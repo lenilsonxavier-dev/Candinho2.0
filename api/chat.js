@@ -97,46 +97,84 @@ async function getRespostaGroq(pergunta, apiKey) {
 
 async function gerarImagemCorreta(prompt) {
     try {
-        let tema = prompt.toLowerCase();
+        let textoOriginal = prompt.toLowerCase();
         
         // Extrair o tema
-        if (tema.includes("desenhe")) {
-            tema = tema.split("desenhe").pop().trim();
+        let tema = "";
+        if (textoOriginal.includes("desenhe") || textoOriginal.includes("desenho")) {
+            let match = textoOriginal.match(/(?:desenhe|desenho|desenha|faca um|crie um)\s+(.+)/i);
+            if (match) {
+                tema = match[1];
+            } else {
+                tema = textoOriginal.replace(/desenhe|desenho|colorir|me|um|uma|para|de|a|o|e|por favor/g, "").trim();
+            }
+        } else {
+            tema = textoOriginal.replace(/desenhe|desenho|colorir|me|um|uma|para|de|a|o|e/g, "").trim();
         }
-        tema = tema.replace(/por favor|me|um|uma|para|de|a|o|e/g, "").trim();
         
         if (!tema || tema.length < 2) {
-            tema = "beautiful art";
+            tema = "arte";
         }
         
-        // Mapeamento para prompts realistas
-        const promptsReais = {
-            "mona lisa": "Mona Lisa painting by Leonardo da Vinci, high resolution, museum quality",
-            "noite estrelada": "The Starry Night by Vincent van Gogh, oil on canvas, swirling sky",
-            "abaporu": "Abaporu by Tarsila do Amaral, 1928, Brazilian modernist painting",
-            "guernica": "Guernica by Pablo Picasso, 1937, cubist anti-war mural",
-            "tiranossauro": "Tyrannosaurus Rex, realistic paleoart, detailed dinosaur",
-            "triceratops": "Triceratops, realistic dinosaur, detailed illustration",
-            "picasso": "Pablo Picasso cubist portrait, abstract geometric faces",
-            "dali": "Salvador Dali surrealist painting, melting clocks, dreamscape",
-            "van gogh": "Vincent van Gogh post-impressionist landscape, bold brushstrokes",
-            "frida kahlo": "Frida Kahlo self-portrait, Mexican folk art style, flowers in hair"
+        // Mapeamento específico sem filtro de segurança
+        const mapeamento = {
+            // Obras de arte famosas (sem filtro)
+            "mona lisa": "Mona Lisa by Leonardo da Vinci, realistic, detailed, painting",
+            "noite estrelada": "Starry Night by Vincent van Gogh, oil painting, swirling sky",
+            "abaporu": "Abaporu painting by Tarsila do Amaral, modernist, Brazilian art",
+            "guernica": "Guernica by Pablo Picasso, cubist, black and white, anti-war",
+            "girassois": "Sunflowers by Vincent van Gogh, still life, yellow flowers",
+            "o grito": "The Scream by Edvard Munch, expressionist, figure screaming",
+            "persistencia da memoria": "The Persistence of Memory by Salvador Dali, melting clocks, surrealist",
+            "moça com brinco de pérola": "Girl with a Pearl Earring by Vermeer, portrait",
+            
+            // Autorretratos famosos
+            "autorretrato van gogh": "Self-portrait by Vincent van Gogh, with bandaged ear",
+            "autorretrato frida": "Self-portrait by Frida Kahlo, with monkeys, Mexican art",
+            "autorretrato rembrandt": "Self-portrait by Rembrandt, Baroque painting, old master",
+            
+            // Dinossauros realistas
+            "tiranossauro": "Tyrannosaurus Rex, realistic dinosaur, detailed, paleoart",
+            "triceratops": "Triceratops, realistic dinosaur, three horns, detailed",
+            "velociraptor": "Velociraptor, realistic dinosaur, feathered, detailed",
+            "braquiossauro": "Brachiosaurus, realistic dinosaur, long neck, detailed",
+            
+            // Artistas em seus estilos
+            "picasso": "Cubist portrait, Picasso style, geometric shapes, abstract",
+            "dali": "Surrealist landscape, Salvador Dali style, melting objects, dreamlike",
+            "monet": "Impressionist garden, Claude Monet style, water lilies, blurred",
+            "van gogh": "Post-impressionist landscape, Van Gogh style, swirling brushstrokes",
+            
+            // Paisagens e naturezas
+            "por do sol": "Sunset landscape, vibrant colors, realistic sky",
+            "montanha": "Mountain landscape, detailed, realistic, snow peaks",
+            "praia": "Beach scene, ocean waves, sand, realistic",
+            "floresta": "Forest with trees, realistic, detailed leaves",
+            
+            // Animais realistas
+            "leao": "Lion, realistic, detailed fur, majestic",
+            "elefante": "Elephant, realistic, detailed skin, African savanna",
+            "gato": "Cat, realistic, detailed fur, domestic animal",
+            "cachorro": "Dog, realistic, detailed, pet portrait"
         };
         
-        let promptFinal = tema;
-        for (const [key, valor] of Object.entries(promptsReais)) {
+        let promptImagem = null;
+        for (const [key, valor] of Object.entries(mapeamento)) {
             if (tema.includes(key)) {
-                promptFinal = valor;
+                promptImagem = valor;
                 break;
             }
         }
         
-        // Usar API da Lexica (busca imagens reais)
-        const lexicaUrl = `https://lexica.art/api/v1/search?q=${encodeURIComponent(promptFinal)}`;
+        if (!promptImagem) {
+            promptImagem = `${tema}, detailed, realistic, high quality, no children, no cartoon`;
+        }
         
-        // Fallback para Pollinations se Lexica falhar
-        const encodedPrompt = encodeURIComponent(promptFinal);
-        const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=768&height=768&nologo=true&seed=${Date.now()}`;
+        console.log("Gerando imagem:", promptImagem);
+        
+        // Usar Pollinations com modelo de qualidade e sem filtro
+        const encodedPrompt = encodeURIComponent(promptImagem);
+        const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=768&height=768&nologo=true&model=flux&seed=${Math.floor(Math.random() * 10000)}`;
         
         return imageUrl;
         
