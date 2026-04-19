@@ -24,7 +24,6 @@ body {
     background: rgba(22, 33, 62, 0.95);
     border-radius: 20px; 
     padding: 25px; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .header { 
@@ -32,8 +31,8 @@ body {
     align-items: center; 
     gap: 15px; 
     margin-bottom: 20px; 
-    padding-bottom: 15px;
     border-bottom: 2px solid #ffd700;
+    padding-bottom: 15px;
 }
 
 .avatar { 
@@ -53,11 +52,6 @@ body {
     color: transparent;
 }
 
-.title small {
-    opacity: 0.8;
-    font-size: 0.85em;
-}
-
 #chat { 
     height: 400px; 
     overflow-y: auto; 
@@ -65,48 +59,29 @@ body {
     padding: 15px; 
     border-radius: 15px; 
     margin-bottom: 15px;
-    scroll-behavior: smooth;
 }
 
 .input-area { 
     display: flex; 
     gap: 10px; 
-    margin-top: 10px;
 }
 
 input { 
     flex: 1; 
-    padding: 14px 20px; 
+    padding: 14px; 
     border-radius: 30px; 
     border: none; 
     background: #0f3460;
     color: white;
-    font-size: 16px;
-}
-
-input:focus {
-    outline: none;
-    background: #1a4580;
-    box-shadow: 0 0 0 2px #ffd700;
-}
-
-input::placeholder {
-    color: #88aacc;
 }
 
 button { 
-    padding: 14px 30px; 
+    padding: 14px 25px; 
     border-radius: 30px; 
-    background: linear-gradient(135deg, #e94560, #c73e56);
+    background: #e94560; 
     color: white; 
     border: none; 
     cursor: pointer; 
-    font-weight: bold;
-    transition: all 0.3s;
-}
-
-button:hover:not(:disabled) {
-    transform: translateY(-2px);
 }
 
 button:disabled {
@@ -116,46 +91,17 @@ button:disabled {
 
 .msg { 
     margin-bottom: 15px; 
-    padding: 12px 15px; 
+    padding: 12px; 
     border-radius: 15px; 
-    word-wrap: break-word;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .user-msg { 
-    background: linear-gradient(135deg, #1b6ca8, #155a8c);
+    background: #1b6ca8; 
     margin-left: 40px;
-    border-bottom-right-radius: 5px;
 }
 
 .ai-msg { 
-    background: linear-gradient(135deg, #533483, #3d2668);
-    margin-right: 40px;
-    border-bottom-left-radius: 5px;
-}
-
-.status {
-    background: #0f3460;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-    font-size: 0.9em;
-}
-
-.status.success {
-    background: linear-gradient(135deg, #2d6a4f, #1b4d3a);
+    background: #533483; 
 }
 
 .typing {
@@ -180,7 +126,6 @@ button:disabled {
     border-radius: 10px;
     display: none;
     margin-top: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 </style>
 </head>
@@ -197,31 +142,30 @@ button:disabled {
     </div>
 </div>
 
-<div id="status" class="status success">✅ Candinho está pronto!</div>
-
 <div id="chat">
     <div class="msg ai-msg">
         <div>
         <b>Candinho</b><br>
-        Sou o Candinho. Seu amigo especialista em Arte. 🎨
+        Sou o Candinho! Especialista em Arte. 🎨<br>
+        Me pergunte sobre artistas, peça um desenho ou compartilhe como se sente!
         </div>
     </div>
 </div>
 
 <div id="areaImagem">
-    <img id="imagemGerada" alt="Desenho gerado">
+    <img id="imagemGerada">
 </div>
 
 <div class="input-area">
-    <input id="pergunta" placeholder="Pergunte sobre arte ou peça um desenho..." />
-    <button onclick="enviarMensagem()" id="sendBtn">📤 Enviar</button>
+    <input id="pergunta" placeholder="Ex: Quem foi Tarsila? ou Desenhe um dinossauro..." />
+    <button onclick="enviarMensagem()" id="sendBtn">Enviar</button>
 </div>
 
 </div>
 
 <script>
 function ehPedidoDeImagem(texto) {
-    const palavras = ["desenho", "colorir", "desenha", "desenhe", "imagem", "ilustração", "pintar", "faça", "crie"];
+    const palavras = ["desenho", "colorir", "desenha", "desenhe", "imagem", "pintar"];
     return palavras.some(p => texto.toLowerCase().includes(p));
 }
 
@@ -248,8 +192,7 @@ window.enviarMensagem = async function() {
     addMessage(pergunta, true);
     input.value = "";
     
-    const img = document.getElementById("imagemGerada");
-    img.style.display = "none";
+    document.getElementById("imagemGerada").style.display = "none";
     
     const typingDiv = document.createElement("div");
     typingDiv.className = "msg ai-msg";
