@@ -1,149 +1,244 @@
-export default async function handler(req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
-    
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Método não permitido' });
-    }
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Candinho - IA de Arte</title>
 
-    const { message, gerarImagem } = req.body;
-    
-    if (!message) {
-        return res.status(400).json({ error: 'Mensagem não fornecida' });
-    }
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    // ============================================
-    // CONHECIMENTO LOCAL DO CANDINHO (SEM API)
-    // ============================================
-    
-    const pergunta = message.toLowerCase();
-    let resposta = "";
-    
-    // Artistas
-    if (pergunta.includes("van gogh")) {
-        resposta = "Van Gogh pintou 'Noite Estrelada' e 'Girassóis'. Sabia que ele vendeu apenas um quadro em vida? Hoje suas obras valem milhões! Use pinceladas grossas como ele! 🌟";
-    }
-    else if (pergunta.includes("monet")) {
-        resposta = "Claude Monet criou o Impressionismo! Ele pintava a mesma cena em diferentes horários para mostrar a luz. Que tal observarmos o pôr do sol hoje? 🌅";
-    }
-    else if (pergunta.includes("picasso")) {
-        resposta = "Pablo Picasso inventou o Cubismo! Ele desmontava os rostos em formas geométricas. Tente desenhar um rosto usando só quadrados e triângulos! 🎭";
-    }
-    else if (pergunta.includes("tarsila")) {
-        resposta = "Tarsila do Amaral pintou 'Abaporu' e misturou arte europeia com cores do Brasil. Ela é uma das artistas mais importantes do nosso país! 🇧🇷";
-    }
-    else if (pergunta.includes("portinari")) {
-        resposta = "Candido Portinari pintou a vida do povo brasileiro: retirantes, café e crianças brincando. Suas obras estão em museus do mundo todo! ☕";
-    }
-    else if (pergunta.includes("frida")) {
-        resposta = "Frida Kahlo pintava sua própria vida e dores. Ela usava muitas cores e símbolos mexicanos. Que exemplo de transformar tristeza em arte! 🌺";
-    }
-    else if (pergunta.includes("leonardo")) {
-        resposta = "Leonardo da Vinci pintou a Mona Lisa! Além de artista, era inventor, músico e estudava o corpo humano. Um gênio completo! ✨";
-    }
-    // Dinossauros
-    else if (pergunta.includes("tiranossauro")) {
-        resposta = "O Tiranossauro Rex era um dos maiores carnívoros que já existiu! Seus dentes eram do tamanho de uma banana. Vamos desenhar um? 🦖";
-    }
-    else if (pergunta.includes("triceratops")) {
-        resposta = "O Triceratops tinha três chifres e um escudo no pescoço para se proteger. Ele comia plantas e vivia em manadas! 🦕";
-    }
-    else if (pergunta.includes("dinossauro")) {
-        resposta = "Dinossauros viveram há milhões de anos! Temos o Tiranossauro (carnívoro), o Triceratops (com chifres) e o Braquiossauro (pescoçudo)! 🦖";
-    }
-    // Mapas
-    else if (pergunta.includes("mapa") && pergunta.includes("brasil")) {
-        resposta = "O Brasil tem 26 estados e o Distrito Federal! Somos divididos em 5 regiões: Norte, Nordeste, Centro-Oeste, Sudeste e Sul. Que país grande! 🗺️";
-    }
-    else if (pergunta.includes("mapa") && pergunta.includes("são paulo")) {
-        resposta = "São Paulo tem 645 municípios! A capital é a cidade de São Paulo, a maior do Brasil. O mapa parece uma forma de coração! ❤️";
-    }
-    else if (pergunta.includes("mapa")) {
-        resposta = "Mapas são desenhos que representam lugares! Eles mostram cidades, rios, montanhas e florestas. Que tal colorirmos um mapa juntos? 🗺️";
-    }
-    // Lettering
-    else if (pergunta.includes("lettering")) {
-        resposta = "Lettering é a arte de desenhar letras bonitas! Você pode fazer letras gordinhas, fininhas, com sombra, com cor. É como dar personalidade às palavras! ✏️";
-    }
-    // Obras famosas
-    else if (pergunta.includes("mona lisa")) {
-        resposta = "A Mona Lisa de Leonardo da Vinci tem um sorriso misterioso! Está no Museu do Louvre em Paris. O que será que ela está pensando? 🖼️";
-    }
-    else if (pergunta.includes("noite estrelada")) {
-        resposta = "Van Gogh pintou 'Noite Estrelada' enquanto estava num hospital. O céu parece se mover com as pinceladas em espiral! 🌙";
-    }
-    else if (pergunta.includes("abaporu")) {
-        resposta = "Abaporu significa 'homem que come gente' em tupi. Tarsila pintou essa figura com pés enormes e mão pequena. É uma obra surreal! 🎨";
-    }
-    // Danças brasileiras
-    else if (pergunta.includes("frevo")) {
-        resposta = "O Frevo é uma dança pernambucana cheia de acrobacias e guarda-chuvas coloridos! Os passos incluem 'tesoura' e 'parafuso'. É Patrimônio da Humanidade! ☂️";
-    }
-    else if (pergunta.includes("maracatu")) {
-        resposta = "Maracatu é uma dança teatral de Pernambuco que homenageia os reis do Congo. As roupas são lindas e cheias de brilhos! 👑";
-    }
-    else if (pergunta.includes("bumba meu boi")) {
-        resposta = "O Bumba Meu Boi é uma festa do Maranhão que conta a história de um boi que morreu e ressuscitou! Tem índios, vaqueiros e muita música! 🐂";
-    }
-    else if (pergunta.includes("catira")) {
-        resposta = "A Catira é uma dança caipira de São Paulo e Minas! Os dançarinos batem palmas e pés em movimentos sincronizados. Vamos tentar bater palmas no ritmo? 👏";
-    }
-    else if (pergunta.includes("coco")) {
-        resposta = "O Coco é uma dança nordestina batida no chão! Os dançarinos usam sandálias de madeira para fazer ritmo. Bate o pé comigo! 🦶";
-    }
-    // Emoções e conselhos
-    else if (pergunta.includes("triste")) {
-        resposta = "Quando a tristeza chegar, que tal desenhar como ela é? Colocar a emoção no papel faz ela ficar mais leve. Use cores bem alegres depois! 🌈";
-    }
-    else if (pergunta.includes("ansiedade")) {
-        resposta = "Ansiedade parece um monte de pensamentos voando. Desenhar bem devagar ajuda a acalmar a mente. Que tal fazer uma mandala? 🧘";
-    }
-    else if (pergunta.includes("bullying")) {
-        resposta = "Se alguém estiver sendo malvado com você, converse com um adulto. Você é especial como uma obra de arte única! Ninguém tem direito de te machucar. Desenhe um escudo bem forte para se proteger! 🛡️";
-    }
-    else if (pergunta.includes("medo")) {
-        resposta = "Todo mundo sente medo! Desenhe seu medo e dê a ele um chapéu engraçado. Você vai ver que ele fica menos assustador. Funciona mesmo! 🦁";
-    }
-    else if (pergunta.includes("raiva")) {
-        resposta = "A raiva é como um vulcão! Antes de explodir, que tal amassar um papel ou desenhar rabiscos fortes? A arte ajuda a expressar a raiva sem machucar ninguém! 🌋";
-    }
-    // Matemática na arte
-    else if (pergunta.includes("proporção") || pergunta.includes("áurea")) {
-        resposta = "A Proporção Áurea é um número mágico (1,618) que aparece na natureza e na arte! As conchas, girassóis e até o rosto da Mona Lisa seguem essa proporção. Que legal! 🔢";
-    }
-    else if (pergunta.includes("simetria")) {
-        resposta = "Simetria é quando um lado é igual ao outro! Borboletas, folhas e muitas obras de arte são simétricas. Dobre o papel ao meio e desenhe! 🦋";
-    }
-    // Padrão
-    else {
-        resposta = "Sou o Candinho! Especialista em Arte. 🎨\n\nVocê pode me perguntar sobre:\n• Artistas (Van Gogh, Tarsila, Picasso)\n• Dinossauros (Tiranossauro, Triceratops)\n• Mapas (Brasil, São Paulo)\n• Lettering (letras bonitas)\n• Obras famosas (Mona Lisa, Noite Estrelada)\n• Danças brasileiras (Frevo, Maracatu)\n• Emoções (tristeza, ansiedade)\n\nQue tal me fazer uma pergunta?";
-    }
-    
-    // Gerar imagem se solicitado
-    let imagemUrl = null;
-    if (gerarImagem) {
-        let tema = message.toLowerCase();
-        tema = tema.replace(/desenhe|desenho|colorir|me|um|uma|para|de|a|o|e/g, "").trim();
-        
-        if (!tema || tema.length < 2) tema = "feliz";
-        
-        if (tema.includes("dinossauro")) tema = "cute baby dinosaur outline coloring page";
-        else if (tema.includes("mapa") && tema.includes("brasil")) tema = "map of Brazil with states outline coloring page";
-        else if (tema.includes("mona")) tema = "Mona Lisa outline coloring page";
-        else if (tema.includes("gato")) tema = "cute cat outline drawing coloring page";
-        else if (tema.includes("cachorro")) tema = "cute dog outline drawing coloring page";
-        else tema = `simple ${tema} outline drawing coloring page for kids`;
-        
-        imagemUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(tema)}?width=512&height=512&nologo=true`;
-    }
-    
-    return res.status(200).json({
-        resposta: resposta,
-        imagem: imagemUrl
-    });
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white; 
+    padding: 20px; 
+    display: flex; 
+    justify-content: center;
+    min-height: 100vh;
 }
+
+.container { 
+    width: 100%; 
+    max-width: 800px; 
+    background: rgba(22, 33, 62, 0.95);
+    border-radius: 20px; 
+    padding: 25px; 
+}
+
+.header { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    margin-bottom: 20px; 
+    border-bottom: 2px solid #ffd700;
+    padding-bottom: 15px;
+}
+
+.avatar { 
+    width: 70px; 
+    height: 70px; 
+    border-radius: 50%; 
+    object-fit: cover;
+    border: 3px solid #ffd700;
+    background: #533483;
+}
+
+.title h1 { 
+    font-size: 1.8em;
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+#chat { 
+    height: 400px; 
+    overflow-y: auto; 
+    background: rgba(15, 52, 96, 0.4);
+    padding: 15px; 
+    border-radius: 15px; 
+    margin-bottom: 15px;
+}
+
+.input-area { 
+    display: flex; 
+    gap: 10px; 
+}
+
+input { 
+    flex: 1; 
+    padding: 14px; 
+    border-radius: 30px; 
+    border: none; 
+    background: #0f3460;
+    color: white;
+}
+
+button { 
+    padding: 14px 25px; 
+    border-radius: 30px; 
+    background: #e94560; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+}
+
+button:disabled {
+    background: #666;
+    cursor: not-allowed;
+}
+
+.msg { 
+    margin-bottom: 15px; 
+    padding: 12px; 
+    border-radius: 15px; 
+}
+
+.user-msg { 
+    background: #1b6ca8; 
+    margin-left: 40px;
+}
+
+.ai-msg { 
+    background: #533483; 
+}
+
+.typing {
+    display: inline-block;
+}
+
+.typing span {
+    animation: blink 1.4s infinite;
+}
+
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+#imagemGerada {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 10px;
+    display: none;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+    <img src="https://i.imgur.com/fnMYS0Z.png" class="avatar" alt="Candinho" onerror="this.src='https://via.placeholder.com/70/533483/ffd700?text=C'">
+    <div class="title">
+        <h1>Candinho 🎨</h1>
+        <small>Especialista em Arte</small>
+    </div>
+</div>
+
+<div id="chat">
+    <div class="msg ai-msg">
+        <div>
+        <b>Candinho</b><br>
+        Sou o Candinho! Especialista em Arte. 🎨<br>
+        Me pergunte sobre artistas, peça um desenho ou compartilhe como se sente!
+        </div>
+    </div>
+</div>
+
+<div id="areaImagem">
+    <img id="imagemGerada">
+</div>
+
+<div class="input-area">
+    <input id="pergunta" placeholder="Ex: Quem foi Tarsila? ou Desenhe um dinossauro..." />
+    <button onclick="enviarMensagem()" id="sendBtn">Enviar</button>
+</div>
+
+</div>
+
+<script>
+function ehPedidoDeImagem(texto) {
+    const palavras = ["desenho", "colorir", "desenha", "desenhe", "imagem", "pintar"];
+    return palavras.some(p => texto.toLowerCase().includes(p));
+}
+
+function addMessage(text, isUser = false) {
+    const chat = document.getElementById("chat");
+    const div = document.createElement("div");
+    div.className = `msg ${isUser ? 'user-msg' : 'ai-msg'}`;
+    const nome = isUser ? 'Você' : 'Candinho';
+    div.innerHTML = `<div><b>${nome}</b><br>${text}</div>`;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+window.enviarMensagem = async function() {
+    const input = document.getElementById("pergunta");
+    const sendBtn = document.getElementById("sendBtn");
+    
+    const pergunta = input.value.trim();
+    if (!pergunta) return;
+    
+    input.disabled = true;
+    sendBtn.disabled = true;
+    
+    addMessage(pergunta, true);
+    input.value = "";
+    
+    document.getElementById("imagemGerada").style.display = "none";
+    
+    const typingDiv = document.createElement("div");
+    typingDiv.className = "msg ai-msg";
+    typingDiv.innerHTML = `<div><b>Candinho</b><br><span class="typing">✍️<span>.</span><span>.</span><span>.</span></span></div>`;
+    document.getElementById("chat").appendChild(typingDiv);
+    document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
+    
+    try {
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                message: pergunta,
+                gerarImagem: ehPedidoDeImagem(pergunta)
+            })
+        });
+        
+        const data = await response.json();
+        
+        typingDiv.remove();
+        
+        if (data.imagem) {
+            const img = document.getElementById("imagemGerada");
+            img.src = data.imagem;
+            img.style.display = "block";
+        }
+        
+        addMessage(data.resposta, false);
+        
+    } catch (error) {
+        typingDiv.remove();
+        addMessage("Ops! Tente novamente. 🎨", false);
+    }
+    
+    input.disabled = false;
+    sendBtn.disabled = false;
+    input.focus();
+}
+
+document.getElementById("pergunta").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        enviarMensagem();
+    }
+});
+</script>
+
+</body>
+</html>
