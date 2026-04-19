@@ -73,6 +73,7 @@ input {
     border: none; 
     background: #0f3460;
     color: white;
+    outline: none;
 }
 
 button { 
@@ -82,6 +83,11 @@ button {
     color: white; 
     border: none; 
     cursor: pointer; 
+    transition: transform 0.2s;
+}
+
+button:hover:not(:disabled) {
+    transform: scale(1.05);
 }
 
 button:disabled {
@@ -126,6 +132,12 @@ button:disabled {
     border-radius: 10px;
     display: none;
     margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.arte-container {
+    text-align: center;
+    margin: 10px 0;
 }
 </style>
 </head>
@@ -137,8 +149,8 @@ button:disabled {
 <div class="header">
     <img src="https://i.imgur.com/fnMYS0Z.png" class="avatar" alt="Candinho" onerror="this.src='https://via.placeholder.com/70/533483/ffd700?text=C'">
     <div class="title">
-        <h1>Candinho 🎨</h1>
-        <small>Especialista em Arte</small>
+        <h1>Candinho 2.0 🎨</h1>
+        <small>Gerador de Arte com IA</small>
     </div>
 </div>
 
@@ -146,18 +158,19 @@ button:disabled {
     <div class="msg ai-msg">
         <div>
         <b>Candinho</b><br>
-        Sou o Candinho! Especialista em Arte. 🎨<br>
-        Me pergunte sobre artistas, peça um desenho ou compartilhe como se sente!
+        Sou o Candinho 2.0! Agora com superpoderes de desenho! 🎨✨<br>
+        Peça: <strong>"Desenhe um gato fofo"</strong> ou pergunte sobre arte!<br>
+        <small>💡 Dica: use palavras como "desenhe", "crie", "faça uma arte de"</small>
         </div>
     </div>
 </div>
 
-<div id="areaImagem">
+<div class="arte-container" id="areaImagem">
     <img id="imagemGerada">
 </div>
 
 <div class="input-area">
-    <input id="pergunta" placeholder="Ex: Quem foi Tarsila? ou Desenhe um dinossauro..." />
+    <input id="pergunta" placeholder="Ex: Desenhe um dinossauro robô..." />
     <button onclick="enviarMensagem()" id="sendBtn">Enviar</button>
 </div>
 
@@ -165,7 +178,7 @@ button:disabled {
 
 <script>
 function ehPedidoDeImagem(texto) {
-    const palavras = ["desenho", "colorir", "desenha", "desenhe", "imagem", "pintar"];
+    const palavras = ["desenhe", "desenha", "crie", "faça", "gera", "imagem", "pintar", "ilustre", "desenho", "arte de", "criar"];
     return palavras.some(p => texto.toLowerCase().includes(p));
 }
 
@@ -196,7 +209,7 @@ window.enviarMensagem = async function() {
     
     const typingDiv = document.createElement("div");
     typingDiv.className = "msg ai-msg";
-    typingDiv.innerHTML = `<div><b>Candinho</b><br><span class="typing">✍️<span>.</span><span>.</span><span>.</span></span></div>`;
+    typingDiv.innerHTML = `<div><b>Candinho</b><br><span class="typing">🎨 Criando arte<span>.</span><span>.</span><span>.</span></span></div>`;
     document.getElementById("chat").appendChild(typingDiv);
     document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
     
@@ -218,13 +231,17 @@ window.enviarMensagem = async function() {
             const img = document.getElementById("imagemGerada");
             img.src = data.imagem;
             img.style.display = "block";
+            addMessage("✨ Aqui está sua arte! ✨", false);
         }
         
-        addMessage(data.resposta, false);
+        if (data.resposta) {
+            addMessage(data.resposta, false);
+        }
         
     } catch (error) {
         typingDiv.remove();
-        addMessage("Ops! Tente novamente. 🎨", false);
+        addMessage("😅 Ops! Não consegui gerar a arte agora. Tente novamente em alguns segundos! 🎨", false);
+        console.error("Erro:", error);
     }
     
     input.disabled = false;
