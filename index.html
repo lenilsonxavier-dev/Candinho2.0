@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Candinho - IA de Arte</title>
+<title>Candinho - IA Híbrida de Arte</title>
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -168,13 +168,13 @@ button:disabled {
     background: linear-gradient(135deg, #2d6a4f, #1b4d3a);
 }
 
-.status.error {
-    background: linear-gradient(135deg, #e94560, #c73e56);
-}
-
 .status.loading {
     background: linear-gradient(135deg, #ffd700, #ff8c00);
     color: #1a1a2e;
+}
+
+.status.hybrid {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
 }
 
 .typing {
@@ -203,6 +203,15 @@ button:disabled {
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     animation: fadeIn 0.5s ease;
 }
+
+.model-badge {
+    font-size: 10px;
+    background: rgba(0,0,0,0.5);
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 8px;
+}
 </style>
 </head>
 
@@ -214,18 +223,22 @@ button:disabled {
     <img src="https://i.imgur.com/fnMYS0Z.png" class="avatar" alt="Candinho" onerror="this.src='https://via.placeholder.com/70/533483/ffd700?text=C'">
     <div class="title">
         <h1>Candinho 🎨</h1>
-        <small>Seu amigo artista</small>
+        <small>IA Híbrida - Local + Nuvem | Professor de Arte</small>
     </div>
 </div>
 
-<div id="status" class="status success">✅ Candinho está pronto!</div>
+<div id="status" class="status loading">🎨 Inicializando modo híbrido...</div>
 
 <div id="chat">
     <div class="msg ai-msg">
         <div>
-        <b>Candinho</b><br>
-        Olá! Que bom te ver por aqui. O que vamos aprender sobre Arte hoje? 😊<br>
-        <small style="opacity:0.7;">💡 Dica: Digite "desenhe um gato" para ganhar uma imagem para colorir!</small>
+        <b>Candinho</b> <span class="model-badge" id="modelBadge">🌐 Nuvem</span><br>
+        Olá! Que bom ver você por aqui. 😊<br>
+        Eu sou o Candinho, tenho 60 anos e adoro ensinar arte para crianças.<br>
+        Você pode me perguntar sobre pintura, música, dança, teatro, poesia, matemática, geografia, inglês...<br>
+        Também posso gerar desenhos para você colorir!<br>
+        <strong>🎯 Desafio:</strong> Que tal me pedir para desenhar um dinossauro, um mapa do Brasil ou uma obra famosa?<br>
+        <small style="opacity:0.7;">💡 Exemplos: "Desenhe um Tiranossauro Rex" | "Desenhe a Mona Lisa" | "Desenhe o mapa de São Paulo" | "Desenhe letras bonitas"</small>
         </div>
     </div>
 </div>
@@ -235,112 +248,247 @@ button:disabled {
 </div>
 
 <div class="input-area">
-    <input id="pergunta" placeholder="Ex: Quem foi Van Gogh? ou desenhe um dinossauro..." />
+    <input id="pergunta" placeholder="Ex: Quem foi Tarsila? ou Desenhe um castelo medieval..." />
     <button onclick="enviarMensagem()" id="sendBtn">📤 Enviar</button>
 </div>
 
 </div>
 
 <script>
-// Banco de conhecimento do Candinho
-const conhecimento = {
-    // Artistas
-    "van gogh": "Van Gogh foi um pintor holandês que criou obras incríveis como 'Noite Estrelada' e 'Girassóis'! Ele usava cores vibrantes e pinceladas fortes. 🌟🎨",
-    "monet": "Claude Monet foi um dos fundadores do Impressionismo! Ele pintava muitas flores, jardins e a famosa série 'Nenúfares'. 🌸🎨",
-    "leonardo da vinci": "Leonardo da Vinci foi um gênio! Além de pintar a Mona Lisa, ele também era inventor, cientista e desenhava máquinas incríveis! ✨🎨",
-    "picasso": "Picasso foi um artista espanhol que criou o Cubismo! Ele pintava as pessoas de formas geométricas e cores diferentes. Muito criativo! 🎭🎨",
-    "tarsila": "Tarsila do Amaral foi uma grande artista brasileira! Ela pintou 'Abaporu' e ajudou a criar o movimento modernista no Brasil. 🇧🇷🎨",
-    "portinari": "Candido Portinari pintou a vida do povo brasileiro! Suas obras mostram crianças, café e a cultura do nosso país. ☕🇧🇷",
-    // Cores
-    "cores primárias": "As cores primárias são vermelho, azul e amarelo! Com elas podemos misturar e criar todas as outras cores. Que mágico! 🔴🔵🟡",
-    "cores secundárias": "Verde (azul+amarelo), laranja (vermelho+amarelo) e roxo (azul+vermelho)! Experimente misturar! 🟢🟠🟣",
-    // Técnicas
-    "desenhar": "Para desenhar bem, pratique todos os dias! Comece com formas simples: círculos, quadrados e triângulos. ✏️",
-    "pintar": "Pintar é uma forma maravilhosa de expressar sentimentos! Use pincéis, lápis de cor ou até os dedos! 🖌️",
-    // Educação
-    "porque a arte": "A arte nos ajuda a expressar sentimentos, contar histórias e ver o mundo de formas diferentes! É muito importante! 💭🎨",
-    "arte rupestre": "Arte rupestre são desenhos feitos nas paredes das cavernas há milhares de anos! Eles mostravam animais e cenas do dia a dia. 🦌🪨"
+// ============================================
+// MODO HÍBRIDO: IA Local (conhecimento) + IA Nuvem (Groq/OpenAI quando disponível)
+// ============================================
+
+let modoIA = "local"; // local ou nuvem
+let apiKey = localStorage.getItem('groq_api_key') || '';
+
+// Verificar se tem chave da Groq salva
+if (apiKey && apiKey.startsWith('gsk_')) {
+    modoIA = "nuvem";
+    document.getElementById('modelBadge').innerHTML = '☁️ Nuvem (Groq)';
+    document.getElementById('status').innerHTML = '✅ Modo Nuvem ativado - Respostas mais inteligentes!';
+    document.getElementById('status').className = 'status hybrid';
+} else {
+    document.getElementById('status').innerHTML = '🎨 Modo Local ativo - Clique para ativar IA na nuvem (mais inteligente)';
+    document.getElementById('status').className = 'status success';
+}
+
+// Botão para alternar/ativar nuvem
+document.getElementById('status').style.cursor = 'pointer';
+document.getElementById('status').onclick = function() {
+    const chave = prompt('🔑 Digite sua chave da API Groq (gratuita em console.groq.com) ou OpenAI:\n\nGROQ: gsk_...\nOpenAI: sk-...');
+    if (chave && (chave.startsWith('gsk_') || chave.startsWith('sk-'))) {
+        apiKey = chave;
+        localStorage.setItem('groq_api_key', chave);
+        modoIA = "nuvem";
+        document.getElementById('modelBadge').innerHTML = chave.startsWith('gsk_') ? '☁️ Nuvem (Groq)' : '🤖 Nuvem (OpenAI)';
+        document.getElementById('status').innerHTML = '✅ Modo Nuvem ativado! Respostas muito mais inteligentes!';
+        document.getElementById('status').className = 'status hybrid';
+        addMessage("Agora estou usando a inteligência da nuvem! Posso responder perguntas muito mais complexas. Pergunte o que quiser sobre arte, história, geografia, matemática, inglês... Vamos aprender juntos! 🚀", false);
+    } else {
+        alert('Chave inválida. Use gsk_... para Groq ou sk-... para OpenAI');
+    }
 };
 
-// Respostas genéricas para outras perguntas
-const respostasGenericas = [
-    "Que pergunta interessante! Na arte, podemos explorar nossa imaginação sem limites! 🎨✨",
-    "Isso me lembra que a arte está em todos os lugares! Você já observou as cores do pôr do sol? 🌅",
-    "Arte é sobre expressão! Cada pessoa vê o mundo de um jeito único. Continue curioso! 😊",
-    "Que legal você perguntar isso! A arte nos ensina a observar o mundo com mais atenção. 🖼️",
-    "Sabia que até um rabisco pode ser arte? O importante é se divertir criando! ✏️",
-    "A criatividade mora dentro de cada um de nós! Você já tentou desenhar o que vê pela janela? 🪟",
-    "Arte também é sobre praticar! Quanto mais você desenha, melhor fica! Continue tentando! 💪"
-];
+// ============================================
+// BANCO DE CONHECIMENTO LOCAL (fallback e complemento)
+// ============================================
 
-function getRespostaInteligente(pergunta) {
-    const perguntaLower = pergunta.toLowerCase();
+const conhecimentoLocal = {
+    "van gogh": "Van Gogh era um pintor holandês que usava pinceladas grossas e cores vibrantes. Ele pintou 'Noite Estrelada' e 'Girassóis'. Sabia que ele vendeu apenas um quadro em vida?",
+    "monet": "Claude Monet criou o Impressionismo. Ele pintava a mesma cena em diferentes horários para mostrar a luz. Famoso pelos nenúfares do seu jardim em Giverny.",
+    "picasso": "Pablo Picasso inventou o Cubismo. Ele desmontava as pessoas e objetos em formas geométricas. 'Toda criança é um artista', ele dizia.",
+    "tarsila": "Tarsila do Amaral pintou 'Abaporu' e criou o Movimento Antropofágico. Ela misturava o modernismo europeu com as cores do Brasil.",
+    "portinari": "Candido Portinari pintou a vida do povo brasileiro: retirantes, café, crianças brincando. Suas obras estão em museus do mundo todo.",
+    "frida kahlo": "Frida Kahlo pintava sua própria vida e dores. Ela usava muitas cores e símbolos mexicanos. 55 de seus 143 quadros são autorretratos.",
+    "dali": "Salvador Dalí pintava sonhos e relógios derretidos. Ele era surrealista e adorava coisas estranhas. Tinha um bigode enorme!",
+    "leonardo": "Leonardo da Vinci pintou a Mona Lisa e a Última Ceia. Ele também era inventor, músico e estudava o corpo humano.",
     
-    // Verificar se é uma pergunta sobre artista específico
-    for (const [key, resposta] of Object.entries(conhecimento)) {
-        if (perguntaLower.includes(key)) {
-            return resposta;
+    // Dinossauros
+    "tiranossauro": "O Tiranossauro Rex era um dos maiores carnívoros que já existiu! Ele tinha dentes do tamanho de uma banana e uma mordida super forte. Vamos desenhar um? 🦖",
+    "triceratops": "O Triceratops tinha três chifres e um escudo no pescoço. Ele era herbívoro, comia plantas e vivia em manadas. 🦕",
+    "velociraptor": "O Velociraptor era pequeno, rápido e inteligente. Ele caçava em grupo e tinha garras enormes nas patas!",
+    "braquiossauro": "O Braquiossauro era tão alto que podia comer as folhas do topo das árvores! Seu pescoço media 9 metros.",
+    
+    // Obras famosas
+    "mona lisa": "A Mona Lisa, pintada por Leonardo da Vinci, é o quadro mais famoso do mundo! Está no Museu do Louvre em Paris. Seu sorriso é um mistério até hoje.",
+    "noite estrelada": "Van Gogh pintou 'Noite Estrelada' enquanto estava num hospital. O céu parece estar se movendo com as pinceladas em espiral!",
+    "guernica": "Guernica é um quadro enorme de Picasso que mostra os horrores da guerra. Está no museu Reina Sofia em Madrid.",
+    "abaporu": "Abaporu significa 'homem que come gente' em tupi. Tarsila pintou essa figura com pés enormes e mão pequena.",
+    
+    // Estados Brasileiros
+    "são paulo": "São Paulo é o estado mais populoso do Brasil! Tem a Avenida Paulista, o MASP e o Mercado Municipal. A comida típica é o pastel de feira!",
+    "rio de janeiro": "O Rio tem o Cristo Redentor, uma das 7 maravilhas do mundo! Também tem o Pão de Açúcar e as praias mais famosas do Brasil.",
+    "bahia": "A Bahia é o berço do axé e do acarajé! Salvador tem o Pelourinho e a maior igreja do Brasil. O São João lá é muito animado!",
+    "amazonas": "O Amazonas tem a maior floresta tropical do mundo! Lá fica o Teatro Amazonas e o encontro das águas do Rio Negro com o Solimões.",
+    "minas gerais": "Minas Gerais é famoso pelo queijo, pão de queijo e doce de leite! Tem cidades históricas como Ouro Preto e Tiradentes.",
+    
+    // Lettering
+    "lettering": "Lettering é a arte de desenhar letras bonitas! Você pode fazer letras gordinhas, fininhas, com sombra, com cor... É como dar personalidade às palavras!",
+};
+
+// ============================================
+// FUNÇÃO PRINCIPAL: IA HÍBRIDA
+// ============================================
+
+async function getRespostaHibrida(pergunta) {
+    // Se estiver no modo nuvem e tiver API key, usa IA de verdade
+    if (modoIA === "nuvem" && apiKey) {
+        try {
+            const isGroq = apiKey.startsWith('gsk_');
+            const apiUrl = isGroq 
+                ? 'https://api.groq.com/openai/v1/chat/completions'
+                : 'https://api.openai.com/v1/chat/completions';
+            const model = isGroq ? 'llama-3.1-70b-versatile' : 'gpt-3.5-turbo';
+            
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    model: model,
+                    messages: [
+                        {
+                            role: "system",
+                            content: `Você é o Candinho, um professor de arte de 60 anos.
+- Fale português do Brasil, de forma lúdica e educativa
+- Trate a criança como "você" ou "criança" - NUNCA use "meu jovem", "meu amigo", "querido"
+- Use diminutivos como "desenhozinho", "pinturinha", "coleguinha" para tornar a conversa acolhedora
+- Seja paciente e divertido, faça piadas sobre arte
+- Responda sobre: artistas, obras, dinossauros, mapas, lettering, estados brasileiros, danças, teatro, poesia
+- Dê conselhos sobre emoções (tristeza, ansiedade, bullying) usando arte como ferramenta
+- Se pedirem um desenho, diga que vai gerar uma imagem
+- Respostas de 2-4 frases, diretas e educativas
+- NUNCA use violência, política ou assuntos adultos`
+                        },
+                        { role: "user", content: pergunta }
+                    ],
+                    max_tokens: 200,
+                    temperature: 0.8
+                })
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                let resposta = data.choices[0].message.content;
+                // Remover possíveis clichês
+                resposta = resposta.replace(/meu jovem|meu amigo|querido|meu caro/gi, '');
+                return resposta.trim();
+            }
+        } catch (error) {
+            console.log("Erro na nuvem, usando local:", error);
         }
     }
     
-    // Verificar perguntas comuns
-    if (perguntaLower.includes("quem foi") || perguntaLower.includes("o que é")) {
-        return "Essa é uma ótima pergunta! Na arte, existem muitos artistas incríveis. Quer saber sobre Van Gogh, Monet, Picasso ou Tarsila? 🎨";
+    // MODO LOCAL: conhecimento pré-programado + fallback inteligente
+    const perguntaLower = pergunta.toLowerCase();
+    
+    // Verificar conhecimento local
+    for (const [key, resposta] of Object.entries(conhecimentoLocal)) {
+        if (perguntaLower.includes(key)) {
+            return resposta + " 🎨";
+        }
     }
     
-    if (perguntaLower.includes("como") && (perguntaLower.includes("desenhar") || perguntaLower.includes("pintar"))) {
-        return "Para aprender a desenhar, comece observando formas simples! Um gato é feito de círculos, um cachorro de ovais. Pratique todo dia! ✏️😊";
+    // Detectar pedidos de desenho específicos
+    if (perguntaLower.includes("desenhe") || perguntaLower.includes("desenho")) {
+        if (perguntaLower.includes("mapa")) {
+            if (perguntaLower.includes("brasil")) return "Um mapa do Brasil mostra 26 estados e o Distrito Federal! O Brasil é dividido em 5 regiões: Norte, Nordeste, Centro-Oeste, Sudeste e Sul. Vou gerar um mapa para você colorir! 🗺️";
+            if (perguntaLower.includes("são paulo")) return "O mapa de São Paulo mostra 645 municípios! A capital é São Paulo, a maior cidade do Brasil. Vou desenhar um mapa do estado para você! 🗺️";
+            return "Mapas são desenhos que representam lugares! Eles mostram cidades, rios e montanhas. Que tal colorirmos um mapa juntos? 🗺️";
+        }
+        if (perguntaLower.includes("dinossauro")) {
+            return "Os dinossauros viveram há milhões de anos! Tinham muitos tipos: o Tiranossauro era carnívoro, o Triceratops tinha chifres. Vou desenhar um para você colorir! 🦖";
+        }
+        if (perguntaLower.includes("letra") || perguntaLower.includes("lettering")) {
+            return "Lettering é desenhar letras bonitas! Você pode fazer letras com sombras, cores, formatos diferentes. É como dar vida às palavras! Vou gerar um alfabeto para você praticar! ✏️";
+        }
+        if (perguntaLower.includes("mona") || perguntaLower.includes("monalisa")) {
+            return "A Mona Lisa é o retrato mais famoso do mundo! Leonardo da Vinci pintou esse sorriso misterioso. Ela está no Louvre, em Paris. Vou gerar uma versão para você colorir! 🖼️";
+        }
+        if (perguntaLower.includes("van gogh") || perguntaLower.includes("noite estrelada")) {
+            return "A Noite Estrelada tem um céu que parece se mover! Van Gogh usou pinceladas em espiral para mostrar o vento. Vou gerar esse desenho para você colorir! 🌟";
+        }
     }
     
-    if (perguntaLower.includes("cor") || perguntaLower.includes("colorir")) {
-        return "As cores são mágicas! Sabia que o vermelho e o amarelo formam o laranja? Experimente misturar tintas! 🎨🌈";
+    // Conselhos emocionais
+    if (perguntaLower.includes("triste")) {
+        return "Quando a tristeza chegar, que tal desenhar como ela é? Às vezes colocar a emoção no papel faz ela ficar mais leve. Você pode fazer um desenho bem colorido para espantar a tristeza! 🌈";
+    }
+    if (perguntaLower.includes("ansiedade")) {
+        return "Ansiedade parece um monte de pensamentos voando. Sabe o que ajuda? Fazer um desenho bem devagar, respirando fundo. Você pode pintar mandalas ou fazer bolinhas de papel! 🧘";
+    }
+    if (perguntaLower.includes("bullying")) {
+        return "Se alguém estiver sendo malvado com você, converse com um adulto. Você é especial como uma obra de arte única! Ninguém tem o direito de te machucar. Desenhe um escudo bem forte para te proteger! 🛡️";
     }
     
-    // Resposta aleatória para outras perguntas
-    return respostasGenericas[Math.floor(Math.random() * respostasGenericas.length)];
+    // Resposta padrão lúdica
+    const respostas = [
+        "Que pergunta legal! Vamos explorar isso juntos? Você pode me pedir para desenhar um dinossauro, um mapa ou uma obra famosa também! 🎨",
+        "Isso me lembra uma história interessante! Sabe o que mais? Você pode pedir: 'Desenhe um Tiranossauro Rex' ou 'Desenhe o mapa da Bahia' 🦖🗺️",
+        "Continue perguntando, criança! A arte é um mundo sem fim. Que tal pedir um desenho de lettering ou de um autorretrato famoso? ✏️",
+        "Você sabia que pode me pedir para desenhar obras famosas? Tente: 'Desenhe a Mona Lisa' ou 'Desenhe a Noite Estrelada' 🖼️"
+    ];
+    
+    return respostas[Math.floor(Math.random() * respostas.length)];
 }
 
+// ============================================
+// GERAR IMAGEM (SUPORTE A MÚLTIPLOS TEMAS)
+// ============================================
+
 function ehPedidoDeImagem(texto) {
-    const palavras = ["desenho", "colorir", "desenha", "desenhe", "imagem", "ilustração", "pintar"];
+    const palavras = ["desenho", "colorir", "desenha", "desenhe", "imagem", "ilustração", "pintar", "faça", "crie", "mostre", "desenho para colorir"];
     return palavras.some(p => texto.toLowerCase().includes(p));
 }
 
 async function gerarImagemColorir(promptUsuario) {
     try {
-        // Remover palavras comuns para melhorar o prompt
         let tema = promptUsuario.toLowerCase();
-        tema = tema.replace("desenhe", "").replace("desenho", "").replace("colorir", "").replace("me", "").trim();
+        tema = tema.replace(/desenhe|desenho|colorir|me|um|uma|para|de|a|o|e|por favor/g, "").trim();
         
-        if (!tema) tema = "feliz";
+        if (!tema || tema.length < 2) tema = "coisa feliz";
         
-        const prompt = `black and white outline drawing, coloring page for kids, simple line art, ${tema}, thick clear lines, no shading, white background, cute, child friendly`;
-        const encodedPrompt = encodeURIComponent(prompt);
+        // Mapear temas especiais
+        if (tema.includes("mapa") && tema.includes("brasil")) tema = "map of Brazil with states, outline, coloring page";
+        else if (tema.includes("mapa") && tema.includes("são paulo")) tema = "map of Sao Paulo state Brazil, outline, coloring page";
+        else if (tema.includes("mapa")) tema = "world map outline, continents, coloring page for kids";
+        else if (tema.includes("dinossauro")) tema = "cute dinosaur, triceratops or t-rex, outline drawing, coloring page";
+        else if (tema.includes("lettering")) tema = "alphabet lettering, decorative letters, outline, coloring page for kids";
+        else if (tema.includes("mona") || tema.includes("monalisa")) tema = "Mona Lisa outline drawing, coloring page, simple lines";
+        else if (tema.includes("noite estrelada")) tema = "Starry Night by Van Gogh outline, coloring page, simplified";
+        else if (tema.includes("abaporu")) tema = "Abaporu painting by Tarsila outline, coloring page";
+        else tema = `black and white outline drawing, coloring page for kids, simple line art, ${tema}, thick clear lines, white background, cute`;
+        
+        const encodedPrompt = encodeURIComponent(tema);
         const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&nologo=true`;
         
         const img = document.getElementById("imagemGerada");
         img.src = imageUrl;
         img.style.display = "block";
-        img.alt = `Desenho: ${tema}`;
         
         img.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         
-        return `🎨 Aqui está um desenho de ${tema} para você colorir! Use lápis de cor ou giz de cera e solte a imaginação! 🖍️✨`;
+        return `🎨 Aqui está o desenho para você colorir! Use lápis de cor, giz de cera ou canetinhas. Se quiser, pode me mostrar o resultado depois! 🖍️✨`;
         
     } catch (error) {
-        console.error("Erro ao gerar imagem:", error);
-        return "Não consegui gerar a imagem agora, mas podemos conversar sobre arte! 🎨";
+        return "Não consegui gerar a imagem agora, mas podemos continuar conversando sobre arte! Que tal me fazer outra pergunta? 🎨";
     }
 }
+
+// ============================================
+// FUNÇÕES DO CHAT
+// ============================================
 
 function addMessage(text, isUser = false) {
     const chat = document.getElementById("chat");
     const div = document.createElement("div");
     div.className = `msg ${isUser ? 'user-msg' : 'ai-msg'}`;
-    
     const nome = isUser ? 'Você' : 'Candinho';
-    
-    div.innerHTML = `<div><b>${nome}</b><br>${text}</div>`;
-    
+    const badge = !isUser && modoIA === "nuvem" ? '<span class="model-badge">☁️ Nuvem</span>' : '';
+    div.innerHTML = `<div><b>${nome}</b> ${badge}<br>${text}</div>`;
     chat.appendChild(div);
     chat.scrollTop = chat.scrollHeight;
 }
@@ -352,63 +500,56 @@ window.enviarMensagem = async function() {
     const pergunta = input.value.trim();
     if (!pergunta) return;
     
-    // Desabilitar durante processamento
     input.disabled = true;
     sendBtn.disabled = true;
     
-    // Mostrar mensagem do usuário
     addMessage(pergunta, true);
     input.value = "";
     
-    // Esconder imagem anterior
     const img = document.getElementById("imagemGerada");
     img.style.display = "none";
     
-    // Indicador de digitação
     const typingDiv = document.createElement("div");
     typingDiv.className = "msg ai-msg";
-    typingDiv.id = "typingIndicator";
-    typingDiv.innerHTML = `<div><b>Candinho</b><br><span class="typing">✍️ Pensando<span>.</span><span>.</span><span>.</span></span></div>`;
+    typingDiv.innerHTML = `<div><b>Candinho</b><span class="model-badge">✍️</span><br><span class="typing">Pensando<span>.</span><span>.</span><span>.</span></span></div>`;
     document.getElementById("chat").appendChild(typingDiv);
     document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
     
-    // Pequena pausa para parecer natural
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise(resolve => setTimeout(resolve, 500));
     
     let resposta;
     
     try {
         if (ehPedidoDeImagem(pergunta)) {
             const imgResposta = await gerarImagemColorir(pergunta);
-            const textoResposta = getRespostaInteligente(pergunta);
+            const textoResposta = await getRespostaHibrida(pergunta);
             resposta = imgResposta + "<br><br>" + textoResposta;
         } else {
-            resposta = getRespostaInteligente(pergunta);
+            resposta = await getRespostaHibrida(pergunta);
         }
     } catch (error) {
-        console.error("Erro:", error);
-        resposta = "Xiii, tive um probleminha! Vamos tentar de novo? 🎨";
+        resposta = "Tive um probleminha técnico. Vamos tentar de novo? O importante é continuar aprendendo arte! 🎨";
     }
     
-    // Remover indicador
     typingDiv.remove();
-    
-    // Adicionar resposta
     addMessage(resposta, false);
     
-    // Reabilitar
     input.disabled = false;
     sendBtn.disabled = false;
     input.focus();
 }
 
-// Suporte para tecla Enter
 document.getElementById("pergunta").addEventListener("keypress", function(e) {
     if (e.key === "Enter") {
         e.preventDefault();
         enviarMensagem();
     }
 });
+
+// Badge de boas-vindas
+setTimeout(() => {
+    addMessage("Você pode me pedir para desenhar muitas coisas: dinossauros 🦖, mapas do Brasil 🗺️, obras famosas como a Mona Lisa 🖼️, letras bonitas (lettering) ✏️, ou o que você imaginar! É só digitar: 'Desenhe um...'", false);
+}, 2000);
 </script>
 
 </body>
