@@ -37,13 +37,12 @@ body {
     width: 70px; 
     height: 70px; 
     border-radius: 50%; 
-    object-fit: cover; 
-    border: 3px solid #ffd700;
     background: #533483;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 40px;
+    border: 3px solid #ffd700;
 }
 
 .title h1 { font-size: 1.8em; }
@@ -108,20 +107,6 @@ button:disabled {
     background: #533483; 
 }
 
-#areaImagem {
-    margin-top: 10px;
-    text-align: center;
-}
-
-#imagemGerada {
-    max-width: 100%;
-    max-height: 300px;
-    border-radius: 10px;
-    display: none;
-    margin-top: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
 .status {
     background: #0f3460;
     padding: 10px;
@@ -129,7 +114,14 @@ button:disabled {
     margin-bottom: 10px;
     text-align: center;
     font-size: 0.9em;
-    transition: all 0.3s;
+}
+
+.status.success {
+    background: #2d6a4f;
+}
+
+.status.error {
+    background: #e94560;
 }
 
 .typing {
@@ -150,6 +142,15 @@ button:disabled {
 
 .typing span:nth-child(2) { animation-delay: 0.2s; }
 .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+#imagemGerada {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 10px;
+    display: none;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
 </style>
 </head>
 
@@ -161,11 +162,11 @@ button:disabled {
     <div class="avatar">🎨</div>
     <div class="title">
         <h1>Candinho 🎨</h1>
-        <small>Seu amigo artista - IA no seu navegador</small>
+        <small>Seu amigo artista - IA no backend</small>
     </div>
 </div>
 
-<div id="status" class="status">🔧 Carregando o Candinho...</div>
+<div id="status" class="status">🔧 Inicializando Candinho...</div>
 
 <div id="chat">
     <div class="msg ai-msg">
@@ -187,105 +188,41 @@ button:disabled {
 
 </div>
 
-<script type="importmap">
-  {
-    "imports": {
-      "@mlc-ai/web-llm": "https://esm.run/@mlc-ai/web-llm@0.2.56"
-    }
-  }
-</script>
+<script>
+let isReady = true; // Sempre pronto pois o backend já tem a chave
 
-<script type="module">
-import * as webllm from "@mlc-ai/web-llm";
-
-let engine = null;
-let isReady = false;
-
-// ===== FILTRO DE CONTEÚDO =====
-function validarPromptArte(input) {
-    const proibidos = ["violência","arma","sexo","nudez","droga","morte","sangue"];
-    const t = input.toLowerCase();
+// Verificar se o backend está ok
+async function verificarBackend() {
+    const statusDiv = document.getElementById('status');
+    const input = document.getElementById('pergunta');
+    const sendBtn = document.getElementById('sendBtn');
     
-    if (proibidos.some(p => t.includes(p))) {
-        return { ok: false, msg: "🚫 Esse tema não é apropriado, meu jovem. Vamos falar de arte bonita e educativa!" };
+    try {
+        const response = await fetch('/api/health');
+        if (response.ok) {
+            statusDiv.innerHTML = '✅ Candinho está pronto! Pode perguntar sobre arte! 🎨';
+            statusDiv.className = 'status success';
+            input.disabled = false;
+            sendBtn.disabled = false;
+            input.focus();
+        } else {
+            throw new Error('Backend não respondeu');
+        }
+    } catch (error) {
+        statusDiv.innerHTML = '❌ Erro ao conectar com o servidor. Recarregue a página.';
+        statusDiv.className = 'status error';
+        input.disabled = true;
+        sendBtn.disabled = true;
     }
-    
-    return { ok: true };
 }
 
+// ===== FILTRO =====
 function ehPedidoDeImagem(texto) {
-    const palavras = ["desenho", "colorir", "imagem", "ilustração", "desenha", "pintar", "faça um", "crie um"];
+    const palavras = ["desenho", "colorir", "imagem", "ilustração", "desenha", "pintar", "faça um", "crie um", "desenhe"];
     return palavras.some(p => texto.toLowerCase().includes(p));
 }
 
-// ===== GERAR IMAGEM (API gratuita Pollinations) =====
-async function gerarImagemColorir(promptUsuario) {
-    const valid = validarPromptArte(promptUsuario);
-    if (!valid.ok) return valid.msg;
-    
-    // Criar prompt adequado para colorir
-    const prompt = `black and white outline drawing, coloring page for kids, simple line art, ${promptUsuario}, thick clear lines, no shading, white background, child friendly`;
-    const encodedPrompt = encodeURIComponent(prompt);
-    const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&nologo=true`;
-    
-    const img = document.getElementById("imagemGerada");
-    img.src = imageUrl;
-    img.style.display = "block";
-    img.alt = `Desenho: ${promptUsuario}`;
-    
-    // Rolar até a imagem
-    img.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    
-    return "🎨 Aqui está um desenho especial para você colorir! Use lápis de cor, giz de cera ou canetinhas. Solte sua criatividade! 🖍️";
-}
-
-// ===== RESPOSTA DO CANDINHO =====
-async function getResposta(pergunta) {
-    if (!engine || !isReady) {
-        return "Aguarde um pouquinho, ainda estou preparando minha paleta de cores... 🎨";
-    }
-    
-    try {
-        const messages = [
-            {
-                role: "system",
-                content: `Você é o Candinho, um professor de arte muito querido de 60 anos.
-- Fala português do Brasil de forma clara e educativa
-- Ensina crianças de 10 anos sobre arte, pintura, artistas famosos e cultura
-- É paciente, divertido e usa emojis 🎨😊✨
-- SEMPRE responde como se estivesse conversando com uma criança curiosa
-- Explica conceitos de arte de forma simples e interessante
-- Fala sobre: Van Gogh, Monet, Leonardo da Vinci, Picasso, Tarsila do Amaral, Portinari
-- Ensina sobre cores, formas, técnicas de desenho
-- Se não souber algo, diz "Que pergunta interessante! Vamos pesquisar juntos na próxima aula!"
-- NUNCA fala sobre violência, política ou assuntos adultos
-- As respostas são curtas (máximo 3 frases) para manter a atenção`
-            },
-            { role: "user", content: pergunta }
-        ];
-        
-        const reply = await engine.chat.completions.create({
-            messages: messages,
-            max_tokens: 100,
-            temperature: 0.7
-        });
-        
-        let resposta = reply.choices[0].message.content;
-        
-        // Garantir que tenha emojis amigáveis
-        if (!resposta.includes('🎨') && !resposta.includes('😊')) {
-            resposta += " 🎨";
-        }
-        
-        return resposta;
-        
-    } catch (error) {
-        console.error("Erro na IA:", error);
-        return "Ops! Minha tinta acabou por um momento. Pode repetir a pergunta? 🎨";
-    }
-}
-
-// ===== ADICIONAR MENSAGEM AO CHAT =====
+// ===== ADICIONAR MENSAGEM =====
 function addMessage(text, isUser = false) {
     const chat = document.getElementById("chat");
     const div = document.createElement("div");
@@ -307,21 +244,17 @@ window.enviarMensagem = async function() {
     const sendBtn = document.getElementById("sendBtn");
     
     const pergunta = input.value.trim();
-    if (!pergunta || !isReady) return;
+    if (!pergunta) return;
     
-    // Desabilitar durante processamento
     input.disabled = true;
     sendBtn.disabled = true;
     
-    // Mostrar mensagem do usuário
     addMessage(pergunta, true);
     input.value = "";
     
-    // Esconder imagem anterior
     const img = document.getElementById("imagemGerada");
     img.style.display = "none";
     
-    // Indicador de digitação
     const typingDiv = document.createElement("div");
     typingDiv.className = "msg ai-msg";
     typingDiv.id = "typingIndicator";
@@ -329,79 +262,47 @@ window.enviarMensagem = async function() {
     document.getElementById("chat").appendChild(typingDiv);
     document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
     
-    let resposta;
-    
     try {
-        if (ehPedidoDeImagem(pergunta)) {
-            const imgResposta = await gerarImagemColorir(pergunta);
-            const textoResposta = await getResposta(pergunta);
-            resposta = imgResposta + "<br><br>" + textoResposta;
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: pergunta,
+                gerarImagem: ehPedidoDeImagem(pergunta)
+            })
+        });
+        
+        const data = await response.json();
+        
+        typingDiv.remove();
+        
+        if (data.imagem) {
+            const img = document.getElementById("imagemGerada");
+            img.src = data.imagem;
+            img.style.display = "block";
+            addMessage(data.resposta, false);
         } else {
-            resposta = await getResposta(pergunta);
+            addMessage(data.resposta, false);
         }
+        
     } catch (error) {
-        console.error("Erro:", error);
-        resposta = "Xiii, tive um probleminha técnico! Vamos tentar de novo? 🎨";
+        typingDiv.remove();
+        addMessage("Ops! Tive um problema técnico. Tente novamente! 🎨", false);
     }
     
-    // Remover indicador
-    typingDiv.remove();
-    
-    // Adicionar resposta
-    addMessage(resposta, false);
-    
-    // Reabilitar
     input.disabled = false;
     sendBtn.disabled = false;
     input.focus();
 }
 
-// ===== INICIALIZAR MODELO =====
-async function initModel() {
-    const statusDiv = document.getElementById("status");
-    const input = document.getElementById("pergunta");
-    const sendBtn = document.getElementById("sendBtn");
-    
-    try {
-        statusDiv.innerHTML = "📥 Baixando o modelo de IA (TinyLlama)... Isso pode levar alguns segundos na primeira vez...";
-        
-        // Modelo leve que funciona no WebLLM
-        const modelId = "TinyLlama-1.1B-Chat-v0.4-q4f32_1-1k";
-        
-        engine = await webllm.CreateMLCEngine(modelId, { 
-            initProgressCallback: (progress) => {
-                if (progress.text) {
-                    statusDiv.innerHTML = `📥 ${progress.text}`;
-                }
-            }
-        });
-        
-        isReady = true;
-        statusDiv.innerHTML = "✅ Candinho está pronto! Pode fazer suas perguntas sobre arte! 🎨";
-        statusDiv.style.background = "#2d6a4f";
-        
-        input.disabled = false;
-        sendBtn.disabled = false;
-        input.focus();
-        
-        // Mensagem de boas-vindas adicional
-        setTimeout(() => {
-            addMessage("Que bom ter você aqui! Pode me perguntar sobre artistas famosos, técnicas de desenho, ou me pedir: 'Me desenhe um gato para colorir'! 🐱✏️", false);
-        }, 1500);
-        
-    } catch (error) {
-        console.error("Erro:", error);
-        statusDiv.innerHTML = "❌ Erro ao carregar o modelo. Recarregue a página para tentar novamente.";
-        statusDiv.style.background = "#e94560";
-    }
-}
-
-// Iniciar tudo
-initModel();
+// Iniciar
+verificarBackend();
 
 // Enter para enviar
 document.getElementById("pergunta").addEventListener("keypress", function(e) {
-    if (e.key === "Enter" && isReady && !this.disabled) {
+    if (e.key === "Enter" && !this.disabled) {
         enviarMensagem();
     }
 });
