@@ -1,83 +1,119 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candinho - IA de Arte</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Candinho - IA de Arte</title>
 
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body { 
-            font-family: 'Segoe UI', Tahoma;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white; 
+    padding: 20px; 
+    display: flex; 
+    justify-content: center;
+    min-height: 100vh;
+}
 
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: rgba(22,33,62,0.95);
-            border-radius: 20px;
-            padding: 25px;
-        }
+.container { 
+    width: 100%; 
+    max-width: 800px; 
+    background: rgba(22, 33, 62, 0.95);
+    border-radius: 20px; 
+    padding: 25px; 
+}
 
-        #chat {
-            height: 400px;
-            overflow-y: auto;
-            background: rgba(15,52,96,0.6);
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 15px;
-        }
+.header { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    margin-bottom: 20px; 
+}
 
-        .input-area { display:flex; gap:10px; }
+.avatar { 
+    width: 70px; 
+    height: 70px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 3px solid #ffd700;
+}
 
-        input {
-            flex:1;
-            padding:14px;
-            border-radius:30px;
-            border:none;
-            background:#0f3460;
-            color:white;
-        }
+.title h1 { font-size: 1.8em; }
 
-        button {
-            padding:14px 20px;
-            border-radius:30px;
-            background:#e94560;
-            border:none;
-            color:white;
-            cursor:pointer;
-        }
+#chat { 
+    height: 400px; 
+    overflow-y: auto; 
+    background: rgba(15, 52, 96, 0.6);
+    padding: 15px; 
+    border-radius: 15px; 
+    margin-bottom: 15px; 
+}
 
-        .msg { margin-bottom:15px; padding:10px; border-radius:10px; }
-        .user-msg { background:#1b6ca8; }
-        .ai-msg { background:#533483; }
+.input-area { display: flex; gap: 10px; }
 
-        #areaImagem {
-            margin-top:15px;
-            text-align:center;
-        }
+input { 
+    flex: 1; 
+    padding: 14px; 
+    border-radius: 30px; 
+    border: none; 
+    background: #0f3460;
+    color: white;
+}
 
-        #imagemGerada {
-            max-width:100%;
-            border-radius:10px;
-            display:none;
-        }
-    </style>
+button { 
+    padding: 14px 25px; 
+    border-radius: 30px; 
+    background: #e94560; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+}
+
+.msg { margin-bottom: 15px; padding: 12px; border-radius: 15px; }
+.user-msg { background: #1b6ca8; }
+.ai-msg { background: #533483; }
+
+.msg-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+#areaImagem {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#imagemGerada {
+    max-width: 100%;
+    border-radius: 10px;
+    display: none;
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
+<div class="header">
+    <img src="https://i.imgur.com/fnMYS0Z.png" class="avatar">
+    <div class="title">
+        <h1>Candinho 🎨</h1>
+        <small>Seu amigo artista</small>
+    </div>
+</div>
+
 <div id="chat">
     <div class="msg ai-msg">
-        🎨 Oi! Eu sou o Candinho! Pergunte sobre arte ou peça um desenho para colorir!
+        <img src="https://i.imgur.com/fnMYS0Z.png" class="msg-avatar">
+        <div>
+        <b>Candinho</b><br>
+        Oi! Vamos explorar arte juntos! 🎨
+        </div>
     </div>
 </div>
 
@@ -86,7 +122,7 @@
 </div>
 
 <div class="input-area">
-    <input id="pergunta" placeholder="Ex: Quem foi Tarsila? ou desenho do MASP">
+    <input id="pergunta" placeholder="Pergunte sobre arte ou peça um desenho...">
     <button onclick="enviarMensagem()">Enviar</button>
 </div>
 
@@ -94,11 +130,13 @@
 
 <script type="module">
 
-// =========================
-// 🔒 FILTRO DE SEGURANÇA
-// =========================
+import { CreateMLCEngine } from "https://esm.run/@mlc-ai/web-llm@0.2.56";
+
+let engine = null;
+
+// ===== FILTRO =====
 function validarPromptArte(input) {
-    const proibidos = ["violência","arma","sexo","nudez","sangue"];
+    const proibidos = ["violência","arma","sexo","nudez"];
     const temas = ["arte","museu","pintura","escultura","desenho","mapa","monumento","artista"];
 
     const t = input.toLowerCase();
@@ -114,16 +152,10 @@ function validarPromptArte(input) {
     return { ok:true };
 }
 
-// =========================
-// 🎯 DETECTAR IMAGEM
-// =========================
 function ehPedidoDeImagem(texto) {
     return ["desenho","colorir","imagem"].some(p => texto.toLowerCase().includes(p));
 }
 
-// =========================
-// ✏️ PROMPT COLORIR
-// =========================
 function criarPromptColorir(input) {
     return `
 desenho infantil para colorir,
@@ -134,9 +166,7 @@ tema: ${input}
 `;
 }
 
-// =========================
-// 🖼️ GERAR IMAGEM
-// =========================
+// ===== IMAGEM VIA BACKEND =====
 async function gerarImagemColorir(promptUsuario) {
 
     const valid = validarPromptArte(promptUsuario);
@@ -145,44 +175,44 @@ async function gerarImagemColorir(promptUsuario) {
     const prompt = criarPromptColorir(promptUsuario);
 
     try {
-        const res = await fetch("https://api.openai.com/v1/images/generations", {
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json",
-                "Authorization":"Bearer SUA_API_KEY_AQUI"
-            },
-            body: JSON.stringify({
-                model:"gpt-image-1",
-                prompt: prompt,
-                size:"1024x1024"
-            })
+        const res = await fetch("/api/imagem", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt })
         });
 
         const data = await res.json();
-        const url = data.data[0].url;
 
         const img = document.getElementById("imagemGerada");
-        img.src = url;
+        img.src = data.url;
         img.style.display = "block";
 
-        return "🖍️ Aqui está seu desenho para colorir!";
-
-    } catch (e) {
-        console.error(e);
+        return "🖍️ Fiz um desenho pra você!";
+    } catch {
         return "😅 Não consegui gerar a imagem.";
     }
 }
 
-// =========================
-// 🎨 IA CANDINHO (SIMPLES)
-// =========================
+// ===== RESPOSTA IA =====
 async function getResposta(pergunta) {
-    return "🎨 Que tema artístico interessante! Quer também um desenho para colorir?";
+
+    if (!engine) return "🎨 Pensando sobre arte...";
+
+    const reply = await engine.chat.completions.create({
+        messages: [
+            {
+                role: "system",
+                content: "Você é o Candinho, um especialista em arte, amigável e divertido."
+            },
+            { role: "user", content: pergunta }
+        ],
+        max_tokens: 80
+    });
+
+    return reply.choices[0].message.content;
 }
 
-// =========================
-// 💬 CHAT PRINCIPAL
-// =========================
+// ===== CHAT =====
 window.enviarMensagem = async function() {
 
     const input = document.getElementById("pergunta");
@@ -197,19 +227,23 @@ window.enviarMensagem = async function() {
     let resposta;
 
     if (ehPedidoDeImagem(pergunta)) {
-
-        const imgResposta = await gerarImagemColorir(pergunta);
-        const textoResposta = await getResposta(pergunta);
-
-        resposta = imgResposta + "<br><br>" + textoResposta;
-
+        const img = await gerarImagemColorir(pergunta);
+        const texto = await getResposta(pergunta);
+        resposta = img + "<br><br>" + texto;
     } else {
         resposta = await getResposta(pergunta);
     }
 
-    chat.innerHTML += `<div class="msg ai-msg">${resposta}</div>`;
-    chat.scrollTop = chat.scrollHeight;
+    chat.innerHTML += `
+        <div class="msg ai-msg">
+            <img src="https://i.imgur.com/fnMYS0Z.png" class="msg-avatar">
+            <div><b>Candinho</b><br>${resposta}</div>
+        </div>
+    `;
 }
+
+// ===== INIT =====
+engine = await CreateMLCEngine("Llama-3.2-1B-Instruct-q4f16_1-MLC");
 
 </script>
 
