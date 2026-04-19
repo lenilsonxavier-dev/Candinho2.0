@@ -1,74 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Candinho - IA de Arte</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candinho - IA de Arte</title>
 
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body { 
-    font-family: 'Segoe UI', Tahoma;
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    color: white; 
-    padding: 20px; 
-    display: flex; 
-    justify-content: center;
-}
+        body { 
+            font-family: 'Segoe UI', Tahoma;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
 
-.container { 
-    max-width: 800px; 
-    width: 100%;
-    background: rgba(22,33,62,0.95);
-    border-radius: 20px; 
-    padding: 25px;
-}
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(22,33,62,0.95);
+            border-radius: 20px;
+            padding: 25px;
+        }
 
-#chat { 
-    height: 400px; 
-    overflow-y: auto; 
-    background: rgba(15,52,96,0.6);
-    padding: 15px; 
-    border-radius: 15px; 
-    margin-bottom: 15px;
-}
+        #chat {
+            height: 400px;
+            overflow-y: auto;
+            background: rgba(15,52,96,0.6);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
 
-.input-area { display: flex; gap: 10px; }
+        .input-area { display:flex; gap:10px; }
 
-input {
-    flex:1;
-    padding:14px;
-    border-radius:30px;
-    border:none;
-    background:#0f3460;
-    color:white;
-}
+        input {
+            flex:1;
+            padding:14px;
+            border-radius:30px;
+            border:none;
+            background:#0f3460;
+            color:white;
+        }
 
-button {
-    padding:14px 20px;
-    border-radius:30px;
-    background:#e94560;
-    border:none;
-    color:white;
-    cursor:pointer;
-}
+        button {
+            padding:14px 20px;
+            border-radius:30px;
+            background:#e94560;
+            border:none;
+            color:white;
+            cursor:pointer;
+        }
 
-.msg { margin-bottom:15px; padding:10px; border-radius:10px; }
-.user-msg { background:#1b6ca8; }
-.ai-msg { background:#533483; }
+        .msg { margin-bottom:15px; padding:10px; border-radius:10px; }
+        .user-msg { background:#1b6ca8; }
+        .ai-msg { background:#533483; }
 
-#areaImagem {
-    margin-top:15px;
-    text-align:center;
-}
+        #areaImagem {
+            margin-top:15px;
+            text-align:center;
+        }
 
-#imagemGerada {
-    max-width:100%;
-    border-radius:10px;
-    display:none;
-}
-</style>
+        #imagemGerada {
+            max-width:100%;
+            border-radius:10px;
+            display:none;
+        }
+    </style>
 </head>
 
 <body>
@@ -77,7 +77,7 @@ button {
 
 <div id="chat">
     <div class="msg ai-msg">
-        🎨 Oi! Peça um desenho para colorir!
+        🎨 Oi! Eu sou o Candinho! Pergunte sobre arte ou peça um desenho para colorir!
     </div>
 </div>
 
@@ -86,41 +86,47 @@ button {
 </div>
 
 <div class="input-area">
-    <input id="pergunta" placeholder="Ex: desenho do MASP para colorir">
+    <input id="pergunta" placeholder="Ex: Quem foi Tarsila? ou desenho do MASP">
     <button onclick="enviarMensagem()">Enviar</button>
 </div>
 
 </div>
 
-<script>
+<script type="module">
 
-// ===== FILTRO =====
+// =========================
+// 🔒 FILTRO DE SEGURANÇA
+// =========================
 function validarPromptArte(input) {
-    const proibidos = ["violência","sangue","arma","sexo","nudez"];
-    const temasArte = ["arte","museu","pintura","escultura","desenho","mapa","monumento","artista"];
+    const proibidos = ["violência","arma","sexo","nudez","sangue"];
+    const temas = ["arte","museu","pintura","escultura","desenho","mapa","monumento","artista"];
 
     const t = input.toLowerCase();
 
     if (proibidos.some(p => t.includes(p))) {
-        return { ok:false, msg:"🚫 Conteúdo não permitido" };
+        return { ok:false, msg:"🚫 Tema não permitido." };
     }
 
-    if (!temasArte.some(p => t.includes(p))) {
-        return { ok:false, msg:"🎨 Peça algo relacionado à arte!" };
+    if (!temas.some(p => t.includes(p))) {
+        return { ok:false, msg:"🎨 Vamos focar em arte!" };
     }
 
     return { ok:true };
 }
 
-// ===== DETECTAR IMAGEM =====
+// =========================
+// 🎯 DETECTAR IMAGEM
+// =========================
 function ehPedidoDeImagem(texto) {
     return ["desenho","colorir","imagem"].some(p => texto.toLowerCase().includes(p));
 }
 
-// ===== PROMPT =====
+// =========================
+// ✏️ PROMPT COLORIR
+// =========================
 function criarPromptColorir(input) {
     return `
-desenho para colorir infantil,
+desenho infantil para colorir,
 linha preta grossa,
 sem cor,
 fundo branco,
@@ -128,7 +134,9 @@ tema: ${input}
 `;
 }
 
-// ===== GERAR IMAGEM =====
+// =========================
+// 🖼️ GERAR IMAGEM
+// =========================
 async function gerarImagemColorir(promptUsuario) {
 
     const valid = validarPromptArte(promptUsuario);
@@ -137,7 +145,7 @@ async function gerarImagemColorir(promptUsuario) {
     const prompt = criarPromptColorir(promptUsuario);
 
     try {
-        const r = await fetch("https://api.openai.com/v1/images/generations", {
+        const res = await fetch("https://api.openai.com/v1/images/generations", {
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
@@ -150,38 +158,53 @@ async function gerarImagemColorir(promptUsuario) {
             })
         });
 
-        const data = await r.json();
+        const data = await res.json();
         const url = data.data[0].url;
 
         const img = document.getElementById("imagemGerada");
         img.src = url;
         img.style.display = "block";
 
-        return "🖍️ Aqui está seu desenho!";
+        return "🖍️ Aqui está seu desenho para colorir!";
 
-    } catch(e) {
-        return "Erro ao gerar imagem 😅";
+    } catch (e) {
+        console.error(e);
+        return "😅 Não consegui gerar a imagem.";
     }
 }
 
-// ===== CHAT =====
-async function enviarMensagem() {
+// =========================
+// 🎨 IA CANDINHO (SIMPLES)
+// =========================
+async function getResposta(pergunta) {
+    return "🎨 Que tema artístico interessante! Quer também um desenho para colorir?";
+}
+
+// =========================
+// 💬 CHAT PRINCIPAL
+// =========================
+window.enviarMensagem = async function() {
 
     const input = document.getElementById("pergunta");
     const chat = document.getElementById("chat");
 
-    const texto = input.value.trim();
-    if (!texto) return;
+    const pergunta = input.value.trim();
+    if (!pergunta) return;
 
-    chat.innerHTML += `<div class="msg user-msg">${texto}</div>`;
+    chat.innerHTML += `<div class="msg user-msg">${pergunta}</div>`;
     input.value = "";
 
     let resposta;
 
-    if (ehPedidoDeImagem(texto)) {
-        resposta = await gerarImagemColorir(texto);
+    if (ehPedidoDeImagem(pergunta)) {
+
+        const imgResposta = await gerarImagemColorir(pergunta);
+        const textoResposta = await getResposta(pergunta);
+
+        resposta = imgResposta + "<br><br>" + textoResposta;
+
     } else {
-        resposta = "🎨 Pergunte algo sobre arte ou peça um desenho!";
+        resposta = await getResposta(pergunta);
     }
 
     chat.innerHTML += `<div class="msg ai-msg">${resposta}</div>`;
