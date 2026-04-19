@@ -24,6 +24,7 @@ body {
     background: rgba(22, 33, 62, 0.95);
     border-radius: 20px; 
     padding: 25px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .header { 
@@ -31,40 +32,67 @@ body {
     align-items: center; 
     gap: 15px; 
     margin-bottom: 20px; 
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ffd700;
 }
 
 .avatar { 
     width: 70px; 
     height: 70px; 
     border-radius: 50%; 
-    background: #533483;
+    background: linear-gradient(135deg, #533483, #e94560);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 40px;
+    font-size: 45px;
     border: 3px solid #ffd700;
+    box-shadow: 0 0 15px rgba(255,215,0,0.3);
 }
 
-.title h1 { font-size: 1.8em; }
+.title h1 { 
+    font-size: 1.8em;
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.title small {
+    opacity: 0.8;
+    font-size: 0.85em;
+}
 
 #chat { 
     height: 400px; 
     overflow-y: auto; 
-    background: rgba(15, 52, 96, 0.6);
+    background: rgba(15, 52, 96, 0.4);
     padding: 15px; 
     border-radius: 15px; 
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
+    scroll-behavior: smooth;
 }
 
-.input-area { display: flex; gap: 10px; }
+.input-area { 
+    display: flex; 
+    gap: 10px; 
+    margin-top: 10px;
+}
 
 input { 
     flex: 1; 
-    padding: 14px; 
+    padding: 14px 20px; 
     border-radius: 30px; 
     border: none; 
     background: #0f3460;
     color: white;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+input:focus {
+    outline: none;
+    background: #1a4580;
+    box-shadow: 0 0 0 2px #ffd700;
 }
 
 input::placeholder {
@@ -72,39 +100,61 @@ input::placeholder {
 }
 
 button { 
-    padding: 14px 25px; 
+    padding: 14px 30px; 
     border-radius: 30px; 
-    background: #e94560; 
+    background: linear-gradient(135deg, #e94560, #c73e56);
     color: white; 
     border: none; 
     cursor: pointer; 
-    transition: transform 0.2s;
+    font-weight: bold;
+    transition: all 0.3s;
 }
 
 button:hover {
-    transform: scale(1.02);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(233,69,96,0.4);
+}
+
+button:active {
+    transform: translateY(0);
 }
 
 button:disabled {
     background: #666;
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
 }
 
 .msg { 
     margin-bottom: 15px; 
-    padding: 12px; 
+    padding: 12px 15px; 
     border-radius: 15px; 
     word-wrap: break-word;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .user-msg { 
-    background: #1b6ca8; 
+    background: linear-gradient(135deg, #1b6ca8, #155a8c);
     margin-left: 40px;
+    border-bottom-right-radius: 5px;
 }
 
 .ai-msg { 
-    background: #533483; 
+    background: linear-gradient(135deg, #533483, #3d2668);
+    margin-right: 40px;
+    border-bottom-left-radius: 5px;
 }
 
 .status {
@@ -114,25 +164,30 @@ button:disabled {
     margin-bottom: 10px;
     text-align: center;
     font-size: 0.9em;
+    transition: all 0.3s;
 }
 
 .status.success {
-    background: #2d6a4f;
+    background: linear-gradient(135deg, #2d6a4f, #1b4d3a);
 }
 
 .status.error {
-    background: #e94560;
+    background: linear-gradient(135deg, #e94560, #c73e56);
+}
+
+.status.loading {
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    color: #1a1a2e;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
 }
 
 .typing {
     display: inline-block;
-    width: 20px;
-    text-align: left;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
 }
 
 .typing span {
@@ -143,6 +198,11 @@ button:disabled {
 .typing span:nth-child(2) { animation-delay: 0.2s; }
 .typing span:nth-child(3) { animation-delay: 0.4s; }
 
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
 #imagemGerada {
     max-width: 100%;
     max-height: 300px;
@@ -150,6 +210,21 @@ button:disabled {
     display: none;
     margin-top: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    animation: fadeIn 0.5s ease;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #ffd700;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 </style>
 </head>
@@ -162,17 +237,18 @@ button:disabled {
     <div class="avatar">🎨</div>
     <div class="title">
         <h1>Candinho 🎨</h1>
-        <small>Seu amigo artista</small>
+        <small>Seu amigo artista - IA poderosa</small>
     </div>
 </div>
 
-<div id="status" class="status">🔧 Inicializando Candinho...</div>
+<div id="status" class="status loading">🎨 Inicializando Candinho...</div>
 
 <div id="chat">
     <div class="msg ai-msg">
         <div>
-        <b>Candinho</b><br>
-        Olá! Que bom te ver por aqui. O que vamos aprender sobre Arte hoje? 😊
+        <b>🎨 Candinho</b><br>
+        Olá! Que bom te ver por aqui. O que vamos aprender sobre Arte hoje? 😊<br>
+        <small style="opacity:0.7;">💡 Dica: Digite "Me desenhe um [animal/objeto]" para ganhar uma imagem para colorir!</small>
         </div>
     </div>
 </div>
@@ -183,123 +259,232 @@ button:disabled {
 
 <div class="input-area">
     <input id="pergunta" placeholder="Ex: Quem foi Van Gogh? ou Me desenhe um dinossauro..." disabled>
-    <button onclick="enviarMensagem()" id="sendBtn" disabled>Enviar</button>
+    <button onclick="enviarMensagem()" id="sendBtn" disabled>📤 Enviar</button>
 </div>
 
 </div>
 
-<script>
-async function verificarBackend() {
-    const statusDiv = document.getElementById('status');
-    const input = document.getElementById('pergunta');
-    const sendBtn = document.getElementById('sendBtn');
-    
-    try {
-        const response = await fetch('/api/health');
-        const data = await response.json();
-        
-        if (response.ok && data.status === 'ok') {
-            statusDiv.innerHTML = '✅ Candinho está pronto! Pode perguntar sobre arte! 🎨';
-            statusDiv.className = 'status success';
-            input.disabled = false;
-            sendBtn.disabled = false;
-            input.focus();
-        } else {
-            throw new Error('Backend não respondeu corretamente');
-        }
-    } catch (error) {
-        statusDiv.innerHTML = '❌ Erro ao conectar com o servidor. Recarregue a página.';
-        statusDiv.className = 'status error';
-        input.disabled = true;
-        sendBtn.disabled = true;
+<script type="importmap">
+  {
+    "imports": {
+      "@mlc-ai/web-llm": "https://esm.run/@mlc-ai/web-llm@0.2.56"
     }
+  }
+</script>
+
+<script type="module">
+import * as webllm from "@mlc-ai/web-llm";
+
+let engine = null;
+let isReady = false;
+
+// Avatar no topo (emojis são mais confiáveis que imagens externas)
+// O avatar já está no header como emoji 🎨
+
+// ===== FILTRO =====
+function validarPromptArte(input) {
+    const proibidos = ["violência","arma","sexo","nudez","droga","morte","sangue","assassino","machado"];
+    const t = input.toLowerCase();
+    
+    if (proibidos.some(p => t.includes(p))) {
+        return { ok: false, msg: "🚫 Esse tema não é apropriado, meu jovem. Vamos falar de arte bonita e educativa!" };
+    }
+    return { ok: true };
 }
 
 function ehPedidoDeImagem(texto) {
-    const palavras = ["desenho", "colorir", "imagem", "ilustração", "desenha", "pintar", "faça um", "crie um", "desenhe"];
+    const palavras = ["desenho", "colorir", "imagem", "ilustração", "desenha", "pintar", "faça um", "crie um", "desenhe", "me desenhe"];
     return palavras.some(p => texto.toLowerCase().includes(p));
 }
 
+// ===== GERAR IMAGEM =====
+async function gerarImagemColorir(promptUsuario) {
+    const valid = validarPromptArte(promptUsuario);
+    if (!valid.ok) return valid.msg;
+    
+    const prompt = `black and white outline drawing, coloring page for kids, simple line art, ${promptUsuario}, thick clear lines, no shading, white background, child friendly, cute`;
+    const encodedPrompt = encodeURIComponent(prompt);
+    const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&nologo=true`;
+    
+    const img = document.getElementById("imagemGerada");
+    img.src = imageUrl;
+    img.style.display = "block";
+    img.alt = `Desenho: ${promptUsuario}`;
+    
+    img.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    
+    return "🎨 Aqui está um desenho especial para você colorir! Use sua criatividade e as cores que mais gostar! 🖍️✨";
+}
+
+// ===== RESPOSTA IA =====
+async function getResposta(pergunta) {
+    if (!engine || !isReady) {
+        return "Aguarde um pouquinho, ainda estou preparando minha paleta de cores... 🎨";
+    }
+    
+    try {
+        const messages = [
+            {
+                role: "system",
+                content: `Você é o Candinho, um professor de arte muito querido de 60 anos.
+- Fala português do Brasil de forma clara e educativa
+- Ensina crianças de 10 anos sobre arte, pintura, artistas famosos e cultura
+- É paciente, divertido e usa emojis 🎨😊✨
+- SEMPRE responde como se estivesse conversando com uma criança curiosa
+- Explica conceitos de arte de forma simples e interessante
+- Fala sobre: Van Gogh, Monet, Leonardo da Vinci, Picasso, Tarsila do Amaral, Portinari
+- Ensina sobre cores primárias, secundárias, formas geométricas
+- Se não souber algo, diz "Que pergunta interessante! Vamos pesquisar juntos!"
+- NUNCA fala sobre violência, política ou assuntos adultos
+- Respostas curtas (máximo 4 frases) para manter a atenção`
+            },
+            { role: "user", content: pergunta }
+        ];
+        
+        const reply = await engine.chat.completions.create({
+            messages: messages,
+            max_tokens: 120,
+            temperature: 0.7
+        });
+        
+        let resposta = reply.choices[0].message.content;
+        
+        if (!resposta.includes('🎨') && !resposta.includes('😊') && !resposta.includes('✨')) {
+            resposta += " 🎨";
+        }
+        
+        return resposta;
+        
+    } catch (error) {
+        console.error("Erro na IA:", error);
+        return "Ops! Minha tinta acabou por um momento. Pode repetir a pergunta? 🎨";
+    }
+}
+
+// ===== MENSAGEM =====
 function addMessage(text, isUser = false) {
     const chat = document.getElementById("chat");
     const div = document.createElement("div");
     div.className = `msg ${isUser ? 'user-msg' : 'ai-msg'}`;
     
+    const nome = isUser ? '👤 Você' : '🎨 Candinho';
+    
     if (isUser) {
-        div.innerHTML = `<div><b>Você</b><br>${text}</div>`;
+        div.innerHTML = `<div><b>${nome}</b><br>${text}</div>`;
     } else {
-        div.innerHTML = `<div><b>Candinho</b><br>${text}</div>`;
+        div.innerHTML = `<div><b>${nome}</b><br>${text}</div>`;
     }
     
     chat.appendChild(div);
     chat.scrollTop = chat.scrollHeight;
 }
 
+// ===== ENVIAR MENSAGEM =====
 window.enviarMensagem = async function() {
     const input = document.getElementById("pergunta");
     const sendBtn = document.getElementById("sendBtn");
     
     const pergunta = input.value.trim();
-    if (!pergunta) return;
+    if (!pergunta || !isReady) return;
     
+    // Desabilitar durante processamento
     input.disabled = true;
     sendBtn.disabled = true;
     
+    // Mostrar mensagem do usuário
     addMessage(pergunta, true);
     input.value = "";
     
+    // Esconder imagem anterior
     const img = document.getElementById("imagemGerada");
     img.style.display = "none";
     
+    // Indicador de digitação
     const typingDiv = document.createElement("div");
     typingDiv.className = "msg ai-msg";
     typingDiv.id = "typingIndicator";
-    typingDiv.innerHTML = `<div><b>Candinho</b><br><span class="typing">Pensando<span>.</span><span>.</span><span>.</span></span></div>`;
+    typingDiv.innerHTML = `<div><b>🎨 Candinho</b><br><span class="typing">✍️ Pensando<span>.</span><span>.</span><span>.</span></span></div>`;
     document.getElementById("chat").appendChild(typingDiv);
     document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
     
+    let resposta;
+    
     try {
-        const response = await fetch('/api/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                message: pergunta,
-                gerarImagem: ehPedidoDeImagem(pergunta)
-            })
-        });
-        
-        const data = await response.json();
-        
-        typingDiv.remove();
-        
-        if (data.imagem) {
-            const img = document.getElementById("imagemGerada");
-            img.src = data.imagem;
-            img.style.display = "block";
+        if (ehPedidoDeImagem(pergunta)) {
+            const imgResposta = await gerarImagemColorir(pergunta);
+            const textoResposta = await getResposta(pergunta);
+            resposta = imgResposta + "<br><br>" + textoResposta;
+        } else {
+            resposta = await getResposta(pergunta);
         }
-        
-        addMessage(data.resposta, false);
-        
     } catch (error) {
-        console.error('Erro:', error);
-        typingDiv.remove();
-        addMessage("Ops! Tive um problema técnico. Tente novamente! 🎨", false);
+        console.error("Erro:", error);
+        resposta = "Xiii, tive um probleminha técnico! Vamos tentar de novo? 🎨";
     }
     
+    // Remover indicador
+    typingDiv.remove();
+    
+    // Adicionar resposta
+    addMessage(resposta, false);
+    
+    // Reabilitar
     input.disabled = false;
     sendBtn.disabled = false;
     input.focus();
 }
 
-verificarBackend();
+// ===== INICIALIZAR =====
+async function initModel() {
+    const statusDiv = document.getElementById("status");
+    const input = document.getElementById("pergunta");
+    const sendBtn = document.getElementById("sendBtn");
+    
+    try {
+        statusDiv.innerHTML = "📥 Baixando o modelo TinyLlama... (primeira vez pode demorar 30 segundos)";
+        statusDiv.className = "status loading";
+        
+        const modelId = "TinyLlama-1.1B-Chat-v0.4-q4f32_1-1k";
+        
+        engine = await webllm.CreateMLCEngine(modelId, { 
+            initProgressCallback: (progress) => {
+                if (progress.text) {
+                    statusDiv.innerHTML = `📥 ${progress.text}`;
+                }
+            }
+        });
+        
+        isReady = true;
+        statusDiv.innerHTML = "✅ Candinho está pronto! Pode fazer suas perguntas sobre arte! 🎨";
+        statusDiv.className = "status success";
+        
+        input.disabled = false;
+        sendBtn.disabled = false;
+        input.focus();
+        
+        // Mensagem de boas-vindas
+        setTimeout(() => {
+            addMessage("Que bom ter você aqui! Pode me perguntar sobre artistas famosos, cores, técnicas de desenho, ou me pedir: 'Me desenhe um gato para colorir'! 🐱✏️", false);
+        }, 1000);
+        
+    } catch (error) {
+        console.error("Erro:", error);
+        statusDiv.innerHTML = "❌ Erro ao carregar o modelo. Recarregue a página para tentar novamente.";
+        statusDiv.className = "status error";
+    }
+}
 
+// Iniciar
+initModel();
+
+// Suporte para tecla Enter
 document.getElementById("pergunta").addEventListener("keypress", function(e) {
-    if (e.key === "Enter" && !this.disabled) {
+    if (e.key === "Enter" && isReady && !this.disabled) {
+        e.preventDefault();
         enviarMensagem();
     }
 });
+
 </script>
 
 </body>
