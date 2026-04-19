@@ -83,7 +83,6 @@ input {
     background: #0f3460;
     color: white;
     font-size: 16px;
-    transition: all 0.3s;
 }
 
 input:focus {
@@ -112,15 +111,9 @@ button:hover:not(:disabled) {
     box-shadow: 0 5px 15px rgba(233,69,96,0.4);
 }
 
-button:active {
-    transform: translateY(0);
-}
-
 button:disabled {
     background: #666;
     cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
 }
 
 .msg { 
@@ -178,7 +171,6 @@ button:disabled {
 
 .typing span {
     animation: blink 1.4s infinite;
-    animation-fill-mode: both;
 }
 
 .typing span:nth-child(2) { animation-delay: 0.2s; }
@@ -196,7 +188,6 @@ button:disabled {
     display: none;
     margin-top: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    animation: fadeIn 0.5s ease;
 }
 </style>
 </head>
@@ -209,17 +200,21 @@ button:disabled {
     <img src="https://i.imgur.com/fnMYS0Z.png" class="avatar" alt="Candinho" onerror="this.src='https://via.placeholder.com/70/533483/ffd700?text=C'">
     <div class="title">
         <h1>Candinho 🎨</h1>
-        <small>Professor de Arte - IA na Nuvem</small>
+        <small>Professor de Arte - 60 anos de sabedoria</small>
     </div>
 </div>
 
-<div id="status" class="status loading">🎨 Conectando...</div>
+<div id="status" class="status loading">🎨 Conectando com a nuvem...</div>
 
 <div id="chat">
     <div class="msg ai-msg">
         <div>
         <b>Candinho</b><br>
-        Olá! Pode me perguntar sobre arte! 🎨
+        Olá, criança! Que bom ver você por aqui. 😊<br>
+        Sou o Candinho, tenho 60 anos e adoro ensinar arte.<br>
+        Pode me perguntar sobre pintura, música, dança, teatro, poesia, matemática, geografia...<br>
+        Também posso gerar desenhos para você colorir!<br>
+        <strong>🎯 Exemplos:</strong> "Quem foi Tarsila?" | "Desenhe um Tiranossauro" | "Desenhe a Mona Lisa" | "Desenhe o mapa do Brasil"
         </div>
     </div>
 </div>
@@ -229,17 +224,15 @@ button:disabled {
 </div>
 
 <div class="input-area">
-    <input id="pergunta" placeholder="Ex: Quem foi Tarsila? ou Desenhe um dinossauro..." />
+    <input id="pergunta" placeholder="Digite sua pergunta sobre arte ou peça um desenho..." />
     <button onclick="enviarMensagem()" id="sendBtn">📤 Enviar</button>
 </div>
 
 </div>
 
 <script>
-let isReady = true;
-
 function ehPedidoDeImagem(texto) {
-    const palavras = ["desenho", "colorir", "desenha", "desenhe", "imagem", "ilustração", "pintar", "faça", "crie"];
+    const palavras = ["desenho", "colorir", "desenha", "desenhe", "imagem", "ilustração", "pintar", "faça", "crie", "mostre"];
     return palavras.some(p => texto.toLowerCase().includes(p));
 }
 
@@ -271,7 +264,7 @@ window.enviarMensagem = async function() {
     
     const typingDiv = document.createElement("div");
     typingDiv.className = "msg ai-msg";
-    typingDiv.innerHTML = `<div><b>Candinho</b><br><span class="typing">✍️<span>.</span><span>.</span><span>.</span></span></div>`;
+    typingDiv.innerHTML = `<div><b>Candinho</b><br><span class="typing">✍️ Pensando<span>.</span><span>.</span><span>.</span></span></div>`;
     document.getElementById("chat").appendChild(typingDiv);
     document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
     
@@ -298,8 +291,9 @@ window.enviarMensagem = async function() {
         addMessage(data.resposta, false);
         
     } catch (error) {
+        console.error('Erro:', error);
         typingDiv.remove();
-        addMessage("Ops! Tive um problema. Tente novamente! 🎨", false);
+        addMessage("Desculpe, criança. Tive um probleminha técnico. Vamos tentar de novo? 🎨", false);
     }
     
     input.disabled = false;
@@ -314,9 +308,8 @@ document.getElementById("pergunta").addEventListener("keypress", function(e) {
     }
 });
 
-// Status
 setTimeout(() => {
-    document.getElementById('status').innerHTML = '✅ Candinho pronto!';
+    document.getElementById('status').innerHTML = '✅ Candinho está pronto! Pode perguntar sobre arte!';
     document.getElementById('status').className = 'status success';
 }, 1000);
 </script>
