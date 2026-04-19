@@ -32,7 +32,8 @@ export default async function handler(req, res) {
         
         let imagemUrl = null;
         if (gerarImagem) {
-            imagemUrl = await gerarImagemCorreta(message);
+            // Tenta múltiplos provedores em sequência
+            imagemUrl = await gerarImagemMultiProvedor(message);
         }
         
         res.status(200).json({
@@ -92,119 +93,245 @@ async function getRespostaGroq(pergunta, apiKey) {
 }
 
 // ============================================
-// FUNÇÃO CORRIGIDA DE GERAÇÃO DE IMAGEM
+// SISTEMA DE MÚLTIPLOS PROVEDORES DE IMAGEM
 // ============================================
 
-async function gerarImagemCorreta(prompt) {
-    try {
-        let textoOriginal = prompt.toLowerCase();
-        
-        // Extrair o tema
-        let tema = "";
-        if (textoOriginal.includes("desenhe") || textoOriginal.includes("desenho")) {
-            let match = textoOriginal.match(/(?:desenhe|desenho|desenha|faca um|crie um)\s+(.+)/i);
-            if (match) {
-                tema = match[1];
-            } else {
-                tema = textoOriginal.replace(/desenhe|desenho|colorir|me|um|uma|para|de|a|o|e|por favor/g, "").trim();
+async function gerarImagemMultiProvedor(prompt) {
+    // Extrair o tema do prompt
+    let tema = extrairTema(prompt);
+    
+    // Lista de provedores em ordem de preferência
+    const provedores = [
+        () => gerarComHuggingFace(tema),
+        () => gerarComPollinationsProfissional(tema),
+        () => gerarComLexica(tema),
+        () => gerarComLocalAI(tema)
+    ];
+    
+    // Tenta cada provedor até um funcionar
+    for (const provedor of provedores) {
+        try {
+            const imagem = await provedor();
+            if (imagem) {
+                console.log(`✅ Imagem gerada com sucesso`);
+                return imagem;
             }
-        } else {
-            tema = textoOriginal.replace(/desenhe|desenho|colorir|me|um|uma|para|de|a|o|e/g, "").trim();
+        } catch (error) {
+            console.log(`Provedor falhou:`, error.message);
+            continue;
         }
-        
-        if (!tema || tema.length < 2) {
-            tema = "arte";
-        }
-        
-        // Mapeamento específico sem filtro de segurança
-        const mapeamento = {
-            // Obras de arte famosas (sem filtro)
-            "mona lisa": "Mona Lisa by Leonardo da Vinci, realistic, detailed, painting",
-            "noite estrelada": "Starry Night by Vincent van Gogh, oil painting, swirling sky",
-            "abaporu": "Abaporu painting by Tarsila do Amaral, modernist, Brazilian art",
-            "guernica": "Guernica by Pablo Picasso, cubist, black and white, anti-war",
-            "girassois": "Sunflowers by Vincent van Gogh, still life, yellow flowers",
-            "o grito": "The Scream by Edvard Munch, expressionist, figure screaming",
-            "persistencia da memoria": "The Persistence of Memory by Salvador Dali, melting clocks, surrealist",
-            "moça com brinco de pérola": "Girl with a Pearl Earring by Vermeer, portrait",
-            
-            // Autorretratos famosos
-            "autorretrato van gogh": "Self-portrait by Vincent van Gogh, with bandaged ear",
-            "autorretrato frida": "Self-portrait by Frida Kahlo, with monkeys, Mexican art",
-            "autorretrato rembrandt": "Self-portrait by Rembrandt, Baroque painting, old master",
-            
-            // Dinossauros realistas
-            "tiranossauro": "Tyrannosaurus Rex, realistic dinosaur, detailed, paleoart",
-            "triceratops": "Triceratops, realistic dinosaur, three horns, detailed",
-            "velociraptor": "Velociraptor, realistic dinosaur, feathered, detailed",
-            "braquiossauro": "Brachiosaurus, realistic dinosaur, long neck, detailed",
-            
-            // Artistas em seus estilos
-            "picasso": "Cubist portrait, Picasso style, geometric shapes, abstract",
-            "dali": "Surrealist landscape, Salvador Dali style, melting objects, dreamlike",
-            "monet": "Impressionist garden, Claude Monet style, water lilies, blurred",
-            "van gogh": "Post-impressionist landscape, Van Gogh style, swirling brushstrokes",
-            
-            // Paisagens e naturezas
-            "por do sol": "Sunset landscape, vibrant colors, realistic sky",
-            "montanha": "Mountain landscape, detailed, realistic, snow peaks",
-            "praia": "Beach scene, ocean waves, sand, realistic",
-            "floresta": "Forest with trees, realistic, detailed leaves",
-            
-            // Animais realistas
-            "leao": "Lion, realistic, detailed fur, majestic",
-            "elefante": "Elephant, realistic, detailed skin, African savanna",
-            "gato": "Cat, realistic, detailed fur, domestic animal",
-            "cachorro": "Dog, realistic, detailed, pet portrait"
-        };
-        
-        let promptImagem = null;
-        for (const [key, valor] of Object.entries(mapeamento)) {
-            if (tema.includes(key)) {
-                promptImagem = valor;
-                break;
-            }
-        }
-        
-        if (!promptImagem) {
-            promptImagem = `${tema}, detailed, realistic, high quality, no children, no cartoon`;
-        }
-        
-        console.log("Gerando imagem:", promptImagem);
-        
-        // Usar Pollinations com modelo de qualidade e sem filtro
-        const encodedPrompt = encodeURIComponent(promptImagem);
-        const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=768&height=768&nologo=true&model=flux&seed=${Math.floor(Math.random() * 10000)}`;
-        
-        return imageUrl;
-        
-    } catch (error) {
-        console.error('Erro:', error);
-        return null;
     }
+    
+    return null;
+}
+
+function extrairTema(prompt) {
+    let tema = prompt.toLowerCase();
+    
+    // Remove palavras comuns de comando
+    tema = tema.replace(/desenhe|desenho|colorir|me|um|uma|para|de|a|o|e|por favor|crie|faça|gere/g, "");
+    tema = tema.replace(/imagem|figura|ilustração|pintura|obra|arte/g, "");
+    tema = tema.trim();
+    
+    if (!tema || tema.length < 2) {
+        tema = "beautiful landscape painting";
+    }
+    
+    return tema;
+}
+
+// PROVEDOR 1: Hugging Face (gratuito, modelos profissionais)
+async function gerarComHuggingFace(tema) {
+    // Mapeamento de temas para prompts profissionais
+    const promptsProfissionais = {
+        // Obras de arte famosas
+        "mona lisa": "Leonardo da Vinci, Mona Lisa, Renaissance portrait, sfumato technique, Louvre museum quality",
+        "noite estrelada": "Vincent van Gogh, The Starry Night, post-impressionism, swirling sky, oil on canvas",
+        "abaporu": "Tarsila do Amaral, Abaporu, 1928, Brazilian modernism, surrealist figure with giant foot",
+        "guernica": "Pablo Picasso, Guernica, 1937, cubist mural, anti-war, black and white",
+        "girassois": "Van Gogh, Sunflowers, still life, yellow flowers in vase",
+        "o grito": "Edvard Munch, The Scream, expressionist, figure screaming on bridge",
+        "persistencia": "Salvador Dali, The Persistence of Memory, surrealism, melting clocks",
+        
+        // Autorretratos
+        "autorretrato van gogh": "Van Gogh self-portrait, post-impressionist, bandaged ear",
+        "autorretrato frida": "Frida Kahlo self-portrait, Mexican folk art, flowers in hair, unibrow",
+        "autorretrato rembrandt": "Rembrandt self-portrait, Baroque painting, dramatic lighting",
+        
+        // Dinossauros realistas
+        "tiranossauro": "Tyrannosaurus Rex, photorealistic paleoart, detailed scales, sharp teeth, Jurassic period",
+        "triceratops": "Triceratops, realistic dinosaur, three horns, herbivore, Cretaceous period",
+        "velociraptor": "Velociraptor, realistic dinosaur, feathered, intelligent predator",
+        "braquiossauro": "Brachiosaurus, realistic, long neck, feeding on treetops",
+        
+        // Estilos de artistas
+        "picasso cubista": "Cubist portrait, Pablo Picasso style, geometric shapes, abstract face",
+        "dali surrealista": "Surrealist landscape, Salvador Dali style, melting objects, dreamlike",
+        "monet impressionista": "Impressionist garden, Claude Monet style, water lilies, blurred brushstrokes",
+        "van gogh pos impressionista": "Post-impressionist landscape, Van Gogh style, bold colors, swirling sky",
+        
+        // Paisagens
+        "por do sol": "Sunset over ocean, dramatic orange and purple sky, realistic, high detail",
+        "montanha": "Mountain range with snow peaks, realistic landscape, dramatic lighting",
+        "floresta amazônica": "Amazon rainforest, Brazil, detailed trees, tropical vegetation, realistic",
+        
+        // Padrão
+        "padrao": `${tema}, professional artwork, high resolution, masterpiece, detailed, realistic, art museum quality`
+    };
+    
+    let promptFinal = promptsProfissionais[tema] || promptsProfissionais["padrao"];
+    
+    // Tenta usar o modelo FLUX do Hugging Face (gratuito)
+    const modelos = [
+        "black-forest-labs/FLUX.1-dev",
+        "stabilityai/stable-diffusion-3.5-large",
+        "stabilityai/stable-diffusion-xl-base-1.0"
+    ];
+    
+    for (const modelo of modelos) {
+        try {
+            const response = await fetch(
+                `https://api-inference.huggingface.co/models/${modelo}`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        inputs: promptFinal,
+                        parameters: {
+                            negative_prompt: "cartoon, children, cute, baby, coloring page, simple line art, low quality",
+                            width: 768,
+                            height: 768
+                        }
+                    })
+                }
+            );
+            
+            if (response.ok) {
+                const blob = await response.blob();
+                // Converter blob para URL temporária
+                const imageUrl = URL.createObjectURL(blob);
+                return imageUrl;
+            }
+        } catch (err) {
+            continue;
+        }
+    }
+    
+    return null;
+}
+
+// PROVEDOR 2: Pollinations com parâmetros anti-filtro
+async function gerarComPollinationsProfissional(tema) {
+    // Prompt profissional sem termos que disparam filtros
+    const promptProfissional = `${tema}, professional artwork, detailed, realistic, high quality, museum piece, masterpiece, no cartoon, no child, no coloring page`;
+    
+    const negativePrompt = "children, kid, baby, cute, cartoon, coloring page, simple line art, childish, infantilized";
+    
+    const encodedPrompt = encodeURIComponent(promptProfissional);
+    const encodedNegative = encodeURIComponent(negativePrompt);
+    
+    // Múltiplas tentativas com diferentes parâmetros
+    const urls = [
+        `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1024&height=1024&nologo=true&model=flux&negative_prompt=${encodedNegative}`,
+        `https://image.pollinations.ai/prompt/${encodedPrompt}?width=768&height=768&nologo=true&seed=${Date.now()}`
+    ];
+    
+    for (const url of urls) {
+        try {
+            const response = await fetch(url, { method: 'HEAD' });
+            if (response.ok) {
+                return url;
+            }
+        } catch (err) {
+            continue;
+        }
+    }
+    
+    return urls[0];
+}
+
+// PROVEDOR 3: Lexica.art (busca imagens reais)
+async function gerarComLexica(tema) {
+    const searchTerms = {
+        "mona lisa": "Mona Lisa painting",
+        "noite estrelada": "Van Gogh Starry Night",
+        "abaporu": "Tarsila Abaporu",
+        "tiranossauro": "Tyrannosaurus Rex realistic",
+        default: `${tema} famous painting`
+    };
+    
+    let searchTerm = searchTerms[tema] || searchTerms.default;
+    
+    try {
+        const response = await fetch(`https://lexica.art/api/v1/search?q=${encodeURIComponent(searchTerm)}`);
+        
+        if (response.ok) {
+            const data = await response.json();
+            if (data.images && data.images.length > 0) {
+                // Pega uma imagem real da obra
+                return data.images[0].url;
+            }
+        }
+    } catch (err) {
+        console.log("Lexica falhou:", err);
+    }
+    
+    return null;
+}
+
+// PROVEDOR 4: LocalAI (auto-hospedado - mais controle)
+async function gerarComLocalAI(tema) {
+    // Para usar com LocalAI instalado localmente
+    // Endereço do servidor LocalAI (se estiver rodando)
+    const localAIUrl = process.env.LOCAL_AI_URL || 'http://localhost:8080';
+    
+    try {
+        const response = await fetch(`${localAIUrl}/v1/images/generations`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                prompt: `${tema}, professional artwork, high quality`,
+                model: "stabilityai/stable-diffusion-xl-base-1.0",
+                n: 1,
+                size: "768x768"
+            })
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            if (data.data && data.data[0] && data.data[0].url) {
+                return data.data[0].url;
+            }
+        }
+    } catch (err) {
+        console.log("LocalAI não disponível");
+    }
+    
+    return null;
 }
 
 function getRespostaFallback(pergunta) {
     const p = pergunta.toLowerCase();
     
-    const respostas = {
-        "van gogh": "Van Gogh pintou 'Noite Estrelada'! Ele usava pinceladas grossas e cores vibrantes. Vamos tentar pintar um céu estrelado? 🌟",
-        "monet": "Monet criou o Impressionismo! Pintava a mesma cena em diferentes horários para mostrar a luz. 🌅",
-        "picasso": "Picasso inventou o Cubismo! Desmontava rostos em formas geométricas. Tente desenhar um rosto com quadrados! 🎭",
-        "tarsila": "Tarsila pintou 'Abaporu' e é a artista brasileira mais importante do modernismo! 🇧🇷",
-        "frida": "Frida Kahlo transformou sua dor em arte! Pintava autorretratos cheios de cores mexicanas. 🌺",
-        "dinossauro": "Os dinossauros viveram há milhões de anos! O Tiranossauro Rex era um dos maiores carnívoros. Vou gerar um desenho para você colorir! 🦖",
-        "tiranossauro": "O Tiranossauro Rex tinha dentes do tamanho de uma banana! Vou gerar um desenho bem legal para você colorir! 🦖",
-        "mapa brasil": "O Brasil tem 26 estados e 5 regiões! O mapa parece um coração. Vou gerar um mapa para você colorir! 🗺️",
-        "lettering": "Lettering é desenhar letras bonitas! Dá para fazer letras gordinhas, fininhas, com sombra... Vou gerar um alfabeto para você praticar! ✏️",
-        "flor": "As flores são lindas! Vou gerar um desenho de flor para você colorir com as cores que mais gostar! 🌸"
-    };
-    
-    for (const [key, resposta] of Object.entries(respostas)) {
-        if (p.includes(key)) {
-            return resposta;
-        }
+    if (p.includes("van gogh")) {
+        return "Van Gogh pintou 'Noite Estrelada' e 'Girassóis'! Ele usava pinceladas grossas e cores vibrantes. Vou gerar uma imagem da obra para você! 🌟";
+    }
+    if (p.includes("mona lisa")) {
+        return "A Mona Lisa de Leonardo da Vinci tem o sorriso mais famoso do mundo! Vou gerar a imagem dessa obra-prima para você! 🖼️";
+    }
+    if (p.includes("picasso")) {
+        return "Picasso inventou o Cubismo! Desmontava rostos em formas geométricas. Vou gerar uma imagem no estilo cubista para você! 🎭";
+    }
+    if (p.includes("tarsila")) {
+        return "Tarsila pintou 'Abaporu', a obra mais importante do modernismo brasileiro! Vou gerar a imagem para você! 🇧🇷";
+    }
+    if (p.includes("tiranossauro") || p.includes("dinossauro")) {
+        return "O Tiranossauro Rex era o maior predador do período Jurássico! Vou gerar uma imagem realista para você! 🦖";
     }
     
-    return "Sou o Candinho, especialista em Arte! 🎨\n\nPosso te ensinar sobre artistas, dinossauros, mapas, lettering, flores e muito mais! O que você quer aprender hoje?";
+    return "Sou o Candinho, especialista em Arte! 🎨\n\nPosso te mostrar imagens de obras famosas como Mona Lisa, Noite Estrelada e Abaporu, além de dinossauros realistas! O que você quer ver?";
 }
