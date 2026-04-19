@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Candinho - IA de Arte</title>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    font-family: 'Segoe UI', Tahoma;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white; 
+    padding: 20px; 
+    display: flex; 
+    justify-content: center;
+}
+
+.container { 
+    max-width: 800px; 
+    width: 100%;
+    background: rgba(22,33,62,0.95);
+    border-radius: 20px; 
+    padding: 25px;
+}
+
+#chat { 
+    height: 400px; 
+    overflow-y: auto; 
+    background: rgba(15,52,96,0.6);
+    padding: 15px; 
+    border-radius: 15px; 
+    margin-bottom: 15px;
+}
+
+.input-area { display: flex; gap: 10px; }
+
+input {
+    flex:1;
+    padding:14px;
+    border-radius:30px;
+    border:none;
+    background:#0f3460;
+    color:white;
+}
+
+button {
+    padding:14px 20px;
+    border-radius:30px;
+    background:#e94560;
+    border:none;
+    color:white;
+    cursor:pointer;
+}
+
+.msg { margin-bottom:15px; padding:10px; border-radius:10px; }
+.user-msg { background:#1b6ca8; }
+.ai-msg { background:#533483; }
+
+#areaImagem {
+    margin-top:15px;
+    text-align:center;
+}
+
+#imagemGerada {
+    max-width:100%;
+    border-radius:10px;
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="chat">
+    <div class="msg ai-msg">
+        🎨 Oi! Peça um desenho para colorir!
+    </div>
+</div>
+
+<div id="areaImagem">
+    <img id="imagemGerada">
+</div>
+
+<div class="input-area">
+    <input id="pergunta" placeholder="Ex: desenho do MASP para colorir">
+    <button onclick="enviarMensagem()">Enviar</button>
+</div>
+
+</div>
+
+<script>
+
+// ===== FILTRO =====
+function validarPromptArte(input) {
+    const proibidos = ["violência","sangue","arma","sexo","nudez"];
+    const temasArte = ["arte","museu","pintura","escultura","desenho","mapa","monumento","artista"];
+
+    const t = input.toLowerCase();
+
+    if (proibidos.some(p => t.includes(p))) {
+        return { ok:false, msg:"🚫 Conteúdo não permitido" };
+    }
+
+    if (!temasArte.some(p => t.includes(p))) {
+        return { ok:false, msg:"🎨 Peça algo relacionado à arte!" };
+    }
+
+    return { ok:true };
+}
+
+// ===== DETECTAR IMAGEM =====
+function ehPedidoDeImagem(texto) {
+    return ["desenho","colorir","imagem"].some(p => texto.toLowerCase().includes(p));
+}
+
+// ===== PROMPT =====
+function criarPromptColorir(input) {
+    return `
+desenho para colorir infantil,
+linha preta grossa,
+sem cor,
+fundo branco,
+tema: ${input}
+`;
+}
+
+// ===== GERAR IMAGEM =====
+async function gerarImagemColorir(promptUsuario) {
+
+    const valid = validarPromptArte(promptUsuario);
+    if (!valid.ok) return valid.msg;
+
+    const prompt = criarPromptColorir(promptUsuario);
+
+    try {
+        const r = await fetch("https://api.openai.com/v1/images/generations", {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer SUA_API_KEY_AQUI"
+            },
+            body: JSON.stringify({
+                model:"gpt-image-1",
+                prompt: prompt,
+                size:"1024x1024"
+            })
+        });
+
+        const data = await r.json();
+        const url = data.data[0].url;
+
+        const img = document.getElementById("imagemGerada");
+        img.src = url;
+        img.style.display = "block";
+
+        return "🖍️ Aqui está seu desenho!";
+
+    } catch(e) {
+        return "Erro ao gerar imagem 😅";
+    }
+}
+
+// ===== CHAT =====
+async function enviarMensagem() {
+
+    const input = document.getElementById("pergunta");
+    const chat = document.getElementById("chat");
+
+    const texto = input.value.trim();
+    if (!texto) return;
+
+    chat.innerHTML += `<div class="msg user-msg">${texto}</div>`;
+    input.value = "";
+
+    let resposta;
+
+    if (ehPedidoDeImagem(texto)) {
+        resposta = await gerarImagemColorir(texto);
+    } else {
+        resposta = "🎨 Pergunte algo sobre arte ou peça um desenho!";
+    }
+
+    chat.innerHTML += `<div class="msg ai-msg">${resposta}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+}
+
+</script>
+
+</body>
+</html>
