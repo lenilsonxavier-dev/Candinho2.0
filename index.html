@@ -112,7 +112,7 @@ button {
         <img src="https://i.imgur.com/fnMYS0Z.png" class="msg-avatar">
         <div>
         <b>Candinho</b><br>
-        Oi! Vamos explorar arte juntos! 🎨
+        Olá, meu jovem! 😊 Vamos aprender arte juntos hoje?
         </div>
     </div>
 </div>
@@ -142,11 +142,11 @@ function validarPromptArte(input) {
     const t = input.toLowerCase();
 
     if (proibidos.some(p => t.includes(p))) {
-        return { ok:false, msg:"🚫 Tema não permitido." };
+        return { ok:false, msg:"🚫 Esse tema não é apropriado. Vamos falar de arte!" };
     }
 
     if (!temas.some(p => t.includes(p))) {
-        return { ok:false, msg:"🎨 Vamos focar em arte!" };
+        return { ok:false, msg:"🎨 Vamos conversar sobre arte, combinado?" };
     }
 
     return { ok:true };
@@ -158,11 +158,9 @@ function ehPedidoDeImagem(texto) {
 
 function criarPromptColorir(input) {
     return `
-desenho infantil para colorir,
-linha preta grossa,
-sem cor,
-fundo branco,
-tema: ${input}
+Desenho infantil para colorir.
+Linha preta grossa, sem cores, fundo branco.
+Tema: ${input}.
 `;
 }
 
@@ -187,26 +185,32 @@ async function gerarImagemColorir(promptUsuario) {
         img.src = data.url;
         img.style.display = "block";
 
-        return "🖍️ Fiz um desenho pra você!";
+        return "Aqui está um belo desenho para você colorir! 🖍️";
     } catch {
-        return "😅 Não consegui gerar a imagem.";
+        return "Hmm... não consegui gerar o desenho agora. Tente novamente em instantes.";
     }
 }
 
-// ===== RESPOSTA IA =====
+// ===== RESPOSTA IA (PERSONALIDADE DO CANDINHO) =====
 async function getResposta(pergunta) {
 
-    if (!engine) return "🎨 Pensando sobre arte...";
+    if (!engine) return "Estou me preparando para nossa conversa sobre arte... 🎨";
 
     const reply = await engine.chat.completions.create({
         messages: [
             {
                 role: "system",
-                content: "Você é o Candinho, um especialista em arte, amigável e divertido."
+                content: `Você é o Candinho, um professor de arte de 60 anos.
+Fala português corretamente, com linguagem clara e educativa.
+Ensina crianças de 10 anos.
+É paciente, amigável e gosta de explicar arte de forma simples.
+Possui conhecimento de arte, cultura geral, matemática básica e inglês.
+Evita linguagem neutra.
+Responda como um professor experiente e acolhedor.`
             },
             { role: "user", content: pergunta }
         ],
-        max_tokens: 80
+        max_tokens: 120
     });
 
     return reply.choices[0].message.content;
@@ -242,8 +246,8 @@ window.enviarMensagem = async function() {
     `;
 }
 
-// ===== INIT =====
-engine = await CreateMLCEngine("Llama-3.2-1B-Instruct-q4f16_1-MLC");
+// ✅ MODELO CORRIGIDO (SEM ERRO)
+engine = await CreateMLCEngine("Llama-3-8B-Instruct-q4f32_1-MLC");
 
 </script>
 
