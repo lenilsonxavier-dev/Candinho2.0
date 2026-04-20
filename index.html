@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Candinho - Desenhos para Colorir</title>
+<title>Candinho Desenhista</title>
 <style>
 * {
     margin: 0;
@@ -23,12 +23,11 @@ body {
 
 .container {
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
     background: rgba(22, 33, 62, 0.95);
     border-radius: 20px;
     padding: 25px;
     backdrop-filter: blur(5px);
-    text-align: center;
 }
 
 .avatar {
@@ -52,12 +51,27 @@ h1 {
 .subtitle {
     color: #ddd;
     margin-bottom: 30px;
+    font-style: italic;
 }
 
-.input-area {
+.secao {
+    background: rgba(0,0,0,0.3);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.secao h2 {
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    border-left: 4px solid #ffd700;
+    padding-left: 12px;
+}
+
+.input-group {
     display: flex;
     gap: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 input {
@@ -107,6 +121,7 @@ button:disabled {
     margin: 20px auto;
     font-size: 1.2em;
     color: #ffd700;
+    text-align: center;
 }
 
 .loading span {
@@ -118,44 +133,98 @@ button:disabled {
     50% { opacity: 0.3; }
 }
 
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card-imagem {
+    background: #0f3460;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-align: center;
+}
+
+.card-imagem:hover {
+    transform: scale(1.05);
+}
+
+.card-imagem img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 2px solid #ffd700;
+}
+
+.card-imagem p {
+    padding: 8px;
+    font-size: 0.8em;
+    color: #ddd;
+}
+
 .dica {
     background: rgba(255,215,0,0.2);
     padding: 12px;
     border-radius: 15px;
     margin-top: 20px;
     font-size: 0.9em;
+    text-align: center;
 }
 </style>
 </head>
 <body>
 <div class="container">
-    <img src="https://i.imgur.com/fnMYS0Z.png" class="avatar" alt="Candinho" onerror="this.src='https://via.placeholder.com/80/533483/ffd700?text=C'">
-    <h1>Candinho 🖍️</h1>
-    <div class="subtitle">Gerador de desenhos para colorir</div>
-
-    <div class="input-area">
-        <input type="text" id="descricao" placeholder="Ex: mapa do Brasil, Mona Lisa, Goku, castelo de princesa, dinossauro fofo...">
-        <button id="gerarBtn">🎨 Gerar desenho</button>
+    <div style="text-align: center;">
+        <img src="https://i.imgur.com/fnMYS0Z.png" class="avatar" alt="Candinho" onerror="this.src='https://via.placeholder.com/80/533483/ffd700?text=C'">
+        <h1>Candinho Desenhista 🖍️</h1>
+        <div class="subtitle">🎨 Sou seu guia no desenho!</div>
     </div>
 
-    <div class="loading" id="loading">
-        <span>✏️</span> Criando seu desenho para colorir<span>.</span><span>.</span><span>.</span>
+    <!-- SEÇÃO 1: Gerador por IA (personalizado) -->
+    <div class="secao">
+        <h2>✏️ Peça um desenho personalizado</h2>
+        <div class="input-group">
+            <input type="text" id="descricao" placeholder="Ex: mapa do Brasil, Mona Lisa, Goku, castelo de princesa...">
+            <button id="gerarBtn">🎨 Gerar desenho</button>
+        </div>
+        <div class="loading" id="loading">
+            <span>✏️</span> Criando seu desenho para colorir<span>.</span><span>.</span><span>.</span>
+        </div>
+        <img id="imagemGerada" alt="Desenho gerado por IA">
     </div>
 
-    <img id="imagemGerada" alt="Desenho para colorir gerado por IA">
+    <!-- SEÇÃO 2: Catálogo Pixabay (desenhos prontos) -->
+    <div class="secao">
+        <h2>📚 Catálogo Pixabay - milhares de desenhos</h2>
+        <div class="input-group">
+            <input type="text" id="buscaPixabay" placeholder="Pesquisar desenhos (ex: unicórnio, dinossauro, castelo)...">
+            <button id="buscarBtn">🔍 Buscar no Pixabay</button>
+        </div>
+        <div id="galeriaPixabay" class="galeria">
+            <!-- As imagens aparecerão aqui -->
+        </div>
+        <div class="dica">
+            💡 Clique em qualquer desenho da galeria para abrir em tamanho grande e imprimir!
+        </div>
+    </div>
 
     <div class="dica">
-        💡 Dica: peça obras de arte, mapas, personagens de games/animes, animais, cidades, contos de fadas. Tudo em preto e branco para imprimir e colorir!
+        🌟 Dica: Use o gerador personalizado para criar desenhos únicos ou o catálogo Pixabay para encontrar desenhos prontos de alta qualidade.
     </div>
 </div>
 
 <script>
-document.getElementById("gerarBtn").addEventListener("click", gerarDesenho);
+// ==================== GERADOR POR IA (Cloudflare) ====================
+document.getElementById("gerarBtn").addEventListener("click", gerarDesenhoIA);
 document.getElementById("descricao").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") gerarDesenho();
+    if (e.key === "Enter") gerarDesenhoIA();
 });
 
-async function gerarDesenho() {
+async function gerarDesenhoIA() {
     const input = document.getElementById("descricao");
     const descricao = input.value.trim();
     if (!descricao) return;
@@ -189,6 +258,67 @@ async function gerarDesenho() {
         loading.style.display = "none";
     }
 }
+
+// ==================== BUSCA NO PIXABAY ====================
+const buscarBtn = document.getElementById("buscarBtn");
+const buscaInput = document.getElementById("buscaPixabay");
+const galeriaDiv = document.getElementById("galeriaPixabay");
+
+buscarBtn.addEventListener("click", buscarPixabay);
+buscaInput.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") buscarPixabay();
+});
+
+async function buscarPixabay() {
+    const termo = buscaInput.value.trim();
+    if (!termo) {
+        alert("Digite algo para pesquisar (ex: unicórnio, mapa, goku)");
+        return;
+    }
+
+    galeriaDiv.innerHTML = '<div style="text-align:center; grid-column:1/-1;">🔍 Buscando desenhos...</div>';
+    buscarBtn.disabled = true;
+
+    try {
+        // Chama a rota da API Pixabay (que você deve implementar no backend)
+        const response = await fetch(`/api/pixabay?q=${encodeURIComponent(termo)}`);
+        const data = await response.json();
+        
+        if (data.error) {
+            galeriaDiv.innerHTML = `<div style="text-align:center; grid-column:1/-1;">❌ ${data.error}</div>`;
+            return;
+        }
+
+        if (!data.length) {
+            galeriaDiv.innerHTML = '<div style="text-align:center; grid-column:1/-1;">😕 Nenhum desenho encontrado. Tente outra palavra.</div>';
+            return;
+        }
+
+        // Exibe os resultados em grade
+        galeriaDiv.innerHTML = "";
+        data.forEach(img => {
+            const card = document.createElement("div");
+            card.className = "card-imagem";
+            card.onclick = () => window.open(img.largeImageURL || img.webformatURL, "_blank");
+            card.innerHTML = `
+                <img src="${img.webformatURL}" alt="${img.tags}">
+                <p>${img.tags.split(',')[0]}</p>
+            `;
+            galeriaDiv.appendChild(card);
+        });
+    } catch (error) {
+        console.error(error);
+        galeriaDiv.innerHTML = '<div style="text-align:center; grid-column:1/-1;">❌ Erro ao conectar com o Pixabay. Verifique se a API está configurada.</div>';
+    } finally {
+        buscarBtn.disabled = false;
+    }
+}
+
+// Carregar alguns desenhos padrão ao abrir a página (ex: "desenho para colorir")
+window.addEventListener("load", () => {
+    buscaInput.value = "desenho para colorir";
+    buscarPixabay();
+});
 </script>
 </body>
 </html>
