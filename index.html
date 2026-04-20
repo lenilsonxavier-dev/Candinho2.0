@@ -7,8 +7,7 @@
 
 <style>
 * {
-    margin: 0;gerar
-    
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
@@ -82,24 +81,12 @@ button {
     border: none;
     cursor: pointer;
     font-weight: bold;
-    transition: transform 0.2s;
-}
-
-button:hover:not(:disabled) {
-    transform: scale(1.05);
-    background: #ff6b8a;
-}
-
-button:disabled {
-    background: #666;
-    cursor: not-allowed;
 }
 
 #imagemGerada {
     max-width: 100%;
     max-height: 400px;
     border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     display: none;
     margin: 20px auto;
     background: white;
@@ -108,26 +95,7 @@ button:disabled {
 .loading {
     display: none;
     margin: 20px auto;
-    font-size: 1.2em;
     color: #ffd700;
-    text-align: center;
-}
-
-.loading span {
-    animation: blink 1.4s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-
-.dica {
-    background: rgba(255,215,0,0.2);
-    padding: 12px;
-    border-radius: 15px;
-    margin-top: 20px;
-    font-size: 0.9em;
 }
 </style>
 </head>
@@ -137,42 +105,34 @@ button:disabled {
 
     <img src="https://i.imgur.com/fnMYS0Z.png"
          class="avatar"
-         alt="Candinho"
-         onerror="this.src='https://via.placeholder.com/80/533483/ffd700?text=C'">
+         alt="Candinho">
 
     <h1>Candinho Desenhista 🖍️</h1>
     <div class="subtitle">🎨 Sou seu guia no desenho!</div>
 
     <div class="input-area">
         <input type="text" id="descricao"
-               placeholder="Ex: mapa do Brasil, dinossauro fofo, castelo de princesa...">
+               placeholder="Ex: mapa do Brasil, dinossauro fofo...">
         <button id="gerarBtn">🎨 Gerar desenho</button>
     </div>
 
     <div class="loading" id="loading">
-        <span>✏️</span> Criando seu desenho<span>.</span><span>.</span><span>.</span>
+        ✏️ Criando desenho...
     </div>
 
-    <img id="imagemGerada" alt="Desenho gerado por IA">
-
-    <div class="dica">
-        💡 Peça desenhos simples para colorir: animais, mapas, personagens...
-    </div>
+    <img id="imagemGerada">
 
 </div>
 
 <script>
 document.getElementById("gerarBtn").addEventListener("click", gerarDesenho);
-document.getElementById("descricao").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") gerarDesenho();
-});
 
 async function gerarDesenho() {
 
     const descricao = document.getElementById("descricao").value.trim();
     if (!descricao) return;
 
-    // 🔒 filtro infantil
+    // filtro infantil
     const proibidas = ["arma", "sangue", "violencia", "terror"];
     if (proibidas.some(p => descricao.toLowerCase().includes(p))) {
         alert("Vamos desenhar coisas seguras 😄");
@@ -186,108 +146,34 @@ async function gerarDesenho() {
     btn.disabled = true;
     loading.style.display = "block";
     img.style.display = "none";
-    img.src = "";
 
     try {
         const promptFinal = `${descricao}, kids coloring book, black and white line art, thick outline, clean lines, no shading`;
 
         const response = await fetch("/api/imagem", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ prompt: promptFinal })
         });
 
-        const raw = await response.text();
-        console.log("RESPOSTA API:", raw);
-
-        let data = {};
-        try { data = JSON.parse(raw); } catch {}
-
-        if (!response.ok) {
-            throw new Error(data.erro || raw || "Erro na API");
-        }
+        const data = await response.json();
 
         if (data.imagem) {
             img.src = data.imagem;
             img.style.display = "block";
         } else {
-            throw new Error("A API não retornou imagem");
+            alert("Não veio imagem 😅");
         }
 
     } catch (err) {
         console.error(err);
-        alert("Erro: " + err.message);
-    } finally {
-        btn.disabled = false;
-        loading.style.display = "none";
+        alert("Erro ao gerar imagem");
     }
+
+    btn.disabled = false;
+    loading.style.display = "none";
 }
 </script>
-    // 🔒 filtro infantil
-    const proibidas = ["arma", "sangue", "violencia", "terror"];
-    if (proibidas.some(p => descricao.toLowerCase().includes(p))) {
-        alert("Vamos desenhar coisas seguras 😄");
-        return;
-    }
 
-    const btn = document.getElementById("gerarBtn");
-    const loading = document.getElementById("loading");
-    const img = document.getElementById("imagemGerada");
-
-    btn.disabled = true;
-    loading.style.display = "block";
-    img.style.display = "none";
-    img.src = "";
-
-    try {
-
-        // 🎨 prompt otimizado
-        const promptFinal = `
-${descricao},
-
-children's coloring book illustration,
-black and white line art,
-thick clean outlines,
-simple shapes,
-no shading,
-no grayscale,
-white background,
-minimal details,
-centered composition,
-high contrast,
-easy for kids to color
-`;
-        const response = await fetch("/api/imagem", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ prompt: promptFinal })
-        });
-
-        if (!response.ok) {
-            throw new Error("Erro na API");
-        }
-
-        const data = await response.json();
-        console.log("Resposta da API:", data);
-
-        if (data.imagem || data.url) {
-            img.src = data.imagem || data.url;
-            img.style.display = "block";
-        } else {
-            alert("A IA respondeu, mas não trouxe imagem 😅");
-        }
-
-    } catch (error) {
-        console.error(error);
-        alert("Erro ao gerar imagem. Pressione F12 para ver detalhes.");
-    } finally {
-        btn.disabled = false;
-        loading.style.display = "none";
-    }
-}
-
-</script>
 </body>
 </html>
