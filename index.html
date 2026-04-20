@@ -162,8 +162,6 @@ button:disabled {
 </div>
 
 <script>
-
-// eventos
 document.getElementById("gerarBtn").addEventListener("click", gerarDesenho);
 document.getElementById("descricao").addEventListener("keypress", function(e) {
     if (e.key === "Enter") gerarDesenho();
@@ -171,9 +169,7 @@ document.getElementById("descricao").addEventListener("keypress", function(e) {
 
 async function gerarDesenho() {
 
-    const input = document.getElementById("descricao");
-    const descricao = input.value.trim();
-
+    const descricao = document.getElementById("descricao").value.trim();
     if (!descricao) return;
 
     // 🔒 filtro infantil
@@ -193,14 +189,11 @@ async function gerarDesenho() {
     img.src = "";
 
     try {
-
-        const promptFinal = `${descricao}, children's coloring book illustration, black and white line art, thick clean outlines, simple shapes, no shading, white background`;
+        const promptFinal = `${descricao}, kids coloring book, black and white line art, thick outline, clean lines, no shading`;
 
         const response = await fetch("/api/imagem", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ prompt: promptFinal })
         });
 
@@ -221,17 +214,15 @@ async function gerarDesenho() {
             throw new Error("A API não retornou imagem");
         }
 
-    } catch (error) {
-        console.error(error);
-        alert("Erro: " + error.message);
+    } catch (err) {
+        console.error(err);
+        alert("Erro: " + err.message);
     } finally {
         btn.disabled = false;
         loading.style.display = "none";
     }
 }
-
 </script>
-
     // 🔒 filtro infantil
     const proibidas = ["arma", "sangue", "violencia", "terror"];
     if (proibidas.some(p => descricao.toLowerCase().includes(p))) {
