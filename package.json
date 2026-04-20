@@ -1,10 +1,10 @@
 {
-  "name": "candinho-2.0",
+  "name": "candinho-colorir",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "engines": {
     "node": "20.x"
   },
-  "description": "Candinho - Seu amigo artista com IA, gerador de desenhos e chat sobre arte"
+  "description": "Candinho - Gerador de desenhos para colorir com IA"
 }
