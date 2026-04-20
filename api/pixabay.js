@@ -1,4 +1,4 @@
-// api/pixabay.js
+// api/pixabay.js – Busca otimizada para desenhos
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -18,16 +18,13 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Parâmetro "q" é obrigatório.' });
   }
 
-  // Adiciona termos que favorecem desenhos para colorir
-  q = `${q} coloring page line art black and white`;
-  
-  const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(q)}&image_type=illustration&safesearch=true&per_page=24`;
+  // Não adiciona termos extras – usa o termo original do usuário
+  // Para favorecer desenhos, já usamos image_type=illustration
+  const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(q)}&image_type=illustration&safesearch=true&per_page=30`;
 
   try {
     const response = await fetch(url);
     const data = await response.json();
-    // Filtra manualmente imagens que parecem ser coloridas (opcional: verificar se a maioria dos pixels é preto/branco? Muito custoso)
-    // Por enquanto, retorna tudo, mas o usuário pode selecionar as que são realmente em preto e branco.
     res.status(200).json(data.hits || []);
   } catch (error) {
     console.error(error);
