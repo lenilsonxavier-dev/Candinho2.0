@@ -18,17 +18,16 @@ export default async function handler(req, res) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        // ✔️ forma estável
-        model: "stability-ai/sdxl",
-        input: {
-          prompt: `${prompt}, kids coloring book, black and white line art, thick outline, clean lines, no shading, white background`,
-          negative_prompt: "color, shading, shadow, realistic, photo, texture, blur, gray",
-          width: 1024,
-          height: 1024,
-          guidance_scale: 7.5,
-          num_inference_steps: 30
-        }
-      })
+  version: "7762fd07cf82d2b0c1e0b97958a3b16130ad13fe7a22ccf7ecd6c6293e7d5d0c",
+  input: {
+    prompt: `${prompt}, kids coloring book, black and white line art, thick outline, clean lines, no shading`,
+    negative_prompt: "color, shading, shadow, realistic, photo, texture, blur",
+    width: 1024,
+    height: 1024,
+    guidance_scale: 7.5,
+    num_inference_steps: 30
+  }
+})
     });
 
     // 👇 erro real do Replicate (criação)
