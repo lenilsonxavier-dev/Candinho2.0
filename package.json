@@ -6,8 +6,5 @@
   "engines": {
     "node": "20.x"
   },
-  "description": "Candinho - Seu amigo artista com IA, gerador de desenhos e chat sobre arte",
-  "scripts": {
-    "start": "vercel dev"
-  }
+  "description": "Candinho - Seu amigo artista com IA, gerador de desenhos e chat sobre arte"
 }
