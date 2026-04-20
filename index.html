@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Candinho - IA de Arte</title>
+<title>Candinho - Seu Amigo Artista</title>
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,6 +24,8 @@ body {
     background: rgba(22, 33, 62, 0.95);
     border-radius: 20px; 
     padding: 25px; 
+    backdrop-filter: blur(5px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
 .header { 
@@ -52,6 +54,11 @@ body {
     color: transparent;
 }
 
+.title small {
+    font-size: 0.8em;
+    opacity: 0.8;
+}
+
 #chat { 
     height: 400px; 
     overflow-y: auto; 
@@ -64,6 +71,7 @@ body {
 .input-area { 
     display: flex; 
     gap: 10px; 
+    margin-top: 10px;
 }
 
 input { 
@@ -74,6 +82,11 @@ input {
     background: #0f3460;
     color: white;
     outline: none;
+    font-size: 1em;
+}
+
+input::placeholder {
+    color: #aaa;
 }
 
 button { 
@@ -83,11 +96,13 @@ button {
     color: white; 
     border: none; 
     cursor: pointer; 
-    transition: transform 0.2s;
+    transition: transform 0.2s, background 0.2s;
+    font-weight: bold;
 }
 
 button:hover:not(:disabled) {
     transform: scale(1.05);
+    background: #ff6b8a;
 }
 
 button:disabled {
@@ -99,6 +114,7 @@ button:disabled {
     margin-bottom: 15px; 
     padding: 12px; 
     border-radius: 15px; 
+    word-wrap: break-word;
 }
 
 .user-msg { 
@@ -152,7 +168,7 @@ button:disabled {
     <img src="https://i.imgur.com/fnMYS0Z.png" class="avatar" alt="Candinho" onerror="this.src='https://via.placeholder.com/70/533483/ffd700?text=C'">
     <div class="title">
         <h1>Candinho 2.0 🎨</h1>
-        <small>Seu amigo artista</small>
+        <small>Seu amigo artista - especialista em desenhos e arte</small>
     </div>
 </div>
 
@@ -161,14 +177,14 @@ button:disabled {
         <div>
         <b>Candinho</b><br>
         Sou o Candinho, seu amigo artista! 🎨✨<br>
-        Peça: <strong>"Desenhe um gato fofo"</strong> ou pergunte sobre arte!<br>
+        Peça um <strong>desenho</strong> (ex: "desenhe um gato fofo") ou pergunte sobre arte!<br>
         💡 Dica: use palavras como <strong>"desenhe"</strong>, <strong>"crie"</strong>, <strong>"faça uma arte de"</strong>
         </div>
     </div>
 </div>
 
 <div class="arte-container" id="areaImagem">
-    <img id="imagemGerada" alt="">
+    <img id="imagemGerada" alt="Desenho gerado por IA">
 </div>
 
 <div class="input-area">
@@ -180,7 +196,7 @@ button:disabled {
 
 <script>
 function ehPedidoDeImagem(texto) {
-    const palavras = ["desenhe", "desenha", "crie", "faça", "gera", "imagem", "pintar", "ilustre", "desenho", "arte de", "criar"];
+    const palavras = ["desenhe", "desenha", "crie", "faça", "gera", "imagem", "pintar", "ilustre", "desenho", "arte de", "criar", "faça um", "faça uma"];
     return palavras.some(p => texto.toLowerCase().includes(p));
 }
 
@@ -213,7 +229,7 @@ window.enviarMensagem = async function() {
     
     const typingDiv = document.createElement("div");
     typingDiv.className = "msg ai-msg";
-    typingDiv.innerHTML = `<div><b>Candinho</b><br><span class="typing">🎨 Pensando<span>.</span><span>.</span><span>.</span></span></div>`;
+    typingDiv.innerHTML = `<div><b>Candinho</b><br><span class="typing">🎨 Criando seu desenho<span>.</span><span>.</span><span>.</span></span></div>`;
     document.getElementById("chat").appendChild(typingDiv);
     document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
     
@@ -233,12 +249,12 @@ window.enviarMensagem = async function() {
         if (data.imagem) {
             imgEl.onload = () => {
                 imgEl.style.display = "block";
-                console.log("✅ Imagem carregada:", data.imagem);
+                console.log("✅ Desenho carregado com sucesso!");
             };
             imgEl.onerror = () => {
-                console.error("❌ Falha ao carregar imagem:", data.imagem);
+                console.error("❌ Falha ao carregar o desenho:", data.imagem);
                 imgEl.style.display = "none";
-                addMessage("⚠️ A imagem não pôde ser carregada. O serviço pode estar ocupado. Tente outro pedido daqui a pouco.", false);
+                addMessage("⚠️ O desenho não pôde ser carregado. Tente novamente com outra descrição.", false);
             };
             imgEl.src = data.imagem;
             addMessage(data.resposta, false);
@@ -249,7 +265,7 @@ window.enviarMensagem = async function() {
     } catch (error) {
         typingDiv.remove();
         addMessage("😅 Erro de conexão. Verifique sua internet e tente novamente.", false);
-        console.error("Fetch error:", error);
+        console.error("Erro:", error);
     }
     
     input.disabled = false;
