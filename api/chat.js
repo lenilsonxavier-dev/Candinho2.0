@@ -1,4 +1,4 @@
-// api/chat.js – Gerador de desenhos (Cloudflare)
+// api/chat.js
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -17,7 +17,7 @@ export default async function handler(req, res) {
   const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
 
   if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
-    console.error('Variáveis Cloudflare não configuradas');
+    console.error('Cloudflare keys missing');
     return res.status(500).json({ error: "Chaves Cloudflare não configuradas." });
   }
 
@@ -49,11 +49,11 @@ export default async function handler(req, res) {
         imagem: `data:image/png;base64,${imageBase64}`,
       });
     } else {
-      console.error('Resposta inesperada da Cloudflare:', data);
+      console.error('Cloudflare response:', data);
       throw new Error('Falha na geração');
     }
   } catch (err) {
-    console.error('Erro:', err);
+    console.error(err);
     return res.status(500).json({ error: "Erro ao gerar o desenho. Tente outra descrição." });
   }
 }
