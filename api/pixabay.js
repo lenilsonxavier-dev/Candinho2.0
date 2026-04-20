@@ -1,3 +1,4 @@
+// api/chat.js – Gerador de desenhos para colorir (Cloudflare)
 export default async function handler(req, res) {
   // CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -20,6 +21,7 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Chaves Cloudflare não configuradas." });
   }
 
+  // Prompt otimizado para desenho de colorir
   const promptColorir = `Create a high-quality, print-ready coloring book page. black and white, line art. The subject is: ${message}. Style: kid-friendly, bold and clear outlines, large empty spaces for coloring, pure white background, no shading, no grayscale, no pre-existing colors. High contrast, perfect for printing.`;
 
   try {
@@ -51,7 +53,7 @@ export default async function handler(req, res) {
       throw new Error('Falha na geração');
     }
   } catch (err) {
-    console.error(err);
+    console.error('Erro:', err);
     return res.status(500).json({ error: "Erro ao gerar o desenho. Tente outra descrição." });
   }
 }
