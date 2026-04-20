@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 
   try {
     // 1) Criar a previsão
-   const create = await fetch("https://api.replicate.com/v1/models/stability-ai/sdxl/predictions", {
+   const create = await fetch("https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions", {
   method: "POST",
   headers: {
     "Authorization": `Token ${token}`,
@@ -20,11 +20,8 @@ export default async function handler(req, res) {
   body: JSON.stringify({
     input: {
       prompt: `${prompt}, children's coloring book, black and white outline drawing, thick bold lines, no shading, white background`,
-      negative_prompt: "color, shading, shadow, realistic, photo, texture, blur",
       width: 1024,
-      height: 1024,
-      guidance_scale: 7.5,
-      num_inference_steps: 30
+      height: 1024
     }
   })
 });
