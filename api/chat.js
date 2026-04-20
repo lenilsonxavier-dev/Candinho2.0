@@ -1,4 +1,4 @@
-// api/chat.js – usando Cloudflare Workers AI (gratuito e estável)
+// api/chat.js – Gera DESENHOS (não fotos) usando Cloudflare Workers AI
 export default async function handler(req, res) {
   // CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -15,19 +15,23 @@ export default async function handler(req, res) {
 
   const { message, gerarImagem } = req.body;
 
-  // ---------------------- IMAGEM (Cloudflare) --------------------------
+  // ---------------------- IMAGEM (desenhos) --------------------------
   if (gerarImagem) {
     const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
     const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
 
     if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
+      console.error('Chaves da Cloudflare não configuradas');
       return res.status(500).json({
-        resposta: "🔑 Chaves da Cloudflare não configuradas. Adicione as variáveis de ambiente na Vercel.",
+        resposta: "🔑 Configure as variáveis CLOUDFLARE_ACCOUNT_ID e CLOUDFLARE_API_TOKEN na Vercel.",
         imagem: null
       });
     }
 
     try {
+      // Prompt especial para gerar DESENHOS (estilo ilustração, cartoon, traços definidos)
+      const promptDesenho = `Desenho ilustrado, estilo cartoon, traços definidos, arte digital colorida, sem realismo, sem fotografia: ${message}.`;
+      
       const response = await fetch(
         `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/black-forest-labs/flux-1-schnell`,
         {
@@ -37,7 +41,7 @@ export default async function handler(req, res) {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            prompt: message,
+            prompt: promptDesenho,
           }),
         }
       );
@@ -52,18 +56,19 @@ export default async function handler(req, res) {
           imagem: imageUrl
         });
       } else {
-        throw new Error('Falha na geração da imagem: ' + JSON.stringify(data));
+        console.error('Erro na resposta da Cloudflare:', data);
+        throw new Error('Falha na geração do desenho');
       }
     } catch (err) {
       console.error('Erro Cloudflare:', err);
       return res.status(500).json({
-        resposta: "😅 Não consegui gerar o desenho agora. Tente outra descrição.",
+        resposta: "😅 Não consegui gerar o desenho agora. Tente outra descrição (ex: 'desenhe um gato').",
         imagem: null
       });
     }
   }
 
-  // ---------------------- TEXTO (respostas locais) --------------------------
+  // ---------------------- TEXTO (conhecimento sobre arte) --------------------------
   const lowerMsg = message.toLowerCase();
   let resposta = "";
 
