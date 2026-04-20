@@ -1,6 +1,6 @@
-// api/chat.js – Gera desenhos coloridos OU para colorir (preto e branco)
+// api/chat.js – Gerador de desenhos para colorir (universo infantil)
 export default async function handler(req, res) {
-  // CORS (mesmo de antes)
+  // CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -15,13 +15,13 @@ export default async function handler(req, res) {
 
   const { message, gerarImagem } = req.body;
 
-  // ---------------------- IMAGEM --------------------------
+  // ---------------------- IMAGEM (desenho para colorir) --------------------------
   if (gerarImagem) {
     const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
     const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
 
     if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
-      console.error('Chaves da Cloudflare não configuradas');
+      console.error('Chaves Cloudflare não configuradas');
       return res.status(500).json({
         resposta: "🔑 Configure as variáveis CLOUDFLARE_ACCOUNT_ID e CLOUDFLARE_API_TOKEN na Vercel.",
         imagem: null
@@ -29,18 +29,45 @@ export default async function handler(req, res) {
     }
 
     try {
-      // Verifica se o pedido é para colorir
-      const isColoring = /colorir|para colorir|livro de colorir|pintar|coloring/i.test(message);
-      
-      let promptDesenho;
-      if (isColoring) {
-        // Desenho para colorir: linha preta, fundo branco, sem cores
-        promptDesenho = `Desenho em linha preta, estilo livro de colorir para crianças, contornos grossos, fundo branco, sem preenchimento de cor, apenas contornos: ${message.replace(/colorir|para colorir|livro de colorir|pintar/gi, '').trim()}. Desenho simples e claro.`;
-      } else {
-        // Desenho colorido normal
-        promptDesenho = `Desenho ilustrado, estilo cartoon, traços definidos, arte digital colorida, sem realismo, sem fotografia: ${message}.`;
+      // 1. Detectar categoria para enriquecer o prompt
+      const lowerMsg = message.toLowerCase();
+      let detalhe = "";
+
+      if (lowerMsg.includes("obra") || lowerMsg.includes("artista") || lowerMsg.includes("tarsila") || lowerMsg.includes("van gogh") || lowerMsg.includes("monet") || lowerMsg.includes("picasso") || lowerMsg.includes("da vinci") || lowerMsg.includes("frida") || lowerMsg.includes("dali")) {
+        if (lowerMsg.includes("tarsila")) detalhe = " Estilo Tarsila do Amaral, Abaporu, formas brasileiras, em preto e branco para colorir.";
+        else if (lowerMsg.includes("van gogh")) detalhe = " Estilo Van Gogh, Noite Estrelada, girassóis, traços fortes e ondulados.";
+        else if (lowerMsg.includes("monet")) detalhe = " Estilo Monet, nenúfares, jardim, impressão suave em linha.";
+        else if (lowerMsg.includes("picasso")) detalhe = " Estilo Picasso, cubismo, rostos geométricos.";
+        else if (lowerMsg.includes("da vinci")) detalhe = " Estilo Da Vinci, Mona Lisa, proporções clássicas.";
+        else if (lowerMsg.includes("frida")) detalhe = " Estilo Frida Kahlo, autorretrato, flores, natureza.";
+        else if (lowerMsg.includes("dali")) detalhe = " Estilo Salvador Dalí, relógios derretidos, surrealismo.";
+        else detalhe = " Releitura de obra-prima da história da arte, em estilo de desenho para colorir educativo.";
       }
-      
+      else if (lowerMsg.includes("mapa") || lowerMsg.includes("geografia") || lowerMsg.includes("país") || lowerMsg.includes("brasil") || lowerMsg.includes("mundo")) {
+        detalhe = " Desenho de mapa com contornos nítidos, fronteiras, rios, cidades principais, em estilo de página para colorir educativa.";
+      }
+      else if (lowerMsg.includes("animal") || lowerMsg.includes("inseto") || lowerMsg.includes("pássaro") || lowerMsg.includes("peixe") || lowerMsg.includes("borboleta") || lowerMsg.includes("abelha") || lowerMsg.includes("joaninha")) {
+        detalhe = " Desenho realista mas com linhas grossas, adequado para colorir, mostrando detalhes naturais do animal/inseto.";
+      }
+      else if (lowerMsg.includes("cidade") || lowerMsg.includes("prédio") || lowerMsg.includes("monumento") || lowerMsg.includes("paris") || lowerMsg.includes("nova york") || lowerMsg.includes("rio de janeiro")) {
+        detalhe = " Desenho de cidade com pontos turísticos, prédios, ruas, em estilo de desenho para colorir, muitos detalhes arquitetônicos.";
+      }
+      else if (lowerMsg.includes("personagem") || lowerMsg.includes("herói") || lowerMsg.includes("super") || lowerMsg.includes("vilão") || lowerMsg.includes("princesa") || lowerMsg.includes("fada") || lowerMsg.includes("bruxa")) {
+        detalhe = " Personagem infantil de desenho animado ou história em quadrinhos, estilo cartoon, expressivo, linhas grossas, fácil de colorir.";
+      }
+      else if (lowerMsg.includes("game") || lowerMsg.includes("anime") || lowerMsg.includes("mario") || lowerMsg.includes("sonic") || lowerMsg.includes("pokemon") || lowerMsg.includes("naruto") || lowerMsg.includes("dragon ball")) {
+        detalhe = " Personagem famoso de videogame ou anime, estilo fiel ao original mas em preto e branco para colorir, traços marcantes.";
+      }
+      else if (lowerMsg.includes("conto") || lowerMsg.includes("fada") || lowerMsg.includes("bruxa") || lowerMsg.includes("príncipe") || lowerMsg.includes("princesa") || lowerMsg.includes("castelo") || lowerMsg.includes("dragão") || lowerMsg.includes("unicórnio")) {
+        detalhe = " Cena de conto de fadas clássico (Cinderela, Branca de Neve, João e Maria, etc.), estilo mágico, muitos elementos para colorir.";
+      }
+      else {
+        detalhe = " Tema lúdico, educativo, com traços simples e divertidos, adequado para crianças.";
+      }
+
+      // 2. Prompt otimizado para desenho de colorir
+      const promptColorir = `Desenho para colorir, página de colorir infantil, linha preta e branca, contornos grossos e bem definidos, sem sombreamento, sem tons de cinza, fundo branco puro, estilo simples e educativo. Assunto: ${message}. ${detalhe} Certifique-se de que o desenho seja adequado para crianças, com áreas amplas para colorir e detalhes nítidos. Não adicione cores, apenas contornos pretos sobre fundo branco.`;
+
       const response = await fetch(
         `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/black-forest-labs/flux-1-schnell`,
         {
@@ -50,7 +77,7 @@ export default async function handler(req, res) {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            prompt: promptDesenho,
+            prompt: promptColorir,
           }),
         }
       );
@@ -60,43 +87,26 @@ export default async function handler(req, res) {
 
       if (imageBase64) {
         const imageUrl = `data:image/png;base64,${imageBase64}`;
-        let respostaTexto;
-        if (isColoring) {
-          respostaTexto = `🖍️ Aqui está o desenho para colorir que você pediu! Imprima e use sua criatividade! Sou o Candinho, seu amigo artista! ✨`;
-        } else {
-          respostaTexto = `🎨 Aqui está o desenho que você pediu! Sou o Candinho, seu amigo artista! ✨`;
-        }
         return res.status(200).json({
-          resposta: respostaTexto,
+          resposta: `🖍️ Aqui está o desenho para colorir que você pediu! Imprima e use lápis de cor, giz de cera ou canetinha. Divirta-se colorindo! Sou o Candinho, seu amigo artista. ✨`,
           imagem: imageUrl
         });
       } else {
         console.error('Erro na resposta da Cloudflare:', data);
-        throw new Error('Falha na geração');
+        throw new Error('Falha na geração do desenho');
       }
     } catch (err) {
       console.error('Erro Cloudflare:', err);
       return res.status(500).json({
-        resposta: "😅 Não consegui gerar o desenho agora. Tente outra descrição.",
+        resposta: "😅 Não consegui gerar o desenho para colorir agora. Tente outra descrição (ex: 'desenho para colorir de um gato').",
         imagem: null
       });
     }
   }
 
-  // ---------------------- TEXTO (mesmo de antes) --------------------------
+  // ---------------------- TEXTO (conhecimento sobre arte) --------------------------
   const lowerMsg = message.toLowerCase();
   let resposta = "";
 
   if (lowerMsg.includes("van gogh")) {
-    resposta = "🎨 Van Gogh foi um pintor pós-impressionista holandês... (mantenha o texto original)";
-  } 
-  // ... (copie o restante do seu código de respostas de texto)
-  else {
-    resposta = `Que legal você perguntar sobre arte! 🎨 Sou o Candinho, seu amigo artista. Se quiser um desenho para colorir, peça "desenhe um gato para colorir". Para desenho colorido, diga apenas "desenhe um gato". ✨`;
-  }
-
-  return res.status(200).json({
-    resposta: resposta + " – Candinho, seu amigo artista! 🖌️",
-    imagem: null
-  });
-}
+    resposta = "🎨 Van Gogh foi um pintor pós-impressionista holandês. Suas obras mais famosas são 'Noite Estrelada' e 'Girassóis'. Ele usava pinc
