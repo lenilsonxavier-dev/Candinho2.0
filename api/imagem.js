@@ -11,22 +11,23 @@ export default async function handler(req, res) {
 
   try {
     // 1) Criar a previsão
-    const create = await fetch("https://api.replicate.com/v1/predictions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Token ${token}`,
-        "Content-Type": "application/json"
-      },
-     body: JSON.stringify({
-  version: "8beff3369e814221b90c4e48c4a6aa1a2f1a65b8c9c3d2c2a176db6c9f3b4b65",
-  input: {
-    prompt: `${prompt}, children's coloring book, black and white outline drawing, thick bold lines, no shading, no gray, white background`,
-    negative_prompt: "color, shading, shadow, realistic, photo, texture, blur",
-    width: 1024,
-    height: 1024
-  }
-})
-    });
+   const create = await fetch("https://api.replicate.com/v1/models/stability-ai/sdxl/predictions", {
+  method: "POST",
+  headers: {
+    "Authorization": `Token ${token}`,
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    input: {
+      prompt: `${prompt}, children's coloring book, black and white outline drawing, thick bold lines, no shading, white background`,
+      negative_prompt: "color, shading, shadow, realistic, photo, texture, blur",
+      width: 1024,
+      height: 1024,
+      guidance_scale: 7.5,
+      num_inference_steps: 30
+    }
+  })
+});
 
     // 👇 erro real do Replicate (criação)
     if (!create.ok) {
