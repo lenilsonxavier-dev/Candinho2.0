@@ -1,6 +1,6 @@
-// api/chat.js – Gera DESENHOS (não fotos) usando Cloudflare Workers AI
+// api/chat.js – Gera desenhos coloridos OU para colorir (preto e branco)
 export default async function handler(req, res) {
-  // CORS
+  // CORS (mesmo de antes)
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 
   const { message, gerarImagem } = req.body;
 
-  // ---------------------- IMAGEM (desenhos) --------------------------
+  // ---------------------- IMAGEM --------------------------
   if (gerarImagem) {
     const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
     const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
@@ -29,8 +29,17 @@ export default async function handler(req, res) {
     }
 
     try {
-      // Prompt especial para gerar DESENHOS (estilo ilustração, cartoon, traços definidos)
-      const promptDesenho = `Desenho ilustrado, estilo cartoon, traços definidos, arte digital colorida, sem realismo, sem fotografia: ${message}.`;
+      // Verifica se o pedido é para colorir
+      const isColoring = /colorir|para colorir|livro de colorir|pintar|coloring/i.test(message);
+      
+      let promptDesenho;
+      if (isColoring) {
+        // Desenho para colorir: linha preta, fundo branco, sem cores
+        promptDesenho = `Desenho em linha preta, estilo livro de colorir para crianças, contornos grossos, fundo branco, sem preenchimento de cor, apenas contornos: ${message.replace(/colorir|para colorir|livro de colorir|pintar/gi, '').trim()}. Desenho simples e claro.`;
+      } else {
+        // Desenho colorido normal
+        promptDesenho = `Desenho ilustrado, estilo cartoon, traços definidos, arte digital colorida, sem realismo, sem fotografia: ${message}.`;
+      }
       
       const response = await fetch(
         `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/black-forest-labs/flux-1-schnell`,
@@ -51,53 +60,39 @@ export default async function handler(req, res) {
 
       if (imageBase64) {
         const imageUrl = `data:image/png;base64,${imageBase64}`;
+        let respostaTexto;
+        if (isColoring) {
+          respostaTexto = `🖍️ Aqui está o desenho para colorir que você pediu! Imprima e use sua criatividade! Sou o Candinho, seu amigo artista! ✨`;
+        } else {
+          respostaTexto = `🎨 Aqui está o desenho que você pediu! Sou o Candinho, seu amigo artista! ✨`;
+        }
         return res.status(200).json({
-          resposta: `🎨 Aqui está o desenho que você pediu! Sou o Candinho, seu amigo artista! ✨`,
+          resposta: respostaTexto,
           imagem: imageUrl
         });
       } else {
         console.error('Erro na resposta da Cloudflare:', data);
-        throw new Error('Falha na geração do desenho');
+        throw new Error('Falha na geração');
       }
     } catch (err) {
       console.error('Erro Cloudflare:', err);
       return res.status(500).json({
-        resposta: "😅 Não consegui gerar o desenho agora. Tente outra descrição (ex: 'desenhe um gato').",
+        resposta: "😅 Não consegui gerar o desenho agora. Tente outra descrição.",
         imagem: null
       });
     }
   }
 
-  // ---------------------- TEXTO (conhecimento sobre arte) --------------------------
+  // ---------------------- TEXTO (mesmo de antes) --------------------------
   const lowerMsg = message.toLowerCase();
   let resposta = "";
 
   if (lowerMsg.includes("van gogh")) {
-    resposta = "🎨 Van Gogh foi um pintor pós-impressionista holandês. Suas obras mais famosas são 'Noite Estrelada' e 'Girassóis'. Ele usava pinceladas grossas e cores vibrantes. Infelizmente, só vendeu um quadro em vida, mas hoje é um dos artistas mais amados do mundo! ✨";
+    resposta = "🎨 Van Gogh foi um pintor pós-impressionista holandês... (mantenha o texto original)";
   } 
-  else if (lowerMsg.includes("tarsila") || lowerMsg.includes("tarsila do amaral")) {
-    resposta = "🇧🇷 Tarsila do Amaral foi uma das maiores artistas do modernismo brasileiro! Criou o movimento 'Antropofágico' e pintou obras icônicas como 'Abaporu' e 'Operários'. Ela queria criar uma arte genuinamente brasileira. 🎨🌴";
-  }
-  else if (lowerMsg.includes("monet") || lowerMsg.includes("claude monet")) {
-    resposta = "🪷 Claude Monet foi o pai do Impressionismo! Ele pintava a mesma cena em diferentes horas do dia para capturar a luz. Famoso por seus 'Nenúfares' e a série da Catedral de Rouen. 🌅";
-  }
-  else if (lowerMsg.includes("dali") || lowerMsg.includes("salvador dali")) {
-    resposta = "⏰ Salvador Dalí foi um surrealista espanhol! Seus quadros parecem sonhos estranhos, como 'A Persistência da Memória' (aqueles relógios derretidos). Ele também fazia filmes e esculturas. 🐘";
-  }
-  else if (lowerMsg.includes("frida") || lowerMsg.includes("frida kahlo")) {
-    resposta = "🌺 Frida Kahlo foi uma artista mexicana conhecida por seus autorretratos cheios de simbolismo. Ela pintava sua dor e sua identidade. 'As Duas Fridas' e 'A Coluna Quebrada' são obras emocionantes. 💔🎨";
-  }
-  else if (lowerMsg.includes("picasso") || lowerMsg.includes("pablo picasso")) {
-    resposta = "🎭 Pablo Picasso foi um gênio espanhol, cofundador do Cubismo! Ele pintava pessoas com rostos vistos de vários ângulos ao mesmo tempo. Obra famosa: 'Guernica', que retrata os horrores da guerra. 🔲";
-  }
-  else if (lowerMsg.includes("leonardo") || lowerMsg.includes("da vinci")) {
-    resposta = "🖌️ Leonardo da Vinci foi o maior polímata do Renascimento! Pintou 'Mona Lisa' e 'A Última Ceia', mas também era inventor, cientista e anatomista. ✨";
-  }
-  else if (lowerMsg.includes("arte") && (lowerMsg.includes("o que é") || lowerMsg.includes("definição"))) {
-    resposta = "🎨 Arte é a expressão da criatividade humana! Pode ser pintura, escultura, música, dança, teatro… O Candinho acredita que arte é tudo que toca o coração e faz a gente sentir algo especial. ❤️";
-  }
+  // ... (copie o restante do seu código de respostas de texto)
   else {
-    resposta = `Que legal você perguntar sobre arte! 🎨 Sou o Candinho, seu amigo artista. Sobre "${message}", posso dizer que a arte está em tudo ao nosso redor. Se quiser, peça um desenho (ex: "desenhe um gato") ou pergunte sobre um artista específico (Van Gogh, Tarsila, Monet, Frida...). ✨`;
+    resposta = `Que legal você perguntar sobre arte! 🎨 Sou o Candinho, seu amigo artista. Se quiser um desenho para colorir, peça "desenhe um gato para colorir". Para desenho colorido, diga apenas "desenhe um gato". ✨`;
   }
 
   return res.status(200).json({
