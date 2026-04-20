@@ -136,7 +136,7 @@ button:disabled {
     <div class="subtitle">🎨 Sou seu guia no desenho!</div>
 
     <div class="input-area">
-        <input type="text" id="descricao" placeholder="Ex: mapa do Brasil, Mona Lisa, Goku, castelo de princesa, dinossauro fofo...">
+        <input type="text" id="descricao" placeholder="Ex: mapa do Brasil, dinossauro fofo, castelo de princesa...">
         <button id="gerarBtn">🎨 Gerar desenho</button>
     </div>
 
@@ -147,7 +147,7 @@ button:disabled {
     <img id="imagemGerada" alt="Desenho gerado por IA">
 
     <div class="dica">
-        💡 Peça qualquer desenho para colorir: animais, personagens, mapas, obras de arte... Tudo em preto e branco, pronto para imprimir e colorir!
+        💡 Peça desenhos simples para colorir: animais, mapas, personagens, objetos...
     </div>
 </div>
 
@@ -162,6 +162,13 @@ async function gerarDesenho() {
     const descricao = input.value.trim();
     if (!descricao) return;
 
+    // 🔒 filtro infantil
+    const proibidas = ["arma", "sangue", "violencia", "terror"];
+    if (proibidas.some(p => descricao.toLowerCase().includes(p))) {
+        alert("Vamos desenhar coisas legais e seguras 😄");
+        return;
+    }
+
     const btn = document.getElementById("gerarBtn");
     const loading = document.getElementById("loading");
     const img = document.getElementById("imagemGerada");
@@ -172,18 +179,31 @@ async function gerarDesenho() {
     img.src = "";
 
     try {
-        const response = await fetch("/api/chat", {
+        const promptFinal = `
+        ${descricao},
+        desenho para colorir,
+        preto e branco,
+        linhas simples,
+        contorno grosso,
+        sem sombras,
+        estilo infantil
+        `;
+
+        const response = await fetch("/api/imagem", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: descricao, gerarImagem: true })
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ prompt: promptFinal })
         });
+
         const data = await response.json();
-        if (data.imagem) {
-            img.src = data.imagem;
+
+        if (data.imagem || data.url) {
+            img.src = data.imagem || data.url;
             img.style.display = "block";
         } else {
-            alert("Não foi possível gerar o desenho. Tente outra descrição.");
+            alert("Não consegui desenhar isso ainda 😅");
         }
+
     } catch (error) {
         alert("Erro de conexão. Tente novamente.");
     } finally {
