@@ -26,10 +26,10 @@ export default async function handler(req, res) {
 
     // 👇 mostra erro real do Replicate
     if (!create.ok) {
-      const errTxt = await create.text();
-      console.error("Replicate create error:", errTxt);
-      return res.status(500).json({ erro: errTxt });
-    }
+  const errTxt = await create.text();
+  console.error("Replicate create error:", errTxt);
+  return res.status(500).json({ erro: errTxt });
+}
 
     let data = await create.json();
 
@@ -43,11 +43,11 @@ export default async function handler(req, res) {
         }
       });
 
-      if (!check.ok) {
-        const errTxt = await check.text();
-        console.error("Replicate check error:", errTxt);
-        return res.status(500).json({ erro: errTxt });
-      }
+    if (!check.ok) {
+  const errTxt = await check.text();
+  console.error("Replicate check error:", errTxt);
+  return res.status(500).json({ erro: errTxt });
+}
 
       data = await check.json();
     }
