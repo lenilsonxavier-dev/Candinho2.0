@@ -197,8 +197,21 @@ async function gerarDesenho() {
     try {
 
         // 🎨 prompt otimizado
-        const promptFinal = `${descricao}, desenho para colorir, preto e branco, linhas simples, contorno grosso, estilo infantil`;
+        const promptFinal = `
+${descricao},
 
+children's coloring book illustration,
+black and white line art,
+thick clean outlines,
+simple shapes,
+no shading,
+no grayscale,
+white background,
+minimal details,
+centered composition,
+high contrast,
+easy for kids to color
+`;
         const response = await fetch("/api/imagem", {
             method: "POST",
             headers: {
