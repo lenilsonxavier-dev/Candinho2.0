@@ -1,8 +1,6 @@
 export default async function handler(req, res) {
   const { prompt } = req.body || {};
-  if (!prompt) {
-    return res.status(400).json({ erro: "Sem prompt" });
-  }
+  if (!prompt) return res.status(400).json({ erro: "Sem prompt" });
 
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) {
@@ -10,23 +8,25 @@ export default async function handler(req, res) {
   }
 
   try {
-    // 1) Criar a previsão
-   const create = await fetch("https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions", {
-  method: "POST",
-  headers: {
-    "Authorization": `Token ${token}`,
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    input: {
-      prompt: `${prompt}, children's coloring book, black and white outline drawing, thick bold lines, no shading, white background`,
-      width: 1024,
-      height: 1024
-    }
-  })
-});
+    // 1) Criar a previsão (endpoint com modelo liberado)
+    const create = await fetch(
+      "https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions",
+      {
+        method: "POST",
+        headers: {
+          "Authorization": `Token ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          input: {
+            prompt: `${prompt}, children's coloring book, black and white outline drawing, thick bold lines, no shading, white background`,
+            width: 1024,
+            height: 1024
+          }
+        })
+      }
+    );
 
-    // 👇 erro real do Replicate (criação)
     if (!create.ok) {
       const errTxt = await create.text();
       console.error("Replicate create error:", errTxt);
@@ -35,20 +35,24 @@ export default async function handler(req, res) {
 
     let data = await create.json();
 
-    // 👇 valida resposta inicial
     if (!data?.urls?.get) {
       console.error("Resposta inesperada do Replicate:", data);
       return res.status(500).json({ erro: "Resposta inválida da IA" });
     }
 
-    // 2) Esperar resultado (polling)
+    // 2) Polling com limite (evita loop infinito)
+    let tentativas = 0;
+    const maxTentativas = 40;
+
     while (data.status !== "succeeded" && data.status !== "failed") {
+      if (tentativas++ > maxTentativas) {
+        return res.status(500).json({ erro: "Tempo excedido ao gerar imagem" });
+      }
+
       await new Promise(r => setTimeout(r, 1500));
 
       const check = await fetch(data.urls.get, {
-        headers: {
-          "Authorization": `Token ${token}`
-        }
+        headers: { "Authorization": `Token ${token}` }
       });
 
       if (!check.ok) {
@@ -60,7 +64,7 @@ export default async function handler(req, res) {
       data = await check.json();
     }
 
-    // 3) Resultado final
+    // 3) Resultado
     if (data.status === "succeeded") {
       const imagem = Array.isArray(data.output) ? data.output[0] : data.output;
       if (!imagem) {
