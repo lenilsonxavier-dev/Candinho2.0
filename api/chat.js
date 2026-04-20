@@ -20,19 +20,28 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Chaves Cloudflare não configuradas." });
   }
 
-  try {
-    // Prompt otimizado para desenho de colorir (preto e branco, linhas grossas, fundo branco)
-    const promptColorir = `Desenho para colorir, página de colorir infantil, linha preta e branca, contornos grossos e bem definidos, sem sombreamento, sem tons de cinza, fundo branco puro, estilo simples e educativo. Assunto: ${message}. Certifique-se de que o desenho seja adequado para crianças, com áreas amplas para colorir e detalhes nítidos. Não adicione cores, apenas contornos pretos sobre fundo branco.`;
+  // 1. Prompt otimizado para desenho de colorir (preto e branco, linhas grossas, alta qualidade)
+  const promptColorir = `Create a high-quality, print-ready coloring book page. black and white, line art. The subject is: ${message}. Style: kid-friendly, bold and clear outlines, large empty spaces for coloring, pure white background, no shading, no grayscale, no pre-existing colors. High contrast, perfect for printing.`;
 
+  // 2. Escolha o melhor modelo disponível: FLUX.2 [dev] (mais preciso) ou fallback para Schnell
+  // Por enquanto usaremos o FLUX.2 [dev] que tem melhor aderência a temas específicos.
+  const MODEL = "@cf/black-forest-labs/flux-2-dev"; // ou "@cf/black-forest-labs/flux-1-schnell" como fallback
+
+  try {
     const response = await fetch(
-      `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/black-forest-labs/flux-1-schnell`,
+      `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/run/${MODEL}`,
       {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${CLOUDFLARE_API_TOKEN}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: promptColorir }),
+        body: JSON.stringify({
+          prompt: promptColorir,
+          steps: 8,          // Aumenta qualidade (padrão era 4)
+          width: 1024,
+          height: 1024,
+        }),
       }
     );
 
@@ -44,10 +53,34 @@ export default async function handler(req, res) {
         imagem: `data:image/png;base64,${imageBase64}`,
       });
     } else {
-      throw new Error('Falha na geração do desenho');
+      // Se falhar com FLUX.2, tenta com Schnell como fallback
+      console.warn("FLUX.2 falhou, tentando Schnell como fallback");
+      const fallbackResponse = await fetch(
+        `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/black-forest-labs/flux-1-schnell`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${CLOUDFLARE_API_TOKEN}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            prompt: promptColorir,
+            steps: 8,
+            width: 1024,
+            height: 1024,
+          }),
+        }
+      );
+      const fallbackData = await fallbackResponse.json();
+      const fallbackImage = fallbackData.result?.image;
+      if (fallbackImage) {
+        return res.status(200).json({ imagem: `data:image/png;base64,${fallbackImage}` });
+      } else {
+        throw new Error('Falha na geração com ambos os modelos');
+      }
     }
   } catch (err) {
-    console.error(err);
+    console.error('Erro na geração:', err);
     return res.status(500).json({ error: "Erro ao gerar o desenho. Tente outra descrição." });
   }
 }
