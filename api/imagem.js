@@ -17,15 +17,13 @@ export default async function handler(req, res) {
         "Authorization": `Token ${token}`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-  version: "7762fd07cf82d2b0c1e0b97958a3b16130ad13fe7a22ccf7ecd6c6293e7d5d0c",
+     body: JSON.stringify({
+  version: "8beff3369e814221b90c4e48c4a6aa1a2f1a65b8c9c3d2c2a176db6c9f3b4b65",
   input: {
-    prompt: `${prompt}, kids coloring book, black and white line art, thick outline, clean lines, no shading`,
+    prompt: `${prompt}, children's coloring book, black and white outline drawing, thick bold lines, no shading, no gray, white background`,
     negative_prompt: "color, shading, shadow, realistic, photo, texture, blur",
     width: 1024,
-    height: 1024,
-    guidance_scale: 7.5,
-    num_inference_steps: 30
+    height: 1024
   }
 })
     });
