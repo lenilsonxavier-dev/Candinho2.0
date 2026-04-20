@@ -169,57 +169,67 @@ document.getElementById("descricao").addEventListener("keypress", function(e) {
     if (e.key === "Enter") gerarDesenho();
 });
 
-<script>
 async function gerarDesenho() {
-  const input = document.getElementById("descricao");
-  const descricao = input.value.trim();
-  if (!descricao) return;
 
-  const btn = document.getElementById("gerarBtn");
-  const loading = document.getElementById("loading");
-  const img = document.getElementById("imagemGerada");
+    const input = document.getElementById("descricao");
+    const descricao = input.value.trim();
 
-  btn.disabled = true;
-  loading.style.display = "block";
-  img.style.display = "none";
-  img.src = "";
+    if (!descricao) return;
 
-  try {
-    const promptFinal = `${descricao}, desenho para colorir, preto e branco, linhas simples, contorno grosso, estilo infantil`;
-
-    const response = await fetch("/api/imagem", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({ prompt: promptFinal })
-    });
-
-    // 👇 pega a resposta crua (mesmo se vier erro)
-    const raw = await response.text();
-    console.log("RESPOSTA API:", raw);
-
-    let data = {};
-    try { data = JSON.parse(raw); } catch {}
-
-    if (!response.ok) {
-      // 👇 mostra o erro real vindo do backend
-      throw new Error(data.erro || raw || "Erro na API");
+    // 🔒 filtro infantil
+    const proibidas = ["arma", "sangue", "violencia", "terror"];
+    if (proibidas.some(p => descricao.toLowerCase().includes(p))) {
+        alert("Vamos desenhar coisas seguras 😄");
+        return;
     }
 
-    if (data.imagem) {
-      img.src = data.imagem;
-      img.style.display = "block";
-    } else {
-      throw new Error("A API não retornou imagem");
-    }
+    const btn = document.getElementById("gerarBtn");
+    const loading = document.getElementById("loading");
+    const img = document.getElementById("imagemGerada");
 
-  } catch (e) {
-    console.error(e);
-    alert("Erro: " + e.message);
-  } finally {
-    btn.disabled = false;
-    loading.style.display = "none";
-  }
+    btn.disabled = true;
+    loading.style.display = "block";
+    img.style.display = "none";
+    img.src = "";
+
+    try {
+
+        const promptFinal = `${descricao}, children's coloring book illustration, black and white line art, thick clean outlines, simple shapes, no shading, white background`;
+
+        const response = await fetch("/api/imagem", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ prompt: promptFinal })
+        });
+
+        const raw = await response.text();
+        console.log("RESPOSTA API:", raw);
+
+        let data = {};
+        try { data = JSON.parse(raw); } catch {}
+
+        if (!response.ok) {
+            throw new Error(data.erro || raw || "Erro na API");
+        }
+
+        if (data.imagem) {
+            img.src = data.imagem;
+            img.style.display = "block";
+        } else {
+            throw new Error("A API não retornou imagem");
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("Erro: " + error.message);
+    } finally {
+        btn.disabled = false;
+        loading.style.display = "none";
+    }
 }
+
 </script>
 
     // 🔒 filtro infantil
