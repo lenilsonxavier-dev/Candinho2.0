@@ -133,6 +133,8 @@ button:disabled {
     display: none;
     margin-top: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    object-fit: contain;
+    background: #0f3460;
 }
 
 .arte-container {
@@ -150,7 +152,7 @@ button:disabled {
     <img src="https://i.imgur.com/fnMYS0Z.png" class="avatar" alt="Candinho" onerror="this.src='https://via.placeholder.com/70/533483/ffd700?text=C'">
     <div class="title">
         <h1>Candinho 2.0 🎨</h1>
-        <small>Gerador de Arte com IA</small>
+        <small>Seu amigo artista</small>
     </div>
 </div>
 
@@ -158,15 +160,15 @@ button:disabled {
     <div class="msg ai-msg">
         <div>
         <b>Candinho</b><br>
-        Sou o Candinho 2.0! Agora com superpoderes de desenho! 🎨✨<br>
+        Sou o Candinho, seu amigo artista! 🎨✨<br>
         Peça: <strong>"Desenhe um gato fofo"</strong> ou pergunte sobre arte!<br>
-        <small>💡 Dica: use palavras como "desenhe", "crie", "faça uma arte de"</small>
+        💡 Dica: use palavras como <strong>"desenhe"</strong>, <strong>"crie"</strong>, <strong>"faça uma arte de"</strong>
         </div>
     </div>
 </div>
 
 <div class="arte-container" id="areaImagem">
-    <img id="imagemGerada">
+    <img id="imagemGerada" alt="">
 </div>
 
 <div class="input-area">
@@ -205,11 +207,13 @@ window.enviarMensagem = async function() {
     addMessage(pergunta, true);
     input.value = "";
     
-    document.getElementById("imagemGerada").style.display = "none";
+    const imgEl = document.getElementById("imagemGerada");
+    imgEl.style.display = "none";
+    imgEl.src = "";
     
     const typingDiv = document.createElement("div");
     typingDiv.className = "msg ai-msg";
-    typingDiv.innerHTML = `<div><b>Candinho</b><br><span class="typing">🎨 Criando arte<span>.</span><span>.</span><span>.</span></span></div>`;
+    typingDiv.innerHTML = `<div><b>Candinho</b><br><span class="typing">🎨 Pensando<span>.</span><span>.</span><span>.</span></span></div>`;
     document.getElementById("chat").appendChild(typingDiv);
     document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
     
@@ -224,24 +228,28 @@ window.enviarMensagem = async function() {
         });
         
         const data = await response.json();
-        
         typingDiv.remove();
         
         if (data.imagem) {
-            const img = document.getElementById("imagemGerada");
-            img.src = data.imagem;
-            img.style.display = "block";
-            addMessage("✨ Aqui está sua arte! ✨", false);
-        }
-        
-        if (data.resposta) {
+            imgEl.onload = () => {
+                imgEl.style.display = "block";
+                console.log("✅ Imagem carregada:", data.imagem);
+            };
+            imgEl.onerror = () => {
+                console.error("❌ Falha ao carregar imagem:", data.imagem);
+                imgEl.style.display = "none";
+                addMessage("⚠️ A imagem não pôde ser carregada. O serviço pode estar ocupado. Tente outro pedido daqui a pouco.", false);
+            };
+            imgEl.src = data.imagem;
+            addMessage(data.resposta, false);
+        } else {
             addMessage(data.resposta, false);
         }
         
     } catch (error) {
         typingDiv.remove();
-        addMessage("😅 Ops! Não consegui gerar a arte agora. Tente novamente em alguns segundos! 🎨", false);
-        console.error("Erro:", error);
+        addMessage("😅 Erro de conexão. Verifique sua internet e tente novamente.", false);
+        console.error("Fetch error:", error);
     }
     
     input.disabled = false;
