@@ -14,14 +14,17 @@ export default async function handler(req, res) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        version: "stability-ai/sdxl", // modelo
+        version: "7762fd07cf82d2b0c1e0b97958a3b16130ad13fe7a22ccf7ecd6c6293e7d5d0c",
         input: {
-          prompt: prompt,
+          prompt: `${prompt}, kids coloring book, black and white line art, thick outline, clean lines, no shading`,
+          negative_prompt: "color, shading, shadow, realistic, photo, texture, blur",
           width: 1024,
-          height: 1024
+          height: 1024,
+          guidance_scale: 7.5,
+          num_inference_steps: 30
         }
       })
-    });
+    }); // ✅ FECHAMENTO QUE FALTAVA
 
     let data = await response.json();
 
@@ -41,10 +44,12 @@ export default async function handler(req, res) {
     if (data.status === "succeeded") {
       return res.json({ imagem: data.output[0] });
     } else {
+      console.error(data);
       return res.status(500).json({ erro: "Erro ao gerar imagem" });
     }
 
   } catch (err) {
+    console.error(err);
     return res.status(500).json({ erro: "Erro no servidor" });
   }
 }
