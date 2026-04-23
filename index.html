@@ -375,6 +375,7 @@ async function getResposta(pergunta) {
 }
 
 /* 💬 CHAT (APENAS adicionada memória) */
+/* 💬 CHAT */
 window.enviarMensagem = async function() {
     const pergunta = input.value.trim();
     if (!pergunta) return;
@@ -419,7 +420,26 @@ window.enviarMensagem = async function() {
     chatDiv.scrollTop = chatDiv.scrollHeight;
 };
 
-/* INIT */
+/* 🌐 TESTE DA NUVEM */
+async function testCloud() {
+    try {
+        const response = await fetch('/api/groq', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                messages: [{ role: "user", content: "teste" }]
+            })
+        });
+
+        isCloudAvailable = response.ok;
+
+    } catch (e) {
+        console.warn("Nuvem indisponível");
+        isCloudAvailable = false;
+    }
+}
+
+/* 🚀 INIT (APENAS UM!) */
 async function init() {
     await carregarMemoria();
     await testCloud();
@@ -431,9 +451,9 @@ async function init() {
     }
 }
 
+/* CHAMAR INIT */
 init();
 
-</script>
 </script>
 </body>
 </html>
