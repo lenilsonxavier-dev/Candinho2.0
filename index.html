@@ -1,295 +1,439 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Candinho Desenhista</title>
-<link rel="icon" href="https://i.imgur.com/fnMYS0Z.png">
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-}
-
-.container {
-    width: 100%;
-    max-width: 1000px;
-    background: rgba(22, 33, 62, 0.95);
-    border-radius: 20px;
-    padding: 25px;
-    backdrop-filter: blur(5px);
-}
-
-.avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 3px solid #ffd700;
-    background: #533483;
-    margin-bottom: 15px;
-}
-
-h1 {
-    font-size: 2em;
-    background: linear-gradient(135deg, #ffd700, #ff8c00);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-bottom: 10px;
-}
-
-.subtitle {
-    color: #ddd;
-    margin-bottom: 30px;
-    font-style: italic;
-}
-
-/* seção gerador */
-.input-area {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
-}
-
-input {
-    flex: 1;
-    padding: 14px;
-    border-radius: 30px;
-    border: none;
-    background: #0f3460;
-    color: white;
-    outline: none;
-    font-size: 1em;
-}
-
-button {
-    padding: 14px 25px;
-    border-radius: 30px;
-    background: #e94560;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    transition: transform 0.2s;
-}
-
-button:hover:not(:disabled) {
-    transform: scale(1.05);
-    background: #ff6b8a;
-}
-
-button:disabled {
-    background: #666;
-    cursor: not-allowed;
-}
-
-#imagemGerada {
-    max-width: 100%;
-    max-height: 400px;
-    border-radius: 15px;
-    display: none;
-    margin: 20px auto;
-    background: white;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-.loading {
-    display: none;
-    margin: 20px auto;
-    color: #ffd700;
-    font-size: 1.2em;
-}
-
-/* seção catálogo */
-.secao {
-    margin-top: 40px;
-    border-top: 2px solid #ffd700;
-    padding-top: 25px;
-}
-
-.secao h2 {
-    font-size: 1.6em;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.galeria {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.card {
-    background: #0f3460;
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.2s;
-    cursor: pointer;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    background: white;
-}
-
-.card p {
-    padding: 10px;
-    font-size: 0.9em;
-    text-align: center;
-}
-
-.download-btn {
-    display: inline-block;
-    background: #e94560;
-    color: white;
-    text-decoration: none;
-    padding: 8px 12px;
-    margin: 8px;
-    border-radius: 20px;
-    font-size: 0.8em;
-    text-align: center;
-}
-
-.download-btn:hover {
-    background: #ff6b8a;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candinho - IA de Arte</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .container { 
+            width: 100%; 
+            max-width: 800px; 
+            background: rgba(22, 33, 62, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px; 
+            padding: 25px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .header { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            margin-bottom: 20px; 
+            padding-bottom: 15px; 
+            border-bottom: 2px solid #e94560; 
+        }
+        
+        .avatar { 
+            width: 70px; 
+            height: 70px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 3px solid #ffd700;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .title h1 { font-size: 1.8em; margin-bottom: 5px; }
+        .title small { font-size: 0.8em; color: #ffd700; }
+        
+        #chat { 
+            height: 400px; 
+            overflow-y: auto; 
+            background: rgba(15, 52, 96, 0.6);
+            padding: 15px; 
+            border-radius: 15px; 
+            margin-bottom: 15px; 
+            border: 1px solid #1b262c;
+        }
+        
+        #status { 
+            font-size: 13px; 
+            color: #ffd700; 
+            margin-bottom: 10px; 
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .mode-indicator {
+            background: #533483;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+        }
+        
+        .mode-indicator.cloud { background: #e94560; }
+        .mode-indicator.local { background: #4ecdc4; }
+        
+        .progress-container { 
+            width: 100%; 
+            background: #333; 
+            height: 6px; 
+            border-radius: 10px; 
+            margin-bottom: 20px; 
+            overflow: hidden; 
+        }
+        
+        .progress-bar { 
+            width: 0%; 
+            height: 100%; 
+            background: linear-gradient(90deg, #e94560, #ffd700); 
+            transition: width 0.3s; 
+        }
+        
+        .input-area { 
+            display: flex; 
+            gap: 10px; 
+            margin-top: 15px;
+        }
+        
+        input { 
+            flex: 1; 
+            padding: 14px 20px; 
+            border-radius: 30px; 
+            border: none; 
+            font-size: 16px; 
+            outline: none;
+            background: #0f3460;
+            color: white;
+        }
+        
+        input::placeholder { color: #aaa; }
+        
+        button { 
+            padding: 14px 25px; 
+            border-radius: 30px; 
+            background: #e94560; 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: 0.3s; 
+        }
+        
+        button:hover:not(:disabled) { 
+            background: #ff6b8a; 
+            transform: scale(1.02);
+        }
+        
+        button:disabled { background: #555; cursor: not-allowed; }
+        
+        .msg { 
+            margin-bottom: 15px; 
+            padding: 12px; 
+            border-radius: 15px; 
+            display: flex; 
+            gap: 12px; 
+            align-items: flex-start;
+        }
+        
+        .user-msg { 
+            background: #1b6ca8; 
+            margin-left: 20%;
+            border-radius: 15px 15px 5px 15px;
+        }
+        
+        .ai-msg { 
+            background: #533483; 
+            margin-right: 20%;
+            border-radius: 15px 15px 15px 5px;
+        }
+        
+        .msg-avatar { 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            object-fit: cover;
+            border: 2px solid #ffd700;
+        }
+        
+        .msg-content { flex: 1; }
+        .msg-content b { display: block; margin-bottom: 5px; color: #ffd700; }
+        
+        .typing {
+            display: flex;
+            gap: 4px;
+            padding: 5px 0;
+        }
+        .typing span {
+            width: 8px;
+            height: 8px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: wave 1.3s infinite;
+        }
+        .typing span:nth-child(2) { animation-delay: 0.2s; }
+        .typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes wave {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+        
+        .error { color: #ff6b6b; }
+        .success { color: #4ecdc4; }
+        
+        #chat::-webkit-scrollbar { width: 6px; }
+        #chat::-webkit-scrollbar-track { background: #1b262c; border-radius: 10px; }
+        #chat::-webkit-scrollbar-thumb { background: #e94560; border-radius: 10px; }
+    </style>
 </head>
 <body>
+
 <div class="container">
-
-    <div style="text-align: center;">
-        <img src="https://i.imgur.com/fnMYS0Z.png" class="avatar" alt="Candinho">
-        <h1>Candinho Desenhista 🖍️</h1>
-        <div class="subtitle">🎨 Sou seu guia no desenho!</div>
-    </div>
-
-    <!-- GERADOR SOB DEMANDA -->
-    <div class="input-area">
-        <input type="text" id="descricao" placeholder="Ex: mapa do Brasil, dinossauro fofo, unicórnio...">
-        <button id="gerarBtn">🎨 Gerar desenho</button>
-    </div>
-    <div class="loading" id="loading">✏️ Criando desenho...</div>
-    <img id="imagemGerada" alt="Desenho gerado">
-
-    <!-- CATÁLOGO PRÉ-GERADO -->
-    <div class="secao">
-        <h2>📚 Catálogo de desenhos para colorir</h2>
-        <div id="galeria" class="galeria">
-            <div style="grid-column:1/-1; text-align:center;">Carregando catálogo...</div>
+    <div class="header">
+        <img src="https://i.imgur.com/fnMYS0Z.png" alt="Candinho" class="avatar">
+        <div class="title">
+            <h1>Candinho 🎨</h1>
+            <small>Seu amigo artista</small>
         </div>
-        <p style="margin-top: 15px; font-size:0.8em; opacity:0.7;">⭐ Clique na imagem para ver em tamanho grande. Clique em "Baixar" para salvar.</p>
+    </div>
+    
+    <div id="status">
+        <span>⚙️ Inicializando...</span>
+        <span id="modeBadge" class="mode-indicator">carregando</span>
+    </div>
+    <div class="progress-container">
+        <div id="progress" class="progress-bar"></div>
     </div>
 
+    <div id="chat">
+        <div class="msg ai-msg">
+            <img src="https://i.imgur.com/fnMYS0Z.png" alt="Candinho" class="msg-avatar">
+            <div class="msg-content">
+                <b>Candinho</b>
+                Oi! Eu sou o Candinho, seu amigo artista! 🎨<br><br>
+                Adoro conversar sobre arte, pinturas, desenhos e artistas. O que você quer saber hoje? ✨
+            </div>
+        </div>
+    </div>
+
+    <div class="input-area">
+        <input type="text" id="pergunta" placeholder="Aguarde o carregamento..." disabled>
+        <button id="btnEnviar" onclick="enviarMensagem()" disabled>Enviar 📤</button>
+    </div>
 </div>
 
-<script>
-// ==================== GERADOR SOB DEMANDA ====================
-const gerarBtn = document.getElementById("gerarBtn");
-const descricaoInput = document.getElementById("descricao");
-const loadingDiv = document.getElementById("loading");
-const imagemGerada = document.getElementById("imagemGerada");
-
-gerarBtn.addEventListener("click", gerarDesenho);
-descricaoInput.addEventListener("keypress", (e) => { if (e.key === "Enter") gerarDesenho(); });
-
-async function gerarDesenho() {
-    const descricao = descricaoInput.value.trim();
-    if (!descricao) return;
-
-    // Filtro básico de segurança
-    const palavrasProibidas = ["arma", "sangue", "violencia", "terror", "morte"];
-    if (palavrasProibidas.some(p => descricao.toLowerCase().includes(p))) {
-        alert("Vamos desenhar coisas seguras e divertidas! 😄");
-        return;
+<script type="importmap">
+    {
+        "imports": {
+            "@mlc-ai/web-llm": "https://esm.run/@mlc-ai/web-llm@0.2.56"
+        }
     }
+</script>
 
-    gerarBtn.disabled = true;
-    loadingDiv.style.display = "block";
-    imagemGerada.style.display = "none";
-    imagemGerada.src = "";
+<script type="module">
+import { CreateMLCEngine } from "@mlc-ai/web-llm";
 
+/* 🔥 FIREBASE */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCQq1DYHivZBIX2_0_NY7eKIoBWG5sKs48",
+  authDomain: "candinho-8bee5.firebaseapp.com",
+  projectId: "candinho-8bee5"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+/* 🧠 MEMÓRIA */
+let memoria = [];
+const user_id = localStorage.getItem("candinho_user") || "default";
+
+async function carregarMemoria() {
+    const q = query(collection(db, "memorias"), orderBy("created_at"));
+    const snap = await getDocs(q);
+
+    memoria = [];
+
+    snap.forEach(doc => {
+        const d = doc.data();
+        if (d.user_id === user_id) {
+            memoria.push({ role: d.role, content: d.content });
+        }
+    });
+
+    console.log("🧠 memória carregada:", memoria);
+}
+
+async function salvarMemoria(role, content) {
+    await addDoc(collection(db, "memorias"), {
+        user_id,
+        role,
+        content,
+        created_at: Date.now()
+    });
+}
+
+/* 🔧 INJETAR MEMÓRIA (SEM ALTERAR PERSONALIDADE) */
+function montarMensagens(pergunta, systemPrompt) {
+    return [
+        { role: "system", content: systemPrompt },
+        ...memoria.slice(-10),
+        { role: "user", content: pergunta }
+    ];
+}
+
+const statusDiv = document.getElementById("status");
+const modeBadge = document.getElementById("modeBadge");
+const progressDiv = document.getElementById("progress");
+const chatDiv = document.getElementById("chat");
+const input = document.getElementById("pergunta");
+const btn = document.getElementById("btnEnviar");
+
+const selectedModel = "Llama-3.2-1B-Instruct-q4f16_1-MLC";
+let engine = null;
+let isCloudAvailable = true;
+
+/* ☁️ CLOUD (inalterado, só memória adicionada) */
+async function respostaCloud(pergunta) {
     try {
-        const promptFinal = `${descricao}, kids coloring book, black and white line art, thick outline, clean lines, no shading, white background`;
-        const response = await fetch("/api/imagem", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prompt: promptFinal })
+        modeBadge.textContent = "☁️ nuvem";
+        modeBadge.className = "mode-indicator cloud";
+
+        const response = await fetch('/api/groq', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                model: "llama-3.3-70b-versatile",
+                messages: montarMensagens(pergunta, `Você é o Candinho, um mentor de arte animado e amigável.
+
+REGRAS:
+- Fale de forma natural
+- Alegre e acolhedor
+- Máx 3 frases
+- Use emojis de arte 🎨`)
+            })
         });
 
+        if (!response.ok) throw new Error();
         const data = await response.json();
-        if (data.imagem) {
-            imagemGerada.src = data.imagem;
-            imagemGerada.style.display = "block";
-        } else {
-            alert("Não foi possível gerar o desenho. Tente outra descrição.");
-        }
-    } catch (err) {
-        console.error(err);
-        alert("Erro ao gerar imagem. Tente novamente.");
-    } finally {
-        gerarBtn.disabled = false;
-        loadingDiv.style.display = "none";
+        return data.choices[0].message.content;
+
+    } catch {
+        return null;
     }
 }
 
-// ==================== CATÁLOGO PRÉ-GERADO ====================
-async function carregarCatalogo() {
-    const galeriaDiv = document.getElementById("galeria");
+/* 💻 LOCAL (inalterado, só memória adicionada) */
+async function respostaLocal(pergunta) {
+    if (!engine) return null;
+
+    modeBadge.textContent = "💻 local";
+    modeBadge.className = "mode-indicator local";
+
     try {
-        const response = await fetch("/catalogo.json");
-        if (!response.ok) throw new Error("Catálogo não encontrado");
-        const catalogo = await response.json();
-
-        if (!catalogo.length) {
-            galeriaDiv.innerHTML = '<div style="grid-column:1/-1;">Nenhum desenho no catálogo ainda.</div>';
-            return;
-        }
-
-        galeriaDiv.innerHTML = "";
-        catalogo.forEach(item => {
-            const card = document.createElement("div");
-            card.className = "card";
-            card.innerHTML = `
-                <img src="${item.imagemUrl}" alt="${item.titulo}" loading="lazy">
-                <p>${item.titulo}</p>
-                <a href="${item.imagemUrl}" download class="download-btn">📥 Baixar</a>
-            `;
-            // Ao clicar na imagem (não no botão), abre em nova aba em tamanho real
-            const img = card.querySelector("img");
-            img.addEventListener("click", (e) => {
-                e.stopPropagation();
-                window.open(item.imagemUrl, "_blank");
-            });
-            galeriaDiv.appendChild(card);
+        const reply = await engine.chat.completions.create({
+            messages: montarMensagens(pergunta, `Você é o Candinho, amigo artista. Alegre e direto. Máx 2 frases.`),
+            max_tokens: 80,
+            temperature: 0.8
         });
-    } catch (error) {
-        console.error("Erro ao carregar catálogo:", error);
-        galeriaDiv.innerHTML = '<div style="grid-column:1/-1;">⚠️ Catálogo indisponível no momento.</div>';
+
+        return reply.choices[0].message.content;
+
+    } catch {
+        return null;
     }
 }
 
-carregarCatalogo();
+/* 🧠 DECISÃO (inalterada) */
+async function getResposta(pergunta) {
+    const complexidade = detectarComplexidade(pergunta);
+
+    if (complexidade === "local" && engine) {
+        const r = await respostaLocal(pergunta);
+        if (r) return r;
+    }
+
+    if (isCloudAvailable) {
+        const r = await respostaCloud(pergunta);
+        if (r) return r;
+    }
+
+    return "Olá! Adoro arte! 🎨 Pode repetir?";
+}
+
+/* 💬 CHAT (APENAS adicionada memória) */
+window.enviarMensagem = async function() {
+    const pergunta = input.value.trim();
+    if (!pergunta) return;
+
+    chatDiv.innerHTML += `
+    <div class="msg user-msg">
+        <div class="msg-content">
+            <b>Você</b>${escapeHtml(pergunta)}
+        </div>
+    </div>`;
+
+    input.value = "";
+
+    memoria.push({ role: "user", content: pergunta });
+    await salvarMemoria("user", pergunta);
+
+    const id = "t" + Date.now();
+
+    chatDiv.innerHTML += `
+    <div class="msg ai-msg" id="${id}">
+        <img src="https://i.imgur.com/fnMYS0Z.png" class="msg-avatar">
+        <div class="msg-content">
+            <b>Candinho</b>🎨 pensando...
+        </div>
+    </div>`;
+
+    const resposta = await getResposta(pergunta);
+
+    document.getElementById(id)?.remove();
+
+    chatDiv.innerHTML += `
+    <div class="msg ai-msg">
+        <img src="https://i.imgur.com/fnMYS0Z.png" class="msg-avatar">
+        <div class="msg-content">
+            <b>Candinho</b>${escapeHtml(resposta)}
+        </div>
+    </div>`;
+
+    memoria.push({ role: "assistant", content: resposta });
+    await salvarMemoria("assistant", resposta);
+
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+};
+
+/* INIT */
+async function init() {
+    await carregarMemoria();
+    await testCloud();
+    const localOk = await initLocal();
+
+    if (localOk || isCloudAvailable) {
+        input.disabled = false;
+        btn.disabled = false;
+    }
+}
+
+init();
+
+</script>
 </script>
 </body>
 </html>
