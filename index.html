@@ -1,478 +1,374 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candinho - IA de Arte</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white; 
-            padding: 20px; 
-            display: flex; 
-            justify-content: center;
-            min-height: 100vh;
-        }
-        
-        .container { 
-            width: 100%; 
-            max-width: 800px; 
-            background: rgba(22, 33, 62, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px; 
-            padding: 25px; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-        
-        .header { 
-            display: flex; 
-            align-items: center; 
-            gap: 15px; 
-            margin-bottom: 20px; 
-            padding-bottom: 15px; 
-            border-bottom: 2px solid #e94560; 
-        }
-        
-        .avatar { 
-            width: 70px; 
-            height: 70px; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            border: 3px solid #ffd700;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .title h1 { font-size: 1.8em; margin-bottom: 5px; }
-        .title small { font-size: 0.8em; color: #ffd700; }
-        
-        #chat { 
-            height: 400px; 
-            overflow-y: auto; 
-            background: rgba(15, 52, 96, 0.6);
-            padding: 15px; 
-            border-radius: 15px; 
-            margin-bottom: 15px; 
-            border: 1px solid #1b262c;
-        }
-        
-        #status { 
-            font-size: 13px; 
-            color: #ffd700; 
-            margin-bottom: 10px; 
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .mode-indicator {
-            background: #533483;
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-        }
-        
-        .mode-indicator.cloud { background: #e94560; }
-        .mode-indicator.local { background: #4ecdc4; }
-        
-        .progress-container { 
-            width: 100%; 
-            background: #333; 
-            height: 6px; 
-            border-radius: 10px; 
-            margin-bottom: 20px; 
-            overflow: hidden; 
-        }
-        
-        .progress-bar { 
-            width: 0%; 
-            height: 100%; 
-            background: linear-gradient(90deg, #e94560, #ffd700); 
-            transition: width 0.3s; 
-        }
-        
-        .input-area { 
-            display: flex; 
-            gap: 10px; 
-            margin-top: 15px;
-        }
-        
-        input { 
-            flex: 1; 
-            padding: 14px 20px; 
-            border-radius: 30px; 
-            border: none; 
-            font-size: 16px; 
-            outline: none;
-            background: #0f3460;
-            color: white;
-        }
-        
-        input::placeholder { color: #aaa; }
-        
-        button { 
-            padding: 14px 25px; 
-            border-radius: 30px; 
-            background: #e94560; 
-            color: white; 
-            border: none; 
-            cursor: pointer; 
-            font-weight: bold; 
-            transition: 0.3s; 
-        }
-        
-        button:hover:not(:disabled) { 
-            background: #ff6b8a; 
-            transform: scale(1.02);
-        }
-        
-        button:disabled { background: #555; cursor: not-allowed; }
-        
-        .msg { 
-            margin-bottom: 15px; 
-            padding: 12px; 
-            border-radius: 15px; 
-            display: flex; 
-            gap: 12px; 
-            align-items: flex-start;
-        }
-        
-        .user-msg { 
-            background: #1b6ca8; 
-            margin-left: 20%;
-            border-radius: 15px 15px 5px 15px;
-        }
-        
-        .ai-msg { 
-            background: #533483; 
-            margin-right: 20%;
-            border-radius: 15px 15px 15px 5px;
-        }
-        
-        .msg-avatar { 
-            width: 40px; 
-            height: 40px; 
-            border-radius: 50%; 
-            object-fit: cover;
-            border: 2px solid #ffd700;
-        }
-        
-        .msg-content { flex: 1; }
-        .msg-content b { display: block; margin-bottom: 5px; color: #ffd700; }
-        
-        .typing {
-            display: flex;
-            gap: 4px;
-            padding: 5px 0;
-        }
-        .typing span {
-            width: 8px;
-            height: 8px;
-            background: #ffd700;
-            border-radius: 50%;
-            animation: wave 1.3s infinite;
-        }
-        .typing span:nth-child(2) { animation-delay: 0.2s; }
-        .typing span:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes wave {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-5px); }
-        }
-        
-        .error { color: #ff6b6b; }
-        .success { color: #4ecdc4; }
-        
-        #chat::-webkit-scrollbar { width: 6px; }
-        #chat::-webkit-scrollbar-track { background: #1b262c; border-radius: 10px; }
-        #chat::-webkit-scrollbar-thumb { background: #e94560; border-radius: 10px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Candinho - O Professor de Arte</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #2b1b3a 0%, #1a2a3a 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 850px;
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 30px;
+    padding: 25px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    background: linear-gradient(135deg, #f9b713, #f28500);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 5px;
+}
+
+.sub {
+    text-align: center;
+    color: #ddd;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+#chat {
+    height: 450px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.msg {
+    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 20px;
+    max-width: 85%;
+    word-wrap: break-word;
+}
+.user-msg {
+    background: #1e6f5c;
+    margin-left: auto;
+    border-bottom-right-radius: 5px;
+}
+.ai-msg {
+    background: #4a2e6b;
+    margin-right: auto;
+    border-bottom-left-radius: 5px;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+}
+input {
+    flex: 1;
+    padding: 12px 18px;
+    border-radius: 40px;
+    border: none;
+    background: #1f2a3e;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+button {
+    padding: 12px 24px;
+    border-radius: 40px;
+    background: #e67e22;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+button:disabled {
+    background: #7f8c8d;
+    cursor: not-allowed;
+}
+.status {
+    font-size: 0.8rem;
+    background: #00000055;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+.loading-dots::after {
+    content: '...';
+    animation: blink 1.5s infinite;
+}
+@keyframes blink {
+    0% { opacity: 0.2; }
+    50% { opacity: 1; }
+    100% { opacity: 0.2; }
+}
+</style>
 </head>
 <body>
-
 <div class="container">
-    <div class="header">
-        <img src="https://i.imgur.com/fnMYS0Z.png" alt="Candinho" class="avatar">
-        <div class="title">
-            <h1>Candinho 🎨</h1>
-            <small>Seu amigo artista</small>
-        </div>
-    </div>
-    
-    <div id="status">
-        <span>⚙️ Inicializando...</span>
-        <span id="modeBadge" class="mode-indicator">carregando</span>
-    </div>
-    <div class="progress-container">
-        <div id="progress" class="progress-bar"></div>
-    </div>
-
+    <h1>🎨 Candinho</h1>
+    <div class="sub">Seu mestre de arte, cultura e muito mais!</div>
+    <div id="status" class="status">🔌 Inicializando memórias e IA...</div>
     <div id="chat">
-        <div class="msg ai-msg">
-            <img src="https://i.imgur.com/fnMYS0Z.png" alt="Candinho" class="msg-avatar">
-            <div class="msg-content">
-                <b>Candinho</b>
-                Oi! Eu sou o Candinho, seu amigo artista! 🎨<br><br>
-                Adoro conversar sobre arte, pinturas, desenhos e artistas. O que você quer saber hoje? ✨
-            </div>
-        </div>
+        <div class="msg ai-msg">📚 Olá, meu pequeno artista! Sou o Candinho, tenho 60 anos de histórias e adoro ensinar arte, cultura, matemática e inglês. Pergunte sobre pintores, obras, ou qualquer curiosidade! Vamos aprender com leveza e alegria. 🖌️✨</div>
     </div>
-
     <div class="input-area">
-        <input type="text" id="pergunta" placeholder="Aguarde o carregamento..." disabled>
-        <button id="btnEnviar" onclick="enviarMensagem()" disabled>Enviar 📤</button>
+        <input type="text" id="pergunta" placeholder="Ex: Quem foi Tarsila do Amaral? Me ensine inglês..." disabled>
+        <button id="btnEnviar" disabled>Enviar</button>
     </div>
 </div>
 
 <script type="importmap">
-    {
-        "imports": {
-            "@mlc-ai/web-llm": "https://esm.run/@mlc-ai/web-llm@0.2.56"
-        }
+{
+    "imports": {
+        "@mlc-ai/web-llm": "https://esm.run/@mlc-ai/web-llm@0.2.56"
     }
+}
 </script>
 
 <script type="module">
 import { CreateMLCEngine } from "@mlc-ai/web-llm";
-
-/* 🔥 FIREBASE */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
+// ================= CONFIGURAÇÕES =================
 const firebaseConfig = {
-  apiKey: "AIzaSyCQq1DYHivZBIX2_0_NY7eKIoBWG5sKs48",
+  apiKey: "AIzaSy...COLOQUE_SUA_CHAVE_AQUI...",
   authDomain: "candinho-8bee5.firebaseapp.com",
   projectId: "candinho-8bee5"
 };
 
+const user_id = "candinho_senhor";
+let engine = null;
+let isCloudAvailable = true;
+let memoria = [];   // histórico local para contexto
+
+// Elementos DOM
+const chatDiv = document.getElementById("chat");
+const inputEl = document.getElementById("pergunta");
+const btn = document.getElementById("btnEnviar");
+const statusDiv = document.getElementById("status");
+
+// ================= FILTROS E PERSONALIDADE =================
+const palavrasProibidas = [
+    "palavrão", "merda", "caralho", "puta", "bosta", "foda", "vadia", "vagabunda",
+    "sexo", "pornô", "pornografia", "tapa na cara", "violência", "sangue", "morte",
+    "ódio", "racismo", "homofobia", "linguagem neutra", "elx", "todes", "amigue"
+];
+
+function mensagemRepudio(texto) {
+    return "😊 Ora, ora... Vamos manter a conversa respeitosa e alegre, como deve ser. Aqui é lugar de aprender, não de usar palavras feias ou assuntos pesados. Que tal falarmos sobre arte ou cultura brasileira? 🎨✨";
+}
+
+function contemConteudoImproprio(texto) {
+    const txt = texto.toLowerCase();
+    return palavrasProibidas.some(palavra => txt.includes(palavra));
+}
+
+// ================= PERSONALIDADE DO SISTEMA =================
+const systemPrompt = `Você é o Candinho, um senhor de 60 anos, muito educado, paciente e adora ensinar crianças. Você é especialista em arte universal e brasileira, mas também domina matemática, português e inglês. Fale sempre com entusiasmo, usando analogias divertidas e exemplos práticos. Repudie qualquer palavra de baixo calão, violência, preconceito ou linguagem neutra (ex: "todes", "amigue") – sempre com humor e leveza, redirecionando para assuntos educativos. Seja amoroso, brincalhão e incentive a criatividade. Use emojis. Seu objetivo é ensinar e encantar.`;
+
+// ================= FIREBASE (MEMÓRIA PERSISTENTE) =================
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* 🧠 MEMÓRIA */
-let memoria = [];
-const user_id = localStorage.getItem("candinho_user") || "default";
-
 async function carregarMemoria() {
-    const q = query(collection(db, "memorias"), orderBy("created_at"));
-    const snap = await getDocs(q);
-
-    memoria = [];
-
-    snap.forEach(doc => {
-        const d = doc.data();
-        if (d.user_id === user_id) {
-            memoria.push({ role: d.role, content: d.content });
-        }
-    });
-
-    console.log("🧠 memória carregada:", memoria);
+    try {
+        const q = query(collection(db, "memorias"), orderBy("created_at"));
+        const snap = await getDocs(q);
+        memoria = [];
+        snap.forEach(doc => {
+            const d = doc.data();
+            if (d.user_id === user_id) {
+                memoria.push({ role: d.role, content: d.content });
+            }
+        });
+        statusDiv.innerHTML = `📚 Memória carregada (${memoria.length} msgs) | 🌐 API: ${isCloudAvailable ? "ok" : "offline"} | 🧠 IA local: ${engine ? "pronta" : "carregando..."}`;
+    } catch(e) {
+        console.warn("Firebase erro:", e);
+        statusDiv.innerHTML = "⚠️ Memória off-line (usando apenas local)";
+    }
 }
 
 async function salvarMemoria(role, content) {
-    await addDoc(collection(db, "memorias"), {
-        user_id,
-        role,
-        content,
-        created_at: Date.now()
-    });
-}
-
-/* 🔧 INJETAR MEMÓRIA (SEM ALTERAR PERSONALIDADE) */
-function montarMensagens(pergunta, systemPrompt) {
-    return [
-        { role: "system", content: systemPrompt },
-        ...memoria.slice(-10),
-        { role: "user", content: pergunta }
-    ];
-}
-
-const statusDiv = document.getElementById("status");
-const modeBadge = document.getElementById("modeBadge");
-const progressDiv = document.getElementById("progress");
-const chatDiv = document.getElementById("chat");
-const input = document.getElementById("pergunta");
-const btn = document.getElementById("btnEnviar");
-
-const selectedModel = "Llama-3.2-1B-Instruct-q4f16_1-MLC";
-let engine = null;
-let isCloudAvailable = true;
-
-/* ☁️ CLOUD (inalterado, só memória adicionada) */
-async function respostaCloud(pergunta) {
     try {
-        modeBadge.textContent = "☁️ nuvem";
-        modeBadge.className = "mode-indicator cloud";
-
-        const response = await fetch('/api/groq', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                model: "llama-3.3-70b-versatile",
-                messages: montarMensagens(pergunta, `Você é o Candinho, um mentor de arte animado e amigável.
-
-REGRAS:
-- Fale de forma natural
-- Alegre e acolhedor
-- Máx 3 frases
-- Use emojis de arte 🎨`)
-            })
+        await addDoc(collection(db, "memorias"), {
+            user_id, role, content, created_at: Date.now()
         });
-
-        if (!response.ok) throw new Error();
-        const data = await response.json();
-        return data.choices[0].message.content;
-
-    } catch {
-        return null;
-    }
+    } catch(e) { console.warn("erro ao salvar", e); }
 }
 
-/* 💻 LOCAL (inalterado, só memória adicionada) */
-async function respostaLocal(pergunta) {
-    if (!engine) return null;
-
-    modeBadge.textContent = "💻 local";
-    modeBadge.className = "mode-indicator local";
-
+// ================= IA LOCAL (WebLLM) =================
+async function initLocal() {
     try {
-        const reply = await engine.chat.completions.create({
-            messages: montarMensagens(pergunta, `Você é o Candinho, amigo artista. Alegre e direto. Máx 2 frases.`),
-            max_tokens: 80,
-            temperature: 0.8
+        statusDiv.innerHTML = "📥 Baixando inteligência local (só na primeira vez)...";
+        engine = await CreateMLCEngine("Llama-3.2-1B-Instruct-q4f16_1-MLC", {
+            initProgressCallback: (p) => {
+                statusDiv.innerHTML = `🧠 ${p.text} (${Math.round(p.progress*100)}%)`;
+            }
         });
-
-        return reply.choices[0].message.content;
-
-    } catch {
-        return null;
-    }
-}
-
-/* 🧠 DECISÃO (inalterada) */
-async function getResposta(pergunta) {
-    const complexidade = detectarComplexidade(pergunta);
-
-    if (complexidade === "local" && engine) {
-        const r = await respostaLocal(pergunta);
-        if (r) return r;
-    }
-
-    if (isCloudAvailable) {
-        const r = await respostaCloud(pergunta);
-        if (r) return r;
-    }
-
-    return "Olá! Adoro arte! 🎨 Pode repetir?";
-}
-
-/* 💬 CHAT (APENAS adicionada memória) */
-/* 💬 CHAT */
-window.enviarMensagem = async function() {
-    const pergunta = input.value.trim();
-    if (!pergunta) return;
-
-    chatDiv.innerHTML += `
-    <div class="msg user-msg">
-        <div class="msg-content">
-            <b>Você</b>${escapeHtml(pergunta)}
-        </div>
-    </div>`;
-
-    input.value = "";
-
-    memoria.push({ role: "user", content: pergunta });
-    await salvarMemoria("user", pergunta);
-
-    const id = "t" + Date.now();
-
-    chatDiv.innerHTML += `
-    <div class="msg ai-msg" id="${id}">
-        <img src="https://i.imgur.com/fnMYS0Z.png" class="msg-avatar">
-        <div class="msg-content">
-            <b>Candinho</b>🎨 pensando...
-        </div>
-    </div>`;
-
-    const resposta = await getResposta(pergunta);
-
-    document.getElementById(id)?.remove();
-
-    chatDiv.innerHTML += `
-    <div class="msg ai-msg">
-        <img src="https://i.imgur.com/fnMYS0Z.png" class="msg-avatar">
-        <div class="msg-content">
-            <b>Candinho</b>${escapeHtml(resposta)}
-        </div>
-    </div>`;
-
-    memoria.push({ role: "assistant", content: resposta });
-    await salvarMemoria("assistant", resposta);
-
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-};
-
-    async function initLocal() {
-    try {
-        engine = await CreateMLCEngine("Llama-3.2-1B-Instruct-q4f16_1-MLC");
-        console.log("🧠 IA local carregada");
+        statusDiv.innerHTML = "✅ IA local pronta! Agora posso responder mesmo sem internet (mas adoro a nuvem também).";
         return true;
-    } catch (e) {
-        console.warn("⚠️ IA local não disponível");
+    } catch(e) {
+        console.error(e);
+        statusDiv.innerHTML = "⚠️ IA local indisponível, usarei apenas a nuvem.";
         return false;
     }
 }
-    
-/* 🌐 TESTE DA NUVEM */
-async function testCloud() {
+
+// ================= API GROQ (CLOUD) =================
+async function respostaCloud(pergunta) {
+    if (!isCloudAvailable) return null;
     try {
-        const response = await fetch('/api/groq', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+        const res = await fetch("/api/groq", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                messages: [{ role: "user", content: "teste" }]
+                messages: [
+                    { role: "system", content: systemPrompt },
+                    ...memoria.slice(-10),
+                    { role: "user", content: pergunta }
+                ]
             })
         });
-
-        isCloudAvailable = response.ok;
-
-    } catch (e) {
-        console.warn("Nuvem indisponível");
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        return data.choices[0].message.content;
+    } catch {
         isCloudAvailable = false;
+        return null;
     }
 }
-    function escapeHtml(text) {
-    return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+async function respostaLocal(pergunta) {
+    if (!engine) return null;
+    try {
+        const resposta = await engine.chat.completions.create({
+            messages: [
+                { role: "system", content: systemPrompt },
+                ...memoria.slice(-10),
+                { role: "user", content: pergunta }
+            ],
+            max_tokens: 300,
+            temperature: 0.8
+        });
+        return resposta.choices[0].message.content;
+    } catch(e) {
+        console.warn("Local falhou", e);
+        return null;
+    }
 }
 
-/* 🚀 INIT (APENAS UM!) */
+// ================= ORQUESTRADOR =================
+function detectarComplexidade(texto) {
+    const t = texto.toLowerCase();
+    if (t.length < 40 && !t.includes("?") && !t.includes("como") && !t.includes("explique")) return "local";
+    return "cloud";
+}
+
+async function getResposta(pergunta) {
+    // 1) FILTRO INAPROPRIADO
+    if (contemConteudoImproprio(pergunta)) {
+        return mensagemRepudio(pergunta);
+    }
+
+    const complexidade = detectarComplexidade(pergunta);
+    let resposta = null;
+
+    if (complexidade === "cloud" && isCloudAvailable) {
+        resposta = await respostaCloud(pergunta);
+    }
+    if (!resposta) {
+        resposta = await respostaLocal(pergunta);
+    }
+    if (!resposta) {
+        resposta = "🎨 Ora, meu jovem, não consegui entender direito. Pode repetir com outras palavras? Estou aqui para ajudar!";
+    }
+    return resposta;
+}
+
+// ================= INTERFACE =================
+function escapeHtml(text) {
+    return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function addMessage(text, isUser = false) {
+    const div = document.createElement("div");
+    div.className = `msg ${isUser ? 'user-msg' : 'ai-msg'}`;
+    div.innerHTML = `<b>${isUser ? '👦 Você' : '👴 Candinho'}</b><br>${escapeHtml(text)}`;
+    chatDiv.appendChild(div);
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+}
+
+async function enviarMensagem() {
+    const texto = inputEl.value.trim();
+    if (!texto) return;
+
+    addMessage(texto, true);
+    inputEl.value = "";
+    inputEl.disabled = true;
+    btn.disabled = true;
+
+    const typing = document.createElement("div");
+    typing.className = "msg ai-msg";
+    typing.innerHTML = "<b>Candinho</b><br><span class='loading-dots'>✍️ Pensando</span>";
+    chatDiv.appendChild(typing);
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+
+    await salvarMemoria("user", texto);
+    memoria.push({ role: "user", content: texto });
+
+    const resposta = await getResposta(texto);
+
+    typing.remove();
+    addMessage(resposta, false);
+
+    await salvarMemoria("assistant", resposta);
+    memoria.push({ role: "assistant", content: resposta });
+
+    inputEl.disabled = false;
+    btn.disabled = false;
+    inputEl.focus();
+}
+
+// ================= INICIALIZAÇÃO =================
 async function init() {
-    await carregarMemoria();
-    await testCloud();
-    const localOk = await initLocal();
+    await carregarMemoria();  // do Firebase
+    await initLocal();        // IA local em background
+    // Testa cloud (rota /api/groq)
+    try {
+        const test = await fetch("/api/groq", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: [{ role: "user", content: "ping" }] }) });
+        isCloudAvailable = test.ok;
+    } catch { isCloudAvailable = false; }
+    statusDiv.innerHTML = `✅ Candinho pronto! Memória: ${memoria.length} msgs | Cloud: ${isCloudAvailable ? "ativa" : "fallback local"}`;
 
-    if (localOk || isCloudAvailable) {
-        input.disabled = false;
-        btn.disabled = false;
-    }
+    inputEl.disabled = false;
+    btn.disabled = false;
+    inputEl.focus();
 }
 
-/* CHAMAR INIT */
-init();
+// Eventos
+window.enviarMensagem = enviarMensagem;
+btn.addEventListener("click", enviarMensagem);
+inputEl.addEventListener("keypress", (e) => {
+    if (e.key === "Enter" && !inputEl.disabled) enviarMensagem();
+});
 
+init();
 </script>
 </body>
 </html>
