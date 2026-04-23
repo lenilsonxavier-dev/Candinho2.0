@@ -420,6 +420,17 @@ window.enviarMensagem = async function() {
     chatDiv.scrollTop = chatDiv.scrollHeight;
 };
 
+    async function initLocal() {
+    try {
+        engine = await CreateMLCEngine("Llama-3.2-1B-Instruct-q4f16_1-MLC");
+        console.log("🧠 IA local carregada");
+        return true;
+    } catch (e) {
+        console.warn("⚠️ IA local não disponível");
+        return false;
+    }
+}
+    
 /* 🌐 TESTE DA NUVEM */
 async function testCloud() {
     try {
