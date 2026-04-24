@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Candinho - Amigo Artista</title>
+<title>Candinho - Seu Amigo Artista</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -100,6 +100,7 @@ button {
 }
 button:disabled {
     background: #7f8c8d;
+    cursor: not-allowed;
 }
 .status {
     font-size: 0.8rem;
@@ -109,22 +110,26 @@ button:disabled {
     margin-bottom: 12px;
     text-align: center;
 }
+#loginBox {
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 30px;
+    padding: 30px;
+    text-align: center;
+    max-width: 350px;
+    margin: 100px auto;
+}
+#loginBox input {
+    width: 100%;
+    margin-bottom: 15px;
+}
+#loginBox button {
+    width: 100%;
+}
 </style>
 </head>
 <body>
-<div class="container">
-    <img src="https://i.imgur.com/fnMYS0Z.png" class="avatar" alt="Candinho">
-    <h1>Candinho</h1>
-    <div class="sub">Seu amigo artista!</div>
-    <div id="status" class="status">🔌 Inicializando...</div>
-    <div id="chat">
-        <div class="msg ai-msg">🎨 Sou o Candinho. Seu amigo artista! Pergunte sobre arte, desenhos, ou sobre o que quiser. Vamos conversar!</div>
-    </div>
-    <div class="input-area">
-        <input type="text" id="pergunta" placeholder="Pergunte sobre arte..." disabled>
-        <button id="btnEnviar" disabled>Enviar</button>
-    </div>
-</div>
+
+<div id="app"></div>
 
 <script type="importmap">
 {
@@ -146,201 +151,241 @@ const firebaseConfig = {
   projectId: "candinho-8bee5"
 };
 
-const user_id = "candinho_unico";
-let engine = null;
-let isCloudAvailable = true;
-let memoria = [];
-let nomeUsuario = "você"; // será capturado opcionalmente
+const appFirebase = initializeApp(firebaseConfig);
+const db = getFirestore(appFirebase);
 
-// DOM
-const chatDiv = document.getElementById("chat");
-const inputEl = document.getElementById("pergunta");
-const btn = document.getElementById("btnEnviar");
-const statusDiv = document.getElementById("status");
+// ================= IDENTIDADE DO USUÁRIO =================
+let user_id = localStorage.getItem("candinho_user");
+const appDiv = document.getElementById("app");
 
-// ================= FILTROS E PERSONALIDADE =================
-const palavrasProibidas = [
-    "palavrão", "merda", "caralho", "puta", "bosta", "foda", "vadia", "vagabunda",
-    "sexo", "pornô", "pornografia", "violência", "sangue", "morte", "ódio", "racismo", "homofobia",
-    "linguagem neutra", "elx", "todes", "amigue"
-];
-
-function mensagemRepudio() {
-    return "😊 Vamos conversar com respeito, combinou? Se quiser, podemos falar sobre arte, desenhos ou cultura. O que você gosta de desenhar? 🎨";
+// Função de login (tela bonita)
+function showLoginScreen() {
+    appDiv.innerHTML = `
+        <div id="loginBox">
+            <img src="https://i.imgur.com/fnMYS0Z.png" style="width:80px; border-radius:50%; margin-bottom:20px;">
+            <h2 style="color:#f9b713;">Olá! Qual é o seu nome?</h2>
+            <input type="text" id="nomeUsuario" placeholder="Digite seu nome" autocomplete="off">
+            <button id="entrarBtn">Entrar</button>
+        </div>
+    `;
+    document.getElementById("entrarBtn").addEventListener("click", () => {
+        const nome = document.getElementById("nomeUsuario").value.trim();
+        if (!nome) return;
+        localStorage.setItem("candinho_user", nome);
+        location.reload();
+    });
+    document.getElementById("nomeUsuario").addEventListener("keypress", (e) => {
+        if (e.key === "Enter") document.getElementById("entrarBtn").click();
+    });
 }
 
-function contemImproprio(texto) {
-    return palavrasProibidas.some(p => texto.toLowerCase().includes(p));
-}
+if (!user_id) {
+    showLoginScreen();
+} else {
+    // Carrega o chat principal
+    appDiv.innerHTML = `
+        <div class="container">
+            <img src="https://i.imgur.com/fnMYS0Z.png" class="avatar" alt="Candinho">
+            <h1>Candinho</h1>
+            <div class="sub">Seu amigo artista!</div>
+            <div id="status" class="status">🔌 Inicializando...</div>
+            <div id="chat">
+                <div class="msg ai-msg">🎨 Sou o Candinho. Seu amigo artista! Pergunte sobre arte, desenhos, ou sobre o que quiser. Vamos conversar!</div>
+            </div>
+            <div class="input-area">
+                <input type="text" id="pergunta" placeholder="Pergunte sobre arte..." disabled>
+                <button id="btnEnviar" disabled>Enviar</button>
+            </div>
+        </div>
+    `;
 
-// ================= PERSONALIDADE (LÚDICA, NATURAL, SEM DIMINUTIVOS) =================
-const systemPrompt = `Você é o Candinho, um artista e educador experiente. Você adora arte, desenhos, pintura, cultura brasileira e também sabe de matemática, português e inglês. Você conversa com crianças de forma natural, alegre e respeitosa. Use "você" para se referir à pessoa. Nunca use diminutivos como "artistinha", "desenhozinho". Seja claro e sensível. Evite expressões como "meu amigo", "minha amiga", "meu pequeno". Trate a pessoa por "você". Repudie qualquer palavra ofensiva ou assunto impróprio com humor, redirecionando para arte. Responda com entusiasmo e criatividade, usando emojis.`;
+    // ================= VARIÁVEIS GLOBAIS =================
+    let engine = null;
+    let isCloudAvailable = true;
+    let memoria = [];
 
-// ================= FIREBASE =================
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+    const chatDiv = document.getElementById("chat");
+    const inputEl = document.getElementById("pergunta");
+    const btn = document.getElementById("btnEnviar");
+    const statusDiv = document.getElementById("status");
 
-async function carregarMemoria() {
-    try {
-        const q = query(collection(db, "memorias"), orderBy("created_at"));
-        const snap = await getDocs(q);
-        memoria = [];
-        snap.forEach(doc => {
-            const d = doc.data();
-            if (d.user_id === user_id) {
-                memoria.push({ role: d.role, content: d.content });
-            }
-        });
-        statusDiv.innerHTML = `💾 Memória carregada (${memoria.length} mensagens) | IA: ${engine ? "pronta" : "carregando..."}`;
-    } catch(e) {
-        console.warn(e);
-        statusDiv.innerHTML = "⚠️ Memória off-line";
+    // ================= FILTROS =================
+    const palavrasProibidas = [
+        "merda", "caralho", "puta", "bosta", "foda", "vadia", "vagabunda",
+        "sexo", "pornô", "pornografia", "violência", "sangue", "morte", "ódio", "racismo", "homofobia",
+        "todes", "amigue"
+    ];
+    function contemImproprio(texto) {
+        return palavrasProibidas.some(p => texto.toLowerCase().includes(p));
     }
-}
-
-async function salvarMemoria(role, content) {
-    try {
-        await addDoc(collection(db, "memorias"), { user_id, role, content, created_at: Date.now() });
-    } catch(e) {}
-}
-
-// ================= IA LOCAL (WebLLM com modelo válido) =================
-async function initLocal() {
-    try {
-        statusDiv.innerHTML = "🖌️ Preparando inteligência (só na primeira vez)...";
-        // Usando modelo compatível (TinyLlama é leve e funciona)
-        engine = await CreateMLCEngine("TinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC", {
-            initProgressCallback: (p) => {
-                statusDiv.innerHTML = `🧠 ${p.text} (${Math.round(p.progress*100)}%)`;
-            }
-        });
-        statusDiv.innerHTML = "✅ Candinho pronto!";
-        return true;
-    } catch(e) {
-        console.error(e);
-        statusDiv.innerHTML = "⚠️ IA local indisponível. Usando apenas nuvem.";
-        return false;
+    function mensagemRepudio() {
+        return "😊 Vamos conversar com respeito, combinou? Que tal falarmos sobre arte ou desenhos?";
     }
-}
 
-// ================= API GROQ =================
-async function respostaCloud(pergunta) {
-    if (!isCloudAvailable) return null;
-    try {
-        const res = await fetch("/api/groq", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
+    // ================= PERSONALIDADE =================
+    const systemPrompt = `Você é o Candinho, um artista e educador experiente. Você adora arte, desenhos, pintura, cultura brasileira e também sabe de matemática, português e inglês. Você conversa com crianças de forma natural, alegre e respeitosa, tratando a pessoa por "você". Nunca use diminutivos como "artistinha", "desenhozinho". Seja claro e sensível. Evite expressões como "meu amigo", "minha amiga", "meu pequeno". Repudie palavras ofensivas ou assuntos impróprios, redirecionando para arte. Responda com entusiasmo e criatividade, usando emojis.`;
+
+    // ================= FIREBASE (MEMÓRIA PERSISTENTE) =================
+    async function carregarMemoria() {
+        try {
+            const q = query(collection(db, "memorias"), orderBy("created_at"));
+            const snap = await getDocs(q);
+            memoria = [];
+            snap.forEach(doc => {
+                const d = doc.data();
+                if (d.user_id === user_id) {
+                    memoria.push({ role: d.role, content: d.content });
+                }
+            });
+            statusDiv.innerHTML = `💾 Memória carregada (${memoria.length} mensagens) | IA: ${engine ? "pronta" : "carregando..."}`;
+        } catch(e) {
+            console.warn(e);
+            statusDiv.innerHTML = "⚠️ Memória off-line";
+        }
+    }
+
+    async function salvarMemoria(role, content) {
+        try {
+            await addDoc(collection(db, "memorias"), { user_id, role, content, created_at: Date.now() });
+        } catch(e) {}
+    }
+
+    // ================= IA LOCAL =================
+    async function initLocal() {
+        try {
+            statusDiv.innerHTML = "🖌️ Preparando inteligência (só na primeira vez)...";
+            engine = await CreateMLCEngine("TinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC", {
+                initProgressCallback: (p) => {
+                    statusDiv.innerHTML = `🧠 ${p.text} (${Math.round(p.progress*100)}%)`;
+                }
+            });
+            statusDiv.innerHTML = "✅ Candinho pronto!";
+            return true;
+        } catch(e) {
+            console.error(e);
+            statusDiv.innerHTML = "⚠️ IA local indisponível. Usando apenas nuvem.";
+            return false;
+        }
+    }
+
+    // ================= API GROQ =================
+    async function respostaCloud(pergunta) {
+        if (!isCloudAvailable) return null;
+        try {
+            const res = await fetch("/api/groq", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    messages: [
+                        { role: "system", content: systemPrompt },
+                        ...memoria.slice(-10),
+                        { role: "user", content: pergunta }
+                    ]
+                })
+            });
+            if (!res.ok) throw new Error();
+            const data = await res.json();
+            return data.choices[0].message.content;
+        } catch {
+            isCloudAvailable = false;
+            return null;
+        }
+    }
+
+    async function respostaLocal(pergunta) {
+        if (!engine) return null;
+        try {
+            const resp = await engine.chat.completions.create({
                 messages: [
                     { role: "system", content: systemPrompt },
                     ...memoria.slice(-10),
                     { role: "user", content: pergunta }
-                ]
-            })
-        });
-        if (!res.ok) throw new Error();
-        const data = await res.json();
-        return data.choices[0].message.content;
-    } catch {
-        isCloudAvailable = false;
-        return null;
+                ],
+                max_tokens: 250,
+                temperature: 0.8
+            });
+            return resp.choices[0].message.content;
+        } catch(e) {
+            console.warn(e);
+            return null;
+        }
     }
-}
 
-async function respostaLocal(pergunta) {
-    if (!engine) return null;
-    try {
-        const resp = await engine.chat.completions.create({
-            messages: [
-                { role: "system", content: systemPrompt },
-                ...memoria.slice(-10),
-                { role: "user", content: pergunta }
-            ],
-            max_tokens: 250,
-            temperature: 0.8
-        });
-        return resp.choices[0].message.content;
-    } catch(e) {
-        console.warn(e);
-        return null;
+    async function getResposta(pergunta) {
+        if (contemImproprio(pergunta)) return mensagemRepudio();
+        let resposta = await respostaCloud(pergunta);
+        if (!resposta) resposta = await respostaLocal(pergunta);
+        if (!resposta) resposta = "😅 Não consegui entender. Pode repetir de outra forma?";
+        return resposta;
     }
+
+    // ================= INTERFACE =================
+    function escapeHtml(text) {
+        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    function addMessage(text, isUser = false) {
+        const div = document.createElement("div");
+        div.className = `msg ${isUser ? 'user-msg' : 'ai-msg'}`;
+        div.innerHTML = `<b>${isUser ? user_id : 'Candinho'}</b><br>${escapeHtml(text)}`;
+        chatDiv.appendChild(div);
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+    }
+
+    async function enviarMensagem() {
+        const texto = inputEl.value.trim();
+        if (!texto) return;
+
+        addMessage(texto, true);
+        inputEl.value = "";
+        inputEl.disabled = true;
+        btn.disabled = true;
+
+        const typingDiv = document.createElement("div");
+        typingDiv.className = "msg ai-msg";
+        typingDiv.innerHTML = "<b>Candinho</b><br>✍️ pensando...";
+        chatDiv.appendChild(typingDiv);
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+
+        await salvarMemoria("user", texto);
+        memoria.push({ role: "user", content: texto });
+
+        const resposta = await getResposta(texto);
+
+        typingDiv.remove();
+        addMessage(resposta, false);
+
+        await salvarMemoria("assistant", resposta);
+        memoria.push({ role: "assistant", content: resposta });
+
+        inputEl.disabled = false;
+        btn.disabled = false;
+        inputEl.focus();
+    }
+
+    // ================= INICIALIZAÇÃO =================
+    async function init() {
+        await carregarMemoria();
+        await initLocal();
+        try {
+            const test = await fetch("/api/groq", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: [{ role: "user", content: "oi" }] }) });
+            isCloudAvailable = test.ok;
+        } catch { isCloudAvailable = false; }
+        statusDiv.innerHTML = `✅ Candinho disponível (Olá, ${user_id}) | ${isCloudAvailable ? "Cloud ativa" : "Modo local"}`;
+        inputEl.disabled = false;
+        btn.disabled = false;
+        inputEl.focus();
+    }
+
+    // Eventos
+    window.enviarMensagem = enviarMensagem;
+    btn.addEventListener("click", enviarMensagem);
+    inputEl.addEventListener("keypress", (e) => {
+        if (e.key === "Enter" && !inputEl.disabled) enviarMensagem();
+    });
+
+    init();
 }
-
-async function getResposta(pergunta) {
-    if (contemImproprio(pergunta)) return mensagemRepudio();
-    let resposta = await respostaCloud(pergunta);
-    if (!resposta) resposta = await respostaLocal(pergunta);
-    if (!resposta) resposta = "😅 Não consegui entender. Pode repetir de outra forma? Estou aqui para ajudar!";
-    return resposta;
-}
-
-// ================= INTERFACE =================
-function escapeHtml(text) {
-    return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-
-function addMessage(text, isUser = false) {
-    const div = document.createElement("div");
-    div.className = `msg ${isUser ? 'user-msg' : 'ai-msg'}`;
-    div.innerHTML = `<b>${isUser ? 'Você' : 'Candinho'}</b><br>${escapeHtml(text)}`;
-    chatDiv.appendChild(div);
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-}
-
-async function enviarMensagem() {
-    const texto = inputEl.value.trim();
-    if (!texto) return;
-
-    addMessage(texto, true);
-    inputEl.value = "";
-    inputEl.disabled = true;
-    btn.disabled = true;
-
-    const typingDiv = document.createElement("div");
-    typingDiv.className = "msg ai-msg";
-    typingDiv.innerHTML = "<b>Candinho</b><br>✍️ pensando...";
-    chatDiv.appendChild(typingDiv);
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-
-    await salvarMemoria("user", texto);
-    memoria.push({ role: "user", content: texto });
-
-    const resposta = await getResposta(texto);
-
-    typingDiv.remove();
-    addMessage(resposta, false);
-
-    await salvarMemoria("assistant", resposta);
-    memoria.push({ role: "assistant", content: resposta });
-
-    inputEl.disabled = false;
-    btn.disabled = false;
-    inputEl.focus();
-}
-
-// ================= INICIALIZAÇÃO =================
-async function init() {
-    await carregarMemoria();
-    await initLocal();
-    // testa cloud
-    try {
-        const test = await fetch("/api/groq", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: [{ role: "user", content: "oi" }] }) });
-        isCloudAvailable = test.ok;
-    } catch { isCloudAvailable = false; }
-    statusDiv.innerHTML = `✅ Candinho disponível | ${isCloudAvailable ? "Cloud ativa" : "Modo local"}`;
-    inputEl.disabled = false;
-    btn.disabled = false;
-    inputEl.focus();
-}
-
-// Eventos
-window.enviarMensagem = enviarMensagem;
-btn.addEventListener("click", enviarMensagem);
-inputEl.addEventListener("keypress", (e) => {
-    if (e.key === "Enter" && !inputEl.disabled) enviarMensagem();
-});
-
-init();
 </script>
 </body>
 </html>
