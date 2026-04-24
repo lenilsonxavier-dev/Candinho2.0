@@ -24,6 +24,7 @@ body {
     border-radius: 30px;
     padding: 25px;
     backdrop-filter: blur(8px);
+    position: relative;
 }
 
 .avatar {
@@ -125,6 +126,21 @@ button:disabled {
 #loginBox button {
     width: 100%;
 }
+.logout-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #e94560;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+.logout-btn:hover {
+    background: #ff6b8a;
+}
 </style>
 </head>
 <body>
@@ -158,7 +174,13 @@ const db = getFirestore(appFirebase);
 let user_id = localStorage.getItem("candinho_user");
 const appDiv = document.getElementById("app");
 
-// Função de login (tela bonita)
+// Função de logout
+function logout() {
+    localStorage.removeItem("candinho_user");
+    location.reload();
+}
+
+// Tela de login
 function showLoginScreen() {
     appDiv.innerHTML = `
         <div id="loginBox">
@@ -182,9 +204,10 @@ function showLoginScreen() {
 if (!user_id) {
     showLoginScreen();
 } else {
-    // Carrega o chat principal
+    // Carrega o chat principal com botão de sair
     appDiv.innerHTML = `
         <div class="container">
+            <button class="logout-btn" id="logoutBtn">🚪 Sair / trocar usuário</button>
             <img src="https://i.imgur.com/fnMYS0Z.png" class="avatar" alt="Candinho">
             <h1>Candinho</h1>
             <div class="sub">Seu amigo artista!</div>
@@ -198,6 +221,8 @@ if (!user_id) {
             </div>
         </div>
     `;
+
+    document.getElementById("logoutBtn").addEventListener("click", logout);
 
     // ================= VARIÁVEIS GLOBAIS =================
     let engine = null;
@@ -219,11 +244,11 @@ if (!user_id) {
         return palavrasProibidas.some(p => texto.toLowerCase().includes(p));
     }
     function mensagemRepudio() {
-        return "😊 Vamos conversar com respeito, combinou? Que tal falarmos sobre arte ou desenhos?";
+        return "😊 Vamos conversar com respeito, combinado? Que tal falarmos sobre arte ou desenhos?";
     }
 
-    // ================= PERSONALIDADE =================
-    const systemPrompt = `Você é o Candinho, um artista e educador experiente. Você adora arte, desenhos, pintura, cultura brasileira e também sabe de matemática, português e inglês. Você conversa com crianças de forma natural, alegre e respeitosa, tratando a pessoa por "você". Nunca use diminutivos como "artistinha", "desenhozinho". Seja claro e sensível. Evite expressões como "meu amigo", "minha amiga", "meu pequeno". Repudie palavras ofensivas ou assuntos impróprios, redirecionando para arte. Responda com entusiasmo e criatividade, usando emojis.`;
+    // ================= PERSONALIDADE (com homenagem a Portinari) =================
+    const systemPrompt = `Você é o Candinho, um artista e educador experiente. Seu nome é uma homenagem ao grande pintor brasileiro Cândido Portinari, que retratou o povo e a cultura do Brasil. Você ama arte, desenhos, pintura, cultura brasileira e também sabe de matemática, português e inglês. Você conversa com crianças de forma natural, alegre e respeitosa, tratando a pessoa por "você". Nunca use diminutivos. Seja claro e sensível. Evite expressões como "meu amigo", "minha amiga". Repudie palavras ofensivas ou assuntos impróprios, redirecionando para arte. Se perguntarem quem é você ou o significado do seu nome, explique que é uma homenagem a Portinari, um dos maiores artistas do Brasil. Responda com entusiasmo e criatividade, usando emojis.`;
 
     // ================= FIREBASE (MEMÓRIA PERSISTENTE) =================
     async function carregarMemoria() {
