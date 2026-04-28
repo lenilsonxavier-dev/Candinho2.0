@@ -20,8 +20,8 @@ function verificarLimite(userId) {
     user.mensagens = 0;
   }
 
-  // limite diário: 5 perguntas por dia
-  if (user.mensagens >= 5) {
+  // limite diário: 10 perguntas por dia
+  if (user.mensagens >= 10) {
     return false;
   }
 
@@ -38,7 +38,7 @@ export default async function handler(req, res) {
     // verifica limite diário
     if (!verificarLimite(usuario)) {
       return res.status(429).json({
-        reply: "⏰ Artista, você atingiu o limite de 5 perguntas hoje. Volte amanhã! 🎨"
+        reply: "⏰ Artista, você atingiu o limite de 10 perguntas hoje. Volte amanhã! 🎨"
       });
     }
 
