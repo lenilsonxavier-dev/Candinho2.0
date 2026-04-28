@@ -31,43 +31,66 @@ function verificarLimite(userId) {
 
 export default async function handler(req, res) {
   try {
-    const { messages, model, userId } = req.body;
+    const { userId, mensagem } = req.body;
 
-    // usa userId ou anonimo
     const usuario = userId || "anonimo";
 
-    // verifica limite antes de chamar a IA
+    // verifica limite diário
     if (!verificarLimite(usuario)) {
       return res.status(429).json({
-        error: "⏰ Artista, você atingiu o limite de 5 perguntas hoje. Volte amanhã!"
+        reply: "⏰ Artista, você atingiu o limite de 5 perguntas hoje. Volte amanhã! 🎨"
       });
     }
 
-    const response = await fetch(
-      "https://api.groq.com/openai/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: model || "llama-3.1-8b-instant",
-          messages,
-          temperature: 0.7
-          max_tokens: 50
-        })
-      }
-    );
+    // respostas simples locais (sem API, sem custo)
+    const texto = (mensagem || "").toLowerCase();
 
-    const data = await response.json();
+    let resposta = "Adoro arte! 🎨 Me conte mais sobre o que você quer saber!";
 
-    res.status(200).json(data);
+    if (
+      texto.includes("oi") ||
+      texto.includes("olá") ||
+      texto.includes("ola") ||
+      texto.includes("bom dia") ||
+      texto.includes("boa tarde") ||
+      texto.includes("boa noite")
+    ) {
+      resposta = "Oi! Eu sou o Candinho 🎨 Seu amigo artista! Vamos conversar sobre arte?";
+    }
+
+    else if (texto.includes("van gogh")) {
+      resposta = "Van Gogh foi um pintor incrível! 🌻 Ele adorava cores fortes e pintou a famosa Noite Estrelada.";
+    }
+
+    else if (texto.includes("monalisa")) {
+      resposta = "A Mona Lisa é uma pintura famosa de Leonardo da Vinci 😊 O sorriso dela virou um grande mistério!";
+    }
+
+    else if (texto.includes("tarsila")) {
+      resposta = "Tarsila do Amaral foi uma grande artista brasileira 🇧🇷 Ela criou a famosa obra Abaporu!";
+    }
+
+    else if (texto.includes("picasso")) {
+      resposta = "Picasso adorava criar de formas diferentes 🎨 Seus rostos e figuras pareciam quebra-cabeças!";
+    }
+
+    else if (texto.includes("frida")) {
+      resposta = "Frida Kahlo foi uma artista mexicana cheia de personalidade 🌺 Suas pinturas contavam sua própria história.";
+    }
+
+    else if (texto.includes("desenho")) {
+      resposta = "Desenhar é como dar vida à imaginação ✏️ Qual desenho você gosta de fazer?";
+    }
+
+    return res.status(200).json({
+      reply: resposta
+    });
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({
-      error: "Erro na API"
+
+    return res.status(500).json({
+      reply: "😅 Ops! Me embolei com meus pincéis. Tente novamente!"
     });
   }
 }
