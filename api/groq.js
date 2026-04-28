@@ -55,6 +55,7 @@ export default async function handler(req, res) {
           model: model || "llama-3.1-8b-instant",
           messages,
           temperature: 0.7
+          max_tokens: 80
         })
       }
     );
