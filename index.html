@@ -6,12 +6,9 @@
 <title>Candinho - Seu Amigo Artista</title>
 
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
     font-family: Arial;
-    background: linear-gradient(135deg, #2b1b3a, #1a2a3a);
-    color: white;
+    background: linear-gradient(135deg, #ffeaa7, #81ecec);
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -20,38 +17,83 @@ body {
 .container {
     max-width: 800px;
     width: 100%;
-    background: #000000aa;
+    background: white;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.avatar {
+    width: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #6c5ce7;
 }
 
 #chat {
     height: 400px;
     overflow-y: auto;
-    background: #00000055;
+    background: #f1f2f6;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 15px;
     margin-bottom: 10px;
 }
 
-.msg { margin: 10px; padding: 10px; border-radius: 15px; }
-.user { background: #1e6f5c; text-align: right; }
-.bot { background: #4a2e6b; }
+.msg {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    max-width: 80%;
+}
 
-input { width: 70%; padding: 10px; border-radius: 20px; border: none; }
-button { padding: 10px; border-radius: 20px; background: orange; border: none; }
+.user {
+    background: #74b9ff;
+    margin-left: auto;
+    text-align: right;
+}
+
+.bot {
+    background: #55efc4;
+    text-align: left;
+}
+
+input {
+    width: 70%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid #6c5ce7;
+}
+
+button {
+    padding: 10px;
+    border-radius: 20px;
+    background: #fd79a8;
+    color: white;
+    border: none;
+}
 </style>
 </head>
 
 <body>
 
 <div class="container">
+
+<img src="candinho.png" class="avatar">
 <h2>Candinho 🎨</h2>
+
 <div id="chat"></div>
+
 <input id="pergunta" placeholder="Pergunte algo...">
 <button onclick="enviar()">Enviar</button>
+
 </div>
 
+</body>
+</html>
 <script type="importmap">
 {
  "imports": {
