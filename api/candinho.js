@@ -1,20 +1,20 @@
-import dancas from "../data/dancas.json";
-import artes from "../data/artes_visuais.json";
-import artistas from "../data/artistas.json";
-import historia from "../data/historia_arte.json";
-import teatro from "../data/teatro.json";
-import musica from "../data/musica.json";
-import indigena from "../data/cultura_indigena.json";
-import afro from "../data/cultura_afro_brasileira.json";
-import folclore from "../data/folclore.json";
-import curiosidades from "../data/curiosidades.json";
-import piadas from "../data/piadas.json";
-import ritmos from "../data/ritmos_musicais.json";
-import lugares from "../data/lugares_arte.json";
-import festas from "../data/festas_brasileiras.json";
-import atividades from "../data/atividades_artisticas.json";
-import emocional from "../data/apoio_emocional.json";
+import dancas from "./data/dancas.json";
+import artes from "./data/artes_visuais.json";
+import artistas from "./data/artistas.json";
+import historia from "./data/historia_arte.json";
+import teatro from "./data/teatro.json";
+import musica from "./data/musica.json";
+import folclore from "./data/folclore.json";
+import ritmos from "./data/ritmos_musicais.json";
 
+import festas from "./data/festas_brasileiras.json";
+import lugares from "./data/lugares_arte.json";
+import curiosidades from "./data/curiosidades.json";
+import indigena from "./data/cultura_indigena.json";
+import afro from "./data/cultura_afro_brasileira.json";
+import atividades from "./data/atividades_artisticas.json";
+import emocional from "./data/apoio_emocional.json";
+import piadas from "./data/piadas.json";
 
 // 🔍 BUSCADOR
 function buscarContexto(pergunta) {
