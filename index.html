@@ -4,299 +4,114 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Candinho - Seu Amigo Artista</title>
+
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #2b1b3a 0%, #1a2a3a 100%);
+    font-family: Arial;
+    background: linear-gradient(135deg, #2b1b3a, #1a2a3a);
     color: white;
-    padding: 20px;
     display: flex;
     justify-content: center;
-    min-height: 100vh;
+    padding: 20px;
 }
 
 .container {
+    max-width: 800px;
     width: 100%;
-    max-width: 850px;
-    background: rgba(0, 0, 0, 0.65);
-    border-radius: 30px;
-    padding: 25px;
-    backdrop-filter: blur(8px);
-    position: relative;
-}
-
-.avatar {
-    display: block;
-    margin: 0 auto 15px;
-    width: 85px;
-    height: 85px;
-    border-radius: 50%;
-    border: 3px solid #f9b713;
-    object-fit: cover;
-}
-
-h1 {
-    text-align: center;
-    font-size: 2.2rem;
-    background: linear-gradient(135deg, #f9b713, #f28500);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-bottom: 5px;
-}
-
-.sub {
-    text-align: center;
-    color: #ddd;
-    margin-bottom: 20px;
-    font-style: italic;
+    background: #000000aa;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 #chat {
-    height: 450px;
+    height: 400px;
     overflow-y: auto;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 20px;
-    padding: 15px;
-    margin-bottom: 15px;
-}
-
-.msg {
-    margin-bottom: 12px;
-    padding: 10px 15px;
-    border-radius: 20px;
-    max-width: 85%;
-    word-wrap: break-word;
-}
-
-.user-msg {
-    background: #1e6f5c;
-    margin-left: auto;
-    border-bottom-right-radius: 5px;
-}
-
-.ai-msg {
-    background: #4a2e6b;
-    margin-right: auto;
-    border-bottom-left-radius: 5px;
-}
-
-.input-area {
-    display: flex;
-    gap: 10px;
-}
-
-input {
-    flex: 1;
-    padding: 12px 18px;
-    border-radius: 40px;
-    border: none;
-    background: #1f2a3e;
-    color: white;
-    font-size: 1rem;
-    outline: none;
-}
-
-button {
-    padding: 12px 24px;
-    border-radius: 40px;
-    background: #e67e22;
-    color: white;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:disabled {
-    background: #7f8c8d;
-    cursor: not-allowed;
-}
-
-.status {
-    font-size: 0.8rem;
     background: #00000055;
-    padding: 6px 12px;
-    border-radius: 20px;
-    margin-bottom: 12px;
-    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
-#loginBox {
-    background: rgba(0, 0, 0, 0.85);
-    border-radius: 30px;
-    padding: 30px;
-    text-align: center;
-    max-width: 350px;
-    margin: 100px auto;
-}
+.msg { margin: 10px; padding: 10px; border-radius: 15px; }
+.user { background: #1e6f5c; text-align: right; }
+.bot { background: #4a2e6b; }
 
-#loginBox input {
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-#loginBox button {
-    width: 100%;
-}
-
-.logout-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: #e94560;
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 0.8rem;
-    color: white;
-    cursor: pointer;
-    border: none;
-}
+input { width: 70%; padding: 10px; border-radius: 20px; border: none; }
+button { padding: 10px; border-radius: 20px; background: orange; border: none; }
 </style>
 </head>
+
 <body>
 
-<div id="app"></div>
+<div class="container">
+<h2>Candinho 🎨</h2>
+<div id="chat"></div>
+<input id="pergunta" placeholder="Pergunte algo...">
+<button onclick="enviar()">Enviar</button>
+</div>
 
 <script type="importmap">
 {
-    "imports": {
-        "@mlc-ai/web-llm": "https://esm.run/@mlc-ai/web-llm@0.2.56"
-    }
+ "imports": {
+  "@mlc-ai/web-llm": "https://esm.run/@mlc-ai/web-llm@0.2.56"
+ }
 }
 </script>
 
 <script type="module">
+
+import dancas from "./data/dancas.json";
+import artes from "./data/artes_visuais.json";
+import artistas from "./data/artistas.json";
+import historia from "./data/historia_arte.json";
+import teatro from "./data/teatro.json";
+import musica from "./data/musica.json";
+import folclore from "./data/folclore.json";
+import ritmos from "./data/ritmos_musicais.json";
+
+import festas from "./data/festas_brasileiras.json";
+import lugares from "./data/lugares_arte.json";
+import curiosidades from "./data/curiosidades.json";
+import indigena from "./data/cultura_indigena.json";
+import afro from "./data/cultura_afro_brasileira.json";
+import atividades from "./data/atividades_artisticas.json";
+import emocional from "./data/apoio_emocional.json";
+import piadas from "./data/piadas.json";
+
 import { CreateMLCEngine } from "@mlc-ai/web-llm";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCQq1DYHivZBIX2_0_NY7eKIoBWG5sKs48",
-    authDomain: "candinho-8bee5.firebaseapp.com",
-    projectId: "candinho-8bee5"
-};
+// ================= BUSCADOR =================
+function buscarContexto(pergunta) {
+    const texto = pergunta.toLowerCase();
 
-const appFirebase = initializeApp(firebaseConfig);
-const db = getFirestore(appFirebase);
+    const bases = [
+    dancas, artes, artistas, historia,
+    teatro, musica, folclore, ritmos,
+    festas, lugares, indigena, afro,
+    atividades, emocional
+];
 
-let user_id = localStorage.getItem("candinho_user");
-const appDiv = document.getElementById("app");
-
-function logout() {
-    localStorage.removeItem("candinho_user");
-    location.reload();
-}
-
-function showLoginScreen() {
-    appDiv.innerHTML = `
-        <div id="loginBox">
-            <img src="https://i.imgur.com/fnMYS0Z.png"
-                 style="width:80px; border-radius:50%; margin-bottom:20px;">
-            <h2 style="color:#f9b713;">Olá! Qual é o seu nome?</h2>
-            <input type="text"
-                   id="nomeUsuario"
-                   placeholder="Digite seu nome">
-            <button id="entrarBtn">Entrar</button>
-        </div>
-    `;
-
-    document.getElementById("entrarBtn").addEventListener("click", () => {
-        const nome = document.getElementById("nomeUsuario").value.trim();
-        if (!nome) return;
-
-        localStorage.setItem("candinho_user", nome);
-        location.reload();
-    });
-}
-
-if (!user_id) {
-    showLoginScreen();
-} else {
-
-    appDiv.innerHTML = `
-        <div class="container">
-
-            <button class="logout-btn" id="logoutBtn">
-                🚪 Sair
-            </button>
-
-            <img src="https://i.imgur.com/fnMYS0Z.png"
-                 class="avatar"
-                 alt="Candinho">
-
-            <h1>Candinho</h1>
-            <div class="sub">Seu amigo artista!</div>
-
-            <div id="status" class="status">
-                🔄 Inicializando modo gratuito...
-            </div>
-
-            <div id="chat">
-                <div class="msg ai-msg">
-                    🎨 Oi! Eu sou o Candinho, seu amigo artista!
-                    Vamos conversar sobre arte, desenhos e criatividade!
-                </div>
-            </div>
-
-            <div class="input-area">
-                <input
-                    type="text"
-                    id="pergunta"
-                    placeholder="Pergunte sobre arte..."
-                    disabled
-                >
-
-                <button id="btnEnviar" disabled>
-                    Enviar
-                </button>
-            </div>
-        </div>
-    `;
-
-    document.getElementById("logoutBtn").addEventListener("click", logout);
-
-    let engine = null;
-    let memoria = [];
-
-    const chatDiv = document.getElementById("chat");
-    const inputEl = document.getElementById("pergunta");
-    const btn = document.getElementById("btnEnviar");
-    const statusDiv = document.getElementById("status");
-
-    // ================= FILTRO =================
-
-    const palavrasProibidas = [
-        "merda",
-        "caralho",
-        "puta",
-        "bosta",
-        "foda",
-        "vadia",
-        "vagabunda",
-        "sexo",
-        "pornô",
-        "pornografia",
-        "violência",
-        "sangue",
-        "morte",
-        "ódio",
-        "racismo",
-        "homofobia"
-    ];
-
-    function contemImproprio(texto) {
-        return palavrasProibidas.some(p =>
-            texto.toLowerCase().includes(p)
-        );
+    for (const base of bases) {
+        for (const chave in base) {
+            const chaveFormatada = chave.replace(/_/g, " ");
+            if (texto.includes(chaveFormatada)) {
+                return base[chave].explicacao_infantil;
+            }
+        }
     }
 
-    function mensagemRepudio() {
-        return "😊 Vamos conversar com respeito, combinado? Que tal falarmos sobre arte, desenhos ou criatividade?";
-    }
+    return "";
+}
 
-    // ================= PERSONALIDADE =================
+// ================= UTIL =================
+function pegarAleatorio(obj) {
+    const valores = Object.values(obj);
+    return valores[Math.floor(Math.random() * valores.length)];
+}
+
+// ================= PERSONALIDADE =================
 const systemPrompt = `
 Você é Candinho, um senhor de 60 anos, gentil, paciente e apaixonado por arte, cultura e educação.
 
@@ -336,197 +151,72 @@ Sempre que possível, faça uma pergunta simples para estimular a criança.
 
 OBJETIVO:
 Ensinar, acolher e despertar curiosidade nas crianças através da arte.
-Se a pergunta não for sobre arte, responda de forma educativa e gentil, conectando com aprendizado.
+Se a pergunta não for sobre arte, língua inglesa, matemática ou língua portuguesa, responda de forma educativa e gentil, conectando com aprendizado.
+
+// ================= IA =================
+let engine;
+
+async function init() {
+    engine = await CreateMLCEngine("TinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC");
+}
+
+async function responder(pergunta) {
+
+    const texto = pergunta.toLowerCase();
+
+    // 🎲 respostas rápidas
+    if (texto.includes("curiosidade")) return pegarAleatorio(curiosidades);
+    if (texto.includes("piada")) return pegarAleatorio(piadas);
+    if (texto.includes("atividade") || texto.includes("desafio")) return pegarAleatorio(atividades);
+    if (texto.includes("triste") || texto.includes("raiva") || texto.includes("ansioso")) return pegarAleatorio(emocional).resposta;
+
+    const contexto = buscarContexto(pergunta);
+
+    const prompt = `
+${systemPrompt}
+
+Use isso:
+${contexto || "Explique de forma simples para uma criança."}
+
+Pergunta:
+${pergunta}
 `;
-    
-    // ================= FIREBASE =================
 
-    async function carregarMemoria() {
-        try {
-            const q = query(
-                collection(db, "memorias"),
-                orderBy("created_at")
-            );
-
-            const snap = await getDocs(q);
-            memoria = [];
-
-            snap.forEach(doc => {
-                const d = doc.data();
-
-                if (d.user_id === user_id) {
-                    memoria.push({
-                        role: d.role,
-                        content: d.content
-                    });
-                }
-            });
-
-        } catch (e) {
-            console.warn("Erro ao carregar memória:", e);
-        }
-    }
-
-    async function salvarMemoria(role, content) {
-        try {
-            await addDoc(collection(db, "memorias"), {
-                user_id,
-                role,
-                content,
-                created_at: Date.now()
-            });
-        } catch (e) {
-            console.warn("Erro ao salvar memória:", e);
-        }
-    }
-
-    // ================= IA LOCAL =================
-
-    async function initLocal() {
-        try {
-            statusDiv.innerHTML =
-                "🧠 Preparando Candinho (primeira vez pode demorar)...";
-
-            engine = await CreateMLCEngine(
-                "TinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC",
-                {
-                    initProgressCallback: (p) => {
-                        statusDiv.innerHTML =
-                            `🖌️ ${p.text} (${Math.round(p.progress * 100)}%)`;
-                    }
-                }
-            );
-
-            statusDiv.innerHTML =
-                `✅ Candinho disponível (Olá, ${user_id}) | Modo gratuito`;
-
-            inputEl.disabled = false;
-            btn.disabled = false;
-            inputEl.focus();
-
-        } catch (e) {
-            console.error(e);
-
-            statusDiv.innerHTML =
-                "❌ Seu navegador não suporta IA local. Use Chrome ou Edge.";
-        }
-    }
-
-    async function respostaLocal(pergunta) {
-        if (!engine) return null;
-
-        try {
-            const resp = await engine.chat.completions.create({
-                messages: [
-                    {
-                        role: "system",
-                        content: systemPrompt
-                    },
-                    ...memoria.slice(-8),
-                    {
-                        role: "user",
-                        content: pergunta
-                    }
-                ],
-                max_tokens: 120,
-                temperature: 0.8
-            });
-
-            return resp.choices[0].message.content;
-
-        } catch (e) {
-            console.warn(e);
-            return null;
-        }
-    }
-
-    // ================= INTERFACE =================
-
-    function escapeHtml(text) {
-        return text
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;");
-    }
-
-    function addMessage(text, isUser = false) {
-        const div = document.createElement("div");
-
-        div.className = `msg ${isUser ? "user-msg" : "ai-msg"}`;
-
-        div.innerHTML = `
-            <b>${isUser ? user_id : "Candinho"}</b><br>
-            ${escapeHtml(text)}
-        `;
-
-        chatDiv.appendChild(div);
-        chatDiv.scrollTop = chatDiv.scrollHeight;
-    }
-
-    async function enviarMensagem() {
-        const texto = inputEl.value.trim();
-
-        if (!texto) return;
-
-        // filtro antes da IA
-        if (contemImproprio(texto)) {
-            addMessage(texto, true);
-            addMessage(mensagemRepudio(), false);
-
-            inputEl.value = "";
-            return;
-        }
-
-        addMessage(texto, true);
-
-        inputEl.value = "";
-        inputEl.disabled = true;
-        btn.disabled = true;
-
-        await salvarMemoria("user", texto);
-
-        memoria.push({
-            role: "user",
-            content: texto
-        });
-
-        const resposta =
-            await respostaLocal(texto) ||
-            "😅 Não consegui entender. Pode repetir de outra forma?";
-
-        addMessage(resposta, false);
-
-        await salvarMemoria("assistant", resposta);
-
-        memoria.push({
-            role: "assistant",
-            content: resposta
-        });
-
-        inputEl.disabled = false;
-        btn.disabled = false;
-        inputEl.focus();
-    }
-
-    // ================= EVENTOS =================
-
-    btn.addEventListener("click", enviarMensagem);
-
-    inputEl.addEventListener("keypress", (e) => {
-        if (e.key === "Enter" && !inputEl.disabled) {
-            enviarMensagem();
-        }
+    const resp = await engine.chat.completions.create({
+        messages: [{ role: "system", content: prompt }],
+        max_tokens: 120
     });
 
-    // ================= START =================
-
-    async function init() {
-        await carregarMemoria();
-        await initLocal();
-    }
-
-    init();
+    return resp.choices[0].message.content;
 }
+
+// ================= CHAT =================
+const chat = document.getElementById("chat");
+
+function addMsg(text, user=false) {
+    const div = document.createElement("div");
+    div.className = "msg " + (user ? "user" : "bot");
+    div.innerText = text;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+async function enviar() {
+    const input = document.getElementById("pergunta");
+    const texto = input.value;
+
+    if (!texto) return;
+
+    addMsg(texto, true);
+    input.value = "";
+
+    const resposta = await responder(texto);
+    addMsg(resposta);
+}
+
+// iniciar IA
+init();
+
 </script>
 
 </body>
