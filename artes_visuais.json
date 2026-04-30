@@ -36,11 +36,12 @@
     "explicacao_infantil": "A composição é a forma de organizar os elementos no desenho. Ela ajuda a deixar a imagem equilibrada e bonita."
   },
   "cores_primarias": {
-  "explicacao_infantil": "As cores primárias são vermelho, azul e amarelo. Elas são especiais porque não podem ser criadas a partir de outras cores."
-},
-"cores_secundarias": {
-  "explicacao_infantil": "As cores secundárias surgem da mistura de duas cores primárias. Por exemplo: azul com amarelo vira verde."
-},
-"cores_terciarias": {
-  "explicacao_infantil": "As cores terciárias aparecem quando misturamos uma cor primária com uma secundária. Elas criam novos tons, como azul-esverdeado."
+    "explicacao_infantil": "As cores primárias são vermelho, azul e amarelo. Elas são especiais porque não podem ser criadas a partir de outras cores."
+  },
+  "cores_secundarias": {
+    "explicacao_infantil": "As cores secundárias surgem da mistura de duas cores primárias. Por exemplo: azul com amarelo vira verde."
+  },
+  "cores_terciarias": {
+    "explicacao_infantil": "As cores terciárias aparecem quando misturamos uma cor primária com uma secundária. Elas criam novos tons, como azul-esverdeado."
+  }
 }
