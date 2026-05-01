@@ -152,7 +152,7 @@
     const CONVERSA_COLLECTION = "conversas_candinho";
 
     // Base dos JSONs no GitHub (arquivos estão na raiz do repositório)
-  const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/";
+const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/";
     
     const jsonFiles = {
         dancas: "dancas.json",
@@ -180,6 +180,7 @@
         localStorage.setItem("candinho_conversaId", conversaId);
     }
     let historicoMensagens = [];
+    let nomeUsuario = localStorage.getItem("candinho_nome") || "";
     
     const chatDiv = document.getElementById("chat");
     const inputField = document.getElementById("pergunta");
@@ -249,10 +250,7 @@
     
     // ======================= RESPOSTAS INSTANTÂNEAS (JSONs do GitHub) =======================
     function pegarAleatorio(obj) {
-        if (!obj || typeof obj !== "object") {
-            console.warn("pegarAleatorio: dado inválido", obj);
-            return null;
-        }
+        if (!obj || typeof obj !== "object") return null;
         let valores = Array.isArray(obj) ? obj : Object.values(obj);
         if (valores.length === 0) return null;
         const item = valores[Math.floor(Math.random() * valores.length)];
@@ -275,12 +273,18 @@
         };
         const contem = (lista) => lista.some(palavra => texto.includes(palavra));
         try {
-            if (contem(palavras.piada) && dataStore.piadas) return pegarAleatorio(dataStore.piadas);
-            if (contem(palavras.curiosidade) && dataStore.curiosidades) return pegarAleatorio(dataStore.curiosidades);
-            if (contem(palavras.atividade) && dataStore.atividades) return pegarAleatorio(dataStore.atividades);
-            if (contem(palavras.artista) && dataStore.artistas) return pegarAleatorio(dataStore.artistas);
-            if (contem(palavras.danca) && dataStore.dancas) return pegarAleatorio(dataStore.dancas);
-            if (contem(palavras.historia) && dataStore.historia) return pegarAleatorio(dataStore.historia);
+            if (contem(palavras.piada) && dataStore.piadas && Object.keys(dataStore.piadas).length) 
+                return pegarAleatorio(dataStore.piadas);
+            if (contem(palavras.curiosidade) && dataStore.curiosidades && Object.keys(dataStore.curiosidades).length) 
+                return pegarAleatorio(dataStore.curiosidades);
+            if (contem(palavras.atividade) && dataStore.atividades && Object.keys(dataStore.atividades).length) 
+                return pegarAleatorio(dataStore.atividades);
+            if (contem(palavras.artista) && dataStore.artistas && Object.keys(dataStore.artistas).length) 
+                return pegarAleatorio(dataStore.artistas);
+            if (contem(palavras.danca) && dataStore.dancas && Object.keys(dataStore.dancas).length) 
+                return pegarAleatorio(dataStore.dancas);
+            if (contem(palavras.historia) && dataStore.historia && Object.keys(dataStore.historia).length) 
+                return pegarAleatorio(dataStore.historia);
         } catch (err) {
             console.error("Erro em respostaInstantanea:", err);
         }
@@ -290,11 +294,33 @@
     // ======================= FUNÇÃO PRINCIPAL =======================
     let isProcessing = false;
     
+    // Detecta se o usuário está se apresentando (ex: "Meu nome é...")
+    function extrairNome(pergunta) {
+        const match = pergunta.match(/(?:meu nome é|sou|chamo-me|chamo) (\w+)/i);
+        if (match && match[1]) {
+            const nome = match[1];
+            localStorage.setItem("candinho_nome", nome);
+            nomeUsuario = nome;
+            return nome;
+        }
+        return null;
+    }
+    
     async function responder(pergunta) {
-        // 1. Tenta resposta instantânea local (JSONs)
+        // 0. Extrair nome se for uma apresentação
+        const novoNome = extrairNome(pergunta);
+        if (novoNome) {
+            const respostaNome = `Prazer em te conhecer, ${novoNome}! Eu sou o Candinho, seu amigo artista. Vamos aprender arte juntos? 🎨`;
+            historicoMensagens.push({ role: "user", content: pergunta });
+            historicoMensagens.push({ role: "assistant", content: respostaNome });
+            await salvarMensagemFirebase("user", pergunta);
+            await salvarMensagemFirebase("assistant", respostaNome);
+            return respostaNome;
+        }
+        
+        // 1. Resposta instantânea (JSONs)
         const instant = respostaInstantanea(pergunta);
         if (instant) {
-            // Salva no histórico local e Firebase
             historicoMensagens.push({ role: "user", content: pergunta });
             historicoMensagens.push({ role: "assistant", content: instant });
             await salvarMensagemFirebase("user", pergunta);
@@ -302,12 +328,12 @@
             return instant;
         }
         
-        // 2. Se não achou, chama o proxy (IA)
+        // 2. Chamar o proxy (IA)
         try {
             const response = await fetch('/api/groq', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ mensagem: pergunta })
+                body: JSON.stringify({ mensagem: pergunta, nome: nomeUsuario })
             });
             
             const textResponse = await response.text();
@@ -324,7 +350,6 @@
             }
             
             const respostaIA = data.reply || "Não consegui responder. Tente de novo!";
-            // Salva no histórico
             historicoMensagens.push({ role: "user", content: pergunta });
             historicoMensagens.push({ role: "assistant", content: respostaIA });
             await salvarMensagemFirebase("user", pergunta);
@@ -332,8 +357,7 @@
             return respostaIA;
         } catch (erro) {
             console.error("Erro no proxy:", erro);
-            // Fallback amigável
-            return "Desculpe, não entendi sua pergunta e também não consegui me conectar à minha central de conhecimentos. Tente perguntar de outra forma ou me pergunte mais tarde. 🎨";
+            return "Desculpe, não consegui me conectar à minha central de conhecimentos agora. Tente novamente mais tarde. 🎨";
         }
     }
     
@@ -400,7 +424,8 @@
         await carregarTodosJSONs();
         await carregarHistoricoFirebase();
         if (historicoMensagens.length === 0) {
-            const boasVindas = "Olá! Sou o Candinho, seu amigo artista. Pergunte sobre artistas, dança, história, ou peça uma piada! 🖌️";
+            let boasVindas = "Olá! Sou o Candinho, seu amigo artista. Pergunte sobre artistas, dança, história, ou peça uma piada! 🖌️";
+            if (nomeUsuario) boasVindas = `Olá, ${nomeUsuario}! Sou o Candinho, seu amigo artista. Vamos criar? 🎨`;
             addMessageToUI(boasVindas, false);
             historicoMensagens.push({ role: "assistant", content: boasVindas });
             await salvarMensagemFirebase("assistant", boasVindas);
