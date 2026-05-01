@@ -124,7 +124,7 @@
 <body>
 <div class="container">
     <div class="header">
-        <img src="./imag/candinho.png" class="avatar" alt="Candinho" onerror="this.src='https://via.placeholder.com/80?text=C'">
+        <https://i.imgur.com/fnMYS0Z.png">
         <h2>Candinho 🎨</h2>
         <div id="status">🔄 Carregando conhecimentos...</div>
     </div>
@@ -132,9 +132,7 @@
     <div class="input-area">
         <input type="text" id="pergunta" placeholder="Pergunte sobre arte, dança, história ou peça uma piada..." autocomplete="off">
         <button id="sendBtn">Enviar</button>
-    </div>
-    <small>⚡ Respostas instantâneas de artistas, dança, história, piadas e curiosidades! 🤖 IA com Groq quando necessário.</small>
-</div>
+    
 
 <script type="module">
     // ======================= CONFIGURAÇÕES =======================
@@ -444,7 +442,7 @@ Contexto extra: ${contextoExtra.slice(0, 300)}`;
             dataStore[key] = resultados[idx++];
         }
         console.log("JSONs carregados:", Object.keys(dataStore));
-        statusDiv.innerText = "🎨 Candinho pronto! (Modo híbrido: JSON + Groq)";
+        statusDiv.innerText = "🎨 Candinho pronto!";
     }
     
     // ======================= INTERFACE ENVIAR =======================
@@ -467,7 +465,7 @@ Contexto extra: ${contextoExtra.slice(0, 300)}`;
             addMessageToUI(resposta, false);
         } catch (err) {
             removeLoading();
-            addMessageToUI("Ops! Tivemos um probleminha. Tente de novo 🎨", false);
+            addMessageToUI("Ops! Tinta derramada. Tente de novo 🎨", false);
             console.error(err);
         } finally {
             isProcessing = false;
@@ -502,3 +500,4 @@ Contexto extra: ${contextoExtra.slice(0, 300)}`;
 </script>
 </body>
 </html>
+       
