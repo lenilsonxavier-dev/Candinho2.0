@@ -1,7 +1,6 @@
-
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/";
 
-// Lista de arquivos e suas chaves
+// Lista de arquivos
 const JSON_FILES = {
     dancas: "dancas.json",
     artes: "artes_visuais.json",
@@ -23,145 +22,151 @@ const JSON_FILES = {
 
 let cacheData = null;
 
+// ======================= CARREGAR JSONS =======================
 async function carregarTodosJSONs() {
     if (cacheData) return cacheData;
+
     const results = {};
     for (const [key, filename] of Object.entries(JSON_FILES)) {
         try {
             const url = GITHUB_BASE + filename;
-            console.log(`Carregando: ${url}`);
             const res = await fetch(url);
+
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            results[key] = await res.json();
-            console.log(`✅ ${filename} carregado`);
+
+            const text = await res.text();
+            results[key] = JSON.parse(text);
+
         } catch (err) {
-            console.error(`❌ Erro ao carregar ${filename}:`, err.message);
+            console.error(`Erro em ${filename}:`, err.message);
             results[key] = {};
         }
     }
+
     cacheData = results;
     return results;
 }
 
+// ======================= UTIL =======================
 function pegarAleatorio(obj) {
     if (!obj || typeof obj !== "object") return null;
     const valores = Object.values(obj);
-    if (valores.length === 0) return null;
+    if (!valores.length) return null;
+
     const item = valores[Math.floor(Math.random() * valores.length)];
-    if (typeof item === "object" && item.explicacao_infantil) return item.explicacao_infantil;
-    return String(item);
+    return item?.explicacao_infantil || String(item);
 }
 
 function respostaInstantanea(pergunta, data) {
-    const texto = pergunta.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const texto = pergunta.toLowerCase();
+
     if (texto.includes("piada")) return pegarAleatorio(data.piadas);
     if (texto.includes("curiosidade")) return pegarAleatorio(data.curiosidades);
-    if (texto.includes("atividade") || texto.includes("brincadeira")) return pegarAleatorio(data.atividades);
-    if (texto.includes("artista") || texto.includes("pintor")) return pegarAleatorio(data.artistas);
-    if (texto.includes("danca") || texto.includes("dança")) return pegarAleatorio(data.dancas);
-    if (texto.includes("historia") || texto.includes("história")) return pegarAleatorio(data.historia);
+    if (texto.includes("atividade")) return pegarAleatorio(data.atividades);
+    if (texto.includes("artista")) return pegarAleatorio(data.artistas);
+    if (texto.includes("dança") || texto.includes("danca")) return pegarAleatorio(data.dancas);
+    if (texto.includes("história") || texto.includes("historia")) return pegarAleatorio(data.historia);
+
     return null;
 }
 
 function buscarContexto(pergunta, data) {
-    const texto = pergunta.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    const bases = [
-        data.dancas, data.artes, data.artistas, data.historia,
-        data.teatro, data.musica, data.indigena, data.afro,
-        data.folclore, data.ritmos, data.lugares, data.festas,
-        data.atividades, data.emocional, data.curiosidades
-    ];
-    for (const base of bases) {
-        if (!base) continue;
+    const texto = pergunta.toLowerCase();
+
+    for (const base of Object.values(data)) {
         for (const chave in base) {
-            const chaveLimpa = chave.replace(/_/g, " ").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            if (texto.includes(chaveLimpa)) {
-                const explicacao = base[chave].explicacao_infantil || "";
-                if (explicacao) return explicacao;
+            if (texto.includes(chave.replace(/_/g, " "))) {
+                return base[chave].explicacao_infantil || "";
             }
         }
     }
+
     return "";
 }
 
+// ======================= HANDLER =======================
 export default async function handler(req, res) {
+
     if (req.method !== "POST") {
         return res.status(405).json({ error: "Método não permitido" });
     }
 
     try {
-        const { mensagem } = req.body;
-        if (!mensagem) return res.status(400).json({ error: "Mensagem vazia" });
+        const { mensagem, memoria = {} } = req.body;
 
-        // 1. Carregar todos os JSONs
+        if (!mensagem) {
+            return res.status(400).json({ error: "Mensagem vazia" });
+        }
+
+        // 1. JSONs
         const data = await carregarTodosJSONs();
 
-        // 2. Tenta resposta instantânea
+        // 2. Resposta rápida
         const instant = respostaInstantanea(mensagem, data);
         if (instant) {
             return res.status(200).json({ reply: instant });
         }
 
-        // 3. Busca contexto específico
-        let contexto = buscarContexto(mensagem, data);
-        if (!contexto) contexto = "Explique de forma simples e divertida para uma criança de 10 anos.";
+        // 3. Contexto
+        const contexto = buscarContexto(mensagem, data);
 
-        // 4. Chama o Groq com prompt forçado para crianças
+        // 4. Sistema com memória
+        const contextoSistema = `
+Você é o Candinho, um assistente artístico infantil.
+
+Aluno:
+Nome: ${memoria.nome || "não informado"}
+Idade: ${memoria.idade || "não informada"}
+Interesses: ${(memoria.interesses || []).join(", ") || "não informados"}
+
+Regras:
+- Use o nome naturalmente
+- Responda como professor de arte
+- Linguagem simples (criança)
+- Máx 3 linhas
+- Seja educativo e criativo
+`;
+
+        const userPrompt = `
+Contexto: ${contexto}
+
+Pergunta: ${mensagem}
+
+Resposta curta e educativa:
+`;
+
+        // 5. Groq
         const GROQ_API_KEY = process.env.GROQ_API_KEY;
-        if (!GROQ_API_KEY) {
-            console.error("GROQ_API_KEY não configurada");
-            return res.status(500).json({ error: "API key não configurada" });
-        }
-        const systemPrompt = `Você é Candinho, um professor de arte de 60 anos, muito gentil e paciente. Seu nome é uma homenagem ao grande pintor Cândido Portinari.
-- Responda SOMENTE em português do Brasil.
-- Use frases curtas (máximo 3 linhas).
-- Linguagem apropriada para crianças de 10 anos.
-- Sempre seja educativo, acolhedor e incentive a criatividade.
-- Não use linguagem neutra.
-- Não use querido, querida, amigo, amiga, menino, menina, aminguinho, amiguinha.
-- Não use diminutivos, nem aumentativos.
--Varie o começo das respostas, podendo contar uma curiosidade.
-- Sempre termine a última frase. Nunca pare no meio de uma palavra.
-- Respeite o limite de 3 linhas, mas se precisar, use até 4 linhas curtas.
-- Se não souber a resposta, diga: "Não sei, mas vou pesquisar para você!"
-- NUNCA invente informações. Se o contexto abaixo não tiver a resposta, diga que não sabe.`;
 
-        const userPrompt = `Contexto: ${contexto.slice(0, 400)}\n\nPergunta: ${mensagem}\n\nResposta do Candinho (curta, educativa, para criança):`;
-
-        const payload = {
-            model: "llama-3.1-8b-instant",
-            messages: [
-                { role: "system", content: systemPrompt },
-                { role: "user", content: userPrompt }
-            ],
-            temperature: 0.5,
-            max_tokens: 200,
-            stream: false
-        };
-
-        const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${GROQ_API_KEY}`,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(payload)
+            body: JSON.stringify({
+                model: "llama-3.1-8b-instant",
+                messages: [
+                    { role: "system", content: contextoSistema },
+                    { role: "user", content: userPrompt }
+                ],
+                temperature: 0.5,
+                max_tokens: 150
+            })
         });
 
-        if (!groqRes.ok) {
-            const errorText = await groqRes.text();
-            console.error("Erro Groq:", groqRes.status, errorText);
-            return res.status(500).json({ error: "Falha na IA" });
-        }
+        const dataIA = await response.json();
 
-        const groqData = await groqRes.json();
-        let reply = groqData.choices?.[0]?.message?.content?.trim();
-        if (!reply) reply = "Não consegui pensar em uma resposta agora. Tente de novo!";
+        let reply = dataIA?.choices?.[0]?.message?.content?.trim();
+
+        if (!reply) {
+            reply = "Não consegui responder agora. Tente de novo!";
+        }
 
         return res.status(200).json({ reply });
 
     } catch (err) {
-        console.error("Handler error:", err);
-        return res.status(500).json({ error: "Erro interno do servidor" });
+        console.error("Erro geral:", err);
+        return res.status(500).json({ error: "Erro interno" });
     }
 }
