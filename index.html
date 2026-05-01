@@ -111,14 +111,6 @@
         opacity: 0.5;
         cursor: not-allowed;
     }
-    small {
-        display: block;
-        text-align: center;
-        padding: 8px;
-        font-size: 0.7rem;
-        color: #555;
-        background: #f1f2f6;
-    }
 </style>
 </head>
 <body>
@@ -139,7 +131,6 @@
 
 <script type="module">
     // ======================= CONFIGURAÇÕES =======================
-    // Configuração Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, where } 
       from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -157,8 +148,8 @@
     const db = getFirestore(app);
     const CONVERSA_COLLECTION = "conversas_candinho";
 
-    // URLs dos JSONs no GitHub (substitua SEU_USUARIO/SEU_REPOSITORIO)
-   const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/api/";
+    // URLs dos JSONs no GitHub (apontando para a pasta api/)
+    const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/api/";
     
     const jsonFiles = {
         dancas: "dancas.json",
@@ -293,7 +284,9 @@
             console.error("Erro em respostaInstantanea:", err);
             return null;
         }
-       
+        return null;  // nenhuma palavra-chave encontrada
+    }
+    
     // ======================= FUNÇÃO PRINCIPAL =======================
     let isProcessing = false;
     
