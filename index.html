@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Candinho Híbrido (GitHub JSON + Groq + Firebase)</title>
+<title>Candinho</title>
 <style>
     * { box-sizing: border-box; }
     body {
@@ -151,7 +151,7 @@
     const db = getFirestore(app);
     const CONVERSA_COLLECTION = "conversas_candinho";
 
-    // URL correta para os JSONs (pasta api/ no repositório)
+    // Base dos JSONs no GitHub (arquivos estão na raiz do repositório)
   const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/";
     
     const jsonFiles = {
