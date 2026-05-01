@@ -75,6 +75,11 @@
         align-self: flex-start;
         border-bottom-left-radius: 5px;
     }
+    .error {
+        background: #ffcccc;
+        align-self: flex-start;
+        border-left: 4px solid #ff0000;
+    }
     .loading {
         background: #dfe6e9;
         font-style: italic;
@@ -120,9 +125,7 @@
         <h2>Candinho 🎨</h2>
         <div id="status">🔄 Carregando conhecimentos...</div>
     </div>
-
     <div id="chat"></div>
-
     <div class="input-area">
         <input type="text" id="pergunta" placeholder="Pergunte sobre arte, dança, história ou peça uma piada..." autocomplete="off">
         <button id="sendBtn">Enviar</button>
@@ -148,8 +151,8 @@
     const db = getFirestore(app);
     const CONVERSA_COLLECTION = "conversas_candinho";
 
-    // URLs dos JSONs no GitHub (apontando para a pasta api/)
-    const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/api/";
+    // URL correta para os JSONs (pasta api/ no repositório)
+  const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/";
     
     const jsonFiles = {
         dancas: "dancas.json",
@@ -184,9 +187,9 @@
     const statusDiv = document.getElementById("status");
     
     // ======================= FUNÇÕES AUXILIARES =======================
-    function addMessageToUI(text, isUser) {
+    function addMessageToUI(text, isUser, isError = false) {
         const div = document.createElement("div");
-        div.className = `msg ${isUser ? "user" : "bot"}`;
+        div.className = `msg ${isUser ? "user" : "bot"} ${isError ? "error" : ""}`;
         div.innerText = text;
         chatDiv.appendChild(div);
         chatDiv.scrollTop = chatDiv.scrollHeight;
@@ -240,20 +243,18 @@
         } catch (e) {
             console.warn("Erro ao carregar histórico:", e);
             historicoMensagens = [];
+            statusDiv.innerText = "⚠️ Memória local apenas (Firebase indisponível)";
         }
     }
     
-    // ======================= RESPOSTAS INSTANTÂNEAS =======================
+    // ======================= RESPOSTAS INSTANTÂNEAS (JSONs do GitHub) =======================
     function pegarAleatorio(obj) {
         if (!obj || typeof obj !== "object") {
             console.warn("pegarAleatorio: dado inválido", obj);
-            return "Ainda estou aprendendo sobre isso! 🎨";
+            return null;
         }
         let valores = Array.isArray(obj) ? obj : Object.values(obj);
-        if (valores.length === 0) {
-            console.warn("pegarAleatorio: array vazio", obj);
-            return "Não tenho essa informação agora.";
-        }
+        if (valores.length === 0) return null;
         const item = valores[Math.floor(Math.random() * valores.length)];
         if (typeof item === "object" && item !== null) {
             if (item.explicacao_infantil) return item.explicacao_infantil;
@@ -274,26 +275,26 @@
         };
         const contem = (lista) => lista.some(palavra => texto.includes(palavra));
         try {
-            if (contem(palavras.piada)) return pegarAleatorio(dataStore.piadas);
-            if (contem(palavras.curiosidade)) return pegarAleatorio(dataStore.curiosidades);
-            if (contem(palavras.atividade)) return pegarAleatorio(dataStore.atividades);
-            if (contem(palavras.artista)) return pegarAleatorio(dataStore.artistas);
-            if (contem(palavras.danca)) return pegarAleatorio(dataStore.dancas);
-            if (contem(palavras.historia)) return pegarAleatorio(dataStore.historia);
+            if (contem(palavras.piada) && dataStore.piadas) return pegarAleatorio(dataStore.piadas);
+            if (contem(palavras.curiosidade) && dataStore.curiosidades) return pegarAleatorio(dataStore.curiosidades);
+            if (contem(palavras.atividade) && dataStore.atividades) return pegarAleatorio(dataStore.atividades);
+            if (contem(palavras.artista) && dataStore.artistas) return pegarAleatorio(dataStore.artistas);
+            if (contem(palavras.danca) && dataStore.dancas) return pegarAleatorio(dataStore.dancas);
+            if (contem(palavras.historia) && dataStore.historia) return pegarAleatorio(dataStore.historia);
         } catch (err) {
             console.error("Erro em respostaInstantanea:", err);
-            return null;
         }
-        return null;  // nenhuma palavra-chave encontrada
+        return null;
     }
     
     // ======================= FUNÇÃO PRINCIPAL =======================
     let isProcessing = false;
     
     async function responder(pergunta) {
-        // 1. Resposta instantânea (JSONs locais se disponíveis)
+        // 1. Tenta resposta instantânea local (JSONs)
         const instant = respostaInstantanea(pergunta);
         if (instant) {
+            // Salva no histórico local e Firebase
             historicoMensagens.push({ role: "user", content: pergunta });
             historicoMensagens.push({ role: "assistant", content: instant });
             await salvarMensagemFirebase("user", pergunta);
@@ -301,33 +302,38 @@
             return instant;
         }
         
-        // 2. Chamar o proxy da Vercel
+        // 2. Se não achou, chama o proxy (IA)
         try {
             const response = await fetch('/api/groq', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ mensagem: pergunta })
             });
+            
             const textResponse = await response.text();
             let data;
             try {
                 data = JSON.parse(textResponse);
             } catch (jsonError) {
-                console.error("Resposta não é JSON:", textResponse.slice(0, 200));
-                return "Candinho está com problemas técnicos. Tente de novo em alguns instantes. 🎨";
+                console.error("Proxy retornou texto não-JSON:", textResponse.slice(0, 200));
+                throw new Error("Resposta inválida do servidor (não é JSON)");
             }
+            
             if (!response.ok) {
-                return data.error || "Erro no servidor. Tente novamente.";
+                throw new Error(data.error || `Erro HTTP ${response.status}`);
             }
-            const respostaIA = data.reply || "Candinho não conseguiu responder agora. Tente de novo! 🎨";
+            
+            const respostaIA = data.reply || "Não consegui responder. Tente de novo!";
+            // Salva no histórico
             historicoMensagens.push({ role: "user", content: pergunta });
             historicoMensagens.push({ role: "assistant", content: respostaIA });
             await salvarMensagemFirebase("user", pergunta);
             await salvarMensagemFirebase("assistant", respostaIA);
             return respostaIA;
         } catch (erro) {
-            console.error("Erro ao chamar proxy:", erro);
-            return "Estou com problemas para me conectar. Verifique sua internet.";
+            console.error("Erro no proxy:", erro);
+            // Fallback amigável
+            return "Desculpe, não entendi sua pergunta e também não consegui me conectar à minha central de conhecimentos. Tente perguntar de outra forma ou me pergunte mais tarde. 🎨";
         }
     }
     
@@ -339,7 +345,7 @@
             const url = GITHUB_BASE + filename;
             promises.push(
                 fetch(url)
-                    .then(res => res.ok ? res.json() : {})
+                    .then(res => res.ok ? res.json() : (console.warn(`Arquivo ${filename} não encontrado`), {}))
                     .catch(err => { console.warn(`Erro ${filename}:`, err); return {}; })
             );
         }
@@ -348,8 +354,13 @@
         for (const key of Object.keys(jsonFiles)) {
             dataStore[key] = resultados[idx++];
         }
-        console.log("JSONs carregados:", Object.keys(dataStore));
-        statusDiv.innerText = "🎨 Candinho pronto!";
+        const carregados = Object.keys(dataStore).filter(k => Object.keys(dataStore[k]).length > 0);
+        console.log("JSONs carregados:", carregados);
+        if (carregados.length === 0) {
+            statusDiv.innerText = "⚠️ Respostas instantâneas não disponíveis (verifique GitHub)";
+        } else {
+            statusDiv.innerText = "🎨 Candinho pronto!";
+        }
     }
     
     // ======================= INTERFACE ENVIAR =======================
@@ -357,19 +368,22 @@
         if (isProcessing) return;
         const texto = inputField.value.trim();
         if (!texto) return;
+        
         isProcessing = true;
         sendBtn.disabled = true;
         inputField.disabled = true;
+        
         addMessageToUI(texto, true);
         inputField.value = "";
         addLoading();
+        
         try {
             const resposta = await responder(texto);
             removeLoading();
             addMessageToUI(resposta, false);
         } catch (err) {
             removeLoading();
-            addMessageToUI("Ops! Tinta derramada. Tente de novo 🎨", false);
+            addMessageToUI("Ops! Ocorreu um erro inesperado. Recarregue a página e tente novamente.", false, true);
             console.error(err);
         } finally {
             isProcessing = false;
@@ -394,8 +408,9 @@
     }
     
     init().catch(err => {
-        console.error(err);
-        statusDiv.innerText = "Erro crítico ao iniciar. Verifique as URLs do GitHub.";
+        console.error("Erro na inicialização:", err);
+        statusDiv.innerText = "Erro crítico ao iniciar. Verifique o console.";
+        addMessageToUI("Não foi possível carregar os conhecimentos do Candinho. Verifique a conexão com a internet e recarregue a página.", false, true);
     });
     
     window.enviar = enviar;
