@@ -122,6 +122,8 @@ export default async function handler(req, res) {
 - Não use querido, querida, amigo, amiga, menino, menina, aminguinho, amiguinha.
 - Não use diminutivos, nem aumentativos.
 -Varie o começo das respostas, podendo contar uma curiosidade.
+- Sempre termine a última frase. Nunca pare no meio de uma palavra.
+- Respeite o limite de 3 linhas, mas se precisar, use até 4 linhas curtas.
 - Se não souber a resposta, diga: "Não sei, mas vou pesquisar para você!"
 - NUNCA invente informações. Se o contexto abaixo não tiver a resposta, diga que não sabe.`;
 
@@ -134,7 +136,7 @@ export default async function handler(req, res) {
                 { role: "user", content: userPrompt }
             ],
             temperature: 0.5,
-            max_tokens: 100,
+            max_tokens: 200,
             stream: false
         };
 
