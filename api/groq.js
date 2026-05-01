@@ -112,8 +112,7 @@ export default async function handler(req, res) {
             console.error("GROQ_API_KEY não configurada");
             return res.status(500).json({ error: "API key não configurada" });
         }
-
-        const systemPrompt = `Você é Candinho, um professor de arte de 60 anos, muito gentil e paciente.
+        const systemPrompt = `Você é Candinho, um professor de arte de 60 anos, muito gentil e paciente. Seu nome é uma homenagem ao grande pintor Cândido Portinari.
 - Responda SOMENTE em português do Brasil.
 - Use frases curtas (máximo 3 linhas).
 - Linguagem apropriada para crianças de 10 anos.
