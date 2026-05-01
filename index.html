@@ -2,259 +2,503 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Candinho - Seu Amigo Artista</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Candinho Híbrido (GitHub JSON + Groq + Firebase)</title>
 <style>
-body {
-    font-family: Arial;
-    background: linear-gradient(135deg, #ffeaa7, #81ecec);
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-
-.container {
-    max-width: 800px;
-    width: 100%;
-    background: white;
-    padding: 20px;
-    border-radius: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    text-align: center;
-}
-
-.avatar {
-    width: 100px;
-    border-radius: 50%;
-    border: 3px solid #f9b713;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    margin-bottom: 10px;
-}
-
-h2 {
-    color: #6c5ce7;
-}
-
-#status {
-    font-size: 14px;
-    margin-bottom: 10px;
-    color: #555;
-}
-
-#chat {
-    height: 400px;
-    overflow-y: auto;
-    background: #f1f2f6;
-    padding: 10px;
-    border-radius: 15px;
-    margin-bottom: 10px;
-}
-
-.msg {
-    margin: 10px;
-    padding: 10px;
-    border-radius: 15px;
-    max-width: 80%;
-}
-
-.user {
-    background: #74b9ff;
-    margin-left: auto;
-    text-align: right;
-}
-
-.bot {
-    background: #55efc4;
-    text-align: left;
-}
-
-input {
-    width: 70%;
-    padding: 10px;
-    border-radius: 20px;
-    border: 2px solid #6c5ce7;
-}
-
-button {
-    padding: 10px;
-    border-radius: 20px;
-    background: #fd79a8;
-    color: white;
-    border: none;
-}
+    * { box-sizing: border-box; }
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: linear-gradient(135deg, #ffeaa7, #81ecec);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+    }
+    .container {
+        max-width: 800px;
+        width: 100%;
+        background: white;
+        border-radius: 35px;
+        box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+    .header {
+        background: #6c5ce7;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+    .avatar {
+        width: 80px;
+        border-radius: 50%;
+        border: 3px solid #f9b713;
+        margin-bottom: 10px;
+    }
+    .header h2 {
+        margin: 0;
+        font-size: 1.6rem;
+    }
+    #status {
+        font-size: 0.8rem;
+        margin-top: 5px;
+        opacity: 0.9;
+    }
+    #chat {
+        height: 400px;
+        overflow-y: auto;
+        background: #f8f9fa;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .msg {
+        max-width: 80%;
+        padding: 10px 15px;
+        border-radius: 20px;
+        line-height: 1.4;
+        word-wrap: break-word;
+        animation: fadeIn 0.2s ease;
+    }
+    .user {
+        background: #74b9ff;
+        align-self: flex-end;
+        color: #000;
+        border-bottom-right-radius: 5px;
+    }
+    .bot {
+        background: #55efc4;
+        align-self: flex-start;
+        border-bottom-left-radius: 5px;
+    }
+    .loading {
+        background: #dfe6e9;
+        font-style: italic;
+        animation: pulse 1s infinite;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0% { opacity: 0.6; } 100% { opacity: 1; } }
+    .input-area {
+        display: flex;
+        padding: 15px;
+        background: white;
+        border-top: 1px solid #ddd;
+        gap: 10px;
+    }
+    input {
+        flex: 1;
+        padding: 12px 18px;
+        border: 2px solid #6c5ce7;
+        border-radius: 50px;
+        font-size: 1rem;
+        outline: none;
+    }
+    button {
+        background: #fd79a8;
+        border: none;
+        padding: 0 20px;
+        border-radius: 50px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+    button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    small {
+        display: block;
+        text-align: center;
+        padding: 8px;
+        font-size: 0.7rem;
+        color: #555;
+        background: #f1f2f6;
+    }
 </style>
 </head>
-
 <body>
-
 <div class="container">
-    <img src="./imag/candinho.png" class="avatar">
-    <h2>Candinho 🎨</h2>
-
-    <!-- 🟢 STATUS -->
-    <div id="status">Carregando Candinho... 🧠</div>
-
+    <div class="header">
+        <img src="./imag/candinho.png" class="avatar" alt="Candinho" onerror="this.src='https://via.placeholder.com/80?text=C'">
+        <h2>Candinho 🎨</h2>
+        <div id="status">🔄 Carregando conhecimentos...</div>
+    </div>
     <div id="chat"></div>
-
-    <input id="pergunta" placeholder="Pergunte algo...">
-    <button onclick="enviar()">Enviar</button>
+    <div class="input-area">
+        <input type="text" id="pergunta" placeholder="Pergunte sobre arte, dança, história ou peça uma piada..." autocomplete="off">
+        <button id="sendBtn">Enviar</button>
+    </div>
+    <small>⚡ Respostas instantâneas de artistas, dança, história, piadas e curiosidades! 🤖 IA com Groq quando necessário.</small>
 </div>
 
-<script type="importmap">
-{
- "imports": {
-  "@mlc-ai/web-llm": "https://esm.run/@mlc-ai/web-llm@0.2.56"
- }
-}
-</script>
-
 <script type="module">
+    // ======================= CONFIGURAÇÕES =======================
+     // ✅ NOVO CÓDIGO – chama o proxy da Vercel
+const response = await fetch('/api/groq', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ mensagem: pergunta })   // <-- campo 'mensagem'
+});
 
-import { CreateMLCEngine } from "@mlc-ai/web-llm";
+const data = await response.json();
+const resposta = data.reply;                     // <-- campo 'reply'
 
-// JSON loader
-async function carregarJSON(caminho) {
-    const res = await fetch(caminho);
-    return await res.json();
-}
+    // ======================= CONFIGURAÇÃO FIREBASE =======================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit } 
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-let dancas, artes, artistas, historia, teatro, musica,
-    folclore, ritmos, festas, lugares, curiosidades,
-    indigena, afro, atividades, emocional, piadas;
+const firebaseConfig = {
+  apiKey: "AIzaSyCQq1DYHivZBIX2_0_NY7eKIoBWG5sKs48",
+  authDomain: "candinho-8bee5.firebaseapp.com",
+  projectId: "candinho-8bee5",
+  storageBucket: "candinho-8bee5.firebasestorage.app",
+  messagingSenderId: "342319000222",
+  appId: "1:342319000222:web:ab04b940b0175b8722a98f"
+};
 
-// BUSCADOR
-function buscarContexto(pergunta) {
-    const texto = pergunta.toLowerCase();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const CONVERSA_COLLECTION = "conversas_candinho";
 
-    const bases = [
-        dancas, artes, artistas, historia,
-        teatro, musica, folclore, ritmos,
-        festas, lugares, indigena, afro,
-        atividades, emocional
-    ];
-
-    for (const base of bases) {
-        for (const chave in base) {
-            const chaveFormatada = chave.replace(/_/g, " ");
-            if (texto.includes(chaveFormatada)) {
-                return base[chave].explicacao_infantil;
-            }
+    // ======================= URLs dos JSONs no GitHub =======================
+    // Altere para o seu repositório e branch corretos
+    const GITHUB_BASE = "https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPOSITORIO/main/data/";
+    // Exemplo: "https://raw.githubusercontent.com/joaosilva/candinho-json/main/data/"
+    
+    const jsonFiles = {
+        dancas: "dancas.json",
+        artes: "artes_visuais.json",
+        artistas: "artistas.json",
+        historia: "historia_arte.json",
+        teatro: "teatro.json",
+        musica: "musica.json",
+        folclore: "folclore.json",
+        ritmos: "ritmos_musicais.json",
+        festas: "festas_brasileiras.json",
+        lugares: "lugares_arte.json",
+        curiosidades: "curiosidades.json",
+        indigena: "cultura_indigena.json",
+        afro: "cultura_afro_brasileira.json",
+        atividades: "atividades_artisticas.json",
+        emocional: "apoio_emocional.json",
+        piadas: "piadas.json"
+    };
+    
+    // Armazenamento dos dados carregados
+    let dataStore = {};
+    
+    // Cache de respostas da IA para evitar repetições
+    const respostaCache = new Map();  // chave = pergunta (lowercase), valor = resposta
+    
+    // Controle de rate limit (Groq: 30 req/min)
+    let requestTimestamps = [];
+    const MAX_REQUESTS_PER_MINUTE = 28;  // deixar margem
+    let isRateLimited = false;
+    
+    // Histórico da conversa (local + Firebase)
+    let conversaId = localStorage.getItem("candinho_conversaId");
+    if (!conversaId) {
+        conversaId = `sessao_${Date.now()}`;
+        localStorage.setItem("candinho_conversaId", conversaId);
+    }
+    let historicoMensagens = []; // { role, content }
+    
+    // Elementos DOM
+    const chatDiv = document.getElementById("chat");
+    const inputField = document.getElementById("pergunta");
+    const sendBtn = document.getElementById("sendBtn");
+    const statusDiv = document.getElementById("status");
+    
+    // ======================= FUNÇÕES AUXILIARES =======================
+    function addMessageToUI(text, isUser) {
+        const div = document.createElement("div");
+        div.className = `msg ${isUser ? "user" : "bot"}`;
+        div.innerText = text;
+        chatDiv.appendChild(div);
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+        return div;
+    }
+    
+    function addLoading() {
+        const div = document.createElement("div");
+        div.className = "msg bot loading";
+        div.id = "loadingMsg";
+        div.innerText = "Candinho está pensando... 🖌️";
+        chatDiv.appendChild(div);
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+    }
+    
+    function removeLoading() {
+        const el = document.getElementById("loadingMsg");
+        if (el) el.remove();
+    }
+    
+    // Salvar mensagem no Firebase
+    async function salvarMensagemFirebase(role, content) {
+        try {
+            await addDoc(collection(db, CONVERSA_COLLECTION), {
+                conversaId: conversaId,
+                role: role,
+                content: content,
+                timestamp: new Date()
+            });
+        } catch (e) {
+            console.warn("Erro Firebase:", e);
         }
     }
-
-    return "";
-}
-
-// UTIL
-function pegarAleatorio(obj) {
-    const valores = Object.values(obj);
-    return valores[Math.floor(Math.random() * valores.length)];
-}
-
-// PERSONALIDADE
-const systemPrompt = `Você é Candinho...`;
-
-// IA
-let engine;
-
-// 🟢 INIT COM STATUS
-async function init() {
-
-    const status = document.getElementById("status");
-
+    
+    // Carregar histórico recente (últimas 12 mensagens)
+    async function carregarHistoricoFirebase() {
+        try {
+            const q = query(
+                collection(db, CONVERSA_COLLECTION),
+                where("conversaId", "==", conversaId),
+                orderBy("timestamp", "desc"),
+                limit(12)
+            );
+            const snap = await getDocs(q);
+            const msgs = [];
+            snap.forEach(doc => msgs.push(doc.data()));
+            msgs.reverse(); // ordem cronológica
+            historicoMensagens = msgs.map(m => ({ role: m.role, content: m.content }));
+            // Exibir no chat
+            for (let msg of historicoMensagens) {
+                addMessageToUI(msg.content, msg.role === "user");
+            }
+            statusDiv.innerText = "✅ Candinho pronto (memória ativa)";
+        } catch (e) {
+            console.warn("Erro ao carregar histórico:", e);
+            historicoMensagens = [];
+        }
+    }
+    
+    // ======================= RESPOSTAS INSTANTÂNEAS (JSONs do GitHub) =======================
+    function pegarAleatorio(obj) {
+        if (!obj || typeof obj !== "object") return "Ainda estou aprendendo sobre isso! 🎨";
+        const valores = Object.values(obj);
+        if (valores.length === 0) return "Não tenho essa informação agora.";
+        const item = valores[Math.floor(Math.random() * valores.length)];
+        if (typeof item === "object" && item.explicacao_infantil) return item.explicacao_infantil;
+        return String(item);
+    }
+    
+    function respostaInstantanea(pergunta) {
+        const texto = pergunta.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        // Padrões
+        if (texto.includes("piada") || texto.includes("piadas")) return pegarAleatorio(dataStore.piadas);
+        if (texto.includes("curiosidade")) return pegarAleatorio(dataStore.curiosidades);
+        if (texto.includes("atividade") || texto.includes("brincadeira") || texto.includes("fazer")) return pegarAleatorio(dataStore.atividades);
+        if (texto.includes("artista") || texto.includes("artistas") || texto.includes("pintor")) return pegarAleatorio(dataStore.artistas);
+        if (texto.includes("danca") || texto.includes("dança") || texto.includes("dançar")) return pegarAleatorio(dataStore.dancas);
+        if (texto.includes("historia") || texto.includes("história") || texto.includes("aconteceu")) return pegarAleatorio(dataStore.historia);
+        return null;
+    }
+    
+    // ======================= GROQ API (com rate limit e cache) =======================
+    async function verificarRateLimit() {
+        const now = Date.now();
+        requestTimestamps = requestTimestamps.filter(ts => now - ts < 60000);
+        if (requestTimestamps.length >= MAX_REQUESTS_PER_MINUTE) {
+            const oldest = requestTimestamps[0];
+            const waitTime = 60000 - (now - oldest);
+            statusDiv.innerText = `⏳ Aguardando limite da IA (${Math.ceil(waitTime/1000)}s)...`;
+            return false;
+        }
+        return true;
+    }
+    
+    async function chamarGroq(pergunta, contextoExtra = "") {
+        // Verifica cache
+        const cacheKey = pergunta.toLowerCase().trim();
+        if (respostaCache.has(cacheKey)) {
+            console.log("Usando cache para:", pergunta);
+            return respostaCache.get(cacheKey);
+        }
+        
+        if (!await verificarRateLimit()) {
+            // Se rate limit, aguarda 2 segundos e tenta de novo (simples)
+            await new Promise(r => setTimeout(r, 2500));
+            if (!await verificarRateLimit()) {
+                return "Muitas perguntas ao mesmo tempo! Dá um tempinho de 1 minuto e pergunta de novo 😊";
+            }
+        }
+        
+        // Prepara histórico recente (últimas 6 mensagens)
+        const ultimasMsg = historicoMensagens.slice(-6);
+        let historicoStr = "";
+        for (let m of ultimasMsg) {
+            if (m.role === "user") historicoStr += `Aluno: ${m.content}\n`;
+            else historicoStr += `Candinho: ${m.content}\n`;
+        }
+        
+        const systemPrompt = `Você é Candinho, professor de arte de 60 anos, muito gentil e paciente.
+- Fale frases curtas (máx 3 linhas) para crianças de 10 anos.
+- Use linguagem simples, sempre incentive a criatividade, nunca seja rude.
+- Responda em português do Brasil com carinho.
+- Se não souber, diga que vai pesquisar.
+Contexto extra: ${contextoExtra.slice(0, 300)}`;
+        
+        const userPrompt = `${historicoStr}\nPergunta atual: ${pergunta}\nCandinho:`;
+        
+        const payload = {
+            model: MODEL_GROQ,
+            messages: [
+                { role: "system", content: systemPrompt },
+                { role: "user", content: userPrompt }
+            ],
+            temperature: 0.7,
+            max_tokens: 120,
+            stream: false
+        };
+        
+        requestTimestamps.push(Date.now());
+        
+        try {
+            const resp = await fetch(GROQ_URL, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${GROQ_API_KEY}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+            if (!resp.ok) {
+                const errText = await resp.text();
+                throw new Error(`Groq API error ${resp.status}: ${errText}`);
+            }
+            const data = await resp.json();
+            let resposta = data.choices[0].message.content.trim();
+            if (!resposta) resposta = "Hum, não entendi direito. Pode perguntar de outro jeito? 🎨";
+            // Salva no cache
+            respostaCache.set(cacheKey, resposta);
+            return resposta;
+        } catch (error) {
+            console.error("Erro Groq:", error);
+            return "Estou com problemas para pensar agora. Tente de novo em alguns instantes 🖌️";
+        }
+    }
+    
+    // ======================= FUNÇÃO PRINCIPAL =======================
+    let isProcessing = false;
+    
+   async function responder(pergunta) {
+    // 1. Resposta instantânea (JSONs do GitHub) – mantém igual
+    const instant = respostaInstantanea(pergunta);
+    if (instant) {
+        historicoMensagens.push({ role: "user", content: pergunta });
+        historicoMensagens.push({ role: "assistant", content: instant });
+        await salvarMensagemFirebase("user", pergunta);
+        await salvarMensagemFirebase("assistant", instant);
+        return instant;
+    }
+    
+    // 2. (Opcional) Se quiser contexto extra, você pode continuar calculando,
+    //    mas o backend (api/groq.js) já faz isso sozinho.
+    //    Para evitar repetição, recomendo não enviar contexto do front.
+    //    Deixe o backend buscar o contexto nos JSONs importados.
+    
+    // 3. Chamar o PROXY da Vercel (em vez do Groq direto)
+    let respostaIA = "";
     try {
-        status.innerText = "Carregando as tintas do Candinho... 🧠";
-
-        engine = await CreateMLCEngine("gemma-2-2b-it-q4f16_1-MLC");
-
-        status.innerText = "Candinho pronto! 🎨";
-
-        dancas = await carregarJSON("./data/dancas.json");
-        artes = await carregarJSON("./data/artes_visuais.json");
-        artistas = await carregarJSON("./data/artistas.json");
-        historia = await carregarJSON("./data/historia_arte.json");
-        teatro = await carregarJSON("./data/teatro.json");
-        musica = await carregarJSON("./data/musica.json");
-        folclore = await carregarJSON("./data/folclore.json");
-        ritmos = await carregarJSON("./data/ritmos_musicais.json");
-        festas = await carregarJSON("./data/festas_brasileiras.json");
-        lugares = await carregarJSON("./data/lugares_arte.json");
-        curiosidades = await carregarJSON("./data/curiosidades.json");
-        indigena = await carregarJSON("./data/cultura_indigena.json");
-        afro = await carregarJSON("./data/cultura_afro_brasileira.json");
-        atividades = await carregarJSON("./data/atividades_artisticas.json");
-        emocional = await carregarJSON("./data/apoio_emocional.json");
-        piadas = await carregarJSON("./data/piadas.json");
-
-    } catch (e) {
-        status.innerText = "Erro ao carregar Candinho 😢";
-        console.error(e);
+        const response = await fetch('/api/groq', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ mensagem: pergunta })
+        });
+        const data = await response.json();
+        respostaIA = data.reply || "Candinho não conseguiu responder agora. Tente de novo! 🎨";
+    } catch (erro) {
+        console.error("Erro ao chamar proxy:", erro);
+        respostaIA = "Estou com problemas para me conectar. Verifique sua internet.";
     }
+    
+    // 4. Salvar no histórico (igual antes)
+    historicoMensagens.push({ role: "user", content: pergunta });
+    historicoMensagens.push({ role: "assistant", content: respostaIA });
+    await salvarMensagemFirebase("user", pergunta);
+    await salvarMensagemFirebase("assistant", respostaIA);
+    
+    return respostaIA;
 }
-
-// 🟢 PROTEÇÃO
-async function responder(pergunta) {
-
-    if (!engine) {
-        return "Estou arrumando o ateliê ainda... espere um pouquinho 🧠🎨";
+    // ======================= CARREGAR TODOS OS JSONs DO GITHUB =======================
+    async function carregarTodosJSONs() {
+        statusDiv.innerText = "📥 Baixando respostas instantâneas do GitHub...";
+        const promises = [];
+        for (const [key, filename] of Object.entries(jsonFiles)) {
+            const url = GITHUB_BASE + filename;
+            promises.push(
+                fetch(url)
+                    .then(res => res.ok ? res.json() : {})
+                    .catch(err => { console.warn(`Erro ${filename}:`, err); return {}; })
+            );
+        }
+        const resultados = await Promise.all(promises);
+        let idx = 0;
+        for (const key of Object.keys(jsonFiles)) {
+            dataStore[key] = resultados[idx++];
+        }
+        console.log("JSONs carregados:", Object.keys(dataStore));
+        statusDiv.innerText = "🎨 Candinho pronto! (Modo híbrido: JSON + Groq)";
     }
-
-    const texto = pergunta.toLowerCase();
-
-    if (texto.includes("curiosidade")) return pegarAleatorio(curiosidades);
-    if (texto.includes("piada")) return pegarAleatorio(piadas);
-    if (texto.includes("atividade")) return pegarAleatorio(atividades);
-
-    const contexto = buscarContexto(pergunta);
-
-    const prompt = `
-${systemPrompt}
-
-Use isso:
-${contexto || "Explique de forma simples para uma criança."}
-
-Pergunta:
-${pergunta}
-`;
-
-    const resp = await engine.chat.completions.create({
-        messages: [{ role: "system", content: prompt }],
-        max_tokens: 120
+    
+    // ======================= INTERFACE ENVIAR =======================
+    async function enviar() {
+        if (isProcessing) return;
+        const texto = inputField.value.trim();
+        if (!texto) return;
+        
+        isProcessing = true;
+        sendBtn.disabled = true;
+        inputField.disabled = true;
+        
+        addMessageToUI(texto, true);
+        inputField.value = "";
+        addLoading();
+        
+        try {
+            const resposta = await responder(texto);
+            removeLoading();
+            addMessageToUI(resposta, false);
+        } catch (err) {
+            removeLoading();
+            addMessageToUI("Ops! Tivemos um probleminha. Tente de novo 🎨", false);
+            console.error(err);
+        } finally {
+            isProcessing = false;
+            sendBtn.disabled = false;
+            inputField.disabled = false;
+            inputField.focus();
+        }
+    }
+    
+    // Eventos
+    sendBtn.addEventListener("click", enviar);
+    inputField.addEventListener("keypress", (e) => { if (e.key === "Enter" && !isProcessing) enviar(); });
+    
+    // ======================= INICIALIZAÇÃO =======================
+    async function init() {
+        await carregarTodosJSONs();
+        await carregarHistoricoFirebase();
+        if (historicoMensagens.length === 0) {
+            const boasVindas = "Olá! Sou o Candinho, seu amigo artista. Pergunte sobre artistas, dança, história, ou peça uma piada! 🖌️";
+            addMessageToUI(boasVindas, false);
+            historicoMensagens.push({ role: "assistant", content: boasVindas });
+            await salvarMensagemFirebase("assistant", boasVindas);
+        }
+    }
+    
+    init().catch(err => {
+        console.error(err);
+        statusDiv.innerText = "Erro crítico ao iniciar. Verifique a chave Groq e URLs do GitHub.";
     });
-
-    return resp.choices[0].message.content;
-}
-
-// CHAT
-const chat = document.getElementById("chat");
-
-function addMsg(text, user=false) {
-    const div = document.createElement("div");
-    div.className = "msg " + (user ? "user" : "bot");
-    div.innerText = text;
-    chat.appendChild(div);
-    chat.scrollTop = chat.scrollHeight;
-}
-
-async function enviar() {
-    const input = document.getElementById("pergunta");
-    const texto = input.value;
-
-    if (!texto) return;
-
-    addMsg(texto, true);
-    input.value = "";
-
-    const resposta = await responder(texto);
-    addMsg(resposta);
-}
-
-window.enviar = enviar;
-
-init();
-
+    
+    window.enviar = enviar;
 </script>
-
 </body>
 </html>
