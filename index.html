@@ -116,6 +116,11 @@
         opacity: 0.5;
         cursor: not-allowed;
     }
+   body: JSON.stringify({
+    mensagem: pergunta,
+    memoria: memoria
+})
+   
 </style>
 </head>
 <body>
@@ -163,8 +168,13 @@ const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenils
         conversaId = `sessao_${Date.now()}`;
         localStorage.setItem("candinho_conversaId", conversaId);
     }
-    let historicoMensagens = [];
-    let nomeUsuario = localStorage.getItem("candinho_nome") || "";
+   let memoria = {
+    nome: localStorage.getItem("candinho_nome") || "",
+    idade: localStorage.getItem("candinho_idade") || "",
+    interesses: JSON.parse(localStorage.getItem("candinho_interesses") || "[]"),
+    nivel: localStorage.getItem("candinho_nivel") || "iniciante",
+    historicoCurto: []
+};
     
     const chatDiv = document.getElementById("chat");
     const inputField = document.getElementById("pergunta");
@@ -180,7 +190,39 @@ const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenils
         chatDiv.scrollTop = chatDiv.scrollHeight;
         return div;
     }
-    
+    function extrairMemoria(pergunta) {
+    const texto = pergunta.toLowerCase();
+
+    // Nome
+    const nomeMatch = pergunta.match(/(?:meu nome é|sou|chamo|chamo-me) (\w+)/i);
+    if (nomeMatch) {
+        memoria.nome = nomeMatch[1];
+        localStorage.setItem("candinho_nome", memoria.nome);
+        return `Prazer, ${memoria.nome}! Vou lembrar de você 😊`;
+    }
+
+    // Idade
+    const idadeMatch = pergunta.match(/(\d{1,2}) anos/);
+    if (idadeMatch) {
+        memoria.idade = idadeMatch[1];
+        localStorage.setItem("candinho_idade", memoria.idade);
+        return `Legal! Você tem ${memoria.idade} anos 🎈`;
+    }
+
+    // Interesses
+    const interesses = ["desenhar", "pintar", "dançar", "música", "teatro"];
+    for (let interesse of interesses) {
+        if (texto.includes(interesse)) {
+            if (!memoria.interesses.includes(interesse)) {
+                memoria.interesses.push(interesse);
+                localStorage.setItem("candinho_interesses", JSON.stringify(memoria.interesses));
+                return `Que legal que você gosta de ${interesse}! 🎨`;
+            }
+        }
+    }
+
+    return null;
+}
     function addLoading() {
         const div = document.createElement("div");
         div.className = "msg bot loading";
@@ -309,18 +351,30 @@ const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenils
         return null;
     }
     
-    async function responder(pergunta) {
-        // 0. Extrair nome se for uma apresentação
-        const novoNome = extrairNome(pergunta);
-        if (novoNome) {
-            const respostaNome = `Prazer em te conhecer, ${novoNome}! Eu sou o Candinho, seu amigo artista. Vamos aprender arte juntos? 🎨`;
-            historicoMensagens.push({ role: "user", content: pergunta });
-            historicoMensagens.push({ role: "assistant", content: respostaNome });
-            await salvarMensagemFirebase("user", pergunta);
-            await salvarMensagemFirebase("assistant", respostaNome);
-            return respostaNome;
-        }
-        
+   async function responder(pergunta) {
+    // 🧠 0. Detectar memória (nome)
+    const memoriaDetectada = extrairMemoria(pergunta);
+    if (memoriaDetectada) {
+        historicoMensagens.push({ role: "user", content: pergunta });
+        historicoMensagens.push({ role: "assistant", content: memoriaDetectada });
+
+        await salvarMensagemFirebase("user", pergunta);
+        await salvarMensagemFirebase("assistant", memoriaDetectada);
+
+        return memoriaDetectada;
+    }
+        // 🧠 perguntas sobre o aluno
+if (pergunta.toLowerCase().includes("meu nome")) {
+    return memoria.nome 
+        ? `Seu nome é ${memoria.nome}! 😊` 
+        : "Você ainda não me contou seu nome!";
+}
+
+if (pergunta.toLowerCase().includes("quantos anos eu tenho")) {
+    return memoria.idade 
+        ? `Você tem ${memoria.idade} anos! 🎈` 
+        : "Você ainda não me contou sua idade!";
+}
         // 1. Resposta instantânea (JSONs)
         const instant = respostaInstantanea(pergunta);
         if (instant) {
