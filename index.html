@@ -281,26 +281,74 @@ const CONVERSA_COLLECTION = "conversas_candinho";
     }
     
     // ======================= RESPOSTAS INSTANTÂNEAS (JSONs do GitHub) =======================
-    function pegarAleatorio(obj) {
-        if (!obj || typeof obj !== "object") return "Ainda estou aprendendo sobre isso! 🎨";
-        const valores = Object.values(obj);
-        if (valores.length === 0) return "Não tenho essa informação agora.";
-        const item = valores[Math.floor(Math.random() * valores.length)];
-        if (typeof item === "object" && item.explicacao_infantil) return item.explicacao_infantil;
-        return String(item);
+  function pegarAleatorio(obj) {
+    // Se for null, undefined ou não for objeto
+    if (!obj || typeof obj !== "object") {
+        console.warn("pegarAleatorio: dado inválido", obj);
+        return "Ainda estou aprendendo sobre isso! 🎨";
+    }
+
+    let valores;
+    
+    // Se for array, usa diretamente
+    if (Array.isArray(obj)) {
+        valores = obj;
+    } 
+    // Se for objeto, pega os valores das propriedades
+    else {
+        valores = Object.values(obj);
+    }
+
+    if (valores.length === 0) {
+        console.warn("pegarAleatorio: array vazio", obj);
+        return "Não tenho essa informação agora.";
+    }
+
+    const item = valores[Math.floor(Math.random() * valores.length)];
+
+    // Se for objeto e tiver campo explicacao_infantil, usa ele
+    if (typeof item === "object" && item !== null) {
+        if (item.explicacao_infantil) return item.explicacao_infantil;
+        // Se não tiver, converte para string (evita [object Object])
+        return JSON.stringify(item);
     }
     
-    function respostaInstantanea(pergunta) {
-        const texto = pergunta.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        // Padrões
-        if (texto.includes("piada") || texto.includes("piadas")) return pegarAleatorio(dataStore.piadas);
-        if (texto.includes("curiosidade")) return pegarAleatorio(dataStore.curiosidades);
-        if (texto.includes("atividade") || texto.includes("brincadeira") || texto.includes("fazer")) return pegarAleatorio(dataStore.atividades);
-        if (texto.includes("artista") || texto.includes("artistas") || texto.includes("pintor")) return pegarAleatorio(dataStore.artistas);
-        if (texto.includes("danca") || texto.includes("dança") || texto.includes("dançar")) return pegarAleatorio(dataStore.dancas);
-        if (texto.includes("historia") || texto.includes("história") || texto.includes("aconteceu")) return pegarAleatorio(dataStore.historia);
+    // Se for string ou número, retorna como está
+    return String(item);
+}
+
+function respostaInstantanea(pergunta) {
+    // Normalização para remover acentos e caixa baixa
+    const texto = pergunta
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    
+    // Lista de palavras-chave mais abrangente
+    const palavras = {
+        piada: ["piada", "piadas", "conte uma piada", "engraçado"],
+        curiosidade: ["curiosidade", "curiosidades", "fato interessante"],
+        atividade: ["atividade", "brincadeira", "fazer", "desenhar", "pintar", "criar"],
+        artista: ["artista", "artistas", "pintor", "pintores", "quem foi"],
+        danca: ["danca", "dança", "dançar", "coreografia", "balé", "samba"],
+        historia: ["historia", "história", "aconteceu", "passado", "antigamente"]
+    };
+    
+    // Função auxiliar para verificar se alguma palavra-chave está no texto
+    const contem = (lista) => lista.some(palavra => texto.includes(palavra));
+    
+    try {
+        if (contem(palavras.piada)) return pegarAleatorio(dataStore.piadas);
+        if (contem(palavras.curiosidade)) return pegarAleatorio(dataStore.curiosidades);
+        if (contem(palavras.atividade)) return pegarAleatorio(dataStore.atividades);
+        if (contem(palavras.artista)) return pegarAleatorio(dataStore.artistas);
+        if (contem(palavras.danca)) return pegarAleatorio(dataStore.dancas);
+        if (contem(palavras.historia)) return pegarAleatorio(dataStore.historia);
+    } catch (err) {
+        console.error("Erro em respostaInstantanea:", err);
         return null;
     }
+    
     
     // ======================= GROQ API (com rate limit e cache) =======================
     async function verificarRateLimit() {
