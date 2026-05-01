@@ -136,42 +136,29 @@
         <button id="sendBtn">Enviar</button>
     </div>
 </div>
-    
 
 <script type="module">
     // ======================= CONFIGURAÇÕES =======================
-     // ✅ NOVO CÓDIGO – chama o proxy da Vercel
-const response = await fetch('/api/groq', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ mensagem: pergunta })   // <-- campo 'mensagem'
-});
+    // Configuração Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, where } 
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const data = await response.json();
-const resposta = data.reply;                     // <-- campo 'reply'
+    const firebaseConfig = {
+      apiKey: "AIzaSyCQq1DYHivZBIX2_0_NY7eKIoBWG5sKs48",
+      authDomain: "candinho-8bee5.firebaseapp.com",
+      projectId: "candinho-8bee5",
+      storageBucket: "candinho-8bee5.firebasestorage.app",
+      messagingSenderId: "342319000222",
+      appId: "1:342319000222:web:ab04b940b0175b8722a98f"
+    };
 
-    // ======================= CONFIGURAÇÃO FIREBASE =======================
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit } 
-  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const CONVERSA_COLLECTION = "conversas_candinho";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCQq1DYHivZBIX2_0_NY7eKIoBWG5sKs48",
-  authDomain: "candinho-8bee5.firebaseapp.com",
-  projectId: "candinho-8bee5",
-  storageBucket: "candinho-8bee5.firebasestorage.app",
-  messagingSenderId: "342319000222",
-  appId: "1:342319000222:web:ab04b940b0175b8722a98f"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const CONVERSA_COLLECTION = "conversas_candinho";
-
-    // ======================= URLs dos JSONs no GitHub =======================
-    // Altere para o seu repositório e branch corretos
+    // URLs dos JSONs no GitHub (substitua SEU_USUARIO/SEU_REPOSITORIO)
     const GITHUB_BASE = "https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPOSITORIO/main/data/";
-    // Exemplo: "https://raw.githubusercontent.com/joaosilva/candinho-json/main/data/"
     
     const jsonFiles = {
         dancas: "dancas.json",
@@ -192,26 +179,14 @@ const CONVERSA_COLLECTION = "conversas_candinho";
         piadas: "piadas.json"
     };
     
-    // Armazenamento dos dados carregados
     let dataStore = {};
-    
-    // Cache de respostas da IA para evitar repetições
-    const respostaCache = new Map();  // chave = pergunta (lowercase), valor = resposta
-    
-    // Controle de rate limit (Groq: 30 req/min)
-    let requestTimestamps = [];
-    const MAX_REQUESTS_PER_MINUTE = 28;  // deixar margem
-    let isRateLimited = false;
-    
-    // Histórico da conversa (local + Firebase)
     let conversaId = localStorage.getItem("candinho_conversaId");
     if (!conversaId) {
         conversaId = `sessao_${Date.now()}`;
         localStorage.setItem("candinho_conversaId", conversaId);
     }
-    let historicoMensagens = []; // { role, content }
+    let historicoMensagens = [];
     
-    // Elementos DOM
     const chatDiv = document.getElementById("chat");
     const inputField = document.getElementById("pergunta");
     const sendBtn = document.getElementById("sendBtn");
@@ -241,7 +216,6 @@ const CONVERSA_COLLECTION = "conversas_candinho";
         if (el) el.remove();
     }
     
-    // Salvar mensagem no Firebase
     async function salvarMensagemFirebase(role, content) {
         try {
             await addDoc(collection(db, CONVERSA_COLLECTION), {
@@ -255,7 +229,6 @@ const CONVERSA_COLLECTION = "conversas_candinho";
         }
     }
     
-    // Carregar histórico recente (últimas 12 mensagens)
     async function carregarHistoricoFirebase() {
         try {
             const q = query(
@@ -267,9 +240,8 @@ const CONVERSA_COLLECTION = "conversas_candinho";
             const snap = await getDocs(q);
             const msgs = [];
             snap.forEach(doc => msgs.push(doc.data()));
-            msgs.reverse(); // ordem cronológica
+            msgs.reverse();
             historicoMensagens = msgs.map(m => ({ role: m.role, content: m.content }));
-            // Exibir no chat
             for (let msg of historicoMensagens) {
                 addMessageToUI(msg.content, msg.role === "user");
             }
@@ -280,222 +252,95 @@ const CONVERSA_COLLECTION = "conversas_candinho";
         }
     }
     
-    // ======================= RESPOSTAS INSTANTÂNEAS (JSONs do GitHub) =======================
-  function pegarAleatorio(obj) {
-    // Se for null, undefined ou não for objeto
-    if (!obj || typeof obj !== "object") {
-        console.warn("pegarAleatorio: dado inválido", obj);
-        return "Ainda estou aprendendo sobre isso! 🎨";
-    }
-
-    let valores;
-    
-    // Se for array, usa diretamente
-    if (Array.isArray(obj)) {
-        valores = obj;
-    } 
-    // Se for objeto, pega os valores das propriedades
-    else {
-        valores = Object.values(obj);
-    }
-
-    if (valores.length === 0) {
-        console.warn("pegarAleatorio: array vazio", obj);
-        return "Não tenho essa informação agora.";
-    }
-
-    const item = valores[Math.floor(Math.random() * valores.length)];
-
-    // Se for objeto e tiver campo explicacao_infantil, usa ele
-    if (typeof item === "object" && item !== null) {
-        if (item.explicacao_infantil) return item.explicacao_infantil;
-        // Se não tiver, converte para string (evita [object Object])
-        return JSON.stringify(item);
-    }
-    
-    // Se for string ou número, retorna como está
-    return String(item);
-}
-
-function respostaInstantanea(pergunta) {
-    // Normalização para remover acentos e caixa baixa
-    const texto = pergunta
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-    
-    // Lista de palavras-chave mais abrangente
-    const palavras = {
-        piada: ["piada", "piadas", "conte uma piada", "engraçado"],
-        curiosidade: ["curiosidade", "curiosidades", "fato interessante"],
-        atividade: ["atividade", "brincadeira", "fazer", "desenhar", "pintar", "criar"],
-        artista: ["artista", "artistas", "pintor", "pintores", "quem foi"],
-        danca: ["danca", "dança", "dançar", "coreografia", "balé", "samba"],
-        historia: ["historia", "história", "aconteceu", "passado", "antigamente"]
-    };
-    
-    // Função auxiliar para verificar se alguma palavra-chave está no texto
-    const contem = (lista) => lista.some(palavra => texto.includes(palavra));
-    
-    try {
-        if (contem(palavras.piada)) return pegarAleatorio(dataStore.piadas);
-        if (contem(palavras.curiosidade)) return pegarAleatorio(dataStore.curiosidades);
-        if (contem(palavras.atividade)) return pegarAleatorio(dataStore.atividades);
-        if (contem(palavras.artista)) return pegarAleatorio(dataStore.artistas);
-        if (contem(palavras.danca)) return pegarAleatorio(dataStore.dancas);
-        if (contem(palavras.historia)) return pegarAleatorio(dataStore.historia);
-    } catch (err) {
-        console.error("Erro em respostaInstantanea:", err);
-        return null;
-    }
-    
-    
-    // ======================= GROQ API (com rate limit e cache) =======================
-    async function verificarRateLimit() {
-        const now = Date.now();
-        requestTimestamps = requestTimestamps.filter(ts => now - ts < 60000);
-        if (requestTimestamps.length >= MAX_REQUESTS_PER_MINUTE) {
-            const oldest = requestTimestamps[0];
-            const waitTime = 60000 - (now - oldest);
-            statusDiv.innerText = `⏳ Aguardando limite da IA (${Math.ceil(waitTime/1000)}s)...`;
-            return false;
+    // ======================= RESPOSTAS INSTANTÂNEAS =======================
+    function pegarAleatorio(obj) {
+        if (!obj || typeof obj !== "object") {
+            console.warn("pegarAleatorio: dado inválido", obj);
+            return "Ainda estou aprendendo sobre isso! 🎨";
         }
-        return true;
+        let valores = Array.isArray(obj) ? obj : Object.values(obj);
+        if (valores.length === 0) {
+            console.warn("pegarAleatorio: array vazio", obj);
+            return "Não tenho essa informação agora.";
+        }
+        const item = valores[Math.floor(Math.random() * valores.length)];
+        if (typeof item === "object" && item !== null) {
+            if (item.explicacao_infantil) return item.explicacao_infantil;
+            return JSON.stringify(item);
+        }
+        return String(item);
     }
     
-    async function chamarGroq(pergunta, contextoExtra = "") {
-        // Verifica cache
-        const cacheKey = pergunta.toLowerCase().trim();
-        if (respostaCache.has(cacheKey)) {
-            console.log("Usando cache para:", pergunta);
-            return respostaCache.get(cacheKey);
-        }
-        
-        if (!await verificarRateLimit()) {
-            // Se rate limit, aguarda 2 segundos e tenta de novo (simples)
-            await new Promise(r => setTimeout(r, 2500));
-            if (!await verificarRateLimit()) {
-                return "Muitas perguntas ao mesmo tempo! Dá um tempinho de 1 minuto e pergunta de novo 😊";
-            }
-        }
-        
-        // Prepara histórico recente (últimas 6 mensagens)
-        const ultimasMsg = historicoMensagens.slice(-6);
-        let historicoStr = "";
-        for (let m of ultimasMsg) {
-            if (m.role === "user") historicoStr += `Aluno: ${m.content}\n`;
-            else historicoStr += `Candinho: ${m.content}\n`;
-        }
-        
-        const systemPrompt = `Você é Candinho, professor de arte de 60 anos, muito gentil e paciente.
-- Fale frases curtas (máx 3 linhas) para crianças de 10 anos.
-- Use linguagem simples, sempre incentive a criatividade, nunca seja rude.
-- Responda em português do Brasil com carinho.
-Em caso de ofensa ou violência, retome educadamente para o assunto Arte
-Não use linguagem neutra
-Não use querido, querida, amigo, amiguinho, amiga, amiguinha
-Você amar ensiar Arte. Sobretudo, arte brasileira.
-Se alguém perguntar sobre o seu nome responda que é uma homenagem a Cândido Portinari, grande pintor brasileiro
-- Se não souber, diga que vai pesquisar.
-Contexto extra: ${contextoExtra.slice(0, 300)}`;
-        
-        const userPrompt = `${historicoStr}\nPergunta atual: ${pergunta}\nCandinho:`;
-        
-        const payload = {
-            model: MODEL_GROQ,
-            messages: [
-                { role: "system", content: systemPrompt },
-                { role: "user", content: userPrompt }
-            ],
-            temperature: 0.7,
-            max_tokens: 120,
-            stream: false
+    function respostaInstantanea(pergunta) {
+        const texto = pergunta.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const palavras = {
+            piada: ["piada", "piadas", "conte uma piada", "engraçado"],
+            curiosidade: ["curiosidade", "curiosidades", "fato interessante"],
+            atividade: ["atividade", "brincadeira", "fazer", "desenhar", "pintar", "criar"],
+            artista: ["artista", "artistas", "pintor", "pintores", "quem foi"],
+            danca: ["danca", "dança", "dançar", "coreografia", "balé", "samba"],
+            historia: ["historia", "história", "aconteceu", "passado", "antigamente"]
         };
-        
-        requestTimestamps.push(Date.now());
-        
+        const contem = (lista) => lista.some(palavra => texto.includes(palavra));
         try {
-            const resp = await fetch(GROQ_URL, {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${GROQ_API_KEY}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            });
-            if (!resp.ok) {
-                const errText = await resp.text();
-                throw new Error(`Groq API error ${resp.status}: ${errText}`);
-            }
-            const data = await resp.json();
-            let resposta = data.choices[0].message.content.trim();
-            if (!resposta) resposta = "Hum, não entendi direito. Pode perguntar de outro jeito? 🎨";
-            // Salva no cache
-            respostaCache.set(cacheKey, resposta);
-            return resposta;
-        } catch (error) {
-            console.error("Erro Groq:", error);
-            return "Estou com problemas para pensar agora. Tente de novo em alguns instantes 🖌️";
+            if (contem(palavras.piada)) return pegarAleatorio(dataStore.piadas);
+            if (contem(palavras.curiosidade)) return pegarAleatorio(dataStore.curiosidades);
+            if (contem(palavras.atividade)) return pegarAleatorio(dataStore.atividades);
+            if (contem(palavras.artista)) return pegarAleatorio(dataStore.artistas);
+            if (contem(palavras.danca)) return pegarAleatorio(dataStore.dancas);
+            if (contem(palavras.historia)) return pegarAleatorio(dataStore.historia);
+        } catch (err) {
+            console.error("Erro em respostaInstantanea:", err);
+            return null;
         }
+        return null;
     }
     
     // ======================= FUNÇÃO PRINCIPAL =======================
     let isProcessing = false;
     
-   async function responder(pergunta) {
-    // 1. Resposta instantânea (JSONs do GitHub)
-    const instant = respostaInstantanea(pergunta);
-    if (instant) {
-        historicoMensagens.push({ role: "user", content: pergunta });
-        historicoMensagens.push({ role: "assistant", content: instant });
-        await salvarMensagemFirebase("user", pergunta);
-        await salvarMensagemFirebase("assistant", instant);
-        return instant;
-    }
-    
-    // 2. Chamar o proxy da Vercel
-    let respostaIA = "";
-    try {
-        const response = await fetch('/api/groq', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ mensagem: pergunta })
-        });
-
-        // Lê o corpo da resposta como texto primeiro
-        const textResponse = await response.text();
-        let data;
+    async function responder(pergunta) {
+        // 1. Resposta instantânea (JSONs locais se disponíveis)
+        const instant = respostaInstantanea(pergunta);
+        if (instant) {
+            historicoMensagens.push({ role: "user", content: pergunta });
+            historicoMensagens.push({ role: "assistant", content: instant });
+            await salvarMensagemFirebase("user", pergunta);
+            await salvarMensagemFirebase("assistant", instant);
+            return instant;
+        }
+        
+        // 2. Chamar o proxy da Vercel
         try {
-            data = JSON.parse(textResponse);
-        } catch (jsonError) {
-            console.error("Resposta não é JSON:", textResponse.slice(0, 200));
-            respostaIA = "Candinho está com problemas técnicos. Tente de novo em alguns instantes. 🎨";
-            // Ainda assim salva o erro? Melhor não salvar.
+            const response = await fetch('/api/groq', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mensagem: pergunta })
+            });
+            const textResponse = await response.text();
+            let data;
+            try {
+                data = JSON.parse(textResponse);
+            } catch (jsonError) {
+                console.error("Resposta não é JSON:", textResponse.slice(0, 200));
+                return "Candinho está com problemas técnicos. Tente de novo em alguns instantes. 🎨";
+            }
+            if (!response.ok) {
+                return data.error || "Erro no servidor. Tente novamente.";
+            }
+            const respostaIA = data.reply || "Candinho não conseguiu responder agora. Tente de novo! 🎨";
+            historicoMensagens.push({ role: "user", content: pergunta });
+            historicoMensagens.push({ role: "assistant", content: respostaIA });
+            await salvarMensagemFirebase("user", pergunta);
+            await salvarMensagemFirebase("assistant", respostaIA);
             return respostaIA;
+        } catch (erro) {
+            console.error("Erro ao chamar proxy:", erro);
+            return "Estou com problemas para me conectar. Verifique sua internet.";
         }
-
-        if (!response.ok) {
-            console.error(`Proxy respondeu com status ${response.ok}:`, data);
-            respostaIA = data.error || "Erro no servidor. Tente novamente.";
-            return respostaIA;
-        }
-
-        respostaIA = data.reply || "Candinho não conseguiu responder agora. Tente de novo! 🎨";
-    } catch (erro) {
-        console.error("Erro ao chamar proxy:", erro);
-        respostaIA = "Estou com problemas para me conectar. Verifique sua internet.";
-        return respostaIA;
     }
     
-    // 3. Salvar no histórico
-    historicoMensagens.push({ role: "user", content: pergunta });
-    historicoMensagens.push({ role: "assistant", content: respostaIA });
-    await salvarMensagemFirebase("user", pergunta);
-    await salvarMensagemFirebase("assistant", respostaIA);
-    
-    return respostaIA;
-}
-    // ======================= CARREGAR TODOS OS JSONs DO GITHUB =======================
+    // ======================= CARREGAR JSONs DO GITHUB =======================
     async function carregarTodosJSONs() {
         statusDiv.innerText = "📥 Baixando respostas instantâneas do GitHub...";
         const promises = [];
@@ -521,15 +366,12 @@ Contexto extra: ${contextoExtra.slice(0, 300)}`;
         if (isProcessing) return;
         const texto = inputField.value.trim();
         if (!texto) return;
-        
         isProcessing = true;
         sendBtn.disabled = true;
         inputField.disabled = true;
-        
         addMessageToUI(texto, true);
         inputField.value = "";
         addLoading();
-        
         try {
             const resposta = await responder(texto);
             removeLoading();
@@ -546,11 +388,9 @@ Contexto extra: ${contextoExtra.slice(0, 300)}`;
         }
     }
     
-    // Eventos
     sendBtn.addEventListener("click", enviar);
     inputField.addEventListener("keypress", (e) => { if (e.key === "Enter" && !isProcessing) enviar(); });
     
-    // ======================= INICIALIZAÇÃO =======================
     async function init() {
         await carregarTodosJSONs();
         await carregarHistoricoFirebase();
@@ -564,11 +404,10 @@ Contexto extra: ${contextoExtra.slice(0, 300)}`;
     
     init().catch(err => {
         console.error(err);
-        statusDiv.innerText = "Erro crítico ao iniciar. Verifique a chave Groq e URLs do GitHub.";
+        statusDiv.innerText = "Erro crítico ao iniciar. Verifique as URLs do GitHub.";
     });
     
     window.enviar = enviar;
 </script>
 </body>
 </html>
-       
