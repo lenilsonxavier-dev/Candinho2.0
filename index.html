@@ -124,7 +124,7 @@
 <body>
 <div class="container">
     <div class="header">
-        <https://i.imgur.com/fnMYS0Z.png">
+     <img src="https://i.imgur.com/fnMYS0Z.png" alt="imagem">
         <h2>Candinho 🎨</h2>
         <div id="status">🔄 Carregando conhecimentos...</div>
     </div>
@@ -386,7 +386,7 @@ Contexto extra: ${contextoExtra.slice(0, 300)}`;
     let isProcessing = false;
     
    async function responder(pergunta) {
-    // 1. Resposta instantânea (JSONs do GitHub) – mantém igual
+    // 1. Resposta instantânea (JSONs do GitHub)
     const instant = respostaInstantanea(pergunta);
     if (instant) {
         historicoMensagens.push({ role: "user", content: pergunta });
@@ -396,12 +396,7 @@ Contexto extra: ${contextoExtra.slice(0, 300)}`;
         return instant;
     }
     
-    // 2. (Opcional) Se quiser contexto extra, você pode continuar calculando,
-    //    mas o backend (api/groq.js) já faz isso sozinho.
-    //    Para evitar repetição, recomendo não enviar contexto do front.
-    //    Deixe o backend buscar o contexto nos JSONs importados.
-    
-    // 3. Chamar o PROXY da Vercel (em vez do Groq direto)
+    // 2. Chamar o proxy da Vercel
     let respostaIA = "";
     try {
         const response = await fetch('/api/groq', {
@@ -409,14 +404,33 @@ Contexto extra: ${contextoExtra.slice(0, 300)}`;
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ mensagem: pergunta })
         });
-        const data = await response.json();
+
+        // Lê o corpo da resposta como texto primeiro
+        const textResponse = await response.text();
+        let data;
+        try {
+            data = JSON.parse(textResponse);
+        } catch (jsonError) {
+            console.error("Resposta não é JSON:", textResponse.slice(0, 200));
+            respostaIA = "Candinho está com problemas técnicos. Tente de novo em alguns instantes. 🎨";
+            // Ainda assim salva o erro? Melhor não salvar.
+            return respostaIA;
+        }
+
+        if (!response.ok) {
+            console.error(`Proxy respondeu com status ${response.ok}:`, data);
+            respostaIA = data.error || "Erro no servidor. Tente novamente.";
+            return respostaIA;
+        }
+
         respostaIA = data.reply || "Candinho não conseguiu responder agora. Tente de novo! 🎨";
     } catch (erro) {
         console.error("Erro ao chamar proxy:", erro);
         respostaIA = "Estou com problemas para me conectar. Verifique sua internet.";
+        return respostaIA;
     }
     
-    // 4. Salvar no histórico (igual antes)
+    // 3. Salvar no histórico
     historicoMensagens.push({ role: "user", content: pergunta });
     historicoMensagens.push({ role: "assistant", content: respostaIA });
     await salvarMensagemFirebase("user", pergunta);
