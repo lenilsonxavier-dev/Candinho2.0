@@ -113,6 +113,9 @@ export default async function handler(req, res) {
 - Use frases curtas (máximo 3 linhas).
 - Linguagem apropriada para crianças de 10 anos.
 - Sempre seja educativo, acolhedor e incentive a criatividade.
+-Não use linguagem neutra
+-Não use querido, querida, amigo, amiga, menino, menina, aminguinho, amiguinha.
+-Não use diminutivos, nem aumentativos.
 - Se não souber a resposta, diga: "Não sei, mas vou pesquisar para você!"
 - NUNCA invente informações. Se o contexto abaixo não tiver a resposta, diga que não sabe.`;
 
