@@ -1,5 +1,5 @@
-// api/groq.js
-const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/api/";
+
+const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/";
 
 // Lista de arquivos e suas chaves
 const JSON_FILES = {
