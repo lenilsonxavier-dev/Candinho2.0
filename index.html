@@ -27,11 +27,19 @@ body {
 .avatar {
     width: 100px;
     border-radius: 50%;
+    border: 3px solid #f9b713;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
     margin-bottom: 10px;
 }
 
 h2 {
     color: #6c5ce7;
+}
+
+#status {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #555;
 }
 
 #chat {
@@ -67,12 +75,6 @@ input {
     border-radius: 20px;
     border: 2px solid #6c5ce7;
 }
-    .avatar {
-    width: 100px;
-    border-radius: 50%;
-    border: 3px solid #f9b713;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-}
 
 button {
     padding: 10px;
@@ -87,19 +89,18 @@ button {
 <body>
 
 <div class="container">
+    <img src="./imag/candinho.png" class="avatar">
+    <h2>Candinho 🎨</h2>
 
-<img src="./img/candinho.png" class="avatar">
-<h2>Candinho 🎨</h2>
+    <!-- 🟢 STATUS -->
+    <div id="status">Carregando Candinho... 🧠</div>
 
-<div id="chat"></div>
+    <div id="chat"></div>
 
-<input id="pergunta" placeholder="Pergunte algo...">
-<button onclick="enviar()">Enviar</button>
-
+    <input id="pergunta" placeholder="Pergunte algo...">
+    <button onclick="enviar()">Enviar</button>
 </div>
 
-</body>
-</html>
 <script type="importmap">
 {
  "imports": {
@@ -110,36 +111,28 @@ button {
 
 <script type="module">
 
-import dancas from "./data/dancas.json";
-import artes from "./data/artes_visuais.json";
-import artistas from "./data/artistas.json";
-import historia from "./data/historia_arte.json";
-import teatro from "./data/teatro.json";
-import musica from "./data/musica.json";
-import folclore from "./data/folclore.json";
-import ritmos from "./data/ritmos_musicais.json";
-
-import festas from "./data/festas_brasileiras.json";
-import lugares from "./data/lugares_arte.json";
-import curiosidades from "./data/curiosidades.json";
-import indigena from "./data/cultura_indigena.json";
-import afro from "./data/cultura_afro_brasileira.json";
-import atividades from "./data/atividades_artisticas.json";
-import emocional from "./data/apoio_emocional.json";
-import piadas from "./data/piadas.json";
-
 import { CreateMLCEngine } from "@mlc-ai/web-llm";
 
-// ================= BUSCADOR =================
+// JSON loader
+async function carregarJSON(caminho) {
+    const res = await fetch(caminho);
+    return await res.json();
+}
+
+let dancas, artes, artistas, historia, teatro, musica,
+    folclore, ritmos, festas, lugares, curiosidades,
+    indigena, afro, atividades, emocional, piadas;
+
+// BUSCADOR
 function buscarContexto(pergunta) {
     const texto = pergunta.toLowerCase();
 
     const bases = [
-    dancas, artes, artistas, historia,
-    teatro, musica, folclore, ritmos,
-    festas, lugares, indigena, afro,
-    atividades, emocional
-];
+        dancas, artes, artistas, historia,
+        teatro, musica, folclore, ritmos,
+        festas, lugares, indigena, afro,
+        atividades, emocional
+    ];
 
     for (const base of bases) {
         for (const chave in base) {
@@ -153,70 +146,65 @@ function buscarContexto(pergunta) {
     return "";
 }
 
-// ================= UTIL =================
+// UTIL
 function pegarAleatorio(obj) {
     const valores = Object.values(obj);
     return valores[Math.floor(Math.random() * valores.length)];
 }
 
-// ================= PERSONALIDADE =================
-const systemPrompt = `
-Você é Candinho, um senhor de 60 anos, gentil, paciente e apaixonado por arte, cultura e educação.
+// PERSONALIDADE
+const systemPrompt = `Você é Candinho...`;
 
-Você conversa com crianças como um avô professor muito carinhoso.
-
-REGRAS:
-- Use frases curtas
-- Linguagem simples para crianças de 10 anos
-- No máximo 3 ou 4 linhas
-- Nunca use linguagem difícil
-- Nunca use linguagem neutra
-- Evite diminutivos excessivos
-- Sempre seja positivo, acolhedor e educativo
-- Sempre incentive a criatividade
-- Explique de forma lúdica e clara
-- Nunca trate assuntos inadequados
-- Nunca seja rude
-- Em caso de palavrões ou agressividade, responda com educação e traga o assunto para arte e aprendizado
-
-CONHECIMENTO:
-Você sabe sobre:
-- artes visuais, desenho, pintura e escultura
-- dança brasileira (maracatu, coco, caboclinho, cavalo-marinho)
-- teatro e música
-- artistas brasileiros e mundiais
-- história da arte
-- cultura indígena e afro-brasileira
-- matemática básica, inglês básico e português
-
-IDENTIDADE:
-Seu nome é Candinho, em homenagem ao pintor brasileiro Cândido Portinari.
-
-ESTILO:
-Fale de forma natural, como uma conversa.
-Evite respostas robóticas.
-Sempre que possível, faça uma pergunta simples para estimular a criança.
-
-OBJETIVO:
-Ensinar, acolher e despertar curiosidade nas crianças através da arte.
-Se a pergunta não for sobre arte, língua inglesa, matemática ou língua portuguesa, responda de forma educativa e gentil, conectando com aprendizado.
-
-// ================= IA =================
+// IA
 let engine;
 
+// 🟢 INIT COM STATUS
 async function init() {
-    engine = await CreateMLCEngine("TinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC");
+
+    const status = document.getElementById("status");
+
+    try {
+        status.innerText = "Carregando as tintas do Candinho... 🧠";
+
+        engine = await CreateMLCEngine("gemma-2-2b-it-q4f16_1-MLC");
+
+        status.innerText = "Candinho pronto! 🎨";
+
+        dancas = await carregarJSON("./data/dancas.json");
+        artes = await carregarJSON("./data/artes_visuais.json");
+        artistas = await carregarJSON("./data/artistas.json");
+        historia = await carregarJSON("./data/historia_arte.json");
+        teatro = await carregarJSON("./data/teatro.json");
+        musica = await carregarJSON("./data/musica.json");
+        folclore = await carregarJSON("./data/folclore.json");
+        ritmos = await carregarJSON("./data/ritmos_musicais.json");
+        festas = await carregarJSON("./data/festas_brasileiras.json");
+        lugares = await carregarJSON("./data/lugares_arte.json");
+        curiosidades = await carregarJSON("./data/curiosidades.json");
+        indigena = await carregarJSON("./data/cultura_indigena.json");
+        afro = await carregarJSON("./data/cultura_afro_brasileira.json");
+        atividades = await carregarJSON("./data/atividades_artisticas.json");
+        emocional = await carregarJSON("./data/apoio_emocional.json");
+        piadas = await carregarJSON("./data/piadas.json");
+
+    } catch (e) {
+        status.innerText = "Erro ao carregar Candinho 😢";
+        console.error(e);
+    }
 }
 
+// 🟢 PROTEÇÃO
 async function responder(pergunta) {
+
+    if (!engine) {
+        return "Estou arrumando o ateliê ainda... espere um pouquinho 🧠🎨";
+    }
 
     const texto = pergunta.toLowerCase();
 
-    // 🎲 respostas rápidas
     if (texto.includes("curiosidade")) return pegarAleatorio(curiosidades);
     if (texto.includes("piada")) return pegarAleatorio(piadas);
-    if (texto.includes("atividade") || texto.includes("desafio")) return pegarAleatorio(atividades);
-    if (texto.includes("triste") || texto.includes("raiva") || texto.includes("ansioso")) return pegarAleatorio(emocional).resposta;
+    if (texto.includes("atividade")) return pegarAleatorio(atividades);
 
     const contexto = buscarContexto(pergunta);
 
@@ -238,7 +226,7 @@ ${pergunta}
     return resp.choices[0].message.content;
 }
 
-// ================= CHAT =================
+// CHAT
 const chat = document.getElementById("chat");
 
 function addMsg(text, user=false) {
@@ -262,7 +250,8 @@ async function enviar() {
     addMsg(resposta);
 }
 
-// iniciar IA
+window.enviar = enviar;
+
 init();
 
 </script>
