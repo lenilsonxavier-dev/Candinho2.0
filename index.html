@@ -132,24 +132,8 @@
     </div>
 </div>
 
-<script type="module">
+    <script type="module">
     // ======================= CONFIGURAÇÕES =======================
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, where } 
-      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyCQq1DYHivZBIX2_0_NY7eKIoBWG5sKs48",
-      authDomain: "candinho-8bee5.firebaseapp.com",
-      projectId: "candinho-8bee5",
-      storageBucket: "candinho-8bee5.firebasestorage.app",
-      messagingSenderId: "342319000222",
-      appId: "1:342319000222:web:ab04b940b0175b8722a98f"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const CONVERSA_COLLECTION = "conversas_candinho";
 
     // Base dos JSONs no GitHub (arquivos estão na raiz do repositório)
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/";
@@ -247,6 +231,25 @@ const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenils
             statusDiv.innerText = "⚠️ Memória local apenas (Firebase indisponível)";
         }
     }
+
+    // ======================= CONFIGURAÇÕES =======================
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, where } 
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCQq1DYHivZBIX2_0_NY7eKIoBWG5sKs48",
+      authDomain: "candinho-8bee5.firebaseapp.com",
+      projectId: "candinho-8bee5",
+      storageBucket: "candinho-8bee5.firebasestorage.app",
+      messagingSenderId: "342319000222",
+      appId: "1:342319000222:web:ab04b940b0175b8722a98f"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const CONVERSA_COLLECTION = "conversas_candinho";
+
     
     // ======================= RESPOSTAS INSTANTÂNEAS (JSONs do GitHub) =======================
     function pegarAleatorio(obj) {
