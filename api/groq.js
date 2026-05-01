@@ -1,5 +1,5 @@
 // api/groq.js
-const GITHUB_BASE = "https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPOSITORIO/main/";
+const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/api/";
 
 // Lista de arquivos e suas chaves
 const JSON_FILES = {
@@ -29,11 +29,13 @@ async function carregarTodosJSONs() {
     for (const [key, filename] of Object.entries(JSON_FILES)) {
         try {
             const url = GITHUB_BASE + filename;
+            console.log(`Carregando: ${url}`);
             const res = await fetch(url);
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             results[key] = await res.json();
+            console.log(`✅ ${filename} carregado`);
         } catch (err) {
-            console.error(`Erro ao carregar ${filename}:`, err);
+            console.error(`❌ Erro ao carregar ${filename}:`, err.message);
             results[key] = {};
         }
     }
@@ -62,7 +64,7 @@ function respostaInstantanea(pergunta, data) {
 }
 
 function buscarContexto(pergunta, data) {
-    const texto = pergunta.toLowerCase();
+    const texto = pergunta.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const bases = [
         data.dancas, data.artes, data.artistas, data.historia,
         data.teatro, data.musica, data.indigena, data.afro,
@@ -72,8 +74,10 @@ function buscarContexto(pergunta, data) {
     for (const base of bases) {
         if (!base) continue;
         for (const chave in base) {
-            if (texto.includes(chave.replace(/_/g, " "))) {
-                return base[chave].explicacao_infantil || "";
+            const chaveLimpa = chave.replace(/_/g, " ").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            if (texto.includes(chaveLimpa)) {
+                const explicacao = base[chave].explicacao_infantil || "";
+                if (explicacao) return explicacao;
             }
         }
     }
@@ -105,6 +109,7 @@ export default async function handler(req, res) {
         // 4. Chama o Groq com prompt forçado para crianças
         const GROQ_API_KEY = process.env.GROQ_API_KEY;
         if (!GROQ_API_KEY) {
+            console.error("GROQ_API_KEY não configurada");
             return res.status(500).json({ error: "API key não configurada" });
         }
 
@@ -113,9 +118,9 @@ export default async function handler(req, res) {
 - Use frases curtas (máximo 3 linhas).
 - Linguagem apropriada para crianças de 10 anos.
 - Sempre seja educativo, acolhedor e incentive a criatividade.
--Não use linguagem neutra
--Não use querido, querida, amigo, amiga, menino, menina, aminguinho, amiguinha.
--Não use diminutivos, nem aumentativos.
+- Não use linguagem neutra.
+- Não use querido, querida, amigo, amiga, menino, menina, aminguinho, amiguinha.
+- Não use diminutivos, nem aumentativos.
 - Se não souber a resposta, diga: "Não sei, mas vou pesquisar para você!"
 - NUNCA invente informações. Se o contexto abaixo não tiver a resposta, diga que não sabe.`;
 
@@ -143,7 +148,7 @@ export default async function handler(req, res) {
 
         if (!groqRes.ok) {
             const errorText = await groqRes.text();
-            console.error("Erro Groq:", errorText);
+            console.error("Erro Groq:", groqRes.status, errorText);
             return res.status(500).json({ error: "Falha na IA" });
         }
 
