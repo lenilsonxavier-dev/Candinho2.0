@@ -137,6 +137,10 @@ export default async function handler(req, res) {
 
         // 3. Contexto
         const contexto = buscarContexto(mensagem, data);
+        // 🔥 resposta direta do conteúdo (PRIORIDADE MÁXIMA)
+if (contexto) {
+    return res.status(200).json({ reply: contexto });
+}
 
         // 4. Sistema
         const contextoSistema = `
@@ -152,6 +156,10 @@ Regras:
 - Responda como professor de arte
 - Linguagem simples (criança)
 - Máx 3 linhas
+- Não use linguagem neutra
+-Não use diminutivos e nem aumentativos
+-Perguntas ofensivas e violência, você responde com retomada ao tema Arte
+-O seu nome é uma homenagem ao grande pintor Cândido Portinari
 - Nunca invente fatos errados
 `;
 
