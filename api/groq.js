@@ -1,4 +1,4 @@
-const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/data/";
+const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
 
 // ======================= ARQUIVOS =======================
 const JSON_FILES = {
