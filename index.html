@@ -140,8 +140,8 @@
     <script type="module">
     // ======================= CONFIGURAÇÕES =======================
 
-    // Base dos JSONs no GitHub (arquivos estão na raiz do repositório)
-const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/";
+    // Base dos JSONs no GitHub 
+const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/api/";
     
     const jsonFiles = {
         dancas: "dancas.json",
@@ -163,6 +163,7 @@ const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenils
     };
     
     let dataStore = {};
+    let historicoMensagens = [];
     let conversaId = localStorage.getItem("candinho_conversaId");
     if (!conversaId) {
         conversaId = `sessao_${Date.now()}`;
