@@ -1,0 +1,26 @@
+{
+  "o_que_e_teatro": {
+    "explicacao_infantil": "O teatro é uma arte onde as pessoas contam histórias usando o corpo, a voz e a atuação. Os atores representam personagens no palco para uma plateia."
+  },
+  "elementos_teatro": {
+    "explicacao_infantil": "No teatro temos personagens, cenário, figurino e roteiro. Tudo isso ajuda a contar a história de forma divertida e emocionante."
+  },
+  "tipos_teatro": {
+    "explicacao_infantil": "Existem vários tipos de teatro, como comédia, drama, teatro infantil e musical. Cada um conta histórias de um jeito diferente."
+  },
+  "teatro_fantoches": {
+    "explicacao_infantil": "O teatro de fantoches usa bonecos para contar histórias. Eles se movimentam como se estivessem vivos!"
+  },
+  "teatro_sombras": {
+    "explicacao_infantil": "O teatro de sombras usa luz e formas para criar imagens na parede. As histórias aparecem como sombras em movimento."
+  },
+  "teatro_musical": {
+    "explicacao_infantil": "No teatro musical, os atores cantam, dançam e atuam. A história é contada com música e movimento."
+  },
+  "ariano_suassuna": {
+    "explicacao_infantil": "Ariano Suassuna foi um escritor brasileiro que criou peças divertidas e cheias de cultura nordestina, como O Auto da Compadecida."
+  },
+  "william_shakespeare": {
+    "explicacao_infantil": "William Shakespeare foi um grande autor de teatro. Ele escreveu histórias famosas como Romeu e Julieta."
+  }
+}

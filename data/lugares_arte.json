@@ -1,0 +1,92 @@
+{
+  "louvre": {
+    "explicacao_infantil": "O Museu do Louvre, na França, é um dos maiores do mundo. Lá está a famosa Mona Lisa e muitas obras antigas."
+  },
+  "museu_do_prado": {
+    "explicacao_infantil": "O Museu do Prado, na Espanha, tem pinturas importantes de artistas famosos. É um lugar cheio de história da arte."
+  },
+  "moma": {
+    "explicacao_infantil": "O MoMA, nos Estados Unidos, é um museu de arte moderna. Ele tem obras criativas e diferentes."
+  },
+  "british_museum": {
+    "explicacao_infantil": "O British Museum, na Inglaterra, guarda objetos antigos do mundo todo. É como uma viagem pela história."
+  },
+  "vaticano": {
+    "explicacao_infantil": "Os Museus do Vaticano têm obras incríveis, como o teto da Capela Sistina. É um lugar cheio de arte e história."
+  },
+  "uffizi": {
+    "explicacao_infantil": "A Galeria Uffizi, na Itália, tem pinturas do Renascimento. É um dos museus mais famosos do mundo."
+  },
+  "masp": {
+    "explicacao_infantil": "O MASP, em São Paulo, é um museu importante do Brasil. Ele tem obras de artistas do mundo inteiro."
+  },
+  "inhotim": {
+    "explicacao_infantil": "Inhotim, em Minas Gerais, mistura natureza e arte. As obras ficam espalhadas em jardins enormes."
+  },
+  "acropole": {
+    "explicacao_infantil": "A Acrópole, na Grécia, tem construções antigas como o Partenon. É um símbolo da arte e da história grega."
+  },
+  "coliseu": {
+    "explicacao_infantil": "O Coliseu, na Itália, é uma construção antiga onde aconteciam espetáculos. Ele mostra a engenharia romana."
+  },
+  "torre_eiffel": {
+    "explicacao_infantil": "A Torre Eiffel, na França, é uma estrutura famosa de ferro. Ela virou um símbolo da cidade de Paris."
+  },
+  "taj_mahal": {
+    "explicacao_infantil": "O Taj Mahal, na Índia, é um monumento muito bonito feito de mármore branco. Ele foi construído como homenagem ao amor."
+  },
+  "estatua_da_liberdade": {
+    "explicacao_infantil": "A Estátua da Liberdade, nos Estados Unidos, é um símbolo de liberdade. Ela fica em Nova York."
+  },
+  "museu_hermitage": {
+    "explicacao_infantil": "O Hermitage, na Rússia, é um dos maiores museus do mundo. Ele tem muitas obras famosas."
+  },
+  "museu_orsay": {
+    "explicacao_infantil": "O Museu d'Orsay, na França, tem obras impressionistas. Ele fica em uma antiga estação de trem."
+  },
+  "guggenheim": {
+    "explicacao_infantil": "O Museu Guggenheim tem um prédio diferente em forma de espiral. Ele mostra arte moderna e contemporânea."
+  },
+  "museu_nacional_china": {
+    "explicacao_infantil": "O Museu Nacional da China tem objetos antigos e importantes. Ele mostra a história e a cultura do país."
+  },
+  "stonehenge": {
+    "explicacao_infantil": "Stonehenge, na Inglaterra, é formado por pedras gigantes. Ninguém sabe exatamente como foi construído."
+  },
+  "machu_picchu": {
+    "explicacao_infantil": "Machu Picchu, no Peru, é uma antiga cidade nas montanhas. Ela mostra a engenharia do povo inca."
+  },
+  "sagrada_familia": {
+    "explicacao_infantil": "A Sagrada Família, na Espanha, é uma igreja com formas diferentes. Foi criada pelo artista Gaudí."
+  },
+  "pompidou": {
+    "explicacao_infantil": "O Centro Pompidou, na França, tem um prédio moderno com tubos coloridos. Ele mostra arte contemporânea."
+  },
+  "museu_egipcio": {
+    "explicacao_infantil": "O Museu Egípcio tem múmias e objetos antigos. Ele conta a história do Egito antigo."
+  },
+  "alhambra": {
+    "explicacao_infantil": "A Alhambra, na Espanha, é um palácio cheio de detalhes e desenhos. Ela mostra a arte islâmica."
+  },
+  "angkor_wat": {
+    "explicacao_infantil": "Angkor Wat, no Camboja, é um templo gigante com esculturas antigas. É um dos maiores do mundo."
+  },
+  "opera_sydney": {
+    "explicacao_infantil": "A Ópera de Sydney tem um formato que lembra velas. É um lugar de música e espetáculos."
+  },
+  "museu_picasso": {
+    "explicacao_infantil": "O Museu Picasso guarda obras do artista Pablo Picasso. Ele mostra diferentes fases da sua arte."
+  },
+  "museu_van_gogh": {
+    "explicacao_infantil": "O Museu Van Gogh tem muitas pinturas do artista. Lá podemos ver suas cores e estilo únicos."
+  },
+  "chapada_diamantina": {
+    "explicacao_infantil": "A Chapada Diamantina, no Brasil, é cheia de paisagens incríveis. A natureza também pode ser vista como arte."
+  },
+  "leni_riefenstahl": {
+    "explicacao_infantil": "Alguns artistas criaram obras em cinema que marcaram a história. O cinema também é uma forma de arte."
+  },
+  "bienal_sp": {
+    "explicacao_infantil": "A Bienal de São Paulo é uma grande exposição de arte. Artistas do mundo inteiro mostram suas obras lá."
+  }
+}
