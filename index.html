@@ -116,10 +116,7 @@
         opacity: 0.5;
         cursor: not-allowed;
     }
-   body: JSON.stringify({
-    mensagem: pergunta,
-    memoria: memoria // ✅ correto
-})
+   .stringify({ mensagem: pergunta, memoria: memoria })
    
 </style>
 </head>
@@ -389,10 +386,10 @@ if (pergunta.toLowerCase().includes("quantos anos eu tenho")) {
         // 2. Chamar o proxy (IA)
         try {
             const response = await fetch('/api/groq', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ mensagem: pergunta, nome: nomeUsuario })
-            });
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ mensagem: pergunta, memoria: memoria })
+});
             
             const textResponse = await response.text();
             let data;
