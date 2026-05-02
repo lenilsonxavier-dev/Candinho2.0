@@ -146,10 +146,13 @@ Resposta curta e educativa:
             },
             body: JSON.stringify({
                 model: "llama-3.1-8b-instant",
-                messages: [
-                    { role: "system", content: contextoSistema },
-                    { role: "user", content: userPrompt }
-                ],
+               messages: [
+  { role: "system", content: contextoSistema },
+
+  ...(memoria.historicoCurto || []), // 🧠 CONTEXTO REAL
+
+  { role: "user", content: mensagem }
+]
                 temperature: 0.5,
                 max_tokens: 150
             })
