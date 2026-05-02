@@ -303,36 +303,90 @@ const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candin
         }
         return String(item);
     }
-    
-    function respostaInstantanea(pergunta) {
-        const texto = pergunta.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        const palavras = {
-            piada: ["piada", "piadas", "conte uma piada", "engraçado"],
-            curiosidade: ["curiosidade", "curiosidades", "fato interessante"],
-            atividade: ["atividade", "brincadeira", "fazer", "desenhar", "pintar", "criar"],
-            artista: ["artista", "artistas", "pintor", "pintores", "quem foi"],
-            danca: ["danca", "dança", "dançar", "coreografia", "balé", "samba"],
-            historia: ["historia", "história", "aconteceu", "passado", "antigamente"]
-        };
-        const contem = (lista) => lista.some(palavra => texto.includes(palavra));
-        try {
-            if (contem(palavras.piada) && dataStore.piadas && Object.keys(dataStore.piadas).length) 
-                return pegarAleatorio(dataStore.piadas);
-            if (contem(palavras.curiosidade) && dataStore.curiosidades && Object.keys(dataStore.curiosidades).length) 
-                return pegarAleatorio(dataStore.curiosidades);
-            if (contem(palavras.atividade) && dataStore.atividades && Object.keys(dataStore.atividades).length) 
-                return pegarAleatorio(dataStore.atividades);
-            if (contem(palavras.artista) && dataStore.artistas && Object.keys(dataStore.artistas).length) 
-                return pegarAleatorio(dataStore.artistas);
-            if (contem(palavras.danca) && dataStore.dancas && Object.keys(dataStore.dancas).length) 
-                return pegarAleatorio(dataStore.dancas);
-            if (contem(palavras.historia) && dataStore.historia && Object.keys(dataStore.historia).length) 
-                return pegarAleatorio(dataStore.historia);
-        } catch (err) {
-            console.error("Erro em respostaInstantanea:", err);
+
+      function buscarPorNome(obj, texto) {
+    for (const chave in obj) {
+        const nomeFormatado = chave
+            .replaceAll("_", " ")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+
+        if (texto.includes(nomeFormatado)) {
+            return obj[chave].explicacao_infantil || JSON.stringify(obj[chave]);
         }
-        return null;
     }
+    return null;
+}
+       
+    function respostaInstantanea(pergunta) {
+       const texto = pergunta.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+const palavras = {
+    piada: ["piada", "piadas", "engraçado"],
+    curiosidade: ["curiosidade", "curiosidades", "fato interessante"],
+
+    artista: ["artista", "artistas", "pintor", "pintores", "quem foi"],
+    atividade: ["atividade", "brincadeira", "desenhar", "pintar", "criar"],
+    danca: ["danca", "dança", "dançar", "coreografia", "balé", "samba"],
+    historia: ["historia", "história", "passado", "antigamente"],
+    musica: ["musica", "música", "som"],
+    teatro: ["teatro", "peça", "encenação"],
+    folclore: ["folclore", "lenda"],
+    ritmo: ["ritmo", "ritmos"],
+    festa: ["festa", "festas"],
+    lugar: ["lugar", "museu"],
+    indigena: ["indigena", "indígena"],
+    afro: ["afro", "afro-brasileira"],
+    arte: ["arte", "artes"],
+    emocional: ["triste", "feliz", "raiva", "medo"]
+};
+
+const contem = (lista) => lista?.some(p => texto.includes(p));
+
+try {
+    // 😂 PIADAS (aleatório)
+    if (contem(palavras.piada) && dataStore.piadas)
+        return pegarAleatorio(dataStore.piadas);
+
+    // 🤔 CURIOSIDADES (aleatório)
+    if (contem(palavras.curiosidade) && dataStore.curiosidades)
+        return pegarAleatorio(dataStore.curiosidades);
+
+    // 🔍 MAPEAMENTO
+    const mapa = {
+        artista: "artistas",
+        atividade: "atividades",
+        danca: "dancas",
+        historia: "historia",
+        musica: "musica",
+        teatro: "teatro",
+        folclore: "folclore",
+        ritmo: "ritmos",
+        festa: "festas",
+        lugar: "lugares",
+        indigena: "indigena",
+        afro: "afro",
+        arte: "artes",
+        emocional: "emocional"
+    };
+
+    // 🔍 BUSCA INTELIGENTE
+    for (const tipo in mapa) {
+        if (contem(palavras[tipo])) {
+            const base = dataStore[mapa[tipo]];
+
+            if (base) {
+                const resposta = buscarPorNome(base, texto);
+                return resposta || pegarAleatorio(base);
+            }
+        }
+    }
+
+} catch (err) {
+    console.error("Erro em respostaInstantanea:", err);
+}
+
+return null;
     
     // ======================= FUNÇÃO PRINCIPAL =======================
     let isProcessing = false;
