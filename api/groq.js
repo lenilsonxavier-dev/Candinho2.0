@@ -98,6 +98,16 @@ function buscarContexto(pergunta, data) {
 
     return "";
 }
+function mesmoTema(novaPergunta, historico) {
+    if (!historico.length) return true;
+
+    const ultima = historico[historico.length - 1]?.content || "";
+
+    const palavrasNova = novaPergunta.toLowerCase().split(" ");
+    const palavrasAntiga = ultima.toLowerCase().split(" ");
+
+    return palavrasNova.some(p => palavrasAntiga.includes(p));
+}
 
 // ======================= HANDLER =======================
 export default async function handler(req, res) {
@@ -146,10 +156,15 @@ Regras:
 `;
 
         // 🧠 Proteção da memória
-        const historicoSeguro = Array.isArray(memoria.historicoCurto)
-            ? memoria.historicoCurto.slice(-6)
-            : [];
+        let historicoSeguro = [];
 
+if (Array.isArray(memoria.historicoCurto)) {
+    if (mesmoTema(mensagem, memoria.historicoCurto)) {
+        historicoSeguro = memoria.historicoCurto.slice(-4);
+    } else {
+        historicoSeguro = []; // limpa se mudou assunto
+    }
+}
         // 5. Groq
         const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
