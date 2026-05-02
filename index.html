@@ -159,13 +159,15 @@ const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candin
         piadas: "piadas.json"
     };
     
-    let dataStore = {};
-    let historicoMensagens = [];
-    let conversaId = localStorage.getItem("candinho_conversaId");
-    if (!conversaId) {
-        conversaId = `sessao_${Date.now()}`;
-        localStorage.setItem("candinho_conversaId", conversaId);
-    }
+let dataStore = {};
+let historicoMensagens = [];
+let nomeUsuario = localStorage.getItem("candinho_nome") || "";
+let conversaId = localStorage.getItem("candinho_conversaId");
+
+if (!conversaId) {
+    conversaId = `sessao_${Date.now()}`;
+    localStorage.setItem("candinho_conversaId", conversaId);
+}
    let memoria = {
     nome: localStorage.getItem("candinho_nome") || "",
     idade: localStorage.getItem("candinho_idade") || "",
@@ -387,6 +389,7 @@ try {
 }
 
 return null;
+}
     
     // ======================= FUNÇÃO PRINCIPAL =======================
     let isProcessing = false;
