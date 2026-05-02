@@ -1,4 +1,4 @@
-const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/";
+const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/api/";
 
 // Lista de arquivos
 const JSON_FILES = {
