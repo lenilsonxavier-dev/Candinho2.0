@@ -116,7 +116,7 @@
         opacity: 0.5;
         cursor: not-allowed;
     }
-   .stringify({ mensagem: pergunta, memoria: memoria })
+   
    
 </style>
 </head>
@@ -428,6 +428,7 @@ try {
     console.error("Erro no proxy:", erro);
     return "Desculpe, não consegui me conectar à minha central de conhecimentos agora. Tente novamente mais tarde. 🎨";
 }
+      }
     // ======================= CARREGAR JSONs DO GITHUB =======================
     async function carregarTodosJSONs() {
         statusDiv.innerText = "📥 Baixando respostas instantâneas do GitHub...";
