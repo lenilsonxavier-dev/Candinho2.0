@@ -383,39 +383,51 @@ if (pergunta.toLowerCase().includes("quantos anos eu tenho")) {
             return instant;
         }
         
-        // 2. Chamar o proxy (IA)
-        try {
-            const response = await fetch('/api/groq', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ mensagem: pergunta, memoria: memoria })
-});
-            
-            const textResponse = await response.text();
-            let data;
-            try {
-                data = JSON.parse(textResponse);
-            } catch (jsonError) {
-                console.error("Proxy retornou texto não-JSON:", textResponse.slice(0, 200));
-                throw new Error("Resposta inválida do servidor (não é JSON)");
-            }
-            
-            if (!response.ok) {
-                throw new Error(data.error || `Erro HTTP ${response.status}`);
-            }
-            
-            const respostaIA = data.reply || "Não consegui responder. Tente de novo!";
-            historicoMensagens.push({ role: "user", content: pergunta });
-            historicoMensagens.push({ role: "assistant", content: respostaIA });
-            await salvarMensagemFirebase("user", pergunta);
-            await salvarMensagemFirebase("assistant", respostaIA);
-            return respostaIA;
-        } catch (erro) {
-            console.error("Erro no proxy:", erro);
-            return "Desculpe, não consegui me conectar à minha central de conhecimentos agora. Tente novamente mais tarde. 🎨";
-        }
+       // 🧠 salvar pergunta no contexto da conversa
+memoria.historicoCurto.push({ role: "user", content: pergunta });
+
+if (memoria.historicoCurto.length > 6) {
+    memoria.historicoCurto.shift();
+}
+
+// 2. Chamar o proxy (IA)
+try {
+    const response = await fetch('/api/groq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mensagem: pergunta, memoria: memoria })
+    });
+
+    const textResponse = await response.text();
+    let data;
+    try {
+        data = JSON.parse(textResponse);
+    } catch (jsonError) {
+        console.error("Proxy retornou texto não-JSON:", textResponse.slice(0, 200));
+        throw new Error("Resposta inválida do servidor (não é JSON)");
     }
-    
+
+    if (!response.ok) {
+        throw new Error(data.error || `Erro HTTP ${response.status}`);
+    }
+
+    const respostaIA = data.reply || "Não consegui responder. Tente de novo!";
+
+    // 🧠 salvar resposta no contexto
+    memoria.historicoCurto.push({ role: "assistant", content: respostaIA });
+
+    historicoMensagens.push({ role: "user", content: pergunta });
+    historicoMensagens.push({ role: "assistant", content: respostaIA });
+
+    await salvarMensagemFirebase("user", pergunta);
+    await salvarMensagemFirebase("assistant", respostaIA);
+
+    return respostaIA;
+
+} catch (erro) {
+    console.error("Erro no proxy:", erro);
+    return "Desculpe, não consegui me conectar à minha central de conhecimentos agora. Tente novamente mais tarde. 🎨";
+}
     // ======================= CARREGAR JSONs DO GITHUB =======================
     async function carregarTodosJSONs() {
         statusDiv.innerText = "📥 Baixando respostas instantâneas do GitHub...";
