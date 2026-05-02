@@ -1,6 +1,6 @@
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/lenilsonxavier-dev/main/data/";
 
-// Lista de arquivos
+// ======================= ARQUIVOS =======================
 const JSON_FILES = {
     dancas: "dancas.json",
     artes: "artes_visuais.json",
@@ -22,20 +22,32 @@ const JSON_FILES = {
 
 let cacheData = null;
 
-// ======================= CARREGAR JSONS =======================
+// ======================= CARREGAR JSONs =======================
 async function carregarTodosJSONs() {
     if (cacheData) return cacheData;
 
     const results = {};
+
     for (const [key, filename] of Object.entries(JSON_FILES)) {
         try {
             const url = GITHUB_BASE + filename;
+
             const res = await fetch(url);
 
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            if (!res.ok) {
+                console.warn(`Arquivo não encontrado: ${filename}`);
+                results[key] = {};
+                continue;
+            }
 
             const text = await res.text();
-            results[key] = JSON.parse(text);
+
+            try {
+                results[key] = JSON.parse(text);
+            } catch {
+                console.error(`JSON inválido em ${filename}`);
+                results[key] = {};
+            }
 
         } catch (err) {
             console.error(`Erro em ${filename}:`, err.message);
@@ -74,9 +86,12 @@ function buscarContexto(pergunta, data) {
     const texto = pergunta.toLowerCase();
 
     for (const base of Object.values(data)) {
+        if (!base) continue;
+
         for (const chave in base) {
-            if (texto.includes(chave.replace(/_/g, " "))) {
-                return base[chave].explicacao_infantil || "";
+            const chaveLimpa = chave.replace(/_/g, " ");
+            if (texto.includes(chaveLimpa)) {
+                return base[chave]?.explicacao_infantil || "";
             }
         }
     }
@@ -87,15 +102,18 @@ function buscarContexto(pergunta, data) {
 // ======================= HANDLER =======================
 export default async function handler(req, res) {
 
+    // 🔒 Anti-cache
+    res.setHeader("Cache-Control", "no-store");
+
     if (req.method !== "POST") {
         return res.status(405).json({ error: "Método não permitido" });
     }
 
     try {
-        const { mensagem, memoria = {} } = req.body;
+        const { mensagem, memoria = {} } = req.body || {};
 
-        if (!mensagem) {
-            return res.status(400).json({ error: "Mensagem vazia" });
+        if (!mensagem || typeof mensagem !== "string") {
+            return res.status(400).json({ error: "Mensagem inválida" });
         }
 
         // 1. JSONs
@@ -110,7 +128,7 @@ export default async function handler(req, res) {
         // 3. Contexto
         const contexto = buscarContexto(mensagem, data);
 
-        // 4. Sistema com memória
+        // 4. Sistema
         const contextoSistema = `
 Você é o Candinho, um assistente artístico infantil.
 
@@ -120,23 +138,35 @@ Idade: ${memoria.idade || "não informada"}
 Interesses: ${(memoria.interesses || []).join(", ") || "não informados"}
 
 Regras:
-- Use o nome naturalmente
+- Use o nome do aluno naturalmente
 - Responda como professor de arte
 - Linguagem simples (criança)
 - Máx 3 linhas
-- Seja educativo e criativo
+- Nunca invente fatos errados
 `;
 
-        const userPrompt = `
-Contexto: ${contexto}
-
-Pergunta: ${mensagem}
-
-Resposta curta e educativa:
-`;
+        // 🧠 Proteção da memória
+        const historicoSeguro = Array.isArray(memoria.historicoCurto)
+            ? memoria.historicoCurto.slice(-6)
+            : [];
 
         // 5. Groq
         const GROQ_API_KEY = process.env.GROQ_API_KEY;
+
+        if (!GROQ_API_KEY) {
+            throw new Error("API KEY não configurada");
+        }
+
+        const payload = {
+            model: "llama-3.1-8b-instant",
+            messages: [
+                { role: "system", content: contextoSistema },
+                ...historicoSeguro,
+                { role: "user", content: mensagem }
+            ],
+            temperature: 0.4,
+            max_tokens: 120
+        };
 
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
@@ -144,32 +174,38 @@ Resposta curta e educativa:
                 "Authorization": `Bearer ${GROQ_API_KEY}`,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                model: "llama-3.1-8b-instant",
-               messages: [
-  { role: "system", content: contextoSistema },
-
-  ...(memoria.historicoCurto || []), // 🧠 CONTEXTO REAL
-
-  { role: "user", content: mensagem }
-]
-                temperature: 0.5,
-                max_tokens: 150
-            })
+            body: JSON.stringify(payload)
         });
 
-        const dataIA = await response.json();
+        const text = await response.text();
+
+        let dataIA;
+
+        try {
+            dataIA = JSON.parse(text);
+        } catch {
+            console.error("Resposta inválida da IA:", text.slice(0, 200));
+            throw new Error("IA retornou formato inválido");
+        }
+
+        if (!response.ok) {
+            console.error("Erro Groq:", dataIA);
+            throw new Error("Erro na IA");
+        }
 
         let reply = dataIA?.choices?.[0]?.message?.content?.trim();
 
         if (!reply) {
-            reply = "Não consegui responder agora. Tente de novo!";
+            reply = contexto || "Não consegui responder agora. Tente novamente!";
         }
 
         return res.status(200).json({ reply });
 
     } catch (err) {
         console.error("Erro geral:", err);
-        return res.status(500).json({ error: "Erro interno" });
+
+        return res.status(200).json({
+            reply: "Hmm... minha paleta travou um pouco 🎨. Pode tentar perguntar de outro jeito?"
+        });
     }
 }
