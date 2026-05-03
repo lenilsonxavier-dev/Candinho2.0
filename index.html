@@ -293,20 +293,47 @@ if (!conversaId) {
     const CONVERSA_COLLECTION = "conversas_candinho";
 
     
-    // ======================= RESPOSTAS INSTANTÂNEAS (JSONs do GitHub) =======================
-    function pegarAleatorio(obj) {
-        if (!obj || typeof obj !== "object") return null;
-        let valores = Array.isArray(obj) ? obj : Object.values(obj);
-        if (valores.length === 0) return null;
-        const item = valores[Math.floor(Math.random() * valores.length)];
-        if (typeof item === "object" && item !== null) {
-            if (item.explicacao_infantil) return item.explicacao_infantil;
-            return JSON.stringify(item);
-        }
-        return String(item);
-    }
+  // ======================= RESPOSTAS INSTANTÂNEAS (JSONs do GitHub) =======================
 
-      function buscarPorNome(obj, texto) {
+// 🔤 NORMALIZAR TEXTO
+function normalizar(texto) {
+    return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+}
+
+// 🧠 DETECTAR PERGUNTA DE CONCEITO
+function ehPerguntaConceito(texto) {
+    const gatilhos = ["o que e", "o que eh", "o que é", "definicao", "explique", "me explique"];
+    return gatilhos.some(g => texto.includes(g));
+}
+
+// 🎯 DETECTAR TEMA
+function detectarTema(texto) {
+    if (texto.includes("danca")) return "danca";
+    if (texto.includes("musica")) return "musica";
+    if (texto.includes("teatro")) return "teatro";
+    if (texto.includes("folclore")) return "folclore";
+    if (texto.includes("festa")) return "festas";
+    if (texto.includes("indigena")) return "indigena";
+    if (texto.includes("afro")) return "afro";
+    if (texto.includes("arte")) return "arte";
+    return null;
+}
+
+// 🎲 ALEATÓRIO
+function pegarAleatorio(obj) {
+    if (!obj || typeof obj !== "object") return null;
+    let valores = Array.isArray(obj) ? obj : Object.values(obj);
+    if (valores.length === 0) return null;
+    const item = valores[Math.floor(Math.random() * valores.length)];
+    return item.explicacao_infantil || item.resposta || JSON.stringify(item);
+}
+
+// 🔍 BUSCAR POR NOME
+function buscarPorNome(obj, texto) {
     for (const chave in obj) {
         const nomeFormatado = chave
             .replaceAll("_", " ")
@@ -314,81 +341,107 @@ if (!conversaId) {
             .replace(/[\u0300-\u036f]/g, "");
 
         if (texto.includes(nomeFormatado)) {
-            return obj[chave].explicacao_infantil || JSON.stringify(obj[chave]);
+            return obj[chave].explicacao_infantil || obj[chave].resposta;
         }
     }
     return null;
 }
-       
-    function respostaInstantanea(pergunta) {
-       const texto = pergunta.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-const palavras = {
-    piada: ["piada", "piadas", "engraçado"],
-    curiosidade: ["curiosidade", "curiosidades", "fato interessante"],
-
-    artista: ["artista", "artistas", "pintor", "pintores", "quem foi"],
-    atividade: ["atividade", "brincadeira", "desenhar", "pintar", "criar"],
-    danca: ["danca", "dança", "dançar", "coreografia", "balé", "samba"],
-    historia: ["historia", "história", "passado", "antigamente"],
-    musica: ["musica", "música", "som"],
-    teatro: ["teatro", "peça", "encenação"],
-    folclore: ["folclore", "lenda"],
-    ritmo: ["ritmo", "ritmos"],
-    festa: ["festa", "festas"],
-    lugar: ["lugar", "museu"],
-    indigena: ["indigena", "indígena"],
-    afro: ["afro", "afro-brasileira"],
-    arte: ["arte", "artes"],
-    emocional: ["triste", "feliz", "raiva", "medo"]
-};
-
-const contem = (lista) => lista?.some(p => texto.includes(p));
-
-try {
-    // 😂 PIADAS (aleatório)
-    if (contem(palavras.piada) && dataStore.piadas)
-        return pegarAleatorio(dataStore.piadas);
-
-    // 🤔 CURIOSIDADES (aleatório)
-    if (contem(palavras.curiosidade) && dataStore.curiosidades)
-        return pegarAleatorio(dataStore.curiosidades);
-
-    // 🔍 MAPEAMENTO
-    const mapa = {
-        artista: "artistas",
-        atividade: "atividades",
-        danca: "dancas",
-        historia: "historia",
-        musica: "musica",
-        teatro: "teatro",
-        folclore: "folclore",
-        ritmo: "ritmos",
-        festa: "festas",
-        lugar: "lugares",
-        indigena: "indigena",
-        afro: "afro",
-        arte: "artes",
-        emocional: "emocional"
-    };
-
-    // 🔍 BUSCA INTELIGENTE
-    for (const tipo in mapa) {
-        if (contem(palavras[tipo])) {
-            const base = dataStore[mapa[tipo]];
-
-            if (base) {
-                const resposta = buscarPorNome(base, texto);
-                return resposta || pegarAleatorio(base);
-            }
+// 💛 BUSCAR EMOÇÃO (PRIORIDADE)
+function buscarEmocao(texto, base) {
+    for (const chave in base) {
+        const item = base[chave];
+        if (item.palavras_chave?.some(p => texto.includes(p))) {
+            return item.resposta;
         }
     }
-
-} catch (err) {
-    console.error("Erro em respostaInstantanea:", err);
+    return null;
 }
 
-return null;
+// 🧠 BUSCAR CONCEITO
+function buscarConceito(texto) {
+    const tema = detectarTema(texto);
+
+    if (tema === "musica") return dataStore.musica?.o_que_e_musica?.explicacao_infantil;
+    if (tema === "danca") return dataStore.dancas?.conceitos_danca?.o_que_e_danca?.explicacao_infantil;
+    if (tema === "teatro") return dataStore.teatro?.o_que_e_teatro?.explicacao_infantil;
+    if (tema === "folclore") return dataStore.folclore?.o_que_e_folclore?.explicacao_infantil;
+    if (tema === "arte") return dataStore.artes?.o_que_e?.explicacao_infantil;
+    if (tema === "indigena") return dataStore.indigena?.o_que_e?.explicacao_infantil;
+    if (tema === "afro") return dataStore.afro?.o_que_e?.explicacao_infantil;
+    if (tema === "festas") return dataStore.festas?.o_que_sao?.explicacao_infantil;
+
+    return null;
+}
+
+// 🔍 BUSCA POR PALAVRA-CHAVE
+function buscarPorPalavraChave(texto, base) {
+    for (const chave in base) {
+        const item = base[chave];
+        if (item.palavras_chave?.some(p => texto.includes(p))) {
+            return item.explicacao_infantil || item.resposta;
+        }
+    }
+    return null;
+}
+
+// 🚀 FUNÇÃO PRINCIPAL
+function respostaInstantanea(pergunta) {
+    const texto = normalizar(pergunta);
+
+    try {
+        // 💛 1. EMOÇÃO (prioridade máxima)
+        if (dataStore.emocional) {
+            const emocao = buscarEmocao(texto, dataStore.emocional);
+            if (emocao) return emocao;
+        }
+
+        // 🧠 2. CONCEITO
+        if (ehPerguntaConceito(texto)) {
+            const conceito = buscarConceito(texto);
+            if (conceito) return conceito;
+        }
+
+        // 😂 PIADAS
+        if (texto.includes("piada") && dataStore.piadas)
+            return pegarAleatorio(dataStore.piadas);
+
+        // 🤔 CURIOSIDADES
+        if (texto.includes("curiosidade") && dataStore.curiosidades)
+            return pegarAleatorio(dataStore.curiosidades);
+
+        // 🔎 BUSCA EM TODAS AS BASES
+        const bases = [
+            dataStore.artistas,
+            dataStore.atividades,
+            dataStore.dancas,
+            dataStore.historia,
+            dataStore.musica,
+            dataStore.teatro,
+            dataStore.folclore,
+            dataStore.ritmos,
+            dataStore.festas,
+            dataStore.lugares,
+            dataStore.indigena,
+            dataStore.afro,
+            dataStore.artes
+        ];
+
+        for (const base of bases) {
+            if (!base) continue;
+
+            const porNome = buscarPorNome(base, texto);
+            if (porNome) return porNome;
+
+            const porPalavra = buscarPorPalavraChave(texto, base);
+            if (porPalavra) return porPalavra;
+        }
+
+    } catch (err) {
+        console.error("Erro em respostaInstantanea:", err);
+    }
+
+    return null;
 }
     
     // ======================= FUNÇÃO PRINCIPAL =======================
