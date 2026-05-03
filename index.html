@@ -116,8 +116,6 @@
         opacity: 0.5;
         cursor: not-allowed;
     }
-   
-   
 </style>
 </head>
 <body>
@@ -172,6 +170,9 @@
         historicoCurto: []
     };
     
+    // Variável global para sincronizar nome (usada em outras telas, se houver)
+    let globalPlayerName = memoria.nome;
+    
     const chatDiv = document.getElementById("chat");
     const inputField = document.getElementById("pergunta");
     const sendBtn = document.getElementById("sendBtn");
@@ -186,44 +187,42 @@
         chatDiv.scrollTop = chatDiv.scrollHeight;
         return div;
     }
-   function extrairMemoria(pergunta) {
-    const texto = pergunta.toLowerCase();
-    // Captura nomes comuns (inclui letras acentuadas e evita capturar palavras soltas)
-    const nomeMatch = pergunta.match(/(?:meu nome é|sou|chamo(-me)?|chamado de) ([A-Za-zÀ-ÖØ-öø-ÿ]+)/i);
-    if (nomeMatch && nomeMatch[2]) {
-        let novoNome = nomeMatch[2].trim();
-        // Capitaliza a primeira letra (opcional)
-        novoNome = novoNome.charAt(0).toUpperCase() + novoNome.slice(1).toLowerCase();
-        memoria.nome = novoNome;
-        localStorage.setItem("candinho_nome", memoria.nome);
-        
-        // Sincroniza com a variável global usada em outras telas
-        globalPlayerName = novoNome;
-        
-        return `Prazer, ${memoria.nome}! Vou lembrar de você 😊`;
-    }
     
-    // Idade
-    const idadeMatch = pergunta.match(/(\d{1,2}) anos/);
-    if (idadeMatch) {
-        memoria.idade = idadeMatch[1];
-        localStorage.setItem("candinho_idade", memoria.idade);
-        return `Legal! Você tem ${memoria.idade} anos 🎈`;
-    }
-    
-    // Interesses
-    const interesses = ["desenhar", "pintar", "dançar", "música", "teatro"];
-    for (let interesse of interesses) {
-        if (texto.includes(interesse)) {
-            if (!memoria.interesses.includes(interesse)) {
-                memoria.interesses.push(interesse);
-                localStorage.setItem("candinho_interesses", JSON.stringify(memoria.interesses));
-                return `Que legal que você gosta de ${interesse}! 🎨`;
+    function extrairMemoria(pergunta) {
+        const texto = pergunta.toLowerCase();
+        // Captura nome (inclui letras acentuadas)
+        const nomeMatch = pergunta.match(/(?:meu nome é|sou|chamo(-me)?|chamado de) ([A-Za-zÀ-ÖØ-öø-ÿ]+)/i);
+        if (nomeMatch && nomeMatch[2]) {
+            let novoNome = nomeMatch[2].trim();
+            novoNome = novoNome.charAt(0).toUpperCase() + novoNome.slice(1).toLowerCase();
+            memoria.nome = novoNome;
+            localStorage.setItem("candinho_nome", memoria.nome);
+            globalPlayerName = novoNome;
+            return `Prazer, ${memoria.nome}! Vou lembrar de você 😊`;
+        }
+        
+        // Idade
+        const idadeMatch = pergunta.match(/(\d{1,2}) anos/);
+        if (idadeMatch) {
+            memoria.idade = idadeMatch[1];
+            localStorage.setItem("candinho_idade", memoria.idade);
+            return `Legal! Você tem ${memoria.idade} anos 🎈`;
+        }
+        
+        // Interesses
+        const interesses = ["desenhar", "pintar", "dançar", "música", "teatro"];
+        for (let interesse of interesses) {
+            if (texto.includes(interesse)) {
+                if (!memoria.interesses.includes(interesse)) {
+                    memoria.interesses.push(interesse);
+                    localStorage.setItem("candinho_interesses", JSON.stringify(memoria.interesses));
+                    return `Que legal que você gosta de ${interesse}! 🎨`;
+                }
             }
         }
+        return null;
     }
-    return null;
-}
+    
     function addLoading() {
         const div = document.createElement("div");
         div.className = "msg bot loading";
@@ -232,15 +231,17 @@
         chatDiv.appendChild(div);
         chatDiv.scrollTop = chatDiv.scrollHeight;
     }
+    
     function removeLoading() {
         const el = document.getElementById("loadingMsg");
         if (el) el.remove();
     }
     
-    // ======================= FIREBASE =======================
+    // ======================= FIREBASE (opcional, mas mantido sem salvamento) =======================
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, where } 
         from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    
     const firebaseConfig = {
         apiKey: "AIzaSyCQq1DYHivZBIX2_0_NY7eKIoBWG5sKs48",
         authDomain: "candinho-8bee5.firebaseapp.com",
@@ -253,291 +254,188 @@
     const db = getFirestore(app);
     const CONVERSA_COLLECTION = "conversas_candinho";
     
+    // Estas funções não são mais usadas (não salvamos nem carregamos histórico)
+    // Mantidas apenas para evitar erro, mas não são chamadas.
     async function salvarMensagemFirebase(role, content) {
-        try {
-            await addDoc(collection(db, CONVERSA_COLLECTION), {
-                conversaId: conversaId,
-                role: role,
-                content: content,
-                timestamp: new Date()
-            });
-        } catch (e) { console.warn("Erro Firebase:", e); }
+        // Desabilitado: não salva nada no Firebase
+        return;
     }
     async function carregarHistoricoFirebase() {
-        try {
-            const q = query(collection(db, CONVERSA_COLLECTION), where("conversaId", "==", conversaId), orderBy("timestamp", "desc"), limit(12));
-            const snap = await getDocs(q);
-            const msgs = [];
-            snap.forEach(doc => msgs.push(doc.data()));
-            msgs.reverse();
-            historicoMensagens = msgs.map(m => ({ role: m.role, content: m.content }));
-            for (let msg of historicoMensagens) {
-                addMessageToUI(msg.content, msg.role === "user");
-            }
-            statusDiv.innerText = "✅ Candinho pronto";
-        } catch (e) {
-            console.warn("Erro ao carregar histórico:", e);
-            historicoMensagens = [];
-            statusDiv.innerText = "⚠️ Memória local apenas (Firebase indisponível)";
-        }
+        // Desabilitado: não carrega histórico
+        historicoMensagens = [];
+        statusDiv.innerText = "✅ Candinho pronto (sem histórico)";
+        return;
     }
     
-// ======================= RESPOSTAS INSTANTÂNEAS - VERSÃO FINAL (PRIORIDADE TOTAL) =======================
-function normalizar(texto) {
-    return texto.toLowerCase()
-        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        .trim();
-}
-
-// Mapeamento de temas com palavras-chave abrangentes
-function detectarTemaPrioritario(texto) {
-    const txt = texto.toLowerCase();
-    // Artes visuais (inclui cores, elementos, etc.)
-    const artesVisuaisKeywords = [
-        "cor primaria", "cores primarias", "cor primária", "cores primárias",
-        "cor secundaria", "cores secundarias", "cor secundária", "cores secundárias",
-        "cor terciaria", "cores terciarias", "cor terciária", "cores terciárias",
-        "linha", "ponto", "forma", "textura", "volume", "perspectiva", "composicao",
-        "luz e sombra", "elementos da arte", "elementos visuais", "o que e arte",
-        "pintura", "desenho", "escultura", "arte visual", "cor quente", "cor fria"
-    ];
-    if (artesVisuaisKeywords.some(kw => txt.includes(kw))) return "arte";
-    
-    // Dança
-    if (txt.includes("danca") || txt.includes("ballet") || txt.includes("samba") || 
-        txt.includes("coreografia") || txt.includes("frevo") || txt.includes("maracatu") ||
-        txt.includes("caboclinho") || txt.includes("ciranda") || txt.includes("carimbo")) return "danca";
-    
-    // Teatro
-    if (txt.includes("teatro") || txt.includes("peca") || txt.includes("ator") || 
-        txt.includes("fantoche") || txt.includes("sombras") || txt.includes("shakespeare") ||
-        txt.includes("suassuna")) return "teatro";
-    
-    // Música
-    if (txt.includes("musica") || txt.includes("cancao") || txt.includes("instrumento") ||
-        txt.includes("ritmo") || txt.includes("violao") || txt.includes("samba") && !txt.includes("danca")) return "musica";
-    
-    // Folclore
-    if (txt.includes("folclore") || txt.includes("lenda") || txt.includes("saci") || 
-        txt.includes("curupira") || txt.includes("iara") || txt.includes("boitata")) return "folclore";
-    
-    // Festas
-    if (txt.includes("festa") || txt.includes("carnaval") || txt.includes("junina") ||
-        txt.includes("bumba meu boi") || txt.includes("cirio")) return "festas";
-    
-    // Cultura indígena
-    if (txt.includes("indigena") || txt.includes("tupi") || txt.includes("grafismo") ||
-        txt.includes("cestaria") || txt.includes("pintura corporal")) return "indigena";
-    
-    // Cultura afro-brasileira
-    if (txt.includes("afro") || txt.includes("quilombo") || txt.includes("orixa")) return "afro";
-    
-    // Atividades artísticas
-    if (txt.includes("atividade") || txt.includes("oficina") || txt.includes("desenho")) return "atividade";
-    
-    // Artistas (prioridade alta)
-    if (txt.includes("artista") || txt.includes("van gogh") || txt.includes("pintor") ||
-        txt.includes("tarsila") || txt.includes("portinari") || txt.includes("picasso") ||
-        txt.includes("monet") || txt.includes("dali") || txt.includes("frida")) return "artista";
-    
-    // Piadas
-    if (txt.includes("piada")) return "piada";
-    
-    // Curiosidades
-    if (txt.includes("curiosidade")) return "curiosidade";
-    
-    // Emoção (apoio emocional)
-    if (txt.includes("triste") || txt.includes("ansioso") || txt.includes("medo") || 
-        txt.includes("raiva") || txt.includes("alegre")) return "emocao";
-    
-    return null;
-}
-
-// Busca recursiva: retorna a primeira explicação encontrada com base nas palavras-chave
-function buscarRecursivo(obj, textoNorm) {
-    if (!obj || typeof obj !== "object") return null;
-    
-    // Se o objeto tem palavras_chave e explicacao_infantil/resposta
-    if (obj.palavras_chave && Array.isArray(obj.palavras_chave)) {
-        for (let kw of obj.palavras_chave) {
-            let kwNorm = normalizar(kw);
-            if (textoNorm.includes(kwNorm)) {
-                return obj.explicacao_infantil || obj.resposta || null;
-            }
-        }
+    // ======================= RESPOSTAS INSTANTÂNEAS (PRIORIDADE TOTAL) =======================
+    function normalizar(texto) {
+        return texto.toLowerCase()
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            .trim();
     }
     
-    // Percorre todas as propriedades recursivamente
-    for (let key in obj) {
-        if (obj.hasOwnProperty(key) && typeof obj[key] === "object") {
-            let resultado = buscarRecursivo(obj[key], textoNorm);
-            if (resultado) return resultado;
-        }
-    }
-    return null;
-}
-
-// Busca em um JSON específico (dataStore[chave])
-function buscarEmJSON(jsonObj, pergunta) {
-    if (!jsonObj || typeof jsonObj !== "object") return null;
-    const textoNorm = normalizar(pergunta);
-    return buscarRecursivo(jsonObj, textoNorm);
-}
-
-// Resposta instantânea principal (prioridade máxima)
-function respostaInstantanea(pergunta) {
-    const tema = detectarTemaPrioritario(pergunta);
-    const texto = normalizar(pergunta);
-    
-    // Caso especial: piada
-    if (tema === "piada" && dataStore.piadas) {
-        const piadasArray = Object.values(dataStore.piadas);
-        if (piadasArray.length) {
-            const aleatoria = piadasArray[Math.floor(Math.random() piadasArray.length)];
-            return aleatoria.explicacao_infantil || aleatoria.resposta || "Kkkkkk";
-        }
-    }
-    
-    // Caso especial: curiosidade
-    if (tema === "curiosidade" && dataStore.curiosidades) {
-        const curiosArray = Object.values(dataStore.curiosidades);
-        if (curiosArray.length) {
-            const aleatoria = curiosArray[Math.floor(Math.random() * curiosArray.length)];
-            return aleatoria.explicacao_infantil || aleatoria.resposta;
-        }
-    }
-    
-    // Caso especial: apoio emocional
-    if (tema === "emocao" && dataStore.emocional) {
-        for (let chave in dataStore.emocional) {
-            const item = dataStore.emocional[chave];
-            if (item.palavras_chave && item.palavras_chave.some(p => texto.includes(p))) {
-                return item.resposta || item.explicacao_infantil;
-            }
-        }
+    function detectarTemaPrioritario(texto) {
+        const txt = texto.toLowerCase();
+        const artesVisuaisKeywords = [
+            "cor primaria", "cores primarias", "cor primária", "cores primárias",
+            "cor secundaria", "cores secundarias", "cor secundária", "cores secundárias",
+            "cor terciaria", "cores terciarias", "cor terciária", "cores terciárias",
+            "linha", "ponto", "forma", "textura", "volume", "perspectiva", "composicao",
+            "luz e sombra", "elementos da arte", "elementos visuais", "o que e arte",
+            "pintura", "desenho", "escultura", "arte visual", "cor quente", "cor fria"
+        ];
+        if (artesVisuaisKeywords.some(kw => txt.includes(kw))) return "arte";
+        
+        if (txt.includes("danca") || txt.includes("ballet") || txt.includes("samba") || 
+            txt.includes("coreografia") || txt.includes("frevo") || txt.includes("maracatu") ||
+            txt.includes("caboclinho") || txt.includes("ciranda") || txt.includes("carimbo")) return "danca";
+        
+        if (txt.includes("teatro") || txt.includes("peca") || txt.includes("ator") || 
+            txt.includes("fantoche") || txt.includes("sombras") || txt.includes("shakespeare") ||
+            txt.includes("suassuna")) return "teatro";
+        
+        if (txt.includes("musica") || txt.includes("cancao") || txt.includes("instrumento") ||
+            txt.includes("ritmo") || txt.includes("violao")) return "musica";
+        
+        if (txt.includes("folclore") || txt.includes("lenda") || txt.includes("saci") || 
+            txt.includes("curupira") || txt.includes("iara") || txt.includes("boitata")) return "folclore";
+        
+        if (txt.includes("festa") || txt.includes("carnaval") || txt.includes("junina") ||
+            txt.includes("bumba meu boi") || txt.includes("cirio")) return "festas";
+        
+        if (txt.includes("indigena") || txt.includes("tupi") || txt.includes("grafismo") ||
+            txt.includes("cestaria") || txt.includes("pintura corporal")) return "indigena";
+        
+        if (txt.includes("afro") || txt.includes("quilombo") || txt.includes("orixa")) return "afro";
+        
+        if (txt.includes("atividade") || txt.includes("oficina") || txt.includes("desenho")) return "atividade";
+        
+        if (txt.includes("artista") || txt.includes("van gogh") || txt.includes("pintor") ||
+            txt.includes("tarsila") || txt.includes("portinari") || txt.includes("picasso") ||
+            txt.includes("monet") || txt.includes("dali") || txt.includes("frida")) return "artista";
+        
+        if (txt.includes("piada")) return "piada";
+        if (txt.includes("curiosidade")) return "curiosidade";
+        if (txt.includes("triste") || txt.includes("ansioso") || txt.includes("medo") || 
+            txt.includes("raiva") || txt.includes("alegre")) return "emocao";
+        
+        return null;
     }
     
-    // Mapeamento tema -> chaves do dataStore (ordem de prioridade)
-    let chavesBusca = [];
-    if (tema === "arte") chavesBusca = ["artes_visuais", "artes", "artistas", "artistas_universais", "historia_arte", "lugares_arte"];
-    else if (tema === "danca") chavesBusca = ["dancas", "ritmos_musicais"];
-    else if (tema === "musica") chavesBusca = ["musica", "ritmos_musicais"];
-    else if (tema === "teatro") chavesBusca = ["teatro"];
-    else if (tema === "folclore") chavesBusca = ["folclore"];
-    else if (tema === "festas") chavesBusca = ["festas_brasileiras"];
-    else if (tema === "indigena") chavesBusca = ["cultura_indigena"];
-    else if (tema === "afro") chavesBusca = ["cultura_afro_brasileira"];
-    else if (tema === "atividade") chavesBusca = ["atividades_artisticas"];
-    else if (tema === "artista") chavesBusca = ["artistas", "artistas_universais"];
-    else {
-        // Sem tema: busca em todas as bases (exceto piadas para não bagunçar)
-        chavesBusca = Object.keys(dataStore).filter(k => k !== "piadas" && k !== "curiosidades" && k !== "emocional");
-    }
-    
-    // Busca na ordem definida
-    for (let chave of chavesBusca) {
-        const obj = dataStore[chave];
-        if (obj) {
-            const resposta = buscarEmJSON(obj, pergunta);
-            if (resposta && typeof resposta === "string" && resposta.trim().length > 0) {
-                return resposta;
-            }
-        }
-    }
-    
-    // Fallback: perguntas "o que é" sem tema detectado
-    if (texto.includes("o que e") || texto.includes("o que é")) {
-        // Tenta achar alguma definição geral em conceitos
-        for (let baseKey of ["musica", "dancas", "teatro", "folclore", "artes_visuais", "cultura_indigena", "cultura_afro_brasileira", "festas_brasileiras"]) {
-            const obj = dataStore[baseKey];
-            if (obj && obj.conceitos && typeof obj.conceitos === "object") {
-                let conceitoItem = null;
-                if (baseKey === "dancas" && obj.conceitos.o_que_e_danca) conceitoItem = obj.conceitos.o_que_e_danca;
-                else if (obj.conceitos.o_que_e) conceitoItem = obj.conceitos.o_que_e;
-                if (conceitoItem && conceitoItem.explicacao_infantil) {
-                    return conceitoItem.explicacao_infantil;
+    function buscarRecursivo(obj, textoNorm) {
+        if (!obj || typeof obj !== "object") return null;
+        
+        if (obj.palavras_chave && Array.isArray(obj.palavras_chave)) {
+            for (let kw of obj.palavras_chave) {
+                let kwNorm = normalizar(kw);
+                if (textoNorm.includes(kwNorm)) {
+                    return obj.explicacao_infantil || obj.resposta || null;
                 }
             }
         }
-    }
-    
-    return null; // Sem resposta instantânea
-}
-
-// ======================= FUNÇÃO RESPONDER (PRIORIDADE INSTANTÂNEA) =======================
-async function responder(pergunta) {
-    // 1. Memória (nome, idade, interesses)
-    const memoriaDetectada = extrairMemoria(pergunta);
-    if (memoriaDetectada) {
-        historicoMensagens.push({ role: "user", content: pergunta });
-        historicoMensagens.push({ role: "assistant", content: memoriaDetectada });
-        await salvarMensagemFirebase("user", pergunta);
-        await salvarMensagemFirebase("assistant", memoriaDetectada);
-        return memoriaDetectada;
-    }
-    
-    // 2. Perguntas sobre memória armazenada
-    if (pergunta.toLowerCase().includes("meu nome")) {
-        return memoria.nome ? `Seu nome é ${memoria.nome}! 😊` : "Você ainda não me contou seu nome!";
-    }
-    if (pergunta.toLowerCase().includes("quantos anos eu tenho")) {
-        return memoria.idade ? `Você tem ${memoria.idade} anos! 🎈` : "Você ainda não me contou sua idade!";
-    }
-    
-    // 3. Resposta instantânea (JSONs) - PRIORIDADE MÁXIMA
-    const instant = respostaInstantanea(pergunta);
-    if (instant) {
-        historicoMensagens.push({ role: "user", content: pergunta });
-        historicoMensagens.push({ role: "assistant", content: instant });
-        await salvarMensagemFirebase("user", pergunta);
-        await salvarMensagemFirebase("assistant", instant);
-        return instant;
-    }
-    
-    // 4. Se não achou nada, chama a IA (proxy)
-    memoria.historicoCurto.push({ role: "user", content: pergunta });
-    if (memoria.historicoCurto.length > 6) memoria.historicoCurto.shift();
-    
-    try {
-        const response = await fetch('/api/groq', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ mensagem: pergunta, memoria: memoria })
-        });
-        const textResponse = await response.text();
-        let data;
-        try {
-            data = JSON.parse(textResponse);
-        } catch (jsonError) {
-            console.error("Proxy retornou texto não-JSON:", textResponse.slice(0, 200));
-            throw new Error("Resposta inválida do servidor");
+        
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key) && typeof obj[key] === "object") {
+                let resultado = buscarRecursivo(obj[key], textoNorm);
+                if (resultado) return resultado;
+            }
         }
-        if (!response.ok) throw new Error(data.error || `Erro HTTP ${response.status}`);
-        const respostaIA = data.reply || "Não consegui responder. Tente de novo!";
-        
-        memoria.historicoCurto.push({ role: "assistant", content: respostaIA });
-        historicoMensagens.push({ role: "user", content: pergunta });
-        historicoMensagens.push({ role: "assistant", content: respostaIA });
-        await salvarMensagemFirebase("user", pergunta);
-        await salvarMensagemFirebase("assistant", respostaIA);
-        return respostaIA;
-        
-    } catch (erro) {
-        console.error("Erro no proxy:", erro);
-        return "Desculpe, não consegui me conectar à minha central de conhecimentos agora. Tente novamente mais tarde. 🎨";
+        return null;
     }
-}
     
-    // ======================= IA (PROXY) =======================
+    function buscarEmJSON(jsonObj, pergunta) {
+        if (!jsonObj || typeof jsonObj !== "object") return null;
+        const textoNorm = normalizar(pergunta);
+        return buscarRecursivo(jsonObj, textoNorm);
+    }
+    
+    function respostaInstantanea(pergunta) {
+        const tema = detectarTemaPrioritario(pergunta);
+        const texto = normalizar(pergunta);
+        
+        // Piada
+        if (tema === "piada" && dataStore.piadas) {
+            const piadasArray = Object.values(dataStore.piadas);
+            if (piadasArray.length) {
+                const aleatoria = piadasArray[Math.floor(Math.random() * piadasArray.length)]; // CORRIGIDO: faltava o *
+                return aleatoria.explicacao_infantil || aleatoria.resposta || "Kkkkkk";
+            }
+        }
+        
+        // Curiosidade
+        if (tema === "curiosidade" && dataStore.curiosidades) {
+            const curiosArray = Object.values(dataStore.curiosidades);
+            if (curiosArray.length) {
+                const aleatoria = curiosArray[Math.floor(Math.random() * curiosArray.length)];
+                return aleatoria.explicacao_infantil || aleatoria.resposta;
+            }
+        }
+        
+        // Apoio emocional
+        if (tema === "emocao" && dataStore.emocional) {
+            for (let chave in dataStore.emocional) {
+                const item = dataStore.emocional[chave];
+                if (item.palavras_chave && item.palavras_chave.some(p => texto.includes(p))) {
+                    return item.resposta || item.explicacao_infantil;
+                }
+            }
+        }
+        
+        // Mapeamento tema -> chaves do dataStore
+        let chavesBusca = [];
+        if (tema === "arte") chavesBusca = ["artes_visuais", "artes", "artistas", "artistas_universais", "historia_arte", "lugares_arte"];
+        else if (tema === "danca") chavesBusca = ["dancas", "ritmos_musicais"];
+        else if (tema === "musica") chavesBusca = ["musica", "ritmos_musicais"];
+        else if (tema === "teatro") chavesBusca = ["teatro"];
+        else if (tema === "folclore") chavesBusca = ["folclore"];
+        else if (tema === "festas") chavesBusca = ["festas_brasileiras"];
+        else if (tema === "indigena") chavesBusca = ["cultura_indigena"];
+        else if (tema === "afro") chavesBusca = ["cultura_afro_brasileira"];
+        else if (tema === "atividade") chavesBusca = ["atividades_artisticas"];
+        else if (tema === "artista") chavesBusca = ["artistas", "artistas_universais"];
+        else {
+            chavesBusca = Object.keys(dataStore).filter(k => k !== "piadas" && k !== "curiosidades" && k !== "emocional");
+        }
+        
+        for (let chave of chavesBusca) {
+            const obj = dataStore[chave];
+            if (obj) {
+                const resposta = buscarEmJSON(obj, pergunta);
+                if (resposta && typeof resposta === "string" && resposta.trim().length > 0) {
+                    return resposta;
+                }
+            }
+        }
+        
+        // Fallback para "o que é"
+        if (texto.includes("o que e") || texto.includes("o que é")) {
+            for (let baseKey of ["musica", "dancas", "teatro", "folclore", "artes_visuais", "cultura_indigena", "cultura_afro_brasileira", "festas_brasileiras"]) {
+                const obj = dataStore[baseKey];
+                if (obj && obj.conceitos && typeof obj.conceitos === "object") {
+                    let conceitoItem = null;
+                    if (baseKey === "dancas" && obj.conceitos.o_que_e_danca) conceitoItem = obj.conceitos.o_que_e_danca;
+                    else if (obj.conceitos.o_que_e) conceitoItem = obj.conceitos.o_que_e;
+                    if (conceitoItem && conceitoItem.explicacao_infantil) {
+                        return conceitoItem.explicacao_infantil;
+                    }
+                }
+            }
+        }
+        
+        return null;
+    }
+    
+    // ======================= FUNÇÃO RESPONDER (PRIORIDADE INSTANTÂNEA + IA FALLBACK) =======================
     async function responder(pergunta) {
+        // 1. Memória (nome, idade, interesses)
         const memoriaDetectada = extrairMemoria(pergunta);
         if (memoriaDetectada) {
             historicoMensagens.push({ role: "user", content: pergunta });
             historicoMensagens.push({ role: "assistant", content: memoriaDetectada });
-            await salvarMensagemFirebase("user", pergunta);
-            await salvarMensagemFirebase("assistant", memoriaDetectada);
             return memoriaDetectada;
         }
+        
+        // 2. Perguntas sobre dados armazenados
         if (pergunta.toLowerCase().includes("meu nome")) {
             return memoria.nome ? `Seu nome é ${memoria.nome}! 😊` : "Você ainda não me contou seu nome!";
         }
@@ -545,15 +443,15 @@ async function responder(pergunta) {
             return memoria.idade ? `Você tem ${memoria.idade} anos! 🎈` : "Você ainda não me contou sua idade!";
         }
         
+        // 3. Resposta instantânea (JSONs) - PRIORIDADE MÁXIMA
         const instant = respostaInstantanea(pergunta);
         if (instant) {
             historicoMensagens.push({ role: "user", content: pergunta });
             historicoMensagens.push({ role: "assistant", content: instant });
-            await salvarMensagemFirebase("user", pergunta);
-            await salvarMensagemFirebase("assistant", instant);
             return instant;
         }
         
+        // 4. Se não achou, chama a IA (proxy Groq)
         memoria.historicoCurto.push({ role: "user", content: pergunta });
         if (memoria.historicoCurto.length > 6) memoria.historicoCurto.shift();
         
@@ -573,11 +471,10 @@ async function responder(pergunta) {
             }
             if (!response.ok) throw new Error(data.error || `Erro HTTP ${response.status}`);
             const respostaIA = data.reply || "Não consegui responder. Tente de novo!";
+            
             memoria.historicoCurto.push({ role: "assistant", content: respostaIA });
             historicoMensagens.push({ role: "user", content: pergunta });
             historicoMensagens.push({ role: "assistant", content: respostaIA });
-            await salvarMensagemFirebase("user", pergunta);
-            await salvarMensagemFirebase("assistant", respostaIA);
             return respostaIA;
         } catch (erro) {
             console.error("Erro no proxy:", erro);
@@ -634,27 +531,27 @@ async function responder(pergunta) {
             inputField.focus();
         }
     }
+    
     sendBtn.addEventListener("click", enviar);
     inputField.addEventListener("keypress", (e) => { if (e.key === "Enter" && !isProcessing) enviar(); });
     
     async function init() {
         await carregarTodosJSONs();
-        await carregarHistoricoFirebase();
-        if (historicoMensagens.length === 0) {
-            let boasVindas = "Olá! Sou o Candinho, seu amigo artista. Pergunte sobre artistas, dança, história, ou peça uma piada! 🖌️";
-            if (nomeUsuario) boasVindas = `Olá, ${nomeUsuario}! Sou o Candinho, seu amigo artista. Vamos criar? 🎨`;
-            addMessageToUI(boasVindas, false);
-            historicoMensagens.push({ role: "assistant", content: boasVindas });
-            await salvarMensagemFirebase("assistant", boasVindas);
-        }
+        // Não carrega histórico do Firebase (sempre começa do zero)
+        // Histórico local é resetado a cada refresh
+        historicoMensagens = [];
+        let boasVindas = "Olá! Sou o Candinho, seu amigo artista. Pergunte sobre artistas, dança, história, ou peça uma piada! 🖌️";
+        if (nomeUsuario) boasVindas = `Olá, ${nomeUsuario}! Sou o Candinho, seu amigo artista. Vamos criar? 🎨`;
+        addMessageToUI(boasVindas, false);
+        historicoMensagens.push({ role: "assistant", content: boasVindas });
+        // Não salva no Firebase
     }
+    
     init().catch(err => {
         console.error(err);
         statusDiv.innerText = "Erro crítico ao iniciar.";
         addMessageToUI("Não foi possível carregar os conhecimentos do Candinho. Verifique a conexão.", false, true);
     });
-    
-    window.enviar = enviar;
 </script>
 </body>
 </html>
