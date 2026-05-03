@@ -396,11 +396,29 @@ function respostaInstantanea(pergunta) {
             if (emocao) return emocao;
         }
 
-        // 🧠 2. CONCEITO
-        if (ehPerguntaConceito(texto)) {
-            const conceito = buscarConceito(texto);
-            if (conceito) return conceito;
-        }
+        // 🔎 1. BUSCA DIRETA POR NOME (PRIORIDADE MÁXIMA)
+const bases = [
+    dataStore.dancas,
+    dataStore.ritmos,
+    dataStore.folclore,
+    dataStore.artistas,
+    dataStore.artes,
+    dataStore.musica,
+    dataStore.teatro
+];
+
+for (const base of bases) {
+    if (!base) continue;
+
+    const porNome = buscarPorNome(base, texto);
+    if (porNome) return porNome;
+}
+
+// 🧠 2. CONCEITO (SÓ SE NÃO ACHOU NADA)
+if (ehPerguntaConceito(texto)) {
+    const conceito = buscarConceito(texto);
+    if (conceito) return conceito;
+}
 
         // 😂 PIADAS
         if (texto.includes("piada") && dataStore.piadas)
