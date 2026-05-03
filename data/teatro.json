@@ -1,26 +1,69 @@
 {
   "o_que_e_teatro": {
+    "palavras_chave": [
+      "o que e teatro",
+      "definicao de teatro",
+      "arte teatral",
+      "atuacao no palco"
+    ],
     "explicacao_infantil": "O teatro é uma arte onde as pessoas contam histórias usando o corpo, a voz e a atuação. Os atores representam personagens no palco para uma plateia."
   },
   "elementos_teatro": {
+    "palavras_chave": [
+      "elementos do teatro",
+      "personagens cenario figurino roteiro",
+      "partes do teatro",
+      "componentes do teatro"
+    ],
     "explicacao_infantil": "No teatro temos personagens, cenário, figurino e roteiro. Tudo isso ajuda a contar a história de forma divertida e emocionante."
   },
   "tipos_teatro": {
+    "palavras_chave": [
+      "tipos de teatro",
+      "generos teatrais",
+      "teatro comedia drama musical infantil"
+    ],
     "explicacao_infantil": "Existem vários tipos de teatro, como comédia, drama, teatro infantil e musical. Cada um conta histórias de um jeito diferente."
   },
   "teatro_fantoches": {
+    "palavras_chave": [
+      "teatro de fantoches",
+      "fantoches teatro",
+      "bonecos no teatro"
+    ],
     "explicacao_infantil": "O teatro de fantoches usa bonecos para contar histórias. Eles se movimentam como se estivessem vivos!"
   },
   "teatro_sombras": {
+    "palavras_chave": [
+      "teatro de sombras",
+      "sombras teatro",
+      "luz e sombra teatro"
+    ],
     "explicacao_infantil": "O teatro de sombras usa luz e formas para criar imagens na parede. As histórias aparecem como sombras em movimento."
   },
   "teatro_musical": {
+    "palavras_chave": [
+      "teatro musical",
+      "musical teatro",
+      "peca com musica e danca"
+    ],
     "explicacao_infantil": "No teatro musical, os atores cantam, dançam e atuam. A história é contada com música e movimento."
   },
   "ariano_suassuna": {
+    "palavras_chave": [
+      "ariano suassuna",
+      "auto da compadecida",
+      "teatro nordestino"
+    ],
     "explicacao_infantil": "Ariano Suassuna foi um escritor brasileiro que criou peças divertidas e cheias de cultura nordestina, como O Auto da Compadecida."
   },
   "william_shakespeare": {
+    "palavras_chave": [
+      "shakespeare",
+      "william shakespeare",
+      "romeu e julieta",
+      "autor de teatro"
+    ],
     "explicacao_infantil": "William Shakespeare foi um grande autor de teatro. Ele escreveu histórias famosas como Romeu e Julieta."
   }
 }
