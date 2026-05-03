@@ -1,59 +1,78 @@
 {
   "arte_rupestre": {
+    "palavras_chave": ["arte rupestre", "caverna", "desenho na pedra", "arte antiga"],
     "explicacao_infantil": "A arte rupestre é a arte mais antiga do mundo. Os seres humanos desenhavam nas paredes das cavernas usando tintas naturais. Eles mostravam animais, caçadas e o dia a dia."
   },
   "arte_egipcia": {
+    "palavras_chave": ["arte egipcia", "egito antigo", "hieroglifo", "piramide"],
     "explicacao_infantil": "A arte egípcia foi feita no Egito antigo. Ela aparece em pirâmides e templos, com desenhos de pessoas de lado e símbolos chamados hieróglifos."
   },
   "arte_grega": {
+    "palavras_chave": ["arte grega", "grecia antiga", "escultura grega"],
     "explicacao_infantil": "A arte grega valorizava o corpo humano e a beleza. Os artistas faziam esculturas e construções com formas equilibradas e harmoniosas."
   },
   "arte_romana": {
+    "palavras_chave": ["arte romana", "roma antiga", "coliseu"],
     "explicacao_infantil": "A arte romana se inspirou na arte grega, mas também mostrava cenas do dia a dia e conquistas do império. Eles construíram estradas, arcos e coliseus."
   },
   "arte_medieval": {
+    "palavras_chave": ["arte medieval", "idade media", "arte religiosa antiga"],
     "explicacao_infantil": "A arte medieval estava ligada à religião. Muitas obras mostravam histórias bíblicas em igrejas, vitrais e pinturas."
   },
   "arte_crista": {
+    "palavras_chave": ["arte crista", "arte religiosa", "cristianismo arte"],
     "explicacao_infantil": "A arte cristã surgiu com o cristianismo. Ela mostra histórias religiosas em pinturas, esculturas e igrejas, ajudando as pessoas a entender a fé."
   },
   "arte_gotica": {
+    "palavras_chave": ["arte gotica", "igreja gotica", "vitrais"],
     "explicacao_infantil": "A arte gótica aparece em igrejas muito altas com vitrais coloridos. Esses vidros deixam a luz entrar e contam histórias com imagens."
   },
   "renascimento": {
+    "palavras_chave": ["renascimento", "arte renascentista"],
     "explicacao_infantil": "O Renascimento valorizou o ser humano e a natureza. Os artistas buscavam fazer obras realistas, com proporção e profundidade."
   },
   "barroco": {
+    "palavras_chave": ["barroco", "luz e sombra forte"],
     "explicacao_infantil": "O Barroco é cheio de emoção e movimento. As obras usam luz e sombra fortes para criar drama e chamar atenção."
   },
   "rococo": {
+    "palavras_chave": ["rococo", "arte delicada"],
     "explicacao_infantil": "O Rococó é um estilo leve e decorativo. As obras têm cores suaves, detalhes delicados e cenas elegantes."
   },
   "neoclassicismo": {
+    "palavras_chave": ["neoclassicismo", "arte classica moderna"],
     "explicacao_infantil": "O Neoclassicismo se inspira na arte antiga da Grécia e de Roma. As obras são organizadas, equilibradas e com formas claras."
   },
   "romantismo": {
+    "palavras_chave": ["romantismo", "emocao arte"],
     "explicacao_infantil": "O Romantismo valoriza sentimentos e imaginação. As obras mostram emoções fortes e cenas da natureza."
   },
   "realismo": {
+    "palavras_chave": ["realismo", "vida real arte"],
     "explicacao_infantil": "O Realismo mostra a vida como ela é. Os artistas pintam pessoas comuns e situações do dia a dia."
   },
   "impressionismo": {
+    "palavras_chave": ["impressionismo", "luz pintura", "monet"],
     "explicacao_infantil": "O Impressionismo mostra momentos rápidos da vida. Os artistas usam pinceladas leves e cores para captar a luz."
   },
   "modernismo": {
+    "palavras_chave": ["modernismo", "arte moderna brasil", "1922"],
     "explicacao_infantil": "O Modernismo trouxe novas ideias e formas diferentes de fazer arte. No Brasil, ficou famoso com a Semana de Arte Moderna de 1922."
   },
   "expressionismo": {
+    "palavras_chave": ["expressionismo", "emocao forte arte"],
     "explicacao_infantil": "O Expressionismo mostra sentimentos fortes nas obras. As cores e formas são exageradas para expressar emoções."
   },
   "cubismo": {
+    "palavras_chave": ["cubismo", "formas geometricas", "picasso"],
     "explicacao_infantil": "O Cubismo mostra objetos de vários lados ao mesmo tempo. As formas parecem quebradas e reorganizadas."
   },
   "surrealismo": {
+    "palavras_chave": ["surrealismo", "sonho arte", "dali"],
     "explicacao_infantil": "O Surrealismo mistura sonho e realidade. As imagens parecem estranhas, como coisas que vemos quando estamos sonhando."
   },
   "arte_contemporanea": {
+    "palavras_chave": ["arte contemporanea", "arte atual"],
     "explicacao_infantil": "A arte contemporânea é a arte de hoje. Ela mistura materiais, ideias e formas diferentes para expressar sentimentos e opiniões."
   }
 }
