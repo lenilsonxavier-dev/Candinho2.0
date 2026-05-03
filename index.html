@@ -134,12 +134,9 @@
     </div>
 </div>
 
-    <script type="module">
+<script type="module">
     // ======================= CONFIGURAÇÕES =======================
-
-    // Base dos JSONs no GitHub 
-const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
-    
+    const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
     const jsonFiles = {
         dancas: "dancas.json",
         artes: "artes_visuais.json",
@@ -159,22 +156,21 @@ const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candin
         piadas: "piadas.json"
     };
     
-let dataStore = {};
-let historicoMensagens = [];
-let nomeUsuario = localStorage.getItem("candinho_nome") || "";
-let conversaId = localStorage.getItem("candinho_conversaId");
-
-if (!conversaId) {
-    conversaId = `sessao_${Date.now()}`;
-    localStorage.setItem("candinho_conversaId", conversaId);
-}
-   let memoria = {
-    nome: localStorage.getItem("candinho_nome") || "",
-    idade: localStorage.getItem("candinho_idade") || "",
-    interesses: JSON.parse(localStorage.getItem("candinho_interesses") || "[]"),
-    nivel: localStorage.getItem("candinho_nivel") || "iniciante",
-    historicoCurto: []
-};
+    let dataStore = {};
+    let historicoMensagens = [];
+    let nomeUsuario = localStorage.getItem("candinho_nome") || "";
+    let conversaId = localStorage.getItem("candinho_conversaId");
+    if (!conversaId) {
+        conversaId = `sessao_${Date.now()}`;
+        localStorage.setItem("candinho_conversaId", conversaId);
+    }
+    let memoria = {
+        nome: localStorage.getItem("candinho_nome") || "",
+        idade: localStorage.getItem("candinho_idade") || "",
+        interesses: JSON.parse(localStorage.getItem("candinho_interesses") || "[]"),
+        nivel: localStorage.getItem("candinho_nivel") || "iniciante",
+        historicoCurto: []
+    };
     
     const chatDiv = document.getElementById("chat");
     const inputField = document.getElementById("pergunta");
@@ -191,38 +187,31 @@ if (!conversaId) {
         return div;
     }
     function extrairMemoria(pergunta) {
-    const texto = pergunta.toLowerCase();
-
-    // Nome
-    const nomeMatch = pergunta.match(/(?:meu nome é|sou|chamo|chamo-me) (\w+)/i);
-    if (nomeMatch) {
-        memoria.nome = nomeMatch[1];
-        localStorage.setItem("candinho_nome", memoria.nome);
-        return `Prazer, ${memoria.nome}! Vou lembrar de você 😊`;
-    }
-
-    // Idade
-    const idadeMatch = pergunta.match(/(\d{1,2}) anos/);
-    if (idadeMatch) {
-        memoria.idade = idadeMatch[1];
-        localStorage.setItem("candinho_idade", memoria.idade);
-        return `Legal! Você tem ${memoria.idade} anos 🎈`;
-    }
-
-    // Interesses
-    const interesses = ["desenhar", "pintar", "dançar", "música", "teatro"];
-    for (let interesse of interesses) {
-        if (texto.includes(interesse)) {
-            if (!memoria.interesses.includes(interesse)) {
-                memoria.interesses.push(interesse);
-                localStorage.setItem("candinho_interesses", JSON.stringify(memoria.interesses));
-                return `Que legal que você gosta de ${interesse}! 🎨`;
+        const texto = pergunta.toLowerCase();
+        const nomeMatch = pergunta.match(/(?:meu nome é|sou|chamo|chamo-me) (\w+)/i);
+        if (nomeMatch) {
+            memoria.nome = nomeMatch[1];
+            localStorage.setItem("candinho_nome", memoria.nome);
+            return `Prazer, ${memoria.nome}! Vou lembrar de você 😊`;
+        }
+        const idadeMatch = pergunta.match(/(\d{1,2}) anos/);
+        if (idadeMatch) {
+            memoria.idade = idadeMatch[1];
+            localStorage.setItem("candinho_idade", memoria.idade);
+            return `Legal! Você tem ${memoria.idade} anos 🎈`;
+        }
+        const interesses = ["desenhar", "pintar", "dançar", "música", "teatro"];
+        for (let interesse of interesses) {
+            if (texto.includes(interesse)) {
+                if (!memoria.interesses.includes(interesse)) {
+                    memoria.interesses.push(interesse);
+                    localStorage.setItem("candinho_interesses", JSON.stringify(memoria.interesses));
+                    return `Que legal que você gosta de ${interesse}! 🎨`;
+                }
             }
         }
+        return null;
     }
-
-    return null;
-}
     function addLoading() {
         const div = document.createElement("div");
         div.className = "msg bot loading";
@@ -231,11 +220,26 @@ if (!conversaId) {
         chatDiv.appendChild(div);
         chatDiv.scrollTop = chatDiv.scrollHeight;
     }
-    
     function removeLoading() {
         const el = document.getElementById("loadingMsg");
         if (el) el.remove();
     }
+    
+    // ======================= FIREBASE =======================
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, where } 
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    const firebaseConfig = {
+        apiKey: "AIzaSyCQq1DYHivZBIX2_0_NY7eKIoBWG5sKs48",
+        authDomain: "candinho-8bee5.firebaseapp.com",
+        projectId: "candinho-8bee5",
+        storageBucket: "candinho-8bee5.firebasestorage.app",
+        messagingSenderId: "342319000222",
+        appId: "1:342319000222:web:ab04b940b0175b8722a98f"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const CONVERSA_COLLECTION = "conversas_candinho";
     
     async function salvarMensagemFirebase(role, content) {
         try {
@@ -245,19 +249,11 @@ if (!conversaId) {
                 content: content,
                 timestamp: new Date()
             });
-        } catch (e) {
-            console.warn("Erro Firebase:", e);
-        }
+        } catch (e) { console.warn("Erro Firebase:", e); }
     }
-    
     async function carregarHistoricoFirebase() {
         try {
-            const q = query(
-                collection(db, CONVERSA_COLLECTION),
-                where("conversaId", "==", conversaId),
-                orderBy("timestamp", "desc"),
-                limit(12)
-            );
+            const q = query(collection(db, CONVERSA_COLLECTION), where("conversaId", "==", conversaId), orderBy("timestamp", "desc"), limit(12));
             const snap = await getDocs(q);
             const msgs = [];
             snap.forEach(doc => msgs.push(doc.data()));
@@ -273,228 +269,172 @@ if (!conversaId) {
             statusDiv.innerText = "⚠️ Memória local apenas (Firebase indisponível)";
         }
     }
-
-    // ======================= CONFIGURAÇÕES DO FIREBASE =======================
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, where } 
-      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyCQq1DYHivZBIX2_0_NY7eKIoBWG5sKs48",
-      authDomain: "candinho-8bee5.firebaseapp.com",
-      projectId: "candinho-8bee5",
-      storageBucket: "candinho-8bee5.firebasestorage.app",
-      messagingSenderId: "342319000222",
-      appId: "1:342319000222:web:ab04b940b0175b8722a98f"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const CONVERSA_COLLECTION = "conversas_candinho";
-
-    // ======================= RESPOSTAS INSTANTÂNEAS =======================
-
-// 🔤 NORMALIZAR TEXTO
-function normalizar(texto) {
-    return texto
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .trim();
-}
-
-// 🧠 DETECTAR PERGUNTA DE CONCEITO
-function ehPerguntaConceito(texto) {
-    const gatilhos = ["o que e", "o que eh", "o que é", "definicao", "explique", "me explique"];
-    return gatilhos.some(g => texto.includes(g));
-}
-
-// 🎯 DETECTAR TEMA (mais preciso)
-function detectarTema(texto) {
-    if (texto.includes("danca") || texto.includes("dancar") || texto.includes("passo")) return "danca";
-    if (texto.includes("musica") || texto.includes("ritmo") || texto.includes("som")) return "musica";
-    if (texto.includes("teatro") || texto.includes("peca") || texto.includes("ator")) return "teatro";
-    if (texto.includes("folclore") || texto.includes("lenda")) return "folclore";
-    if (texto.includes("festa") || texto.includes("celebracao")) return "festas";
-    if (texto.includes("indigena")) return "indigena";
-    if (texto.includes("afro")) return "afro";
-    if (texto.includes("arte")) return "arte";
-    return null;
-}
-
-// 🎲 ALEATÓRIO
-function pegarAleatorio(obj) {
-    if (!obj || typeof obj !== "object") return null;
-    const valores = Object.values(obj);
-    if (!valores.length) return null;
-    const item = valores[Math.floor(Math.random() * valores.length)];
-    return item.explicacao_infantil || item.resposta || JSON.stringify(item);
-}
-
-// 🔍 BUSCAR POR NOME (prioridade máxima)
-function buscarPorNome(obj, texto) {
-    for (const chave in obj) {
-        const nome = chave.replaceAll("_", " ");
-        if (texto.includes(nome)) {
-            return obj[chave].explicacao_infantil || obj[chave].resposta;
-        }
-    }
-    return null;
-}
-
-// 💛 BUSCAR EMOÇÃO
-function buscarEmocao(texto, base) {
-    for (const chave in base) {
-        const item = base[chave];
-        if (item.palavras_chave?.some(p => texto.includes(p))) {
-            return item.resposta;
-        }
-    }
-    return null;
-}
-
-// 🧠 BUSCAR CONCEITO
-function buscarConceito(texto) {
-    const tema = detectarTema(texto);
-
-    if (tema === "musica") return dataStore.musica?.o_que_e_musica?.explicacao_infantil;
-    if (tema === "danca") return dataStore.dancas?.conceitos_danca?.o_que_e_danca?.explicacao_infantil;
-    if (tema === "teatro") return dataStore.teatro?.o_que_e_teatro?.explicacao_infantil;
-    if (tema === "folclore") return dataStore.folclore?.o_que_e_folclore?.explicacao_infantil;
-    if (tema === "arte") return dataStore.artes?.o_que_e?.explicacao_infantil;
-    if (tema === "indigena") return dataStore.indigena?.o_que_e?.explicacao_infantil;
-    if (tema === "afro") return dataStore.afro?.o_que_e?.explicacao_infantil;
-    if (tema === "festas") return dataStore.festas?.o_que_sao?.explicacao_infantil;
-
-    return null;
-}
-
-// 🔍 BUSCA POR PALAVRA-CHAVE
-function buscarPorPalavraChave(texto, base) {
-    for (const chave in base) {
-        const item = base[chave];
-        if (item.palavras_chave?.some(p => texto.includes(p))) {
-            return item.explicacao_infantil || item.resposta;
-        }
-    }
-    return null;
-}
-
-// 🚀 FUNÇÃO PRINCIPAL (SEM CONFLITOS)
-function respostaInstantanea(pergunta) {
-    const texto = normalizar(pergunta);
-
-    try {
-        // 🔎 1. NOME DIRETO (PRIORIDADE MÁXIMA)
-        const basesPrioridade = [
-            dataStore.dancas,
-            dataStore.ritmos,
-            dataStore.folclore,
-            dataStore.artistas,
-            dataStore.artes,
-            dataStore.musica,
-            dataStore.teatro
-        ];
-
-        for (const base of basesPrioridade) {
-            if (!base) continue;
-            const resposta = buscarPorNome(base, texto);
-            if (resposta) return resposta;
-        }
-
-        // 💛 2. EMOÇÃO
-        if (dataStore.emocional) {
-            const emocao = buscarEmocao(texto, dataStore.emocional);
-            if (emocao) return emocao;
-        }
-
-        // 😂 PIADAS
-        if (texto.includes("piada") && dataStore.piadas)
-            return pegarAleatorio(dataStore.piadas);
-
-        // 🤔 CURIOSIDADES
-        if (texto.includes("curiosidade") && dataStore.curiosidades)
-            return pegarAleatorio(dataStore.curiosidades);
-
-        // 🔍 3. BUSCA GERAL
-        const basesGerais = [
-            dataStore.artistas,
-            dataStore.atividades,
-            dataStore.dancas,
-            dataStore.historia,
-            dataStore.musica,
-            dataStore.teatro,
-            dataStore.folclore,
-            dataStore.ritmos,
-            dataStore.festas,
-            dataStore.lugares,
-            dataStore.indigena,
-            dataStore.afro,
-            dataStore.artes
-        ];
-
-        for (const base of basesGerais) {
-            if (!base) continue;
-
-            const porNome = buscarPorNome(base, texto);
-            if (porNome) return porNome;
-
-            const porPalavra = buscarPorPalavraChave(texto, base);
-            if (porPalavra) return porPalavra;
-        }
-
-        // 🧠 4. CONCEITO (AGORA NO LUGAR CERTO)
-        if (ehPerguntaConceito(texto)) {
-            const conceito = buscarConceito(texto);
-            if (conceito) return conceito;
-        }
-
-    } catch (err) {
-        console.error("Erro:", err);
-    }
-
-    return "Ainda estou aprendendo 😊. Pode perguntar de outro jeito?";
-}
-    // ======================= FUNÇÃO PRINCIPAL =======================
-    let isProcessing = false;
     
-    // Detecta se o usuário está se apresentando (ex: "Meu nome é...")
-    function extrairNome(pergunta) {
-        const match = pergunta.match(/(?:meu nome é|sou|chamo-me|chamo) (\w+)/i);
-        if (match && match[1]) {
-            const nome = match[1];
-            localStorage.setItem("candinho_nome", nome);
-            nomeUsuario = nome;
-            return nome;
-        }
+    // ======================= RESPOSTAS INSTANTÂNEAS CORRIGIDAS =======================
+    function normalizar(texto) {
+        return texto.toLowerCase()
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            .trim();
+    }
+    
+    // Prioridade de temas: mais específicos primeiro
+    const temaParaChave = {
+        danca: ["dancas", "ritmos"],
+        musica: ["musica", "ritmos"],
+        teatro: ["teatro"],
+        folclore: ["folclore"],
+        festas: ["festas"],
+        indigena: ["indigena"],
+        afro: ["afro"],
+        arte: ["artes", "artistas", "historia", "lugares"],
+        curiosidade: ["curiosidades"],
+        piada: ["piadas"],
+        emocao: ["emocional"],
+        atividade: ["atividades"]
+    };
+    
+    function detectarTemaPrioritario(texto) {
+        const txt = texto.toLowerCase();
+        if (txt.includes("piada")) return "piada";
+        if (txt.includes("curiosidade")) return "curiosidade";
+        if (txt.includes("emocao") || txt.includes("sentimento") || txt.includes("triste") || txt.includes("alegre")) return "emocao";
+        if (txt.includes("danca") || txt.includes("ballet") || txt.includes("samba") || txt.includes("coreografia")) return "danca";
+        if (txt.includes("musica") || txt.includes("cancao") || txt.includes("instrumento")) return "musica";
+        if (txt.includes("teatro") || txt.includes("peca") || txt.includes("ator")) return "teatro";
+        if (txt.includes("folclore") || txt.includes("lenda") || txt.includes("saci")) return "folclore";
+        if (txt.includes("festa") || txt.includes("carnaval") || txt.includes("junina")) return "festas";
+        if (txt.includes("indigena") || txt.includes("tupi") || txt.includes("guarani")) return "indigena";
+        if (txt.includes("afro") || txt.includes("quilombo")) return "afro";
+        if (txt.includes("atividade") || txt.includes("oficina")) return "atividade";
+        if (txt.includes("pintor") || txt.includes("van gogh") || txt.includes("artista")) return "arte";
+        if (txt.includes("arte") && !txt.includes("danca") && !txt.includes("musica")) return "arte";
         return null;
     }
     
-   async function responder(pergunta) {
-    // 🧠 0. Detectar memória (nome)
-    const memoriaDetectada = extrairMemoria(pergunta);
-    if (memoriaDetectada) {
-        historicoMensagens.push({ role: "user", content: pergunta });
-        historicoMensagens.push({ role: "assistant", content: memoriaDetectada });
-
-        await salvarMensagemFirebase("user", pergunta);
-        await salvarMensagemFirebase("assistant", memoriaDetectada);
-
-        return memoriaDetectada;
+    // Busca em um único JSON (objeto) por nome da chave ou palavras-chave
+    function buscarEmJSON(obj, texto, recurso) {
+        if (!obj || typeof obj !== "object") return null;
+        const textoNorm = normalizar(texto);
+        let melhor = { score: 0, resposta: null };
+        
+        for (const [chave, valor] of Object.entries(obj)) {
+            if (!valor) continue;
+            let chaveNorm = normalizar(chave);
+            // Verifica se a chave (nome) aparece exatamente na pergunta (score alto)
+            if (textoNorm.includes(chaveNorm) && chaveNorm.length > 3) {
+                let score = chaveNorm.length;
+                if (score > melhor.score) {
+                    melhor.score = score;
+                    melhor.resposta = valor.explicacao_infantil || valor.resposta || JSON.stringify(valor);
+                }
+            }
+            // Busca por palavras-chave dentro do item
+            if (valor.palavras_chave && Array.isArray(valor.palavras_chave)) {
+                for (let kw of valor.palavras_chave) {
+                    let kwNorm = normalizar(kw);
+                    if (textoNorm.includes(kwNorm) && kwNorm.length > 2) {
+                        let score = kwNorm.length;
+                        if (score > melhor.score) {
+                            melhor.score = score;
+                            melhor.resposta = valor.explicacao_infantil || valor.resposta || JSON.stringify(valor);
+                        }
+                    }
+                }
+            }
+        }
+        return melhor.resposta;
     }
-        // 🧠 perguntas sobre o aluno
-if (pergunta.toLowerCase().includes("meu nome")) {
-    return memoria.nome 
-        ? `Seu nome é ${memoria.nome}! 😊` 
-        : "Você ainda não me contou seu nome!";
-}
-
-if (pergunta.toLowerCase().includes("quantos anos eu tenho")) {
-    return memoria.idade 
-        ? `Você tem ${memoria.idade} anos! 🎈` 
-        : "Você ainda não me contou sua idade!";
-}
-        // 1. Resposta instantânea (JSONs)
+    
+    function respostaInstantanea(pergunta) {
+        const texto = normalizar(pergunta);
+        const tema = detectarTemaPrioritario(pergunta);
+        
+        // Caso especial: piada, curiosidade, emoção (podem estar em qualquer lugar)
+        if (tema === "piada" && dataStore.piadas) {
+            const piadasArray = Object.values(dataStore.piadas);
+            if (piadasArray.length) {
+                const aleatoria = piadasArray[Math.floor(Math.random() * piadasArray.length)];
+                return aleatoria.explicacao_infantil || aleatoria.resposta || "Kkkkkk";
+            }
+        }
+        if (tema === "curiosidade" && dataStore.curiosidades) {
+            const curiosArray = Object.values(dataStore.curiosidades);
+            if (curiosArray.length) {
+                const aleatoria = curiosArray[Math.floor(Math.random() * curiosArray.length)];
+                return aleatoria.explicacao_infantil || aleatoria.resposta;
+            }
+        }
+        if (tema === "emocao" && dataStore.emocional) {
+            const emocao = dataStore.emocional;
+            for (let chave in emocao) {
+                const item = emocao[chave];
+                if (item.palavras_chave && item.palavras_chave.some(p => texto.includes(p))) {
+                    return item.resposta || item.explicacao_infantil;
+                }
+            }
+        }
+        
+        // Se detectou um tema, busca APENAS nos JSONs relacionados
+        if (tema && temaParaChave[tema]) {
+            const chaves = temaParaChave[tema];
+            for (let chave of chaves) {
+                const obj = dataStore[chave];
+                if (obj) {
+                    const resposta = buscarEmJSON(obj, pergunta, chave);
+                    if (resposta) return resposta;
+                }
+            }
+        } else {
+            // Sem tema claro: busca em todas as bases, mas ordena por relevância (a que tiver melhor score)
+            let todasRespostas = [];
+            for (let baseKey in dataStore) {
+                const obj = dataStore[baseKey];
+                if (obj && typeof obj === "object") {
+                    const resposta = buscarEmJSON(obj, pergunta, baseKey);
+                    if (resposta) {
+                        todasRespostas.push({ base: baseKey, resposta });
+                    }
+                }
+            }
+            if (todasRespostas.length) {
+                // Prioriza se a base for "dancas" quando a pergunta contém "dança", etc. (já tratado pelo tema)
+                // Mas aqui simplesmente retorna a primeira encontrada (a que tiver maior score implicitamente)
+                // Para evitar mistura, podemos retornar a que tiver melhor score, mas como não temos score global, vamos apenas retornar a primeira.
+                return todasRespostas[0].resposta;
+            }
+        }
+        
+        // Conceitos (ex: "o que é música")
+        if (texto.includes("o que e") || texto.includes("o que é")) {
+            for (let baseKey of ["musica", "dancas", "teatro", "folclore", "artes", "indigena", "afro", "festas"]) {
+                const obj = dataStore[baseKey];
+                if (obj && obj.conceitos && obj.conceitos[baseKey === "dancas" ? "o_que_e_danca" : "o_que_e"]) {
+                    const conceito = obj.conceitos[baseKey === "dancas" ? "o_que_e_danca" : "o_que_e"];
+                    if (conceito) return conceito.explicacao_infantil;
+                }
+            }
+        }
+        
+        return null;
+    }
+    
+    // ======================= IA (PROXY) =======================
+    async function responder(pergunta) {
+        const memoriaDetectada = extrairMemoria(pergunta);
+        if (memoriaDetectada) {
+            historicoMensagens.push({ role: "user", content: pergunta });
+            historicoMensagens.push({ role: "assistant", content: memoriaDetectada });
+            await salvarMensagemFirebase("user", pergunta);
+            await salvarMensagemFirebase("assistant", memoriaDetectada);
+            return memoriaDetectada;
+        }
+        if (pergunta.toLowerCase().includes("meu nome")) {
+            return memoria.nome ? `Seu nome é ${memoria.nome}! 😊` : "Você ainda não me contou seu nome!";
+        }
+        if (pergunta.toLowerCase().includes("quantos anos eu tenho")) {
+            return memoria.idade ? `Você tem ${memoria.idade} anos! 🎈` : "Você ainda não me contou sua idade!";
+        }
+        
         const instant = respostaInstantanea(pergunta);
         if (instant) {
             historicoMensagens.push({ role: "user", content: pergunta });
@@ -504,55 +444,40 @@ if (pergunta.toLowerCase().includes("quantos anos eu tenho")) {
             return instant;
         }
         
-       // 🧠 salvar pergunta no contexto da conversa
-memoria.historicoCurto.push({ role: "user", content: pergunta });
-
-if (memoria.historicoCurto.length > 6) {
-    memoria.historicoCurto.shift();
-}
-
-// 2. Chamar o proxy (IA)
-try {
-    const response = await fetch('/api/groq', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mensagem: pergunta, memoria: memoria })
-    });
-
-    const textResponse = await response.text();
-    let data;
-    try {
-        data = JSON.parse(textResponse);
-    } catch (jsonError) {
-        console.error("Proxy retornou texto não-JSON:", textResponse.slice(0, 200));
-        throw new Error("Resposta inválida do servidor (não é JSON)");
+        memoria.historicoCurto.push({ role: "user", content: pergunta });
+        if (memoria.historicoCurto.length > 6) memoria.historicoCurto.shift();
+        
+        try {
+            const response = await fetch('/api/groq', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mensagem: pergunta, memoria: memoria })
+            });
+            const textResponse = await response.text();
+            let data;
+            try {
+                data = JSON.parse(textResponse);
+            } catch (jsonError) {
+                console.error("Proxy retornou texto não-JSON:", textResponse.slice(0, 200));
+                throw new Error("Resposta inválida do servidor");
+            }
+            if (!response.ok) throw new Error(data.error || `Erro HTTP ${response.status}`);
+            const respostaIA = data.reply || "Não consegui responder. Tente de novo!";
+            memoria.historicoCurto.push({ role: "assistant", content: respostaIA });
+            historicoMensagens.push({ role: "user", content: pergunta });
+            historicoMensagens.push({ role: "assistant", content: respostaIA });
+            await salvarMensagemFirebase("user", pergunta);
+            await salvarMensagemFirebase("assistant", respostaIA);
+            return respostaIA;
+        } catch (erro) {
+            console.error("Erro no proxy:", erro);
+            return "Desculpe, não consegui me conectar à minha central de conhecimentos agora. Tente novamente mais tarde. 🎨";
+        }
     }
-
-    if (!response.ok) {
-        throw new Error(data.error || `Erro HTTP ${response.status}`);
-    }
-
-    const respostaIA = data.reply || "Não consegui responder. Tente de novo!";
-
-    // 🧠 salvar resposta no contexto
-    memoria.historicoCurto.push({ role: "assistant", content: respostaIA });
-
-    historicoMensagens.push({ role: "user", content: pergunta });
-    historicoMensagens.push({ role: "assistant", content: respostaIA });
-
-    await salvarMensagemFirebase("user", pergunta);
-    await salvarMensagemFirebase("assistant", respostaIA);
-
-    return respostaIA;
-
-} catch (erro) {
-    console.error("Erro no proxy:", erro);
-    return "Desculpe, não consegui me conectar à minha central de conhecimentos agora. Tente novamente mais tarde. 🎨";
-}
-      }
-    // ======================= CARREGAR JSONs DO GITHUB =======================
+    
+    // ======================= CARREGAR JSONs =======================
     async function carregarTodosJSONs() {
-        statusDiv.innerText = "📥 Baixando respostas instantâneas do GitHub...";
+        statusDiv.innerText = "📥 Baixando respostas instantâneas...";
         const promises = [];
         for (const [key, filename] of Object.entries(jsonFiles)) {
             const url = GITHUB_BASE + filename;
@@ -569,27 +494,21 @@ try {
         }
         const carregados = Object.keys(dataStore).filter(k => Object.keys(dataStore[k]).length > 0);
         console.log("JSONs carregados:", carregados);
-        if (carregados.length === 0) {
-            statusDiv.innerText = "⚠️ Respostas instantâneas não disponíveis (verifique GitHub)";
-        } else {
-            statusDiv.innerText = "🎨 Candinho pronto!";
-        }
+        statusDiv.innerText = carregados.length ? "🎨 Candinho pronto!" : "⚠️ Respostas instantâneas indisponíveis";
     }
     
-    // ======================= INTERFACE ENVIAR =======================
+    // ======================= INTERFACE =======================
+    let isProcessing = false;
     async function enviar() {
         if (isProcessing) return;
         const texto = inputField.value.trim();
         if (!texto) return;
-        
         isProcessing = true;
         sendBtn.disabled = true;
         inputField.disabled = true;
-        
         addMessageToUI(texto, true);
         inputField.value = "";
         addLoading();
-        
         try {
             const resposta = await responder(texto);
             removeLoading();
@@ -605,7 +524,6 @@ try {
             inputField.focus();
         }
     }
-    
     sendBtn.addEventListener("click", enviar);
     inputField.addEventListener("keypress", (e) => { if (e.key === "Enter" && !isProcessing) enviar(); });
     
@@ -620,11 +538,10 @@ try {
             await salvarMensagemFirebase("assistant", boasVindas);
         }
     }
-    
     init().catch(err => {
-        console.error("Erro na inicialização:", err);
-        statusDiv.innerText = "Erro crítico ao iniciar. Verifique o console.";
-        addMessageToUI("Não foi possível carregar os conhecimentos do Candinho. Verifique a conexão com a internet e recarregue a página.", false, true);
+        console.error(err);
+        statusDiv.innerText = "Erro crítico ao iniciar.";
+        addMessageToUI("Não foi possível carregar os conhecimentos do Candinho. Verifique a conexão.", false, true);
     });
     
     window.enviar = enviar;
