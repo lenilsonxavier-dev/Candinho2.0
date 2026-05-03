@@ -1,32 +1,42 @@
 {
   "o_que_e_folclore": {
+    "palavras_chave": ["o que e folclore", "definicao de folclore", "cultura popular brasileira", "folclore brasileiro"],
     "explicacao_infantil": "O folclore é o conjunto de histórias, lendas, músicas e costumes de um povo. Ele é passado de geração em geração e faz parte da cultura do Brasil."
   },
   "lendas": {
+    "palavras_chave": ["o que sao lendas", "lendas brasileiras", "historia de lenda"],
     "explicacao_infantil": "As lendas são histórias que misturam imaginação e realidade. Elas explicam coisas da natureza e ensinam valores de forma divertida."
   },
   "saci_perere": {
+    "palavras_chave": ["saci", "saci perere", "menino de uma perna", "gorro vermelho"],
     "explicacao_infantil": "O Saci é um menino travesso de uma perna só. Ele usa um gorro vermelho e gosta de fazer brincadeiras e travessuras."
   },
   "curupira": {
+    "palavras_chave": ["curupira", "protetor da floresta", "pes virados"],
     "explicacao_infantil": "O Curupira é o protetor da floresta. Ele tem os pés virados para trás e confunde quem tenta fazer mal à natureza."
   },
   "iara": {
+    "palavras_chave": ["iara", "sereia", "sereia do rio"],
     "explicacao_infantil": "A Iara é uma sereia dos rios. Ela canta para atrair as pessoas com sua voz encantadora."
   },
   "boitata": {
+    "palavras_chave": ["boitata", "cobra de fogo", "luz na mata"],
     "explicacao_infantil": "O Boitatá é uma cobra de fogo que protege a natureza. Ele aparece como uma luz brilhante na mata."
   },
   "mula_sem_cabeca": {
+    "palavras_chave": ["mula sem cabeca", "mula de fogo"],
     "explicacao_infantil": "A Mula sem cabeça é uma criatura que solta fogo pelo pescoço. Ela aparece correndo e fazendo barulho pelas noites."
   },
   "boto_cor_de_rosa": {
+    "palavras_chave": ["boto", "boto cor de rosa", "rapaz elegante do rio"],
     "explicacao_infantil": "O boto vira um rapaz elegante nas festas. Ele encanta as pessoas e depois volta para o rio."
   },
   "cuca": {
+    "palavras_chave": ["cuca", "bruxa cuca"],
     "explicacao_infantil": "A Cuca é uma personagem que aparece em histórias para assustar. Ela é conhecida por cantar e cuidar de crianças travessas."
   },
   "lobisomem": {
+    "palavras_chave": ["lobisomem", "homem lobo", "lua cheia"],
     "explicacao_infantil": "O lobisomem é um homem que se transforma em lobo nas noites de lua cheia. Ele aparece em histórias misteriosas."
   }
 }
