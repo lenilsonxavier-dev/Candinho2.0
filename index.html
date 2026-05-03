@@ -385,7 +385,7 @@ function respostaInstantanea(pergunta) {
     const texto = normalizar(pergunta);
 
     try {
-        // 🔎 1. PRIORIDADE MÁXIMA: NOME DIRETO
+        // 🔎 1. NOME DIRETO (PRIORIDADE MÁXIMA)
         const basesPrioridade = [
             dataStore.dancas,
             dataStore.ritmos,
@@ -408,12 +408,6 @@ function respostaInstantanea(pergunta) {
             if (emocao) return emocao;
         }
 
-        // 🧠 3. CONCEITO
-        if (ehPerguntaConceito(texto)) {
-            const conceito = buscarConceito(texto);
-            if (conceito) return conceito;
-        }
-
         // 😂 PIADAS
         if (texto.includes("piada") && dataStore.piadas)
             return pegarAleatorio(dataStore.piadas);
@@ -422,7 +416,7 @@ function respostaInstantanea(pergunta) {
         if (texto.includes("curiosidade") && dataStore.curiosidades)
             return pegarAleatorio(dataStore.curiosidades);
 
-        // 🔍 4. BUSCA GERAL
+        // 🔍 3. BUSCA GERAL
         const basesGerais = [
             dataStore.artistas,
             dataStore.atividades,
@@ -449,13 +443,18 @@ function respostaInstantanea(pergunta) {
             if (porPalavra) return porPalavra;
         }
 
+        // 🧠 4. CONCEITO (AGORA NO LUGAR CERTO)
+        if (ehPerguntaConceito(texto)) {
+            const conceito = buscarConceito(texto);
+            if (conceito) return conceito;
+        }
+
     } catch (err) {
         console.error("Erro:", err);
     }
 
     return "Ainda estou aprendendo 😊. Pode perguntar de outro jeito?";
 }
-    
     // ======================= FUNÇÃO PRINCIPAL =======================
     let isProcessing = false;
     
