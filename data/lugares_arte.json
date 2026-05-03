@@ -1,92 +1,122 @@
 {
   "louvre": {
+    "palavras_chave": ["louvre", "museu do louvre", "mona lisa museu", "museu paris"],
     "explicacao_infantil": "O Museu do Louvre, na França, é um dos maiores do mundo. Lá está a famosa Mona Lisa e muitas obras antigas."
   },
   "museu_do_prado": {
+    "palavras_chave": ["museu do prado", "prado espanha", "museu espanha arte"],
     "explicacao_infantil": "O Museu do Prado, na Espanha, tem pinturas importantes de artistas famosos. É um lugar cheio de história da arte."
   },
   "moma": {
+    "palavras_chave": ["moma", "museu de arte moderna nova york", "museu moderno eua"],
     "explicacao_infantil": "O MoMA, nos Estados Unidos, é um museu de arte moderna. Ele tem obras criativas e diferentes."
   },
   "british_museum": {
+    "palavras_chave": ["british museum", "museu britanico", "museu londres historia"],
     "explicacao_infantil": "O British Museum, na Inglaterra, guarda objetos antigos do mundo todo. É como uma viagem pela história."
   },
   "vaticano": {
+    "palavras_chave": ["museus do vaticano", "capela sistina", "vaticano arte"],
     "explicacao_infantil": "Os Museus do Vaticano têm obras incríveis, como o teto da Capela Sistina. É um lugar cheio de arte e história."
   },
   "uffizi": {
+    "palavras_chave": ["uffizi", "galeria uffizi", "museu renascimento italia"],
     "explicacao_infantil": "A Galeria Uffizi, na Itália, tem pinturas do Renascimento. É um dos museus mais famosos do mundo."
   },
   "masp": {
+    "palavras_chave": ["masp", "museu sao paulo arte", "museu brasil sp"],
     "explicacao_infantil": "O MASP, em São Paulo, é um museu importante do Brasil. Ele tem obras de artistas do mundo inteiro."
   },
   "inhotim": {
+    "palavras_chave": ["inhotim", "museu a ceu aberto brasil", "arte natureza minas gerais"],
     "explicacao_infantil": "Inhotim, em Minas Gerais, mistura natureza e arte. As obras ficam espalhadas em jardins enormes."
   },
   "acropole": {
+    "palavras_chave": ["acropole", "partenon grecia", "construcao antiga grecia"],
     "explicacao_infantil": "A Acrópole, na Grécia, tem construções antigas como o Partenon. É um símbolo da arte e da história grega."
   },
   "coliseu": {
+    "palavras_chave": ["coliseu", "roma antiga coliseu", "arena romana"],
     "explicacao_infantil": "O Coliseu, na Itália, é uma construção antiga onde aconteciam espetáculos. Ele mostra a engenharia romana."
   },
   "torre_eiffel": {
+    "palavras_chave": ["torre eiffel", "paris torre ferro", "monumento frança"],
     "explicacao_infantil": "A Torre Eiffel, na França, é uma estrutura famosa de ferro. Ela virou um símbolo da cidade de Paris."
   },
   "taj_mahal": {
+    "palavras_chave": ["taj mahal", "india monumento branco", "palacio marmore"],
     "explicacao_infantil": "O Taj Mahal, na Índia, é um monumento muito bonito feito de mármore branco. Ele foi construído como homenagem ao amor."
   },
   "estatua_da_liberdade": {
+    "palavras_chave": ["estatua da liberdade", "nova york estatua", "liberdade eua"],
     "explicacao_infantil": "A Estátua da Liberdade, nos Estados Unidos, é um símbolo de liberdade. Ela fica em Nova York."
   },
   "museu_hermitage": {
+    "palavras_chave": ["hermitage", "museu russia arte", "museu sao petersburgo"],
     "explicacao_infantil": "O Hermitage, na Rússia, é um dos maiores museus do mundo. Ele tem muitas obras famosas."
   },
   "museu_orsay": {
+    "palavras_chave": ["museu orsay", "orsay impressionismo", "museu paris trem"],
     "explicacao_infantil": "O Museu d'Orsay, na França, tem obras impressionistas. Ele fica em uma antiga estação de trem."
   },
   "guggenheim": {
+    "palavras_chave": ["guggenheim", "museu espiral", "arte moderna guggenheim"],
     "explicacao_infantil": "O Museu Guggenheim tem um prédio diferente em forma de espiral. Ele mostra arte moderna e contemporânea."
   },
   "museu_nacional_china": {
+    "palavras_chave": ["museu nacional china", "museu china historia", "cultura chinesa museu"],
     "explicacao_infantil": "O Museu Nacional da China tem objetos antigos e importantes. Ele mostra a história e a cultura do país."
   },
   "stonehenge": {
+    "palavras_chave": ["stonehenge", "pedras gigantes inglaterra", "monumento antigo pedras"],
     "explicacao_infantil": "Stonehenge, na Inglaterra, é formado por pedras gigantes. Ninguém sabe exatamente como foi construído."
   },
   "machu_picchu": {
+    "palavras_chave": ["machu picchu", "cidade inca peru", "ruinas incas"],
     "explicacao_infantil": "Machu Picchu, no Peru, é uma antiga cidade nas montanhas. Ela mostra a engenharia do povo inca."
   },
   "sagrada_familia": {
+    "palavras_chave": ["sagrada familia", "igreja gaudi barcelona", "igreja diferente espanha"],
     "explicacao_infantil": "A Sagrada Família, na Espanha, é uma igreja com formas diferentes. Foi criada pelo artista Gaudí."
   },
   "pompidou": {
+    "palavras_chave": ["centro pompidou", "museu tubos coloridos", "arte contemporanea paris"],
     "explicacao_infantil": "O Centro Pompidou, na França, tem um prédio moderno com tubos coloridos. Ele mostra arte contemporânea."
   },
   "museu_egipcio": {
+    "palavras_chave": ["museu egipcio", "mumias egito", "arte egito museu"],
     "explicacao_infantil": "O Museu Egípcio tem múmias e objetos antigos. Ele conta a história do Egito antigo."
   },
   "alhambra": {
+    "palavras_chave": ["alhambra", "palacio espanha islamico", "arte islamica espanha"],
     "explicacao_infantil": "A Alhambra, na Espanha, é um palácio cheio de detalhes e desenhos. Ela mostra a arte islâmica."
   },
   "angkor_wat": {
+    "palavras_chave": ["angkor wat", "templo camboja", "templo gigante asia"],
     "explicacao_infantil": "Angkor Wat, no Camboja, é um templo gigante com esculturas antigas. É um dos maiores do mundo."
   },
   "opera_sydney": {
+    "palavras_chave": ["opera sydney", "teatro australia", "predio em forma de vela"],
     "explicacao_infantil": "A Ópera de Sydney tem um formato que lembra velas. É um lugar de música e espetáculos."
   },
   "museu_picasso": {
+    "palavras_chave": ["museu picasso", "obras picasso museu", "arte picasso museu"],
     "explicacao_infantil": "O Museu Picasso guarda obras do artista Pablo Picasso. Ele mostra diferentes fases da sua arte."
   },
   "museu_van_gogh": {
+    "palavras_chave": ["museu van gogh", "pinturas van gogh museu", "arte van gogh museu"],
     "explicacao_infantil": "O Museu Van Gogh tem muitas pinturas do artista. Lá podemos ver suas cores e estilo únicos."
   },
   "chapada_diamantina": {
+    "palavras_chave": ["chapada diamantina", "paisagem brasil natureza arte", "natureza como arte"],
     "explicacao_infantil": "A Chapada Diamantina, no Brasil, é cheia de paisagens incríveis. A natureza também pode ser vista como arte."
   },
   "leni_riefenstahl": {
+    "palavras_chave": ["leni riefenstahl", "cinema arte", "arte no cinema"],
     "explicacao_infantil": "Alguns artistas criaram obras em cinema que marcaram a história. O cinema também é uma forma de arte."
   },
   "bienal_sp": {
+    "palavras_chave": ["bienal de sao paulo", "exposicao arte sp", "evento arte brasil"],
     "explicacao_infantil": "A Bienal de São Paulo é uma grande exposição de arte. Artistas do mundo inteiro mostram suas obras lá."
   }
 }
