@@ -271,152 +271,156 @@
     }
     
     // ======================= RESPOSTAS INSTANTÂNEAS CORRIGIDAS =======================
-    function normalizar(texto) {
-        return texto.toLowerCase()
-            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            .trim();
+    // ======================= RESPOSTAS INSTANTÂNEAS CORRIGIDAS =======================
+function normalizar(texto) {
+    return texto.toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .trim();
+}
+
+// Tema prioritário (igual ao anterior)
+const temaParaChave = {
+    danca: ["dancas", "ritmos"],
+    musica: ["musica", "ritmos"],
+    teatro: ["teatro"],
+    folclore: ["folclore"],
+    festas: ["festas"],
+    indigena: ["indigena"],
+    afro: ["afro"],
+    arte: ["artes", "artistas", "historia", "lugares"],
+    curiosidade: ["curiosidades"],
+    piada: ["piadas"],
+    emocao: ["emocional"],
+    atividade: ["atividades"]
+};
+
+function detectarTemaPrioritario(texto) {
+    const txt = texto.toLowerCase();
+    if (txt.includes("piada")) return "piada";
+    if (txt.includes("curiosidade")) return "curiosidade";
+    if (txt.includes("emocao") || txt.includes("sentimento") || txt.includes("triste") || txt.includes("alegre")) return "emocao";
+    if (txt.includes("danca") || txt.includes("ballet") || txt.includes("samba") || txt.includes("coreografia")) return "danca";
+    if (txt.includes("musica") || txt.includes("cancao") || txt.includes("instrumento")) return "musica";
+    if (txt.includes("teatro") || txt.includes("peca") || txt.includes("ator")) return "teatro";
+    if (txt.includes("folclore") || txt.includes("lenda") || txt.includes("saci")) return "folclore";
+    if (txt.includes("festa") || txt.includes("carnaval") || txt.includes("junina")) return "festas";
+    if (txt.includes("indigena") || txt.includes("tupi") || txt.includes("guarani")) return "indigena";
+    if (txt.includes("afro") || txt.includes("quilombo")) return "afro";
+    if (txt.includes("atividade") || txt.includes("oficina")) return "atividade";
+    if (txt.includes("pintor") || txt.includes("van gogh") || txt.includes("artista")) return "arte";
+    if (txt.includes("arte") && !txt.includes("danca") && !txt.includes("musica")) return "arte";
+    return null;
+}
+
+// Busca recursiva em qualquer objeto JSON, retorna o texto amigável (string)
+function buscarRecursivo(obj, textoNorm, melhorAtual = { score: 0, resposta: null }) {
+    if (!obj || typeof obj !== "object") return melhorAtual;
+    
+    // Se este objeto tem palavras_chave e explicacao_infantil/resposta
+    if (obj.palavras_chave && Array.isArray(obj.palavras_chave)) {
+        for (let kw of obj.palavras_chave) {
+            let kwNorm = normalizar(kw);
+            if (textoNorm.includes(kwNorm) && kwNorm.length > 2) {
+                let score = kwNorm.length;
+                if (score > melhorAtual.score) {
+                    melhorAtual.score = score;
+                    melhorAtual.resposta = obj.explicacao_infantil || obj.resposta || null;
+                }
+            }
+        }
     }
     
-    // Prioridade de temas: mais específicos primeiro
-    const temaParaChave = {
-        danca: ["dancas", "ritmos"],
-        musica: ["musica", "ritmos"],
-        teatro: ["teatro"],
-        folclore: ["folclore"],
-        festas: ["festas"],
-        indigena: ["indigena"],
-        afro: ["afro"],
-        arte: ["artes", "artistas", "historia", "lugares"],
-        curiosidade: ["curiosidades"],
-        piada: ["piadas"],
-        emocao: ["emocional"],
-        atividade: ["atividades"]
-    };
-    
-    function detectarTemaPrioritario(texto) {
-        const txt = texto.toLowerCase();
-        if (txt.includes("piada")) return "piada";
-        if (txt.includes("curiosidade")) return "curiosidade";
-        if (txt.includes("emocao") || txt.includes("sentimento") || txt.includes("triste") || txt.includes("alegre")) return "emocao";
-        if (txt.includes("danca") || txt.includes("ballet") || txt.includes("samba") || txt.includes("coreografia")) return "danca";
-        if (txt.includes("musica") || txt.includes("cancao") || txt.includes("instrumento")) return "musica";
-        if (txt.includes("teatro") || txt.includes("peca") || txt.includes("ator")) return "teatro";
-        if (txt.includes("folclore") || txt.includes("lenda") || txt.includes("saci")) return "folclore";
-        if (txt.includes("festa") || txt.includes("carnaval") || txt.includes("junina")) return "festas";
-        if (txt.includes("indigena") || txt.includes("tupi") || txt.includes("guarani")) return "indigena";
-        if (txt.includes("afro") || txt.includes("quilombo")) return "afro";
-        if (txt.includes("atividade") || txt.includes("oficina")) return "atividade";
-        if (txt.includes("pintor") || txt.includes("van gogh") || txt.includes("artista")) return "arte";
-        if (txt.includes("arte") && !txt.includes("danca") && !txt.includes("musica")) return "arte";
-        return null;
+    // Se tem explicacao_infantil ou resposta e não encontramos ainda nada, guarda como fallback
+    if (!melhorAtual.resposta && (obj.explicacao_infantil || obj.resposta)) {
+        melhorAtual.resposta = obj.explicacao_infantil || obj.resposta;
+        melhorAtual.score = 1; // score baixo, mas serve como fallback
     }
     
-    // Busca em um único JSON (objeto) por nome da chave ou palavras-chave
-    function buscarEmJSON(obj, texto, recurso) {
-        if (!obj || typeof obj !== "object") return null;
-        const textoNorm = normalizar(texto);
-        let melhor = { score: 0, resposta: null };
-        
-        for (const [chave, valor] of Object.entries(obj)) {
-            if (!valor) continue;
-            let chaveNorm = normalizar(chave);
-            // Verifica se a chave (nome) aparece exatamente na pergunta (score alto)
-            if (textoNorm.includes(chaveNorm) && chaveNorm.length > 3) {
-                let score = chaveNorm.length;
-                if (score > melhor.score) {
-                    melhor.score = score;
-                    melhor.resposta = valor.explicacao_infantil || valor.resposta || JSON.stringify(valor);
-                }
-            }
-            // Busca por palavras-chave dentro do item
-            if (valor.palavras_chave && Array.isArray(valor.palavras_chave)) {
-                for (let kw of valor.palavras_chave) {
-                    let kwNorm = normalizar(kw);
-                    if (textoNorm.includes(kwNorm) && kwNorm.length > 2) {
-                        let score = kwNorm.length;
-                        if (score > melhor.score) {
-                            melhor.score = score;
-                            melhor.resposta = valor.explicacao_infantil || valor.resposta || JSON.stringify(valor);
-                        }
-                    }
-                }
+    // Percorre todas as chaves recursivamente
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key) && typeof obj[key] === "object") {
+            melhorAtual = buscarRecursivo(obj[key], textoNorm, melhorAtual);
+        }
+    }
+    return melhorAtual;
+}
+
+// Busca em um JSON específico (pode ser qualquer objeto aninhado)
+function buscarEmJSON(obj, texto) {
+    if (!obj || typeof obj !== "object") return null;
+    const textoNorm = normalizar(texto);
+    const resultado = buscarRecursivo(obj, textoNorm, { score: 0, resposta: null });
+    return resultado.resposta; // será string ou null
+}
+
+function respostaInstantanea(pergunta) {
+    const texto = normalizar(pergunta);
+    const tema = detectarTemaPrioritario(pergunta);
+    
+    // Piada
+    if (tema === "piada" && dataStore.piadas) {
+        const piadasArray = Object.values(dataStore.piadas);
+        if (piadasArray.length) {
+            const aleatoria = piadasArray[Math.floor(Math.random() * piadasArray.length)];
+            return aleatoria.explicacao_infantil || aleatoria.resposta || "Kkkkkk";
+        }
+    }
+    // Curiosidade
+    if (tema === "curiosidade" && dataStore.curiosidades) {
+        const curiosArray = Object.values(dataStore.curiosidades);
+        if (curiosArray.length) {
+            const aleatoria = curiosArray[Math.floor(Math.random() * curiosArray.length)];
+            return aleatoria.explicacao_infantil || aleatoria.resposta;
+        }
+    }
+    // Emoção
+    if (tema === "emocao" && dataStore.emocional) {
+        for (let chave in dataStore.emocional) {
+            const item = dataStore.emocional[chave];
+            if (item.palavras_chave && item.palavras_chave.some(p => texto.includes(p))) {
+                return item.resposta || item.explicacao_infantil;
             }
         }
-        return melhor.resposta;
     }
     
-    function respostaInstantanea(pergunta) {
-        const texto = normalizar(pergunta);
-        const tema = detectarTemaPrioritario(pergunta);
-        
-        // Caso especial: piada, curiosidade, emoção (podem estar em qualquer lugar)
-        if (tema === "piada" && dataStore.piadas) {
-            const piadasArray = Object.values(dataStore.piadas);
-            if (piadasArray.length) {
-                const aleatoria = piadasArray[Math.floor(Math.random() * piadasArray.length)];
-                return aleatoria.explicacao_infantil || aleatoria.resposta || "Kkkkkk";
+    // Busca por tema específico ou geral
+    if (tema && temaParaChave[tema]) {
+        const chaves = temaParaChave[tema];
+        for (let chave of chaves) {
+            const obj = dataStore[chave];
+            if (obj) {
+                const resposta = buscarEmJSON(obj, pergunta);
+                if (resposta && typeof resposta === "string" && resposta.length > 0) return resposta;
             }
         }
-        if (tema === "curiosidade" && dataStore.curiosidades) {
-            const curiosArray = Object.values(dataStore.curiosidades);
-            if (curiosArray.length) {
-                const aleatoria = curiosArray[Math.floor(Math.random() * curiosArray.length)];
-                return aleatoria.explicacao_infantil || aleatoria.resposta;
+    } else {
+        // Sem tema: busca em todas as bases
+        for (let baseKey in dataStore) {
+            const obj = dataStore[baseKey];
+            if (obj) {
+                const resposta = buscarEmJSON(obj, pergunta);
+                if (resposta && typeof resposta === "string" && resposta.length > 0) return resposta;
             }
         }
-        if (tema === "emocao" && dataStore.emocional) {
-            const emocao = dataStore.emocional;
-            for (let chave in emocao) {
-                const item = emocao[chave];
-                if (item.palavras_chave && item.palavras_chave.some(p => texto.includes(p))) {
-                    return item.resposta || item.explicacao_infantil;
-                }
-            }
-        }
-        
-        // Se detectou um tema, busca APENAS nos JSONs relacionados
-        if (tema && temaParaChave[tema]) {
-            const chaves = temaParaChave[tema];
-            for (let chave of chaves) {
-                const obj = dataStore[chave];
-                if (obj) {
-                    const resposta = buscarEmJSON(obj, pergunta, chave);
-                    if (resposta) return resposta;
-                }
-            }
-        } else {
-            // Sem tema claro: busca em todas as bases, mas ordena por relevância (a que tiver melhor score)
-            let todasRespostas = [];
-            for (let baseKey in dataStore) {
-                const obj = dataStore[baseKey];
-                if (obj && typeof obj === "object") {
-                    const resposta = buscarEmJSON(obj, pergunta, baseKey);
-                    if (resposta) {
-                        todasRespostas.push({ base: baseKey, resposta });
-                    }
-                }
-            }
-            if (todasRespostas.length) {
-                // Prioriza se a base for "dancas" quando a pergunta contém "dança", etc. (já tratado pelo tema)
-                // Mas aqui simplesmente retorna a primeira encontrada (a que tiver maior score implicitamente)
-                // Para evitar mistura, podemos retornar a que tiver melhor score, mas como não temos score global, vamos apenas retornar a primeira.
-                return todasRespostas[0].resposta;
-            }
-        }
-        
-        // Conceitos (ex: "o que é música")
-        if (texto.includes("o que e") || texto.includes("o que é")) {
-            for (let baseKey of ["musica", "dancas", "teatro", "folclore", "artes", "indigena", "afro", "festas"]) {
-                const obj = dataStore[baseKey];
-                if (obj && obj.conceitos && obj.conceitos[baseKey === "dancas" ? "o_que_e_danca" : "o_que_e"]) {
-                    const conceito = obj.conceitos[baseKey === "dancas" ? "o_que_e_danca" : "o_que_e"];
-                    if (conceito) return conceito.explicacao_infantil;
-                }
-            }
-        }
-        
-        return null;
     }
+    
+    // Conceitos (ex: "o que é música")
+    if (texto.includes("o que e") || texto.includes("o que é")) {
+        for (let baseKey of ["musica", "dancas", "teatro", "folclore", "artes", "indigena", "afro", "festas"]) {
+            const obj = dataStore[baseKey];
+            if (obj && obj.conceitos && typeof obj.conceitos === "object") {
+                let conceitoItem = null;
+                if (baseKey === "dancas" && obj.conceitos.o_que_e_danca) conceitoItem = obj.conceitos.o_que_e_danca;
+                else if (obj.conceitos.o_que_e) conceitoItem = obj.conceitos.o_que_e;
+                if (conceitoItem && conceitoItem.explicacao_infantil) {
+                    return conceitoItem.explicacao_infantil;
+                }
+            }
+        }
+    }
+    
+    return null;
+}
     
     // ======================= IA (PROXY) =======================
     async function responder(pergunta) {
