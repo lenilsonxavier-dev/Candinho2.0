@@ -1,26 +1,34 @@
 {
   "o_que_e_musica": {
+    "palavras_chave": ["o que e musica", "definicao de musica", "arte dos sons"],
     "explicacao_infantil": "A música é a arte dos sons. Ela pode ter ritmo, melodia e harmonia, e pode fazer a gente sentir alegria, calma ou emoção."
   },
   "elementos_musica": {
+    "palavras_chave": ["elementos da musica", "ritmo melodia harmonia", "partes da musica"],
     "explicacao_infantil": "Na música temos ritmo, melodia e harmonia. O ritmo marca o tempo, a melodia é a sequência de sons e a harmonia combina os sons."
   },
   "tipos_musica": {
+    "palavras_chave": ["tipos de musica", "estilos musicais", "musica classica popular"],
     "explicacao_infantil": "Existem muitos tipos de música, como popular, clássica e folclórica. Cada tipo tem seu estilo e sua forma de expressão."
   },
   "instrumentos": {
+    "palavras_chave": ["instrumentos musicais", "violao flauta tambor", "tipos de instrumentos"],
     "explicacao_infantil": "Os instrumentos musicais produzem sons. Existem instrumentos de corda, sopro e percussão, como violão, flauta e tambor."
   },
   "villa_lobos": {
+    "palavras_chave": ["villa lobos", "heitor villa lobos"],
     "explicacao_infantil": "Heitor Villa-Lobos foi um grande compositor brasileiro. Ele misturava música clássica com sons do Brasil."
   },
   "chiquinha_gonzaga": {
+    "palavras_chave": ["chiquinha gonzaga"],
     "explicacao_infantil": "Chiquinha Gonzaga foi uma compositora brasileira muito importante. Ela criou músicas animadas e ajudou a abrir espaço para mulheres na música."
   },
   "cartola": {
+    "palavras_chave": ["cartola", "samba cartola"],
     "explicacao_infantil": "Cartola foi um grande compositor de samba. Suas músicas são conhecidas até hoje e fazem parte da cultura brasileira."
   },
   "beethoven": {
+    "palavras_chave": ["beethoven", "musica classica beethoven"],
     "explicacao_infantil": "Beethoven foi um compositor famoso da música clássica. Ele criou músicas fortes e emocionantes que são ouvidas até hoje."
   }
 }
