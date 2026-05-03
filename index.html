@@ -266,7 +266,7 @@ if (!conversaId) {
             for (let msg of historicoMensagens) {
                 addMessageToUI(msg.content, msg.role === "user");
             }
-            statusDiv.innerText = "✅ Candinho pronto (memória ativa)";
+            statusDiv.innerText = "✅ Candinho pronto";
         } catch (e) {
             console.warn("Erro ao carregar histórico:", e);
             historicoMensagens = [];
@@ -274,7 +274,7 @@ if (!conversaId) {
         }
     }
 
-    // ======================= CONFIGURAÇÕES =======================
+    // ======================= CONFIGURAÇÕES DO FIREBASE =======================
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, where } 
       from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
