@@ -353,23 +353,26 @@
         const tema = detectarTemaPrioritario(pergunta);
         const texto = normalizar(pergunta);
         
-        // Piada
-        if (tema === "piada" && dataStore.piadas) {
-            const piadasArray = Object.values(dataStore.piadas);
-            if (piadasArray.length) {
-                const aleatoria = piadasArray[Math.floor(Math.random() * piadasArray.length)]; // CORRIGIDO: faltava o *
-                return aleatoria.explicacao_infantil || aleatoria.resposta || "Kkkkkk";
-            }
-        }
-        
-        // Curiosidade
-        if (tema === "curiosidade" && dataStore.curiosidades) {
-            const curiosArray = Object.values(dataStore.curiosidades);
-            if (curiosArray.length) {
-                const aleatoria = curiosArray[Math.floor(Math.random() * curiosArray.length)];
-                return aleatoria.explicacao_infantil || aleatoria.resposta;
-            }
-        }
+       // Caso especial: piada
+if (tema === "piada" && dataStore.piadas) {
+    const piadasArray = Object.values(dataStore.piadas);
+    if (piadasArray.length) {
+        const aleatoria = piadasArray[Math.floor(Math.random() * piadasArray.length)];
+        // Se for string (formato simples), retorna a string; se for objeto, tenta explicacao_infantil/resposta
+        if (typeof aleatoria === "string") return aleatoria;
+        return aleatoria.explicacao_infantil || aleatoria.resposta || "😂 Não sei nenhuma piada agora!";
+    }
+}
+
+// Caso especial: curiosidade
+if (tema === "curiosidade" && dataStore.curiosidades) {
+    const curiosArray = Object.values(dataStore.curiosidades);
+    if (curiosArray.length) {
+        const aleatoria = curiosArray[Math.floor(Math.random() * curiosArray.length)];
+        if (typeof aleatoria === "string") return aleatoria;
+        return aleatoria.explicacao_infantil || aleatoria.resposta;
+    }
+}
         
         // Apoio emocional
         if (tema === "emocao" && dataStore.emocional) {
