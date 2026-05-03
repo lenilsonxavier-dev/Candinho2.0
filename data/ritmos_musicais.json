@@ -1,92 +1,122 @@
 {
   "samba": {
+    "palavras_chave": ["samba", "ritmo de samba", "musica de samba", "genero samba"],
     "explicacao_infantil": "O samba é um ritmo brasileiro alegre e cheio de energia. Ele é muito usado no carnaval."
   },
   "forro": {
+    "palavras_chave": ["forro", "ritmo forro", "musica nordestina forro", "forro musica"],
     "explicacao_infantil": "O forró é um ritmo nordestino dançado em pares. Tem sanfona, zabumba e triângulo."
   },
   "frevo": {
+    "palavras_chave": ["frevo", "ritmo frevo", "musica frevo pernambuco"],
     "explicacao_infantil": "O frevo é um ritmo rápido de Pernambuco. Ele combina música e dança com muita energia."
   },
   "maracatu": {
+    "palavras_chave": ["maracatu", "ritmo maracatu", "musica afro brasileira maracatu"],
     "explicacao_infantil": "O maracatu tem tambores fortes e ritmo marcante. Ele vem da cultura afro-brasileira."
   },
-  "axé": {
+  "axe": {
+    "palavras_chave": ["axe", "ritmo axe", "musica baiana axe"],
     "explicacao_infantil": "O axé é um ritmo animado da Bahia. Ele mistura vários estilos e é muito dançante."
   },
   "funk": {
+    "palavras_chave": ["funk", "ritmo funk", "musica funk brasileira"],
     "explicacao_infantil": "O funk é um ritmo brasileiro com batidas fortes. Ele é muito popular entre os jovens."
   },
   "sertanejo": {
+    "palavras_chave": ["sertanejo", "musica sertaneja", "ritmo sertanejo"],
     "explicacao_infantil": "O sertanejo é um ritmo que fala da vida no campo e dos sentimentos. É muito ouvido no Brasil."
   },
   "bossa_nova": {
+    "palavras_chave": ["bossa nova", "musica bossa nova", "ritmo suave brasileiro"],
     "explicacao_infantil": "A bossa nova é um ritmo suave e calmo. Ela mistura samba com influências do jazz."
   },
   "pagode": {
+    "palavras_chave": ["pagode", "musica pagode", "tipo de samba pagode"],
     "explicacao_infantil": "O pagode é um tipo de samba com ritmo leve e alegre. Ele é muito usado em rodas de música."
   },
   "reggae": {
+    "palavras_chave": ["reggae", "musica reggae", "ritmo reggae"],
     "explicacao_infantil": "O reggae é um ritmo tranquilo com batidas marcadas. Ele fala de paz e união."
   },
   "rock": {
+    "palavras_chave": ["rock", "musica rock", "ritmo rock"],
     "explicacao_infantil": "O rock é um ritmo com guitarras e energia. Ele pode ser rápido ou mais calmo."
   },
   "pop": {
+    "palavras_chave": ["pop", "musica pop", "ritmo pop"],
     "explicacao_infantil": "O pop é um ritmo popular e fácil de ouvir. Ele mistura vários estilos musicais."
   },
   "jazz": {
+    "palavras_chave": ["jazz", "musica jazz", "ritmo jazz"],
     "explicacao_infantil": "O jazz é um ritmo cheio de improviso. Os músicos criam sons diferentes na hora."
   },
   "blues": {
+    "palavras_chave": ["blues", "musica blues", "ritmo blues"],
     "explicacao_infantil": "O blues é um ritmo que expressa sentimentos. Ele tem uma melodia marcante e profunda."
   },
   "hip_hop": {
+    "palavras_chave": ["hip hop", "musica hip hop", "ritmo hip hop"],
     "explicacao_infantil": "O hip hop mistura música, dança e rimas. Ele é muito usado para contar histórias."
   },
   "rap": {
+    "palavras_chave": ["rap", "musica rap", "ritmo rap"],
     "explicacao_infantil": "O rap é um estilo onde as palavras são faladas com ritmo. Ele expressa ideias e opiniões."
   },
   "classica": {
+    "palavras_chave": ["musica classica", "ritmo classico", "genero classico"],
     "explicacao_infantil": "A música clássica usa instrumentos como violino e piano. Ela pode ser calma ou intensa."
   },
   "eletronica": {
+    "palavras_chave": ["musica eletronica", "ritmo eletronico", "dj musica"],
     "explicacao_infantil": "A música eletrônica usa sons criados por computador. Ela é muito usada em festas."
   },
   "country": {
+    "palavras_chave": ["country", "musica country", "ritmo country"],
     "explicacao_infantil": "O country é um ritmo que fala da vida no campo. Ele usa violão e tem melodia simples."
   },
   "flamenco": {
+    "palavras_chave": ["flamenco", "musica flamenco", "ritmo flamenco"],
     "explicacao_infantil": "O flamenco vem da Espanha. Ele mistura música e dança com palmas e sapateado."
   },
   "tango": {
+    "palavras_chave": ["tango", "musica tango", "ritmo tango"],
     "explicacao_infantil": "O tango é um ritmo elegante da Argentina. Ele é dançado em dupla com movimentos marcantes."
   },
   "salsa": {
+    "palavras_chave": ["salsa", "musica salsa", "ritmo salsa"],
     "explicacao_infantil": "A salsa é um ritmo latino animado. Ela é cheia de movimento e dança."
   },
   "merengue": {
+    "palavras_chave": ["merengue", "musica merengue", "ritmo merengue"],
     "explicacao_infantil": "O merengue é um ritmo rápido do Caribe. Ele é fácil de dançar e muito animado."
   },
   "cumbia": {
+    "palavras_chave": ["cumbia", "musica cumbia", "ritmo cumbia"],
     "explicacao_infantil": "A cumbia é um ritmo latino com batidas suaves. Ela mistura dança e tradição."
   },
   "afrobeat": {
+    "palavras_chave": ["afrobeat", "musica afrobeat", "ritmo africano moderno"],
     "explicacao_infantil": "O afrobeat mistura música africana com ritmos modernos. Ele tem batidas fortes e repetitivas."
   },
   "k_pop": {
+    "palavras_chave": ["k pop", "musica kpop", "pop coreano"],
     "explicacao_infantil": "O K-pop é um estilo moderno da Coreia. Ele mistura música, dança e apresentações animadas."
   },
   "gospel": {
+    "palavras_chave": ["gospel", "musica gospel", "ritmo religioso"],
     "explicacao_infantil": "A música gospel fala de fé e espiritualidade. Ela pode ser calma ou muito animada."
   },
   "mpb": {
+    "palavras_chave": ["mpb", "musica popular brasileira", "ritmo brasileiro mpb"],
     "explicacao_infantil": "A MPB mistura vários ritmos brasileiros. Ela tem letras poéticas e melodias bonitas."
   },
   "choro": {
+    "palavras_chave": ["choro", "musica choro", "ritmo brasileiro choro"],
     "explicacao_infantil": "O choro é um ritmo brasileiro com instrumentos como flauta e violão. Ele é alegre e cheio de técnica."
   },
   "carimbo": {
+    "palavras_chave": ["carimbo", "musica carimbo", "ritmo paraense"],
     "explicacao_infantil": "O carimbó é um ritmo do Pará com muita dança e alegria. Ele usa tambores e movimentos leves."
   }
 }
