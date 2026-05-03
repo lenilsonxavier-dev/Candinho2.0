@@ -1,92 +1,122 @@
 {
   "leonardo_da_vinci": {
+    "palavras_chave": ["leonardo", "leonardo da vinci", "mona lisa"],
     "explicacao_infantil": "Leonardo da Vinci foi um artista italiano muito curioso. Ele pintou a Mona Lisa e também estudava ciência e invenções."
   },
   "michelangelo": {
+    "palavras_chave": ["michelangelo", "capela sistina"],
     "explicacao_infantil": "Michelangelo foi um artista que pintava e esculpia. Ele fez a pintura do teto da Capela Sistina."
   },
   "raphael": {
+    "palavras_chave": ["raphael", "rafael"],
     "explicacao_infantil": "Raphael foi um pintor italiano conhecido por suas obras equilibradas e belas. Ele pintava pessoas com harmonia."
   },
   "caravaggio": {
+    "palavras_chave": ["caravaggio", "luz e sombra"],
     "explicacao_infantil": "Caravaggio pintava com luz e sombra bem fortes. Suas obras parecem iluminadas por uma luz dramática."
   },
   "rembrandt": {
+    "palavras_chave": ["rembrandt"],
     "explicacao_infantil": "Rembrandt foi um pintor que gostava de retratar pessoas com muita emoção. Ele usava luz e sombra para dar profundidade."
   },
   "vermeer": {
+    "palavras_chave": ["vermeer"],
     "explicacao_infantil": "Vermeer pintava cenas tranquilas do dia a dia. Suas obras têm luz suave e detalhes delicados."
   },
   "claude_monet": {
+    "palavras_chave": ["monet", "claude monet", "impressionismo"],
     "explicacao_infantil": "Monet pintava paisagens com luz e cor. Ele é um dos principais artistas do impressionismo."
   },
   "edgar_degas": {
+    "palavras_chave": ["degas", "bailarina"],
     "explicacao_infantil": "Degas gostava de pintar bailarinas. Suas obras mostram movimento e momentos do cotidiano."
   },
   "vincent_van_gogh": {
+    "palavras_chave": ["van gogh", "noite estrelada"],
     "explicacao_infantil": "Van Gogh pintava com cores fortes e pinceladas marcadas. Sua obra mais famosa é a Noite Estrelada."
   },
   "paul_cezanne": {
+    "palavras_chave": ["cezanne", "cezanne"],
     "explicacao_infantil": "Cézanne pintava formas simples e ajudou a criar novas ideias para a arte moderna."
   },
   "pablo_picasso": {
+    "palavras_chave": ["picasso", "cubismo"],
     "explicacao_infantil": "Picasso criou o cubismo. Ele mostrava objetos de vários ângulos ao mesmo tempo."
   },
   "georges_braque": {
+    "palavras_chave": ["braque", "cubismo"],
     "explicacao_infantil": "Braque trabalhou com Picasso no cubismo. Suas obras têm formas geométricas."
   },
   "salvador_dali": {
+    "palavras_chave": ["dali", "salvador dali", "relogio derretendo"],
     "explicacao_infantil": "Dalí pintava imagens estranhas e criativas, como relógios derretendo. Sua arte parece sonho."
   },
   "rene_magritte": {
+    "palavras_chave": ["magritte"],
     "explicacao_infantil": "Magritte criava imagens curiosas que fazem a gente pensar. Ele misturava objetos de forma inesperada."
   },
   "frida_kahlo": {
+    "palavras_chave": ["frida kahlo", "frida"],
     "explicacao_infantil": "Frida Kahlo pintava sobre sua vida e sentimentos. Suas obras mostram sua identidade e história."
   },
   "gustav_klimt": {
+    "palavras_chave": ["klimt", "o beijo"],
     "explicacao_infantil": "Klimt usava dourado e muitos detalhes em suas pinturas. Sua obra mais famosa é O Beijo."
   },
   "edvard_munch": {
+    "palavras_chave": ["munch", "o grito"],
     "explicacao_infantil": "Munch pintou O Grito. Suas obras mostram emoções fortes e intensas."
   },
   "wassily_kandinsky": {
+    "palavras_chave": ["kandinsky", "arte abstrata"],
     "explicacao_infantil": "Kandinsky criou arte abstrata. Ele usava cores e formas sem representar objetos reais."
   },
   "piet_mondrian": {
+    "palavras_chave": ["mondrian"],
     "explicacao_infantil": "Mondrian usava linhas e cores básicas. Suas obras parecem quadros com formas organizadas."
   },
   "jackson_pollock": {
+    "palavras_chave": ["pollock"],
     "explicacao_infantil": "Pollock pintava jogando tinta na tela. Sua arte mostra movimento e energia."
   },
   "andy_warhol": {
+    "palavras_chave": ["warhol", "pop art"],
     "explicacao_infantil": "Warhol fazia arte com imagens populares. Ele repetia figuras como latas e celebridades."
   },
   "jean_michel_basquiat": {
+    "palavras_chave": ["basquiat"],
     "explicacao_infantil": "Basquiat misturava desenho e grafite. Suas obras são cheias de símbolos e energia."
   },
   "banksy": {
+    "palavras_chave": ["banksy", "grafite"],
     "explicacao_infantil": "Banksy é um artista misterioso de rua. Ele faz grafites com mensagens importantes."
   },
   "yayoi_kusama": {
+    "palavras_chave": ["kusama", "bolinhas"],
     "explicacao_infantil": "Kusama usa bolinhas em suas obras. Suas instalações são coloridas e envolventes."
   },
   "ai_weiwei": {
+    "palavras_chave": ["ai weiwei"],
     "explicacao_infantil": "Ai Weiwei cria obras que fazem as pessoas pensar sobre sociedade e liberdade."
   },
   "henri_matisse": {
+    "palavras_chave": ["matisse"],
     "explicacao_infantil": "Matisse usava cores fortes e formas simples. Suas obras são alegres e expressivas."
   },
   "paul_gauguin": {
+    "palavras_chave": ["gauguin"],
     "explicacao_infantil": "Gauguin pintava cenas com cores fortes e temas diferentes. Ele buscava inspiração em outras culturas."
   },
   "diego_rivera": {
+    "palavras_chave": ["rivera", "diego rivera"],
     "explicacao_infantil": "Rivera pintava murais grandes contando histórias do povo e da cultura mexicana."
   },
   "georgia_okeeffe": {
+    "palavras_chave": ["okeeffe", "georgia okeeffe"],
     "explicacao_infantil": "Georgia O'Keeffe pintava flores grandes e paisagens. Suas obras mostram formas e cores da natureza."
   },
   "marcel_duchamp": {
+    "palavras_chave": ["duchamp"],
     "explicacao_infantil": "Duchamp mudou a ideia de arte. Ele mostrou que objetos comuns também podem ser arte."
   }
 }
