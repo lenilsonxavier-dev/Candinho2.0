@@ -1,20 +1,26 @@
 {
   "o_que_e": {
+    "palavras_chave": ["cultura afro", "afro brasileira", "o que e cultura afro brasileira"],
     "explicacao_infantil": "A cultura afro-brasileira vem das tradições africanas trazidas para o Brasil. Ela influencia a música, a dança, a arte e a forma de viver."
   },
   "arte_afro_brasileira": {
+    "palavras_chave": ["arte afro", "arte afro brasileira"],
     "explicacao_infantil": "A arte afro-brasileira aparece em músicas, danças, pinturas e festas. Ela expressa história, resistência e identidade."
   },
   "musica": {
+    "palavras_chave": ["musica afro", "samba", "maracatu", "ritmo africano"],
     "explicacao_infantil": "A música afro-brasileira tem ritmos marcantes e uso de tambores. Ela está presente no samba, maracatu e outras manifestações."
   },
   "danca": {
+    "palavras_chave": ["danca afro", "dancas afro brasileiras"],
     "explicacao_infantil": "As danças afro-brasileiras têm movimentos fortes e expressivos. Elas contam histórias e celebram a cultura."
   },
   "religiosidade": {
+    "palavras_chave": ["religiao afro", "orixa", "candomble", "umbanda"],
     "explicacao_infantil": "As religiões de matriz africana fazem parte da cultura afro-brasileira. Elas valorizam a espiritualidade, os ancestrais e a natureza."
   },
   "resistencia": {
+    "palavras_chave": ["resistencia negra", "cultura negra", "luta afro brasileira"],
     "explicacao_infantil": "A cultura afro-brasileira também é uma forma de resistência. Ela preserva histórias, saberes e identidade ao longo do tempo."
   }
 }
