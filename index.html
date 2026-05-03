@@ -186,32 +186,44 @@
         chatDiv.scrollTop = chatDiv.scrollHeight;
         return div;
     }
-    function extrairMemoria(pergunta) {
-        const texto = pergunta.toLowerCase();
-        const nomeMatch = pergunta.match(/(?:meu nome é|sou|chamo|chamo-me) (\w+)/i);
-        if (nomeMatch) {
-            memoria.nome = nomeMatch[1];
-            localStorage.setItem("candinho_nome", memoria.nome);
-            return `Prazer, ${memoria.nome}! Vou lembrar de você 😊`;
-        }
-        const idadeMatch = pergunta.match(/(\d{1,2}) anos/);
-        if (idadeMatch) {
-            memoria.idade = idadeMatch[1];
-            localStorage.setItem("candinho_idade", memoria.idade);
-            return `Legal! Você tem ${memoria.idade} anos 🎈`;
-        }
-        const interesses = ["desenhar", "pintar", "dançar", "música", "teatro"];
-        for (let interesse of interesses) {
-            if (texto.includes(interesse)) {
-                if (!memoria.interesses.includes(interesse)) {
-                    memoria.interesses.push(interesse);
-                    localStorage.setItem("candinho_interesses", JSON.stringify(memoria.interesses));
-                    return `Que legal que você gosta de ${interesse}! 🎨`;
-                }
+   function extrairMemoria(pergunta) {
+    const texto = pergunta.toLowerCase();
+    // Captura nomes comuns (inclui letras acentuadas e evita capturar palavras soltas)
+    const nomeMatch = pergunta.match(/(?:meu nome é|sou|chamo(-me)?|chamado de) ([A-Za-zÀ-ÖØ-öø-ÿ]+)/i);
+    if (nomeMatch && nomeMatch[2]) {
+        let novoNome = nomeMatch[2].trim();
+        // Capitaliza a primeira letra (opcional)
+        novoNome = novoNome.charAt(0).toUpperCase() + novoNome.slice(1).toLowerCase();
+        memoria.nome = novoNome;
+        localStorage.setItem("candinho_nome", memoria.nome);
+        
+        // Sincroniza com a variável global usada em outras telas
+        globalPlayerName = novoNome;
+        
+        return `Prazer, ${memoria.nome}! Vou lembrar de você 😊`;
+    }
+    
+    // Idade
+    const idadeMatch = pergunta.match(/(\d{1,2}) anos/);
+    if (idadeMatch) {
+        memoria.idade = idadeMatch[1];
+        localStorage.setItem("candinho_idade", memoria.idade);
+        return `Legal! Você tem ${memoria.idade} anos 🎈`;
+    }
+    
+    // Interesses
+    const interesses = ["desenhar", "pintar", "dançar", "música", "teatro"];
+    for (let interesse of interesses) {
+        if (texto.includes(interesse)) {
+            if (!memoria.interesses.includes(interesse)) {
+                memoria.interesses.push(interesse);
+                localStorage.setItem("candinho_interesses", JSON.stringify(memoria.interesses));
+                return `Que legal que você gosta de ${interesse}! 🎨`;
             }
         }
-        return null;
     }
+    return null;
+}
     function addLoading() {
         const div = document.createElement("div");
         div.className = "msg bot loading";
@@ -270,66 +282,82 @@
         }
     }
     
-  // ======================= RESPOSTAS INSTANTÂNEAS - VERSÃO DEFINITIVA =======================
+// ======================= RESPOSTAS INSTANTÂNEAS - VERSÃO FINAL (PRIORIDADE TOTAL) =======================
 function normalizar(texto) {
     return texto.toLowerCase()
         .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
         .trim();
 }
 
-// Detecção de tema com palavras muito específicas (incluindo cores)
+// Mapeamento de temas com palavras-chave abrangentes
 function detectarTemaPrioritario(texto) {
-    const txt = normalizar(texto);
-    
-    // Artes visuais (prioridade máxima para cores, linha, ponto, etc.)
+    const txt = texto.toLowerCase();
+    // Artes visuais (inclui cores, elementos, etc.)
     const artesVisuaisKeywords = [
-        "cor primaria", "cores primarias", "cor primaria", "cores primarias",
-        "cor secundaria", "cores secundarias", "cor secundaria", "cores secundarias",
-        "cor terciaria", "cores terciarias", "cor terciaria", "cores terciarias",
-        "cor quente", "cores quentes", "cor fria", "cores frias",
+        "cor primaria", "cores primarias", "cor primária", "cores primárias",
+        "cor secundaria", "cores secundarias", "cor secundária", "cores secundárias",
+        "cor terciaria", "cores terciarias", "cor terciária", "cores terciárias",
         "linha", "ponto", "forma", "textura", "volume", "perspectiva", "composicao",
-        "luz e sombra", "elementos da arte", "elementos visuais",
-        "o que e arte", "pintura", "desenho", "escultura"
+        "luz e sombra", "elementos da arte", "elementos visuais", "o que e arte",
+        "pintura", "desenho", "escultura", "arte visual", "cor quente", "cor fria"
     ];
-    if (artesVisuaisKeywords.some(kw => txt.includes(kw))) {
-        return "artes_visuais";
-    }
+    if (artesVisuaisKeywords.some(kw => txt.includes(kw))) return "arte";
+    
+    // Dança
+    if (txt.includes("danca") || txt.includes("ballet") || txt.includes("samba") || 
+        txt.includes("coreografia") || txt.includes("frevo") || txt.includes("maracatu") ||
+        txt.includes("caboclinho") || txt.includes("ciranda") || txt.includes("carimbo")) return "danca";
     
     // Teatro
-    if (txt.includes("teatro") || txt.includes("peca") || txt.includes("ator") || txt.includes("personagem")) return "teatro";
-    // Dança
-    if (txt.includes("danca") || txt.includes("ballet") || txt.includes("samba") || txt.includes("frevo")) return "dancas";
+    if (txt.includes("teatro") || txt.includes("peca") || txt.includes("ator") || 
+        txt.includes("fantoche") || txt.includes("sombras") || txt.includes("shakespeare") ||
+        txt.includes("suassuna")) return "teatro";
+    
     // Música
-    if (txt.includes("musica") || txt.includes("ritmo") || txt.includes("instrumento") || txt.includes("cancao")) return "musica";
+    if (txt.includes("musica") || txt.includes("cancao") || txt.includes("instrumento") ||
+        txt.includes("ritmo") || txt.includes("violao") || txt.includes("samba") && !txt.includes("danca")) return "musica";
+    
     // Folclore
-    if (txt.includes("folclore") || txt.includes("lenda") || txt.includes("saci") || txt.includes("curupira")) return "folclore";
+    if (txt.includes("folclore") || txt.includes("lenda") || txt.includes("saci") || 
+        txt.includes("curupira") || txt.includes("iara") || txt.includes("boitata")) return "folclore";
+    
     // Festas
-    if (txt.includes("festa") || txt.includes("carnaval") || txt.includes("junina") || txt.includes("feriado")) return "festas_brasileiras";
-    // Indígena
-    if (txt.includes("indigena") || txt.includes("tupi") || txt.includes("guarani") || txt.includes("povos originarios")) return "cultura_indigena";
-    // Afro
-    if (txt.includes("afro") || txt.includes("quilombo") || txt.includes("orixa")) return "cultura_afro_brasileira";
-    // Atividade
-    if (txt.includes("atividade") || txt.includes("oficina") || txt.includes("desafio")) return "atividades_artisticas";
-    // Artistas (nomes específicos)
-    const artistasNomes = ["tarsila", "portinari", "van gogh", "picasso", "monet", "dali", "frida", "leonardo", "michelangelo"];
-    if (artistasNomes.some(nome => txt.includes(nome))) return "artistas_universais";
-    // Piada
-    if (txt.includes("piada")) return "piadas";
-    // Curiosidade
-    if (txt.includes("curiosidade")) return "curiosidades";
-    // Emoção
-    const emocoes = ["triste", "ansioso", "medo", "raiva", "alegre", "bullying"];
-    if (emocoes.some(e => txt.includes(e))) return "apoio_emocional";
+    if (txt.includes("festa") || txt.includes("carnaval") || txt.includes("junina") ||
+        txt.includes("bumba meu boi") || txt.includes("cirio")) return "festas";
+    
+    // Cultura indígena
+    if (txt.includes("indigena") || txt.includes("tupi") || txt.includes("grafismo") ||
+        txt.includes("cestaria") || txt.includes("pintura corporal")) return "indigena";
+    
+    // Cultura afro-brasileira
+    if (txt.includes("afro") || txt.includes("quilombo") || txt.includes("orixa")) return "afro";
+    
+    // Atividades artísticas
+    if (txt.includes("atividade") || txt.includes("oficina") || txt.includes("desenho")) return "atividade";
+    
+    // Artistas (prioridade alta)
+    if (txt.includes("artista") || txt.includes("van gogh") || txt.includes("pintor") ||
+        txt.includes("tarsila") || txt.includes("portinari") || txt.includes("picasso") ||
+        txt.includes("monet") || txt.includes("dali") || txt.includes("frida")) return "artista";
+    
+    // Piadas
+    if (txt.includes("piada")) return "piada";
+    
+    // Curiosidades
+    if (txt.includes("curiosidade")) return "curiosidade";
+    
+    // Emoção (apoio emocional)
+    if (txt.includes("triste") || txt.includes("ansioso") || txt.includes("medo") || 
+        txt.includes("raiva") || txt.includes("alegre")) return "emocao";
     
     return null;
 }
 
-// Busca recursiva que retorna a PRIMEIRA ocorrência que satisfaça as palavras-chave
-function buscarRecursivo(obj, textoNorm, prioridade = null) {
+// Busca recursiva: retorna a primeira explicação encontrada com base nas palavras-chave
+function buscarRecursivo(obj, textoNorm) {
     if (!obj || typeof obj !== "object") return null;
     
-    // Se este objeto tem palavras_chave e explicação
+    // Se o objeto tem palavras_chave e explicacao_infantil/resposta
     if (obj.palavras_chave && Array.isArray(obj.palavras_chave)) {
         for (let kw of obj.palavras_chave) {
             let kwNorm = normalizar(kw);
@@ -339,7 +367,7 @@ function buscarRecursivo(obj, textoNorm, prioridade = null) {
         }
     }
     
-    // Busca nos filhos (ordem recursiva)
+    // Percorre todas as propriedades recursivamente
     for (let key in obj) {
         if (obj.hasOwnProperty(key) && typeof obj[key] === "object") {
             let resultado = buscarRecursivo(obj[key], textoNorm);
@@ -349,70 +377,38 @@ function buscarRecursivo(obj, textoNorm, prioridade = null) {
     return null;
 }
 
-// Busca em um JSON específico (com fallback para campos comuns)
-function buscarEmJSON(jsonObj, pergunta, temaAtual = null) {
+// Busca em um JSON específico (dataStore[chave])
+function buscarEmJSON(jsonObj, pergunta) {
     if (!jsonObj || typeof jsonObj !== "object") return null;
     const textoNorm = normalizar(pergunta);
-    
-    // 1. Busca recursiva normal
-    let resposta = buscarRecursivo(jsonObj, textoNorm);
-    if (resposta) return resposta;
-    
-    // 2. Caso especial: se for tema "artes_visuais" e pergunta for "o que é cor primária"
-    if (temaAtual === "artes_visuais") {
-        if (textoNorm.includes("cor primaria") || textoNorm.includes("cores primarias")) {
-            // Procura especificamente pelo objeto cores_primarias
-            if (jsonObj.cor && jsonObj.cor.tipos && jsonObj.cor.tipos.cores_primarias) {
-                return jsonObj.cor.tipos.cores_primarias.explicacao_infantil;
-            }
-        }
-        if (textoNorm.includes("cor secundaria") || textoNorm.includes("cores secundarias")) {
-            if (jsonObj.cor && jsonObj.cor.tipos && jsonObj.cor.tipos.cores_secundarias) {
-                return jsonObj.cor.tipos.cores_secundarias.explicacao_infantil;
-            }
-        }
-        if (textoNorm.includes("cor terciaria") || textoNorm.includes("cores terciarias")) {
-            if (jsonObj.cor && jsonObj.cor.tipos && jsonObj.cor.tipos.cores_terciarias) {
-                return jsonObj.cor.tipos.cores_terciarias.explicacao_infantil;
-            }
-        }
-        if (textoNorm.includes("cor quente") || textoNorm.includes("cores quentes")) {
-            if (jsonObj.cor && jsonObj.cor.tipos && jsonObj.cor.tipos.cores_quentes) {
-                return jsonObj.cor.tipos.cores_quentes.explicacao_infantil;
-            }
-        }
-        if (textoNorm.includes("cor fria") || textoNorm.includes("cores frias")) {
-            if (jsonObj.cor && jsonObj.cor.tipos && jsonObj.cor.tipos.cores_frias) {
-                return jsonObj.cor.tipos.cores_frias.explicacao_infantil;
-            }
-        }
-    }
-    
-    return null;
+    return buscarRecursivo(jsonObj, textoNorm);
 }
 
+// Resposta instantânea principal (prioridade máxima)
 function respostaInstantanea(pergunta) {
     const tema = detectarTemaPrioritario(pergunta);
     const texto = normalizar(pergunta);
     
-    // Casos especiais: piada, curiosidade, emoção
-    if (tema === "piadas" && dataStore.piadas) {
+    // Caso especial: piada
+    if (tema === "piada" && dataStore.piadas) {
         const piadasArray = Object.values(dataStore.piadas);
         if (piadasArray.length) {
-            const aleatoria = piadasArray[Math.floor(Math.random() * piadasArray.length)];
-            return aleatoria.explicacao_infantil || aleatoria.resposta || aleatoria;
+            const aleatoria = piadasArray[Math.floor(Math.random() piadasArray.length)];
+            return aleatoria.explicacao_infantil || aleatoria.resposta || "Kkkkkk";
         }
     }
     
-    if (tema === "curiosidades" && dataStore.curiosidades) {
+    // Caso especial: curiosidade
+    if (tema === "curiosidade" && dataStore.curiosidades) {
         const curiosArray = Object.values(dataStore.curiosidades);
         if (curiosArray.length) {
             const aleatoria = curiosArray[Math.floor(Math.random() * curiosArray.length)];
-            return aleatoria.explicacao_infantil || aleatoria.resposta || aleatoria;
+            return aleatoria.explicacao_infantil || aleatoria.resposta;
         }
     }
     
-    if (tema === "apoio_emocional" && dataStore.emocional) {
+    // Caso especial: apoio emocional
+    if (tema === "emocao" && dataStore.emocional) {
         for (let chave in dataStore.emocional) {
             const item = dataStore.emocional[chave];
             if (item.palavras_chave && item.palavras_chave.some(p => texto.includes(p))) {
@@ -421,35 +417,115 @@ function respostaInstantanea(pergunta) {
         }
     }
     
-    // Mapeia tema para a chave correta no dataStore
-    let chaveBusca = tema;
-    if (!chaveBusca) {
-        // Se não detectou tema, busca em todas as bases (exceto piadas e emocional)
-        for (let chave of Object.keys(dataStore)) {
-            if (chave === "piadas" || chave === "emocional") continue;
-            const obj = dataStore[chave];
-            const resposta = buscarEmJSON(obj, pergunta, chave);
-            if (resposta) return resposta;
+    // Mapeamento tema -> chaves do dataStore (ordem de prioridade)
+    let chavesBusca = [];
+    if (tema === "arte") chavesBusca = ["artes_visuais", "artes", "artistas", "artistas_universais", "historia_arte", "lugares_arte"];
+    else if (tema === "danca") chavesBusca = ["dancas", "ritmos_musicais"];
+    else if (tema === "musica") chavesBusca = ["musica", "ritmos_musicais"];
+    else if (tema === "teatro") chavesBusca = ["teatro"];
+    else if (tema === "folclore") chavesBusca = ["folclore"];
+    else if (tema === "festas") chavesBusca = ["festas_brasileiras"];
+    else if (tema === "indigena") chavesBusca = ["cultura_indigena"];
+    else if (tema === "afro") chavesBusca = ["cultura_afro_brasileira"];
+    else if (tema === "atividade") chavesBusca = ["atividades_artisticas"];
+    else if (tema === "artista") chavesBusca = ["artistas", "artistas_universais"];
+    else {
+        // Sem tema: busca em todas as bases (exceto piadas para não bagunçar)
+        chavesBusca = Object.keys(dataStore).filter(k => k !== "piadas" && k !== "curiosidades" && k !== "emocional");
+    }
+    
+    // Busca na ordem definida
+    for (let chave of chavesBusca) {
+        const obj = dataStore[chave];
+        if (obj) {
+            const resposta = buscarEmJSON(obj, pergunta);
+            if (resposta && typeof resposta === "string" && resposta.trim().length > 0) {
+                return resposta;
+            }
         }
-        return null;
     }
     
-    // Busca no JSON correspondente ao tema
-    const obj = dataStore[chaveBusca];
-    if (obj) {
-        const resposta = buscarEmJSON(obj, pergunta, chaveBusca);
-        if (resposta) return resposta;
+    // Fallback: perguntas "o que é" sem tema detectado
+    if (texto.includes("o que e") || texto.includes("o que é")) {
+        // Tenta achar alguma definição geral em conceitos
+        for (let baseKey of ["musica", "dancas", "teatro", "folclore", "artes_visuais", "cultura_indigena", "cultura_afro_brasileira", "festas_brasileiras"]) {
+            const obj = dataStore[baseKey];
+            if (obj && obj.conceitos && typeof obj.conceitos === "object") {
+                let conceitoItem = null;
+                if (baseKey === "dancas" && obj.conceitos.o_que_e_danca) conceitoItem = obj.conceitos.o_que_e_danca;
+                else if (obj.conceitos.o_que_e) conceitoItem = obj.conceitos.o_que_e;
+                if (conceitoItem && conceitoItem.explicacao_infantil) {
+                    return conceitoItem.explicacao_infantil;
+                }
+            }
+        }
     }
     
-    // Fallback: busca em todas as bases se não achou no tema específico
-    for (let chave of Object.keys(dataStore)) {
-        if (chave === chaveBusca) continue;
-        const obj2 = dataStore[chave];
-        const resposta2 = buscarEmJSON(obj2, pergunta, chave);
-        if (resposta2) return resposta2;
+    return null; // Sem resposta instantânea
+}
+
+// ======================= FUNÇÃO RESPONDER (PRIORIDADE INSTANTÂNEA) =======================
+async function responder(pergunta) {
+    // 1. Memória (nome, idade, interesses)
+    const memoriaDetectada = extrairMemoria(pergunta);
+    if (memoriaDetectada) {
+        historicoMensagens.push({ role: "user", content: pergunta });
+        historicoMensagens.push({ role: "assistant", content: memoriaDetectada });
+        await salvarMensagemFirebase("user", pergunta);
+        await salvarMensagemFirebase("assistant", memoriaDetectada);
+        return memoriaDetectada;
     }
     
-    return null;
+    // 2. Perguntas sobre memória armazenada
+    if (pergunta.toLowerCase().includes("meu nome")) {
+        return memoria.nome ? `Seu nome é ${memoria.nome}! 😊` : "Você ainda não me contou seu nome!";
+    }
+    if (pergunta.toLowerCase().includes("quantos anos eu tenho")) {
+        return memoria.idade ? `Você tem ${memoria.idade} anos! 🎈` : "Você ainda não me contou sua idade!";
+    }
+    
+    // 3. Resposta instantânea (JSONs) - PRIORIDADE MÁXIMA
+    const instant = respostaInstantanea(pergunta);
+    if (instant) {
+        historicoMensagens.push({ role: "user", content: pergunta });
+        historicoMensagens.push({ role: "assistant", content: instant });
+        await salvarMensagemFirebase("user", pergunta);
+        await salvarMensagemFirebase("assistant", instant);
+        return instant;
+    }
+    
+    // 4. Se não achou nada, chama a IA (proxy)
+    memoria.historicoCurto.push({ role: "user", content: pergunta });
+    if (memoria.historicoCurto.length > 6) memoria.historicoCurto.shift();
+    
+    try {
+        const response = await fetch('/api/groq', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ mensagem: pergunta, memoria: memoria })
+        });
+        const textResponse = await response.text();
+        let data;
+        try {
+            data = JSON.parse(textResponse);
+        } catch (jsonError) {
+            console.error("Proxy retornou texto não-JSON:", textResponse.slice(0, 200));
+            throw new Error("Resposta inválida do servidor");
+        }
+        if (!response.ok) throw new Error(data.error || `Erro HTTP ${response.status}`);
+        const respostaIA = data.reply || "Não consegui responder. Tente de novo!";
+        
+        memoria.historicoCurto.push({ role: "assistant", content: respostaIA });
+        historicoMensagens.push({ role: "user", content: pergunta });
+        historicoMensagens.push({ role: "assistant", content: respostaIA });
+        await salvarMensagemFirebase("user", pergunta);
+        await salvarMensagemFirebase("assistant", respostaIA);
+        return respostaIA;
+        
+    } catch (erro) {
+        console.error("Erro no proxy:", erro);
+        return "Desculpe, não consegui me conectar à minha central de conhecimentos agora. Tente novamente mais tarde. 🎨";
+    }
 }
     
     // ======================= IA (PROXY) =======================
