@@ -292,8 +292,7 @@ if (!conversaId) {
     const db = getFirestore(app);
     const CONVERSA_COLLECTION = "conversas_candinho";
 
-    
-  // ======================= RESPOSTAS INSTANTÂNEAS (JSONs do GitHub) =======================
+    // ======================= RESPOSTAS INSTANTÂNEAS =======================
 
 // 🔤 NORMALIZAR TEXTO
 function normalizar(texto) {
@@ -310,13 +309,13 @@ function ehPerguntaConceito(texto) {
     return gatilhos.some(g => texto.includes(g));
 }
 
-// 🎯 DETECTAR TEMA
+// 🎯 DETECTAR TEMA (mais preciso)
 function detectarTema(texto) {
-    if (texto.includes("danca")) return "danca";
-    if (texto.includes("musica")) return "musica";
-    if (texto.includes("teatro")) return "teatro";
-    if (texto.includes("folclore")) return "folclore";
-    if (texto.includes("festa")) return "festas";
+    if (texto.includes("danca") || texto.includes("dancar") || texto.includes("passo")) return "danca";
+    if (texto.includes("musica") || texto.includes("ritmo") || texto.includes("som")) return "musica";
+    if (texto.includes("teatro") || texto.includes("peca") || texto.includes("ator")) return "teatro";
+    if (texto.includes("folclore") || texto.includes("lenda")) return "folclore";
+    if (texto.includes("festa") || texto.includes("celebracao")) return "festas";
     if (texto.includes("indigena")) return "indigena";
     if (texto.includes("afro")) return "afro";
     if (texto.includes("arte")) return "arte";
@@ -326,28 +325,24 @@ function detectarTema(texto) {
 // 🎲 ALEATÓRIO
 function pegarAleatorio(obj) {
     if (!obj || typeof obj !== "object") return null;
-    let valores = Array.isArray(obj) ? obj : Object.values(obj);
-    if (valores.length === 0) return null;
+    const valores = Object.values(obj);
+    if (!valores.length) return null;
     const item = valores[Math.floor(Math.random() * valores.length)];
     return item.explicacao_infantil || item.resposta || JSON.stringify(item);
 }
 
-// 🔍 BUSCAR POR NOME
+// 🔍 BUSCAR POR NOME (prioridade máxima)
 function buscarPorNome(obj, texto) {
     for (const chave in obj) {
-        const nomeFormatado = chave
-            .replaceAll("_", " ")
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
-
-        if (texto.includes(nomeFormatado)) {
+        const nome = chave.replaceAll("_", " ");
+        if (texto.includes(nome)) {
             return obj[chave].explicacao_infantil || obj[chave].resposta;
         }
     }
     return null;
 }
 
-// 💛 BUSCAR EMOÇÃO (PRIORIDADE)
+// 💛 BUSCAR EMOÇÃO
 function buscarEmocao(texto, base) {
     for (const chave in base) {
         const item = base[chave];
@@ -385,40 +380,39 @@ function buscarPorPalavraChave(texto, base) {
     return null;
 }
 
-// 🚀 FUNÇÃO PRINCIPAL
+// 🚀 FUNÇÃO PRINCIPAL (SEM CONFLITOS)
 function respostaInstantanea(pergunta) {
     const texto = normalizar(pergunta);
 
     try {
-        // 💛 1. EMOÇÃO (prioridade máxima)
+        // 🔎 1. PRIORIDADE MÁXIMA: NOME DIRETO
+        const basesPrioridade = [
+            dataStore.dancas,
+            dataStore.ritmos,
+            dataStore.folclore,
+            dataStore.artistas,
+            dataStore.artes,
+            dataStore.musica,
+            dataStore.teatro
+        ];
+
+        for (const base of basesPrioridade) {
+            if (!base) continue;
+            const resposta = buscarPorNome(base, texto);
+            if (resposta) return resposta;
+        }
+
+        // 💛 2. EMOÇÃO
         if (dataStore.emocional) {
             const emocao = buscarEmocao(texto, dataStore.emocional);
             if (emocao) return emocao;
         }
 
-        // 🔎 1. BUSCA DIRETA POR NOME (PRIORIDADE MÁXIMA)
-const bases = [
-    dataStore.dancas,
-    dataStore.ritmos,
-    dataStore.folclore,
-    dataStore.artistas,
-    dataStore.artes,
-    dataStore.musica,
-    dataStore.teatro
-];
-
-for (const base of bases) {
-    if (!base) continue;
-
-    const porNome = buscarPorNome(base, texto);
-    if (porNome) return porNome;
-}
-
-// 🧠 2. CONCEITO (SÓ SE NÃO ACHOU NADA)
-if (ehPerguntaConceito(texto)) {
-    const conceito = buscarConceito(texto);
-    if (conceito) return conceito;
-}
+        // 🧠 3. CONCEITO
+        if (ehPerguntaConceito(texto)) {
+            const conceito = buscarConceito(texto);
+            if (conceito) return conceito;
+        }
 
         // 😂 PIADAS
         if (texto.includes("piada") && dataStore.piadas)
@@ -428,8 +422,8 @@ if (ehPerguntaConceito(texto)) {
         if (texto.includes("curiosidade") && dataStore.curiosidades)
             return pegarAleatorio(dataStore.curiosidades);
 
-        // 🔎 BUSCA EM TODAS AS BASES
-        const bases = [
+        // 🔍 4. BUSCA GERAL
+        const basesGerais = [
             dataStore.artistas,
             dataStore.atividades,
             dataStore.dancas,
@@ -445,7 +439,7 @@ if (ehPerguntaConceito(texto)) {
             dataStore.artes
         ];
 
-        for (const base of bases) {
+        for (const base of basesGerais) {
             if (!base) continue;
 
             const porNome = buscarPorNome(base, texto);
@@ -456,10 +450,10 @@ if (ehPerguntaConceito(texto)) {
         }
 
     } catch (err) {
-        console.error("Erro em respostaInstantanea:", err);
+        console.error("Erro:", err);
     }
 
-    return null;
+    return "Ainda estou aprendendo 😊. Pode perguntar de outro jeito?";
 }
     
     // ======================= FUNÇÃO PRINCIPAL =======================
