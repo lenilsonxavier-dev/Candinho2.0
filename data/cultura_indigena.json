@@ -1,20 +1,26 @@
 {
   "o_que_e": {
+    "palavras_chave": ["cultura indigena", "o que e cultura indigena", "povos originarios", "indigena brasil"],
     "explicacao_infantil": "A cultura indígena é formada pelos costumes, saberes e tradições dos povos originários do Brasil. Ela envolve respeito à natureza, à comunidade e à ancestralidade."
   },
   "arte_indigena": {
+    "palavras_chave": ["arte indigena", "arte dos indigenas", "arte nativa"],
     "explicacao_infantil": "A arte indígena aparece em pinturas corporais, grafismos, cerâmicas e objetos. Cada desenho tem significado e conta uma história."
   },
   "grafismos": {
+    "palavras_chave": ["grafismo", "grafismos indigenas", "desenhos indigenas"],
     "explicacao_infantil": "Os grafismos são desenhos usados pelos povos indígenas. Eles aparecem no corpo, em objetos e representam ideias, natureza e identidade."
   },
   "pintura_corporal": {
+    "palavras_chave": ["pintura corporal", "tinta no corpo indigena", "pintura indigena"],
     "explicacao_infantil": "A pintura corporal é feita com tintas naturais. Ela pode representar proteção, celebração e identidade do povo."
   },
   "cestaria": {
+    "palavras_chave": ["cestaria", "cestos indigenas", "arte com fibras"],
     "explicacao_infantil": "A cestaria é a arte de fazer cestos com fibras naturais. Ela é usada no dia a dia e também tem beleza e significado."
   },
   "relacao_natureza": {
+    "palavras_chave": ["natureza indigena", "relacao com a natureza", "equilibrio com a natureza"],
     "explicacao_infantil": "Os povos indígenas têm uma forte relação com a natureza. Eles cuidam da terra e aprendem com ela para viver em equilíbrio."
   }
 }
