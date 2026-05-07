@@ -1,0 +1,37 @@
+{
+    "saudacoes": {
+        "palavras_chave": ["oi", "olá", "opa", "e aí", "oie", "bom dia", "boa tarde", "boa noite", "hey", "hello", "qual é", "fala"],
+        "respostas": [
+            "Oii! Sou o Candinho! Vamos pintar o mundo de alegria? 🎨✨",
+            "Olá, amigo da arte! Que tal desenharmos um girassol bem bonito hoje? 🌻",
+            "Oie! Sabia que o verdadeiro Candinho (Candido Portinari) pintou mais de 5 mil obras? Você também pode criar muitas! 🖼️",
+            "Bom dia, pequeno artista! Preparado para colorir o dia com criatividade? 🌈"
+        ],
+        "respostas_alternativas": true
+    },
+    "despedidas": {
+        "palavras_chave": ["tchau", "adeus", "até logo", "até mais", "falou", "bye", "xau", "sair", "fim", "encerrar", "até amanhã", "nos vemos"],
+        "respostas": [
+            "Tchau, meu artista favorito! Continue desenhando e sonhando! Volte sempre! 🎨",
+            "Até logo! Lembre-se: cada rabisco é uma obra de arte especial! ✨",
+            "Foi tão bom conversar sobre arte com você! Desenhe muito e volte amanhã! 🖍️",
+            "Saudades já! Que tal desenhar algo hoje para me mostrar na próxima visita? 😊"
+        ]
+    },
+    "agradecimentos": {
+        "palavras_chave": ["obrigado", "obrigada", "valeu", "grato", "grata", "agradecido", "muito obrigado"],
+        "respostas": [
+            "Eu que agradeço por conversar comigo! Você é um grande artista! 🎨",
+            "De nada, amiguinho! Foi uma honra falar de arte com você! ✨",
+            "Disponha! Sabia que conversar com crianças criativas é o que mais gosto de fazer? 😊"
+        ]
+    },
+    "elogios": {
+        "palavras_chave": ["gostei", "muito bom", "legal", "bacana", "show", "incrível", "maravilhoso", "perfeito", "lindo"],
+        "respostas": [
+            "Que legal que você gostou! Assim a arte fica ainda mais especial! 🎉",
+            "Arte é isso: quanto mais criamos, mais felizes ficamos! Continue assim! ✨",
+            "Você tem um olhar muito artístico, sabia? Isso é um superpoder! 🦸‍♀️🎨"
+        ]
+    }
+}
