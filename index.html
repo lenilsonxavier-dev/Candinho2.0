@@ -139,6 +139,7 @@
         dancas: "dancas.json",
         artes: "artes_visuais.json",
         artistas: "artistas.json",
+        tecnicas: "arte_tecnicas.json",
         historia: "historia_arte.json",
         teatro: "teatro.json",
         musica: "musica.json",
@@ -151,6 +152,7 @@
         afro: "cultura_afro_brasileira.json",
         atividades: "atividades_artisticas.json",
         emocional: "apoio_emocional.json",
+        saudacoes: "saudacoes.json",
         piadas: "piadas.json"
     };
     
@@ -282,7 +284,7 @@
             "cor terciaria", "cores terciarias", "cor terciária", "cores terciárias",
             "linha", "ponto", "forma", "textura", "volume", "perspectiva", "composicao",
             "luz e sombra", "elementos da arte", "elementos visuais", "o que e arte",
-            "pintura", "desenho", "escultura", "arte visual", "cor quente", "cor fria"
+            "pintura", "desenho", "escultura", "arte visual", "cor quente", "cores quentes", "cores frias", "cor fria"
         ];
         if (artesVisuaisKeywords.some(kw => txt.includes(kw))) return "arte";
         
@@ -309,6 +311,10 @@
         if (txt.includes("afro") || txt.includes("quilombo") || txt.includes("orixa")) return "afro";
         
         if (txt.includes("atividade") || txt.includes("oficina") || txt.includes("desenho")) return "atividade";
+
+       if (txt.includes("saudacoes") || txt.includes("oi") || txt.includes("ola")) return "saudacoes";
+
+       if (txt.includes("tecnica") || txt.includes("jeito") || txt.includes("maneira")) return "tecnicas";
         
         if (txt.includes("artista") || txt.includes("van gogh") || txt.includes("pintor") ||
             txt.includes("tarsila") || txt.includes("portinari") || txt.includes("picasso") ||
