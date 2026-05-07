@@ -1,26 +1,250 @@
 {
   "o_que_e": {
-    "palavras_chave": ["cultura indigena", "o que e cultura indigena", "povos originarios", "indigena brasil"],
-    "explicacao_infantil": "A cultura indígena é formada pelos costumes, saberes e tradições dos povos originários do Brasil. Ela envolve respeito à natureza, à comunidade e à ancestralidade."
+    "tema": "cultura_indigena",
+    "subtema": "o_que_e",
+
+    "palavras_chave": [
+      "cultura indigena",
+      "o que e cultura indigena",
+      "povos originarios",
+      "indigena brasil"
+    ],
+
+    "inicio": [
+      "Você já ouviu falar dos povos originários do Brasil? 🌿",
+      "A cultura indígena faz parte da história do nosso país."
+    ],
+
+    "explicacao_curta": [
+      "A cultura indígena é formada pelos costumes, saberes e tradições dos povos originários do Brasil."
+    ],
+
+    "explicacao_aprofundada": [
+      "A cultura indígena envolve respeito à natureza, à comunidade e à ancestralidade. Cada povo possui sua própria língua, costumes, histórias e formas de viver."
+    ],
+
+    "curiosidade": [
+      "Existem muitos povos indígenas diferentes no Brasil, cada um com suas tradições."
+    ],
+
+    "interacao": [
+      "Você conhece alguma palavra de origem indígena?",
+      "O que você acha que podemos aprender com os povos indígenas?"
+    ],
+
+    "atividade": [
+      "Desenhe elementos da natureza importantes para os povos indígenas 🌳"
+    ],
+
+    "emocao": "respeito",
+
+    "final": [
+      "Conhecer a cultura indígena é valorizar a história e a diversidade do Brasil 💛"
+    ]
   },
+
   "arte_indigena": {
-    "palavras_chave": ["arte indigena", "arte dos indigenas", "arte nativa"],
-    "explicacao_infantil": "A arte indígena aparece em pinturas corporais, grafismos, cerâmicas e objetos. Cada desenho tem significado e conta uma história."
+    "tema": "cultura_indigena",
+    "subtema": "arte_indigena",
+
+    "palavras_chave": [
+      "arte indigena",
+      "arte dos indigenas",
+      "arte nativa"
+    ],
+
+    "inicio": [
+      "A arte indígena é cheia de cores, símbolos e histórias 🎨"
+    ],
+
+    "explicacao_curta": [
+      "A arte indígena aparece em pinturas corporais, grafismos, cerâmicas e objetos."
+    ],
+
+    "explicacao_aprofundada": [
+      "Cada desenho e objeto pode representar histórias, animais, elementos da natureza e tradições importantes para os povos indígenas."
+    ],
+
+    "curiosidade": [
+      "Muitas tintas usadas pelos povos indígenas vêm da natureza."
+    ],
+
+    "interacao": [
+      "Que formas e desenhos você criaria para representar sua história?"
+    ],
+
+    "atividade": [
+      "Crie um desenho inspirado nos grafismos indígenas."
+    ],
+
+    "emocao": "criatividade",
+
+    "final": [
+      "A arte indígena ajuda a preservar memórias e tradições 🌿"
+    ]
   },
+
   "grafismos": {
-    "palavras_chave": ["grafismo", "grafismos indigenas", "desenhos indigenas"],
-    "explicacao_infantil": "Os grafismos são desenhos usados pelos povos indígenas. Eles aparecem no corpo, em objetos e representam ideias, natureza e identidade."
+    "tema": "cultura_indigena",
+    "subtema": "grafismos",
+
+    "palavras_chave": [
+      "grafismo",
+      "grafismos indigenas",
+      "desenhos indigenas"
+    ],
+
+    "inicio": [
+      "Os grafismos indígenas são desenhos cheios de significado ✨"
+    ],
+
+    "explicacao_curta": [
+      "Os grafismos aparecem no corpo, em objetos e em pinturas."
+    ],
+
+    "explicacao_aprofundada": [
+      "Cada grafismo pode representar elementos da natureza, identidade do povo, proteção ou histórias tradicionais."
+    ],
+
+    "curiosidade": [
+      "Alguns grafismos são inspirados em animais, rios e plantas."
+    ],
+
+    "interacao": [
+      "Se você criasse um símbolo sobre a natureza, como ele seria?"
+    ],
+
+    "atividade": [
+      "Faça padrões usando linhas, círculos e formas geométricas."
+    ],
+
+    "emocao": "criatividade",
+
+    "final": [
+      "Os grafismos ajudam a contar histórias sem usar palavras 🌎"
+    ]
   },
+
   "pintura_corporal": {
-    "palavras_chave": ["pintura corporal", "tinta no corpo indigena", "pintura indigena"],
-    "explicacao_infantil": "A pintura corporal é feita com tintas naturais. Ela pode representar proteção, celebração e identidade do povo."
+    "tema": "cultura_indigena",
+    "subtema": "pintura_corporal",
+
+    "palavras_chave": [
+      "pintura corporal",
+      "tinta no corpo indigena",
+      "pintura indigena"
+    ],
+
+    "inicio": [
+      "A pintura corporal indígena possui muitos significados 🎨"
+    ],
+
+    "explicacao_curta": [
+      "Ela é feita com tintas naturais retiradas da natureza."
+    ],
+
+    "explicacao_aprofundada": [
+      "A pintura corporal pode representar proteção, celebração, identidade cultural e momentos importantes para a comunidade."
+    ],
+
+    "curiosidade": [
+      "Urucum e jenipapo são usados para criar tintas naturais."
+    ],
+
+    "interacao": [
+      "Você já viu tintas feitas com elementos naturais?"
+    ],
+
+    "atividade": [
+      "Crie padrões usando apenas cores da natureza."
+    ],
+
+    "emocao": "expressao",
+
+    "final": [
+      "As pinturas corporais mostram identidade, tradição e conexão cultural 🌿"
+    ]
   },
+
   "cestaria": {
-    "palavras_chave": ["cestaria", "cestos indigenas", "arte com fibras"],
-    "explicacao_infantil": "A cestaria é a arte de fazer cestos com fibras naturais. Ela é usada no dia a dia e também tem beleza e significado."
+    "tema": "cultura_indigena",
+    "subtema": "cestaria",
+
+    "palavras_chave": [
+      "cestaria",
+      "cestos indigenas",
+      "arte com fibras"
+    ],
+
+    "inicio": [
+      "A cestaria indígena mistura arte e utilidade 🧺"
+    ],
+
+    "explicacao_curta": [
+      "A cestaria é a arte de criar cestos usando fibras naturais."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os povos indígenas utilizam fibras de plantas para produzir objetos usados no cotidiano e também em celebrações culturais."
+    ],
+
+    "curiosidade": [
+      "Cada povo pode ter formas e tramas diferentes em seus cestos."
+    ],
+
+    "interacao": [
+      "Você já tentou criar algo usando materiais naturais?"
+    ],
+
+    "atividade": [
+      "Faça uma colagem imitando tramas de cestaria."
+    ],
+
+    "emocao": "criatividade",
+
+    "final": [
+      "A cestaria mostra como arte e natureza podem caminhar juntas 🌱"
+    ]
   },
+
   "relacao_natureza": {
-    "palavras_chave": ["natureza indigena", "relacao com a natureza", "equilibrio com a natureza"],
-    "explicacao_infantil": "Os povos indígenas têm uma forte relação com a natureza. Eles cuidam da terra e aprendem com ela para viver em equilíbrio."
+    "tema": "cultura_indigena",
+    "subtema": "relacao_natureza",
+
+    "palavras_chave": [
+      "natureza indigena",
+      "relacao com a natureza",
+      "equilibrio com a natureza"
+    ],
+
+    "inicio": [
+      "Os povos indígenas têm uma ligação muito forte com a natureza 🌳"
+    ],
+
+    "explicacao_curta": [
+      "Eles aprendem com a terra, os rios, os animais e as florestas."
+    ],
+
+    "explicacao_aprofundada": [
+      "A natureza é vista como parte importante da vida e da comunidade. Muitos conhecimentos indígenas ajudam na preservação do meio ambiente."
+    ],
+
+    "curiosidade": [
+      "Muitos povos indígenas conhecem plantas usadas para alimentação e cuidados naturais."
+    ],
+
+    "interacao": [
+      "Como você pode ajudar a cuidar da natureza no seu dia a dia?"
+    ],
+
+    "atividade": [
+      "Observe uma planta ou árvore e desenhe os detalhes que você percebeu 🌿"
+    ],
+
+    "emocao": "harmonia",
+
+    "final": [
+      "Cuidar da natureza é cuidar da vida 🌎"
+    ]
   }
 }
