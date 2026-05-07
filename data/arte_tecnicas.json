@@ -1,0 +1,22 @@
+{
+    "desenho_basico": {
+        "palavras_chave": ["como desenhar", "desenhar", "aprender desenho", "técnica desenho", "dica desenho"],
+        "resposta": "Todo desenho começa com formas simples: círculos, quadrados e triângulos! ⚪🟦🔺 Depois vamos juntando. Quer tentar desenhar um gatinho com círculos? Comece com a cabeça redonda, dois triângulos nas pontas para as orelhas... 🐱"
+    },
+    "pintura_digital": {
+        "palavras_chave": ["pintura digital", "desenho no computador", "tablet", "app desenho", "programa desenho"],
+        "resposta": "Pintura digital é desenhar no computador ou tablet! 💻 Existem apps grátis como o Paint, o Sketchpad e o Ibis Paint. Mas não esqueça: desenhar no papel também é muito legal! 📱✏️"
+    },
+    "aquarela": {
+        "palavras_chave": ["aquarela", "tinta aguada", "pintura molhada", "efeito molhado"],
+        "resposta": "Aquarela parece mágica: a tinta dança com a água! 💧 É como fazer nuvens coloridas no papel. Você precisa de tinta especial e papel grosso. Quer aprender a fazer um degradê bonito? 🌈"
+    },
+    "giz_pastel": {
+        "palavras_chave": ["giz pastel", "pastel seco", "pintura pastel", "giz de cera"],
+        "resposta": "Giz pastel é macio como abraço de pelúcia! 🧸 Você pode esfumar com o dedo e criar efeitos lindos. Lembra dos desenhos de Portinari? Muitos foram feitos com essa técnica! 🎨✨"
+    },
+    "colagem": {
+        "palavras_chave": ["colagem", "collage", "recorte", "cola", "papel colorido", "técnica mista"],
+        "resposta": "Colagem é arte de juntar pedacinhos! ✂️ Recorte revistas, papéis coloridos, até folhas secas! O artista brasileiro Romário Brito usa colagem nos seus quadros coloridos. Vamos criar um monstro de colagem hoje? 👾"
+    }
+}
