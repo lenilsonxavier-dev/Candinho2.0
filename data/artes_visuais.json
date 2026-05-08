@@ -2,74 +2,609 @@
   "artes_visuais": {
 
     "elementos_basicos": {
+
       "linha": {
-        "palavras_chave": ["linha", "traco"],
-        "explicacao_infantil": "A linha é um traço que pode ser reta, curva ou ondulada. Ela pode mostrar caminhos, movimentos e formas no desenho."
+        "tema": "artes_visuais",
+        "subtema": "linha",
+
+        "palavras_chave": [
+          "linha",
+          "traco",
+          "traço"
+        ],
+
+        "inicio": [
+          "As linhas estão em quase todos os desenhos ✏️",
+          "Uma linha pode passear pelo papel de muitos jeitos 🌈"
+        ],
+
+        "explicacao_curta": [
+          "A linha é um traço que pode ser reto, curvo ou ondulado."
+        ],
+
+        "explicacao_aprofundada": [
+          "As linhas ajudam a mostrar caminhos, movimentos, emoções e formas dentro da arte."
+        ],
+
+        "curiosidade": [
+          "Linhas rápidas podem mostrar agitação, enquanto linhas suaves parecem mais calmas."
+        ],
+
+        "interacao": [
+          "Você consegue desenhar uma linha bem maluca?",
+          "Que tipo de linha parece mais divertida para você?"
+        ],
+
+        "atividade": [
+          "Desenhe linhas retas, curvas e em zigue-zague ✏️"
+        ],
+
+        "final": [
+          "Uma simples linha pode virar uma grande criação 🎨"
+        ],
+
+        "emocao": "criatividade",
+        "nivel": "leve"
       },
+
       "ponto": {
-        "palavras_chave": ["ponto"],
-        "explicacao_infantil": "O ponto é o menor elemento do desenho. Vários pontos juntos podem formar imagens e texturas."
+        "tema": "artes_visuais",
+        "subtema": "ponto",
+
+        "palavras_chave": [
+          "ponto"
+        ],
+
+        "inicio": [
+          "O ponto é pequeno, mas muito importante 🎯"
+        ],
+
+        "explicacao_curta": [
+          "O ponto é o menor elemento do desenho."
+        ],
+
+        "explicacao_aprofundada": [
+          "Vários pontos juntos podem formar imagens, texturas e efeitos visuais."
+        ],
+
+        "curiosidade": [
+          "Alguns artistas criam desenhos inteiros usando apenas pontos ✨"
+        ],
+
+        "interacao": [
+          "Você consegue fazer um desenho só com pontinhos?"
+        ],
+
+        "atividade": [
+          "Crie uma figura usando muitos pontos coloridos 🔵"
+        ],
+
+        "final": [
+          "Pequenos pontos podem criar grandes imagens 🌟"
+        ],
+
+        "emocao": "exploracao",
+        "nivel": "leve"
       },
+
       "forma": {
-        "palavras_chave": ["forma", "figura"],
-        "explicacao_infantil": "A forma é o contorno de algo, como um círculo ou quadrado. Ela ajuda a criar figuras nos desenhos."
+        "tema": "artes_visuais",
+        "subtema": "forma",
+
+        "palavras_chave": [
+          "forma",
+          "figura"
+        ],
+
+        "inicio": [
+          "As formas ajudam a construir desenhos 🟠⬜🔺"
+        ],
+
+        "explicacao_curta": [
+          "A forma é o contorno de algo, como um círculo ou quadrado."
+        ],
+
+        "explicacao_aprofundada": [
+          "As formas podem ser geométricas ou livres e ajudam a criar personagens, objetos e paisagens."
+        ],
+
+        "curiosidade": [
+          "Muitos desenhos começam com formas simples."
+        ],
+
+        "interacao": [
+          "Qual forma você mais gosta de desenhar?"
+        ],
+
+        "atividade": [
+          "Crie um personagem usando círculos e quadrados ✏️"
+        ],
+
+        "final": [
+          "As formas são como peças de construção da arte 🌈"
+        ],
+
+        "emocao": "criatividade",
+        "nivel": "leve"
       }
     },
 
     "cor": {
+
       "conceito": {
-        "palavras_chave": ["o que e cor", "definicao de cor"],
-        "explicacao_infantil": "A cor dá vida ao desenho! Pode transmitir sentimentos como alegria, calma ou energia."
+        "tema": "artes_visuais",
+        "subtema": "conceito_cor",
+
+        "palavras_chave": [
+          "o que e cor",
+          "definicao de cor"
+        ],
+
+        "inicio": [
+          "As cores deixam o mundo mais vivo 🌈"
+        ],
+
+        "explicacao_curta": [
+          "As cores podem transmitir sentimentos e emoções."
+        ],
+
+        "explicacao_aprofundada": [
+          "Algumas cores parecem calmas, outras agitadas ou alegres. Elas ajudam artistas a mostrar emoções."
+        ],
+
+        "curiosidade": [
+          "As cores aparecem por causa da luz ☀️"
+        ],
+
+        "interacao": [
+          "Qual cor combina mais com alegria para você?"
+        ],
+
+        "atividade": [
+          "Pinte um desenho usando apenas suas cores favoritas 🎨"
+        ],
+
+        "final": [
+          "As cores contam histórias sem usar palavras ✨"
+        ],
+
+        "emocao": "alegria",
+        "nivel": "leve"
       },
 
       "tipos": {
+
         "cores_quentes": {
-          "palavras_chave": ["cores quentes", "vermelho", "amarelo"],
-          "explicacao_infantil": "As cores quentes, como vermelho e amarelo, lembram o sol e o fogo. Elas passam sensação de calor e energia."
+          "tema": "artes_visuais",
+          "subtema": "cores_quentes",
+
+          "palavras_chave": [
+            "cores quentes",
+            "vermelho",
+            "amarelo"
+          ],
+
+          "inicio": [
+            "As cores quentes parecem cheias de energia 🔥"
+          ],
+
+          "explicacao_curta": [
+            "Vermelho, amarelo e laranja lembram o fogo e o sol."
+          ],
+
+          "explicacao_aprofundada": [
+            "As cores quentes transmitem calor, movimento e animação."
+          ],
+
+          "interacao": [
+            "Qual cor quente você acha mais animada?"
+          ],
+
+          "atividade": [
+            "Desenhe um sol usando cores quentes ☀️"
+          ],
+
+          "final": [
+            "As cores quentes deixam as artes vibrantes 🌞"
+          ],
+
+          "emocao": "animacao",
+          "nivel": "leve"
         },
+
         "cores_frias": {
-          "palavras_chave": ["cores frias", "azul", "verde"],
-          "explicacao_infantil": "As cores frias, como azul e verde, lembram água e natureza. Elas passam calma e tranquilidade."
-        },
-        "cores_primarias": {
-          "palavras_chave": ["cores primarias"],
-          "explicacao_infantil": "As cores primárias são vermelho, azul e amarelo."
-        },
-        "cores_secundarias": {
-          "palavras_chave": ["cores secundarias"],
-          "explicacao_infantil": "As cores secundárias surgem da mistura de duas cores primárias."
-        },
-        "cores_terciarias": {
-          "palavras_chave": ["cores terciarias"],
-          "explicacao_infantil": "As cores terciárias aparecem quando misturamos uma cor primária com uma secundária."
+          "tema": "artes_visuais",
+          "subtema": "cores_frias",
+
+          "palavras_chave": [
+            "cores frias",
+            "azul",
+            "verde"
+          ],
+
+          "inicio": [
+            "As cores frias parecem tranquilas 🌊"
+          ],
+
+          "explicacao_curta": [
+            "Azul e verde lembram água, céu e natureza."
+          ],
+
+          "explicacao_aprofundada": [
+            "As cores frias costumam transmitir calma e serenidade."
+          ],
+
+          "interacao": [
+            "Qual paisagem você pintaria usando cores frias?"
+          ],
+
+          "atividade": [
+            "Faça uma pintura inspirada no oceano 🌊"
+          ],
+
+          "final": [
+            "As cores frias parecem abraços tranquilos ☁️"
+          ],
+
+          "emocao": "calma",
+          "nivel": "leve"
         }
       }
     },
 
     "outros_elementos": {
+
       "textura": {
-        "palavras_chave": ["textura"],
-        "explicacao_infantil": "A textura mostra como algo parece ao toque, como áspero ou liso."
+        "tema": "artes_visuais",
+        "subtema": "textura",
+
+        "palavras_chave": [
+          "textura"
+        ],
+
+        "inicio": [
+          "A textura faz a arte parecer viva ✨"
+        ],
+
+        "explicacao_curta": [
+          "A textura mostra como algo parece ao toque."
+        ],
+
+        "interacao": [
+          "O que parece mais áspero: pedra ou algodão?"
+        ],
+
+        "atividade": [
+          "Crie texturas usando lápis e pontinhos ✏️"
+        ],
+
+        "final": [
+          "As texturas deixam os desenhos mais interessantes 🌿"
+        ],
+
+        "emocao": "exploracao",
+        "nivel": "leve"
       },
+
       "volume": {
-        "palavras_chave": ["volume"],
-        "explicacao_infantil": "O volume dá a ideia de que algo é tridimensional."
-      },
-      "espaco": {
-        "palavras_chave": ["espaco"],
-        "explicacao_infantil": "O espaço é o lugar onde o desenho acontece."
-      },
-      "luz_sombra": {
-        "palavras_chave": ["luz", "sombra"],
-        "explicacao_infantil": "A luz e a sombra ajudam a dar profundidade ao desenho."
-      },
-      "perspectiva": {
-        "palavras_chave": ["perspectiva"],
-        "explicacao_infantil": "A perspectiva faz objetos distantes parecerem menores."
-      },
-      "composicao": {
-        "palavras_chave": ["composicao"],
-        "explicacao_infantil": "A composição é a forma de organizar os elementos no desenho."
+        "tema": "artes_visuais",
+        "subtema": "volume",
+
+        "palavras_chave": [
+          "volume"
+        ],
+
+        "inicio": [
+          "O volume ajuda o desenho a parecer tridimensional 📦"
+        ],
+
+        "explicacao_curta": [
+          "O volume cria a sensação de profundidade."
+        ],
+
+        "atividade": [
+          "Desenhe um cubo usando luz e sombra ✏️"
+        ],
+
+        "final": [
+          "O volume faz os objetos parecerem reais 🌟"
+        ],
+
+        "emocao": "criatividade",
+        "nivel": "leve"
+        },
+        
+  "espaco": {
+    "tema": "artes_visuais",
+    "subtema": "espaco",
+
+    "palavras_chave": [
+      "espaco",
+      "espaço"
+    ],
+
+    "inicio": [
+      "Todo desenho precisa de um espaço para acontecer 🌎",
+      "O espaço ajuda os elementos da arte a se organizarem ✨"
+    ],
+
+    "explicacao_curta": [
+      "O espaço é o lugar onde os desenhos, formas e cores aparecem."
+    ],
+
+    "explicacao_aprofundada": [
+      "Na arte, o espaço pode parecer cheio, vazio, perto ou distante. Ele ajuda a organizar a imagem."
+    ],
+
+    "curiosidade": [
+      "Um espaço vazio também pode fazer parte da arte 🎨"
+    ],
+
+    "interacao": [
+      "Você prefere desenhos cheios de detalhes ou com bastante espaço vazio?"
+    ],
+
+    "atividade": [
+      "Desenhe um céu bem aberto com poucas formas ☁️"
+    ],
+
+    "final": [
+      "O espaço ajuda a arte a respirar 🌿"
+    ],
+
+    "emocao": "equilibrio",
+    "nivel": "leve"
+  },
+
+  "luz_sombra": {
+    "tema": "artes_visuais",
+    "subtema": "luz_sombra",
+
+    "palavras_chave": [
+      "luz",
+      "sombra",
+      "luz e sombra"
+    ],
+
+    "inicio": [
+      "A luz e a sombra criam mágicas nos desenhos ✨",
+      "Sombras ajudam os objetos a parecerem mais reais 🌗"
+    ],
+
+    "explicacao_curta": [
+      "A luz ilumina e a sombra mostra as partes mais escuras."
+    ],
+
+    "explicacao_aprofundada": [
+      "Artistas usam luz e sombra para criar profundidade, destacar formas e dar sensação de volume."
+    ],
+
+    "curiosidade": [
+      "A posição da luz muda completamente as sombras ☀️"
+    ],
+
+    "interacao": [
+      "Você já observou a sombra de um objeto no sol?"
+    ],
+
+    "atividade": [
+      "Desenhe uma bola e faça uma sombra ao lado ✏️"
+    ],
+
+    "final": [
+      "A luz e a sombra deixam os desenhos mais vivos 🌟"
+    ],
+
+    "emocao": "exploracao",
+    "nivel": "leve"
+  },
+
+  "perspectiva": {
+    "tema": "artes_visuais",
+    "subtema": "perspectiva",
+
+    "palavras_chave": [
+      "perspectiva"
+    ],
+
+    "inicio": [
+      "A perspectiva faz os desenhos parecerem profundos 🛤️",
+      "Ela ajuda a criar a sensação de distância 👀"
+    ],
+
+    "explicacao_curta": [
+      "Objetos distantes parecem menores."
+    ],
+
+    "explicacao_aprofundada": [
+      "A perspectiva ajuda artistas a mostrar profundidade e criar cenas mais realistas."
+    ],
+
+    "curiosidade": [
+      "Trilhos de trem parecem se juntar ao longe 🚂"
+    ],
+
+    "interacao": [
+      "Você consegue imaginar uma estrada desaparecendo no horizonte?"
+    ],
+
+    "atividade": [
+      "Desenhe uma estrada ficando mais fina ao longe ✏️"
+    ],
+
+    "final": [
+      "A perspectiva cria ilusões incríveis na arte 🌈"
+    ],
+
+    "emocao": "curiosidade",
+    "nivel": "leve"
+  },
+
+  "composicao": {
+    "tema": "artes_visuais",
+    "subtema": "composicao",
+
+    "palavras_chave": [
+      "composicao",
+      "composição"
+    ],
+
+    "inicio": [
+      "A composição organiza os elementos da arte 🎨",
+      "Cada desenho tem um jeito especial de organizar formas e cores ✨"
+    ],
+
+    "explicacao_curta": [
+      "A composição mostra como os elementos aparecem no desenho."
+    ],
+
+    "explicacao_aprofundada": [
+      "Artistas escolhem onde colocar objetos, cores e linhas para criar equilíbrio e movimento."
+    ],
+
+    "curiosidade": [
+      "Mudar um elemento de lugar pode transformar toda a imagem 🌟"
+    ],
+
+    "interacao": [
+      "Você gosta de desenhos organizados ou mais livres?"
+    ],
+
+    "atividade": [
+      "Monte uma cena colocando objetos em diferentes posições ✏️"
+    ],
+
+    "final": [
+      "A composição ajuda a contar histórias através da arte 🌿"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
+  },
+
+  "cores_primarias": {
+    "tema": "artes_visuais",
+    "subtema": "cores_primarias",
+
+    "palavras_chave": [
+      "cores primarias",
+      "cores primárias"
+    ],
+
+    "inicio": [
+      "As cores primárias são muito especiais 🌈"
+    ],
+
+    "explicacao_curta": [
+      "As cores primárias são vermelho, azul e amarelo."
+    ],
+
+    "explicacao_aprofundada": [
+      "Com as cores primárias podemos criar muitas outras misturas e tonalidades."
+    ],
+
+    "curiosidade": [
+      "Muitas cores surgem da mistura das primárias 🎨"
+    ],
+
+    "interacao": [
+      "Você já tentou misturar tintas coloridas?"
+    ],
+
+    "atividade": [
+      "Misture azul e amarelo para descobrir uma nova cor ✨"
+    ],
+
+    "final": [
+      "As cores primárias são a base de muitas pinturas 🌟"
+    ],
+
+    "emocao": "exploracao",
+    "nivel": "leve"
+  },
+
+  "cores_secundarias": {
+    "tema": "artes_visuais",
+    "subtema": "cores_secundarias",
+
+    "palavras_chave": [
+      "cores secundarias",
+      "cores secundárias"
+    ],
+
+    "inicio": [
+      "As cores secundárias nascem das misturas 🎨"
+    ],
+
+    "explicacao_curta": [
+      "As cores secundárias aparecem quando misturamos duas cores primárias."
+    ],
+
+    "explicacao_aprofundada": [
+      "Laranja, verde e roxo são exemplos de cores secundárias."
+    ],
+
+    "curiosidade": [
+      "Misturar tintas é quase como fazer experiências mágicas ✨"
+    ],
+
+    "interacao": [
+      "Qual mistura de cores você gostaria de testar?"
+    ],
+
+    "atividade": [
+      "Misture vermelho e amarelo para criar laranja 🧡"
+    ],
+
+    "final": [
+      "As misturas criam novas possibilidades coloridas 🌈"
+    ],
+
+    "emocao": "diversao",
+    "nivel": "leve"
+  },
+
+  "cores_terciarias": {
+    "tema": "artes_visuais",
+    "subtema": "cores_terciarias",
+
+    "palavras_chave": [
+      "cores terciarias",
+      "cores terciárias"
+    ],
+
+    "inicio": [
+      "As cores terciárias deixam a arte ainda mais rica 🎨"
+    ],
+
+    "explicacao_curta": [
+      "As cores terciárias surgem da mistura de uma cor primária com uma secundária."
+    ],
+
+    "explicacao_aprofundada": [
+      "Essas misturas criam tonalidades diferentes e cheias de personalidade."
+    ],
+
+    "curiosidade": [
+      "Algumas cores terciárias recebem nomes bem diferentes 🌈"
+    ],
+
+    "interacao": [
+      "Você gostaria de inventar uma cor nova?"
+    ],
+
+    "atividade": [
+      "Misture várias cores e observe os resultados ✨"
+    ],
+
+    "final": [
+      "As cores podem criar infinitas combinações 🌟"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
+  }
+}
       }
     }
   }
