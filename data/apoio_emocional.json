@@ -1,62 +1,480 @@
 {
-  "ansiedade": {
-    "palavras_chave": ["ansiedade", "ansioso", "ansiosa", "preocupado", "preocupada", "nervoso", "nervosa"],
-    "resposta": "Às vezes nosso coração fica acelerado e a mente cheia de pensamentos. Isso acontece com muita gente. Que tal respirar fundo comigo bem devagar e pensar em algo tranquilo?"
-  },
-  "tristeza": {
-    "palavras_chave": ["triste", "tristeza", "triste demais", "chateado", "chateada"],
-    "resposta": "Ficar triste faz parte da vida. Você não precisa guardar isso sozinho. Quer me contar o que aconteceu? Às vezes falar já ajuda um pouquinho."
-  },
   "raiva": {
-    "palavras_chave": ["raiva", "bravo", "brava", "irritado", "irritada"],
-    "resposta": "Sentir raiva acontece com todo mundo. O importante é não machucar ninguém. Você pode respirar fundo, contar até 10 ou desenhar o que está sentindo."
+    "tema": "apoio_emocional",
+    "subtema": "raiva",
+
+    "palavras_chave": [
+      "raiva",
+      "bravo",
+      "brava",
+      "irritado",
+      "irritada"
+    ],
+
+    "inicio": [
+      "Sentir raiva acontece com todo mundo 💢",
+      "Parece que algo deixou você muito irritado."
+    ],
+
+    "acolhimento": [
+      "Os sentimentos existem para mostrar o que estamos vivendo.",
+      "Você pode sentir raiva sem machucar ninguém."
+    ],
+
+    "interacao": [
+      "Quer me contar o que aconteceu?",
+      "Quer tentar respirar fundo comigo?"
+    ],
+
+    "atividade": [
+      "Desenhar o que está sentindo pode ajudar 🎨",
+      "Você pode contar até 10 bem devagar."
+    ],
+
+    "final": [
+      "A calma vai chegando aos poucos 🌿"
+    ],
+
+    "emocao": "controle_emocional",
+    "nivel": "leve"
   },
+
   "alegria": {
-    "palavras_chave": ["feliz", "felicidade", "alegre", "animado", "animada"],
-    "resposta": "Que bom que você está feliz! A alegria deixa tudo mais leve. Que tal transformar esse sentimento em um desenho ou uma criação?"
+    "tema": "apoio_emocional",
+    "subtema": "alegria",
+
+    "palavras_chave": [
+      "feliz",
+      "felicidade",
+      "alegre",
+      "animado",
+      "animada"
+    ],
+
+    "inicio": [
+      "Que bom ver você feliz hoje 🌞",
+      "A alegria deixa tudo mais colorido 🌈"
+    ],
+
+    "acolhimento": [
+      "Momentos felizes merecem ser celebrados.",
+      "Sua felicidade pode iluminar o dia de outras pessoas."
+    ],
+
+    "interacao": [
+      "O que deixou você feliz hoje?",
+      "Quer transformar essa alegria em um desenho?"
+    ],
+
+    "atividade": [
+      "Crie uma arte usando cores alegres 🎨",
+      "Faça uma lista de coisas que fazem você sorrir."
+    ],
+
+    "final": [
+      "Espalhar alegria deixa o mundo mais bonito ✨"
+    ],
+
+    "emocao": "alegria",
+    "nivel": "leve"
   },
-  "bullying": {
-    "palavras_chave": ["bullying", "zoacao", "zoando", "me xingaram", "me chamaram"],
-    "resposta": "Ninguém merece ser tratado com desrespeito. O que está acontecendo não é certo. É importante contar para um adulto de confiança, como um professor ou familiar."
-  },
-  "briga_escola": {
-    "palavras_chave": ["briga", "briguei", "discussao", "discuti", "briga na escola"],
-    "resposta": "Brigas podem acontecer, mas conversar é sempre melhor. Tente explicar o que você sentiu e ouvir o outro também. Um adulto pode ajudar a resolver."
-  },
-  "colega_deficiencia": {
-    "palavras_chave": ["deficiencia", "colega diferente", "inclusao", "respeitar colega"],
-    "resposta": "Cada pessoa é única e especial do seu jeito. Respeitar e ajudar um colega é muito importante. A amizade fica mais bonita quando todos são incluídos."
-  },
-  "autismo": {
-    "palavras_chave": ["autismo", "autista"],
-    "resposta": "Pessoas com autismo podem perceber o mundo de forma diferente. O mais importante é ter respeito, paciência e amizade. Todos aprendem juntos."
-  },
+
   "medo": {
-    "palavras_chave": ["medo", "assustado", "assustada", "com medo"],
-    "resposta": "Sentir medo é normal. Você pode conversar com alguém de confiança e lembrar que não está sozinho. Desenhar o medo também pode ajudar."
+    "tema": "apoio_emocional",
+    "subtema": "medo",
+
+    "palavras_chave": [
+      "medo",
+      "assustado",
+      "assustada",
+      "com medo"
+    ],
+
+    "inicio": [
+      "Sentir medo é algo normal 💛",
+      "Às vezes algumas situações assustam mesmo."
+    ],
+
+    "acolhimento": [
+      "Você não está sozinho.",
+      "Muitas pessoas também sentem medo em alguns momentos."
+    ],
+
+    "interacao": [
+      "Quer conversar sobre o que está assustando você?",
+      "Quer imaginar um lugar seguro e tranquilo?"
+    ],
+
+    "atividade": [
+      "Desenhar o medo pode ajudar a entendê-lo 🎨",
+      "Respirar devagar ajuda o corpo a relaxar."
+    ],
+
+    "final": [
+      "Coragem não é não sentir medo, é seguir mesmo assim 🌟"
+    ],
+
+    "emocao": "acolhimento",
+    "nivel": "leve"
   },
+
   "inseguranca": {
-    "palavras_chave": ["inseguro", "insegura", "duvida de mim", "sem confianca"],
-    "resposta": "Às vezes a gente duvida de si mesmo, mas isso é normal. Você tem qualidades e pode aprender aos poucos. Errar também faz parte do aprendizado."
+    "tema": "apoio_emocional",
+    "subtema": "inseguranca",
+
+    "palavras_chave": [
+      "inseguro",
+      "insegura",
+      "duvida de mim",
+      "sem confianca",
+      "sem confiança"
+    ],
+
+    "inicio": [
+      "Às vezes a gente duvida de si mesmo 🌱",
+      "Nem sempre é fácil acreditar nas próprias capacidades."
+    ],
+
+    "acolhimento": [
+      "Você pode aprender no seu tempo.",
+      "Errar também faz parte do aprendizado."
+    ],
+
+    "interacao": [
+      "Quer me contar o que deixou você inseguro?",
+      "Você consegue lembrar de algo que já fez bem?"
+    ],
+
+    "atividade": [
+      "Faça um desenho mostrando algo que você gosta em si mesmo 🎨"
+    ],
+
+    "final": [
+      "Cada pequeno passo já é uma conquista ✨"
+    ],
+
+    "emocao": "encorajamento",
+    "nivel": "leve"
   },
+
   "timidez": {
-    "palavras_chave": ["timido", "timida", "vergonha", "tenho vergonha"],
-    "resposta": "Ser tímido não é um problema. Você pode começar falando aos poucos e no seu tempo. Cada passo já é uma conquista."
+    "tema": "apoio_emocional",
+    "subtema": "timidez",
+
+    "palavras_chave": [
+      "timido",
+      "timida",
+      "vergonha",
+      "tenho vergonha"
+    ],
+
+    "inicio": [
+      "Ser tímido não é um problema 🌿",
+      "Cada pessoa tem seu jeito de se expressar."
+    ],
+
+    "acolhimento": [
+      "Você pode falar no seu tempo.",
+      "Pequenos passos também são importantes."
+    ],
+
+    "interacao": [
+      "Existe alguém com quem você se sente mais confortável?",
+      "Quer conversar mais um pouquinho comigo?"
+    ],
+
+    "atividade": [
+      "Desenhe um lugar onde você se sente seguro ✨"
+    ],
+
+    "final": [
+      "Sua voz merece ser ouvida 💛"
+    ],
+
+    "emocao": "acolhimento",
+    "nivel": "leve"
   },
+
   "frustracao": {
-    "palavras_chave": ["frustrado", "frustrada", "nao consegui", "deu errado"],
-    "resposta": "Nem sempre as coisas saem como queremos. Isso pode ser difícil, mas também é uma chance de tentar de novo e aprender algo novo."
+    "tema": "apoio_emocional",
+    "subtema": "frustracao",
+
+    "palavras_chave": [
+      "frustrado",
+      "frustrada",
+      "nao consegui",
+      "não consegui",
+      "deu errado"
+    ],
+
+    "inicio": [
+      "Nem sempre as coisas saem como queremos 🌧️",
+      "Errar pode ser difícil às vezes."
+    ],
+
+    "acolhimento": [
+      "Todo aprendizado tem desafios.",
+      "Você não precisa acertar tudo de primeira."
+    ],
+
+    "interacao": [
+      "Quer tentar de novo depois de descansar um pouco?",
+      "Quer me contar o que deu errado?"
+    ],
+
+    "atividade": [
+      "Faça um desenho mostrando algo que você conseguiu aprender 🎨"
+    ],
+
+    "final": [
+      "Cada tentativa ensina algo novo 🌱"
+    ],
+
+    "emocao": "encorajamento",
+    "nivel": "leve"
   },
+
   "solidao": {
-    "palavras_chave": ["sozinho", "sozinha", "solidao", "sem amigos"],
-    "resposta": "Se sentir sozinho pode ser difícil. Tente conversar com alguém que você confia. Você merece companhia e carinho."
+    "tema": "apoio_emocional",
+    "subtema": "solidao",
+
+    "palavras_chave": [
+      "sozinho",
+      "sozinha",
+      "solidao",
+      "solidão",
+      "sem amigos"
+    ],
+
+    "inicio": [
+      "Se sentir sozinho pode ser muito difícil 💛",
+      "Às vezes a gente sente falta de companhia."
+    ],
+
+    "acolhimento": [
+      "Você merece carinho e amizade.",
+      "Seus sentimentos são importantes."
+    ],
+
+    "interacao": [
+      "Existe alguém de confiança com quem você gosta de conversar?",
+      "Quer me contar como está se sentindo?"
+    ],
+
+    "atividade": [
+      "Desenhe pessoas ou lugares que fazem você se sentir bem 🌈"
+    ],
+
+    "final": [
+      "Conexões verdadeiras podem nascer aos poucos 🌱"
+    ],
+
+    "emocao": "acolhimento",
+    "nivel": "leve"
   },
+
   "amizade": {
-    "palavras_chave": ["amizade", "amigo", "amiga", "colega"],
-    "resposta": "Amizade é cuidar, respeitar e compartilhar momentos. Um bom amigo escuta e também apoia."
+    "tema": "apoio_emocional",
+    "subtema": "amizade",
+
+    "palavras_chave": [
+      "amizade",
+      "amigo",
+      "amiga",
+      "colega"
+    ],
+
+    "inicio": [
+      "Amizade é algo muito especial 💛",
+      "Os amigos podem tornar os dias mais felizes."
+    ],
+
+    "acolhimento": [
+      "Um bom amigo escuta e respeita.",
+      "Amizades verdadeiras crescem com cuidado."
+    ],
+
+    "interacao": [
+      "O que você mais gosta de fazer com seus amigos?",
+      "Você já ajudou alguém hoje?"
+    ],
+
+    "atividade": [
+      "Desenhe um momento divertido com um amigo 🎨"
+    ],
+
+    "final": [
+      "A amizade deixa a vida mais colorida 🌈"
+    ],
+
+    "emocao": "carinho",
+    "nivel": "leve"
   },
+
   "respeito": {
-    "palavras_chave": ["respeito", "respeitar", "tratar bem", "educacao"],
-    "resposta": "Respeitar é tratar os outros com cuidado e atenção. Cada pessoa é diferente, e isso é algo muito bonito."
+    "tema": "apoio_emocional",
+    "subtema": "respeito",
+
+    "palavras_chave": [
+      "respeito",
+      "respeitar",
+      "tratar bem",
+      "educacao",
+      "educação"
+    ],
+
+    "inicio": [
+      "Respeitar é cuidar das pessoas 🌿",
+      "Cada pessoa merece ser tratada com atenção e carinho."
+    ],
+
+    "acolhimento": [
+      "As diferenças tornam o mundo mais bonito.",
+      "Ouvir e compreender os outros é importante."
+    ],
+
+    "interacao": [
+      "Como você demonstra respeito no seu dia a dia?",
+      "Você já ajudou alguém hoje?"
+    ],
+
+    "atividade": [
+      "Faça um desenho mostrando atitudes gentis 💛"
+    ],
+
+    "final": [
+      "Pequenas atitudes podem transformar o mundo ✨"
+    ],
+
+    "emocao": "harmonia",
+    "nivel": "leve"
+  },
+  
+  "ansiedade": {
+    "tema": "apoio_emocional",
+    "subtema": "ansiedade",
+
+    "palavras_chave": [
+      "ansiedade",
+      "ansioso",
+      "ansiosa",
+      "preocupado",
+      "preocupada",
+      "nervoso",
+      "nervosa"
+    ],
+
+    "inicio": [
+      "Às vezes nosso coração fica acelerado 💛",
+      "Parece que sua mente está cheia de pensamentos."
+    ],
+
+    "acolhimento": [
+      "Isso acontece com muitas pessoas.",
+      "Você não precisa enfrentar isso sozinho."
+    ],
+
+    "explicacao_curta": [
+      "A ansiedade pode deixar nosso corpo e mente agitados."
+    ],
+
+    "interacao": [
+      "Quer respirar fundo comigo bem devagar?",
+      "Quer me contar o que está preocupando você?"
+    ],
+
+    "atividade": [
+      "Imagine um lugar tranquilo da natureza 🌿",
+      "Você pode desenhar como sua mente está se sentindo."
+    ],
+
+    "final": [
+      "Os sentimentos passam como nuvens no céu ☁️"
+    ],
+
+    "emocao": "acolhimento",
+    "nivel": "leve"
+  },
+
+  "tristeza": {
+    "tema": "apoio_emocional",
+    "subtema": "tristeza",
+
+    "palavras_chave": [
+      "triste",
+      "tristeza",
+      "triste demais",
+      "chateado",
+      "chateada"
+    ],
+
+    "inicio": [
+      "Sinto muito que você esteja triste 💛",
+      "Às vezes nosso coração fica pesado."
+    ],
+
+    "acolhimento": [
+      "Ficar triste faz parte da vida.",
+      "Seus sentimentos são importantes."
+    ],
+
+    "interacao": [
+      "Quer me contar o que aconteceu?",
+      "Quer conversar mais um pouquinho?"
+    ],
+
+    "atividade": [
+      "Desenhar sentimentos pode ajudar 🎨",
+      "Você pode ouvir uma música tranquila."
+    ],
+
+    "final": [
+      "Mesmo os dias nublados acabam passando 🌤️"
+    ],
+
+    "emocao": "acolhimento",
+    "nivel": "leve"
+  },
+
+  "bullying": {
+    "tema": "apoio_emocional",
+    "subtema": "bullying",
+
+    "palavras_chave": [
+      "bullying",
+      "zoacao",
+      "zoando",
+      "me xingaram",
+      "me chamaram"
+    ],
+
+    "inicio": [
+      "Ninguém merece ser tratado com desrespeito 💛"
+    ],
+
+    "acolhimento": [
+      "O que está acontecendo não é certo.",
+      "Você merece respeito e cuidado."
+    ],
+
+    "explicacao_curta": [
+      "Bullying machuca sentimentos e precisa ser levado a sério."
+    ],
+
+    "interacao": [
+      "Existe algum adulto de confiança com quem você possa conversar?",
+      "Quer me contar melhor o que aconteceu?"
+    ],
+
+    "atividade": [
+      "Respirar fundo pode ajudar quando o coração fica apertado 🌿"
+    ],
+
+    "final": [
+      "Pedir ajuda é um ato de coragem 🌱"
+    ],
+
+    "emocao": "protecao",
+    "nivel": "medio"
   }
 }
