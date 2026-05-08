@@ -1,78 +1,504 @@
 {
   "arte_rupestre": {
-    "palavras_chave": ["arte rupestre", "caverna", "desenho na pedra", "arte antiga"],
-    "explicacao_infantil": "A arte rupestre é a arte mais antiga do mundo. Os seres humanos desenhavam nas paredes das cavernas usando tintas naturais. Eles mostravam animais, caçadas e o dia a dia."
+    "tema": "historia_arte",
+    "subtema": "arte_rupestre",
+
+    "palavras_chave": [
+      "arte rupestre",
+      "caverna",
+      "desenho na pedra",
+      "arte antiga"
+    ],
+
+    "inicio": [
+      "A arte rupestre é uma das formas de arte mais antigas do mundo 🪨"
+    ],
+
+    "explicacao_curta": [
+      "Os seres humanos desenhavam nas paredes das cavernas usando tintas naturais."
+    ],
+
+    "explicacao_aprofundada": [
+      "Esses desenhos mostravam animais, caçadas e momentos do cotidiano das antigas comunidades."
+    ],
+
+    "curiosidade": [
+      "Algumas pinturas rupestres existem há milhares de anos ⏳"
+    ],
+
+    "interacao": [
+      "O que você desenharia para contar sua história?"
+    ],
+
+    "atividade": [
+      "Faça desenhos usando tons terrosos em papel kraft 🎨"
+    ],
+
+    "final": [
+      "As cavernas guardam memórias dos primeiros artistas 🌍"
+    ],
+
+    "emocao": "curiosidade",
+    "nivel": "leve"
   },
+
   "arte_egipcia": {
-    "palavras_chave": ["arte egipcia", "egito antigo", "hieroglifo", "piramide"],
-    "explicacao_infantil": "A arte egípcia foi feita no Egito antigo. Ela aparece em pirâmides e templos, com desenhos de pessoas de lado e símbolos chamados hieróglifos."
+    "tema": "historia_arte",
+    "subtema": "arte_egipcia",
+
+    "palavras_chave": [
+      "arte egipcia",
+      "egito antigo",
+      "hieroglifo",
+      "piramide"
+    ],
+
+    "inicio": [
+      "A arte egípcia nasceu às margens do rio Nilo 🏺"
+    ],
+
+    "explicacao_curta": [
+      "Ela aparece em pirâmides, templos e pinturas cheias de símbolos."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os egípcios desenhavam pessoas de lado e utilizavam hieróglifos para registrar histórias e crenças."
+    ],
+
+    "curiosidade": [
+      "Os hieróglifos funcionavam como uma escrita com desenhos ✨"
+    ],
+
+    "interacao": [
+      "Você gostaria de criar seu próprio símbolo egípcio?"
+    ],
+
+    "atividade": [
+      "Desenhe uma pirâmide com símbolos inventados ✏️"
+    ],
+
+    "final": [
+      "A arte egípcia mistura mistério, história e símbolos 🌞"
+    ],
+
+    "emocao": "misterio",
+    "nivel": "leve"
   },
+
   "arte_grega": {
-    "palavras_chave": ["arte grega", "grecia antiga", "escultura grega"],
-    "explicacao_infantil": "A arte grega valorizava o corpo humano e a beleza. Os artistas faziam esculturas e construções com formas equilibradas e harmoniosas."
+    "tema": "historia_arte",
+    "subtema": "arte_grega",
+
+    "palavras_chave": [
+      "arte grega",
+      "grecia antiga",
+      "escultura grega"
+    ],
+
+    "inicio": [
+      "Os gregos valorizavam equilíbrio e beleza 🏛️"
+    ],
+
+    "explicacao_curta": [
+      "A arte grega mostrava esculturas e construções harmoniosas."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os artistas gregos estudavam o corpo humano e criavam obras com proporção e movimento."
+    ],
+
+    "curiosidade": [
+      "Muitas esculturas gregas representavam atletas e deuses ⚡"
+    ],
+
+    "interacao": [
+      "Você já viu colunas gregas em filmes ou desenhos?"
+    ],
+
+    "atividade": [
+      "Crie uma construção usando formas simétricas ✏️"
+    ],
+
+    "final": [
+      "A arte grega influenciou artistas do mundo inteiro 🌍"
+    ],
+
+    "emocao": "admiracao",
+    "nivel": "leve"
   },
+
   "arte_romana": {
-    "palavras_chave": ["arte romana", "roma antiga", "coliseu"],
-    "explicacao_infantil": "A arte romana se inspirou na arte grega, mas também mostrava cenas do dia a dia e conquistas do império. Eles construíram estradas, arcos e coliseus."
+    "tema": "historia_arte",
+    "subtema": "arte_romana",
+
+    "palavras_chave": [
+      "arte romana",
+      "roma antiga",
+      "coliseu"
+    ],
+
+    "inicio": [
+      "Os romanos construíram obras gigantescas 🏟️"
+    ],
+
+    "explicacao_curta": [
+      "A arte romana se inspirou nos gregos e mostrava cenas do cotidiano."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os romanos criaram estradas, arcos e anfiteatros famosos, como o Coliseu."
+    ],
+
+    "curiosidade": [
+      "O Coliseu recebia grandes apresentações e eventos 🎭"
+    ],
+
+    "interacao": [
+      "Você gostaria de visitar uma construção romana antiga?"
+    ],
+
+    "atividade": [
+      "Desenhe um arco inspirado na arquitetura romana ✏️"
+    ],
+
+    "final": [
+      "A arte romana uniu força, arquitetura e história 🏛️"
+    ],
+
+    "emocao": "grandiosidade",
+    "nivel": "leve"
   },
+
   "arte_medieval": {
-    "palavras_chave": ["arte medieval", "idade media", "arte religiosa antiga"],
-    "explicacao_infantil": "A arte medieval estava ligada à religião. Muitas obras mostravam histórias bíblicas em igrejas, vitrais e pinturas."
+    "tema": "historia_arte",
+    "subtema": "arte_medieval",
+
+    "palavras_chave": [
+      "arte medieval",
+      "idade media",
+      "arte religiosa antiga"
+    ],
+
+    "inicio": [
+      "A arte medieval aparece em castelos e igrejas 🏰"
+    ],
+
+    "explicacao_curta": [
+      "Muitas obras medievais mostravam histórias religiosas."
+    ],
+
+    "explicacao_aprofundada": [
+      "Pinturas, esculturas e vitrais ajudavam as pessoas a conhecer histórias importantes daquela época."
+    ],
+
+    "curiosidade": [
+      "Os vitrais coloridos iluminavam as igrejas com muitas cores 🌈"
+    ],
+
+    "interacao": [
+      "Você prefere castelos ou igrejas antigas?"
+    ],
+
+    "atividade": [
+      "Crie um desenho inspirado em vitrais coloridos 🎨"
+    ],
+
+    "final": [
+      "A arte medieval mistura história, fé e imaginação ✨"
+    ],
+
+    "emocao": "misterio",
+    "nivel": "leve"
   },
-  "arte_crista": {
-    "palavras_chave": ["arte crista", "arte religiosa", "cristianismo arte"],
-    "explicacao_infantil": "A arte cristã surgiu com o cristianismo. Ela mostra histórias religiosas em pinturas, esculturas e igrejas, ajudando as pessoas a entender a fé."
-  },
-  "arte_gotica": {
-    "palavras_chave": ["arte gotica", "igreja gotica", "vitrais"],
-    "explicacao_infantil": "A arte gótica aparece em igrejas muito altas com vitrais coloridos. Esses vidros deixam a luz entrar e contam histórias com imagens."
-  },
+
   "renascimento": {
-    "palavras_chave": ["renascimento", "arte renascentista"],
-    "explicacao_infantil": "O Renascimento valorizou o ser humano e a natureza. Os artistas buscavam fazer obras realistas, com proporção e profundidade."
+    "tema": "historia_arte",
+    "subtema": "renascimento",
+
+    "palavras_chave": [
+      "renascimento",
+      "arte renascentista"
+    ],
+
+    "inicio": [
+      "O Renascimento trouxe novas formas de observar o mundo 🌞"
+    ],
+
+    "explicacao_curta": [
+      "Os artistas buscavam criar obras mais realistas."
+    ],
+
+    "explicacao_aprofundada": [
+      "Eles estudavam luz, perspectiva, anatomia e natureza para melhorar suas pinturas e esculturas."
+    ],
+
+    "curiosidade": [
+      "Leonardo da Vinci foi um dos artistas mais conhecidos do Renascimento 🎨"
+    ],
+
+    "interacao": [
+      "Você gostaria de desenhar algo muito detalhado?"
+    ],
+
+    "atividade": [
+      "Faça um desenho usando profundidade e perspectiva ✏️"
+    ],
+
+    "final": [
+      "O Renascimento aproximou arte, ciência e observação 🌍"
+    ],
+
+    "emocao": "descoberta",
+    "nivel": "leve"
   },
+
   "barroco": {
-    "palavras_chave": ["barroco", "luz e sombra forte"],
-    "explicacao_infantil": "O Barroco é cheio de emoção e movimento. As obras usam luz e sombra fortes para criar drama e chamar atenção."
+    "tema": "historia_arte",
+    "subtema": "barroco",
+
+    "palavras_chave": [
+      "barroco",
+      "luz e sombra forte"
+    ],
+
+    "inicio": [
+      "O Barroco é cheio de emoção e dramaticidade ✨"
+    ],
+
+    "explicacao_curta": [
+      "As obras usam contrastes fortes de luz e sombra."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os artistas barrocos criavam movimento e intensidade para impressionar quem observava."
+    ],
+
+    "curiosidade": [
+      "Muitas igrejas barrocas possuem detalhes dourados 🌟"
+    ],
+
+    "interacao": [
+      "Você prefere desenhos claros ou cheios de contraste?"
+    ],
+
+    "atividade": [
+      "Faça uma pintura usando áreas bem claras e bem escuras 🎨"
+    ],
+
+    "final": [
+      "O Barroco transforma emoção em arte 🌙"
+    ],
+
+    "emocao": "intensidade",
+    "nivel": "leve"
   },
-  "rococo": {
-    "palavras_chave": ["rococo", "arte delicada"],
-    "explicacao_infantil": "O Rococó é um estilo leve e decorativo. As obras têm cores suaves, detalhes delicados e cenas elegantes."
-  },
-  "neoclassicismo": {
-    "palavras_chave": ["neoclassicismo", "arte classica moderna"],
-    "explicacao_infantil": "O Neoclassicismo se inspira na arte antiga da Grécia e de Roma. As obras são organizadas, equilibradas e com formas claras."
-  },
-  "romantismo": {
-    "palavras_chave": ["romantismo", "emocao arte"],
-    "explicacao_infantil": "O Romantismo valoriza sentimentos e imaginação. As obras mostram emoções fortes e cenas da natureza."
-  },
-  "realismo": {
-    "palavras_chave": ["realismo", "vida real arte"],
-    "explicacao_infantil": "O Realismo mostra a vida como ela é. Os artistas pintam pessoas comuns e situações do dia a dia."
-  },
+
   "impressionismo": {
-    "palavras_chave": ["impressionismo", "luz pintura", "monet"],
-    "explicacao_infantil": "O Impressionismo mostra momentos rápidos da vida. Os artistas usam pinceladas leves e cores para captar a luz."
+    "tema": "historia_arte",
+    "subtema": "impressionismo",
+
+    "palavras_chave": [
+      "impressionismo",
+      "luz pintura",
+      "monet"
+    ],
+
+    "inicio": [
+      "Os impressionistas adoravam pintar luz e movimento ☀️"
+    ],
+
+    "explicacao_curta": [
+      "Eles registravam momentos rápidos usando pinceladas leves."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os artistas impressionistas buscavam captar a sensação do momento e das mudanças da luz."
+    ],
+
+    "curiosidade": [
+      "Claude Monet pintou várias vezes o mesmo lugar em horários diferentes 🌤️"
+    ],
+
+    "interacao": [
+      "Você já observou como o céu muda de cor ao longo do dia?"
+    ],
+
+    "atividade": [
+      "Pinte uma paisagem usando pinceladas rápidas 🎨"
+    ],
+
+    "final": [
+      "A luz pode transformar completamente uma pintura ✨"
+    ],
+
+    "emocao": "leveza",
+    "nivel": "leve"
   },
+
   "modernismo": {
-    "palavras_chave": ["modernismo", "arte moderna brasil", "1922"],
-    "explicacao_infantil": "O Modernismo trouxe novas ideias e formas diferentes de fazer arte. No Brasil, ficou famoso com a Semana de Arte Moderna de 1922."
+    "tema": "historia_arte",
+    "subtema": "modernismo",
+
+    "palavras_chave": [
+      "modernismo",
+      "arte moderna brasil",
+      "1922"
+    ],
+
+    "inicio": [
+      "O Modernismo trouxe novas ideias para a arte brasileira 🇧🇷"
+    ],
+
+    "explicacao_curta": [
+      "Os artistas modernistas queriam criar algo diferente e inovador."
+    ],
+
+    "explicacao_aprofundada": [
+      "Eles misturavam cores, formas e temas brasileiros de maneiras criativas e ousadas."
+    ],
+
+    "curiosidade": [
+      "A Semana de Arte Moderna de 1922 marcou o Modernismo no Brasil ✨"
+    ],
+
+    "interacao": [
+      "Que tipo de arte diferente você gostaria de inventar?"
+    ],
+
+    "atividade": [
+      "Crie uma arte usando formas e cores livres 🎨"
+    ],
+
+    "final": [
+      "O Modernismo incentivou liberdade e criatividade 🌈"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
   },
-  "expressionismo": {
-    "palavras_chave": ["expressionismo", "emocao forte arte"],
-    "explicacao_infantil": "O Expressionismo mostra sentimentos fortes nas obras. As cores e formas são exageradas para expressar emoções."
-  },
+
   "cubismo": {
-    "palavras_chave": ["cubismo", "formas geometricas", "picasso"],
-    "explicacao_infantil": "O Cubismo mostra objetos de vários lados ao mesmo tempo. As formas parecem quebradas e reorganizadas."
+    "tema": "historia_arte",
+    "subtema": "cubismo",
+
+    "palavras_chave": [
+      "cubismo",
+      "formas geometricas",
+      "picasso"
+    ],
+
+    "inicio": [
+      "O Cubismo transforma objetos em formas geométricas 🟦🔺"
+    ],
+
+    "explicacao_curta": [
+      "Os artistas mostravam vários lados do objeto ao mesmo tempo."
+    ],
+
+    "explicacao_aprofundada": [
+      "As imagens pareciam quebradas e reorganizadas em diferentes ângulos."
+    ],
+
+    "curiosidade": [
+      "Pablo Picasso foi um dos artistas cubistas mais famosos 🎨"
+    ],
+
+    "interacao": [
+      "Você conseguiria desenhar um rosto usando formas geométricas?"
+    ],
+
+    "atividade": [
+      "Monte um desenho usando quadrados, triângulos e círculos ✏️"
+    ],
+
+    "final": [
+      "O Cubismo mostra que a arte pode olhar o mundo de muitos jeitos 🌍"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
   },
+
   "surrealismo": {
-    "palavras_chave": ["surrealismo", "sonho arte", "dali"],
-    "explicacao_infantil": "O Surrealismo mistura sonho e realidade. As imagens parecem estranhas, como coisas que vemos quando estamos sonhando."
+    "tema": "historia_arte",
+    "subtema": "surrealismo",
+
+    "palavras_chave": [
+      "surrealismo",
+      "sonho arte",
+      "dali"
+    ],
+
+    "inicio": [
+      "O Surrealismo mistura sonho e imaginação 🌙"
+    ],
+
+    "explicacao_curta": [
+      "As obras surrealistas parecem cenas de sonhos estranhos."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os artistas criavam imagens inesperadas para explorar ideias e pensamentos imaginativos."
+    ],
+
+    "curiosidade": [
+      "Salvador Dalí ficou famoso por relógios derretendo ⏰"
+    ],
+
+    "interacao": [
+      "Qual sonho estranho você transformaria em desenho?"
+    ],
+
+    "atividade": [
+      "Misture objetos diferentes em uma mesma cena 🎨"
+    ],
+
+    "final": [
+      "A imaginação pode criar mundos surpreendentes ✨"
+    ],
+
+    "emocao": "imaginacao",
+    "nivel": "leve"
   },
+
   "arte_contemporanea": {
-    "palavras_chave": ["arte contemporanea", "arte atual"],
-    "explicacao_infantil": "A arte contemporânea é a arte de hoje. Ela mistura materiais, ideias e formas diferentes para expressar sentimentos e opiniões."
+    "tema": "historia_arte",
+    "subtema": "arte_contemporanea",
+
+    "palavras_chave": [
+      "arte contemporanea",
+      "arte atual"
+    ],
+
+    "inicio": [
+      "A arte contemporânea é a arte dos dias atuais 🌍"
+    ],
+
+    "explicacao_curta": [
+      "Ela mistura materiais, ideias e formas diferentes."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os artistas contemporâneos usam pintura, tecnologia, fotografia, objetos e até performances."
+    ],
+
+    "curiosidade": [
+      "Na arte contemporânea, quase qualquer material pode virar arte ✨"
+    ],
+
+    "interacao": [
+      "O que você transformaria em obra de arte?"
+    ],
+
+    "atividade": [
+      "Crie uma arte usando materiais recicláveis ♻️"
+    ],
+
+    "final": [
+      "A arte contemporânea incentiva liberdade de criação 🌈"
+    ],
+
+    "emocao": "exploracao",
+    "nivel": "leve"
   }
 }
