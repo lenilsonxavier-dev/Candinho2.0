@@ -1,22 +1,235 @@
 {
-    "desenho_basico": {
-        "palavras_chave": ["como desenhar", "desenhar", "aprender desenho", "técnica desenho", "dica desenho"],
-        "resposta": "Todo desenho começa com formas simples: círculos, quadrados e triângulos! ⚪🟦🔺 Depois vamos juntando. Quer tentar desenhar um gatinho com círculos? Comece com a cabeça redonda, dois triângulos nas pontas para as orelhas... 🐱"
-    },
-    "pintura_digital": {
-        "palavras_chave": ["pintura digital", "desenho no computador", "tablet", "app desenho", "programa desenho"],
-        "resposta": "Pintura digital é desenhar no computador ou tablet! 💻 Existem apps grátis como o Paint, o Sketchpad e o Ibis Paint. Mas não esqueça: desenhar no papel também é muito legal! 📱✏️"
-    },
-    "aquarela": {
-        "palavras_chave": ["aquarela", "tinta aguada", "pintura molhada", "efeito molhado"],
-        "resposta": "Aquarela parece mágica: a tinta dança com a água! 💧 É como fazer nuvens coloridas no papel. Você precisa de tinta especial e papel grosso. Quer aprender a fazer um degradê bonito? 🌈"
-    },
-    "giz_pastel": {
-        "palavras_chave": ["giz pastel", "pastel seco", "pintura pastel", "giz de cera"],
-        "resposta": "Giz pastel é macio como abraço de pelúcia! 🧸 Você pode esfumar com o dedo e criar efeitos lindos. Lembra dos desenhos de Portinari? Muitos foram feitos com essa técnica! 🎨✨"
-    },
-    "colagem": {
-        "palavras_chave": ["colagem", "collage", "recorte", "cola", "papel colorido", "técnica mista"],
-        "resposta": "Colagem é arte de juntar pedacinhos! ✂️ Recorte revistas, papéis coloridos, até folhas secas! O artista brasileiro Romário Brito usa colagem nos seus quadros coloridos. Vamos criar um monstro de colagem hoje? 👾"
-    }
+  "desenho_basico": {
+    "tema": "arte_tecnicas",
+    "subtema": "desenho_basico",
+
+    "palavras_chave": [
+      "como desenhar",
+      "desenhar",
+      "aprender desenho",
+      "técnica desenho",
+      "dica desenho"
+    ],
+
+    "inicio": [
+      "Todo desenho começa com formas simples 🎨",
+      "Desenhar é como montar um quebra-cabeça de formas ✨"
+    ],
+
+    "explicacao_curta": [
+      "Círculos, quadrados e triângulos ajudam a criar muitos desenhos."
+    ],
+
+    "explicacao_aprofundada": [
+      "Muitos artistas começam desenhando formas básicas antes de adicionar detalhes. Isso ajuda o desenho a ficar mais organizado."
+    ],
+
+    "curiosidade": [
+      "Até grandes artistas usam formas simples para começar seus desenhos 🖍️"
+    ],
+
+    "interacao": [
+      "Quer tentar desenhar um gatinho comigo? 🐱",
+      "Qual animal você gostaria de aprender a desenhar?"
+    ],
+
+    "atividade": [
+      "Desenhe um círculo para a cabeça e dois triângulos para as orelhas ✏️",
+      "Crie um personagem usando apenas formas geométricas."
+    ],
+
+    "final": [
+      "Cada desenho começa com um pequeno traço 🌈"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
+  },
+
+  "pintura_digital": {
+    "tema": "arte_tecnicas",
+    "subtema": "pintura_digital",
+
+    "palavras_chave": [
+      "pintura digital",
+      "desenho no computador",
+      "tablet",
+      "app desenho",
+      "programa desenho"
+    ],
+
+    "inicio": [
+      "Pintura digital é criar arte usando tecnologia 💻🎨",
+      "Desenhar no tablet pode ser muito divertido ✨"
+    ],
+
+    "explicacao_curta": [
+      "A pintura digital usa aplicativos e telas para desenhar e colorir."
+    ],
+
+    "explicacao_aprofundada": [
+      "Muitos artistas usam computadores e tablets para criar ilustrações, animações e pinturas digitais."
+    ],
+
+    "curiosidade": [
+      "Existem aplicativos gratuitos para desenhar digitalmente 📱"
+    ],
+
+    "interacao": [
+      "Você prefere desenhar no papel ou no tablet?",
+      "Qual ferramenta digital você gostaria de experimentar?"
+    ],
+
+    "atividade": [
+      "Crie um desenho usando apenas formas simples no computador 💻",
+      "Experimente desenhar usando diferentes pincéis digitais."
+    ],
+
+    "final": [
+      "Arte pode nascer tanto no papel quanto na tela 🌟"
+    ],
+
+    "emocao": "exploracao",
+    "nivel": "leve"
+  },
+
+  "aquarela": {
+    "tema": "arte_tecnicas",
+    "subtema": "aquarela",
+
+    "palavras_chave": [
+      "aquarela",
+      "tinta aguada",
+      "pintura molhada",
+      "efeito molhado"
+    ],
+
+    "inicio": [
+      "A aquarela parece uma dança entre água e tinta 💧🎨",
+      "As cores da aquarela ficam suaves e leves 🌈"
+    ],
+
+    "explicacao_curta": [
+      "A aquarela mistura tinta e água para criar efeitos delicados."
+    ],
+
+    "explicacao_aprofundada": [
+      "A quantidade de água muda o jeito que a tinta se espalha no papel, criando manchas e misturas bonitas."
+    ],
+
+    "curiosidade": [
+      "O papel usado na aquarela costuma ser mais grosso para aguentar a água."
+    ],
+
+    "interacao": [
+      "Você gostaria de pintar uma paisagem com aquarela?",
+      "Qual cor você mais usaria em uma pintura aquarelada?"
+    ],
+
+    "atividade": [
+      "Experimente fazer um degradê usando bastante água 🌊",
+      "Misture duas cores e observe a transformação."
+    ],
+
+    "final": [
+      "Na aquarela, as cores parecem flutuar no papel ☁️"
+    ],
+
+    "emocao": "leveza",
+    "nivel": "leve"
+  },
+
+  "giz_pastel": {
+    "tema": "arte_tecnicas",
+    "subtema": "giz_pastel",
+
+    "palavras_chave": [
+      "giz pastel",
+      "pastel seco",
+      "pintura pastel",
+      "giz de cera"
+    ],
+
+    "inicio": [
+      "O giz pastel cria desenhos macios e coloridos 🧸🎨",
+      "As cores do pastel podem parecer fumaça colorida ✨"
+    ],
+
+    "explicacao_curta": [
+      "O giz pastel é uma técnica que permite esfumar e misturar cores facilmente."
+    ],
+
+    "explicacao_aprofundada": [
+      "Com o dedo ou papel, é possível espalhar o pastel e criar sombras suaves e efeitos artísticos."
+    ],
+
+    "curiosidade": [
+      "Muitos artistas famosos usaram giz pastel em retratos e paisagens."
+    ],
+
+    "interacao": [
+      "Você gostaria de desenhar um pôr do sol com giz pastel?",
+      "Qual cor pastel você mais gosta?"
+    ],
+
+    "atividade": [
+      "Experimente esfumar uma cor usando o dedo 🌈",
+      "Desenhe nuvens usando movimentos suaves."
+    ],
+
+    "final": [
+      "As cores do pastel deixam os desenhos cheios de textura 🌟"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
+  },
+
+  "colagem": {
+    "tema": "arte_tecnicas",
+    "subtema": "colagem",
+
+    "palavras_chave": [
+      "colagem",
+      "collage",
+      "recorte",
+      "cola",
+      "papel colorido",
+      "técnica mista"
+    ],
+
+    "inicio": [
+      "Colagem é a arte de juntar pedacinhos para criar algo novo ✂️",
+      "Com papéis e recortes podemos inventar mundos inteiros 🌎"
+    ],
+
+    "explicacao_curta": [
+      "A colagem mistura imagens, papéis e materiais diferentes em uma mesma arte."
+    ],
+
+    "explicacao_aprofundada": [
+      "Artistas usam recortes de revistas, tecidos, folhas e outros materiais para criar composições criativas."
+    ],
+
+    "curiosidade": [
+      "A colagem pode reutilizar materiais e ajudar o planeta ♻️"
+    ],
+
+    "interacao": [
+      "Que personagem você criaria com recortes?",
+      "Você gosta de usar papéis coloridos nas suas artes?"
+    ],
+
+    "atividade": [
+      "Crie um monstrinho usando recortes 👾",
+      "Monte uma paisagem usando pedaços de revista."
+    ],
+
+    "final": [
+      "Na colagem, pequenos pedaços viram grandes ideias ✨"
+    ],
+
+    "emocao": "diversao",
+    "nivel": "leve"
+  }
 }
