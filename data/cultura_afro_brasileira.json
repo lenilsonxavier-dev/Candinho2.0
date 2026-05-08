@@ -1,26 +1,260 @@
 {
   "o_que_e": {
-    "palavras_chave": ["cultura afro", "afro brasileira", "o que e cultura afro brasileira"],
-    "explicacao_infantil": "A cultura afro-brasileira vem das tradições africanas trazidas para o Brasil. Ela influencia a música, a dança, a arte e a forma de viver."
+    "tema": "cultura_afro_brasileira",
+    "subtema": "o_que_e",
+
+    "palavras_chave": [
+      "cultura afro",
+      "afro brasileira",
+      "o que e cultura afro brasileira"
+    ],
+
+    "inicio": [
+      "A cultura afro-brasileira faz parte da história e da identidade do Brasil 🌍",
+      "Muitas tradições brasileiras têm raízes africanas ✨"
+    ],
+
+    "explicacao_curta": [
+      "A cultura afro-brasileira vem das tradições africanas trazidas para o Brasil."
+    ],
+
+    "explicacao_aprofundada": [
+      "Ela influencia músicas, danças, comidas, festas, artes e muitas formas de viver presentes no cotidiano brasileiro."
+    ],
+
+    "curiosidade": [
+      "Palavras, ritmos e comidas do Brasil possuem influências africanas 🌿"
+    ],
+
+    "interacao": [
+      "Você conhece alguma música ou dança afro-brasileira?",
+      "O que você acha mais interessante na cultura brasileira?"
+    ],
+
+    "atividade": [
+      "Desenhe elementos culturais importantes do Brasil 🎨"
+    ],
+
+    "final": [
+      "A diversidade cultural deixa o Brasil mais rico e bonito 🌈"
+    ],
+
+    "emocao": "respeito",
+    "nivel": "leve"
   },
+
   "arte_afro_brasileira": {
-    "palavras_chave": ["arte afro", "arte afro brasileira"],
-    "explicacao_infantil": "A arte afro-brasileira aparece em músicas, danças, pinturas e festas. Ela expressa história, resistência e identidade."
+    "tema": "cultura_afro_brasileira",
+    "subtema": "arte_afro_brasileira",
+
+    "palavras_chave": [
+      "arte afro",
+      "arte afro brasileira"
+    ],
+
+    "inicio": [
+      "A arte afro-brasileira é cheia de força, ritmo e expressão 🎨"
+    ],
+
+    "explicacao_curta": [
+      "Ela aparece em músicas, pinturas, danças, esculturas e festas."
+    ],
+
+    "explicacao_aprofundada": [
+      "A arte afro-brasileira expressa história, ancestralidade, resistência e identidade cultural."
+    ],
+
+    "curiosidade": [
+      "Muitos artistas brasileiros usam símbolos e cores inspirados em tradições africanas ✨"
+    ],
+
+    "interacao": [
+      "Que tipo de arte você mais gosta de criar?"
+    ],
+
+    "atividade": [
+      "Crie padrões e formas inspirados em ritmos e movimentos 🎭"
+    ],
+
+    "final": [
+      "A arte ajuda culturas e histórias a continuarem vivas 🌿"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
   },
+
   "musica": {
-    "palavras_chave": ["musica afro", "samba", "maracatu", "ritmo africano"],
-    "explicacao_infantil": "A música afro-brasileira tem ritmos marcantes e uso de tambores. Ela está presente no samba, maracatu e outras manifestações."
+    "tema": "cultura_afro_brasileira",
+    "subtema": "musica",
+
+    "palavras_chave": [
+      "musica afro",
+      "samba",
+      "maracatu",
+      "ritmo africano"
+    ],
+
+    "inicio": [
+      "A música afro-brasileira é cheia de ritmo e energia 🥁"
+    ],
+
+    "explicacao_curta": [
+      "Ela usa tambores, cantos e ritmos marcantes."
+    ],
+
+    "explicacao_aprofundada": [
+      "Muitos estilos musicais brasileiros, como samba e maracatu, possuem influências africanas."
+    ],
+
+    "curiosidade": [
+      "Os tambores têm papel importante em muitas manifestações culturais africanas e afro-brasileiras 🎶"
+    ],
+
+    "interacao": [
+      "Você consegue criar um ritmo batendo palmas?",
+      "Qual música deixa você animado?"
+    ],
+
+    "atividade": [
+      "Crie um instrumento usando materiais recicláveis 🪘"
+    ],
+
+    "final": [
+      "A música conecta pessoas, histórias e emoções 🌈"
+    ],
+
+    "emocao": "animacao",
+    "nivel": "leve"
   },
+
   "danca": {
-    "palavras_chave": ["danca afro", "dancas afro brasileiras"],
-    "explicacao_infantil": "As danças afro-brasileiras têm movimentos fortes e expressivos. Elas contam histórias e celebram a cultura."
+    "tema": "cultura_afro_brasileira",
+    "subtema": "danca",
+
+    "palavras_chave": [
+      "danca afro",
+      "dancas afro brasileiras",
+      "dança afro"
+    ],
+
+    "inicio": [
+      "As danças afro-brasileiras possuem movimentos cheios de expressão 💃"
+    ],
+
+    "explicacao_curta": [
+      "Essas danças celebram cultura, ritmo e histórias."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os movimentos corporais podem representar tradições, celebrações e ligação com a música."
+    ],
+
+    "curiosidade": [
+      "Algumas danças afro-brasileiras são acompanhadas por tambores e cantos 🥁"
+    ],
+
+    "interacao": [
+      "Você gosta de dançar quando escuta música?"
+    ],
+
+    "atividade": [
+      "Crie movimentos inspirados nos sons da natureza 🌿"
+    ],
+
+    "final": [
+      "A dança transforma emoções em movimento ✨"
+    ],
+
+    "emocao": "energia",
+    "nivel": "leve"
   },
+
   "religiosidade": {
-    "palavras_chave": ["religiao afro", "orixa", "candomble", "umbanda"],
-    "explicacao_infantil": "As religiões de matriz africana fazem parte da cultura afro-brasileira. Elas valorizam a espiritualidade, os ancestrais e a natureza."
+    "tema": "cultura_afro_brasileira",
+    "subtema": "religiosidade",
+
+    "palavras_chave": [
+      "religiao afro",
+      "religião afro",
+      "orixa",
+      "orixá",
+      "candomble",
+      "candomblé",
+      "umbanda"
+    ],
+
+    "inicio": [
+      "As religiões afro-brasileiras fazem parte da diversidade cultural do Brasil 🌿"
+    ],
+
+    "explicacao_curta": [
+      "Elas valorizam espiritualidade, ancestralidade e natureza."
+    ],
+
+    "explicacao_aprofundada": [
+      "As tradições de matriz africana possuem cantos, símbolos, histórias e ensinamentos importantes para muitas comunidades."
+    ],
+
+    "curiosidade": [
+      "Os orixás estão ligados a elementos da natureza, como água, vento e floresta 🌊"
+    ],
+
+    "interacao": [
+      "Por que você acha importante respeitar diferentes culturas e religiões?"
+    ],
+
+    "atividade": [
+      "Desenhe elementos da natureza que transmitam tranquilidade 🎨"
+    ],
+
+    "final": [
+      "O respeito às diferenças torna o mundo mais harmonioso 🌎"
+    ],
+
+    "emocao": "respeito",
+    "nivel": "leve"
   },
+
   "resistencia": {
-    "palavras_chave": ["resistencia negra", "cultura negra", "luta afro brasileira"],
-    "explicacao_infantil": "A cultura afro-brasileira também é uma forma de resistência. Ela preserva histórias, saberes e identidade ao longo do tempo."
+    "tema": "cultura_afro_brasileira",
+    "subtema": "resistencia",
+
+    "palavras_chave": [
+      "resistencia negra",
+      "cultura negra",
+      "luta afro brasileira"
+    ],
+
+    "inicio": [
+      "A cultura afro-brasileira também representa resistência e força ✊"
+    ],
+
+    "explicacao_curta": [
+      "Ela preserva histórias, saberes e tradições importantes."
+    ],
+
+    "explicacao_aprofundada": [
+      "Mesmo enfrentando dificuldades ao longo da história, muitas comunidades mantiveram vivas suas culturas e identidades."
+    ],
+
+    "curiosidade": [
+      "Os quilombos foram espaços importantes de resistência e preservação cultural 🌿"
+    ],
+
+    "interacao": [
+      "Por que é importante conhecer diferentes histórias e culturas?"
+    ],
+
+    "atividade": [
+      "Crie um mural sobre diversidade cultural 🎨"
+    ],
+
+    "final": [
+      "Conhecer a história ajuda a construir respeito e igualdade 🌈"
+    ],
+
+    "emocao": "consciencia",
+    "nivel": "leve"
   }
 }
