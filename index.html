@@ -276,128 +276,316 @@
             .trim();
     }
     
-       function detectarTemaPrioritario(texto) {
-    const txt = texto.toLowerCase();
+     function detectarTemaPrioritario(texto) {
+
+    const txt = normalizar(texto);
+
+    // =========================
+    // PRIORIDADE ALTÍSSIMA
+    // =========================
+
+    // SAUDAÇÕES
+    if (
+        txt.includes("oi") ||
+        txt.includes("ola") ||
+        txt.includes("bom dia") ||
+        txt.includes("boa tarde") ||
+        txt.includes("boa noite") ||
+        txt.includes("oie") ||
+        txt === "hey"
+    ) {
+        return "saudacoes";
+    }
+
+    // EMOCIONAL
+    if (
+        txt.includes("triste") ||
+        txt.includes("ansioso") ||
+        txt.includes("medo") ||
+        txt.includes("raiva") ||
+        txt.includes("sozinho") ||
+        txt.includes("vergonha") ||
+        txt.includes("frustrado") ||
+        txt.includes("saudade") ||
+        txt.includes("ciumes")
+    ) {
+        return "emocional";
+    }
+
+    // PIADAS
+    if (
+        txt.includes("piada") ||
+        txt.includes("engracado") ||
+        txt.includes("engraçada")
+    ) {
+        return "piadas";
+    }
+
+    // CURIOSIDADES
+    if (
+        txt.includes("curiosidade") ||
+        txt.includes("sabia que")
+    ) {
+        return "curiosidades";
+    }
+
+    // =========================
+    // PERGUNTAS DIRETAS
+    // =========================
+
+    if (
+        txt.includes("o que e musica") ||
+        txt.includes("o que é musica") ||
+        txt.includes("o que e melodia")
+    ) {
+        return "musica";
+    }
+
+    if (
+        txt.includes("o que e danca") ||
+        txt.includes("o que é dança") ||
+        txt.includes("o que e ballet")
+    ) {
+        return "danca";
+    }
+
+    if (
+        txt.includes("o que e teatro") ||
+        txt.includes("o que é teatro")
+    ) {
+        return "teatro";
+    }
+
+    if (
+        txt.includes("o que e folclore") ||
+        txt.includes("o que é folclore")
+    ) {
+        return "folclore";
+    }
+
+    // =========================
+    // IMAGINAÇÃO
+    // =========================
+
+    if (
+        txt.includes("animal magico") ||
+        txt.includes("super heroi") ||
+        txt.includes("monstro") ||
+        txt.includes("criatura") ||
+        txt.includes("desenho facil") ||
+        txt.includes("arte maluca") ||
+        txt.includes("arte engraçada") ||
+        txt.includes("imaginacao") ||
+        txt.includes("imaginação")
+    ) {
+        return "imaginacao";
+    }
+
+    // =========================
+    // TÉCNICAS
+    // =========================
+
+    if (
+        txt.includes("aquarela") ||
+        txt.includes("origami") ||
+        txt.includes("colagem") ||
+        txt.includes("mosaico") ||
+        txt.includes("gravura") ||
+        txt.includes("xilogravura") ||
+        txt.includes("stencil") ||
+        txt.includes("tecnica") ||
+        txt.includes("maneira de desenhar")
+    ) {
+        return "tecnicas";
+    }
+
+    // =========================
+    // ARTISTAS
+    // =========================
+
+    if (
+        txt.includes("van gogh") ||
+        txt.includes("tarsila") ||
+        txt.includes("portinari") ||
+        txt.includes("picasso") ||
+        txt.includes("monet") ||
+        txt.includes("dali") ||
+        txt.includes("frida") ||
+        txt.includes("michelangelo") ||
+        txt.includes("da vinci") ||
+        txt.includes("duchamp") ||
+        txt.includes("gaudi") ||
+        txt.includes("artista") ||
+        txt.includes("pintor")
+    ) {
+        return "artista";
+    }
+
+    // =========================
+    // FOLCLORE
+    // =========================
+
+    if (
+        txt.includes("folclore") ||
+        txt.includes("lenda") ||
+        txt.includes("saci") ||
+        txt.includes("curupira") ||
+        txt.includes("iara") ||
+        txt.includes("boitata") ||
+        txt.includes("mula sem cabeca") ||
+        txt.includes("cuca") ||
+        txt.includes("boto")
+    ) {
+        return "folclore";
+    }
+
+    // =========================
+    // FESTAS
+    // =========================
+
+    if (
+        txt.includes("carnaval") ||
+        txt.includes("festa junina") ||
+        txt.includes("sao joao") ||
+        txt.includes("bumba meu boi") ||
+        txt.includes("parintins") ||
+        txt.includes("reisado") ||
+        txt.includes("congada") ||
+        txt.includes("cirio") ||
+        txt.includes("festa")
+    ) {
+        return "festas";
+    }
+
+    // =========================
+    // INDÍGENA
+    // =========================
+
+    if (
+        txt.includes("indigena") ||
+        txt.includes("tupi") ||
+        txt.includes("grafismo") ||
+        txt.includes("cestaria") ||
+        txt.includes("aldeia") ||
+        txt.includes("pintura corporal")
+    ) {
+        return "indigena";
+    }
+
+    // =========================
+    // AFRO
+    // =========================
+
+    if (
+        txt.includes("quilombo") ||
+        txt.includes("orixa") ||
+        txt.includes("cultura afro") ||
+        txt.includes("afro brasileira")
+    ) {
+        return "afro";
+    }
+
+    // =========================
+    // DANÇA
+    // =========================
+
+    if (
+        txt.includes("danca") ||
+        txt.includes("dança") ||
+        txt.includes("ballet") ||
+        txt.includes("coreografia") ||
+        txt.includes("frevo") ||
+        txt.includes("ciranda") ||
+        txt.includes("carimbo") ||
+        txt.includes("quadrilha") ||
+        txt.includes("cacuria")
+    ) {
+        return "danca";
+    }
+
+    // =========================
+    // MÚSICA
+    // =========================
+
+    if (
+        txt.includes("musica") ||
+        txt.includes("canção") ||
+        txt.includes("instrumento") ||
+        txt.includes("violao") ||
+        txt.includes("tambor") ||
+        txt.includes("flauta") ||
+        txt.includes("melodia") ||
+        txt.includes("ritmo")
+    ) {
+        return "musica";
+    }
+
+    // =========================
+    // TEATRO
+    // =========================
+
+    if (
+        txt.includes("teatro") ||
+        txt.includes("peca") ||
+        txt.includes("ator") ||
+        txt.includes("fantoche") ||
+        txt.includes("sombras") ||
+        txt.includes("musical")
+    ) {
+        return "teatro";
+    }
+
+    // =========================
+    // ATIVIDADES
+    // =========================
+
+    if (
+        txt.includes("atividade") ||
+        txt.includes("oficina") ||
+        txt.includes("brincadeira") ||
+        txt.includes("desafio")
+    ) {
+        return "atividades";
+    }
+
+    // =========================
+    // ARTES VISUAIS
+    // =========================
 
     const artesVisuaisKeywords = [
-        "cor primaria", "cores primarias", "cor primária", "cores primárias",
-        "cor secundaria", "cores secundarias", "cor secundária", "cores secundárias",
-        "cor terciaria", "cores terciarias", "cor terciária", "cores terciárias",
-        "linha", "ponto", "forma", "textura", "volume", "perspectiva", "composicao",
-        "luz e sombra", "elementos da arte", "elementos visuais", "o que e arte",
-        "pintura", "desenho", "escultura", "arte visual",
-        "cor quente", "cores quentes", "cores frias", "cor fria",
-        "grafite", "mural", "fotografia", "pixel art",
-        "animacao", "quadrinhos", "hq", "arte digital",
-        "arte abstrata", "arte figurativa"
+        "cor primaria",
+        "cores primarias",
+        "cor secundaria",
+        "cores secundarias",
+        "cor terciaria",
+        "cores terciarias",
+        "linha",
+        "ponto",
+        "forma",
+        "textura",
+        "volume",
+        "perspectiva",
+        "composicao",
+        "luz e sombra",
+        "pintura",
+        "desenho",
+        "escultura",
+        "arte visual",
+        "arte digital",
+        "grafite",
+        "mural",
+        "pixel art",
+        "fotografia",
+        "quadrinhos",
+        "hq"
     ];
 
-    if (artesVisuaisKeywords.some(kw => txt.includes(kw))) return "arte";
-
-    if (
-        txt.includes("danca") || txt.includes("ballet") || txt.includes("samba") ||
-        txt.includes("coreografia") || txt.includes("frevo") || txt.includes("maracatu") ||
-        txt.includes("caboclinho") || txt.includes("ciranda") || txt.includes("carimbo") ||
-        txt.includes("cacuria") || txt.includes("quadrilha") || txt.includes("capoeira")
-    ) return "danca";
-
-    if (
-        txt.includes("teatro") || txt.includes("peca") || txt.includes("ator") ||
-        txt.includes("fantoche") || txt.includes("sombras") ||
-        txt.includes("shakespeare") || txt.includes("suassuna") ||
-        txt.includes("musical")
-    ) return "teatro";
-
-    if (
-        txt.includes("musica") || txt.includes("cancao") ||
-        txt.includes("instrumento") || txt.includes("ritmo") ||
-        txt.includes("violao") || txt.includes("tambor") ||
-        txt.includes("flauta") || txt.includes("samba") ||
-        txt.includes("forro") || txt.includes("rap") ||
-        txt.includes("rock") || txt.includes("melodia")
-    ) return "musica";
-
-    if (
-        txt.includes("folclore") || txt.includes("lenda") ||
-        txt.includes("saci") || txt.includes("curupira") ||
-        txt.includes("iara") || txt.includes("boitata") ||
-        txt.includes("mula sem cabeca") || txt.includes("cuca") ||
-        txt.includes("boto")
-    ) return "folclore";
-
-    if (
-        txt.includes("festa") || txt.includes("carnaval") ||
-        txt.includes("junina") || txt.includes("bumba meu boi") ||
-        txt.includes("cirio") || txt.includes("parintins") ||
-        txt.includes("sao joao") || txt.includes("reisado") ||
-        txt.includes("congada")
-    ) return "festas";
-
-    if (
-        txt.includes("indigena") || txt.includes("tupi") ||
-        txt.includes("grafismo") || txt.includes("cestaria") ||
-        txt.includes("pintura corporal") || txt.includes("aldeia")
-    ) return "indigena";
-
-    if (
-        txt.includes("afro") || txt.includes("quilombo") ||
-        txt.includes("orixa") || txt.includes("capoeira") ||
-        txt.includes("maracatu")
-    ) return "afro";
-
-    if (
-        txt.includes("atividade") || txt.includes("oficina") ||
-        txt.includes("brincadeira") || txt.includes("desafio artistico")
-    ) return "atividades";
-
-    if (
-        txt.includes("oi") || txt.includes("ola") ||
-        txt.includes("olá") || txt.includes("bom dia") ||
-        txt.includes("boa tarde") || txt.includes("boa noite") ||
-        txt.includes("e ai") || txt.includes("oie")
-    ) return "saudacoes";
-
-    if (
-        txt.includes("tecnica") || txt.includes("jeito") ||
-        txt.includes("maneira") || txt.includes("origami") ||
-        txt.includes("aquarela") || txt.includes("colagem") ||
-        txt.includes("mosaico") || txt.includes("gravura") ||
-        txt.includes("xilogravura") || txt.includes("stencil")
-    ) return "tecnicas";
-
-    if (
-        txt.includes("artista") || txt.includes("pintor") ||
-        txt.includes("van gogh") || txt.includes("tarsila") ||
-        txt.includes("portinari") || txt.includes("picasso") ||
-        txt.includes("monet") || txt.includes("dali") ||
-        txt.includes("frida") || txt.includes("michelangelo") ||
-        txt.includes("da vinci") || txt.includes("duchamp") ||
-        txt.includes("gaudi")
-    ) return "artista";
-
-    if (
-        txt.includes("imaginação") || txt.includes("imaginacao") ||
-        txt.includes("animal magico") || txt.includes("super heroi") ||
-        txt.includes("monstro") || txt.includes("desenho facil") ||
-        txt.includes("arte engraçada") || txt.includes("arte engraçada")
-    ) return "imaginacao";
-
-    if (txt.includes("piada")) return "piadas";
-
-    if (txt.includes("curiosidade") || txt.includes("sabia que"))
-        return "curiosidades";
-
-    if (
-        txt.includes("triste") || txt.includes("ansioso") ||
-        txt.includes("medo") || txt.includes("raiva") ||
-        txt.includes("alegre") || txt.includes("sozinho") ||
-        txt.includes("frustrado") || txt.includes("timido") ||
-        txt.includes("vergonha") || txt.includes("ciumes") ||
-        txt.includes("saudade")
-    ) return "emocional";
+    if (artesVisuaisKeywords.some(kw => txt.includes(kw))) {
+        return "arte";
+    }
 
     return null;
-    }
+}
     
     function buscarRecursivo(obj, textoNorm) {
         if (!obj || typeof obj !== "object") return null;
