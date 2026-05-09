@@ -1,0 +1,255 @@
+{
+  "perguntas_infantis": {
+
+    "arte_engracada": {
+      "palavras_chave": [
+        "arte engraçada",
+        "desenho engraçado",
+        "arte maluca",
+        "pintura engraçada",
+        "desenho divertido",
+        "arte estranha"
+      ],
+
+      "inicio": [
+        "A arte também pode fazer a gente rir 😄"
+      ],
+
+      "respostas": [
+        "Alguns artistas criam personagens com olhos gigantes, pernas compridas ou cores malucas 🎨",
+        "Existem pinturas cheias de formas engraçadas e situações imaginárias ✨",
+        "A criatividade não precisa seguir regras o tempo todo 🌈"
+      ],
+
+      "curiosidade": [
+        "Muitos desenhos animados usam exageros para ficar engraçados 🎭"
+      ],
+
+      "interacao": [
+        "Como seria seu personagem mais engraçado?"
+      ],
+
+      "atividade": [
+        "Desenhe um animal usando cores que normalmente ele não teria 🐸🌈"
+      ],
+
+      "final": [
+        "A arte pode ser divertida e cheia de imaginação ✨"
+      ]
+    },
+
+    "coisa_assustadora": {
+      "palavras_chave": [
+        "coisa assustadora",
+        "desenho assustador",
+        "arte de medo",
+        "personagem assustador",
+        "monstro desenho",
+        "coisa creepy"
+      ],
+
+      "inicio": [
+        "Algumas histórias usam mistério para criar emoção 🌙"
+      ],
+
+      "respostas": [
+        "Monstros imaginários aparecem muito em desenhos e filmes 🎭",
+        "Sombras, cores escuras e olhos brilhantes podem deixar imagens misteriosas ✨",
+        "Mesmo personagens assustadores podem virar desenhos criativos 🌌"
+      ],
+
+      "curiosidade": [
+        "Muitos monstros famosos nasceram da imaginação das pessoas 👀"
+      ],
+
+      "interacao": [
+        "Que criatura misteriosa você inventaria?"
+      ],
+
+      "atividade": [
+        "Desenhe um monstrinho engraçado em vez de assustador 🎨"
+      ],
+
+      "final": [
+        "A imaginação pode transformar medo em criatividade 🌟"
+      ]
+    },
+
+    "animal_magico": {
+      "palavras_chave": [
+        "animal mágico",
+        "bicho mágico",
+        "criatura mágica",
+        "animal fantasia",
+        "animal imaginário"
+      ],
+
+      "inicio": [
+        "Animais mágicos aparecem em muitas histórias encantadas 🦄"
+      ],
+
+      "respostas": [
+        "Algumas criaturas imaginárias têm asas, brilho ou poderes especiais ✨",
+        "Dragões, unicórnios e sereias são exemplos famosos 🌈",
+        "A imaginação pode misturar vários animais em um só 🎨"
+      ],
+
+      "curiosidade": [
+        "Muitos povos criaram criaturas mágicas em suas lendas 🌍"
+      ],
+
+      "interacao": [
+        "Que poder teria seu animal mágico?"
+      ],
+
+      "atividade": [
+        "Misture dois animais para criar uma criatura nova ✏️"
+      ],
+
+      "final": [
+        "Criar criaturas imaginárias é uma aventura criativa 🌟"
+      ]
+    },
+
+    "desenho_facil": {
+      "palavras_chave": [
+        "desenho fácil",
+        "como desenhar fácil",
+        "desenho simples",
+        "desenho infantil",
+        "quero desenhar"
+      ],
+
+      "inicio": [
+        "Todo desenho pode começar com formas simples ✏️"
+      ],
+
+      "respostas": [
+        "Círculos, quadrados e triângulos ajudam a montar personagens 🎨",
+        "Treinar aos poucos ajuda o desenho a melhorar 🌱",
+        "Até grandes artistas começaram desenhando formas básicas ✨"
+      ],
+
+      "curiosidade": [
+        "Muitos desenhos famosos nasceram de rabiscos simples 😄"
+      ],
+
+      "interacao": [
+        "O que você gostaria de aprender a desenhar?"
+      ],
+
+      "atividade": [
+        "Desenhe um rostinho usando apenas círculos 😊"
+      ],
+
+      "final": [
+        "Cada desenho é um passo novo na criatividade 🌈"
+      ]
+    },
+
+    "cor_diferente": {
+      "palavras_chave": [
+        "cor diferente",
+        "mistura de cores",
+        "cor maluca",
+        "cor inventada"
+      ],
+
+      "inicio": [
+        "As cores podem transformar completamente um desenho 🌈"
+      ],
+
+      "respostas": [
+        "Misturar cores cria novas possibilidades 🎨",
+        "Alguns artistas usam cores inesperadas para deixar a arte mais divertida ✨",
+        "Não existe limite para imaginar combinações coloridas 🌟"
+      ],
+
+      "curiosidade": [
+        "Azul com amarelo pode criar verde 💚"
+      ],
+
+      "interacao": [
+        "Que cor inventada você criaria?"
+      ],
+
+      "atividade": [
+        "Misture tintas para descobrir novas cores 🎨"
+      ],
+
+      "final": [
+        "As cores ajudam a mostrar emoções e imaginação ✨"
+      ]
+    },
+
+    "super_heroi": {
+      "palavras_chave": [
+        "super heroi",
+        "heroi desenho",
+        "personagem poderoso",
+        "criar heroi"
+      ],
+
+      "inicio": [
+        "Os super-heróis usam coragem e criatividade 🦸"
+      ],
+
+      "respostas": [
+        "Alguns heróis possuem poderes, roupas especiais e símbolos marcantes ✨",
+        "Os personagens podem proteger cidades, animais ou a natureza 🌎",
+        "Cada herói possui habilidades únicas 🌟"
+      ],
+
+      "curiosidade": [
+        "Muitos heróis nasceram primeiro nos quadrinhos 📚"
+      ],
+
+      "interacao": [
+        "Qual seria o poder do seu herói?"
+      ],
+
+      "atividade": [
+        "Crie um símbolo para seu personagem ✏️"
+      ],
+
+      "final": [
+        "A imaginação pode criar heróis incríveis 🌈"
+      ]
+    },
+
+    "desenho_animal": {
+      "palavras_chave": [
+        "desenhar animal",
+        "como desenhar cachorro",
+        "como desenhar gato",
+        "animal fácil"
+      ],
+
+      "inicio": [
+        "Os animais podem ser desenhados usando formas simples 🐾"
+      ],
+
+      "respostas": [
+        "Círculos ajudam a criar cabeças e corpos ✏️",
+        "Triângulos podem virar orelhas ou bicos 🎨",
+        "Cada animal possui formas e movimentos diferentes 🌿"
+      ],
+
+      "curiosidade": [
+        "Muitos artistas observam animais reais antes de desenhar 👀"
+      ],
+
+      "interacao": [
+        "Qual animal você mais gosta de desenhar?"
+      ],
+
+      "atividade": [
+        "Desenhe um gato usando círculos e triângulos 🐱"
+      ],
+
+      "final": [
+        "Observar a natureza ajuda muito na arte 🌈"
+      ]
+    }
+  }
+}
