@@ -603,8 +603,423 @@
 
     "emocao": "criatividade",
     "nivel": "leve"
-  }
-}
+    },
+
+  "arte_abstrata": {
+    "tema": "artes_visuais_avancadas",
+    "subtema": "arte_abstrata",
+
+    "palavras_chave": [
+      "arte abstrata",
+      "abstrato",
+      "pintura abstrata"
+    ],
+
+    "inicio": [
+      "A arte abstrata usa formas, linhas e cores de maneira livre 🎨"
+    ],
+
+    "explicacao_curta": [
+      "Ela não tenta copiar exatamente pessoas ou objetos reais."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os artistas abstratos usam cores, formas e movimentos para transmitir emoções e ideias."
+    ],
+
+    "curiosidade": [
+      "Na arte abstrata, cada pessoa pode imaginar algo diferente ✨"
+    ],
+
+    "interacao": [
+      "Que sentimentos você mostraria usando apenas cores?"
+    ],
+
+    "atividade": [
+      "Pinte linhas e formas livres sem desenhar objetos 🎨"
+    ],
+
+    "final": [
+      "As cores também podem contar histórias 🌈"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
+  },
+
+  "arte_figurativa": {
+    "tema": "artes_visuais_avancadas",
+    "subtema": "arte_figurativa",
+
+    "palavras_chave": [
+      "arte figurativa",
+      "figurativo"
+    ],
+
+    "inicio": [
+      "A arte figurativa mostra pessoas, animais e objetos 🖼️"
+    ],
+
+    "explicacao_curta": [
+      "Ela representa elementos reconhecíveis do mundo real."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os artistas figurativos podem desenhar paisagens, retratos e cenas do cotidiano."
+    ],
+
+    "curiosidade": [
+      "Muitas pinturas antigas são figurativas 🎨"
+    ],
+
+    "interacao": [
+      "O que você mais gosta de desenhar?"
+    ],
+
+    "atividade": [
+      "Faça um desenho observando objetos da sua casa ✏️"
+    ],
+
+    "final": [
+      "A observação ajuda a criar arte cheia de detalhes ✨"
+    ],
+
+    "emocao": "observacao",
+    "nivel": "leve"
+  },
+
+  "grafite": {
+    "tema": "artes_visuais_avancadas",
+    "subtema": "grafite",
+
+    "palavras_chave": [
+      "grafite",
+      "arte urbana",
+      "mural grafite"
+    ],
+
+    "inicio": [
+      "O grafite colore muros e cidades 🌆"
+    ],
+
+    "explicacao_curta": [
+      "É uma forma de arte urbana cheia de criatividade."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os artistas usam spray, desenhos e letras para criar imagens em espaços públicos."
+    ],
+
+    "curiosidade": [
+      "Muitos grafites contam histórias da comunidade 🎨"
+    ],
+
+    "interacao": [
+      "Que desenho você faria em um mural gigante?"
+    ],
+
+    "atividade": [
+      "Crie letras coloridas inspiradas no grafite ✏️"
+    ],
+
+    "final": [
+      "A arte pode transformar paredes em galerias 🌈"
+    ],
+
+    "emocao": "expressao",
+    "nivel": "leve"
+  },
+
+  "muralismo": {
+    "tema": "artes_visuais_avancadas",
+    "subtema": "muralismo",
+
+    "palavras_chave": [
+      "muralismo",
+      "mural",
+      "pintura mural"
+    ],
+
+    "inicio": [
+      "O muralismo cria pinturas enormes em paredes 🖌️"
+    ],
+
+    "explicacao_curta": [
+      "Os murais contam histórias usando imagens gigantes."
+    ],
+
+    "explicacao_aprofundada": [
+      "Muitos artistas usam murais para mostrar cultura, história e ideias importantes."
+    ],
+
+    "curiosidade": [
+      "Alguns murais ocupam prédios inteiros 🏙️"
+    ],
+
+    "interacao": [
+      "O que você desenharia em uma parede gigante?"
+    ],
+
+    "atividade": [
+      "Planeje um mural coletivo com amigos 🎨"
+    ],
+
+    "final": [
+      "Grandes paredes podem virar grandes obras 🌟"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
+  },
+
+  "fotografia": {
+    "tema": "artes_visuais_avancadas",
+    "subtema": "fotografia",
+
+    "palavras_chave": [
+      "fotografia",
+      "foto artistica",
+      "camera fotografica"
+    ],
+
+    "inicio": [
+      "A fotografia captura momentos usando luz 📸"
+    ],
+
+    "explicacao_curta": [
+      "As câmeras registram imagens e memórias."
+    ],
+
+    "explicacao_aprofundada": [
+      "Fotógrafos observam luz, ângulo e composição para criar imagens interessantes."
+    ],
+
+    "curiosidade": [
+      "Uma fotografia pode congelar um instante do tempo ⏳"
+    ],
+
+    "interacao": [
+      "O que você mais gostaria de fotografar?"
+    ],
+
+    "atividade": [
+      "Tire fotos observando luz e sombra 🌞"
+    ],
+
+    "final": [
+      "As imagens podem guardar lembranças especiais ✨"
+    ],
+
+    "emocao": "observacao",
+    "nivel": "leve"
+  },
+
+  "animacao": {
+    "tema": "artes_visuais_avancadas",
+    "subtema": "animacao",
+
+    "palavras_chave": [
+      "animacao",
+      "desenho animado",
+      "animar desenho"
+    ],
+
+    "inicio": [
+      "A animação faz desenhos parecerem vivos 🎬"
+    ],
+
+    "explicacao_curta": [
+      "Várias imagens em sequência criam movimento."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os animadores desenham muitas cenas para criar personagens e histórias em movimento."
+    ],
+
+    "curiosidade": [
+      "Um segundo de animação pode usar muitos desenhos ✏️"
+    ],
+
+    "interacao": [
+      "Que personagem animado você inventaria?"
+    ],
+
+    "atividade": [
+      "Faça um flipbook em um bloquinho 📚"
+    ],
+
+    "final": [
+      "Desenhos podem ganhar movimento e vida 🌈"
+    ],
+
+    "emocao": "diversao",
+    "nivel": "leve"
+  },
+
+  "stop_motion": {
+    "tema": "artes_visuais_avancadas",
+    "subtema": "stop_motion",
+
+    "palavras_chave": [
+      "stop motion",
+      "animacao quadro a quadro"
+    ],
+
+    "inicio": [
+      "O stop motion cria animações usando fotos 🎥"
+    ],
+
+    "explicacao_curta": [
+      "Os objetos são movidos pouquinho por pouquinho."
+    ],
+
+    "explicacao_aprofundada": [
+      "Cada foto registra uma pequena mudança até formar movimento."
+    ],
+
+    "curiosidade": [
+      "Massinhas e brinquedos podem virar personagens ✨"
+    ],
+
+    "interacao": [
+      "Que brinquedo você animaria?"
+    ],
+
+    "atividade": [
+      "Faça fotos movendo objetos lentamente 📸"
+    ],
+
+    "final": [
+      "Pequenos movimentos podem criar grandes histórias 🌟"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
+  },
+
+  "pixel_art": {
+    "tema": "artes_visuais_avancadas",
+    "subtema": "pixel_art",
+
+    "palavras_chave": [
+      "pixel art",
+      "arte pixelada"
+    ],
+
+    "inicio": [
+      "A pixel art cria desenhos usando quadradinhos 🟦"
+    ],
+
+    "explicacao_curta": [
+      "Ela lembra imagens de videogames antigos."
+    ],
+
+    "explicacao_aprofundada": [
+      "Cada pixel funciona como uma pequena peça formando a imagem."
+    ],
+
+    "curiosidade": [
+      "Muitos jogos clássicos usam pixel art 🎮"
+    ],
+
+    "interacao": [
+      "Você gosta de jogos retrô?"
+    ],
+
+    "atividade": [
+      "Monte desenhos usando papel quadriculado ✏️"
+    ],
+
+    "final": [
+      "Pequenos pixels podem criar mundos inteiros 🌈"
+    ],
+
+    "emocao": "diversao",
+    "nivel": "leve"
+  },
+
+  "historia_em_quadrinhos": {
+    "tema": "artes_visuais_avancadas",
+    "subtema": "historia_em_quadrinhos",
+
+    "palavras_chave": [
+      "quadrinhos",
+      "hq",
+      "historia em quadrinhos"
+    ],
+
+    "inicio": [
+      "Os quadrinhos misturam desenho e narrativa 📚"
+    ],
+
+    "explicacao_curta": [
+      "As histórias aparecem em cenas organizadas em quadros."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os personagens falam usando balões e expressões desenhadas."
+    ],
+
+    "curiosidade": [
+      "Os quadrinhos podem ter aventura, humor ou mistério ✨"
+    ],
+
+    "interacao": [
+      "Que superpoder teria seu personagem?"
+    ],
+
+    "atividade": [
+      "Crie uma HQ com três quadros ✏️"
+    ],
+
+    "final": [
+      "Desenhos também podem contar aventuras 🌟"
+    ],
+
+    "emocao": "imaginacao",
+    "nivel": "leve"
+  },
+
+  "arte_digital": {
+    "tema": "artes_visuais_avancadas",
+    "subtema": "arte_digital",
+
+    "palavras_chave": [
+      "arte digital",
+      "desenho digital",
+      "pintura digital"
+    ],
+
+    "inicio": [
+      "A arte digital usa computadores e tablets para criar 🎨"
+    ],
+
+    "explicacao_curta": [
+      "Os artistas desenham usando programas e telas digitais."
+    ],
+
+    "explicacao_aprofundada": [
+      "É possível usar pincéis virtuais, efeitos e muitas cores diferentes."
+    ],
+
+    "curiosidade": [
+      "Muitos filmes e jogos usam arte digital 🎮"
+    ],
+
+    "interacao": [
+      "Você prefere desenhar no papel ou na tela?"
+    ],
+
+    "atividade": [
+      "Crie desenhos usando aplicativos simples ✏️"
+    ],
+
+    "final": [
+      "Tecnologia e criatividade podem trabalhar juntas 🌈"
+    ],
+
+    "emocao": "exploracao",
+    "nivel": "leve"
       }
     }
   }
