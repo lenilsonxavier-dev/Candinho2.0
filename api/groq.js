@@ -2,23 +2,26 @@ const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candin
 
 // ======================= ARQUIVOS =======================
 const JSON_FILES = {
-    tecnicas: "arte_tecnicas.json",
-    artes: "artes_visuais.json",
+
+    apoio_emocional: "apoio_emocional.json",
+    arte_artista: "arte_artista.json",
+    arte_tecnicas: "arte_tecnicas.json",
+    artes_visuais: "artes_visuais.json",
     artistas: "artistas.json",
-    artistasUniversais: "artistas_universais.json",
-    atividades: "atividades_artisticas.json",
-    afro: "cultura_afro_brasileira.json",
-    indigena: "cultura_indigena.json",
+    artistas_universais: "artistas_universais.json",
+    atividades_artisticas: "atividades_artisticas.json",
+    cultura_afro_brasileira: "cultura_afro_brasileira.json",
+    cultura_indigena: "cultura_indigena.json",
     curiosidades: "curiosidades.json",
     dancas: "dancas.json",
-    festas: "festas_brasileiras.json",
+    festas_brasileiras: "festas_brasileiras.json",
     folclore: "folclore.json",
-    historia: "historia_arte.json",
-    imaginacao: "imaginacao_infantil.json",
-    lugares: "lugares_arte.json",
+    historia_arte: "historia_arte.json",
+    imaginacao_infantil: "imaginacao_infantil.json",
+    lugares_arte: "lugares_arte.json",
     musica: "musica.json",
     piadas: "piadas.json",
-    ritmos: "ritmos_musicais.json",
+    ritmos_musicais: "ritmos_musicais.json",
     saudacoes: "saudacoes.json",
     teatro: "teatro.json"
 };
