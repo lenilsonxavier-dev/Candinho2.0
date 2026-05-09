@@ -1,128 +1,839 @@
 {
+  "cordel": {
+    "tema": "cultura_brasileira",
+    "subtema": "cordel",
+
+    "palavras_chave": [
+      "cordel",
+      "literatura de cordel",
+      "poesia nordestina"
+    ],
+
+    "inicio": [
+      "O cordel mistura poesia, rima e histórias 📚"
+    ],
+
+    "explicacao_curta": [
+      "Os folhetos de cordel contam aventuras e tradições."
+    ],
+
+    "explicacao_aprofundada": [
+      "A literatura de cordel é muito popular no Nordeste brasileiro e costuma ter capas em xilogravura."
+    ],
+
+    "curiosidade": [
+      "Os folhetos ficavam pendurados em cordas, por isso receberam o nome de cordel ✨"
+    ],
+
+    "interacao": [
+      "Você consegue criar uma frase rimando?"
+    ],
+
+    "atividade": [
+      "Escreva pequenos versos com rimas 🎶"
+    ],
+
+    "final": [
+      "As palavras também podem virar arte 🌟"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
+  },
+
+  "repente": {
+    "tema": "cultura_brasileira",
+    "subtema": "repente",
+
+    "palavras_chave": [
+      "repente",
+      "cantoria",
+      "repentista"
+    ],
+
+    "inicio": [
+      "O repente é uma poesia cantada e improvisada 🎤"
+    ],
+
+    "explicacao_curta": [
+      "Os cantadores criam versos na hora."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os repentistas usam criatividade e rapidez para responder em forma de rima."
+    ],
+
+    "curiosidade": [
+      "O repente costuma ser acompanhado por viola 🎸"
+    ],
+
+    "interacao": [
+      "Você conseguiria improvisar uma rima?"
+    ],
+
+    "atividade": [
+      "Brinque criando versos curtos com amigos ✏️"
+    ],
+
+    "final": [
+      "A criatividade pode nascer em poucos segundos ✨"
+    ],
+
+    "emocao": "animacao",
+    "nivel": "leve"
+  },
+
+  "capoeira": {
+    "tema": "cultura_brasileira",
+    "subtema": "capoeira",
+
+    "palavras_chave": [
+      "capoeira",
+      "ginga",
+      "berimbau"
+    ],
+
+    "inicio": [
+      "A capoeira mistura luta, dança e música 🥁"
+    ],
+
+    "explicacao_curta": [
+      "Ela faz parte da cultura afro-brasileira."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os movimentos acontecem em roda com música, canto e instrumentos."
+    ],
+
+    "curiosidade": [
+      "O berimbau ajuda a marcar o ritmo da capoeira 🎵"
+    ],
+
+    "interacao": [
+      "Você já viu uma roda de capoeira?"
+    ],
+
+    "atividade": [
+      "Experimente movimentos leves de equilíbrio 🤸"
+    ],
+
+    "final": [
+      "Movimento e música podem caminhar juntos 🌈"
+    ],
+
+    "emocao": "energia",
+    "nivel": "leve"
+  },
+
+  "reisado": {
+    "tema": "cultura_brasileira",
+    "subtema": "reisado",
+
+    "palavras_chave": [
+      "reisado",
+      "festa reisado"
+    ],
+
+    "inicio": [
+      "O reisado mistura música, dança e tradição 🎭"
+    ],
+
+    "explicacao_curta": [
+      "Essa manifestação cultural acontece em festas populares."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os participantes usam roupas coloridas e apresentam músicas e encenações."
+    ],
+
+    "curiosidade": [
+      "O reisado possui influência portuguesa e brasileira ✨"
+    ],
+
+    "interacao": [
+      "Você gosta de festas com dança e música?"
+    ],
+
+    "atividade": [
+      "Crie máscaras coloridas inspiradas em festas 🎨"
+    ],
+
+    "final": [
+      "As tradições ajudam a manter histórias vivas 🌟"
+    ],
+
+    "emocao": "celebracao",
+    "nivel": "leve"
+  },
+
+  "boi_bumba": {
+    "tema": "cultura_brasileira",
+    "subtema": "boi_bumba",
+
+    "palavras_chave": [
+      "boi bumba",
+      "bumba meu boi",
+      "festa do boi"
+    ],
+
+    "inicio": [
+      "O boi-bumbá mistura dança, música e teatro 🐂"
+    ],
+
+    "explicacao_curta": [
+      "Essa festa é cheia de cores e personagens."
+    ],
+
+    "explicacao_aprofundada": [
+      "As apresentações contam histórias usando fantasias, ritmos e encenações."
+    ],
+
+    "curiosidade": [
+      "O boi decorado é o principal símbolo da festa ✨"
+    ],
+
+    "interacao": [
+      "Que cores você usaria para decorar um boi?"
+    ],
+
+    "atividade": [
+      "Desenhe fantasias coloridas 🎨"
+    ],
+
+    "final": [
+      "As festas populares espalham alegria 🌈"
+    ],
+
+    "emocao": "animacao",
+    "nivel": "leve"
+  },
+
+  "cacuria": {
+    "tema": "cultura_brasileira",
+    "subtema": "cacuria",
+
+    "palavras_chave": [
+      "cacuria",
+      "danca cacuria"
+    ],
+
+    "inicio": [
+      "A cacuriá é uma dança alegre e animada 💃"
+    ],
+
+    "explicacao_curta": [
+      "Ela faz parte das tradições populares do Maranhão."
+    ],
+
+    "explicacao_aprofundada": [
+      "A dança possui músicas animadas, rodas e movimentos festivos."
+    ],
+
+    "curiosidade": [
+      "As roupas coloridas aparecem bastante nas apresentações 🌈"
+    ],
+
+    "interacao": [
+      "Você gosta de danças animadas?"
+    ],
+
+    "atividade": [
+      "Crie passos acompanhando músicas alegres 🎶"
+    ],
+
+    "final": [
+      "Dançar também é uma forma de expressão ✨"
+    ],
+
+    "emocao": "alegria",
+    "nivel": "leve"
+  },
+
+  "pastoril": {
+    "tema": "cultura_brasileira",
+    "subtema": "pastoril",
+
+    "palavras_chave": [
+      "pastoril",
+      "festa pastoril"
+    ],
+
+    "inicio": [
+      "O pastoril mistura teatro, canto e dança 🎭"
+    ],
+
+    "explicacao_curta": [
+      "Essa tradição aparece em festas populares brasileiras."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os grupos usam roupas coloridas e apresentam músicas em grupo."
+    ],
+
+    "curiosidade": [
+      "As cores azul e vermelho costumam aparecer no pastoril ✨"
+    ],
+
+    "interacao": [
+      "Você gostaria de participar de uma apresentação?"
+    ],
+
+    "atividade": [
+      "Desenhe figurinos coloridos 🎨"
+    ],
+
+    "final": [
+      "As apresentações populares unem música e tradição 🌟"
+    ],
+
+    "emocao": "celebracao",
+    "nivel": "leve"
+  },
+
+  "quadrilha": {
+    "tema": "cultura_brasileira",
+    "subtema": "quadrilha",
+
+    "palavras_chave": [
+      "quadrilha",
+      "danca junina",
+      "festa junina quadrilha"
+    ],
+
+    "inicio": [
+      "A quadrilha é uma dança tradicional das festas juninas 🌽"
+    ],
+
+    "explicacao_curta": [
+      "Ela mistura música, dança e brincadeiras."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os participantes dançam em grupo usando roupas típicas e coreografias divertidas."
+    ],
+
+    "curiosidade": [
+      "Muitas quadrilhas possuem personagens e encenações 🎭"
+    ],
+
+    "interacao": [
+      "Você gosta das festas juninas?"
+    ],
+
+    "atividade": [
+      "Desenhe bandeirinhas coloridas 🎨"
+    ],
+
+    "final": [
+      "As festas populares espalham alegria e tradição 🌈"
+    ],
+
+    "emocao": "animacao",
+    "nivel": "leve"
+  },
+
+  "lavadeiras": {
+    "tema": "cultura_brasileira",
+    "subtema": "lavadeiras",
+
+    "palavras_chave": [
+      "lavadeiras",
+      "cantigas lavadeiras"
+    ],
+
+    "inicio": [
+      "As lavadeiras cantavam enquanto trabalhavam 🌊"
+    ],
+
+    "explicacao_curta": [
+      "Os cantos ajudavam a tornar o trabalho mais leve."
+    ],
+
+    "explicacao_aprofundada": [
+      "As músicas tradicionais das lavadeiras fazem parte da memória cultural brasileira."
+    ],
+
+    "curiosidade": [
+      "Os cantos eram compartilhados entre grupos ✨"
+    ],
+
+    "interacao": [
+      "Você gosta de cantar enquanto faz atividades?"
+    ],
+
+    "atividade": [
+      "Crie ritmos usando sons do cotidiano 🎶"
+    ],
+
+    "final": [
+      "A música pode acompanhar momentos simples 🌟"
+    ],
+
+    "emocao": "calma",
+    "nivel": "leve"
+  },
+
+  "festa_do_divino": {
+    "tema": "cultura_brasileira",
+    "subtema": "festa_do_divino",
+
+    "palavras_chave": [
+      "festa do divino",
+      "divino espirito santo"
+    ],
+
+    "inicio": [
+      "A Festa do Divino reúne música, tradição e celebração 🎉"
+    ],
+
+    "explicacao_curta": [
+      "Ela acontece em várias regiões do Brasil."
+    ],
+
+    "explicacao_aprofundada": [
+      "As festas possuem procissões, músicas, danças e decorações coloridas."
+    ],
+
+    "curiosidade": [
+      "As bandeiras vermelhas aparecem bastante nessa tradição 🚩"
+    ],
+
+    "interacao": [
+      "Você gosta de festas cheias de música e cores?"
+    ],
+
+    "atividade": [
+      "Crie bandeiras decorativas coloridas 🎨"
+    ],
+
+    "final": [
+      "As tradições ajudam a unir as pessoas 🌈"
+    ],
+
+    "emocao": "uniao",
+    "nivel": "leve"
+     },
+{
   "o_que_sao": {
+    "tema": "festas_brasileiras",
+    "subtema": "o_que_sao",
+
     "palavras_chave": [
       "festas tradicionais brasileiras",
       "o que sao festas populares",
       "cultura brasileira festas",
       "celebracoes do brasil"
     ],
-    "explicacao_infantil": "As festas tradicionais brasileiras são celebrações que fazem parte da cultura do país. Elas têm música, dança, comidas típicas e muita alegria."
+
+    "inicio": [
+      "As festas brasileiras misturam música, dança e tradição 🎉"
+    ],
+
+    "explicacao_curta": [
+      "Essas celebrações fazem parte da cultura do Brasil."
+    ],
+
+    "explicacao_aprofundada": [
+      "As festas populares reúnem costumes, comidas típicas, roupas coloridas e apresentações culturais."
+    ],
+
+    "curiosidade": [
+      "Cada região do Brasil possui festas e tradições diferentes 🌎"
+    ],
+
+    "interacao": [
+      "Qual festa brasileira você gostaria de conhecer?"
+    ],
+
+    "atividade": [
+      "Desenhe uma festa cheia de bandeiras e música 🎨"
+    ],
+
+    "final": [
+      "As festas ajudam a manter a cultura viva 🌈"
+    ],
+
+    "emocao": "celebracao",
+    "nivel": "leve"
   },
+
   "carnaval": {
+    "tema": "festas_brasileiras",
+    "subtema": "carnaval",
+
     "palavras_chave": [
       "carnaval",
       "festa carnaval brasil",
-      "desfile carnaval",
-      "fantasia carnaval"
+      "desfile carnaval"
     ],
-    "explicacao_infantil": "O Carnaval é uma festa com desfiles, fantasias e muita música. As pessoas dançam e celebram com alegria em várias cidades do Brasil."
+
+    "inicio": [
+      "O Carnaval é uma das festas mais animadas do Brasil 🎭"
+    ],
+
+    "explicacao_curta": [
+      "A festa possui música, fantasias e desfiles."
+    ],
+
+    "explicacao_aprofundada": [
+      "As escolas de samba apresentam carros alegóricos, danças e fantasias coloridas."
+    ],
+
+    "curiosidade": [
+      "O samba é um dos ritmos mais ligados ao Carnaval 🥁"
+    ],
+
+    "interacao": [
+      "Que fantasia você usaria no Carnaval?"
+    ],
+
+    "atividade": [
+      "Crie máscaras coloridas usando papel 🎨"
+    ],
+
+    "final": [
+      "O Carnaval espalha ritmo e alegria pelas ruas 🌈"
+    ],
+
+    "emocao": "animacao",
+    "nivel": "leve"
   },
+
   "festa_junina": {
+    "tema": "festas_brasileiras",
+    "subtema": "festa_junina",
+
     "palavras_chave": [
       "festa junina",
       "quadrilha festa junina",
       "festa caipira",
       "comidas tipicas juninas"
     ],
-    "explicacao_infantil": "A Festa Junina tem comidas típicas, danças como a quadrilha e roupas caipiras. Ela celebra tradições do interior e é muito divertida."
+
+    "inicio": [
+      "A Festa Junina é cheia de bandeirinhas e dança 🌽"
+    ],
+
+    "explicacao_curta": [
+      "Ela celebra tradições populares do interior."
+    ],
+
+    "explicacao_aprofundada": [
+      "As festas possuem quadrilha, fogueira, músicas e comidas feitas com milho."
+    ],
+
+    "curiosidade": [
+      "As roupas caipiras fazem parte da tradição 👒"
+    ],
+
+    "interacao": [
+      "Qual comida junina você gostaria de experimentar?"
+    ],
+
+    "atividade": [
+      "Faça bandeirinhas coloridas com papel ✂️"
+    ],
+
+    "final": [
+      "As festas juninas unem dança, sabor e tradição ✨"
+    ],
+
+    "emocao": "alegria",
+    "nivel": "leve"
   },
+
   "bumba_meu_boi": {
+    "tema": "festas_brasileiras",
+    "subtema": "bumba_meu_boi",
+
     "palavras_chave": [
       "bumba meu boi",
       "festa do boi",
       "tradicao boi brasil"
     ],
-    "explicacao_infantil": "O Bumba Meu Boi mistura dança, música e teatro. Ele conta uma história com personagens e é muito popular no Norte e Nordeste."
+
+    "inicio": [
+      "O Bumba Meu Boi mistura dança, música e teatro 🐂"
+    ],
+
+    "explicacao_curta": [
+      "A festa conta histórias usando personagens e fantasias."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os grupos apresentam encenações coloridas acompanhadas por tambores e cantorias."
+    ],
+
+    "curiosidade": [
+      "O boi decorado é o principal símbolo da festa ✨"
+    ],
+
+    "interacao": [
+      "Que cores você colocaria em um boi festivo?"
+    ],
+
+    "atividade": [
+      "Desenhe fantasias inspiradas no Bumba Meu Boi 🎨"
+    ],
+
+    "final": [
+      "As histórias populares ganham vida nas festas 🌈"
+    ],
+
+    "emocao": "encantamento",
+    "nivel": "leve"
   },
+
   "congada": {
+    "tema": "festas_brasileiras",
+    "subtema": "congada",
+
     "palavras_chave": [
       "congada",
       "festa afro brasileira congada",
       "tradicao congada"
     ],
-    "explicacao_infantil": "A Congada é uma festa com dança, música e tradição afro-brasileira. Ela celebra a cultura e a história com cortejos e cantos."
+
+    "inicio": [
+      "A Congada mistura música, dança e tradição afro-brasileira 🥁"
+    ],
+
+    "explicacao_curta": [
+      "Ela celebra cultura, história e religiosidade."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os participantes usam roupas coloridas e realizam cortejos acompanhados de tambores."
+    ],
+
+    "curiosidade": [
+      "As coroas e estandartes aparecem bastante na Congada 👑"
+    ],
+
+    "interacao": [
+      "Você gosta de festas com música e cortejos?"
+    ],
+
+    "atividade": [
+      "Crie coroas decorativas usando papel ✨"
+    ],
+
+    "final": [
+      "As tradições ajudam a preservar histórias importantes 🌍"
+    ],
+
+    "emocao": "respeito",
+    "nivel": "leve"
   },
+
   "maracatu": {
+    "tema": "festas_brasileiras",
+    "subtema": "maracatu",
+
     "palavras_chave": [
       "maracatu festa",
       "festa maracatu",
       "tradicao maracatu"
     ],
-    "explicacao_infantil": "O Maracatu é uma festa com tambores, dança e personagens que lembram reis e rainhas. Ele vem da cultura afro-brasileira."
+
+    "inicio": [
+      "O Maracatu possui tambores fortes e roupas coloridas 🥁"
+    ],
+
+    "explicacao_curta": [
+      "Essa tradição faz parte da cultura afro-brasileira."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os cortejos apresentam reis, rainhas e ritmos marcantes."
+    ],
+
+    "curiosidade": [
+      "Os tambores ajudam a criar a energia do Maracatu ✨"
+    ],
+
+    "interacao": [
+      "Você gosta de ritmos fortes e animados?"
+    ],
+
+    "atividade": [
+      "Crie batidas usando palmas e objetos 🎶"
+    ],
+
+    "final": [
+      "A música pode transformar festas em grandes espetáculos 🌟"
+    ],
+
+    "emocao": "energia",
+    "nivel": "leve"
   },
+
   "cirio_de_nazare": {
+    "tema": "festas_brasileiras",
+    "subtema": "cirio_de_nazare",
+
     "palavras_chave": [
       "cirio de nazare",
       "festa religiosa belem",
       "procissao nazare"
     ],
-    "explicacao_infantil": "O Círio de Nazaré é uma grande festa religiosa em Belém. Muitas pessoas participam em uma procissão cheia de fé."
+
+    "inicio": [
+      "O Círio de Nazaré reúne milhares de pessoas em Belém ✨"
+    ],
+
+    "explicacao_curta": [
+      "A celebração possui procissões e tradições religiosas."
+    ],
+
+    "explicacao_aprofundada": [
+      "As pessoas caminham juntas demonstrando união, fé e cultura."
+    ],
+
+    "curiosidade": [
+      "O Círio é uma das maiores procissões do Brasil 🌎"
+    ],
+
+    "interacao": [
+      "Você já participou de alguma grande celebração?"
+    ],
+
+    "atividade": [
+      "Desenhe uma procissão cheia de cores 🎨"
+    ],
+
+    "final": [
+      "As festas também podem reunir muitas pessoas 🌈"
+    ],
+
+    "emocao": "uniao",
+    "nivel": "leve"
   },
+
   "folia_de_reis": {
+    "tema": "festas_brasileiras",
+    "subtema": "folia_de_reis",
+
     "palavras_chave": [
       "folia de reis",
       "festa reis brasil",
       "tradicao reisado religioso"
     ],
-    "explicacao_infantil": "A Folia de Reis é uma tradição com músicas e visitas às casas. Ela celebra histórias religiosas com canto e instrumentos."
-  },
-  "festa_do_divino": {
-    "palavras_chave": [
-      "festa do divino",
-      "celebracao divino espirito santo",
-      "festa religiosa divino"
+
+    "inicio": [
+      "A Folia de Reis mistura música e tradição 🎶"
     ],
-    "explicacao_infantil": "A Festa do Divino tem cortejos, música e símbolos religiosos. Ela é celebrada em várias regiões do Brasil."
-  },
-  "lavagem_do_bonfim": {
-    "palavras_chave": [
-      "lavagem do bonfim",
-      "festa bahia bonfim",
-      "tradicao bonfim salvador"
+
+    "explicacao_curta": [
+      "Os grupos visitam casas cantando músicas tradicionais."
     ],
-    "explicacao_infantil": "A Lavagem do Bonfim acontece na Bahia. As pessoas vestem branco e participam de um cortejo com música e tradição."
+
+    "explicacao_aprofundada": [
+      "As apresentações usam instrumentos, roupas coloridas e histórias populares."
+    ],
+
+    "curiosidade": [
+      "As bandeiras fazem parte da celebração ✨"
+    ],
+
+    "interacao": [
+      "Você gostaria de participar de um grupo musical?"
+    ],
+
+    "atividade": [
+      "Crie pequenas bandeiras decorativas 🎨"
+    ],
+
+    "final": [
+      "A música ajuda a manter tradições vivas 🌟"
+    ],
+
+    "emocao": "celebracao",
+    "nivel": "leve"
   },
+
   "festival_parintins": {
+    "tema": "festas_brasileiras",
+    "subtema": "festival_parintins",
+
     "palavras_chave": [
       "festival de parintins",
       "boi garantido caprichoso",
       "festa amazonas boi"
     ],
-    "explicacao_infantil": "O Festival de Parintins é uma festa com apresentações coloridas e histórias do boi. Os grupos competem com música e dança."
-  },
-  "festa_do_peao": {
-    "palavras_chave": [
-      "festa do peao",
-      "rodeio brasil",
-      "festa sertaneja peao"
+
+    "inicio": [
+      "O Festival de Parintins é cheio de cores e música 🐂"
     ],
-    "explicacao_infantil": "A Festa do Peão tem rodeios, música e celebra a cultura do campo. É muito comum no interior do Brasil."
-  },
-  "cavalhada": {
-    "palavras_chave": [
-      "cavalhada",
-      "festa cavaleiros",
-      "encenacao cavalhada"
+
+    "explicacao_curta": [
+      "Os grupos apresentam histórias usando dança e fantasia."
     ],
-    "explicacao_infantil": "A Cavalhada é uma festa com cavaleiros e encenações. Ela mistura história, tradição e espetáculo."
-  },
-  "reisado": {
-    "palavras_chave": [
-      "reisado",
-      "festa reisado",
-      "tradicao popular reisado"
+
+    "explicacao_aprofundada": [
+      "Garantido e Caprichoso competem com apresentações gigantes e criativas."
     ],
-    "explicacao_infantil": "O Reisado é uma festa com dança, música e personagens. Ele celebra tradições populares com alegria."
+
+    "curiosidade": [
+      "As torcidas usam as cores dos bois 🔵🔴"
+    ],
+
+    "interacao": [
+      "Qual cor você escolheria para seu grupo?"
+    ],
+
+    "atividade": [
+      "Desenhe um boi decorado 🎨"
+    ],
+
+    "final": [
+      "As festas podem virar verdadeiros espetáculos 🌈"
+    ],
+
+    "emocao": "animacao",
+    "nivel": "leve"
   },
+
   "sao_joao": {
+    "tema": "festas_brasileiras",
+    "subtema": "sao_joao",
+
     "palavras_chave": [
       "sao joao",
       "festa sao joao",
       "fogueira junina",
       "comidas milho festa"
     ],
-    "explicacao_infantil": "São João é uma das festas juninas mais conhecidas. Tem fogueira, dança e comidas típicas como milho e pipoca."
+
+    "inicio": [
+      "São João é uma festa cheia de dança e fogueira 🔥"
+    ],
+
+    "explicacao_curta": [
+      "Ela faz parte das comemorações juninas."
+    ],
+
+    "explicacao_aprofundada": [
+      "As pessoas celebram com quadrilhas, músicas e comidas típicas."
+    ],
+
+    "curiosidade": [
+      "Milho, pipoca e canjica aparecem bastante nas festas 🌽"
+    ],
+
+    "interacao": [
+      "Qual brincadeira junina você mais gosta?"
+    ],
+
+    "atividade": [
+      "Desenhe fogueiras e bandeirinhas coloridas 🎨"
+    ],
+
+    "final": [
+      "As festas juninas aquecem o coração com alegria ✨"
+    ],
+
+    "emocao": "acolhimento",
+    "nivel": "leve"
   }
 }
-
-
