@@ -616,7 +616,7 @@
     
     function respostaInstantanea(pergunta) {
         const tema = detectarTemaPrioritario(pergunta);
-        const texto = normalizar(pergunta);
+        const txt = normalizar(pergunta);
         
        // Caso especial: piada
 if (tema === "piada" && dataStore.piadas) {
