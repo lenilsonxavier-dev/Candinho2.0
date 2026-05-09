@@ -276,56 +276,127 @@
             .trim();
     }
     
-    function detectarTemaPrioritario(texto) {
-        const txt = texto.toLowerCase();
-        const artesVisuaisKeywords = [
-            "cor primaria", "cores primarias", "cor primária", "cores primárias",
-            "cor secundaria", "cores secundarias", "cor secundária", "cores secundárias",
-            "cor terciaria", "cores terciarias", "cor terciária", "cores terciárias",
-            "linha", "ponto", "forma", "textura", "volume", "perspectiva", "composicao",
-            "luz e sombra", "elementos da arte", "elementos visuais", "o que e arte",
-            "pintura", "desenho", "escultura", "arte visual", "cor quente", "cores quentes", "cores frias", "cor fria"
-        ];
-        if (artesVisuaisKeywords.some(kw => txt.includes(kw))) return "arte";
-        
-        if (txt.includes("danca") || txt.includes("ballet") || txt.includes("samba") || 
-            txt.includes("coreografia") || txt.includes("frevo") || txt.includes("maracatu") ||
-            txt.includes("caboclinho") || txt.includes("ciranda") || txt.includes("carimbo")) return "danca";
-        
-        if (txt.includes("teatro") || txt.includes("peca") || txt.includes("ator") || 
-            txt.includes("fantoche") || txt.includes("sombras") || txt.includes("shakespeare") ||
-            txt.includes("suassuna")) return "teatro";
-        
-        if (txt.includes("musica") || txt.includes("cancao") || txt.includes("instrumento") ||
-            txt.includes("ritmo") || txt.includes("violao")) return "musica";
-        
-        if (txt.includes("folclore") || txt.includes("lenda") || txt.includes("saci") || 
-            txt.includes("curupira") || txt.includes("iara") || txt.includes("boitata")) return "folclore";
-        
-        if (txt.includes("festa") || txt.includes("carnaval") || txt.includes("junina") ||
-            txt.includes("bumba meu boi") || txt.includes("cirio")) return "festas";
-        
-        if (txt.includes("indigena") || txt.includes("tupi") || txt.includes("grafismo") ||
-            txt.includes("cestaria") || txt.includes("pintura corporal")) return "indigena";
-        
-        if (txt.includes("afro") || txt.includes("quilombo") || txt.includes("orixa")) return "afro";
-        
-        if (txt.includes("atividade") || txt.includes("oficina") || txt.includes("desenho")) return "atividade";
+       function detectarTemaPrioritario(texto) {
+    const txt = texto.toLowerCase();
 
-       if (txt.includes("saudacoes") || txt.includes("oi") || txt.includes("ola")) return "saudacoes";
+    const artesVisuaisKeywords = [
+        "cor primaria", "cores primarias", "cor primária", "cores primárias",
+        "cor secundaria", "cores secundarias", "cor secundária", "cores secundárias",
+        "cor terciaria", "cores terciarias", "cor terciária", "cores terciárias",
+        "linha", "ponto", "forma", "textura", "volume", "perspectiva", "composicao",
+        "luz e sombra", "elementos da arte", "elementos visuais", "o que e arte",
+        "pintura", "desenho", "escultura", "arte visual",
+        "cor quente", "cores quentes", "cores frias", "cor fria",
+        "grafite", "mural", "fotografia", "pixel art",
+        "animacao", "quadrinhos", "hq", "arte digital",
+        "arte abstrata", "arte figurativa"
+    ];
 
-       if (txt.includes("tecnica") || txt.includes("jeito") || txt.includes("maneira")) return "tecnicas";
-        
-        if (txt.includes("artista") || txt.includes("van gogh") || txt.includes("pintor") ||
-            txt.includes("tarsila") || txt.includes("portinari") || txt.includes("picasso") ||
-            txt.includes("monet") || txt.includes("dali") || txt.includes("frida")) return "artista";
-        
-        if (txt.includes("piada")) return "piada";
-        if (txt.includes("curiosidade")) return "curiosidade";
-        if (txt.includes("triste") || txt.includes("ansioso") || txt.includes("medo") || 
-            txt.includes("raiva") || txt.includes("alegre")) return "emocao";
-        
-        return null;
+    if (artesVisuaisKeywords.some(kw => txt.includes(kw))) return "arte";
+
+    if (
+        txt.includes("danca") || txt.includes("ballet") || txt.includes("samba") ||
+        txt.includes("coreografia") || txt.includes("frevo") || txt.includes("maracatu") ||
+        txt.includes("caboclinho") || txt.includes("ciranda") || txt.includes("carimbo") ||
+        txt.includes("cacuria") || txt.includes("quadrilha") || txt.includes("capoeira")
+    ) return "danca";
+
+    if (
+        txt.includes("teatro") || txt.includes("peca") || txt.includes("ator") ||
+        txt.includes("fantoche") || txt.includes("sombras") ||
+        txt.includes("shakespeare") || txt.includes("suassuna") ||
+        txt.includes("musical")
+    ) return "teatro";
+
+    if (
+        txt.includes("musica") || txt.includes("cancao") ||
+        txt.includes("instrumento") || txt.includes("ritmo") ||
+        txt.includes("violao") || txt.includes("tambor") ||
+        txt.includes("flauta") || txt.includes("samba") ||
+        txt.includes("forro") || txt.includes("rap") ||
+        txt.includes("rock") || txt.includes("melodia")
+    ) return "musica";
+
+    if (
+        txt.includes("folclore") || txt.includes("lenda") ||
+        txt.includes("saci") || txt.includes("curupira") ||
+        txt.includes("iara") || txt.includes("boitata") ||
+        txt.includes("mula sem cabeca") || txt.includes("cuca") ||
+        txt.includes("boto")
+    ) return "folclore";
+
+    if (
+        txt.includes("festa") || txt.includes("carnaval") ||
+        txt.includes("junina") || txt.includes("bumba meu boi") ||
+        txt.includes("cirio") || txt.includes("parintins") ||
+        txt.includes("sao joao") || txt.includes("reisado") ||
+        txt.includes("congada")
+    ) return "festas";
+
+    if (
+        txt.includes("indigena") || txt.includes("tupi") ||
+        txt.includes("grafismo") || txt.includes("cestaria") ||
+        txt.includes("pintura corporal") || txt.includes("aldeia")
+    ) return "indigena";
+
+    if (
+        txt.includes("afro") || txt.includes("quilombo") ||
+        txt.includes("orixa") || txt.includes("capoeira") ||
+        txt.includes("maracatu")
+    ) return "afro";
+
+    if (
+        txt.includes("atividade") || txt.includes("oficina") ||
+        txt.includes("brincadeira") || txt.includes("desafio artistico")
+    ) return "atividades";
+
+    if (
+        txt.includes("oi") || txt.includes("ola") ||
+        txt.includes("olá") || txt.includes("bom dia") ||
+        txt.includes("boa tarde") || txt.includes("boa noite") ||
+        txt.includes("e ai") || txt.includes("oie")
+    ) return "saudacoes";
+
+    if (
+        txt.includes("tecnica") || txt.includes("jeito") ||
+        txt.includes("maneira") || txt.includes("origami") ||
+        txt.includes("aquarela") || txt.includes("colagem") ||
+        txt.includes("mosaico") || txt.includes("gravura") ||
+        txt.includes("xilogravura") || txt.includes("stencil")
+    ) return "tecnicas";
+
+    if (
+        txt.includes("artista") || txt.includes("pintor") ||
+        txt.includes("van gogh") || txt.includes("tarsila") ||
+        txt.includes("portinari") || txt.includes("picasso") ||
+        txt.includes("monet") || txt.includes("dali") ||
+        txt.includes("frida") || txt.includes("michelangelo") ||
+        txt.includes("da vinci") || txt.includes("duchamp") ||
+        txt.includes("gaudi")
+    ) return "artista";
+
+    if (
+        txt.includes("imaginação") || txt.includes("imaginacao") ||
+        txt.includes("animal magico") || txt.includes("super heroi") ||
+        txt.includes("monstro") || txt.includes("desenho facil") ||
+        txt.includes("arte engraçada") || txt.includes("arte engraçada")
+    ) return "imaginacao";
+
+    if (txt.includes("piada")) return "piadas";
+
+    if (txt.includes("curiosidade") || txt.includes("sabia que"))
+        return "curiosidades";
+
+    if (
+        txt.includes("triste") || txt.includes("ansioso") ||
+        txt.includes("medo") || txt.includes("raiva") ||
+        txt.includes("alegre") || txt.includes("sozinho") ||
+        txt.includes("frustrado") || txt.includes("timido") ||
+        txt.includes("vergonha") || txt.includes("ciumes") ||
+        txt.includes("saudade")
+    ) return "emocional";
+
+    return null;
     }
     
     function buscarRecursivo(obj, textoNorm) {
@@ -391,20 +462,141 @@ if (tema === "curiosidade" && dataStore.curiosidades) {
         }
         
         // Mapeamento tema -> chaves do dataStore
-        let chavesBusca = [];
-        if (tema === "arte") chavesBusca = ["artes_visuais", "artes", "artistas", "artistas_universais", "historia_arte", "lugares_arte"];
-        else if (tema === "danca") chavesBusca = ["dancas", "ritmos_musicais"];
-        else if (tema === "musica") chavesBusca = ["musica", "ritmos_musicais"];
-        else if (tema === "teatro") chavesBusca = ["teatro"];
-        else if (tema === "folclore") chavesBusca = ["folclore"];
-        else if (tema === "festas") chavesBusca = ["festas_brasileiras"];
-        else if (tema === "indigena") chavesBusca = ["cultura_indigena"];
-        else if (tema === "afro") chavesBusca = ["cultura_afro_brasileira"];
-        else if (tema === "atividade") chavesBusca = ["atividades_artisticas"];
-        else if (tema === "artista") chavesBusca = ["artistas", "artistas_universais"];
-        else {
-            chavesBusca = Object.keys(dataStore).filter(k => k !== "piadas" && k !== "curiosidades" && k !== "emocional");
-        }
+let chavesBusca = [];
+
+if (tema === "arte") {
+    chavesBusca = [
+        "artes_visuais",
+        "arte_tecnicas",
+        "arte_artista",
+        "artistas",
+        "artistas_universais",
+        "historia_arte",
+        "lugares_arte"
+    ];
+}
+
+else if (tema === "danca") {
+    chavesBusca = [
+        "dancas",
+        "ritmos_musicais",
+        "cultura_afro_brasileira",
+        "festas_brasileiras"
+    ];
+}
+
+else if (tema === "musica") {
+    chavesBusca = [
+        "musica",
+        "ritmos_musicais",
+        "cultura_afro_brasileira",
+        "festas_brasileiras"
+    ];
+}
+
+else if (tema === "teatro") {
+    chavesBusca = [
+        "teatro"
+    ];
+}
+
+else if (tema === "folclore") {
+    chavesBusca = [
+        "folclore",
+        "imaginacao_infantil"
+    ];
+}
+
+else if (tema === "festas") {
+    chavesBusca = [
+        "festas_brasileiras",
+        "cultura_afro_brasileira",
+        "dancas",
+        "musica"
+    ];
+}
+
+else if (tema === "indigena") {
+    chavesBusca = [
+        "cultura_indigena",
+        "artes_visuais",
+        "folclore"
+    ];
+}
+
+else if (tema === "afro") {
+    chavesBusca = [
+        "cultura_afro_brasileira",
+        "musica",
+        "dancas",
+        "festas_brasileiras"
+    ];
+}
+
+else if (tema === "atividades") {
+    chavesBusca = [
+        "atividades_artisticas",
+        "arte_tecnicas",
+        "imaginacao_infantil"
+    ];
+}
+
+else if (tema === "artista") {
+    chavesBusca = [
+        "artistas",
+        "artistas_universais",
+        "arte_artista",
+        "historia_arte"
+    ];
+}
+
+else if (tema === "tecnicas") {
+    chavesBusca = [
+        "arte_tecnicas",
+        "artes_visuais",
+        "atividades_artisticas"
+    ];
+}
+
+else if (tema === "saudacoes") {
+    chavesBusca = [
+        "saudacoes"
+    ];
+}
+
+else if (tema === "imaginacao") {
+    chavesBusca = [
+        "imaginacao_infantil",
+        "folclore",
+        "atividades_artisticas"
+    ];
+}
+
+else if (tema === "emocional") {
+    chavesBusca = [
+        "apoio_emocional"
+    ];
+}
+
+else if (tema === "curiosidades") {
+    chavesBusca = [
+        "curiosidades"
+    ];
+}
+
+else if (tema === "piadas") {
+    chavesBusca = [
+        "piadas"
+    ];
+}
+
+else {
+    chavesBusca = Object.keys(dataStore).filter(
+        k =>
+            k !== "piadas" &&
+            k !== "curiosidades"
+    );
+}
         
         for (let chave of chavesBusca) {
             const obj = dataStore[chave];
@@ -417,15 +609,87 @@ if (tema === "curiosidade" && dataStore.curiosidades) {
         }
         
         // Fallback para "o que é"
-        if (texto.includes("o que e") || texto.includes("o que é")) {
-            for (let baseKey of ["musica", "dancas", "teatro", "folclore", "artes_visuais", "cultura_indigena", "cultura_afro_brasileira", "festas_brasileiras"]) {
-                const obj = dataStore[baseKey];
-                if (obj && obj.conceitos && typeof obj.conceitos === "object") {
-                    let conceitoItem = null;
-                    if (baseKey === "dancas" && obj.conceitos.o_que_e_danca) conceitoItem = obj.conceitos.o_que_e_danca;
-                    else if (obj.conceitos.o_que_e) conceitoItem = obj.conceitos.o_que_e;
-                    if (conceitoItem && conceitoItem.explicacao_infantil) {
-                        return conceitoItem.explicacao_infantil;
+if (texto.includes("o que e") || texto.includes("o que é")) {
+
+    for (let baseKey of [
+        "musica",
+        "dancas",
+        "teatro",
+        "folclore",
+        "artes_visuais",
+        "cultura_indigena",
+        "cultura_afro_brasileira",
+        "festas_brasileiras",
+        "historia_arte",
+        "arte_tecnicas",
+        "imaginacao_infantil"
+    ]) {
+
+        const obj = dataStore[baseKey];
+
+        if (obj && typeof obj === "object") {
+
+            let conceitoItem = null;
+
+            // Estruturas específicas
+            if (baseKey === "dancas" && obj.conceitos?.o_que_e_danca) {
+                conceitoItem = obj.conceitos.o_que_e_danca;
+            }
+
+            else if (baseKey === "musica" && obj.o_que_e_musica) {
+                conceitoItem = obj.o_que_e_musica;
+            }
+
+            else if (baseKey === "teatro" && obj.o_que_e_teatro) {
+                conceitoItem = obj.o_que_e_teatro;
+            }
+
+            else if (baseKey === "folclore" && obj.o_que_e_folclore) {
+                conceitoItem = obj.o_que_e_folclore;
+            }
+
+            else if (baseKey === "cultura_indigena" && obj.o_que_e) {
+                conceitoItem = obj.o_que_e;
+            }
+
+            else if (baseKey === "cultura_afro_brasileira" && obj.o_que_e) {
+                conceitoItem = obj.o_que_e;
+            }
+
+            else if (baseKey === "festas_brasileiras" && obj.o_que_sao) {
+                conceitoItem = obj.o_que_sao;
+            }
+
+            else if (obj.conceitos?.o_que_e) {
+                conceitoItem = obj.conceitos.o_que_e;
+            }
+
+            else if (obj.o_que_e) {
+                conceitoItem = obj.o_que_e;
+            }
+
+            // Retorno
+            if (conceitoItem) {
+
+                if (conceitoItem.explicacao_infantil) {
+                    return conceitoItem.explicacao_infantil;
+                }
+
+                if (
+                    conceitoItem.explicacao_curta &&
+                    Array.isArray(conceitoItem.explicacao_curta)
+                ) {
+                    return conceitoItem.explicacao_curta[
+                        Math.floor(Math.random() * conceitoItem.explicacao_curta.length)
+                    ];
+                }
+
+                if (
+                    conceitoItem.respostas &&
+                    Array.isArray(conceitoItem.respostas)
+                ) {
+                    return conceitoItem.respostas[
+                        Math.floor(Math.random() * conceitoItem.respostas.length)
                     }
                 }
             }
