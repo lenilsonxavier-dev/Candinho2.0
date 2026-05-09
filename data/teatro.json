@@ -1,69 +1,341 @@
 {
   "o_que_e_teatro": {
+    "tema": "teatro",
+    "subtema": "o_que_e_teatro",
+
     "palavras_chave": [
       "o que e teatro",
       "definicao de teatro",
       "arte teatral",
       "atuacao no palco"
     ],
-    "explicacao_infantil": "O teatro é uma arte onde as pessoas contam histórias usando o corpo, a voz e a atuação. Os atores representam personagens no palco para uma plateia."
+
+    "inicio": [
+      "O teatro transforma histórias em apresentações vivas 🎭",
+      "No teatro, corpo, voz e imaginação trabalham juntos ✨"
+    ],
+
+    "explicacao_curta": [
+      "O teatro é uma arte em que atores representam personagens no palco."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os artistas usam expressão corporal, voz, figurinos e cenários para contar histórias para uma plateia."
+    ],
+
+    "curiosidade": [
+      "O teatro existe há milhares de anos 🌍"
+    ],
+
+    "interacao": [
+      "Que personagem você gostaria de interpretar?"
+    ],
+
+    "atividade": [
+      "Crie uma pequena cena usando diferentes vozes 🎤"
+    ],
+
+    "final": [
+      "No teatro, a imaginação ganha vida no palco 🌟"
+    ],
+
+    "emocao": "expressao",
+    "nivel": "leve"
   },
+
   "elementos_teatro": {
+    "tema": "teatro",
+    "subtema": "elementos_teatro",
+
     "palavras_chave": [
       "elementos do teatro",
       "personagens cenario figurino roteiro",
       "partes do teatro",
       "componentes do teatro"
     ],
-    "explicacao_infantil": "No teatro temos personagens, cenário, figurino e roteiro. Tudo isso ajuda a contar a história de forma divertida e emocionante."
+
+    "inicio": [
+      "Uma peça teatral possui muitos elementos importantes 🎭"
+    ],
+
+    "explicacao_curta": [
+      "Personagens, cenário, figurino e roteiro ajudam a construir a história."
+    ],
+
+    "explicacao_aprofundada": [
+      "Cada elemento contribui para criar emoções, ambientes e ações durante a apresentação."
+    ],
+
+    "curiosidade": [
+      "As roupas dos personagens ajudam a mostrar quem eles são 👗"
+    ],
+
+    "interacao": [
+      "Que tipo de cenário você criaria para uma peça?"
+    ],
+
+    "atividade": [
+      "Desenhe um palco com cenário e personagens 🎨"
+    ],
+
+    "final": [
+      "No teatro, cada detalhe ajuda a contar a história ✨"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
   },
+
   "tipos_teatro": {
+    "tema": "teatro",
+    "subtema": "tipos_teatro",
+
     "palavras_chave": [
       "tipos de teatro",
       "generos teatrais",
       "teatro comedia drama musical infantil"
     ],
-    "explicacao_infantil": "Existem vários tipos de teatro, como comédia, drama, teatro infantil e musical. Cada um conta histórias de um jeito diferente."
+
+    "inicio": [
+      "Existem muitos tipos diferentes de teatro 🎭"
+    ],
+
+    "explicacao_curta": [
+      "Cada gênero teatral conta histórias de um jeito especial."
+    ],
+
+    "explicacao_aprofundada": [
+      "Há peças engraçadas, emocionantes, musicais, infantis e muitas outras formas de apresentação."
+    ],
+
+    "curiosidade": [
+      "Algumas peças misturam humor, música e aventura ao mesmo tempo 🌈"
+    ],
+
+    "interacao": [
+      "Você prefere histórias engraçadas ou emocionantes?"
+    ],
+
+    "atividade": [
+      "Crie o nome de uma peça teatral inventada ✏️"
+    ],
+
+    "final": [
+      "O teatro pode despertar muitos sentimentos 🌟"
+    ],
+
+    "emocao": "diversao",
+    "nivel": "leve"
   },
+
   "teatro_fantoches": {
+    "tema": "teatro",
+    "subtema": "teatro_fantoches",
+
     "palavras_chave": [
       "teatro de fantoches",
       "fantoches teatro",
       "bonecos no teatro"
     ],
-    "explicacao_infantil": "O teatro de fantoches usa bonecos para contar histórias. Eles se movimentam como se estivessem vivos!"
+
+    "inicio": [
+      "Os fantoches parecem ganhar vida nas histórias 🧸"
+    ],
+
+    "explicacao_curta": [
+      "O teatro de fantoches usa bonecos para representar personagens."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os bonecos são movimentados por artistas que criam vozes e ações divertidas."
+    ],
+
+    "curiosidade": [
+      "Os fantoches podem ser feitos de papel, tecido e até meia ✂️"
+    ],
+
+    "interacao": [
+      "Que personagem você criaria em um fantoche?"
+    ],
+
+    "atividade": [
+      "Faça um fantoche usando papel ou meia 🎨"
+    ],
+
+    "final": [
+      "Os fantoches transformam brincadeiras em teatro ✨"
+    ],
+
+    "emocao": "diversao",
+    "nivel": "leve"
   },
+
   "teatro_sombras": {
+    "tema": "teatro",
+    "subtema": "teatro_sombras",
+
     "palavras_chave": [
       "teatro de sombras",
       "sombras teatro",
       "luz e sombra teatro"
     ],
-    "explicacao_infantil": "O teatro de sombras usa luz e formas para criar imagens na parede. As histórias aparecem como sombras em movimento."
+
+    "inicio": [
+      "O teatro de sombras cria imagens mágicas com luz 🌙"
+    ],
+
+    "explicacao_curta": [
+      "As histórias aparecem como sombras projetadas em uma tela."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os artistas movimentam figuras entre a luz e a parede para criar cenas."
+    ],
+
+    "curiosidade": [
+      "Até as mãos podem virar personagens no teatro de sombras ✋"
+    ],
+
+    "interacao": [
+      "Você já tentou criar sombras usando uma lanterna?"
+    ],
+
+    "atividade": [
+      "Faça animais usando sombras das mãos 🐰"
+    ],
+
+    "final": [
+      "Luz e sombra também podem contar histórias ✨"
+    ],
+
+    "emocao": "misterio",
+    "nivel": "leve"
   },
+
   "teatro_musical": {
+    "tema": "teatro",
+    "subtema": "teatro_musical",
+
     "palavras_chave": [
       "teatro musical",
       "musical teatro",
       "peca com musica e danca"
     ],
-    "explicacao_infantil": "No teatro musical, os atores cantam, dançam e atuam. A história é contada com música e movimento."
+
+    "inicio": [
+      "No teatro musical, histórias ganham ritmo e movimento 🎶"
+    ],
+
+    "explicacao_curta": [
+      "Os atores cantam, dançam e atuam ao mesmo tempo."
+    ],
+
+    "explicacao_aprofundada": [
+      "A música ajuda a mostrar emoções e tornar as cenas mais animadas."
+    ],
+
+    "curiosidade": [
+      "Alguns musicais possuem coreografias gigantescas 💃"
+    ],
+
+    "interacao": [
+      "Que música você colocaria em um musical?"
+    ],
+
+    "atividade": [
+      "Crie uma cena misturando fala e dança 🎵"
+    ],
+
+    "final": [
+      "O teatro musical transforma histórias em espetáculo 🌟"
+    ],
+
+    "emocao": "animacao",
+    "nivel": "leve"
   },
+
   "ariano_suassuna": {
+    "tema": "teatro",
+    "subtema": "ariano_suassuna",
+
     "palavras_chave": [
       "ariano suassuna",
       "auto da compadecida",
       "teatro nordestino"
     ],
-    "explicacao_infantil": "Ariano Suassuna foi um escritor brasileiro que criou peças divertidas e cheias de cultura nordestina, como O Auto da Compadecida."
+
+    "inicio": [
+      "Ariano Suassuna valorizou muito a cultura brasileira 🌵"
+    ],
+
+    "explicacao_curta": [
+      "Ele escreveu peças divertidas inspiradas no Nordeste."
+    ],
+
+    "explicacao_aprofundada": [
+      "Suas histórias misturam humor, aventura e elementos da cultura popular brasileira."
+    ],
+
+    "curiosidade": [
+      "O Auto da Compadecida é uma de suas obras mais conhecidas 📚"
+    ],
+
+    "interacao": [
+      "Você gosta de histórias engraçadas?"
+    ],
+
+    "atividade": [
+      "Crie um personagem inspirado na cultura brasileira 🎨"
+    ],
+
+    "final": [
+      "A cultura popular pode inspirar grandes histórias ✨"
+    ],
+
+    "emocao": "diversao",
+    "nivel": "leve"
   },
+
   "william_shakespeare": {
+    "tema": "teatro",
+    "subtema": "william_shakespeare",
+
     "palavras_chave": [
       "shakespeare",
       "william shakespeare",
       "romeu e julieta",
       "autor de teatro"
     ],
-    "explicacao_infantil": "William Shakespeare foi um grande autor de teatro. Ele escreveu histórias famosas como Romeu e Julieta."
+
+    "inicio": [
+      "William Shakespeare escreveu histórias famosas do teatro 🎭"
+    ],
+
+    "explicacao_curta": [
+      "Ele criou peças cheias de aventura, humor e emoção."
+    ],
+
+    "explicacao_aprofundada": [
+      "Suas histórias foram apresentadas em muitos países e continuam conhecidas até hoje."
+    ],
+
+    "curiosidade": [
+      "Romeu e Julieta é uma das histórias mais famosas de Shakespeare 🌹"
+    ],
+
+    "interacao": [
+      "Você gostaria de criar uma peça teatral?"
+    ],
+
+    "atividade": [
+      "Invente um diálogo entre dois personagens ✏️"
+    ],
+
+    "final": [
+      "O teatro ajuda histórias a atravessarem o tempo 🌍"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
   }
 }
