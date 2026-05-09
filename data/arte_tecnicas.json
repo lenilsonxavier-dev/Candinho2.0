@@ -231,5 +231,422 @@
 
     "emocao": "diversao",
     "nivel": "leve"
+  },
+  {
+  "origami": {
+    "tema": "tecnicas_artisticas",
+    "subtema": "origami",
+
+    "palavras_chave": [
+      "origami",
+      "dobradura japonesa",
+      "dobrar papel"
+    ],
+
+    "inicio": [
+      "O origami transforma papel em formas incríveis 🦢"
+    ],
+
+    "explicacao_curta": [
+      "Essa técnica usa dobras para criar figuras."
+    ],
+
+    "explicacao_aprofundada": [
+      "Com paciência e criatividade, o papel pode virar animais, flores e objetos."
+    ],
+
+    "curiosidade": [
+      "O origami nasceu no Japão 🇯🇵"
+    ],
+
+    "interacao": [
+      "Que animal você gostaria de criar com papel?"
+    ],
+
+    "atividade": [
+      "Faça uma dobradura simples usando papel colorido ✂️"
+    ],
+
+    "final": [
+      "Uma folha pode esconder muitas possibilidades ✨"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
+  },
+
+  "mosaico": {
+    "tema": "tecnicas_artisticas",
+    "subtema": "mosaico",
+
+    "palavras_chave": [
+      "mosaico",
+      "arte mosaico"
+    ],
+
+    "inicio": [
+      "O mosaico cria imagens usando pequenas peças coloridas 🟦"
+    ],
+
+    "explicacao_curta": [
+      "As figuras são montadas juntando pedacinhos."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os artistas usam pedras, papéis, azulejos e outros materiais para formar desenhos."
+    ],
+
+    "curiosidade": [
+      "Muitos mosaicos antigos decoravam igrejas e construções ✨"
+    ],
+
+    "interacao": [
+      "Que figura você montaria usando pedacinhos?"
+    ],
+
+    "atividade": [
+      "Monte desenhos com recortes coloridos ✂️"
+    ],
+
+    "final": [
+      "Pequenas partes podem formar grandes imagens 🌈"
+    ],
+
+    "emocao": "organizacao",
+    "nivel": "leve"
+  },
+
+  "xilogravura": {
+    "tema": "tecnicas_artisticas",
+    "subtema": "xilogravura",
+
+    "palavras_chave": [
+      "xilogravura",
+      "gravura madeira",
+      "cordel xilogravura"
+    ],
+
+    "inicio": [
+      "A xilogravura cria imagens usando madeira 🪵"
+    ],
+
+    "explicacao_curta": [
+      "Os desenhos são gravados e depois impressos no papel."
+    ],
+
+    "explicacao_aprofundada": [
+      "Essa técnica aparece muito em capas de literatura de cordel."
+    ],
+
+    "curiosidade": [
+      "A xilogravura possui linhas fortes e marcantes ✨"
+    ],
+
+    "interacao": [
+      "Você gosta de desenhos com contrastes fortes?"
+    ],
+
+    "atividade": [
+      "Crie desenhos usando carimbos caseiros 🎨"
+    ],
+
+    "final": [
+      "A arte também pode nascer da impressão 🌟"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
+  },
+
+  "gravura": {
+    "tema": "tecnicas_artisticas",
+    "subtema": "gravura",
+
+    "palavras_chave": [
+      "gravura",
+      "arte impressa"
+    ],
+
+    "inicio": [
+      "A gravura permite repetir imagens muitas vezes 🖼️"
+    ],
+
+    "explicacao_curta": [
+      "Os artistas criam matrizes para imprimir desenhos."
+    ],
+
+    "explicacao_aprofundada": [
+      "A imagem pode ser transferida para papel usando tinta e pressão."
+    ],
+
+    "curiosidade": [
+      "Existem vários tipos diferentes de gravura ✨"
+    ],
+
+    "interacao": [
+      "Você gostaria de criar seus próprios carimbos?"
+    ],
+
+    "atividade": [
+      "Faça impressões usando folhas ou objetos 🍃"
+    ],
+
+    "final": [
+      "Uma imagem pode ganhar várias cópias artísticas 🌈"
+    ],
+
+    "emocao": "exploracao",
+    "nivel": "leve"
+  },
+
+  "escultura_argila": {
+    "tema": "tecnicas_artisticas",
+    "subtema": "escultura_argila",
+
+    "palavras_chave": [
+      "argila",
+      "escultura argila",
+      "modelagem"
+    ],
+
+    "inicio": [
+      "A argila permite modelar formas com as mãos ✋"
+    ],
+
+    "explicacao_curta": [
+      "Ela pode virar personagens, vasos e esculturas."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os artistas apertam, moldam e criam formas usando materiais macios."
+    ],
+
+    "curiosidade": [
+      "Muitas culturas antigas criavam objetos de argila 🏺"
+    ],
+
+    "interacao": [
+      "O que você modelaria usando massinha?"
+    ],
+
+    "atividade": [
+      "Crie animais usando argila ou massinha 🎨"
+    ],
+
+    "final": [
+      "As mãos também podem desenhar no espaço ✨"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
+  },
+
+  "papietagem": {
+    "tema": "tecnicas_artisticas",
+    "subtema": "papietagem",
+
+    "palavras_chave": [
+      "papietagem",
+      "papel mache",
+      "papel colado"
+    ],
+
+    "inicio": [
+      "A papietagem usa papel para criar esculturas 📜"
+    ],
+
+    "explicacao_curta": [
+      "Os pedaços de papel são colados em camadas."
+    ],
+
+    "explicacao_aprofundada": [
+      "Depois de seco, o material fica firme e pode ser pintado."
+    ],
+
+    "curiosidade": [
+      "Máscaras e bonecos podem ser feitos com papietagem 🎭"
+    ],
+
+    "interacao": [
+      "Que personagem você criaria?"
+    ],
+
+    "atividade": [
+      "Cubra um balão com papel e cola ✂️"
+    ],
+
+    "final": [
+      "O papel pode virar esculturas surpreendentes 🌟"
+    ],
+
+    "emocao": "imaginacao",
+    "nivel": "leve"
+  },
+
+  "stencil": {
+    "tema": "tecnicas_artisticas",
+    "subtema": "stencil",
+
+    "palavras_chave": [
+      "stencil",
+      "molde pintura"
+    ],
+
+    "inicio": [
+      "O stencil usa moldes para criar desenhos repetidos 🎨"
+    ],
+
+    "explicacao_curta": [
+      "Os artistas pintam sobre formas vazadas."
+    ],
+
+    "explicacao_aprofundada": [
+      "Essa técnica ajuda a criar imagens rápidas e organizadas."
+    ],
+
+    "curiosidade": [
+      "O stencil aparece muito na arte urbana 🌆"
+    ],
+
+    "interacao": [
+      "Que forma você repetiria em um mural?"
+    ],
+
+    "atividade": [
+      "Crie moldes simples com papel ✂️"
+    ],
+
+    "final": [
+      "Os moldes podem ajudar a espalhar criatividade ✨"
+    ],
+
+    "emocao": "organizacao",
+    "nivel": "leve"
+  },
+
+  "colagem": {
+    "tema": "tecnicas_artisticas",
+    "subtema": "colagem",
+
+    "palavras_chave": [
+      "colagem",
+      "recorte",
+      "papel colado"
+    ],
+
+    "inicio": [
+      "A colagem junta imagens e materiais diferentes ✂️"
+    ],
+
+    "explicacao_curta": [
+      "Os artistas montam figuras usando recortes."
+    ],
+
+    "explicacao_aprofundada": [
+      "Papéis, revistas, tecidos e folhas podem virar arte."
+    ],
+
+    "curiosidade": [
+      "A colagem mistura textura, cor e criatividade 🌈"
+    ],
+
+    "interacao": [
+      "Que materiais você usaria em uma colagem?"
+    ],
+
+    "atividade": [
+      "Monte personagens usando recortes 🎨"
+    ],
+
+    "final": [
+      "Peças diferentes podem criar novas imagens ✨"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
+  },
+
+  "aquarela": {
+    "tema": "tecnicas_artisticas",
+    "subtema": "aquarela",
+
+    "palavras_chave": [
+      "aquarela",
+      "tinta aguada"
+    ],
+
+    "inicio": [
+      "A aquarela mistura água e cor 💧"
+    ],
+
+    "explicacao_curta": [
+      "As tintas criam efeitos suaves e transparentes."
+    ],
+
+    "explicacao_aprofundada": [
+      "A água espalha as cores formando manchas leves e delicadas."
+    ],
+
+    "curiosidade": [
+      "As cores podem se misturar diretamente no papel 🌈"
+    ],
+
+    "interacao": [
+      "Que cores você misturaria primeiro?"
+    ],
+
+    "atividade": [
+      "Faça manchas coloridas usando bastante água 🎨"
+    ],
+
+    "final": [
+      "A água pode transformar a pintura em magia ✨"
+    ],
+
+    "emocao": "leveza",
+    "nivel": "leve"
+  },
+
+  "arte_reciclavel": {
+    "tema": "tecnicas_artisticas",
+    "subtema": "arte_reciclavel",
+
+    "palavras_chave": [
+      "arte reciclavel",
+      "arte com reciclados",
+      "reciclagem artistica"
+    ],
+
+    "inicio": [
+      "A arte reciclável transforma objetos usados em criatividade ♻️"
+    ],
+
+    "explicacao_curta": [
+      "Materiais reciclados podem virar brinquedos e esculturas."
+    ],
+
+    "explicacao_aprofundada": [
+      "Caixas, garrafas e tampinhas ganham novos usos através da arte."
+    ],
+
+    "curiosidade": [
+      "Muitos artistas usam materiais recicláveis em suas obras 🌍"
+    ],
+
+    "interacao": [
+      "Que objeto reciclado você transformaria?"
+    ],
+
+    "atividade": [
+      "Crie personagens usando embalagens vazias 🎨"
+    ],
+
+    "final": [
+      "A criatividade também ajuda a cuidar do planeta 🌿"
+    ],
+
+    "emocao": "consciencia",
+    "nivel": "leve"
+    
   }
 }
