@@ -1,94 +1,801 @@
 {
   "danca": {
+
     "conceitos": {
+
       "o_que_e": {
-        "palavras_chave": ["o que e danca", "definicao de danca", "conceito de danca", "o que e a danca"],
-        "explicacao_infantil": "Dançar é usar o corpo para mostrar ideias e sentimentos. Pode ser com música ou só com movimento. É como contar uma história sem falar!"
+        "tema": "dancas",
+        "subtema": "o_que_e_danca",
+
+        "palavras_chave": [
+          "o que e danca",
+          "definicao de danca",
+          "conceito de danca",
+          "o que e a danca"
+        ],
+
+        "inicio": [
+          "Dançar é contar histórias usando o corpo 💃",
+          "A dança transforma movimentos em expressão ✨"
+        ],
+
+        "explicacao_curta": [
+          "A dança usa movimentos para mostrar ideias e sentimentos."
+        ],
+
+        "explicacao_aprofundada": [
+          "As pessoas dançam em festas, celebrações e apresentações artísticas há milhares de anos."
+        ],
+
+        "curiosidade": [
+          "Cada cultura possui danças com ritmos e movimentos diferentes 🌎"
+        ],
+
+        "interacao": [
+          "Você gosta mais de dançar rápido ou devagar?"
+        ],
+
+        "atividade": [
+          "Crie uma dança usando movimentos inspirados em animais 🐦"
+        ],
+
+        "final": [
+          "A dança faz o corpo se transformar em arte 🌈"
+        ],
+
+        "emocao": "alegria",
+        "nivel": "leve"
       },
+
       "elementos": {
-        "palavras_chave": ["elementos da danca", "partes da danca", "o que tem na danca"],
-        "explicacao_infantil": "Na dança usamos o corpo, nos movemos no espaço, seguimos um ritmo no tempo e colocamos energia nos movimentos. É como brincar com o corpo!"
+        "tema": "dancas",
+        "subtema": "elementos_danca",
+
+        "palavras_chave": [
+          "elementos da danca",
+          "partes da danca",
+          "o que tem na danca"
+        ],
+
+        "inicio": [
+          "A dança mistura corpo, espaço, ritmo e energia ✨"
+        ],
+
+        "explicacao_curta": [
+          "Na dança usamos movimentos, ritmo e expressão corporal."
+        ],
+
+        "explicacao_aprofundada": [
+          "Os movimentos podem ser rápidos, suaves, fortes ou leves, dependendo da dança."
+        ],
+
+        "curiosidade": [
+          "Até o silêncio pode fazer parte de uma dança 🌙"
+        ],
+
+        "interacao": [
+          "Que movimento combina mais com alegria para você?"
+        ],
+
+        "atividade": [
+          "Faça movimentos lentos e depois rápidos 🎵"
+        ],
+
+        "final": [
+          "Cada corpo possui um jeito único de dançar 🌟"
+        ],
+
+        "emocao": "expressao",
+        "nivel": "leve"
       },
+
       "passos": {
-        "palavras_chave": ["passos de danca", "movimentos de danca", "sequencia de passos"],
-        "explicacao_infantil": "Passos de dança são movimentos organizados em sequência. Quando juntamos vários passos, criamos uma dança completa!"
-      },
-      "tipos_geral": {
-        "palavras_chave": ["tipos de danca", "quais dancas existem", "exemplos de danca"],
-        "explicacao_infantil": "Existem muitos tipos de dança! Algumas são antigas, outras modernas. Cada uma tem um jeito diferente de se mover e se expressar."
+        "tema": "dancas",
+        "subtema": "passos_danca",
+
+        "palavras_chave": [
+          "passos de danca",
+          "movimentos de danca",
+          "sequencia de passos"
+        ],
+
+        "inicio": [
+          "Os passos criam o caminho da dança 👣"
+        ],
+
+        "explicacao_curta": [
+          "Passos de dança são movimentos organizados em sequência."
+        ],
+
+        "explicacao_aprofundada": [
+          "Quando vários passos são combinados, nasce uma coreografia."
+        ],
+
+        "curiosidade": [
+          "Algumas coreografias possuem centenas de movimentos diferentes ✨"
+        ],
+
+        "interacao": [
+          "Você consegue inventar três passos diferentes?"
+        ],
+
+        "atividade": [
+          "Crie uma pequena sequência com palmas e giros 💫"
+        ],
+
+        "final": [
+          "Cada passo ajuda a construir a dança 🌈"
+        ],
+
+        "emocao": "criatividade",
+        "nivel": "leve"
       }
     },
 
     "tipos": {
+
       "bale": {
-        "palavras_chave": ["bale", "bale classico"],
-        "explicacao_infantil": "O balé é uma dança elegante, com movimentos suaves, giros e saltos. Os dançarinos treinam bastante para ficar leves como se estivessem flutuando!"
+        "tema": "dancas",
+        "subtema": "bale",
+
+        "palavras_chave": [
+          "bale",
+          "bale classico"
+        ],
+
+        "inicio": [
+          "O balé parece uma dança flutuando no ar 🩰"
+        ],
+
+        "explicacao_curta": [
+          "O balé possui movimentos suaves, giros e saltos."
+        ],
+
+        "explicacao_aprofundada": [
+          "Os dançarinos treinam equilíbrio, postura e precisão nos movimentos."
+        ],
+
+        "curiosidade": [
+          "As sapatilhas ajudam os bailarinos a fazer movimentos delicados ✨"
+        ],
+
+        "interacao": [
+          "Você gostaria de aprender um giro de balé?"
+        ],
+
+        "atividade": [
+          "Tente caminhar na ponta dos pés 🩰"
+        ],
+
+        "final": [
+          "O balé mistura leveza, música e disciplina 🌙"
+        ],
+
+        "emocao": "leveza",
+        "nivel": "leve"
       },
+
       "hip_hop": {
-        "palavras_chave": ["hip hop", "break", "street dance"],
-        "explicacao_infantil": "O hip hop é uma dança moderna com movimentos livres e cheios de atitude. Cada pessoa pode criar seu próprio estilo!"
-      },
-      "funk": {
-        "palavras_chave": ["funk", "funk brasileiro"],
-        "explicacao_infantil": "O funk é uma dança brasileira com batidas fortes e movimentos marcantes. É muito presente na cultura jovem e nas festas."
-      },
-      "danca_classica": {
-        "palavras_chave": ["danca classica"],
-        "explicacao_infantil": "A dança clássica segue regras e movimentos bem treinados, como no balé. Ela busca precisão e beleza nos movimentos."
-      },
-      "danca_salao": {
-        "palavras_chave": ["danca de salao", "salao"],
-        "explicacao_infantil": "Na dança de salão, duas pessoas dançam juntas. Elas seguem o ritmo da música e se movimentam em parceria."
-      },
-      "danca_contemporanea": {
-        "palavras_chave": ["danca contemporanea", "contemporanea"],
-        "explicacao_infantil": "A dança contemporânea é livre e criativa. Os movimentos podem ser diferentes e mostram sentimentos e ideias."
+        "tema": "dancas",
+        "subtema": "hip_hop",
+
+        "palavras_chave": [
+          "hip hop",
+          "break",
+          "street dance"
+        ],
+
+        "inicio": [
+          "O hip hop é cheio de energia e atitude 🎧"
+        ],
+
+        "explicacao_curta": [
+          "É uma dança urbana com movimentos livres e criativos."
+        ],
+
+        "explicacao_aprofundada": [
+          "No hip hop cada pessoa pode criar passos e mostrar seu próprio estilo."
+        ],
+
+        "curiosidade": [
+          "O breakdance possui giros e movimentos acrobáticos incríveis 🔥"
+        ],
+
+        "interacao": [
+          "Que movimento você inventaria em uma dança de hip hop?"
+        ],
+
+        "atividade": [
+          "Crie uma sequência com passos rápidos e pausas 🎵"
+        ],
+
+        "final": [
+          "O hip hop transforma ritmo em expressão 🌟"
+        ],
+
+        "emocao": "energia",
+        "nivel": "leve"
       },
 
       "frevo": {
-        "palavras_chave": ["frevo", "pernambuco", "sombrinha"],
-        "explicacao_infantil": "O frevo é uma dança muito rápida de Pernambuco. As pessoas usam sombrinhas coloridas e fazem movimentos cheios de energia!"
+        "tema": "dancas",
+        "subtema": "frevo",
+
+        "palavras_chave": [
+          "frevo",
+          "pernambuco",
+          "sombrinha"
+        ],
+
+        "inicio": [
+          "O frevo é uma explosão de cores e movimentos 🎉"
+        ],
+
+        "explicacao_curta": [
+          "É uma dança rápida e cheia de energia de Pernambuco."
+        ],
+
+        "explicacao_aprofundada": [
+          "Os dançarinos fazem saltos, giros e movimentos ágeis usando sombrinhas coloridas."
+        ],
+
+        "curiosidade": [
+          "O frevo é considerado patrimônio cultural brasileiro 🌈"
+        ],
+
+        "interacao": [
+          "Você conseguiria dançar segurando uma sombrinha?"
+        ],
+
+        "atividade": [
+          "Crie uma mini sombrinha colorida 🎨"
+        ],
+
+        "final": [
+          "O frevo faz as ruas parecerem festas dançantes 🌟"
+        ],
+
+        "emocao": "animacao",
+        "nivel": "leve"
       },
-      "maracatu": {
-        "palavras_chave": ["maracatu", "afro brasileira", "cortejo"],
-        "explicacao_infantil": "O maracatu é uma dança com tambores fortes e roupas coloridas. Parece um desfile com reis e rainhas da cultura afro-brasileira!"
-      },
-      "cavalo_marinho": {
-        "palavras_chave": ["cavalo marinho"],
-        "explicacao_infantil": "O cavalo-marinho mistura dança, música e teatro. Tem personagens, fantasias e muita brincadeira!"
-      },
+
       "ciranda": {
-        "palavras_chave": ["ciranda", "roda"],
-        "explicacao_infantil": "Na ciranda, as pessoas dão as mãos e dançam em roda. É uma dança coletiva e muito alegre!"
+        "tema": "dancas",
+        "subtema": "ciranda",
+
+        "palavras_chave": [
+          "ciranda",
+          "roda"
+        ],
+
+        "inicio": [
+          "A ciranda reúne pessoas em roda 🤝"
+        ],
+
+        "explicacao_curta": [
+          "As pessoas dão as mãos e dançam juntas."
+        ],
+
+        "explicacao_aprofundada": [
+          "A ciranda valoriza união, música e participação coletiva."
+        ],
+
+        "curiosidade": [
+          "A ciranda é muito conhecida nas praias de Pernambuco 🌊"
+        ],
+
+        "interacao": [
+          "Você gosta de brincadeiras em roda?"
+        ],
+
+        "atividade": [
+          "Faça uma roda com amigos e invente passos simples 🎵"
+        ],
+
+        "final": [
+          "A ciranda transforma dança em amizade 🌈"
+        ],
+
+        "emocao": "uniao",
+        "nivel": "leve"
       },
+
       "carimbo": {
-        "palavras_chave": ["carimbo", "para"],
-        "explicacao_infantil": "O carimbó é uma dança do Pará com movimentos leves e giratórios. As roupas são coloridas e a música é animada!"
-      },
-      "jongo": {
-        "palavras_chave": ["jongo", "tambores"],
-        "explicacao_infantil": "O jongo é uma dança com tambores e canto. As pessoas dançam em roda e contam histórias com o corpo e a música."
-      },
-      "catira": {
-        "palavras_chave": ["catira", "sapateado brasileiro"],
-        "explicacao_infantil": "Na catira, as pessoas batem palmas e os pés no ritmo da música. É como um sapateado brasileiro!"
-      },
-      "fandango": {
-        "palavras_chave": ["fandango", "sul"],
-        "explicacao_infantil": "O fandango é uma dança do sul do Brasil com sapateado e música animada. Os dançarinos marcam o ritmo com os pés."
-      },
-      "congada": {
-        "palavras_chave": ["congada", "afro brasileira", "cortejo"],
-        "explicacao_infantil": "A congada mistura dança, música e tradição afro-brasileira. Tem cortejos e celebrações cheias de significado."
-      },
-      "caboclinho": {
-        "palavras_chave": ["caboclinho", "indigena"],
-        "explicacao_infantil": "O caboclinho é uma dança inspirada nos povos indígenas. Os movimentos são rápidos e lembram guerreiros em ação."
-      },
-      "coco_pernambucano": {
-        "palavras_chave": ["coco", "coco pernambucano"],
-        "explicacao_infantil": "O coco pernambucano é uma dança com batidas de pés e palmas. As pessoas cantam e dançam juntas com muita animação!"
+        "tema": "dancas",
+        "subtema": "carimbo",
+
+        "palavras_chave": [
+          "carimbo",
+          "para"
+        ],
+
+        "inicio": [
+          "O carimbó possui ritmo alegre e giratório 🌿"
+        ],
+
+        "explicacao_curta": [
+          "É uma dança tradicional do Pará."
+        ],
+
+        "explicacao_aprofundada": [
+          "Os movimentos leves acompanham músicas animadas e roupas coloridas."
+        ],
+
+        "curiosidade": [
+          "O carimbó mistura influências indígenas, africanas e europeias ✨"
+        ],
+
+        "interacao": [
+          "Você gosta de danças com giros?"
+        ],
+
+        "atividade": [
+          "Faça movimentos circulares acompanhando uma música 🎶"
+        ],
+
+        "final": [
+          "O carimbó espalha ritmo e alegria 🌞"
+        ],
+
+        "emocao": "alegria",
+        "nivel": "leve"
+        },
+
+  "funk": {
+    "tema": "dancas",
+    "subtema": "funk",
+
+    "palavras_chave": [
+      "funk",
+      "funk brasileiro"
+    ],
+
+    "inicio": [
+      "O funk possui batidas fortes e cheias de energia 🔊"
+    ],
+
+    "explicacao_curta": [
+      "O funk é uma dança brasileira muito presente nas festas e na cultura jovem."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os movimentos acompanham ritmos marcantes e permitem muita criatividade."
+    ],
+
+    "curiosidade": [
+      "O funk brasileiro nasceu nas comunidades urbanas 🎶"
+    ],
+
+    "interacao": [
+      "Você consegue criar um passo divertido de funk?"
+    ],
+
+    "atividade": [
+      "Monte uma sequência de movimentos rápidos 🎵"
+    ],
+
+    "final": [
+      "A dança pode transformar ritmo em expressão 🌈"
+    ],
+
+    "emocao": "energia",
+    "nivel": "leve"
+  },
+
+  "danca_classica": {
+    "tema": "dancas",
+    "subtema": "danca_classica",
+
+    "palavras_chave": [
+      "danca classica"
+    ],
+
+    "inicio": [
+      "A dança clássica busca beleza e precisão ✨"
+    ],
+
+    "explicacao_curta": [
+      "Ela possui movimentos treinados e organizados."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os dançarinos praticam equilíbrio, postura e movimentos delicados."
+    ],
+
+    "interacao": [
+      "Você gostaria de aprender movimentos suaves?"
+    ],
+
+    "atividade": [
+      "Experimente andar lentamente na ponta dos pés 🩰"
+    ],
+
+    "final": [
+      "A dança clássica mistura disciplina e arte 🌙"
+    ],
+
+    "emocao": "leveza",
+    "nivel": "leve"
+  },
+
+  "danca_salao": {
+    "tema": "dancas",
+    "subtema": "danca_salao",
+
+    "palavras_chave": [
+      "danca de salao",
+      "salao"
+    ],
+
+    "inicio": [
+      "Na dança de salão duas pessoas dançam juntas 💃🕺"
+    ],
+
+    "explicacao_curta": [
+      "Os parceiros acompanham o ritmo da música."
+    ],
+
+    "explicacao_aprofundada": [
+      "A dança de salão valoriza parceria, coordenação e sintonia."
+    ],
+
+    "interacao": [
+      "Você já tentou acompanhar passos com outra pessoa?"
+    ],
+
+    "atividade": [
+      "Faça movimentos em dupla seguindo uma música 🎵"
+    ],
+
+    "final": [
+      "Dançar junto cria conexão e diversão 🌟"
+    ],
+
+    "emocao": "uniao",
+    "nivel": "leve"
+  },
+
+  "danca_contemporanea": {
+    "tema": "dancas",
+    "subtema": "danca_contemporanea",
+
+    "palavras_chave": [
+      "danca contemporanea",
+      "contemporanea"
+    ],
+
+    "inicio": [
+      "A dança contemporânea mistura liberdade e criatividade 🌈"
+    ],
+
+    "explicacao_curta": [
+      "Os movimentos podem ser diferentes e cheios de expressão."
+    ],
+
+    "explicacao_aprofundada": [
+      "Ela permite criar movimentos livres inspirados em sentimentos e ideias."
+    ],
+
+    "interacao": [
+      "Que emoção você transformaria em dança?"
+    ],
+
+    "atividade": [
+      "Dance imaginando vento, chuva ou ondas 🌊"
+    ],
+
+    "final": [
+      "Na dança contemporânea o corpo vira imaginação ✨"
+    ],
+
+    "emocao": "expressao",
+    "nivel": "leve"
+  },
+
+  "maracatu": {
+    "tema": "dancas",
+    "subtema": "maracatu",
+
+    "palavras_chave": [
+      "maracatu",
+      "afro brasileira",
+      "cortejo"
+    ],
+
+    "inicio": [
+      "O maracatu mistura dança, música e tradição afro-brasileira 🥁"
+    ],
+
+    "explicacao_curta": [
+      "Os cortejos possuem tambores fortes e roupas coloridas."
+    ],
+
+    "explicacao_aprofundada": [
+      "O maracatu representa reis, rainhas e elementos culturais afro-brasileiros."
+    ],
+
+    "curiosidade": [
+      "Os tambores do maracatu criam ritmos poderosos 🔥"
+    ],
+
+    "interacao": [
+      "Você gosta de músicas com tambores?"
+    ],
+
+    "atividade": [
+      "Crie um ritmo usando palmas e batidas 🥁"
+    ],
+
+    "final": [
+      "O maracatu une ritmo, história e celebração 🌟"
+    ],
+
+    "emocao": "energia",
+    "nivel": "leve"
+  },
+
+  "cavalo_marinho": {
+    "tema": "dancas",
+    "subtema": "cavalo_marinho",
+
+    "palavras_chave": [
+      "cavalo marinho"
+    ],
+
+    "inicio": [
+      "O cavalo-marinho mistura dança, música e teatro 🎭"
+    ],
+
+    "explicacao_curta": [
+      "A apresentação possui personagens, fantasias e brincadeiras."
+    ],
+
+    "explicacao_aprofundada": [
+      "Essa manifestação cultural combina humor, ritmo e representação teatral."
+    ],
+
+    "curiosidade": [
+      "O cavalo-marinho é muito tradicional em Pernambuco 🌿"
+    ],
+
+    "interacao": [
+      "Você gostaria de usar fantasias em uma apresentação?"
+    ],
+
+    "atividade": [
+      "Crie um personagem divertido para uma dança 🎨"
+    ],
+
+    "final": [
+      "O cavalo-marinho transforma cultura em brincadeira ✨"
+    ],
+
+    "emocao": "diversao",
+    "nivel": "leve"
+  },
+
+  "jongo": {
+    "tema": "dancas",
+    "subtema": "jongo",
+
+    "palavras_chave": [
+      "jongo",
+      "tambores"
+    ],
+
+    "inicio": [
+      "O jongo mistura dança, canto e tambores 🥁"
+    ],
+
+    "explicacao_curta": [
+      "As pessoas dançam em roda acompanhando o ritmo."
+    ],
+
+    "explicacao_aprofundada": [
+      "O jongo possui forte ligação com tradições afro-brasileiras."
+    ],
+
+    "interacao": [
+      "Você consegue criar um ritmo usando o corpo?"
+    ],
+
+    "atividade": [
+      "Dance em roda acompanhando palmas 🎵"
+    ],
+
+    "final": [
+      "O jongo mantém tradições culturais vivas 🌿"
+    ],
+
+    "emocao": "uniao",
+    "nivel": "leve"
+  },
+
+  "catira": {
+    "tema": "dancas",
+    "subtema": "catira",
+
+    "palavras_chave": [
+      "catira",
+      "sapateado brasileiro"
+    ],
+
+    "inicio": [
+      "A catira mistura sapateado, palmas e ritmo 👢"
+    ],
+
+    "explicacao_curta": [
+      "Os dançarinos marcam a música com pés e mãos."
+    ],
+
+    "explicacao_aprofundada": [
+      "A dança possui movimentos sincronizados e muito ritmo."
+    ],
+
+    "interacao": [
+      "Você consegue bater palmas no ritmo de uma música?"
+    ],
+
+    "atividade": [
+      "Crie uma sequência de palmas e passos 👏"
+    ],
+
+    "final": [
+      "A catira transforma ritmo em movimento 🌟"
+    ],
+
+    "emocao": "animacao",
+    "nivel": "leve"
+  },
+
+  "fandango": {
+    "tema": "dancas",
+    "subtema": "fandango",
+
+    "palavras_chave": [
+      "fandango",
+      "sul"
+    ],
+
+    "inicio": [
+      "O fandango possui sapateado e música animada 🎻"
+    ],
+
+    "explicacao_curta": [
+      "Essa dança tradicional é muito conhecida no sul do Brasil."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os dançarinos marcam o ritmo usando os pés e movimentos coordenados."
+    ],
+
+    "interacao": [
+      "Você gosta de danças rápidas ou lentas?"
+    ],
+
+    "atividade": [
+      "Experimente marcar ritmos diferentes com os pés 👣"
+    ],
+
+    "final": [
+      "O fandango mistura tradição e alegria 🌈"
+    ],
+
+    "emocao": "alegria",
+    "nivel": "leve"
+  },
+
+  "congada": {
+    "tema": "dancas",
+    "subtema": "congada",
+
+    "palavras_chave": [
+      "congada",
+      "afro brasileira",
+      "cortejo"
+    ],
+
+    "inicio": [
+      "A congada mistura música, dança e tradição afro-brasileira 👑"
+    ],
+
+    "explicacao_curta": [
+      "Ela possui cortejos, cantos e celebrações culturais."
+    ],
+
+    "explicacao_aprofundada": [
+      "A congada mantém histórias e tradições importantes da cultura afro-brasileira."
+    ],
+
+    "interacao": [
+      "Você já viu desfiles culturais com música e dança?"
+    ],
+
+    "atividade": [
+      "Crie coroas e roupas coloridas em um desenho 🎨"
+    ],
+
+    "final": [
+      "A congada celebra memória, cultura e comunidade 🌟"
+    ],
+
+    "emocao": "celebracao",
+    "nivel": "leve"
+  },
+
+  "caboclinho": {
+    "tema": "dancas",
+    "subtema": "caboclinho",
+
+    "palavras_chave": [
+      "caboclinho",
+      "indigena"
+    ],
+
+    "inicio": [
+      "O caboclinho possui movimentos rápidos e cheios de energia 🌿"
+    ],
+
+    "explicacao_curta": [
+      "A dança é inspirada nos povos indígenas."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os movimentos lembram guerreiros em ação acompanhados por música forte."
+    ],
+
+    "interacao": [
+      "Você conseguiria criar movimentos inspirados na natureza?"
+    ],
+
+    "atividade": [
+      "Dance imaginando passos leves pela floresta 🌳"
+    ],
+
+    "final": [
+      "O caboclinho mistura tradição, ritmo e movimento ✨"
+    ],
+
+    "emocao": "energia",
+    "nivel": "leve"
+  },
+
+  "coco_pernambucano": {
+    "tema": "dancas",
+    "subtema": "coco_pernambucano",
+
+    "palavras_chave": [
+      "coco",
+      "coco pernambucano"
+    ],
+
+    "inicio": [
+      "O coco pernambucano é cheio de ritmo e animação 🥥"
+    ],
+
+    "explicacao_curta": [
+      "As pessoas cantam, batem palmas e dançam juntas."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os movimentos acompanham músicas alegres e batidas marcantes."
+    ],
+
+    "interacao": [
+      "Você gosta de músicas com palmas e batidas?"
+    ],
+
+    "atividade": [
+      "Crie ritmos usando pés e mãos 👏👣"
+    ],
+
+    "final": [
+      "O coco transforma música e dança em celebração 🌞"
+    ],
+
+    "emocao": "animacao",
+    "nivel": "leve"
+       }
       }
-    }
   }
 }
