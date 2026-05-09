@@ -697,6 +697,7 @@ if (texto.includes("o que e") || texto.includes("o que é")) {
 
     return null;
 }
+}       
     // ======================= FUNÇÃO RESPONDER (PRIORIDADE INSTANTÂNEA + IA FALLBACK) =======================
     async function responder(pergunta) {
         // 1. Memória (nome, idade, interesses)
@@ -812,7 +813,7 @@ if (texto.includes("o que e") || texto.includes("o que é")) {
         // Não carrega histórico do Firebase (sempre começa do zero)
         // Histórico local é resetado a cada refresh
         historicoMensagens = [];
-        let boasVindas = "Olá! Sou o Candinho, seu amigo artista. Pergunte sobre artistas, dança, história, ou peça uma piada! 🖌️";
+        let boasVindas = "Olá! Sou o Candinho, seu amigo artista. Pergunte sobre artistas, artes...! 🖌️";
         if (nomeUsuario) boasVindas = `Olá, ${nomeUsuario}! Sou o Candinho, seu amigo artista. Vamos criar? 🎨`;
         addMessageToUI(boasVindas, false);
         historicoMensagens.push({ role: "assistant", content: boasVindas });
