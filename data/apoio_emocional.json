@@ -476,5 +476,428 @@
 
     "emocao": "protecao",
     "nivel": "medio"
+  },
+  {
+  "solidao": {
+    "tema": "emocoes_avancadas",
+    "subtema": "solidao",
+
+    "palavras_chave": [
+      "sozinho",
+      "sozinha",
+      "solidao",
+      "sem amigos"
+    ],
+
+    "inicio": [
+      "Às vezes a solidão pode deixar o coração silencioso 🌙"
+    ],
+
+    "explicacao_curta": [
+      "Muitas pessoas sentem solidão em alguns momentos."
+    ],
+
+    "explicacao_aprofundada": [
+      "Conversar, desenhar, brincar ou procurar pessoas de confiança pode ajudar a trazer acolhimento."
+    ],
+
+    "curiosidade": [
+      "Até momentos silenciosos podem ser preenchidos com criatividade 🎨"
+    ],
+
+    "interacao": [
+      "Você gostaria de conversar sobre como está se sentindo?"
+    ],
+
+    "atividade": [
+      "Desenhe um lugar onde você se sentiria acolhido 🌈"
+    ],
+
+    "final": [
+      "Você merece companhia, cuidado e escuta ✨"
+    ],
+
+    "emocao": "acolhimento",
+    "nivel": "medio"
+  },
+
+  "ciumes": {
+    "tema": "emocoes_avancadas",
+    "subtema": "ciumes",
+
+    "palavras_chave": [
+      "ciumes",
+      "com ciumes",
+      "inveja"
+    ],
+
+    "inicio": [
+      "Os ciúmes aparecem quando temos medo de perder atenção 💭"
+    ],
+
+    "explicacao_curta": [
+      "Esse sentimento pode acontecer com muitas pessoas."
+    ],
+
+    "explicacao_aprofundada": [
+      "Conversar com calma e entender os próprios sentimentos ajuda bastante."
+    ],
+
+    "curiosidade": [
+      "Os sentimentos podem mudar quando compartilhamos o que pensamos 🌿"
+    ],
+
+    "interacao": [
+      "Você gostaria de contar o que deixou você assim?"
+    ],
+
+    "atividade": [
+      "Desenhe coisas que fazem você se sentir especial ✨"
+    ],
+
+    "final": [
+      "Cada pessoa possui seu próprio valor 🌟"
+    ],
+
+    "emocao": "reflexao",
+    "nivel": "medio"
+  },
+
+  "culpa": {
+    "tema": "emocoes_avancadas",
+    "subtema": "culpa",
+
+    "palavras_chave": [
+      "culpa",
+      "me sinto culpado",
+      "me sinto culpada"
+    ],
+
+    "inicio": [
+      "Sentir culpa pode ser um sentimento difícil 🌧️"
+    ],
+
+    "explicacao_curta": [
+      "Às vezes erramos e aprendemos com isso."
+    ],
+
+    "explicacao_aprofundada": [
+      "Pedir desculpas, conversar e tentar melhorar ajuda a seguir em frente."
+    ],
+
+    "curiosidade": [
+      "Aprender também faz parte dos erros ✨"
+    ],
+
+    "interacao": [
+      "Você gostaria de falar sobre o que aconteceu?"
+    ],
+
+    "atividade": [
+      "Escreva ou desenhe algo que você aprendeu 🌱"
+    ],
+
+    "final": [
+      "As pessoas podem crescer e mudar aos poucos 🌈"
+    ],
+
+    "emocao": "aprendizado",
+    "nivel": "medio"
+  },
+
+  "saudade": {
+    "tema": "emocoes_avancadas",
+    "subtema": "saudade",
+
+    "palavras_chave": [
+      "saudade",
+      "sentindo falta",
+      "com saudades"
+    ],
+
+    "inicio": [
+      "A saudade aparece quando algo ou alguém faz falta 💛"
+    ],
+
+    "explicacao_curta": [
+      "Ela mostra que algo foi importante para você."
+    ],
+
+    "explicacao_aprofundada": [
+      "Lembranças, desenhos e conversas podem ajudar a guardar momentos especiais."
+    ],
+
+    "curiosidade": [
+      "A palavra saudade existe em português e é conhecida no mundo inteiro 🌎"
+    ],
+
+    "interacao": [
+      "Do que você sente mais saudade?"
+    ],
+
+    "atividade": [
+      "Desenhe uma lembrança feliz ✨"
+    ],
+
+    "final": [
+      "As boas memórias podem continuar no coração 🌈"
+    ],
+
+    "emocao": "carinho",
+    "nivel": "leve"
+  },
+
+  "decepcao": {
+    "tema": "emocoes_avancadas",
+    "subtema": "decepcao",
+
+    "palavras_chave": [
+      "decepcao",
+      "decepcionado",
+      "decepcionada"
+    ],
+
+    "inicio": [
+      "A decepção aparece quando algo não acontece como esperávamos 🌧️"
+    ],
+
+    "explicacao_curta": [
+      "Esse sentimento pode ser triste e confuso."
+    ],
+
+    "explicacao_aprofundada": [
+      "Com o tempo, novas experiências e conversas ajudam a entender melhor as situações."
+    ],
+
+    "curiosidade": [
+      "Até momentos difíceis podem ensinar algo 🌱"
+    ],
+
+    "interacao": [
+      "Você gostaria de contar o que aconteceu?"
+    ],
+
+    "atividade": [
+      "Transforme um rabisco em um desenho bonito 🎨"
+    ],
+
+    "final": [
+      "Novas possibilidades podem surgir depois de dias difíceis ✨"
+    ],
+
+    "emocao": "superacao",
+    "nivel": "medio"
+  },
+
+  "orgulho": {
+    "tema": "emocoes_avancadas",
+    "subtema": "orgulho",
+
+    "palavras_chave": [
+      "orgulho",
+      "orgulhoso",
+      "orgulhosa"
+    ],
+
+    "inicio": [
+      "Sentir orgulho pode trazer alegria e confiança 🌟"
+    ],
+
+    "explicacao_curta": [
+      "Reconhecer suas conquistas é importante."
+    ],
+
+    "explicacao_aprofundada": [
+      "Cada pequeno avanço pode mostrar o quanto você está aprendendo e crescendo."
+    ],
+
+    "curiosidade": [
+      "Grandes mudanças começam com pequenos passos ✨"
+    ],
+
+    "interacao": [
+      "Do que você sente orgulho hoje?"
+    ],
+
+    "atividade": [
+      "Desenhe algo que você aprendeu a fazer 🎨"
+    ],
+
+    "final": [
+      "Valorizar suas conquistas ajuda a fortalecer a confiança 🌈"
+    ],
+
+    "emocao": "confianca",
+    "nivel": "leve"
+  },
+
+  "vergonha": {
+    "tema": "emocoes_avancadas",
+    "subtema": "vergonha",
+
+    "palavras_chave": [
+      "vergonha",
+      "envergonhado",
+      "envergonhada"
+    ],
+
+    "inicio": [
+      "A vergonha pode deixar a gente mais quietinho 🌱"
+    ],
+
+    "explicacao_curta": [
+      "Esse sentimento acontece com muitas pessoas."
+    ],
+
+    "explicacao_aprofundada": [
+      "Falar aos poucos e confiar em pessoas gentis pode ajudar a diminuir a vergonha."
+    ],
+
+    "curiosidade": [
+      "Até artistas famosos já sentiram vergonha 🎭"
+    ],
+
+    "interacao": [
+      "O que faz você se sentir mais confortável?"
+    ],
+
+    "atividade": [
+      "Desenhe um lugar tranquilo e seguro 🌈"
+    ],
+
+    "final": [
+      "Você pode se expressar no seu próprio tempo ✨"
+    ],
+
+    "emocao": "acolhimento",
+    "nivel": "leve"
+  },
+
+  "esperanca": {
+    "tema": "emocoes_avancadas",
+    "subtema": "esperanca",
+
+    "palavras_chave": [
+      "esperanca",
+      "esperançoso",
+      "esperançosa"
+    ],
+
+    "inicio": [
+      "A esperança ajuda a imaginar dias melhores 🌤️"
+    ],
+
+    "explicacao_curta": [
+      "Ela pode trazer coragem e motivação."
+    ],
+
+    "explicacao_aprofundada": [
+      "Mesmo quando algo parece difícil, continuar acreditando pode ajudar a seguir em frente."
+    ],
+
+    "curiosidade": [
+      "Muitas histórias e músicas falam sobre esperança ✨"
+    ],
+
+    "interacao": [
+      "O que faz você sentir esperança?"
+    ],
+
+    "atividade": [
+      "Desenhe como imagina um dia feliz 🌈"
+    ],
+
+    "final": [
+      "Pequenas luzes podem iluminar caminhos grandes 🌟"
+    ],
+
+    "emocao": "inspiracao",
+    "nivel": "leve"
+  },
+
+  "gratidao": {
+    "tema": "emocoes_avancadas",
+    "subtema": "gratidao",
+
+    "palavras_chave": [
+      "gratidao",
+      "grato",
+      "grata",
+      "agradecido"
+    ],
+
+    "inicio": [
+      "A gratidão ajuda a perceber coisas boas do dia 🌻"
+    ],
+
+    "explicacao_curta": [
+      "Agradecer pode fortalecer sentimentos positivos."
+    ],
+
+    "explicacao_aprofundada": [
+      "Pequenos momentos, amizades e conquistas podem trazer sensação de carinho e alegria."
+    ],
+
+    "curiosidade": [
+      "Muitas pessoas gostam de escrever coisas pelas quais são gratas ✨"
+    ],
+
+    "interacao": [
+      "O que deixou seu dia mais especial hoje?"
+    ],
+
+    "atividade": [
+      "Desenhe algo pelo qual você sente gratidão 🎨"
+    ],
+
+    "final": [
+      "Pequenos momentos podem ter grande valor 🌈"
+    ],
+
+    "emocao": "carinho",
+    "nivel": "leve"
+  },
+
+  "empatia": {
+    "tema": "emocoes_avancadas",
+    "subtema": "empatia",
+
+    "palavras_chave": [
+      "empatia",
+      "compreender os outros",
+      "ajudar pessoas"
+    ],
+
+    "inicio": [
+      "A empatia é tentar entender os sentimentos das outras pessoas 🤝"
+    ],
+
+    "explicacao_curta": [
+      "Ela ajuda a criar relações mais gentis."
+    ],
+
+    "explicacao_aprofundada": [
+      "Escutar, respeitar e acolher os sentimentos dos outros fortalece amizades e convivência."
+    ],
+
+    "curiosidade": [
+      "A gentileza pode melhorar o dia de alguém ✨"
+    ],
+
+    "interacao": [
+      "Como você ajuda alguém quando percebe que está triste?"
+    ],
+
+    "atividade": [
+      "Desenhe atitudes gentis entre amigos 🎨"
+    ],
+
+    "final": [
+      "Compreender os outros deixa o mundo mais acolhedor 🌎"
+    ],
+
+    "emocao": "gentileza",
+    "nivel": "leve"
+    
   }
 }
