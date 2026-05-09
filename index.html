@@ -799,10 +799,10 @@ else {
 // FALLBACK "O QUE É"
 // =========================
 
-if (texto.includes("o que e") || texto.includes("o que é")) {
+if (txt.includes("o que e") || txt.includes("o que é")) {
 
     // MÚSICA
-    if (texto.includes("musica")) {
+    if (txt.includes("musica")) {
 
         const item = dataStore.musica?.o_que_e_musica;
 
@@ -813,8 +813,8 @@ if (texto.includes("o que e") || texto.includes("o que é")) {
 
     // DANÇA
     if (
-        texto.includes("danca") ||
-        texto.includes("dança")
+        txt.includes("danca") ||
+        txt.includes("dança")
     ) {
 
         const item = dataStore.dancas?.o_que_e_danca;
@@ -825,7 +825,7 @@ if (texto.includes("o que e") || texto.includes("o que é")) {
     }
 
     // TEATRO
-    if (texto.includes("teatro")) {
+    if (txt.includes("teatro")) {
 
         const item = dataStore.teatro?.o_que_e_teatro;
 
@@ -835,7 +835,7 @@ if (texto.includes("o que e") || texto.includes("o que é")) {
     }
 
     // FOLCLORE
-    if (texto.includes("folclore")) {
+    if (txt.includes("folclore")) {
 
         const item = dataStore.folclore?.o_que_e_folclore;
 
@@ -845,7 +845,7 @@ if (texto.includes("o que e") || texto.includes("o que é")) {
     }
 
     // LINHA
-    if (texto.includes("linha")) {
+    if (txt.includes("linha")) {
 
         const item =
             dataStore.artes_visuais?.artes_visuais?.elementos_basicos?.linha;
@@ -856,7 +856,7 @@ if (texto.includes("o que e") || texto.includes("o que é")) {
     }
 
     // PONTO
-    if (texto.includes("ponto")) {
+    if (txt.includes("ponto")) {
 
         const item =
             dataStore.artes_visuais?.artes_visuais?.elementos_basicos?.ponto;
@@ -867,7 +867,7 @@ if (texto.includes("o que e") || texto.includes("o que é")) {
     }
 
     // FORMA
-    if (texto.includes("forma")) {
+    if (txt.includes("forma")) {
 
         const item =
             dataStore.artes_visuais?.artes_visuais?.elementos_basicos?.forma;
@@ -878,7 +878,6 @@ if (texto.includes("o que e") || texto.includes("o que é")) {
     }
 
     return null;
-} 
 }
     // ======================= FUNÇÃO RESPONDER (PRIORIDADE INSTANTÂNEA + IA FALLBACK) =======================
     async function responder(pergunta) {
