@@ -1,34 +1,334 @@
 {
   "o_que_e_musica": {
-    "palavras_chave": ["o que e musica", "definicao de musica", "arte dos sons"],
-    "explicacao_infantil": "A música é a arte dos sons. Ela pode ter ritmo, melodia e harmonia, e pode fazer a gente sentir alegria, calma ou emoção."
+    "tema": "musica",
+    "subtema": "o_que_e_musica",
+
+    "palavras_chave": [
+      "o que e musica",
+      "definicao de musica",
+      "arte dos sons"
+    ],
+
+    "inicio": [
+      "A música transforma sons em emoções 🎵",
+      "Os sons podem contar histórias sem usar palavras ✨"
+    ],
+
+    "explicacao_curta": [
+      "A música é a arte de organizar sons, ritmos e melodias."
+    ],
+
+    "explicacao_aprofundada": [
+      "Ela pode transmitir alegria, calma, energia ou emoção através de instrumentos, vozes e ritmos."
+    ],
+
+    "curiosidade": [
+      "A música existe em quase todas as culturas do mundo 🌍"
+    ],
+
+    "interacao": [
+      "Que música deixa você feliz?",
+      "Você gosta mais de cantar ou ouvir música?"
+    ],
+
+    "atividade": [
+      "Crie sons usando palmas, mesa e objetos da casa 🥁"
+    ],
+
+    "final": [
+      "A música faz o mundo parecer cheio de movimento 🌈"
+    ],
+
+    "emocao": "alegria",
+    "nivel": "leve"
   },
+
   "elementos_musica": {
-    "palavras_chave": ["elementos da musica", "ritmo melodia harmonia", "partes da musica"],
-    "explicacao_infantil": "Na música temos ritmo, melodia e harmonia. O ritmo marca o tempo, a melodia é a sequência de sons e a harmonia combina os sons."
+    "tema": "musica",
+    "subtema": "elementos_musica",
+
+    "palavras_chave": [
+      "elementos da musica",
+      "ritmo melodia harmonia",
+      "partes da musica"
+    ],
+
+    "inicio": [
+      "A música possui partes importantes que trabalham juntas 🎶"
+    ],
+
+    "explicacao_curta": [
+      "Ritmo, melodia e harmonia ajudam a construir a música."
+    ],
+
+    "explicacao_aprofundada": [
+      "O ritmo marca o tempo, a melodia organiza os sons e a harmonia combina diferentes notas."
+    ],
+
+    "curiosidade": [
+      "Até os batimentos do coração possuem ritmo 💓"
+    ],
+
+    "interacao": [
+      "Você consegue bater palmas acompanhando uma música?"
+    ],
+
+    "atividade": [
+      "Crie uma sequência de sons rápidos e lentos 👏"
+    ],
+
+    "final": [
+      "Cada elemento ajuda a música a ganhar vida ✨"
+    ],
+
+    "emocao": "curiosidade",
+    "nivel": "leve"
   },
+
   "tipos_musica": {
-    "palavras_chave": ["tipos de musica", "estilos musicais", "musica classica popular"],
-    "explicacao_infantil": "Existem muitos tipos de música, como popular, clássica e folclórica. Cada tipo tem seu estilo e sua forma de expressão."
+    "tema": "musica",
+    "subtema": "tipos_musica",
+
+    "palavras_chave": [
+      "tipos de musica",
+      "estilos musicais",
+      "musica classica popular"
+    ],
+
+    "inicio": [
+      "Existem muitos estilos musicais diferentes 🌎"
+    ],
+
+    "explicacao_curta": [
+      "Cada tipo de música possui sons e ritmos especiais."
+    ],
+
+    "explicacao_aprofundada": [
+      "Algumas músicas são agitadas, outras tranquilas, e cada cultura possui seus próprios estilos."
+    ],
+
+    "curiosidade": [
+      "Os ritmos podem mudar bastante de um país para outro 🌍"
+    ],
+
+    "interacao": [
+      "Qual estilo musical você mais gosta?"
+    ],
+
+    "atividade": [
+      "Desenhe como seria sua música favorita 🎨"
+    ],
+
+    "final": [
+      "A música pode ter muitos jeitos diferentes 🌈"
+    ],
+
+    "emocao": "exploracao",
+    "nivel": "leve"
   },
+
   "instrumentos": {
-    "palavras_chave": ["instrumentos musicais", "violao flauta tambor", "tipos de instrumentos"],
-    "explicacao_infantil": "Os instrumentos musicais produzem sons. Existem instrumentos de corda, sopro e percussão, como violão, flauta e tambor."
+    "tema": "musica",
+    "subtema": "instrumentos",
+
+    "palavras_chave": [
+      "instrumentos musicais",
+      "violao flauta tambor",
+      "tipos de instrumentos"
+    ],
+
+    "inicio": [
+      "Os instrumentos ajudam a criar sons incríveis 🎻"
+    ],
+
+    "explicacao_curta": [
+      "Existem instrumentos de corda, sopro e percussão."
+    ],
+
+    "explicacao_aprofundada": [
+      "Violão, tambor, piano, flauta e muitos outros instrumentos possuem sons diferentes."
+    ],
+
+    "curiosidade": [
+      "Cada instrumento produz vibrações sonoras únicas ✨"
+    ],
+
+    "interacao": [
+      "Que instrumento você gostaria de tocar?"
+    ],
+
+    "atividade": [
+      "Crie um instrumento usando materiais recicláveis ♻️"
+    ],
+
+    "final": [
+      "Os instrumentos transformam movimento em som 🎵"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
   },
+
   "villa_lobos": {
-    "palavras_chave": ["villa lobos", "heitor villa lobos"],
-    "explicacao_infantil": "Heitor Villa-Lobos foi um grande compositor brasileiro. Ele misturava música clássica com sons do Brasil."
+    "tema": "musica",
+    "subtema": "villa_lobos",
+
+    "palavras_chave": [
+      "villa lobos",
+      "heitor villa lobos"
+    ],
+
+    "inicio": [
+      "Villa-Lobos foi um importante compositor brasileiro 🇧🇷"
+    ],
+
+    "explicacao_curta": [
+      "Ele misturava música clássica com sons brasileiros."
+    ],
+
+    "explicacao_aprofundada": [
+      "Suas obras foram inspiradas na natureza, no folclore e nos ritmos do Brasil."
+    ],
+
+    "curiosidade": [
+      "Villa-Lobos gostava de explorar sons diferentes 🌿"
+    ],
+
+    "interacao": [
+      "Você gostaria de criar músicas inspiradas na natureza?"
+    ],
+
+    "atividade": [
+      "Imite sons da chuva, vento e pássaros 🎶"
+    ],
+
+    "final": [
+      "A música brasileira possui muitos sons inspiradores 🌎"
+    ],
+
+    "emocao": "descoberta",
+    "nivel": "leve"
   },
+
   "chiquinha_gonzaga": {
-    "palavras_chave": ["chiquinha gonzaga"],
-    "explicacao_infantil": "Chiquinha Gonzaga foi uma compositora brasileira muito importante. Ela criou músicas animadas e ajudou a abrir espaço para mulheres na música."
+    "tema": "musica",
+    "subtema": "chiquinha_gonzaga",
+
+    "palavras_chave": [
+      "chiquinha gonzaga"
+    ],
+
+    "inicio": [
+      "Chiquinha Gonzaga marcou a história da música brasileira 🎹"
+    ],
+
+    "explicacao_curta": [
+      "Ela foi compositora e ajudou a abrir caminhos para mulheres na música."
+    ],
+
+    "explicacao_aprofundada": [
+      "Suas músicas animadas ficaram famosas em festas e apresentações."
+    ],
+
+    "curiosidade": [
+      "Ela compôs marchinhas conhecidas até hoje 🎉"
+    ],
+
+    "interacao": [
+      "Você gosta de músicas alegres para dançar?"
+    ],
+
+    "atividade": [
+      "Crie uma pequena melodia batendo palmas 👏"
+    ],
+
+    "final": [
+      "A música pode inspirar mudanças importantes ✨"
+    ],
+
+    "emocao": "inspiracao",
+    "nivel": "leve"
   },
+
   "cartola": {
-    "palavras_chave": ["cartola", "samba cartola"],
-    "explicacao_infantil": "Cartola foi um grande compositor de samba. Suas músicas são conhecidas até hoje e fazem parte da cultura brasileira."
+    "tema": "musica",
+    "subtema": "cartola",
+
+    "palavras_chave": [
+      "cartola",
+      "samba cartola"
+    ],
+
+    "inicio": [
+      "Cartola foi um dos grandes nomes do samba 🎩"
+    ],
+
+    "explicacao_curta": [
+      "Ele criou músicas importantes da cultura brasileira."
+    ],
+
+    "explicacao_aprofundada": [
+      "Suas canções misturavam poesia, emoção e ritmos do samba."
+    ],
+
+    "curiosidade": [
+      "Cartola ajudou a fortalecer o samba brasileiro 🥁"
+    ],
+
+    "interacao": [
+      "Você gosta de músicas com letras poéticas?"
+    ],
+
+    "atividade": [
+      "Escreva palavras que combinam com alegria 🎵"
+    ],
+
+    "final": [
+      "A música também pode ser cheia de poesia 🌙"
+    ],
+
+    "emocao": "emocao",
+    "nivel": "leve"
   },
+
   "beethoven": {
-    "palavras_chave": ["beethoven", "musica classica beethoven"],
-    "explicacao_infantil": "Beethoven foi um compositor famoso da música clássica. Ele criou músicas fortes e emocionantes que são ouvidas até hoje."
+    "tema": "musica",
+    "subtema": "beethoven",
+
+    "palavras_chave": [
+      "beethoven",
+      "musica classica beethoven"
+    ],
+
+    "inicio": [
+      "Beethoven criou músicas famosas da música clássica 🎼"
+    ],
+
+    "explicacao_curta": [
+      "Suas composições possuem emoção e intensidade."
+    ],
+
+    "explicacao_aprofundada": [
+      "Ele escreveu obras para piano, orquestras e muitos instrumentos."
+    ],
+
+    "curiosidade": [
+      "Beethoven continuou compondo mesmo enfrentando dificuldades auditivas 🎹"
+    ],
+
+    "interacao": [
+      "Você gosta de músicas suaves ou grandiosas?"
+    ],
+
+    "atividade": [
+      "Desenhe como você imagina uma grande orquestra 🎻"
+    ],
+
+    "final": [
+      "A música clássica atravessa gerações 🌟"
+    ],
+
+    "emocao": "admiracao",
+    "nivel": "leve"
   }
 }
