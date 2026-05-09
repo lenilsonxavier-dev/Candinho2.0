@@ -607,7 +607,6 @@ else {
                 }
             }
         }
-        
         // Fallback para "o que é"
 if (texto.includes("o que e") || texto.includes("o que é")) {
 
@@ -690,14 +689,14 @@ if (texto.includes("o que e") || texto.includes("o que é")) {
                 ) {
                     return conceitoItem.respostas[
                         Math.floor(Math.random() * conceitoItem.respostas.length)
-                    }
+                    ];
                 }
             }
         }
-        
-        return null;
     }
-    
+
+    return null;
+}
     // ======================= FUNÇÃO RESPONDER (PRIORIDADE INSTANTÂNEA + IA FALLBACK) =======================
     async function responder(pergunta) {
         // 1. Memória (nome, idade, interesses)
