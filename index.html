@@ -795,97 +795,90 @@ else {
                 }
             }
         }
-        // Fallback para "o que é"
+    // =========================
+// FALLBACK "O QUE É"
+// =========================
+
 if (texto.includes("o que e") || texto.includes("o que é")) {
 
-    for (let baseKey of [
-        "musica",
-        "dancas",
-        "teatro",
-        "folclore",
-        "artes_visuais",
-        "cultura_indigena",
-        "cultura_afro_brasileira",
-        "festas_brasileiras",
-        "historia_arte",
-        "arte_tecnicas",
-        "imaginacao_infantil"
-    ]) {
+    // MÚSICA
+    if (texto.includes("musica")) {
 
-        const obj = dataStore[baseKey];
+        const item = dataStore.musica?.o_que_e_musica;
 
-        if (obj && typeof obj === "object") {
+        if (item?.explicacao_infantil) {
+            return item.explicacao_infantil;
+        }
+    }
 
-            let conceitoItem = null;
+    // DANÇA
+    if (
+        texto.includes("danca") ||
+        texto.includes("dança")
+    ) {
 
-            // Estruturas específicas
-            if (baseKey === "dancas" && obj.conceitos?.o_que_e_danca) {
-                conceitoItem = obj.conceitos.o_que_e_danca;
-            }
+        const item = dataStore.dancas?.o_que_e_danca;
 
-            else if (baseKey === "musica" && obj.o_que_e_musica) {
-                conceitoItem = obj.o_que_e_musica;
-            }
+        if (item?.explicacao_infantil) {
+            return item.explicacao_infantil;
+        }
+    }
 
-            else if (baseKey === "teatro" && obj.o_que_e_teatro) {
-                conceitoItem = obj.o_que_e_teatro;
-            }
+    // TEATRO
+    if (texto.includes("teatro")) {
 
-            else if (baseKey === "folclore" && obj.o_que_e_folclore) {
-                conceitoItem = obj.o_que_e_folclore;
-            }
+        const item = dataStore.teatro?.o_que_e_teatro;
 
-            else if (baseKey === "cultura_indigena" && obj.o_que_e) {
-                conceitoItem = obj.o_que_e;
-            }
+        if (item?.explicacao_infantil) {
+            return item.explicacao_infantil;
+        }
+    }
 
-            else if (baseKey === "cultura_afro_brasileira" && obj.o_que_e) {
-                conceitoItem = obj.o_que_e;
-            }
+    // FOLCLORE
+    if (texto.includes("folclore")) {
 
-            else if (baseKey === "festas_brasileiras" && obj.o_que_sao) {
-                conceitoItem = obj.o_que_sao;
-            }
+        const item = dataStore.folclore?.o_que_e_folclore;
 
-            else if (obj.conceitos?.o_que_e) {
-                conceitoItem = obj.conceitos.o_que_e;
-            }
+        if (item?.explicacao_infantil) {
+            return item.explicacao_infantil;
+        }
+    }
 
-            else if (obj.o_que_e) {
-                conceitoItem = obj.o_que_e;
-            }
+    // LINHA
+    if (texto.includes("linha")) {
 
-            // Retorno
-            if (conceitoItem) {
+        const item =
+            dataStore.artes_visuais?.artes_visuais?.elementos_basicos?.linha;
 
-                if (conceitoItem.explicacao_infantil) {
-                    return conceitoItem.explicacao_infantil;
-                }
+        if (item?.explicacao_infantil) {
+            return item.explicacao_infantil;
+        }
+    }
 
-                if (
-                    conceitoItem.explicacao_curta &&
-                    Array.isArray(conceitoItem.explicacao_curta)
-                ) {
-                    return conceitoItem.explicacao_curta[
-                        Math.floor(Math.random() * conceitoItem.explicacao_curta.length)
-                    ];
-                }
+    // PONTO
+    if (texto.includes("ponto")) {
 
-                if (
-                    conceitoItem.respostas &&
-                    Array.isArray(conceitoItem.respostas)
-                ) {
-                    return conceitoItem.respostas[
-                        Math.floor(Math.random() * conceitoItem.respostas.length)
-                    ];
-                }
-            }
+        const item =
+            dataStore.artes_visuais?.artes_visuais?.elementos_basicos?.ponto;
+
+        if (item?.explicacao_infantil) {
+            return item.explicacao_infantil;
+        }
+    }
+
+    // FORMA
+    if (texto.includes("forma")) {
+
+        const item =
+            dataStore.artes_visuais?.artes_visuais?.elementos_basicos?.forma;
+
+        if (item?.explicacao_infantil) {
+            return item.explicacao_infantil;
         }
     }
 
     return null;
-}
-}       
+} 
     // ======================= FUNÇÃO RESPONDER (PRIORIDADE INSTANTÂNEA + IA FALLBACK) =======================
     async function responder(pergunta) {
         // 1. Memória (nome, idade, interesses)
