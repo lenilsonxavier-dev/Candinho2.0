@@ -1,122 +1,422 @@
 {
   "louvre": {
-    "palavras_chave": ["louvre", "museu do louvre", "mona lisa museu", "museu paris"],
-    "explicacao_infantil": "O Museu do Louvre, na França, é um dos maiores do mundo. Lá está a famosa Mona Lisa e muitas obras antigas."
+    "tema": "lugares_arte",
+    "subtema": "louvre",
+
+    "palavras_chave": [
+      "louvre",
+      "museu do louvre",
+      "mona lisa museu",
+      "museu paris"
+    ],
+
+    "inicio": [
+      "O Louvre é um dos museus mais famosos do mundo 🖼️"
+    ],
+
+    "explicacao_curta": [
+      "Ele fica na França e possui milhares de obras de arte."
+    ],
+
+    "explicacao_aprofundada": [
+      "O museu guarda pinturas, esculturas e objetos antigos de diferentes épocas da história."
+    ],
+
+    "curiosidade": [
+      "A famosa Mona Lisa está no Louvre 🎨"
+    ],
+
+    "interacao": [
+      "Que obra famosa você gostaria de conhecer?"
+    ],
+
+    "atividade": [
+      "Desenhe um museu cheio de obras imaginárias ✏️"
+    ],
+
+    "final": [
+      "Museus guardam histórias e criatividade 🌍"
+    ],
+
+    "emocao": "curiosidade",
+    "nivel": "leve"
   },
-  "museu_do_prado": {
-    "palavras_chave": ["museu do prado", "prado espanha", "museu espanha arte"],
-    "explicacao_infantil": "O Museu do Prado, na Espanha, tem pinturas importantes de artistas famosos. É um lugar cheio de história da arte."
-  },
+
   "moma": {
-    "palavras_chave": ["moma", "museu de arte moderna nova york", "museu moderno eua"],
-    "explicacao_infantil": "O MoMA, nos Estados Unidos, é um museu de arte moderna. Ele tem obras criativas e diferentes."
+    "tema": "lugares_arte",
+    "subtema": "moma",
+
+    "palavras_chave": [
+      "moma",
+      "museu de arte moderna nova york",
+      "museu moderno eua"
+    ],
+
+    "inicio": [
+      "O MoMA é cheio de arte moderna e criativa 🌈"
+    ],
+
+    "explicacao_curta": [
+      "O museu reúne pinturas, esculturas e obras modernas."
+    ],
+
+    "explicacao_aprofundada": [
+      "Muitos artistas modernos experimentaram novas formas, cores e ideias em suas obras."
+    ],
+
+    "curiosidade": [
+      "O MoMA fica em Nova York 🏙️"
+    ],
+
+    "interacao": [
+      "Você gosta de artes diferentes e criativas?"
+    ],
+
+    "atividade": [
+      "Crie uma obra usando formas livres 🎨"
+    ],
+
+    "final": [
+      "A arte moderna incentiva imaginação e inovação ✨"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
   },
-  "british_museum": {
-    "palavras_chave": ["british museum", "museu britanico", "museu londres historia"],
-    "explicacao_infantil": "O British Museum, na Inglaterra, guarda objetos antigos do mundo todo. É como uma viagem pela história."
-  },
-  "vaticano": {
-    "palavras_chave": ["museus do vaticano", "capela sistina", "vaticano arte"],
-    "explicacao_infantil": "Os Museus do Vaticano têm obras incríveis, como o teto da Capela Sistina. É um lugar cheio de arte e história."
-  },
-  "uffizi": {
-    "palavras_chave": ["uffizi", "galeria uffizi", "museu renascimento italia"],
-    "explicacao_infantil": "A Galeria Uffizi, na Itália, tem pinturas do Renascimento. É um dos museus mais famosos do mundo."
-  },
+
   "masp": {
-    "palavras_chave": ["masp", "museu sao paulo arte", "museu brasil sp"],
-    "explicacao_infantil": "O MASP, em São Paulo, é um museu importante do Brasil. Ele tem obras de artistas do mundo inteiro."
+    "tema": "lugares_arte",
+    "subtema": "masp",
+
+    "palavras_chave": [
+      "masp",
+      "museu sao paulo arte",
+      "museu brasil sp"
+    ],
+
+    "inicio": [
+      "O MASP é um importante museu brasileiro 🇧🇷"
+    ],
+
+    "explicacao_curta": [
+      "Ele possui obras de artistas do Brasil e do mundo."
+    ],
+
+    "explicacao_aprofundada": [
+      "O prédio do MASP é conhecido por sua estrutura suspensa vermelha."
+    ],
+
+    "curiosidade": [
+      "O MASP fica na Avenida Paulista, em São Paulo 🌆"
+    ],
+
+    "interacao": [
+      "Você gostaria de visitar um grande museu?"
+    ],
+
+    "atividade": [
+      "Desenhe um prédio diferente para um museu ✏️"
+    ],
+
+    "final": [
+      "Os museus ajudam a preservar arte e cultura 🌟"
+    ],
+
+    "emocao": "descoberta",
+    "nivel": "leve"
   },
+
   "inhotim": {
-    "palavras_chave": ["inhotim", "museu a ceu aberto brasil", "arte natureza minas gerais"],
-    "explicacao_infantil": "Inhotim, em Minas Gerais, mistura natureza e arte. As obras ficam espalhadas em jardins enormes."
+    "tema": "lugares_arte",
+    "subtema": "inhotim",
+
+    "palavras_chave": [
+      "inhotim",
+      "museu a ceu aberto brasil",
+      "arte natureza minas gerais"
+    ],
+
+    "inicio": [
+      "Inhotim mistura arte e natureza 🌿"
+    ],
+
+    "explicacao_curta": [
+      "As obras ficam espalhadas em jardins enormes."
+    ],
+
+    "explicacao_aprofundada": [
+      "O lugar reúne galerias, esculturas e paisagens naturais em Minas Gerais."
+    ],
+
+    "curiosidade": [
+      "Algumas obras de Inhotim ficam ao ar livre 🌳"
+    ],
+
+    "interacao": [
+      "Você gostaria de ver arte no meio da natureza?"
+    ],
+
+    "atividade": [
+      "Crie um jardim cheio de esculturas 🎨"
+    ],
+
+    "final": [
+      "Arte e natureza podem caminhar juntas 🌈"
+    ],
+
+    "emocao": "harmonia",
+    "nivel": "leve"
   },
+
   "acropole": {
-    "palavras_chave": ["acropole", "partenon grecia", "construcao antiga grecia"],
-    "explicacao_infantil": "A Acrópole, na Grécia, tem construções antigas como o Partenon. É um símbolo da arte e da história grega."
+    "tema": "lugares_arte",
+    "subtema": "acropole",
+
+    "palavras_chave": [
+      "acropole",
+      "partenon grecia",
+      "construcao antiga grecia"
+    ],
+
+    "inicio": [
+      "A Acrópole guarda construções antigas da Grécia 🏛️"
+    ],
+
+    "explicacao_curta": [
+      "Ela possui templos importantes como o Partenon."
+    ],
+
+    "explicacao_aprofundada": [
+      "A Acrópole representa a arte, arquitetura e história da Grécia Antiga."
+    ],
+
+    "curiosidade": [
+      "O Partenon foi dedicado à deusa Atena ⚡"
+    ],
+
+    "interacao": [
+      "Você gostaria de visitar construções antigas?"
+    ],
+
+    "atividade": [
+      "Desenhe um templo com colunas gregas ✏️"
+    ],
+
+    "final": [
+      "As construções antigas contam histórias do passado 🌍"
+    ],
+
+    "emocao": "admiracao",
+    "nivel": "leve"
   },
+
   "coliseu": {
-    "palavras_chave": ["coliseu", "roma antiga coliseu", "arena romana"],
-    "explicacao_infantil": "O Coliseu, na Itália, é uma construção antiga onde aconteciam espetáculos. Ele mostra a engenharia romana."
+    "tema": "lugares_arte",
+    "subtema": "coliseu",
+
+    "palavras_chave": [
+      "coliseu",
+      "roma antiga coliseu",
+      "arena romana"
+    ],
+
+    "inicio": [
+      "O Coliseu é uma construção gigante da Roma Antiga 🏟️"
+    ],
+
+    "explicacao_curta": [
+      "Lá aconteciam apresentações e eventos."
+    ],
+
+    "explicacao_aprofundada": [
+      "O Coliseu mostra a engenharia e arquitetura dos romanos."
+    ],
+
+    "curiosidade": [
+      "O Coliseu possui muitos corredores e arquibancadas antigas ✨"
+    ],
+
+    "interacao": [
+      "Você gosta de construções enormes?"
+    ],
+
+    "atividade": [
+      "Monte um desenho inspirado em arenas antigas 🎨"
+    ],
+
+    "final": [
+      "Grandes construções também podem ser obras de arte 🌟"
+    ],
+
+    "emocao": "grandiosidade",
+    "nivel": "leve"
   },
+
   "torre_eiffel": {
-    "palavras_chave": ["torre eiffel", "paris torre ferro", "monumento frança"],
-    "explicacao_infantil": "A Torre Eiffel, na França, é uma estrutura famosa de ferro. Ela virou um símbolo da cidade de Paris."
+    "tema": "lugares_arte",
+    "subtema": "torre_eiffel",
+
+    "palavras_chave": [
+      "torre eiffel",
+      "paris torre ferro",
+      "monumento frança"
+    ],
+
+    "inicio": [
+      "A Torre Eiffel é um símbolo famoso de Paris ✨"
+    ],
+
+    "explicacao_curta": [
+      "Ela foi construída com ferro e possui um formato muito conhecido."
+    ],
+
+    "explicacao_aprofundada": [
+      "A torre foi criada para uma exposição e acabou se tornando um dos monumentos mais famosos do mundo."
+    ],
+
+    "curiosidade": [
+      "A Torre Eiffel brilha à noite com muitas luzes 🌙"
+    ],
+
+    "interacao": [
+      "Você gostaria de subir em uma torre gigante?"
+    ],
+
+    "atividade": [
+      "Desenhe uma torre usando formas geométricas ✏️"
+    ],
+
+    "final": [
+      "Algumas construções se transformam em símbolos do mundo 🌍"
+    ],
+
+    "emocao": "encantamento",
+    "nivel": "leve"
   },
-  "taj_mahal": {
-    "palavras_chave": ["taj mahal", "india monumento branco", "palacio marmore"],
-    "explicacao_infantil": "O Taj Mahal, na Índia, é um monumento muito bonito feito de mármore branco. Ele foi construído como homenagem ao amor."
-  },
-  "estatua_da_liberdade": {
-    "palavras_chave": ["estatua da liberdade", "nova york estatua", "liberdade eua"],
-    "explicacao_infantil": "A Estátua da Liberdade, nos Estados Unidos, é um símbolo de liberdade. Ela fica em Nova York."
-  },
-  "museu_hermitage": {
-    "palavras_chave": ["hermitage", "museu russia arte", "museu sao petersburgo"],
-    "explicacao_infantil": "O Hermitage, na Rússia, é um dos maiores museus do mundo. Ele tem muitas obras famosas."
-  },
-  "museu_orsay": {
-    "palavras_chave": ["museu orsay", "orsay impressionismo", "museu paris trem"],
-    "explicacao_infantil": "O Museu d'Orsay, na França, tem obras impressionistas. Ele fica em uma antiga estação de trem."
-  },
-  "guggenheim": {
-    "palavras_chave": ["guggenheim", "museu espiral", "arte moderna guggenheim"],
-    "explicacao_infantil": "O Museu Guggenheim tem um prédio diferente em forma de espiral. Ele mostra arte moderna e contemporânea."
-  },
-  "museu_nacional_china": {
-    "palavras_chave": ["museu nacional china", "museu china historia", "cultura chinesa museu"],
-    "explicacao_infantil": "O Museu Nacional da China tem objetos antigos e importantes. Ele mostra a história e a cultura do país."
-  },
-  "stonehenge": {
-    "palavras_chave": ["stonehenge", "pedras gigantes inglaterra", "monumento antigo pedras"],
-    "explicacao_infantil": "Stonehenge, na Inglaterra, é formado por pedras gigantes. Ninguém sabe exatamente como foi construído."
-  },
+
   "machu_picchu": {
-    "palavras_chave": ["machu picchu", "cidade inca peru", "ruinas incas"],
-    "explicacao_infantil": "Machu Picchu, no Peru, é uma antiga cidade nas montanhas. Ela mostra a engenharia do povo inca."
+    "tema": "lugares_arte",
+    "subtema": "machu_picchu",
+
+    "palavras_chave": [
+      "machu picchu",
+      "cidade inca peru",
+      "ruinas incas"
+    ],
+
+    "inicio": [
+      "Machu Picchu fica nas montanhas do Peru ⛰️"
+    ],
+
+    "explicacao_curta": [
+      "Ela foi construída pelo povo inca."
+    ],
+
+    "explicacao_aprofundada": [
+      "As construções mostram conhecimentos avançados de engenharia e organização."
+    ],
+
+    "curiosidade": [
+      "Machu Picchu ficou escondida entre montanhas por muito tempo 🌿"
+    ],
+
+    "interacao": [
+      "Você gostaria de explorar cidades antigas?"
+    ],
+
+    "atividade": [
+      "Desenhe uma cidade no alto das montanhas ✏️"
+    ],
+
+    "final": [
+      "As antigas civilizações deixaram marcas incríveis na história 🌎"
+    ],
+
+    "emocao": "aventura",
+    "nivel": "leve"
   },
+
   "sagrada_familia": {
-    "palavras_chave": ["sagrada familia", "igreja gaudi barcelona", "igreja diferente espanha"],
-    "explicacao_infantil": "A Sagrada Família, na Espanha, é uma igreja com formas diferentes. Foi criada pelo artista Gaudí."
+    "tema": "lugares_arte",
+    "subtema": "sagrada_familia",
+
+    "palavras_chave": [
+      "sagrada familia",
+      "igreja gaudi barcelona",
+      "igreja diferente espanha"
+    ],
+
+    "inicio": [
+      "A Sagrada Família possui formas surpreendentes ⛪"
+    ],
+
+    "explicacao_curta": [
+      "Ela foi criada pelo artista Antoni Gaudí."
+    ],
+
+    "explicacao_aprofundada": [
+      "A igreja mistura arquitetura, natureza e muitos detalhes artísticos."
+    ],
+
+    "curiosidade": [
+      "As torres da Sagrada Família parecem esculturas gigantes 🌟"
+    ],
+
+    "interacao": [
+      "Que tipo de construção diferente você criaria?"
+    ],
+
+    "atividade": [
+      "Desenhe uma igreja inspirada em formas da natureza 🌿"
+    ],
+
+    "final": [
+      "A arquitetura também pode ser cheia de imaginação ✨"
+    ],
+
+    "emocao": "criatividade",
+    "nivel": "leve"
   },
-  "pompidou": {
-    "palavras_chave": ["centro pompidou", "museu tubos coloridos", "arte contemporanea paris"],
-    "explicacao_infantil": "O Centro Pompidou, na França, tem um prédio moderno com tubos coloridos. Ele mostra arte contemporânea."
-  },
-  "museu_egipcio": {
-    "palavras_chave": ["museu egipcio", "mumias egito", "arte egito museu"],
-    "explicacao_infantil": "O Museu Egípcio tem múmias e objetos antigos. Ele conta a história do Egito antigo."
-  },
-  "alhambra": {
-    "palavras_chave": ["alhambra", "palacio espanha islamico", "arte islamica espanha"],
-    "explicacao_infantil": "A Alhambra, na Espanha, é um palácio cheio de detalhes e desenhos. Ela mostra a arte islâmica."
-  },
-  "angkor_wat": {
-    "palavras_chave": ["angkor wat", "templo camboja", "templo gigante asia"],
-    "explicacao_infantil": "Angkor Wat, no Camboja, é um templo gigante com esculturas antigas. É um dos maiores do mundo."
-  },
-  "opera_sydney": {
-    "palavras_chave": ["opera sydney", "teatro australia", "predio em forma de vela"],
-    "explicacao_infantil": "A Ópera de Sydney tem um formato que lembra velas. É um lugar de música e espetáculos."
-  },
-  "museu_picasso": {
-    "palavras_chave": ["museu picasso", "obras picasso museu", "arte picasso museu"],
-    "explicacao_infantil": "O Museu Picasso guarda obras do artista Pablo Picasso. Ele mostra diferentes fases da sua arte."
-  },
-  "museu_van_gogh": {
-    "palavras_chave": ["museu van gogh", "pinturas van gogh museu", "arte van gogh museu"],
-    "explicacao_infantil": "O Museu Van Gogh tem muitas pinturas do artista. Lá podemos ver suas cores e estilo únicos."
-  },
-  "chapada_diamantina": {
-    "palavras_chave": ["chapada diamantina", "paisagem brasil natureza arte", "natureza como arte"],
-    "explicacao_infantil": "A Chapada Diamantina, no Brasil, é cheia de paisagens incríveis. A natureza também pode ser vista como arte."
-  },
-  "leni_riefenstahl": {
-    "palavras_chave": ["leni riefenstahl", "cinema arte", "arte no cinema"],
-    "explicacao_infantil": "Alguns artistas criaram obras em cinema que marcaram a história. O cinema também é uma forma de arte."
-  },
+
   "bienal_sp": {
-    "palavras_chave": ["bienal de sao paulo", "exposicao arte sp", "evento arte brasil"],
-    "explicacao_infantil": "A Bienal de São Paulo é uma grande exposição de arte. Artistas do mundo inteiro mostram suas obras lá."
+    "tema": "lugares_arte",
+    "subtema": "bienal_sp",
+
+    "palavras_chave": [
+      "bienal de sao paulo",
+      "exposicao arte sp",
+      "evento arte brasil"
+    ],
+
+    "inicio": [
+      "A Bienal de São Paulo reúne artistas do mundo inteiro 🎨"
+    ],
+
+    "explicacao_curta": [
+      "É uma grande exposição de arte contemporânea."
+    ],
+
+    "explicacao_aprofundada": [
+      "Os artistas apresentam obras criativas usando pinturas, esculturas, vídeos e instalações."
+    ],
+
+    "curiosidade": [
+      "A Bienal acontece em São Paulo e recebe visitantes de muitos lugares 🌎"
+    ],
+
+    "interacao": [
+      "Que tipo de obra você gostaria de mostrar em uma exposição?"
+    ],
+
+    "atividade": [
+      "Crie um cartaz para uma mostra de arte ✏️"
+    ],
+
+    "final": [
+      "A arte pode unir pessoas e ideias diferentes 🌈"
+    ],
+
+    "emocao": "exploracao",
+    "nivel": "leve"
   }
 }
