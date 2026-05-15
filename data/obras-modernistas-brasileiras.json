@@ -1,0 +1,162 @@
+[
+  {
+    "obra": "Abaporu",
+    "ano": "1928",
+    "artista": "Tarsila do Amaral",
+    "explicacao_candinho": "Oi, amiguinho! Essa pintura mostra uma pessoa com pés e mãos enormes sentada ao lado de um cacto. A artista queria mostrar a força do povo brasileiro e criar uma arte diferente, bem brasileira e cheia de imaginação.",
+    "cores_principais": ["verde", "azul", "amarelo"],
+    "tema": "Modernismo brasileiro"
+  },
+  {
+    "obra": "Operários",
+    "ano": "1933",
+    "artista": "Tarsila do Amaral",
+    "explicacao_candinho": "Aqui vemos muitas pessoas trabalhando juntas. Cada rosto é diferente, mostrando como o Brasil é formado por vários povos e culturas. A pintura fala sobre trabalho e união.",
+    "cores_principais": ["cinza", "marrom", "rosa"],
+    "tema": "Trabalho e diversidade"
+  },
+  {
+    "obra": "Antropofagia",
+    "ano": "1929",
+    "artista": "Tarsila do Amaral",
+    "explicacao_candinho": "Essa obra mistura formas estranhas e divertidas para mostrar a ideia de que o Brasil pega influências de outros lugares e transforma tudo em algo novo e brasileiro.",
+    "cores_principais": ["verde", "amarelo", "azul"],
+    "tema": "Cultura brasileira"
+  },
+  {
+    "obra": "A Cuca",
+    "ano": "1924",
+    "artista": "Tarsila do Amaral",
+    "explicacao_candinho": "Você conhece a Cuca das histórias? Aqui ela aparece de um jeito mágico e assustador. A artista usou formas diferentes para lembrar os contos do folclore brasileiro.",
+    "cores_principais": ["verde", "amarelo", "laranja"],
+    "tema": "Folclore brasileiro"
+  },
+  {
+    "obra": "O Lavrador de Café",
+    "ano": "1934",
+    "artista": "Candido Portinari",
+    "explicacao_candinho": "Esse trabalhador tem mãos e pés enormes para mostrar sua força. Portinari queria homenagear as pessoas que trabalhavam nas plantações de café no Brasil.",
+    "cores_principais": ["marrom", "azul", "verde"],
+    "tema": "Trabalho no campo"
+  },
+  {
+    "obra": "Café",
+    "ano": "1935",
+    "artista": "Candido Portinari",
+    "explicacao_candinho": "Aqui vemos trabalhadores colhendo café. O artista mostrou como era difícil trabalhar nas fazendas e como essas pessoas eram importantes para o país.",
+    "cores_principais": ["marrom", "verde", "bege"],
+    "tema": "Vida dos trabalhadores"
+  },
+  {
+    "obra": "O Grito",
+    "ano": "1955",
+    "artista": "Candido Portinari",
+    "explicacao_candinho": "Essa pintura mostra uma pessoa parecendo assustada ou triste. As cores fortes ajudam a mostrar emoções bem intensas.",
+    "cores_principais": ["vermelho", "preto", "amarelo"],
+    "tema": "Emoções humanas"
+  },
+  {
+    "obra": "Mestiço",
+    "ano": "1934",
+    "artista": "Candido Portinari",
+    "explicacao_candinho": "O artista pintou um homem brasileiro com expressão séria e forte. A obra mostra a mistura de povos e culturas do Brasil.",
+    "cores_principais": ["marrom", "azul", "bege"],
+    "tema": "Identidade brasileira"
+  },
+  {
+    "obra": "A Estudante",
+    "ano": "1915-1916",
+    "artista": "Anita Malfatti",
+    "explicacao_candinho": "A artista pintou uma jovem estudando com cores diferentes e traços modernos. Na época, muita gente achou estranho, mas hoje a obra é muito famosa.",
+    "cores_principais": ["azul", "verde", "rosa"],
+    "tema": "Vida cotidiana"
+  },
+  {
+    "obra": "O Homem Amarelo",
+    "ano": "1915-1916",
+    "artista": "Anita Malfatti",
+    "explicacao_candinho": "O homem foi pintado com cores fortes e diferentes da realidade. Anita queria mostrar sentimentos e emoções através da arte.",
+    "cores_principais": ["amarelo", "verde", "laranja"],
+    "tema": "Expressionismo"
+  },
+  {
+    "obra": "A Boba",
+    "ano": "1915-1916",
+    "artista": "Anita Malfatti",
+    "explicacao_candinho": "Essa personagem tem uma expressão curiosa e divertida. A pintura usa formas exageradas para chamar atenção para as emoções.",
+    "cores_principais": ["azul", "rosa", "verde"],
+    "tema": "Expressão humana"
+  },
+  {
+    "obra": "Baile Popular",
+    "ano": "1924",
+    "artista": "Di Cavalcanti",
+    "explicacao_candinho": "A obra mostra pessoas dançando e se divertindo. O artista gostava de retratar festas e músicas populares brasileiras.",
+    "cores_principais": ["vermelho", "amarelo", "marrom"],
+    "tema": "Festa brasileira"
+  },
+  {
+    "obra": "Pierrete",
+    "ano": "1922",
+    "artista": "Di Cavalcanti",
+    "explicacao_candinho": "Essa personagem parece sonhadora e misteriosa. O artista usou cores suaves para criar um clima delicado.",
+    "cores_principais": ["rosa", "azul", "cinza"],
+    "tema": "Personagem artística"
+  },
+  {
+    "obra": "Cinco Moças de Guaratinguetá",
+    "ano": "1930",
+    "artista": "Di Cavalcanti",
+    "explicacao_candinho": "As cinco mulheres aparecem juntas em uma cena tranquila. A pintura mostra a beleza das pessoas simples do Brasil.",
+    "cores_principais": ["marrom", "verde", "bege"],
+    "tema": "Cotidiano brasileiro"
+  },
+  {
+    "obra": "Samba",
+    "ano": "1925",
+    "artista": "Di Cavalcanti",
+    "explicacao_candinho": "Aqui vemos música, dança e alegria! O artista quis mostrar a energia do samba e da cultura brasileira.",
+    "cores_principais": ["vermelho", "laranja", "amarelo"],
+    "tema": "Música e dança"
+  },
+  {
+    "obra": "O Artesão",
+    "ano": "1929",
+    "artista": "Vicente do Rego Monteiro",
+    "explicacao_candinho": "A obra mostra um trabalhador fazendo seu ofício. O artista valorizava o trabalho manual e a cultura brasileira.",
+    "cores_principais": ["marrom", "cinza", "verde"],
+    "tema": "Trabalho artesanal"
+  },
+  {
+    "obra": "Paisagem da Espanha",
+    "ano": "1920",
+    "artista": "John Graz",
+    "explicacao_candinho": "Essa pintura mostra uma paisagem tranquila da Espanha com formas modernas e organizadas. Parece quase um desenho geométrico.",
+    "cores_principais": ["azul", "verde", "bege"],
+    "tema": "Paisagem"
+  },
+  {
+    "obra": "Independência ou Morte",
+    "ano": "1888",
+    "artista": "Pedro Américo",
+    "explicacao_candinho": "Essa pintura mostra o momento em que Dom Pedro I declarou a independência do Brasil. É uma cena cheia de movimento e importância histórica.",
+    "cores_principais": ["verde", "marrom", "azul"],
+    "tema": "História do Brasil"
+  },
+  {
+    "obra": "A Primeira Missa no Brasil",
+    "ano": "1860",
+    "artista": "Victor Meirelles",
+    "explicacao_candinho": "A pintura mostra a primeira missa realizada no Brasil, com portugueses e indígenas juntos. Ela representa um momento importante da história.",
+    "cores_principais": ["verde", "azul", "marrom"],
+    "tema": "Colonização do Brasil"
+  },
+  {
+    "obra": "Caipira Picando Fumo",
+    "ano": "1893",
+    "artista": "Almeida Júnior",
+    "explicacao_candinho": "Aqui vemos um homem simples do campo preparando fumo. O artista gostava de mostrar cenas do cotidiano brasileiro.",
+    "cores_principais": ["marrom", "bege", "verde"],
+    "tema": "Vida no campo"
+  }
+]
