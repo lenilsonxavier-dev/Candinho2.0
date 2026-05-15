@@ -136,25 +136,32 @@
     // ======================= CONFIGURAÇÕES =======================
     const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
     const jsonFiles = {
-        dancas: "dancas.json",
-        artes: "artes_visuais.json",
-        artistas: "artistas.json",
-        tecnicas: "arte_tecnicas.json",
-        historia: "historia_arte.json",
-        teatro: "teatro.json",
-        musica: "musica.json",
-        folclore: "folclore.json",
-        ritmos: "ritmos_musicais.json",
-        festas: "festas_brasileiras.json",
-        lugares: "lugares_arte.json",
-        curiosidades: "curiosidades.json",
-        indigena: "cultura_indigena.json",
-        afro: "cultura_afro_brasileira.json",
-        atividades: "atividades_artisticas.json",
-        emocional: "apoio_emocional.json",
-        saudacoes: "saudacoes.json",
-        piadas: "piadas.json"
-    };
+    apoio_emocional: "apoio_emocional.json",
+    arte_tecnicas: "arte_tecnicas.json",
+    artes_visuais: "artes_visuais.json",
+    artistas: "artistas.json",
+    artistas_indigenas_afrobrasileiros: "artistas-indigenas-afrobrasileiros.json",
+    artistas_mulheres_historicas: "artistas-mulheres-historicas.json",
+    atividades_artisticas: "atividades_artisticas.json",
+    cultura_afro_brasileira: "cultura_afro_brasileira.json",
+    cultura_indigena: "cultura_indigena.json",
+    curiosidades: "curiosidades.json",
+    dancas: "dancas.json",
+    escritoras_negras_indigenas_brasileiras: "escritoras-negras-indigenas-brasileiras.json",
+    escritores_negros_indigenas_brasileiros: "escritores-negros-indigenas-brasileiros.json",
+    festas_brasileiras: "festas_brasileiras.json",
+    folclore: "folclore.json",
+    historia_arte: "historia_arte.json",
+    imaginacao_infantil: "imaginacao_infantil.json",
+    lugares_arte: "lugares_arte.json",
+    musica: "musica.json",
+    obras_famosas_mundo: "obras-famosas-mundo.json",
+    obras_modernistas_brasileiras: "obras-modernistas-brasileiras.json",
+    piadas: "piadas.json",
+    ritmos_musicais: "ritmos_musicais.json",
+    saudacoes: "saudacoes.json",
+    teatro: "teatro.json"
+};
     
     let dataStore = {};
     let historicoMensagens = [];
@@ -270,21 +277,21 @@
     }
     
     // ======================= RESPOSTAS INSTANTÂNEAS (PRIORIDADE TOTAL) =======================
-    function normalizar(texto) {
-        return texto.toLowerCase()
-            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            .trim();
-    }
-    
-     function detectarTemaPrioritario(texto) {
+  function normalizar(texto) {
+    return texto.toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+}
+
+function detectarTemaPrioritario(texto) {
 
     const txt = normalizar(texto);
 
     // =========================
-    // PRIORIDADE ALTÍSSIMA
+    // SAUDAÇÕES
     // =========================
 
-    // SAUDAÇÕES
     if (
         txt.includes("oi") ||
         txt.includes("ola") ||
@@ -297,7 +304,10 @@
         return "saudacoes";
     }
 
-    // EMOCIONAL
+    // =========================
+    // APOIO EMOCIONAL
+    // =========================
+
     if (
         txt.includes("triste") ||
         txt.includes("ansioso") ||
@@ -309,10 +319,13 @@
         txt.includes("saudade") ||
         txt.includes("ciumes")
     ) {
-        return "emocional";
+        return "apoio_emocional";
     }
 
+    // =========================
     // PIADAS
+    // =========================
+
     if (
         txt.includes("piada") ||
         txt.includes("engracado") ||
@@ -321,46 +334,15 @@
         return "piadas";
     }
 
+    // =========================
     // CURIOSIDADES
+    // =========================
+
     if (
         txt.includes("curiosidade") ||
         txt.includes("sabia que")
     ) {
         return "curiosidades";
-    }
-
-    // =========================
-    // PERGUNTAS DIRETAS
-    // =========================
-
-    if (
-        txt.includes("o que e musica") ||
-        txt.includes("o que é musica") ||
-        txt.includes("o que e melodia")
-    ) {
-        return "musica";
-    }
-
-    if (
-        txt.includes("o que e danca") ||
-        txt.includes("o que é dança") ||
-        txt.includes("o que e ballet")
-    ) {
-        return "danca";
-    }
-
-    if (
-        txt.includes("o que e teatro") ||
-        txt.includes("o que é teatro")
-    ) {
-        return "teatro";
-    }
-
-    if (
-        txt.includes("o que e folclore") ||
-        txt.includes("o que é folclore")
-    ) {
-        return "folclore";
     }
 
     // =========================
@@ -378,7 +360,7 @@
         txt.includes("imaginacao") ||
         txt.includes("imaginação")
     ) {
-        return "imaginacao";
+        return "imaginacao_infantil";
     }
 
     // =========================
@@ -396,7 +378,7 @@
         txt.includes("tecnica") ||
         txt.includes("maneira de desenhar")
     ) {
-        return "tecnicas";
+        return "arte_tecnicas";
     }
 
     // =========================
@@ -418,47 +400,39 @@
         txt.includes("artista") ||
         txt.includes("pintor")
     ) {
-        return "artista";
+        return "artistas";
     }
 
     // =========================
-    // FOLCLORE
+    // OBRAS MODERNISTAS
     // =========================
 
     if (
-        txt.includes("folclore") ||
-        txt.includes("lenda") ||
-        txt.includes("saci") ||
-        txt.includes("curupira") ||
-        txt.includes("iara") ||
-        txt.includes("boitata") ||
-        txt.includes("mula sem cabeca") ||
-        txt.includes("cuca") ||
-        txt.includes("boto")
+        txt.includes("abaporu") ||
+        txt.includes("operarios") ||
+        txt.includes("antropofagia") ||
+        txt.includes("a cuca") ||
+        txt.includes("lavrador de cafe")
     ) {
-        return "folclore";
+        return "obras_modernistas_brasileiras";
     }
 
     // =========================
-    // FESTAS
+    // OBRAS FAMOSAS MUNDO
     // =========================
 
     if (
-        txt.includes("carnaval") ||
-        txt.includes("festa junina") ||
-        txt.includes("sao joao") ||
-        txt.includes("bumba meu boi") ||
-        txt.includes("parintins") ||
-        txt.includes("reisado") ||
-        txt.includes("congada") ||
-        txt.includes("cirio") ||
-        txt.includes("festa")
+        txt.includes("mona lisa") ||
+        txt.includes("noite estrelada") ||
+        txt.includes("guernica") ||
+        txt.includes("o beijo") ||
+        txt.includes("grande onda")
     ) {
-        return "festas";
+        return "obras_famosas_mundo";
     }
 
     // =========================
-    // INDÍGENA
+    // CULTURA INDÍGENA
     // =========================
 
     if (
@@ -469,11 +443,11 @@
         txt.includes("aldeia") ||
         txt.includes("pintura corporal")
     ) {
-        return "indigena";
+        return "cultura_indigena";
     }
 
     // =========================
-    // AFRO
+    // CULTURA AFRO
     // =========================
 
     if (
@@ -482,11 +456,11 @@
         txt.includes("cultura afro") ||
         txt.includes("afro brasileira")
     ) {
-        return "afro";
+        return "cultura_afro_brasileira";
     }
 
     // =========================
-    // DANÇA
+    // DANÇAS
     // =========================
 
     if (
@@ -495,12 +469,9 @@
         txt.includes("ballet") ||
         txt.includes("coreografia") ||
         txt.includes("frevo") ||
-        txt.includes("ciranda") ||
-        txt.includes("carimbo") ||
-        txt.includes("quadrilha") ||
-        txt.includes("cacuria")
+        txt.includes("ciranda")
     ) {
-        return "danca";
+        return "dancas";
     }
 
     // =========================
@@ -512,10 +483,7 @@
         txt.includes("canção") ||
         txt.includes("instrumento") ||
         txt.includes("violao") ||
-        txt.includes("tambor") ||
-        txt.includes("flauta") ||
-        txt.includes("melodia") ||
-        txt.includes("ritmo")
+        txt.includes("tambor")
     ) {
         return "musica";
     }
@@ -528,11 +496,21 @@
         txt.includes("teatro") ||
         txt.includes("peca") ||
         txt.includes("ator") ||
-        txt.includes("fantoche") ||
-        txt.includes("sombras") ||
-        txt.includes("musical")
+        txt.includes("fantoche")
     ) {
         return "teatro";
+    }
+
+    // =========================
+    // FESTAS
+    // =========================
+
+    if (
+        txt.includes("carnaval") ||
+        txt.includes("festa junina") ||
+        txt.includes("parintins")
+    ) {
+        return "festas_brasileiras";
     }
 
     // =========================
@@ -545,7 +523,7 @@
         txt.includes("brincadeira") ||
         txt.includes("desafio")
     ) {
-        return "atividades";
+        return "atividades_artisticas";
     }
 
     // =========================
@@ -557,31 +535,19 @@
         "cores primarias",
         "cor secundaria",
         "cores secundarias",
-        "cor terciaria",
-        "cores terciarias",
         "linha",
-        "ponto",
         "forma",
         "textura",
-        "volume",
         "perspectiva",
-        "composicao",
-        "luz e sombra",
         "pintura",
         "desenho",
         "escultura",
-        "arte visual",
-        "arte digital",
         "grafite",
-        "mural",
-        "pixel art",
-        "fotografia",
-        "quadrinhos",
-        "hq"
+        "fotografia"
     ];
 
     if (artesVisuaisKeywords.some(kw => txt.includes(kw))) {
-        return "arte";
+        return "artes_visuais";
     }
 
     return null;
