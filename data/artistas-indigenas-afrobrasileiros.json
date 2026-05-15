@@ -1,0 +1,96 @@
+[
+  {
+    "artista": "Jaider Esbell",
+    "povo": "Makuxi",
+    "obra": "Pata Ewa'n – O coração do mundo",
+    "ano": "2016",
+    "explicacao_candinho": "Oi, pequeno artista! Jaider Esbell criou obras cheias de cores e símbolos para mostrar a ligação dos povos indígenas com a natureza e os espíritos da floresta.",
+    "cores_principais": ["verde", "azul", "amarelo"],
+    "tema": "Natureza e espiritualidade"
+  },
+  {
+    "artista": "Daiara Tukano",
+    "povo": "Tukano",
+    "obra": "Selva Mãe do Rio Menino",
+    "ano": "Mural contemporâneo",
+    "explicacao_candinho": "Daiara pinta murais enormes e coloridos inspirados nos rios, florestas e histórias indígenas. Suas obras parecem cantar a força da natureza.",
+    "cores_principais": ["verde", "azul", "laranja"],
+    "tema": "Natureza e ancestralidade"
+  },
+  {
+    "artista": "Daiara Tukano",
+    "povo": "Tukano",
+    "obra": "Série Uremiri Hãusiro",
+    "ano": "Contemporâneo",
+    "explicacao_candinho": "Essa série usa formas e cores vibrantes para representar os conhecimentos e as tradições dos povos indígenas.",
+    "cores_principais": ["vermelho", "amarelo", "azul"],
+    "tema": "Sabedoria indígena"
+  },
+  {
+    "artista": "Denilson Baniwa",
+    "povo": "Baniwa",
+    "obra": "Natureza morta 1",
+    "ano": "2016",
+    "explicacao_candinho": "Denilson mistura arte tradicional indígena com ideias modernas para mostrar que os povos indígenas estão vivos e presentes no mundo de hoje.",
+    "cores_principais": ["preto", "verde", "vermelho"],
+    "tema": "Identidade indígena"
+  },
+  {
+    "artista": "Carmézia Emiliano",
+    "povo": "Macuxi",
+    "obra": "A árvore da vida",
+    "ano": "2022",
+    "explicacao_candinho": "A artista pinta cenas da comunidade Macuxi com muitas cores alegres. A árvore representa união, vida e conexão entre as pessoas.",
+    "cores_principais": ["verde", "amarelo", "rosa"],
+    "tema": "Comunidade e natureza"
+  },
+  {
+    "artista": "Auá Mendes",
+    "povo": "Mura",
+    "obra": "Autorretrato",
+    "ano": "2020",
+    "explicacao_candinho": "Auá cria pinturas que mostram orgulho da cultura indígena e também a diversidade das pessoas indígenas que vivem nas cidades.",
+    "cores_principais": ["roxo", "azul", "rosa"],
+    "tema": "Identidade e diversidade"
+  },
+  {
+    "artista": "Estevão Silva",
+    "obra": "Naturezas-mortas e retratos",
+    "ano": "Século XIX",
+    "explicacao_candinho": "Estevão Silva foi um importante pintor negro brasileiro. Ele gostava de pintar frutas, flores e pessoas com muitos detalhes e beleza.",
+    "cores_principais": ["verde", "vermelho", "marrom"],
+    "tema": "Natureza e retratos"
+  },
+  {
+    "artista": "Arthur Timótheo da Costa",
+    "obra": "Retratos e paisagens impressionistas",
+    "ano": "Início do século XX",
+    "explicacao_candinho": "Arthur pintava cenas iluminadas e cheias de cores suaves. Suas obras parecem cheias de luz e movimento.",
+    "cores_principais": ["azul", "bege", "verde"],
+    "tema": "Paisagens e pessoas"
+  },
+  {
+    "artista": "Maria Auxiliadora",
+    "obra": "Festas populares e cenas do cotidiano",
+    "ano": "Século XX",
+    "explicacao_candinho": "Maria Auxiliadora criava pinturas cheias de texturas e detalhes, mostrando festas, danças e a vida simples do povo brasileiro.",
+    "cores_principais": ["amarelo", "vermelho", "verde"],
+    "tema": "Cultura popular"
+  },
+  {
+    "artista": "Rubem Valentim",
+    "obra": "Emblema",
+    "ano": "1980",
+    "explicacao_candinho": "Rubem usava formas geométricas para representar símbolos da cultura afro-brasileira e dos orixás. Sua arte parece um grande quebra-cabeça colorido.",
+    "cores_principais": ["azul", "branco", "preto"],
+    "tema": "Cultura afro-brasileira"
+  },
+  {
+    "artista": "Maxwell Alexandre",
+    "obra": "Série Pardo é Papel",
+    "ano": "Contemporâneo",
+    "explicacao_candinho": "Maxwell pinta cenas da favela e do cotidiano das pessoas negras no Brasil, mostrando desafios, sonhos e muita criatividade.",
+    "cores_principais": ["marrom", "preto", "amarelo"],
+    "tema": "Vida urbana e identidade"
+  }
+]
