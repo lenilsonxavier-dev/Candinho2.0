@@ -1,0 +1,135 @@
+[
+  {
+    "autor": "Machado de Assis",
+    "obra": "Memórias Póstumas de Brás Cubas",
+    "explicacao_candinho": "Oi, leitorzinho! Machado de Assis criou histórias cheias de humor e inteligência. Nesse livro, um personagem conta sua vida de um jeito muito engraçado e diferente.",
+    "tema": "Reflexão sobre a sociedade",
+    "genero": "Romance"
+  },
+  {
+    "autor": "Machado de Assis",
+    "obra": "Dom Casmurro",
+    "explicacao_candinho": "Essa história fala sobre amizade, amor e dúvidas. O narrador tenta lembrar acontecimentos do passado e faz o leitor pensar bastante.",
+    "tema": "Memória e sentimentos",
+    "genero": "Romance"
+  },
+  {
+    "autor": "Machado de Assis",
+    "obra": "Quincas Borba",
+    "explicacao_candinho": "O livro mistura humor e filosofia para mostrar como as pessoas podem mudar por causa do dinheiro e da ambição.",
+    "tema": "Sociedade e ambição",
+    "genero": "Romance"
+  },
+  {
+    "autor": "Lima Barreto",
+    "obra": "Triste Fim de Policarpo Quaresma",
+    "explicacao_candinho": "Lima Barreto escreveu sobre um homem que amava muito o Brasil e queria melhorar o país, mas enfrentou muitos desafios.",
+    "tema": "Brasil e justiça social",
+    "genero": "Romance"
+  },
+  {
+    "autor": "Lima Barreto",
+    "obra": "Clara dos Anjos",
+    "explicacao_candinho": "A obra mostra as dificuldades enfrentadas por uma jovem negra e pobre em uma sociedade cheia de preconceitos.",
+    "tema": "Desigualdade social",
+    "genero": "Romance"
+  },
+  {
+    "autor": "Conceição Evaristo",
+    "obra": "Becos da Memória",
+    "explicacao_candinho": "Conceição conta histórias inspiradas na vida das pessoas das comunidades brasileiras, mostrando força, amizade e esperança.",
+    "tema": "Memória e comunidade",
+    "genero": "Romance"
+  },
+  {
+    "autor": "Conceição Evaristo",
+    "obra": "Olhos D'Água",
+    "explicacao_candinho": "Os contos falam sobre famílias, sonhos e dificuldades vividas por mulheres negras no Brasil.",
+    "tema": "Família e resistência",
+    "genero": "Contos"
+  },
+  {
+    "autor": "Conceição Evaristo",
+    "obra": "Canção para ninar menino grande",
+    "explicacao_candinho": "A autora usa uma escrita cheia de emoção para falar sobre amor, lembranças e relações humanas.",
+    "tema": "Sentimentos e memória",
+    "genero": "Romance"
+  },
+  {
+    "autor": "Carolina Maria de Jesus",
+    "obra": "Quarto de Despejo: Diário de uma Favelada",
+    "explicacao_candinho": "Carolina escreveu sobre sua própria vida na favela, mostrando coragem e vontade de lutar por dias melhores.",
+    "tema": "Vida na favela",
+    "genero": "Diário"
+  },
+  {
+    "autor": "Itamar Vieira Junior",
+    "obra": "Torto Arado",
+    "explicacao_candinho": "Esse livro fala sobre duas irmãs e a vida no interior do Brasil, mostrando a ligação das pessoas com a terra e suas tradições.",
+    "tema": "Terra e ancestralidade",
+    "genero": "Romance"
+  },
+  {
+    "autor": "Daniel Munduruku",
+    "obra": "Histórias de Índio",
+    "explicacao_candinho": "Daniel conta histórias dos povos indígenas para ensinar respeito à natureza e às diferentes culturas.",
+    "tema": "Cultura indígena",
+    "genero": "Contos"
+  },
+  {
+    "autor": "Daniel Munduruku",
+    "obra": "O Karaíba: Uma História do pré-Brasil",
+    "explicacao_candinho": "A obra imagina como era o Brasil antes da chegada dos portugueses, cheia de aventuras e sabedoria indígena.",
+    "tema": "História indígena",
+    "genero": "Romance"
+  },
+  {
+    "autor": "Ailton Krenak",
+    "obra": "Ideias para adiar o fim do mundo",
+    "explicacao_candinho": "Ailton faz as pessoas pensarem sobre como cuidar da natureza e viver em harmonia com o planeta.",
+    "tema": "Natureza e humanidade",
+    "genero": "Reflexão"
+  },
+  {
+    "autor": "Ailton Krenak",
+    "obra": "A vida não é útil",
+    "explicacao_candinho": "O autor fala sobre a importância de respeitar a vida, os rios, as florestas e todos os seres vivos.",
+    "tema": "Vida e meio ambiente",
+    "genero": "Reflexão"
+  },
+  {
+    "autor": "Olívio Jekupé",
+    "obra": "Xerekó Arandu, a Morte de Kretã",
+    "explicacao_candinho": "A história mostra tradições e ensinamentos do povo guarani através de aventuras e memórias.",
+    "tema": "Sabedoria indígena",
+    "genero": "Narrativa indígena"
+  },
+  {
+    "autor": "Olívio Jekupé",
+    "obra": "As Queixadas e Outros Contos Guaranis",
+    "explicacao_candinho": "O livro reúne histórias inspiradas na tradição oral guarani e nos animais da floresta.",
+    "tema": "Natureza e tradição",
+    "genero": "Contos"
+  },
+  {
+    "autor": "Davi Kopenawa Yanomami",
+    "obra": "A Queda do Céu: Palavras de um Xamã Yanomami",
+    "explicacao_candinho": "Davi conta ensinamentos do povo Yanomami e alerta sobre a importância de proteger a Amazônia.",
+    "tema": "Floresta e preservação",
+    "genero": "Relato"
+  },
+  {
+    "autor": "Kaká Werá Jecupé",
+    "obra": "Todas as vezes que dissemos adeus",
+    "explicacao_candinho": "O autor escreve sobre memórias, encontros e a força das raízes indígenas.",
+    "tema": "Memória e identidade",
+    "genero": "Romance"
+  },
+  {
+    "autor": "Kaká Werá Jecupé",
+    "obra": "Tupã Tenondé",
+    "explicacao_candinho": "Essa obra apresenta histórias e ensinamentos da tradição guarani de maneira poética e cheia de espiritualidade.",
+    "tema": "Espiritualidade indígena",
+    "genero": "Narrativa indígena"
+  }
+]
