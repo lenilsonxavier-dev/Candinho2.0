@@ -1,96 +1,156 @@
-[
-  {
-    "artista": "Jaider Esbell",
-    "povo": "Makuxi",
-    "obra": "Pata Ewa'n – O coração do mundo",
-    "ano": "2016",
-    "explicacao_candinho": "Oi, pequeno artista! Jaider Esbell criou obras cheias de cores e símbolos para mostrar a ligação dos povos indígenas com a natureza e os espíritos da floresta.",
-    "cores_principais": ["verde", "azul", "amarelo"],
-    "tema": "Natureza e espiritualidade"
+{
+  "jaider_esbell": {
+    "tema": "artistas_brasileiros",
+    "subtema": "jaider_esbell",
+    "palavras_chave": ["jaider esbell", "makuxi", "pata ewa'n", "coração do mundo"],
+    "inicio": ["Jaider Esbell pintava o coração do mundo com cores que parecem mágicas ✨"],
+    "explicacao_curta": ["Jaider Esbell criou obras cheias de cores e símbolos para mostrar a ligação dos povos indígenas com a natureza e os espíritos da floresta."],
+    "explicacao_aprofundada": ["Em 'Pata Ewa'n – O coração do mundo', ele usou verde, azul e amarelo para representar a espiritualidade e a força da floresta amazônica."],
+    "curiosidade": ["Jaider também foi escritor e organizou a primeira grande exposição de arte indígena no Museu de Arte do Rio 📚"],
+    "interacao": ["Se você pudesse desenhar o coração do mundo, o que colocaria nele?"],
+    "atividade": ["Desenhe uma grande árvore com raízes que se conectam a animais, estrelas e pessoas 🎨"],
+    "final": ["A arte indígena nos ensina que tudo na natureza tem um espírito 🌳"],
+    "emocao": "espiritualidade",
+    "nivel": "leve"
   },
-  {
-    "artista": "Daiara Tukano",
-    "povo": "Tukano",
-    "obra": "Selva Mãe do Rio Menino",
-    "ano": "Mural contemporâneo",
-    "explicacao_candinho": "Daiara pinta murais enormes e coloridos inspirados nos rios, florestas e histórias indígenas. Suas obras parecem cantar a força da natureza.",
-    "cores_principais": ["verde", "azul", "laranja"],
-    "tema": "Natureza e ancestralidade"
+  "daiara_tukano_selva_mae": {
+    "tema": "artistas_brasileiros",
+    "subtema": "daiara_tukano",
+    "palavras_chave": ["daiara tukano", "selva mãe do rio menino", "tukano", "mural"],
+    "inicio": ["Daiara Tukano pinta murais enormes que parecem cantar a força da natureza 🎶"],
+    "explicacao_curta": ["Daiara pinta murais enormes e coloridos inspirados nos rios, florestas e histórias indígenas."],
+    "explicacao_aprofundada": ["Em 'Selva Mãe do Rio Menino', as cores verde, azul e laranja se misturam para mostrar a ancestralidade e a proteção da floresta."],
+    "curiosidade": ["Daiara é ativista e ajudou a criar a primeira galeria de arte indígena no Museu de Arte do Rio 🏛️"],
+    "interacao": ["Se você fosse pintar um rio, que cores usaria para mostrar sua força?"],
+    "atividade": ["Desenhe um grande painel com ondas, peixes e folhas usando as três cores que mais gosta 🌊"],
+    "final": ["A arte pode proteger os rios e as matas para sempre 💧"],
+    "emocao": "proteção",
+    "nivel": "leve"
   },
-  {
-    "artista": "Daiara Tukano",
-    "povo": "Tukano",
-    "obra": "Série Uremiri Hãusiro",
-    "ano": "Contemporâneo",
-    "explicacao_candinho": "Essa série usa formas e cores vibrantes para representar os conhecimentos e as tradições dos povos indígenas.",
-    "cores_principais": ["vermelho", "amarelo", "azul"],
-    "tema": "Sabedoria indígena"
+  "daiara_tukano_uremiri": {
+    "tema": "artistas_brasileiros",
+    "subtema": "daiara_tukano",
+    "palavras_chave": ["daiara tukano", "uremiri hãusiro", "série", "sabedoria indígena"],
+    "inicio": ["A série 'Uremiri Hãusiro' de Daiara Tukano é como um livro de sabedoria pintado 🧠"],
+    "explicacao_curta": ["Essa série usa formas e cores vibrantes para representar os conhecimentos e as tradições dos povos indígenas."],
+    "explicacao_aprofundada": ["Com vermelho, amarelo e azul, Daiara transforma mitos e histórias antigas em arte moderna e cheia de vida."],
+    "curiosidade": ["O nome 'Uremiri Hãusiro' significa algo como 'desenhos da transformação' na língua tukano 🌀"],
+    "interacao": ["Que conhecimento importante você gostaria de ensinar através de um desenho?"],
+    "atividade": ["Desenhe um símbolo que represente algo que você aprendeu com seus avós ou pais 👵👴"],
+    "final": ["A arte guarda a sabedoria de um povo por gerações 📖"],
+    "emocao": "sabedoria",
+    "nivel": "leve"
   },
-  {
-    "artista": "Denilson Baniwa",
-    "povo": "Baniwa",
-    "obra": "Natureza morta 1",
-    "ano": "2016",
-    "explicacao_candinho": "Denilson mistura arte tradicional indígena com ideias modernas para mostrar que os povos indígenas estão vivos e presentes no mundo de hoje.",
-    "cores_principais": ["preto", "verde", "vermelho"],
-    "tema": "Identidade indígena"
+  "denilson_baniwa": {
+    "tema": "artistas_brasileiros",
+    "subtema": "denilson_baniwa",
+    "palavras_chave": ["denilson baniwa", "natureza morta 1", "baniwa"],
+    "inicio": ["Denilson Baniwa transforma frutas e objetos em uma mensagem poderosa 🍌"],
+    "explicacao_curta": ["Denilson mistura arte tradicional indígena com ideias modernas para mostrar que os povos indígenas estão vivos e presentes no mundo de hoje."],
+    "explicacao_aprofundada": ["Em 'Natureza morta 1', o preto, verde e vermelho criam uma cena que fala de identidade e resistência indígena."],
+    "curiosidade": ["Denilson criou a série 'Vingadores Indígenas', onde heróis da Marvel se tornam guerreiros da Amazônia 🦸🏽"],
+    "interacao": ["O que você acha que um cacho de bananas pode contar sobre história?"],
+    "atividade": ["Desenhe uma cesta de frutas, mas adicione um símbolo indígena que você inventou 🍎"],
+    "final": ["A arte indígena contemporânea mistura passado e futuro de forma divertida 🚀"],
+    "emocao": "inovação",
+    "nivel": "leve"
   },
-  {
-    "artista": "Carmézia Emiliano",
-    "povo": "Macuxi",
-    "obra": "A árvore da vida",
-    "ano": "2022",
-    "explicacao_candinho": "A artista pinta cenas da comunidade Macuxi com muitas cores alegres. A árvore representa união, vida e conexão entre as pessoas.",
-    "cores_principais": ["verde", "amarelo", "rosa"],
-    "tema": "Comunidade e natureza"
+  "carmezia_emiliano": {
+    "tema": "artistas_brasileiros",
+    "subtema": "carmezia_emiliano",
+    "palavras_chave": ["carmezia emiliano", "macuxi", "árvore da vida"],
+    "inicio": ["Carmézia Emiliano pintou uma árvore tão especial que ela conecta toda a comunidade 🌳"],
+    "explicacao_curta": ["A artista pinta cenas da comunidade Macuxi com muitas cores alegres."],
+    "explicacao_aprofundada": ["Em 'A árvore da vida', o verde, amarelo e rosa representam união, vida e a conexão entre as pessoas e a natureza."],
+    "curiosidade": ["Carmézia começou a pintar aos 50 anos e hoje suas obras são conhecidas no mundo todo 🌍"],
+    "interacao": ["Quem faz parte da sua 'árvore da vida'?"],
+    "atividade": ["Desenhe uma árvore e em cada galho escreva ou desenhe o rosto de uma pessoa importante para você 👨‍👩‍👧"],
+    "final": ["A arte pode mostrar que todos estamos ligados uns aos outros 🤝"],
+    "emocao": "conexão",
+    "nivel": "leve"
   },
-  {
-    "artista": "Auá Mendes",
-    "povo": "Mura",
-    "obra": "Autorretrato",
-    "ano": "2020",
-    "explicacao_candinho": "Auá cria pinturas que mostram orgulho da cultura indígena e também a diversidade das pessoas indígenas que vivem nas cidades.",
-    "cores_principais": ["roxo", "azul", "rosa"],
-    "tema": "Identidade e diversidade"
+  "aua_mendes": {
+    "tema": "artistas_brasileiros",
+    "subtema": "aua_mendes",
+    "palavras_chave": ["auá mendes", "mura", "autorretrato"],
+    "inicio": ["Auá Mendes pintou um autorretrato para mostrar a força e a diversidade do povo Mura 💪"],
+    "explicacao_curta": ["Auá cria pinturas que mostram orgulho da cultura indígena e também a diversidade das pessoas indígenas que vivem nas cidades."],
+    "explicacao_aprofundada": ["Em 'Autorretrato', as cores roxo, azul e rosa se encontram para celebrar a identidade indígena contemporânea."],
+    "curiosidade": ["Auá é do povo Mura e também é professora, levando a arte indígena para dentro das escolas 🍎"],
+    "interacao": ["Como você se desenharia para mostrar o que te torna único?"],
+    "atividade": ["Faça um autorretrato usando cores que você ama, mesmo que não sejam as cores reais da sua pele ou cabelo 🎨"],
+    "final": ["A arte ajuda a gente a se ver e a se orgulhar de quem somos 🌟"],
+    "emocao": "autoestima",
+    "nivel": "leve"
   },
-  {
-    "artista": "Estevão Silva",
-    "obra": "Naturezas-mortas e retratos",
-    "ano": "Século XIX",
-    "explicacao_candinho": "Estevão Silva foi um importante pintor negro brasileiro. Ele gostava de pintar frutas, flores e pessoas com muitos detalhes e beleza.",
-    "cores_principais": ["verde", "vermelho", "marrom"],
-    "tema": "Natureza e retratos"
+  "estevao_silva": {
+    "tema": "artistas_brasileiros",
+    "subtema": "estevao_silva",
+    "palavras_chave": ["estevao silva", "naturezas-mortas", "retratos", "século XIX"],
+    "inicio": ["Estevão Silva adorava pintar frutas, flores e pessoas com muito capricho 🍇"],
+    "explicacao_curta": ["Estevão Silva foi um importante pintor negro brasileiro. Ele gostava de pintar frutas, flores e pessoas com muitos detalhes e beleza."],
+    "explicacao_aprofundada": ["Em suas naturezas-mortas e retratos, ele usava verde, vermelho e marrom para criar cenas realistas e cheias de vida."],
+    "curiosidade": ["Ele foi um dos poucos artistas negros a ter reconhecimento no Brasil do século XIX, apesar do preconceito da época 🖤"],
+    "interacao": ["Se você fosse pintar uma fruta, qual escolheria e por quê?"],
+    "atividade": ["Desenhe uma cesta de frutas e capriche nos detalhes: sombras, brilhos e texturas 🍊"],
+    "final": ["A arte pode dar vida até mesmo a uma simples fruta ✨"],
+    "emocao": "delicadeza",
+    "nivel": "leve"
   },
-  {
-    "artista": "Arthur Timótheo da Costa",
-    "obra": "Retratos e paisagens impressionistas",
-    "ano": "Início do século XX",
-    "explicacao_candinho": "Arthur pintava cenas iluminadas e cheias de cores suaves. Suas obras parecem cheias de luz e movimento.",
-    "cores_principais": ["azul", "bege", "verde"],
-    "tema": "Paisagens e pessoas"
+  "arthur_timotheo_da_costa": {
+    "tema": "artistas_brasileiros",
+    "subtema": "arthur_timotheo_da_costa",
+    "palavras_chave": ["arthur timótheo da costa", "impressionista", "paisagens"],
+    "inicio": ["Arthur Timótheo da Costa pintava paisagens que parecem banhadas de luz solar ☀️"],
+    "explicacao_curta": ["Arthur pintava cenas iluminadas e cheias de cores suaves. Suas obras parecem cheias de luz e movimento."],
+    "explicacao_aprofundada": ["Em seus retratos e paisagens impressionistas, ele usava azul, bege e verde para capturar a luz e a atmosfera do momento."],
+    "curiosidade": ["Ele estudou pintura na Europa e trouxe o estilo impressionista para o Brasil, mas morreu muito jovem aos 39 anos 🕯️"],
+    "interacao": ["Como você pintaria a luz do sol entrando pela janela da sua casa?"],
+    "atividade": ["Desenhe uma árvore ou uma rua usando apenas pontos e pequenas pinceladas de cores claras ☀️"],
+    "final": ["A arte impressionista nos ensina a observar a luz e o movimento das coisas 🌅"],
+    "emocao": "leveza",
+    "nivel": "leve"
   },
-  {
-    "artista": "Maria Auxiliadora",
-    "obra": "Festas populares e cenas do cotidiano",
-    "ano": "Século XX",
-    "explicacao_candinho": "Maria Auxiliadora criava pinturas cheias de texturas e detalhes, mostrando festas, danças e a vida simples do povo brasileiro.",
-    "cores_principais": ["amarelo", "vermelho", "verde"],
-    "tema": "Cultura popular"
+  "maria_auxiliadora": {
+    "tema": "artistas_brasileiros",
+    "subtema": "maria_auxiliadora",
+    "palavras_chave": ["maria auxiliadora", "festas populares", "cotidiano"],
+    "inicio": ["Maria Auxiliadora pintava festas tão animadas que parece que a gente ouve a música 🎵"],
+    "explicacao_curta": ["Maria Auxiliadora criava pinturas cheias de texturas e detalhes, mostrando festas, danças e a vida simples do povo brasileiro."],
+    "explicacao_aprofundada": ["Com amarelo, vermelho e verde, ela representava a cultura popular, o trabalho e a religiosidade com muita alegria e textura."],
+    "curiosidade": ["Ela usava tinta caseira, tecidos e até areia para dar relevo às suas obras 🧵"],
+    "interacao": ["Qual festa brasileira você mais gosta? Como são as cores dela?"],
+    "atividade": ["Desenhe uma festa junina ou um carnaval usando muitas cores e enchendo o papel de detalhes (bandeirinhas, balões, confetes) 🎉"],
+    "final": ["A arte pode eternizar a alegria de uma festa popular 🎊"],
+    "emocao": "celebração",
+    "nivel": "leve"
   },
-  {
-    "artista": "Rubem Valentim",
-    "obra": "Emblema",
-    "ano": "1980",
-    "explicacao_candinho": "Rubem usava formas geométricas para representar símbolos da cultura afro-brasileira e dos orixás. Sua arte parece um grande quebra-cabeça colorido.",
-    "cores_principais": ["azul", "branco", "preto"],
-    "tema": "Cultura afro-brasileira"
+  "rubem_valentim": {
+    "tema": "artistas_brasileiros",
+    "subtema": "rubem_valentim",
+    "palavras_chave": ["rubem valentim", "emblema", "orixás", "afro-brasileiro"],
+    "inicio": ["Rubem Valentim transformava símbolos sagrados em um belo quebra-cabeça colorido 🧩"],
+    "explicacao_curta": ["Rubem usava formas geométricas para representar símbolos da cultura afro-brasileira e dos orixás."],
+    "explicacao_aprofundada": ["Em 'Emblema', o azul, branco e preto se organizam em formas retangulares e circulares que lembram objetos rituais."],
+    "curiosidade": ["Ele era também jornalista e crítico de arte, e ajudou a fundar o Museu de Arte da Bahia 🏛️"],
+    "interacao": ["Se você fosse criar um símbolo para a sorte, que formas usaria?"],
+    "atividade": ["Desenhe um emblema geométrico usando apenas quadrados, triângulos e círculos, e pinte com três cores contrastantes ⬛🔺🔵"],
+    "final": ["A arte geométrica pode carregar significados profundos e sagrados ✡️"],
+    "emocao": "mistério",
+    "nivel": "leve"
   },
-  {
-    "artista": "Maxwell Alexandre",
-    "obra": "Série Pardo é Papel",
-    "ano": "Contemporâneo",
-    "explicacao_candinho": "Maxwell pinta cenas da favela e do cotidiano das pessoas negras no Brasil, mostrando desafios, sonhos e muita criatividade.",
-    "cores_principais": ["marrom", "preto", "amarelo"],
-    "tema": "Vida urbana e identidade"
+  "maxwell_alexandre": {
+    "tema": "artistas_brasileiros",
+    "subtema": "maxwell_alexandre",
+    "palavras_chave": ["maxwell alexandre", "pardo é papel", "série", "favela"],
+    "inicio": ["Maxwell Alexandre pinta a vida na favela com cores fortes e muito orgulho 🧡"],
+    "explicacao_curta": ["Maxwell pinta cenas da favela e do cotidiano das pessoas negras no Brasil, mostrando desafios, sonhos e muita criatividade."],
+    "explicacao_aprofundada": ["Na série 'Pardo é Papel', ele usa marrom, preto e amarelo para falar de identidade, poder e a beleza da periferia."],
+    "curiosidade": ["Ele começou a carreira como skatista e usou o esporte como inspiração para suas primeiras pinturas 🛹"],
+    "interacao": ["O que você gostaria de mostrar sobre o lugar onde você mora através da arte?"],
+    "atividade": ["Desenhe uma cena da sua rua ou bairro, destacando as pessoas e as cores que você mais gosta 🏘️"],
+    "final": ["A arte pode transformar o cotidiano em algo grandioso e cheio de significado 🌟"],
+    "emocao": "protagonismo",
+    "nivel": "leve"
   }
-]
+}
