@@ -1,168 +1,282 @@
-[
-  {
-    "obra": "Abaporu",
-    "ano": "1928",
-    "artista": "Tarsila do Amaral",
-    "palavras_chave": [
-    "abaporu",
-    "obra abaporu",
-    "quadro abaporu",
-    "tarsila abaporu"
-  ],
-    "explicacao_candinho": "Oi, amiguinho! Essa pintura mostra uma pessoa com pés e mãos enormes sentada ao lado de um cacto. A artista queria mostrar a força do povo brasileiro e criar uma arte diferente, bem brasileira e cheia de imaginação.",
-    "cores_principais": ["verde", "azul", "amarelo"],
-    "tema": "Modernismo brasileiro"
+{
+  "tarsila_do_amaral_abaporu": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "tarsila_do_amaral",
+    "palavras_chave": ["abaporu", "obra abaporu", "quadro abaporu", "tarsila abaporu"],
+    "inicio": ["Abaporu tem pés e mãos enormes, como se abraçasse o chão e o céu ao mesmo tempo 🌵👣"],
+    "explicacao_curta": ["Essa pintura mostra uma pessoa com pés e mãos enormes sentada ao lado de um cacto. A artista queria mostrar a força do povo brasileiro e criar uma arte diferente, bem brasileira e cheia de imaginação."],
+    "explicacao_aprofundada": ["Tarsila usou verde, azul e amarelo para criar uma figura solitária mas poderosa, representando a antropofagia cultural – a ideia de devorar influências estrangeiras e criar algo genuinamente brasileiro."],
+    "curiosidade": ["Abaporu significa 'homem que come gente' em tupi-guarani, e a obra inspirou o Movimento Antropofágico no Brasil 🍽️"],
+    "interacao": ["Se você tivesse pés enormes, onde gostaria de pisar?"],
+    "atividade": ["Desenhe uma figura com uma parte do corpo exageradamente grande (mão, cabeça, pé) e invente uma história para ela ✍️"],
+    "final": ["A arte pode transformar o estranho em algo cheio de significado 🎨"],
+    "emocao": "espanto",
+    "nivel": "leve"
   },
-  {
-    "obra": "Operários",
-    "ano": "1933",
-    "artista": "Tarsila do Amaral",
-    "explicacao_candinho": "Aqui vemos muitas pessoas trabalhando juntas. Cada rosto é diferente, mostrando como o Brasil é formado por vários povos e culturas. A pintura fala sobre trabalho e união.",
-    "cores_principais": ["cinza", "marrom", "rosa"],
-    "tema": "Trabalho e diversidade"
+  "tarsila_do_amaral_operarios": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "tarsila_do_amaral",
+    "palavras_chave": ["operários", "tarsila operários", "quadro operários"],
+    "inicio": ["Muitos rostos diferentes, mas todos trabalhando juntos – assim Tarsila pintou a força do povo brasileiro 👷‍♂️👷‍♀️"],
+    "explicacao_curta": ["Aqui vemos muitas pessoas trabalhando juntas. Cada rosto é diferente, mostrando como o Brasil é formado por vários povos e culturas. A pintura fala sobre trabalho e união."],
+    "explicacao_aprofundada": ["Com cinza, marrom e rosa, Tarsila criou uma multidão de operários anônimos, destacando a diversidade étnica e a importância coletiva do trabalho na construção do país."],
+    "curiosidade": ["Essa foi a primeira pintura social de Tarsila, mostrando sua preocupação com os trabalhadores após uma viagem à União Soviética 🇷🇺"],
+    "interacao": ["Que profissão você gostaria de desenhar para mostrar a importância do trabalho?"],
+    "atividade": ["Desenhe uma fileira de três pessoas, cada uma com um uniforme ou ferramenta diferente, representando diferentes trabalhos 🛠️"],
+    "final": ["O trabalho em equipe e a diversidade tornam o Brasil mais forte 🤝"],
+    "emocao": "solidariedade",
+    "nivel": "leve"
   },
-  {
-    "obra": "Antropofagia",
-    "ano": "1929",
-    "artista": "Tarsila do Amaral",
-    "explicacao_candinho": "Essa obra mistura formas estranhas e divertidas para mostrar a ideia de que o Brasil pega influências de outros lugares e transforma tudo em algo novo e brasileiro.",
-    "cores_principais": ["verde", "amarelo", "azul"],
-    "tema": "Cultura brasileira"
+  "tarsila_do_amaral_antropofagia": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "tarsila_do_amaral",
+    "palavras_chave": ["antropofagia", "tarsila antropofagia", "quadro antropofagia"],
+    "inicio": ["Uma figura estranha, quase de outro mundo, com uma perna gigante e um pé de planta – é a Antropofagia de Tarsila 🦵🌿"],
+    "explicacao_curta": ["Essa obra mistura formas estranhas e divertidas para mostrar a ideia de que o Brasil pega influências de outros lugares e transforma tudo em algo novo e brasileiro."],
+    "explicacao_aprofundada": ["Com verde, amarelo e azul, a pintura sintetiza o Manifesto Antropofágico de Oswald de Andrade: devorar a cultura europeia e regurgitar algo original, tropical e selvagem."],
+    "curiosidade": ["A figura central lembra Abaporu, mas agora com uma perna ainda mais alongada, como se estivesse pronta para engolir o mundo 🌍"],
+    "interacao": ["O que você 'engole' de outras culturas (comida, música, brincadeiras) e transforma no seu jeito brasileiro?"],
+    "atividade": ["Desenhe um prato com vários alimentos de lugares diferentes (pizza, sushi, feijoada) e misture tudo em um só prato criativo 🍽️"],
+    "final": ["A arte brasileira é poderosa porque consegue transformar tudo em algo nosso 💚💛"],
+    "emocao": "ousadia",
+    "nivel": "leve"
   },
-  {
-    "obra": "A Cuca",
-    "ano": "1924",
-    "artista": "Tarsila do Amaral",
-    "explicacao_candinho": "Você conhece a Cuca das histórias? Aqui ela aparece de um jeito mágico e assustador. A artista usou formas diferentes para lembrar os contos do folclore brasileiro.",
-    "cores_principais": ["verde", "amarelo", "laranja"],
-    "tema": "Folclore brasileiro"
+  "tarsila_do_amaral_a_cuca": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "tarsila_do_amaral",
+    "palavras_chave": ["a cuca", "cuca tarsila", "quadro a cuca"],
+    "inicio": ["A Cuca do folclore ganhou um visual moderno e assustador, com formas geométricas e cores vibrantes 🐊✨"],
+    "explicacao_curta": ["Você conhece a Cuca das histórias? Aqui ela aparece de um jeito mágico e assustador. A artista usou formas diferentes para lembrar os contos do folclore brasileiro."],
+    "explicacao_aprofundada": ["Com verde, amarelo e laranja, Tarsila transformou a bruxa jacaré em uma figura cubista, misturando tradição popular com inovação artística."],
+    "curiosidade": ["Esta pintura foi feita para o livro 'A Cuca', de Monteiro Lobato, e ajudou a imortalizar a personagem no imaginário infantil 📖"],
+    "interacao": ["Como você imagina a Cuca? Ela é bonita ou assustadora? Divertida ou malvada?"],
+    "atividade": ["Desenhe a Cuca do seu jeito, usando formas geométricas (círculos, triângulos, retângulos) e cores fortes 🟩🟨🟧"],
+    "final": ["O folclore fica ainda mais mágico quando os artistas o reinventam 🌙"],
+    "emocao": "curiosidade",
+    "nivel": "leve"
   },
-  {
-    "obra": "O Lavrador de Café",
-    "ano": "1934",
-    "artista": "Candido Portinari",
-    "explicacao_candinho": "Esse trabalhador tem mãos e pés enormes para mostrar sua força. Portinari queria homenagear as pessoas que trabalhavam nas plantações de café no Brasil.",
-    "cores_principais": ["marrom", "azul", "verde"],
-    "tema": "Trabalho no campo"
+  "candido_portinari_o_lavrador_de_cafe": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "candido_portinari",
+    "palavras_chave": ["lavrador de café", "portinari lavrador", "quadro lavrador de café"],
+    "inicio": ["Mãos enormes, pés gigantes – assim Portinari mostrou a força do trabalhador do café ☕💪"],
+    "explicacao_curta": ["Esse trabalhador tem mãos e pés enormes para mostrar sua força. Portinari queria homenagear as pessoas que trabalhavam nas plantações de café no Brasil."],
+    "explicacao_aprofundada": ["Com marrom, azul e verde, o artista realça a dignidade e o sofrimento do lavrador, usando o exagero para valorizar quem sustenta a economia com o suor."],
+    "curiosidade": ["Portinari vinha de uma família de imigrantes italianos que trabalhavam em fazendas de café; ele conhecia bem aquela realidade 🍇"],
+    "interacao": ["O que você faria se tivesse mãos enormes? Que trabalho poderia fazer?"],
+    "atividade": ["Desenhe uma pessoa com mãos enormes realizando alguma tarefa (plantar, construir, cozinhar) 🖐️🌱"],
+    "final": ["Trabalhadores merecem respeito e reconhecimento por sua força e dedicação 🌟"],
+    "emocao": "gratidão",
+    "nivel": "leve"
   },
-  {
-    "obra": "Café",
-    "ano": "1935",
-    "artista": "Candido Portinari",
-    "explicacao_candinho": "Aqui vemos trabalhadores colhendo café. O artista mostrou como era difícil trabalhar nas fazendas e como essas pessoas eram importantes para o país.",
-    "cores_principais": ["marrom", "verde", "bege"],
-    "tema": "Vida dos trabalhadores"
+  "candido_portinari_cafe": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "candido_portinari",
+    "palavras_chave": ["café", "portinari café", "quadro café"],
+    "inicio": ["Homens e mulheres curvados, colhendo café sob o sol – uma cena dura, mas cheia de vida 🌞☕"],
+    "explicacao_curta": ["Aqui vemos trabalhadores colhendo café. O artista mostrou como era difícil trabalhar nas fazendas e como essas pessoas eram importantes para o país."],
+    "explicacao_aprofundada": ["Com marrom, verde e bege, Portinari cria uma composição ritmada, onde os trabalhadores parecem se mover em harmonia, cada um com seu papel na colheita."],
+    "curiosidade": ["O quadro 'Café' faz parte de uma série que Portinari pintou para o Ministério da Educação, retratando os ciclos econômicos do Brasil 🇧🇷"],
+    "interacao": ["Você já colheu alguma fruta ou planta? Como foi?"],
+    "atividade": ["Desenhe uma plantação com fileiras de pés de café e algumas pessoas colhendo os grãozinhos vermelhos 🍒"],
+    "final": ["Até uma simples xícara de café carrega a história de muitos trabalhadores ❤️"],
+    "emocao": "respeito",
+    "nivel": "leve"
   },
-  {
-    "obra": "O Grito",
-    "ano": "1955",
-    "artista": "Candido Portinari",
-    "explicacao_candinho": "Essa pintura mostra uma pessoa parecendo assustada ou triste. As cores fortes ajudam a mostrar emoções bem intensas.",
-    "cores_principais": ["vermelho", "preto", "amarelo"],
-    "tema": "Emoções humanas"
+  "candido_portinari_o_grito": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "candido_portinari",
+    "palavras_chave": ["o grito", "portinari o grito", "quadro o grito portinari"],
+    "inicio": ["Uma boca aberta, olhos arregalados – um grito que parece sair da tela e ecoar no peito 😱"],
+    "explicacao_curta": ["Essa pintura mostra uma pessoa parecendo assustada ou triste. As cores fortes ajudam a mostrar emoções bem intensas."],
+    "explicacao_aprofundada": ["Com vermelho, preto e amarelo, Portinari expressa angústia e desespero, talvez como protesto contra as injustiças sociais e a dor humana."],
+    "curiosidade": ["Diferente do famoso 'O Grito' de Edvard Munch, o de Portinari tem traços mais realistas e uma paleta terrosa, mas igualmente perturbadora 😨"],
+    "interacao": ["O que pode fazer uma pessoa gritar assim? Você já sentiu vontade de gritar?"],
+    "atividade": ["Desenhe um rosto com uma expressão muito forte (grito, risada, choro) usando apenas duas cores contrastantes 🎭"],
+    "final": ["A arte pode dar forma aos sentimentos que não conseguimos explicar com palavras 🗣️"],
+    "emocao": "desespero",
+    "nivel": "leve"
   },
-  {
-    "obra": "Mestiço",
-    "ano": "1934",
-    "artista": "Candido Portinari",
-    "explicacao_candinho": "O artista pintou um homem brasileiro com expressão séria e forte. A obra mostra a mistura de povos e culturas do Brasil.",
-    "cores_principais": ["marrom", "azul", "bege"],
-    "tema": "Identidade brasileira"
+  "candido_portinari_mestico": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "candido_portinari",
+    "palavras_chave": ["mestiço", "portinari mestiço", "quadro mestiço"],
+    "inicio": ["Um homem de olhar sério e pele morena, com um chapéu e um cigarro de palha – assim Portinari pintou o mestiço brasileiro 👒"],
+    "explicacao_curta": ["O artista pintou um homem brasileiro com expressão séria e forte. A obra mostra a mistura de povos e culturas do Brasil."],
+    "explicacao_aprofundada": ["Com marrom, azul e bege, a obra valoriza a figura do caboclo, fruto da miscigenação, com dignidade e humanidade, fugindo dos estereótipos."],
+    "curiosidade": ["Portinari pintou vários retratos de 'mestiços' ao longo de sua carreira, sempre destacando a beleza da diversidade brasileira 🌈"],
+    "interacao": ["O que significa 'mestiço' para você? Por que o Brasil é um país tão misturado?"],
+    "atividade": ["Desenhe um retrato de alguém (real ou imaginário) que represente a mistura de dois ou mais povos que você admira 👥"],
+    "final": ["A mistura de raças e culturas é uma das maiores riquezas do Brasil 💎"],
+    "emocao": "orgulho",
+    "nivel": "leve"
   },
-  {
-    "obra": "A Estudante",
-    "ano": "1915-1916",
-    "artista": "Anita Malfatti",
-    "explicacao_candinho": "A artista pintou uma jovem estudando com cores diferentes e traços modernos. Na época, muita gente achou estranho, mas hoje a obra é muito famosa.",
-    "cores_principais": ["azul", "verde", "rosa"],
-    "tema": "Vida cotidiana"
+  "anita_malfatti_a_estudante": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "anita_malfatti",
+    "palavras_chave": ["a estudante", "anita malfatti estudante", "quadro a estudante"],
+    "inicio": ["Uma jovem estudante com rosto colorido e formas quebradas – Anita desafiou o jeito tradicional de pintar 📚🟣"],
+    "explicacao_curta": ["A artista pintou uma jovem estudando com cores diferentes e traços modernos. Na época, muita gente achou estranho, mas hoje a obra é muito famosa."],
+    "explicacao_aprofundada": ["Com azul, verde e rosa, Anita usa pinceladas expressionistas para mostrar não apenas a aparência da moça, mas seu estado de espírito e a luz ambiente."],
+    "curiosidade": ["Esse quadro foi um dos mais criticados na famosa exposição de 1917, que recebeu um artigo feroz de Monteiro Lobato chamado 'Paranoia ou Mistificação?' 😬"],
+    "interacao": ["Se você fosse pintar alguém estudando, usaria cores reais ou inventaria novas?"],
+    "atividade": ["Desenhe uma pessoa estudando, mas pinte o rosto e os livros com cores que você sente (por exemplo, azul para calma, vermelho para energia) 💙❤️"],
+    "final": ["A arte moderna nos ensina a olhar para o comum com novos olhos 👓"],
+    "emocao": "rebeldia",
+    "nivel": "leve"
   },
-  {
-    "obra": "O Homem Amarelo",
-    "ano": "1915-1916",
-    "artista": "Anita Malfatti",
-    "explicacao_candinho": "O homem foi pintado com cores fortes e diferentes da realidade. Anita queria mostrar sentimentos e emoções através da arte.",
-    "cores_principais": ["amarelo", "verde", "laranja"],
-    "tema": "Expressionismo"
+  "anita_malfatti_o_homem_amarelo": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "anita_malfatti",
+    "palavras_chave": ["o homem amarelo", "anita malfatti homem amarelo"],
+    "inicio": ["Um homem completamente amarelo, com olhos verdes e mão azul – Anita pintou as emoções em vez da realidade 🟡💚"],
+    "explicacao_curta": ["O homem foi pintado com cores fortes e diferentes da realidade. Anita queria mostrar sentimentos e emoções através da arte."],
+    "explicacao_aprofundada": ["Com amarelo, verde e laranja, a artista distorce o corpo e a cor para expressar angústia, solidão ou talvez uma doença – convidando o observador a sentir."],
+    "curiosidade": ["Anita sofria de uma atrofia no braço direito, o que a tornava mais sensível às imperfeições e dores do corpo, refletidas em suas figuras distorcidas 🦾"],
+    "interacao": ["Que cor você usaria para representar a alegria? E a tristeza?"],
+    "atividade": ["Desenhe um retrato de uma pessoa usando apenas uma cor principal para cada sentimento (ex: vermelho para raiva, azul para calma) 🎨"],
+    "final": ["As cores podem falar mais do que as formas quando mostramos o que sentimos 🌈"],
+    "emocao": "introspecção",
+    "nivel": "leve"
   },
-  {
-    "obra": "A Boba",
-    "ano": "1915-1916",
-    "artista": "Anita Malfatti",
-    "explicacao_candinho": "Essa personagem tem uma expressão curiosa e divertida. A pintura usa formas exageradas para chamar atenção para as emoções.",
-    "cores_principais": ["azul", "rosa", "verde"],
-    "tema": "Expressão humana"
+  "anita_malfatti_a_boba": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "anita_malfatti",
+    "palavras_chave": ["a boba", "anita malfatti boba"],
+    "inicio": ["Uma figura de olhar vago e boca torta – é 'A Boba', de Anita Malfatti, que brinca com a expressão humana 😜"],
+    "explicacao_curta": ["Essa personagem tem uma expressão curiosa e divertida. A pintura usa formas exageradas para chamar atenção para as emoções."],
+    "explicacao_aprofundada": ["Com azul, rosa e verde, Anita cria uma figura quase caricata, com braços desproporcionais e rosto assimétrico, sugerindo ingenuidade ou loucura de forma provocadora."],
+    "curiosidade": ["O título 'A Boba' pode ser irônico: a personagem parece mais consciente de sua estranheza do que os críticos que a chamaram de 'boba' na época 😏"],
+    "interacao": ["O que é ser 'bobo' para você? Existe um jeito certo de ser?"],
+    "atividade": ["Desenhe um personagem com uma expressão exagerada (muito feliz, muito triste, muito espantado) e dê a ele um nome engraçado 😂"],
+    "final": ["A arte pode abraçar o que é diferente e mostrar que a normalidade é uma invenção 🌀"],
+    "emocao": "humor",
+    "nivel": "leve"
   },
-  {
-    "obra": "Baile Popular",
-    "ano": "1924",
-    "artista": "Di Cavalcanti",
-    "explicacao_candinho": "A obra mostra pessoas dançando e se divertindo. O artista gostava de retratar festas e músicas populares brasileiras.",
-    "cores_principais": ["vermelho", "amarelo", "marrom"],
-    "tema": "Festa brasileira"
+  "di_cavalcanti_baile_popular": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "di_cavalcanti",
+    "palavras_chave": ["baile popular", "di cavalcanti baile"],
+    "inicio": ["Pessoas dançando coladinho, músicos tocando – é um baile popular cheio de alegria e movimento 💃🎺"],
+    "explicacao_curta": ["A obra mostra pessoas dançando e se divertindo. O artista gostava de retratar festas e músicas populares brasileiras."],
+    "explicacao_aprofundada": ["Com vermelho, amarelo e marrom, Di Cavalcanti captura a energia do samba e dos clubes suburbanos, valorizando a cultura popular como tema nobre da arte."],
+    "curiosidade": ["Di Cavalcanti foi um dos organizadores da Semana de Arte Moderna de 1922 e sempre defendeu uma arte que celebrasse o povo brasileiro 🎉"],
+    "interacao": ["Qual música ou dança faz você querer dançar imediatamente?"],
+    "atividade": ["Desenhe uma cena de dança com pelo menos três pessoas, mostrando o movimento através de linhas onduladas ao redor dos braços e pernas 💫"],
+    "final": ["A arte pode eternizar a alegria de uma noite de dança e amizade 🌙"],
+    "emocao": "festa",
+    "nivel": "leve"
   },
-  {
-    "obra": "Pierrete",
-    "ano": "1922",
-    "artista": "Di Cavalcanti",
-    "explicacao_candinho": "Essa personagem parece sonhadora e misteriosa. O artista usou cores suaves para criar um clima delicado.",
-    "cores_principais": ["rosa", "azul", "cinza"],
-    "tema": "Personagem artística"
+  "di_cavalcanti_pierrete": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "di_cavalcanti",
+    "palavras_chave": ["pierrete", "di cavalcanti pierrete"],
+    "inicio": ["Uma pierrô tristonha, com gola branca e olhar perdido – Di Cavalcanti reinventou a personagem da commedia dell'arte 🎭"],
+    "explicacao_curta": ["Essa personagem parece sonhadora e misteriosa. O artista usou cores suaves para criar um clima delicado."],
+    "explicacao_aprofundada": ["Com rosa, azul e cinza, ele transforma a tradicional Pierrette em uma figura melancólica e moderna, usando linhas suaves e composição simplificada."],
+    "curiosidade": ["A obra foi pintada em 1922, mesmo ano da Semana de Arte Moderna, mostrando a dualidade de Di: moderno mas ainda ligado a temas europeus 🎨"],
+    "interacao": ["Você já assistiu a um teatro de fantoches ou a uma peça com palhaços? Qual personagem você gosta mais?"],
+    "atividade": ["Desenhe um palhaço ou palhaça triste, usando cores suaves (azul claro, lilás, cinza) para mostrar a emoção 🤡💧"],
+    "final": ["A arte pode mostrar o lado delicado e triste dos palhaços, que nem sempre estão felizes 🎪"],
+    "emocao": "melancolia",
+    "nivel": "leve"
   },
-  {
-    "obra": "Cinco Moças de Guaratinguetá",
-    "ano": "1930",
-    "artista": "Di Cavalcanti",
-    "explicacao_candinho": "As cinco mulheres aparecem juntas em uma cena tranquila. A pintura mostra a beleza das pessoas simples do Brasil.",
-    "cores_principais": ["marrom", "verde", "bege"],
-    "tema": "Cotidiano brasileiro"
+  "di_cavalcanti_cinco_mocas_de_guaratingueta": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "di_cavalcanti",
+    "palavras_chave": ["cinco moças de guaratinguetá", "di cavalcanti moças"],
+    "inicio": ["Cinco jovens sentadas na grama, conversando tranquilamente – uma cena simples do interior paulista 🍃👒"],
+    "explicacao_curta": ["As cinco mulheres aparecem juntas em uma cena tranquila. A pintura mostra a beleza das pessoas simples do Brasil."],
+    "explicacao_aprofundada": ["Com marrom, verde e bege, Di Cavalcanti utiliza uma paleta terrosa e formas arredondadas para retratar a intimidade e a dignidade das moças do Vale do Paraíba."],
+    "curiosidade": ["Guaratinguetá é a cidade natal de Di Cavalcanti; ele sempre voltava a ela em suas memórias e pinturas 🏡"],
+    "interacao": ["Você tem um grupo de amigos com quem gosta de sentar e conversar? O que vocês conversam?"],
+    "atividade": ["Desenhe um grupo de três amigos sentados em um banco de praça ou na grama, cada um com uma expressão diferente de conversa 😊😐😁"],
+    "final": ["As cenas simples do cotidiano também merecem virar arte 🖼️"],
+    "emocao": "calma",
+    "nivel": "leve"
   },
-  {
-    "obra": "Samba",
-    "ano": "1925",
-    "artista": "Di Cavalcanti",
-    "explicacao_candinho": "Aqui vemos música, dança e alegria! O artista quis mostrar a energia do samba e da cultura brasileira.",
-    "cores_principais": ["vermelho", "laranja", "amarelo"],
-    "tema": "Música e dança"
+  "di_cavalcanti_samba": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "di_cavalcanti",
+    "palavras_chave": ["samba", "di cavalcanti samba"],
+    "inicio": ["Pernas que dançam, braços que gingam, cores que explodem – é o samba pintado por Di Cavalcanti 🔥🎶"],
+    "explicacao_curta": ["Aqui vemos música, dança e alegria! O artista quis mostrar a energia do samba e da cultura brasileira."],
+    "explicacao_aprofundada": ["Com vermelho, laranja e amarelo, Di cria uma composição vibrante e abstrata, onde os corpos se fundem ao ritmo, celebrando a identidade nacional."],
+    "curiosidade": ["Di Cavalcanti era um grande apreciador de samba e amigo de compositores como Pixinguinha e Donga 🎵"],
+    "interacao": ["O que o samba representa para o Brasil? Que outras danças brasileiras você conhece?"],
+    "atividade": ["Desenhe um casal dançando samba, com os braços e pernas em posições exageradas e ondas coloridas saindo dos pés 🌊💃"],
+    "final": ["O samba é a alma do Brasil, e a arte pode fazer essa alma dançar para sempre 💃🕺"],
+    "emocao": "euforia",
+    "nivel": "leve"
   },
-  {
-    "obra": "O Artesão",
-    "ano": "1929",
-    "artista": "Vicente do Rego Monteiro",
-    "explicacao_candinho": "A obra mostra um trabalhador fazendo seu ofício. O artista valorizava o trabalho manual e a cultura brasileira.",
-    "cores_principais": ["marrom", "cinza", "verde"],
-    "tema": "Trabalho artesanal"
+  "vicente_do_rego_monteiro_o_artesao": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "vicente_do_rego_monteiro",
+    "palavras_chave": ["o artesão", "vicente do rego monteiro", "artesão quadro"],
+    "inicio": ["Um homem curvado sobre sua obra, com ferramentas nas mãos – Vicente pintou o artesão com formas simples e geométricas 🔨"],
+    "explicacao_curta": ["A obra mostra um trabalhador fazendo seu ofício. O artista valorizava o trabalho manual e a cultura brasileira."],
+    "explicacao_aprofundada": ["Com marrom, cinza e verde, ele simplifica a figura quase como um ícone, destacando a concentração e a nobreza do artesanato."],
+    "curiosidade": ["Vicente foi um dos pioneiros da arte moderna brasileira e também poeta; ele participou da Semana de 22 📜"],
+    "interacao": ["Você já fez algo com as mãos, como um boneco de argila ou um desenho? Como se sentiu?"],
+    "atividade": ["Desenhe um artesão ou artesã trabalhando em uma peça (cerâmica, escultura, bordado) usando formas geométricas para simplificar o corpo ⬛🔺"],
+    "final": ["Todo trabalho feito com as mãos merece ser celebrado como arte 👐"],
+    "emocao": "admiração",
+    "nivel": "leve"
   },
-  {
-    "obra": "Paisagem da Espanha",
-    "ano": "1920",
-    "artista": "John Graz",
-    "explicacao_candinho": "Essa pintura mostra uma paisagem tranquila da Espanha com formas modernas e organizadas. Parece quase um desenho geométrico.",
-    "cores_principais": ["azul", "verde", "bege"],
-    "tema": "Paisagem"
+  "john_graz_paisagem_da_espanha": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "john_graz",
+    "palavras_chave": ["paisagem da espanha", "john graz", "paisagem espanha"],
+    "inicio": ["Colinas suaves, casinhas brancas e um céu calmo – a Espanha vista por John Graz com olhar geométrico 🇪🇸🏞️"],
+    "explicacao_curta": ["Essa pintura mostra uma paisagem tranquila da Espanha com formas modernas e organizadas. Parece quase um desenho geométrico."],
+    "explicacao_aprofundada": ["Com azul, verde e bege, Graz aplica uma estética cubista e decorativa, fragmentando a paisagem em planos coloridos e linhas retas."],
+    "curiosidade": ["John Graz era suíço, mas viveu grande parte da vida no Brasil, onde ajudou a difundir o modernismo e o design de interiores 🛋️"],
+    "interacao": ["Se você fosse pintar uma paisagem de um lugar que visitou, como organizaria as cores?"],
+    "atividade": ["Desenhe uma paisagem (montanha, praia, campo) usando apenas formas geométricas: triângulos, quadrados e retângulos 🟠🟩🟦"],
+    "final": ["A arte moderna transforma a natureza em um quebra-cabeça colorido 🧩"],
+    "emocao": "harmonia",
+    "nivel": "leve"
   },
-  {
-    "obra": "Independência ou Morte",
-    "ano": "1888",
-    "artista": "Pedro Américo",
-    "explicacao_candinho": "Essa pintura mostra o momento em que Dom Pedro I declarou a independência do Brasil. É uma cena cheia de movimento e importância histórica.",
-    "cores_principais": ["verde", "marrom", "azul"],
-    "tema": "História do Brasil"
+  "pedro_americo_independencia_ou_morte": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "pedro_americo",
+    "palavras_chave": ["independência ou morte", "pedro americo", "quadro independência"],
+    "inicio": ["Dom Pedro I sobre um cavalo, erguendo a espada – o grito da Independência em uma tela gigante 🇧🇷⚔️"],
+    "explicacao_curta": ["Essa pintura mostra o momento em que Dom Pedro I declarou a independência do Brasil. É uma cena cheia de movimento e importância histórica."],
+    "explicacao_aprofundada": ["Com verde, marrom e azul, Pedro Américo criou uma composição teatral e grandiosa, idealizando o evento às margens do rio Ipiranga em 1822."],
+    "curiosidade": ["Na verdade, Dom Pedro declarou a independência em viagem, e a cena não foi tão heroica quanto o quadro mostra – a arte 'aumentou' a história 🎭"],
+    "interacao": ["Se você pudesse pintar um momento importante da sua vida, qual seria?"],
+    "atividade": ["Desenhe uma cena histórica imaginária (você como herói) com muitos personagens, cavalos ou batalhas – use bastante movimento 🐎"],
+    "final": ["A arte pode transformar um momento simples em uma lenda eterna 📜"],
+    "emocao": "nobreza",
+    "nivel": "leve"
   },
-  {
-    "obra": "A Primeira Missa no Brasil",
-    "ano": "1860",
-    "artista": "Victor Meirelles",
-    "explicacao_candinho": "A pintura mostra a primeira missa realizada no Brasil, com portugueses e indígenas juntos. Ela representa um momento importante da história.",
-    "cores_principais": ["verde", "azul", "marrom"],
-    "tema": "Colonização do Brasil"
+  "victor_meirelles_a_primeira_missa_no_brasil": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "victor_meirelles",
+    "palavras_chave": ["primeira missa no brasil", "victor meirelles", "missa brasil"],
+    "inicio": ["Índios admirados, portugueses ajoelhados – a primeira missa no Brasil, um encontro de dois mundos ⛪🌴"],
+    "explicacao_curta": ["A pintura mostra a primeira missa realizada no Brasil, com portugueses e indígenas juntos. Ela representa um momento importante da história."],
+    "explicacao_aprofundada": ["Com verde, azul e marrom, Victor Meirelles criou uma cena quase documental, idealizada e grandiosa, que por muito tempo foi a imagem oficial do descobrimento."],
+    "curiosidade": ["O quadro foi pintado no Rio de Janeiro mas encomendado pela Academia de Belas Artes de Paris; levou anos para ficar pronto 🖌️"],
+    "interacao": ["Como você imagina que os indígenas se sentiram ao ver os portugueses pela primeira vez?"],
+    "atividade": ["Desenhe um encontro entre duas pessoas de culturas diferentes, trocando presentes ou sorrisos – sem violência 🤝"],
+    "final": ["A história oficial nem sempre conta todos os lados; a arte pode nos fazer perguntar 'o que mais aconteceu?' 🤔"],
+    "emocao": "contemplação",
+    "nivel": "leve"
   },
-  {
-    "obra": "Caipira Picando Fumo",
-    "ano": "1893",
-    "artista": "Almeida Júnior",
-    "explicacao_candinho": "Aqui vemos um homem simples do campo preparando fumo. O artista gostava de mostrar cenas do cotidiano brasileiro.",
-    "cores_principais": ["marrom", "bege", "verde"],
-    "tema": "Vida no campo"
+  "almeida_junior_caipira_picando_fumo": {
+    "tema": "obras_arte_brasileira",
+    "subtema": "almeida_junior",
+    "palavras_chave": ["caipira picando fumo", "almeida junior", "picando fumo"],
+    "inicio": ["Um homem do campo, com chapéu de palha e facão, prepara o fumo – Almeida Júnior pintou a vida simples com realismo 🌾"],
+    "explicacao_curta": ["Aqui vemos um homem simples do campo preparando fumo. O artista gostava de mostrar cenas do cotidiano brasileiro."],
+    "explicacao_aprofundada": ["Com marrom, bege e verde, o artista valoriza a rusticidade e a dignidade do caipira, com detalhes realistas e uma iluminação que destaca o trabalho manual."],
+    "curiosidade": ["Almeida Júnior foi assassinado pelo próprio cunhado em 1899, em um crime passional, interrompendo sua carreira brilhante 🔪"],
+    "interacao": ["Você conhece alguém que trabalha no campo? Que ferramentas essa pessoa usa?"],
+    "atividade": ["Desenhe uma pessoa do campo realizando uma atividade (plantar, colher, cuidar de animais) com roupas e objetos típicos 👒"],
+    "final": ["O homem do campo tem uma sabedoria e uma força que a arte ajuda a eternizar 🌻"],
+    "emocao": "simplicidade",
+    "nivel": "leve"
   }
-]
+}
