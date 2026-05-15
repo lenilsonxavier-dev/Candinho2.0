@@ -1,0 +1,79 @@
+[
+  {
+    "autora": "Conceição Evaristo",
+    "obra": "Olhos d'Água",
+    "explicacao_candinho": "Oi, leitorzinho! Conceição Evaristo escreve histórias inspiradas na vida real de muitas mulheres negras brasileiras. Seus textos falam de coragem, família, sonhos e dificuldades do dia a dia.",
+    "tema": "Memória e resistência",
+    "genero": "Contos"
+  },
+  {
+    "autora": "Conceição Evaristo",
+    "obra": "Becos da Memória",
+    "explicacao_candinho": "Essa obra conta histórias de pessoas que vivem em uma comunidade simples e cheia de lembranças. A autora mostra como a união e a esperança ajudam as pessoas.",
+    "tema": "Comunidade e memória",
+    "genero": "Romance"
+  },
+  {
+    "autora": "Carolina Maria de Jesus",
+    "obra": "Quarto de Despejo: Diário de uma Favelada",
+    "explicacao_candinho": "Carolina escreveu sobre sua própria vida na favela, contando as dificuldades e também sua força para cuidar da família. Seu diário virou um livro muito importante.",
+    "tema": "Vida na favela",
+    "genero": "Diário"
+  },
+  {
+    "autora": "Maria Firmina dos Reis",
+    "obra": "Úrsula",
+    "explicacao_candinho": "Maria Firmina escreveu uma história que defendia a liberdade das pessoas escravizadas. Foi uma obra muito corajosa para a época.",
+    "tema": "Liberdade e justiça",
+    "genero": "Romance"
+  },
+  {
+    "autora": "Jarid Arraes",
+    "obra": "Heroínas Negras Brasileiras em 15 Cordéis",
+    "explicacao_candinho": "Jarid conta histórias de mulheres negras brasileiras muito importantes usando cordel, um jeito divertido e rimado de contar histórias.",
+    "tema": "Heroínas brasileiras",
+    "genero": "Cordel"
+  },
+  {
+    "autora": "Djamila Ribeiro",
+    "obra": "Pequeno Manual Antirracista",
+    "explicacao_candinho": "Djamila explica de forma simples como podemos construir um mundo mais justo e respeitoso para todas as pessoas.",
+    "tema": "Respeito e igualdade",
+    "genero": "Ensaio"
+  },
+  {
+    "autora": "Eliane Potiguara",
+    "obra": "Metade Cara, Metade Máscara",
+    "explicacao_candinho": "Eliane escreve sobre os povos indígenas, suas histórias, culturas e a importância de cuidar das tradições e da natureza.",
+    "tema": "Cultura indígena",
+    "genero": "Poesia e relatos"
+  },
+  {
+    "autora": "Graça Graúna",
+    "obra": "Criaturas de Ñanderu",
+    "explicacao_candinho": "Graça usa poemas para falar sobre espiritualidade, natureza e a sabedoria dos povos indígenas brasileiros.",
+    "tema": "Natureza e ancestralidade",
+    "genero": "Poesia"
+  },
+  {
+    "autora": "Auritha Tabajara",
+    "obra": "Coração na Aldeia, Pés no Mundo",
+    "explicacao_candinho": "Auritha mistura histórias da aldeia com aventuras pelo mundo, mostrando a força e a beleza da cultura indígena.",
+    "tema": "Identidade indígena",
+    "genero": "Cordel"
+  },
+  {
+    "autora": "Márcia Kambeba",
+    "obra": "Ay Kakyri Tama - Eu Moro na Cidade",
+    "explicacao_candinho": "Márcia fala sobre viver na cidade sem esquecer as raízes indígenas e o amor pela natureza e pelos antepassados.",
+    "tema": "Ancestralidade",
+    "genero": "Poesia"
+  },
+  {
+    "autora": "Julie Dorrico",
+    "obra": "Literatura indígena contemporânea",
+    "explicacao_candinho": "Julie Dorrico escreve e pesquisa histórias indígenas para ajudar mais pessoas a conhecerem a riqueza dessas culturas.",
+    "tema": "Cultura e conhecimento indígena",
+    "genero": "Pesquisa e literatura"
+  }
+]
