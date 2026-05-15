@@ -1,86 +1,296 @@
 {
   "tarsila_do_amaral": {
+    "tema": "artistas_brasileiros",
+    "subtema": "tarsila_do_amaral",
     "palavras_chave": ["tarsila", "abaporu", "tarsila do amaral"],
-    "explicacao_infantil": "Tarsila do Amaral foi uma artista brasileira muito importante. Ela pintava com cores fortes e formas diferentes. Sua obra mais famosa é o Abaporu!"
+    "inicio": ["Tarsila do Amaral adorava pintar o Brasil com cores fortes 🎨"],
+    "explicacao_curta": ["Ela foi uma artista brasileira muito importante."],
+    "explicacao_aprofundada": ["Tarsila criava pinturas com formas diferentes e cores vibrantes para mostrar a cultura brasileira."],
+    "curiosidade": ["O Abaporu é uma das pinturas mais famosas do Brasil 🖼️"],
+    "interacao": ["Você gostaria de criar uma pintura cheia de cores como Tarsila?"],
+    "atividade": ["Desenhe um personagem usando formas diferentes ✏️"],
+    "final": ["A arte pode mostrar a imaginação e a cultura 🌟"],
+    "emocao": "criatividade",
+    "nivel": "leve"
   },
   "candido_portinari": {
+    "tema": "artistas_brasileiros",
+    "subtema": "candido_portinari",
     "palavras_chave": ["portinari", "candido portinari"],
-    "explicacao_infantil": "Candido Portinari foi um pintor brasileiro que retratava o povo e a vida no Brasil. Ele gostava de pintar trabalhadores, crianças e cenas do dia a dia."
+    "inicio": ["Candido Portinari pintava a vida do povo brasileiro com muito carinho 🖌️"],
+    "explicacao_curta": ["Ele foi um pintor brasileiro que retratava o povo e a vida no Brasil."],
+    "explicacao_aprofundada": ["Portinari gostava de pintar trabalhadores, crianças e cenas do dia a dia, mostrando a realidade de forma sensível."],
+    "curiosidade": ["Ele pintou mais de 5 mil obras, incluindo murais gigantes no Brasil e no exterior 🎨"],
+    "interacao": ["Que tal desenhar uma cena da sua rotina favorita?"],
+    "atividade": ["Desenhe pessoas fazendo alguma atividade que você vê todos os dias ✏️"],
+    "final": ["A arte pode valorizar as pessoas simples e o nosso cotidiano 🌻"],
+    "emocao": "empatia",
+    "nivel": "leve"
   },
   "anita_malfatti": {
+    "tema": "artistas_brasileiros",
+    "subtema": "anita_malfatti",
     "palavras_chave": ["anita malfatti"],
-    "explicacao_infantil": "Anita Malfatti foi uma artista moderna que trouxe novas ideias para a arte no Brasil. Suas pinturas tinham cores fortes e formas diferentes."
+    "inicio": ["Anita Malfatti gostava de pintar de um jeito diferente e ousado 🌈"],
+    "explicacao_curta": ["Anita Malfatti foi uma artista moderna que trouxe novas ideias para a arte no Brasil."],
+    "explicacao_aprofundada": ["Suas pinturas tinham cores fortes e formas distorcidas, desafiando o que era tradicional na época."],
+    "curiosidade": ["A exposição dela em 1917 causou polêmica, mas ajudou a renovar a arte brasileira 🎭"],
+    "interacao": ["Você já inventou um jeito novo de desenhar?"],
+    "atividade": ["Pinte uma figura humana com cores que não existem na realidade, como roxo no cabelo ou azul na pele 🎨"],
+    "final": ["Ser diferente na arte é um jeito de mostrar o seu olhar único 👁️"],
+    "emocao": "ousadia",
+    "nivel": "leve"
   },
   "di_cavalcanti": {
+    "tema": "artistas_brasileiros",
+    "subtema": "di_cavalcanti",
     "palavras_chave": ["di cavalcanti"],
-    "explicacao_infantil": "Di Cavalcanti pintava cenas da cultura brasileira, como festas, samba e pessoas do cotidiano. Suas obras são cheias de movimento e cor."
+    "inicio": ["Di Cavalcanti amava pintar festas, samba e muita alegria 🥁"],
+    "explicacao_curta": ["Di Cavalcanti pintava cenas da cultura brasileira, como festas, samba e pessoas do cotidiano."],
+    "explicacao_aprofundada": ["Suas obras são cheias de movimento e cor, celebrando a alma popular do Brasil."],
+    "curiosidade": ["Ele também foi escritor e ilustrador de livros, além de pintor ✍️"],
+    "interacao": ["O que você mais gosta de fazer em uma festa?"],
+    "atividade": ["Desenhe uma roda de samba ou uma festa junina com muitas cores e movimentos 💃"],
+    "final": ["A arte pode capturar a alegria e a energia do nosso povo 🎉"],
+    "emocao": "alegria",
+    "nivel": "leve"
   },
   "romero_britto": {
+    "tema": "artistas_brasileiros",
+    "subtema": "romero_britto",
     "palavras_chave": ["romero britto", "britto"],
-    "explicacao_infantil": "Romero Britto é um artista brasileiro conhecido por suas obras coloridas e alegres. Ele usa formas simples e padrões que lembram desenhos."
+    "inicio": ["Romero Britto pinta um mundo de cores vibrantes e formas felizes 😊"],
+    "explicacao_curta": ["Romero Britto é um artista brasileiro conhecido por suas obras coloridas e alegres."],
+    "explicacao_aprofundada": ["Ele usa formas simples, linhas grossas e padrões que lembram desenhos, sempre com otimismo."],
+    "curiosidade": ["Suas obras estão em museus e praças de vários países, como Estados Unidos e Japão 🌍"],
+    "interacao": ["Qual é a sua cor favorita para deixar um desenho mais alegre?"],
+    "atividade": ["Desenhe um coração ou um animal e preencha com listras, bolinhas e cores vibrantes ❤️"],
+    "final": ["A arte pode espalhar felicidade pelo mundo 🌈"],
+    "emocao": "otimismo",
+    "nivel": "leve"
   },
   "vik_muniz": {
+    "tema": "artistas_brasileiros",
+    "subtema": "vik_muniz",
     "palavras_chave": ["vik muniz"],
-    "explicacao_infantil": "Vik Muniz cria arte com materiais diferentes, como chocolate, lixo e açúcar. Ele monta imagens e depois fotografa suas criações."
+    "inicio": ["Vik Muniz cria arte com coisas incríveis: chocolate, lixo e até açúcar 🍫"],
+    "explicacao_curta": ["Vik Muniz cria arte com materiais diferentes, como chocolate, lixo e açúcar."],
+    "explicacao_aprofundada": ["Ele monta imagens usando esses materiais e depois fotografa suas criações, transformando o comum em extraordinário."],
+    "curiosidade": ["O filme 'Lixo Extraordinário' mostra ele fazendo arte com catadores de reciclagem no maior aterro do mundo 🎥"],
+    "interacao": ["Se você pudesse fazer arte com qualquer material, qual escolheria?"],
+    "atividade": ["Use grãos de feijão, arroz ou massinha para montar um rosto ou animal sobre uma folha 📸"],
+    "final": ["A arte pode nascer de qualquer lugar, até do lixo ♻️"],
+    "emocao": "curiosidade",
+    "nivel": "leve"
   },
   "beatriz_milhazes": {
+    "tema": "artistas_brasileiros",
+    "subtema": "beatriz_milhazes",
     "palavras_chave": ["beatriz milhazes"],
-    "explicacao_infantil": "Beatriz Milhazes cria pinturas com muitas cores, formas e padrões. Suas obras parecem festas cheias de movimento e alegria."
+    "inicio": ["Beatriz Milhazes cria pinturas que parecem uma grande festa visual 🎠"],
+    "explicacao_curta": ["Beatriz Milhazes cria pinturas com muitas cores, formas e padrões."],
+    "explicacao_aprofundada": ["Suas obras misturam círculos, flores, arabescos e brilhos, lembrando a alegria e a energia do Brasil."],
+    "curiosidade": ["Ela usa uma técnica de transferência que faz as formas parecerem coladas na tela ✨"],
+    "interacao": ["Quantos padrões diferentes você consegue desenhar em um só papel?"],
+    "atividade": ["Desenhe vários círculos, flores e listras coloridos, um sobre o outro, formando uma composição alegre 🌸"],
+    "final": ["A arte pode ser uma explosão de formas e cores 🎆"],
+    "emocao": "vitalidade",
+    "nivel": "leve"
   },
   "adriana_varejao": {
+    "tema": "artistas_brasileiros",
+    "subtema": "adriana_varejao",
     "palavras_chave": ["adriana varejao", "varejao"],
-    "explicacao_infantil": "Adriana Varejão é uma artista que cria obras que parecem azulejos e pinturas antigas. Ela mistura história e arte de um jeito diferente."
+    "inicio": ["Adriana Varejão adora pintar azulejos e fazer arte que parece história 🏺"],
+    "explicacao_curta": ["Adriana Varejão é uma artista que cria obras que parecem azulejos e pinturas antigas."],
+    "explicacao_aprofundada": ["Ela mistura pintura, escultura e cerâmica para falar de colonização, corpo e cultura."],
+    "curiosidade": ["Ela tem uma obra gigante no museu Inhotim, em Minas Gerais, que parece uma paredão de azulejos azuis e brancos 🏛️"],
+    "interacao": ["Você já reparou nos azulejos de casas ou igrejas antigas?"],
+    "atividade": ["Desenhe um painel de azulejos com um desenho seu favorito repetido várias vezes 🔷"],
+    "final": ["A arte pode conversar com a história e com o nosso dia a dia 📜"],
+    "emocao": "reflexão",
+    "nivel": "leve"
   },
   "heitor_dos_prazeres": {
+    "tema": "artistas_brasileiros",
+    "subtema": "heitor_dos_prazeres",
     "palavras_chave": ["heitor dos prazeres"],
-    "explicacao_infantil": "Heitor dos Prazeres pintava cenas do samba e da vida popular no Brasil. Suas obras mostram música, dança e alegria."
+    "inicio": ["Heitor dos Prazeres pintava o samba e a vida nas ruas do Rio de Janeiro 🎶"],
+    "explicacao_curta": ["Heitor dos Prazeres pintava cenas do samba e da vida popular no Brasil."],
+    "explicacao_aprofundada": ["Suas obras mostram música, dança, alegria e também o cotidiano das pessoas simples com traços soltos e coloridos."],
+    "curiosidade": ["Ele também foi compositor de samba e amigo de grandes nomes do carnaval carioca 🎤"],
+    "interacao": ["Você gosta de música e dança? Como elas te fazem sentir?"],
+    "atividade": ["Desenhe uma roda de samba com instrumentos e pessoas dançando, usando cores quentes e vivas 🥁"],
+    "final": ["A arte pode unir música, dança e pintura em uma só festa 🎭"],
+    "emocao": "ritmo",
+    "nivel": "leve"
   },
   "lasar_segal": {
+    "tema": "artistas_brasileiros",
+    "subtema": "lasar_segal",
     "palavras_chave": ["lasar segall"],
-    "explicacao_infantil": "Lasar Segall foi um artista que retratava emoções e histórias humanas. Suas obras têm formas fortes e expressivas."
+    "inicio": ["Lasar Segall pintava sentimentos e histórias com formas fortes e expressivas 🖤"],
+    "explicacao_curta": ["Lasar Segall foi um artista que retratava emoções e histórias humanas."],
+    "explicacao_aprofundada": ["Suas obras trazem temas como migração, sofrimento e afeto, usando traços dramáticos e contrastes de luz e sombra."],
+    "curiosidade": ["Ele nasceu na Lituânia, mas veio morar no Brasil e se apaixonou pela cultura daqui 🌎"],
+    "interacao": ["Como você mostra seus sentimentos em um desenho?"],
+    "atividade": ["Desenhe um rosto com expressão forte (tristeza, alegria ou susto) usando apenas linhas curvas e grossas ✏️"],
+    "final": ["A arte pode falar de sentimentos profundos sem precisar de palavras 🗣️"],
+    "emocao": "empatia",
+    "nivel": "leve"
   },
   "tomie_ohtake": {
+    "tema": "artistas_brasileiros",
+    "subtema": "tomie_ohtake",
     "palavras_chave": ["tomie ohtake"],
-    "explicacao_infantil": "Tomie Ohtake criou obras com formas abstratas e cores suaves. Suas pinturas e esculturas são modernas e elegantes."
+    "inicio": ["Tomie Ohtake criava formas suaves e abstratas que parecem flutuar 🎐"],
+    "explicacao_curta": ["Tomie Ohtake criou obras com formas abstratas e cores suaves."],
+    "explicacao_aprofundada": ["Suas pinturas e esculturas são modernas e elegantes, com formas orgânicas que lembram ondas, vento e movimento."],
+    "curiosidade": ["Ela começou a pintar aos 40 anos e se tornou uma das maiores artistas abstratas do Brasil 🌊"],
+    "interacao": ["Se você pudesse pintar uma emoção, que forma você usaria?"],
+    "atividade": ["Pinte uma grande mancha vermelha ou azul e, em volta, faça curvas que se repetem suavemente 🎨"],
+    "final": ["A arte abstrata nos permite sentir as formas e cores livremente 🌀"],
+    "emocao": "serenidade",
+    "nivel": "leve"
   },
   "pedro_americo": {
+    "tema": "artistas_brasileiros",
+    "subtema": "pedro_americo",
     "palavras_chave": ["pedro americo"],
-    "explicacao_infantil": "Pedro Américo foi um pintor brasileiro que criou obras históricas. Ele pintava cenas importantes do Brasil, como batalhas e momentos marcantes."
+    "inicio": ["Pedro Américo pintou cenas de batalhas e heróis do Brasil ⚔️"],
+    "explicacao_curta": ["Pedro Américo foi um pintor brasileiro que criou obras históricas."],
+    "explicacao_aprofundada": ["Ele pintava cenas importantes do Brasil, como a Independência e batalhas, com detalhes grandiosos e realistas."],
+    "curiosidade": ["Seu quadro 'Independência ou Morte' é uma das pinturas mais famosas do país, e ele fica no Museu do Ipiranga 🖼️"],
+    "interacao": ["Qual parte da história do Brasil você gostaria de ver pintada?"],
+    "atividade": ["Desenhe uma cena heroica com muitos personagens, como uma cavalgada ou uma grande festa 📜"],
+    "final": ["A arte pode guardar momentos importantes da nossa história 📖"],
+    "emocao": "orgulho",
+    "nivel": "leve"
   },
   "almeida_junior": {
+    "tema": "artistas_brasileiros",
+    "subtema": "almeida_junior",
     "palavras_chave": ["almeida junior"],
-    "explicacao_infantil": "Almeida Júnior pintava cenas do interior do Brasil. Suas obras mostram pessoas simples e momentos do dia a dia com muito cuidado."
+    "inicio": ["Almeida Júnior pintava a vida simples do interior com muito realismo 🌽"],
+    "explicacao_curta": ["Almeida Júnior pintava cenas do interior do Brasil."],
+    "explicacao_aprofundada": ["Suas obras mostram pessoas simples, como caipiras e artesãos, e momentos do dia a dia com muito cuidado e naturalismo."],
+    "curiosidade": ["Ele foi um dos primeiros brasileiros a estudar arte na Europa e trouxe técnicas realistas para suas telas ✈️"],
+    "interacao": ["O que você mais gosta de fazer no campo ou em uma cidade pequena?"],
+    "atividade": ["Desenhe uma cena de roça com uma casinha, uma árvore e uma pessoa trabalhando ou descansando 👨‍🌾"],
+    "final": ["A arte pode valorizar a simplicidade e a beleza da vida no campo 🌾"],
+    "emocao": "nostalgia",
+    "nivel": "leve"
   },
   "djanira": {
+    "tema": "artistas_brasileiros",
+    "subtema": "djanira",
     "palavras_chave": ["djanira"],
-    "explicacao_infantil": "Djanira foi uma artista brasileira que pintava o povo e as tradições do Brasil. Suas obras mostram festas, trabalho e cultura popular."
+    "inicio": ["Djanira amava pintar festas, rezas e trabalhadores do Brasil 🙏"],
+    "explicacao_curta": ["Djanira foi uma artista brasileira que pintava o povo e as tradições do Brasil."],
+    "explicacao_aprofundada": ["Suas obras mostram festas, trabalho, cultura popular e religiosidade, com cores terrosas e formas acolhedoras."],
+    "curiosidade": ["Ela foi operária, empregada doméstica e pintora de igrejas antes de se tornar artista famosa 👩‍🎨"],
+    "interacao": ["Qual festa popular brasileira você mais gosta?"],
+    "atividade": ["Desenhe uma procissão ou uma roda de ciranda com muitas pessoas e bandeirinhas 🎏"],
+    "final": ["A arte pode celebrar as tradições e a fé do nosso povo ✨"],
+    "emocao": "acolhimento",
+    "nivel": "leve"
   },
   "lita_cabellut": {
+    "tema": "artistas_brasileiros",
+    "subtema": "lita_cabellut",
     "palavras_chave": ["lita cabellut"],
-    "explicacao_infantil": "Lita Cabellut é uma artista que cria retratos com muita expressão. Suas pinturas mostram emoções fortes através dos rostos."
+    "inicio": ["Lita Cabellut cria rostos enormes que parecem sentir tudo ao mesmo tempo 😮"],
+    "explicacao_curta": ["Lita Cabellut é uma artista que cria retratos com muita expressão."],
+    "explicacao_aprofundada": ["Suas pinturas mostram emoções fortes através de rostos marcados, rugas e olhares intensos, quase como teatro."],
+    "curiosidade": ["Ela cresceu em situação de rua e depois se tornou uma artista reconhecida mundialmente 🌍"],
+    "interacao": ["Se o seu rosto falasse, o que ele diria agora?"],
+    "atividade": ["Desenhe um rosto bem grande na folha e exagere os olhos, a boca ou as sobrancelhas para mostrar um sentimento 😊😢😡"],
+    "final": ["A arte pode transformar dor e história em beleza 🖤"],
+    "emocao": "intensidade",
+    "nivel": "leve"
   },
   "rosana_paulino": {
+    "tema": "artistas_brasileiros",
+    "subtema": "rosana_paulino",
     "palavras_chave": ["rosana paulino"],
-    "explicacao_infantil": "Rosana Paulino é uma artista brasileira que fala sobre identidade e história. Suas obras ajudam a refletir sobre a cultura afro-brasileira."
+    "inicio": ["Rosana Paulino usa a arte para falar sobre história e identidade da mulher negra 🧵"],
+    "explicacao_curta": ["Rosana Paulino é uma artista brasileira que fala sobre identidade e história."],
+    "explicacao_aprofundada": ["Suas obras usam bordado, fotografia e desenho para refletir sobre a cultura afro-brasileira e o papel da mulher na sociedade."],
+    "curiosidade": ["Ela criou um trabalho chamado 'Parede da Memória', com retratos de mulheres negras bordados sobre imagens antigas 📸"],
+    "interacao": ["Você conhece alguma história de sua família que gostaria de contar com arte?"],
+    "atividade": ["Desenhe um rosto e, ao redor, faça pontos ou linhas como se fosse um bordado, usando lápis de cor 🪡"],
+    "final": ["A arte pode resgatar memórias e dar voz a quem nem sempre foi ouvida 🗣️"],
+    "emocao": "resistência",
+    "nivel": "leve"
   },
   "sonia_gomes": {
+    "tema": "artistas_brasileiros",
+    "subtema": "sonia_gomes",
     "palavras_chave": ["sonia gomes"],
-    "explicacao_infantil": "Sonia Gomes cria esculturas com tecidos e objetos. Suas obras parecem costuradas e cheias de movimento."
+    "inicio": ["Sonia Gomes transforma tecidos em esculturas que parecem abraços moles 🧣"],
+    "explicacao_curta": ["Sonia Gomes cria esculturas com tecidos e objetos."],
+    "explicacao_aprofundada": ["Suas obras parecem costuradas, amarradas e cheias de movimento, usando rendas, linhas e pedaços de pano que ganham forma."],
+    "curiosidade": ["Ela começou a fazer arte aos 50 anos e hoje suas obras estão em museus importantes do mundo, como o Centre Pompidou 🇫🇷"],
+    "interacao": ["O que você faria com um monte de retalhos de tecido?"],
+    "atividade": ["Amasse e amarre retalhos de pano ou tiras de papel formando uma pequena escultura pendurada 🧶"],
+    "final": ["A arte pode nascer do afeto e da reutilização de materiais ♻️"],
+    "emocao": "aconchego",
+    "nivel": "leve"
   },
   "daiara_tukano": {
+    "tema": "artistas_brasileiros",
+    "subtema": "daiara_tukano",
     "palavras_chave": ["daiara tukano"],
-    "explicacao_infantil": "Daiara Tukano é uma artista indígena que usa a arte para mostrar a cultura e os saberes de seu povo. Suas obras têm cores, símbolos e histórias."
+    "inicio": ["Daiara Tukano pinta a força e a beleza da cultura indígena 🌿"],
+    "explicacao_curta": ["Daiara Tukano é uma artista indígena que usa a arte para mostrar a cultura e os saberes de seu povo."],
+    "explicacao_aprofundada": ["Suas obras têm cores, símbolos e histórias que falam de ancestralidade, luta e natureza, misturando pintura, grafite e mural."],
+    "curiosidade": ["Ela também é ativista e ajudou a criar a primeira galeria de arte indígena no Museu de Arte do Rio 🛶"],
+    "interacao": ["Que símbolos você usaria para representar a natureza ou seus antepassados?"],
+    "atividade": ["Desenhe um símbolo que represente a floresta ou um animal importante para você, repetindo-o em uma moldura decorativa 🐆"],
+    "final": ["A arte indígena nos ensina a respeitar a terra e os mais velhos 🌎"],
+    "emocao": "ancestralidade",
+    "nivel": "leve"
   },
   "awa_mendes": {
+    "tema": "artistas_brasileiros",
+    "subtema": "awa_mendes",
     "palavras_chave": ["awa mendes"],
-    "explicacao_infantil": "Awa Mendes é uma artista indígena que expressa a relação com a natureza e a cultura de seu povo. Suas obras mostram identidade e ancestralidade."
+    "inicio": ["Awa Mendes pinta a relação especial entre a natureza e seu povo 🌱"],
+    "explicacao_curta": ["Awa Mendes é uma artista indígena que expressa a relação com a natureza e a cultura de seu povo."],
+    "explicacao_aprofundada": ["Suas obras mostram identidade, rituais e a conexão com a floresta, usando cores terrosas e grafismos tradicionais."],
+    "curiosidade": ["Ela é do povo Guajajara e usa a arte para defender a Amazônia e os direitos indígenas 🌳"],
+    "interacao": ["Se você pudesse agradecer à natureza com um desenho, o que desenharia?"],
+    "atividade": ["Desenhe uma árvore grande com raízes e frutas, e ao redor coloque desenhos de animais da mata 🌴"],
+    "final": ["A arte pode proteger a natureza e lembrar que somos parte dela 🍃"],
+    "emocao": "gratidão",
+    "nivel": "leve"
   },
   "jaider_esbell": {
+    "tema": "artistas_brasileiros",
+    "subtema": "jaider_esbell",
     "palavras_chave": ["jaider esbell"],
-    "explicacao_infantil": "Jaider Esbell é um artista indígena que criou pinturas cheias de símbolos e histórias. Ele ajudou a valorizar a arte indígena contemporânea."
+    "inicio": ["Jaider Esbell pintava mundos cheios de símbolos e histórias sagradas 🌌"],
+    "explicacao_curta": ["Jaider Esbell é um artista indígena que criou pinturas cheias de símbolos e histórias."],
+    "explicacao_aprofundada": ["Ele ajudou a valorizar a arte indígena contemporânea, misturando desenhos tradicionais com cores vibrantes e formas surreais."],
+    "curiosidade": ["Ele também escrevia livros e organizava exposições de artistas indígenas pelo Brasil 📚"],
+    "interacao": ["O que você imagina quando pensa em um 'mundo encantado'?"],
+    "atividade": ["Desenhe um ser fantástico metade homem, metade animal ou planta, usando padrões geométricos como listras e triângulos 🐸"],
+    "final": ["A arte pode criar novos mitos e conectar passado e presente ✨"],
+    "emocao": "imaginação",
+    "nivel": "leve"
   },
   "denilson_baniwa": {
+    "tema": "artistas_brasileiros",
+    "subtema": "denilson_baniwa",
     "palavras_chave": ["denilson baniwa"],
-    "explicacao_infantil": "Denilson Baniwa é um artista indígena que mistura tradição e arte moderna. Ele usa desenhos e imagens para contar histórias de seu povo."
+    "inicio": ["Denilson Baniwa desenha super-heróis e espíritos da floresta com muito humor 💥"],
+    "explicacao_curta": ["Denilson Baniwa é um artista indígena que mistura tradição e arte moderna."],
+    "explicacao_aprofundada": ["Ele usa desenhos, vídeos e imagens para contar histórias de seu povo, criticar o preconceito e brincar com a cultura pop."],
+    "curiosidade": ["Ele criou a série 'Vingadores Indígenas', onde heróis da Marvel viram guerreiros da Amazônia 🦸🏽"],
+    "interacao": ["Qual superpoder você daria a um protetor da floresta?"],
+    "atividade": ["Invente um herói ou heroína indígena: dê um nome, um animal de poder e desenhe seu uniforme com grafismos 🏹"],
+    "final": ["A arte pode transformar a tradição em algo novo e divertido 🤣"],
+    "emocao": "humor",
+    "nivel": "leve"
   }
 }
