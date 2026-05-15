@@ -580,8 +580,38 @@ if (
     }
 
     return null;
+   
 }
-    
+    function buscarResposta(pergunta, dados) {
+
+    const txt = normalizar(pergunta);
+
+    // 1. PRIORIDADE: OBRA
+    let resultado = dados.find(item =>
+        item.obra &&
+        txt.includes(normalizar(item.obra))
+    );
+
+    if (resultado) return resultado;
+
+    // 2. ARTISTA
+    resultado = dados.find(item =>
+        item.artista &&
+        txt.includes(normalizar(item.artista))
+    );
+
+    if (resultado) return resultado;
+
+    // 3. AUTOR
+    resultado = dados.find(item =>
+        item.autor &&
+        txt.includes(normalizar(item.autor))
+    );
+
+    if (resultado) return resultado;
+
+    return null;
+}
     function buscarRecursivo(obj, textoNorm) {
         if (!obj || typeof obj !== "object") return null;
         
