@@ -1,92 +1,142 @@
-[
-  {
-    "obra": "As Duas Fridas",
-    "artista": "Frida Kahlo",
-    "pais": "México",
-    "ano": "1939",
-    "explicacao_candinho": "Oi, pequeno artista! Aqui Frida pintou duas versões dela mesma lado a lado. A obra mostra sentimentos de tristeza, força e também como ela via diferentes partes da sua identidade.",
-    "cores_principais": ["branco", "vermelho", "verde"],
-    "tema": "Identidade e emoções"
+{
+  "frida_kahlo_as_duas_fridas": {
+    "tema": "artistas_mulheres",
+    "subtema": "frida_kahlo",
+    "palavras_chave": ["frida kahlo", "as duas fridas", "méxico", "autorretrato"],
+    "inicio": ["Frida Kahlo pintou duas versões de si mesma lado a lado, como duas amigas que se seguram pelas mãos 🤝"],
+    "explicacao_curta": ["A obra mostra sentimentos de tristeza, força e também como ela via diferentes partes da sua identidade."],
+    "explicacao_aprofundada": ["Com branco, vermelho e verde, Frida representou sua herança mexicana e as duas faces de seu coração: uma amada e outra rejeitada."],
+    "curiosidade": ["Frida começou a pintar depois de um grave acidente de ônibus, usando um espelho que seus pais colocaram no teto de sua cama 🪞"],
+    "interacao": ["Se você pudesse se desenhar em dois jeitos diferentes, como eles seriam?"],
+    "atividade": ["Desenhe dois autorretratos: um mostrando uma das suas paixões e outro mostrando um momento que te deixou forte 💪"],
+    "final": ["A arte pode ajudar a gente a entender e aceitar todos os lados de quem somos 🌈"],
+    "emocao": "autoconhecimento",
+    "nivel": "leve"
   },
-  {
-    "obra": "Autorretrato com Colar de Espinhos e Beija-flor",
-    "artista": "Frida Kahlo",
-    "pais": "México",
-    "ano": "1940",
-    "explicacao_candinho": "Frida pintou a si mesma com um colar de espinhos para mostrar sua dor e coragem. Os animais e plantas deixam a pintura cheia de símbolos e mistérios.",
-    "cores_principais": ["verde", "marrom", "preto"],
-    "tema": "Autorretrato"
+  "frida_kahlo_autorretrato_colar": {
+    "tema": "artistas_mulheres",
+    "subtema": "frida_kahlo",
+    "palavras_chave": ["frida kahlo", "autorretrato com colar de espinhos e beija-flor", "colar de espinhos"],
+    "inicio": ["Frida usou um colar de espinhos que machuca, mas um beija-flor voa perto do seu pescoço 🐦"],
+    "explicacao_curta": ["Frida pintou a si mesma com um colar de espinhos para mostrar sua dor e coragem."],
+    "explicacao_aprofundada": ["Os animais e plantas na pintura (um macaco, um gato preto e um beija-flor) são símbolos de sorte, amor e liberdade, enquanto os espinhos representam o sofrimento físico."],
+    "curiosidade": ["O beija-flor no quadro, para os mexicanos, também simboliza a reencarnação de guerreiros mortos ✨"],
+    "interacao": ["O que você colocaria em um colar que contasse uma história sua?"],
+    "atividade": ["Desenhe um autorretrato e crie um colar especial para você, usando desenhos de flores, animais ou objetos que te representam 🌼"],
+    "final": ["A arte transforma dor em beleza e ensina que podemos ser fortes mesmo machucados 💔➡️💪"],
+    "emocao": "resiliência",
+    "nivel": "leve"
   },
-  {
-    "obra": "Judite Decapitadora de Holofernes",
-    "artista": "Artemisia Gentileschi",
-    "pais": "Itália",
-    "ano": "1612-1613",
-    "explicacao_candinho": "Essa obra mostra uma mulher muito corajosa vencendo um inimigo poderoso. Artemisia queria mostrar a força feminina em uma cena cheia de ação.",
-    "cores_principais": ["vermelho", "marrom", "preto"],
-    "tema": "Coragem e força"
+  "artemisia_gentileschi_judite": {
+    "tema": "artistas_mulheres",
+    "subtema": "artemisia_gentileschi",
+    "palavras_chave": ["artemisia gentileschi", "judite decapitadora de holofernes", "itália", "força feminina"],
+    "inicio": ["Artemisia pintou uma mulher corajosa que vence um gigante mau com a ajuda de sua amiga ⚔️"],
+    "explicacao_curta": ["Essa obra mostra uma mulher muito corajosa vencendo um inimigo poderoso. Artemisia queria mostrar a força feminina em uma cena cheia de ação."],
+    "explicacao_aprofundada": ["Com vermelho, marrom e preto, a artista criou uma cena dramática e realista, onde Judite e sua criada agem com determinação e bravura."],
+    "curiosidade": ["Artemisia foi uma das primeiras mulheres a pintar cenas históricas e religiosas com tanto realismo, numa época em que poucas mulheres eram aceitas como artistas 🎨"],
+    "interacao": ["Que história de coragem você gostaria de pintar?"],
+    "atividade": ["Desenhe uma cena de ação onde uma heroína (pode ser você!) enfrenta um desafio e vence com a ajuda de um amigo 👯‍♀️"],
+    "final": ["A arte pode mostrar que mulheres também são guerreiras e protagonistas 🛡️"],
+    "emocao": "coragem",
+    "nivel": "leve"
   },
-  {
-    "obra": "Infinity Mirror Rooms",
-    "artista": "Yayoi Kusama",
-    "pais": "Japão",
-    "ano": "Várias datas",
-    "explicacao_candinho": "Essas salas cheias de espelhos e luzes fazem parecer que o espaço nunca acaba. Kusama adora usar bolinhas e reflexos para criar mundos mágicos.",
-    "cores_principais": ["preto", "amarelo", "rosa"],
-    "tema": "Infinito e imaginação"
+  "yayoi_kusama_infinity_mirror": {
+    "tema": "artistas_mulheres",
+    "subtema": "yayoi_kusama",
+    "palavras_chave": ["yayoi kusama", "infinity mirror rooms", "japão", "bolinhas", "espelhos"],
+    "inicio": ["Yayoi Kusama cria salas mágicas onde espelhos e luzes se repetem até o infinito ✨🪞"],
+    "explicacao_curta": ["Essas salas cheias de espelhos e luzes fazem parecer que o espaço nunca acaba. Kusama adora usar bolinhas e reflexos para criar mundos mágicos."],
+    "explicacao_aprofundada": ["Com preto, amarelo e rosa, ela transforma pequenas salas em universos infinitos, onde o visitante se sente dentro de uma constelação ou de um sonho."],
+    "curiosidade": ["Yayoi começou a desenhar bolinhas quando criança porque via alucinações de pontos que se espalhavam por todo lugar 🔴⚪"],
+    "interacao": ["O que você acha que existe no infinito? Como seria uma sala infinita?"],
+    "atividade": ["Usando uma caixa de sapatos, cole papel alumínio no fundo e coloque luzinhas de LED (com ajuda de um adulto) ou bolinhas coloridas de papel para criar seu próprio 'quarto infinito' 🎨🔦"],
+    "final": ["A arte pode nos fazer sonhar com mundos que não têm fim 🌌"],
+    "emocao": "maravilhamento",
+    "nivel": "leve"
   },
-  {
-    "obra": "O Banho da Criança",
-    "artista": "Mary Cassatt",
-    "pais": "Estados Unidos",
-    "ano": "1893",
-    "explicacao_candinho": "A pintura mostra um momento carinhoso entre uma mulher e uma criança. A artista gostava de retratar cenas de cuidado e família.",
-    "cores_principais": ["azul", "rosa", "bege"],
-    "tema": "Família"
+  "mary_cassatt_banho": {
+    "tema": "artistas_mulheres",
+    "subtema": "mary_cassatt",
+    "palavras_chave": ["mary cassatt", "o banho da criança", "estados unidos", "família"],
+    "inicio": ["Mary Cassatt pintou um momento de cuidado e amor entre uma mulher e uma criança, com cores suaves e aconchegantes 🛁💕"],
+    "explicacao_curta": ["A pintura mostra um momento carinhoso entre uma mulher e uma criança. A artista gostava de retratar cenas de cuidado e família."],
+    "explicacao_aprofundada": ["Com azul, rosa e bege, Mary criou uma cena íntima e silenciosa, onde o gesto de lavar os pés da criança simboliza proteção e afeto."],
+    "curiosidade": ["Mary nunca teve filhos, mas se inspirou em suas sobrinhas e nas mães que observava no dia a dia para pintar cenas tão reais 👩‍👧"],
+    "interacao": ["Quem cuida de você com carinho? O que vocês gostam de fazer juntos?"],
+    "atividade": ["Desenhe um momento especial com alguém da sua família (avó, mãe, pai, irmão) fazendo alguma atividade que te deixa seguro e amado 👨‍👩‍👧"],
+    "final": ["A arte pode eternizar os gestos simples de amor do nosso cotidiano ❤️"],
+    "emocao": "aconchego",
+    "nivel": "leve"
   },
-  {
-    "obra": "Black Iris",
-    "artista": "Georgia O'Keeffe",
-    "pais": "Estados Unidos",
-    "ano": "1926",
-    "explicacao_candinho": "Georgia pintou uma flor bem de perto, fazendo ela parecer gigante e cheia de detalhes. As cores suaves deixam tudo elegante e delicado.",
-    "cores_principais": ["preto", "roxo", "rosa"],
-    "tema": "Natureza"
+  "georgia_okeeffe_black_iris": {
+    "tema": "artistas_mulheres",
+    "subtema": "georgia_okeeffe",
+    "palavras_chave": ["georgia o'keeffe", "black iris", "flor", "natureza"],
+    "inicio": ["Georgia O'Keeffe pintou uma flor tão de perto que ela parece uma paisagem misteriosa 🌸🔍"],
+    "explicacao_curta": ["Georgia pintou uma flor bem de perto, fazendo ela parecer gigante e cheia de detalhes. As cores suaves deixam tudo elegante e delicado."],
+    "explicacao_aprofundada": ["Com preto, roxo e rosa, ela transformou a íris negra em uma forma abstrata e sensual, convidando o espectador a observar a natureza como nunca antes."],
+    "curiosidade": ["Ela disse: 'Se você pegar uma flor e olhar muito de perto, o mundo inteiro aparece dentro dela.' 🌎"],
+    "interacao": ["Que flor ou planta você gostaria de ver bem grandona?"],
+    "atividade": ["Escolha uma flor ou folha e desenhe ela aumentada, ocupando toda a folha. Preste atenção nas linhas, curvas e cores 🖍️"],
+    "final": ["A arte nos ensina a olhar para as pequenas coisas com olhos de gigante 👀"],
+    "emocao": "admiração",
+    "nivel": "leve"
   },
-  {
-    "obra": "Bichos",
-    "artista": "Lygia Clark",
-    "pais": "Brasil",
-    "ano": "A partir de 1960",
-    "explicacao_candinho": "Essas esculturas podem ser mexidas e montadas de vários jeitos! Lygia queria que as pessoas participassem da arte brincando com as formas.",
-    "cores_principais": ["prata", "cinza", "preto"],
-    "tema": "Arte interativa"
+  "lygia_clark_bichos": {
+    "tema": "artistas_mulheres",
+    "subtema": "lygia_clark",
+    "palavras_chave": ["lygia clark", "bichos", "escultura interativa", "brasil"],
+    "inicio": ["Lygia Clark criou esculturas que você pode tocar, dobrar e brincar como se fossem bichos de metal 🦎🔧"],
+    "explicacao_curta": ["Essas esculturas podem ser mexidas e montadas de vários jeitos! Lygia queria que as pessoas participassem da arte brincando com as formas."],
+    "explicacao_aprofundada": ["Feitas em alumínio ou aço, os 'Bichos' são formados por placas articuladas que se transformam nas mãos de quem manipula, criando uma parceria entre obra e espectador."],
+    "curiosidade": ["Lygia chamava suas obras de 'propostas' porque a arte só se completava com a participação ativa do público 🤝"],
+    "interacao": ["Se você pudesse criar um brinquedo que é também uma escultura, que formas ele teria?"],
+    "atividade": ["Use papelão ou massinha de modelar para criar uma criatura que pode mudar de posição: pernas que dobram, asas que viram, etc. 🧸"],
+    "final": ["A arte pode ser uma brincadeira séria, onde você é parte da obra 🎭"],
+    "emocao": "interatividade",
+    "nivel": "leve"
   },
-  {
-    "obra": "Celacanto provoca maremoto",
-    "artista": "Adriana Varejão",
-    "pais": "Brasil",
-    "ano": "2004-2008",
-    "explicacao_candinho": "A artista usou azulejos coloridos para contar histórias sobre o passado do Brasil. A obra mistura beleza, história e imaginação.",
-    "cores_principais": ["azul", "branco", "vermelho"],
-    "tema": "História e cultura"
+  "adriana_varejao_celacanto": {
+    "tema": "artistas_mulheres",
+    "subtema": "adriana_varejao",
+    "palavras_chave": ["adriana varejão", "celacanto provoca maremoto", "azulejos", "história do brasil"],
+    "inicio": ["Adriana Varejão pintou um grande painel de azulejos onde um peixe pré-histórico causa um maremoto 🌊🐟"],
+    "explicacao_curta": ["A artista usou azulejos coloridos para contar histórias sobre o passado do Brasil. A obra mistura beleza, história e imaginação."],
+    "explicacao_aprofundada": ["Com azul, branco e vermelho, ela criou uma explosão de azulejos quebrados, misturando a tradição portuguesa com referências à arte barroca e à cultura brasileira."],
+    "curiosidade": ["O celacanto é um peixe real que existe há mais de 400 milhões de anos – um 'fóssil vivo' encontrado no oceano Índico 🦕"],
+    "interacao": ["Se você pudesse contar uma história do Brasil usando azulejos, o que desenharia?"],
+    "atividade": ["Pinte um azulejo quadrado de papel com um desenho que lembre uma lenda brasileira (o boto, a vitória-régia, o curupira) e depois faça vários iguais formando um painel 🧩"],
+    "final": ["A arte pode transformar a história em uma grande e colorida parede de memórias 🏺"],
+    "emocao": "memória",
+    "nivel": "leve"
   },
-  {
-    "obra": "Beleza Pura",
-    "artista": "Beatriz Milhazes",
-    "pais": "Brasil",
-    "ano": "2006",
-    "explicacao_candinho": "Essa pintura parece uma festa cheia de círculos, flores e cores vibrantes. Beatriz cria obras alegres e cheias de energia brasileira.",
-    "cores_principais": ["rosa", "laranja", "verde"],
-    "tema": "Cores e alegria"
+  "beatriz_milhazes_beleza_pura": {
+    "tema": "artistas_mulheres",
+    "subtema": "beatriz_milhazes",
+    "palavras_chave": ["beatriz milhazes", "beleza pura", "cores", "alegria", "brasil"],
+    "inicio": ["Beatriz Milhazes pintou uma festa de círculos, flores e arabescos que pulam de alegria 🎠🌈"],
+    "explicacao_curta": ["Essa pintura parece uma festa cheia de círculos, flores e cores vibrantes. Beatriz cria obras alegres e cheias de energia brasileira."],
+    "explicacao_aprofundada": ["Com rosa, laranja e verde, ela sobrepõe formas geométricas e orgânicas usando uma técnica de transferência que dá textura de colagem."],
+    "curiosidade": ["Beatriz já criou capas de cadernos e estampas de roupas, espalhando suas cores alegres para todo o mundo 👗"],
+    "interacao": ["Que forma (círculo, flor, estrela) você repetiria várias vezes para fazer uma pintura feliz?"],
+    "atividade": ["Recorte círculos, triângulos e flores de papéis coloridos e cole uns sobre os outros, formando uma composição cheia de camadas e movimento ✂️🎨"],
+    "final": ["A arte pode ser uma explosão de alegria que contamina quem olha 🎆"],
+    "emocao": "euforia",
+    "nivel": "leve"
   },
-  {
-    "obra": "O Impossível",
-    "artista": "Maria Martins",
-    "pais": "Brasil",
-    "ano": "1945",
-    "explicacao_candinho": "A escultura tem formas misteriosas e diferentes, quase como criaturas de um sonho. Maria Martins gostava de criar obras cheias de imaginação.",
-    "cores_principais": ["bronze", "marrom", "preto"],
-    "tema": "Surrealismo"
+  "maria_martins_o_impossivel": {
+    "tema": "artistas_mulheres",
+    "subtema": "maria_martins",
+    "palavras_chave": ["maria martins", "o impossível", "escultura", "surrealismo", "brasil"],
+    "inicio": ["Maria Martins esculpiu uma criatura misteriosa que parece saída de um sonho, com braços finos e curvas estranhas 🌙🌀"],
+    "explicacao_curta": ["A escultura tem formas misteriosas e diferentes, quase como criaturas de um sonho. Maria Martins gostava de criar obras cheias de imaginação."],
+    "explicacao_aprofundada": ["Em bronze escuro, 'O Impossível' funde elementos vegetais, animais e humanos, representando a força da natureza e do inconsciente."],
+    "curiosidade": ["Maria Martins foi também escritora e musicista, e sua escultura influenciou até o grande pintor surrealista Salvador Dalí 🎶"],
+    "interacao": ["Se você pudesse criar um bicho de outro planeta, como ele seria?"],
+    "atividade": ["Modele uma criatura fantástica com massinha ou argila: misture partes de animais, plantas e objetos (por exemplo, cabeça de flor, corpo de cobra, pernas de cadeira) 🐍🌻"],
+    "final": ["A arte pode dar forma ao impossível e transformar sonhos em matéria ✨"],
+    "emocao": "fantasia",
+    "nivel": "leve"
   }
-]
+}
