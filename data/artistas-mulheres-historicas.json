@@ -1,0 +1,92 @@
+[
+  {
+    "obra": "As Duas Fridas",
+    "artista": "Frida Kahlo",
+    "pais": "México",
+    "ano": "1939",
+    "explicacao_candinho": "Oi, pequeno artista! Aqui Frida pintou duas versões dela mesma lado a lado. A obra mostra sentimentos de tristeza, força e também como ela via diferentes partes da sua identidade.",
+    "cores_principais": ["branco", "vermelho", "verde"],
+    "tema": "Identidade e emoções"
+  },
+  {
+    "obra": "Autorretrato com Colar de Espinhos e Beija-flor",
+    "artista": "Frida Kahlo",
+    "pais": "México",
+    "ano": "1940",
+    "explicacao_candinho": "Frida pintou a si mesma com um colar de espinhos para mostrar sua dor e coragem. Os animais e plantas deixam a pintura cheia de símbolos e mistérios.",
+    "cores_principais": ["verde", "marrom", "preto"],
+    "tema": "Autorretrato"
+  },
+  {
+    "obra": "Judite Decapitadora de Holofernes",
+    "artista": "Artemisia Gentileschi",
+    "pais": "Itália",
+    "ano": "1612-1613",
+    "explicacao_candinho": "Essa obra mostra uma mulher muito corajosa vencendo um inimigo poderoso. Artemisia queria mostrar a força feminina em uma cena cheia de ação.",
+    "cores_principais": ["vermelho", "marrom", "preto"],
+    "tema": "Coragem e força"
+  },
+  {
+    "obra": "Infinity Mirror Rooms",
+    "artista": "Yayoi Kusama",
+    "pais": "Japão",
+    "ano": "Várias datas",
+    "explicacao_candinho": "Essas salas cheias de espelhos e luzes fazem parecer que o espaço nunca acaba. Kusama adora usar bolinhas e reflexos para criar mundos mágicos.",
+    "cores_principais": ["preto", "amarelo", "rosa"],
+    "tema": "Infinito e imaginação"
+  },
+  {
+    "obra": "O Banho da Criança",
+    "artista": "Mary Cassatt",
+    "pais": "Estados Unidos",
+    "ano": "1893",
+    "explicacao_candinho": "A pintura mostra um momento carinhoso entre uma mulher e uma criança. A artista gostava de retratar cenas de cuidado e família.",
+    "cores_principais": ["azul", "rosa", "bege"],
+    "tema": "Família"
+  },
+  {
+    "obra": "Black Iris",
+    "artista": "Georgia O'Keeffe",
+    "pais": "Estados Unidos",
+    "ano": "1926",
+    "explicacao_candinho": "Georgia pintou uma flor bem de perto, fazendo ela parecer gigante e cheia de detalhes. As cores suaves deixam tudo elegante e delicado.",
+    "cores_principais": ["preto", "roxo", "rosa"],
+    "tema": "Natureza"
+  },
+  {
+    "obra": "Bichos",
+    "artista": "Lygia Clark",
+    "pais": "Brasil",
+    "ano": "A partir de 1960",
+    "explicacao_candinho": "Essas esculturas podem ser mexidas e montadas de vários jeitos! Lygia queria que as pessoas participassem da arte brincando com as formas.",
+    "cores_principais": ["prata", "cinza", "preto"],
+    "tema": "Arte interativa"
+  },
+  {
+    "obra": "Celacanto provoca maremoto",
+    "artista": "Adriana Varejão",
+    "pais": "Brasil",
+    "ano": "2004-2008",
+    "explicacao_candinho": "A artista usou azulejos coloridos para contar histórias sobre o passado do Brasil. A obra mistura beleza, história e imaginação.",
+    "cores_principais": ["azul", "branco", "vermelho"],
+    "tema": "História e cultura"
+  },
+  {
+    "obra": "Beleza Pura",
+    "artista": "Beatriz Milhazes",
+    "pais": "Brasil",
+    "ano": "2006",
+    "explicacao_candinho": "Essa pintura parece uma festa cheia de círculos, flores e cores vibrantes. Beatriz cria obras alegres e cheias de energia brasileira.",
+    "cores_principais": ["rosa", "laranja", "verde"],
+    "tema": "Cores e alegria"
+  },
+  {
+    "obra": "O Impossível",
+    "artista": "Maria Martins",
+    "pais": "Brasil",
+    "ano": "1945",
+    "explicacao_candinho": "A escultura tem formas misteriosas e diferentes, quase como criaturas de um sonho. Maria Martins gostava de criar obras cheias de imaginação.",
+    "cores_principais": ["bronze", "marrom", "preto"],
+    "tema": "Surrealismo"
+  }
+]
