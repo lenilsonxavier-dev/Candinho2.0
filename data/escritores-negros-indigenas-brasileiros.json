@@ -1,135 +1,268 @@
-[
-  {
-    "autor": "Machado de Assis",
-    "obra": "Memórias Póstumas de Brás Cubas",
-    "explicacao_candinho": "Oi, leitorzinho! Machado de Assis criou histórias cheias de humor e inteligência. Nesse livro, um personagem conta sua vida de um jeito muito engraçado e diferente.",
-    "tema": "Reflexão sobre a sociedade",
-    "genero": "Romance"
+{
+  "machado_de_assis_memorias_postumas": {
+    "tema": "autores_brasileiros",
+    "subtema": "machado_de_assis",
+    "palavras_chave": ["machado de assis", "memórias póstumas de brás cubas", "romance", "humor"],
+    "inicio": ["Machado de Assis criou um personagem que conta sua vida depois de morto, com muita ironia e criatividade 💀📖"],
+    "explicacao_curta": ["Machado de Assis criou histórias cheias de humor e inteligência. Nesse livro, um personagem conta sua vida de um jeito muito engraçado e diferente."],
+    "explicacao_aprofundada": ["Brás Cubas narra suas memórias do além-túmulo, criticando a sociedade e as vaidades humanas com um tom leve e sarcástico."],
+    "curiosidade": ["Machado era filho de uma lavadeira e de um pintor de paredes, e aprendeu sozinho a ler e escrever, tornando-se o maior escritor brasileiro 🎩"],
+    "interacao": ["Se você pudesse contar sua história depois de velhinho, o que lembraria primeiro?"],
+    "atividade": ["Desenhe uma cena engraçada que poderia acontecer com um personagem que já morreu mas ainda fala – como um fantasma brincalhão 👻"],
+    "final": ["O humor pode nos ensinar a enxergar a vida de outro jeito 😂"],
+    "emocao": "ironia",
+    "nivel": "leve"
   },
-  {
-    "autor": "Machado de Assis",
-    "obra": "Dom Casmurro",
-    "explicacao_candinho": "Essa história fala sobre amizade, amor e dúvidas. O narrador tenta lembrar acontecimentos do passado e faz o leitor pensar bastante.",
-    "tema": "Memória e sentimentos",
-    "genero": "Romance"
+  "machado_de_assis_dom_casmurro": {
+    "tema": "autores_brasileiros",
+    "subtema": "machado_de_assis",
+    "palavras_chave": ["machado de assis", "dom casmurro", "bentinho", "cápitu"],
+    "inicio": ["Em Dom Casmurro, Machado nos faz pensar sobre amor, ciúme e memória, como um grande quebra-cabeça do coração 💔🧩"],
+    "explicacao_curta": ["Essa história fala sobre amizade, amor e dúvidas. O narrador tenta lembrar acontecimentos do passado e faz o leitor pensar bastante."],
+    "explicacao_aprofundada": ["Bentinho conta sua juventude e seu casamento com Capitu, mas o tempo todo duvida da fidelidade dela – e a gente nunca sabe se é verdade ou imaginação."],
+    "curiosidade": ["O livro tem uma das cenas mais famosas da literatura: Capitu com 'olhos de ressaca', que ninguém explica direito o que significa 🌊"],
+    "interacao": ["Você já sentiu dúvida sobre alguma lembrança? O que você fez?"],
+    "atividade": ["Desenhe dois quadros: um mostrando uma lembrança feliz que você tem certeza, e outro mostrando uma lembrança que você não tem tanta certeza se aconteceu mesmo 🖼️"],
+    "final": ["A memória pode pregar peças na gente; por isso, o importante é o que sentimos no coração ❤️"],
+    "emocao": "dúvida",
+    "nivel": "leve"
   },
-  {
-    "autor": "Machado de Assis",
-    "obra": "Quincas Borba",
-    "explicacao_candinho": "O livro mistura humor e filosofia para mostrar como as pessoas podem mudar por causa do dinheiro e da ambição.",
-    "tema": "Sociedade e ambição",
-    "genero": "Romance"
+  "machado_de_assis_quincas_borba": {
+    "tema": "autores_brasileiros",
+    "subtema": "machado_de_assis",
+    "palavras_chave": ["machado de assis", "quincas borba", "filosofia", "ambição"],
+    "inicio": ["Machado criou um filósofo maluco chamado Quincas Borba, que tinha uma teoria engraçada: 'Ao vencedor, as batatas!' 🥔🎩"],
+    "explicacao_curta": ["O livro mistura humor e filosofia para mostrar como as pessoas podem mudar por causa do dinheiro e da ambição."],
+    "explicacao_aprofundada": ["Rubião herda uma fortuna e enlouquece, tentando imitar o amigo Quincas Borba e sua teoria do 'Humanitismo', que diz que a vida é uma competição."],
+    "curiosidade": ["O cachorro Quincas Borba (que tem o nome do filósofo) é um personagem importante e herda parte da fortuna no livro 🐕"],
+    "interacao": ["O que você faria se ganhasse muito dinheiro de repente? Mudaria seu jeito de ser?"],
+    "atividade": ["Desenhe um 'troféu de batatas' e crie uma pequena história em quadrinhos de um personagem que quer esse troféu a qualquer custo 🏆"],
+    "final": ["O dinheiro pode transformar as pessoas, mas o que realmente importa são os amigos e a bondade 💰➡️💖"],
+    "emocao": "ambição",
+    "nivel": "leve"
   },
-  {
-    "autor": "Lima Barreto",
-    "obra": "Triste Fim de Policarpo Quaresma",
-    "explicacao_candinho": "Lima Barreto escreveu sobre um homem que amava muito o Brasil e queria melhorar o país, mas enfrentou muitos desafios.",
-    "tema": "Brasil e justiça social",
-    "genero": "Romance"
+  "lima_barreto_triste_fim_policarpo_quaresma": {
+    "tema": "autores_brasileiros",
+    "subtema": "lima_barreto",
+    "palavras_chave": ["lima barreto", "triste fim de policarpo quaresma", "patriotismo", "brasil"],
+    "inicio": ["Policarpo Quaresma amava tanto o Brasil que queria mudar tudo para melhor, mas nem tudo saiu como ele sonhou 🇧🇷😢"],
+    "explicacao_curta": ["Lima Barreto escreveu sobre um homem que amava muito o Brasil e queria melhorar o país, mas enfrentou muitos desafios."],
+    "explicacao_aprofundada": ["Policarpo propõe o tupi como língua oficial, critica os políticos e tenta ser agricultor, mas acaba preso e morto injustamente – uma crítica à sociedade da época."],
+    "curiosidade": ["Lima Barreto foi um dos primeiros grandes escritores negros do Brasil e sofreu muito preconceito, mas deixou obras-primas 📚"],
+    "interacao": ["Se você pudesse inventar uma lei para melhorar o Brasil, qual seria?"],
+    "atividade": ["Desenhe Policarpo Quaresma plantando mandioca e ao lado um político rindo – mostre como ele é sozinho em sua luta 🌱"],
+    "final": ["O amor ao país pode ser lindo, mas mudar o mundo sozinho é muito difícil; por isso devemos nos unir 🤝"],
+    "emocao": "idealismo",
+    "nivel": "leve"
   },
-  {
-    "autor": "Lima Barreto",
-    "obra": "Clara dos Anjos",
-    "explicacao_candinho": "A obra mostra as dificuldades enfrentadas por uma jovem negra e pobre em uma sociedade cheia de preconceitos.",
-    "tema": "Desigualdade social",
-    "genero": "Romance"
+  "lima_barreto_clara_dos_anjos": {
+    "tema": "autores_brasileiros",
+    "subtema": "lima_barreto",
+    "palavras_chave": ["lima barreto", "clara dos anjos", "preconceito", "desigualdade"],
+    "inicio": ["Clara, uma jovem negra e pobre, sonha em ser feliz, mas enfrenta o preconceito de uma sociedade injusta 👧🏿💔"],
+    "explicacao_curta": ["A obra mostra as dificuldades enfrentadas por uma jovem negra e pobre em uma sociedade cheia de preconceitos."],
+    "explicacao_aprofundada": ["Clara se apaixona por um rapaz de classe média que a engana, revelando como o racismo e a misoginia afetam a vida das mulheres periféricas."],
+    "curiosidade": ["Lima Barreto escreveu esse livro em 1904, mas ele só foi publicado 20 anos depois, após sua morte 🕯️"],
+    "interacao": ["O que você faria para ajudar um amigo que está sendo tratado de forma injusta?"],
+    "atividade": ["Desenhe Clara com um sorriso forte, cercada de flores, e atrás dela desenhe sombras que representam os preconceitos que ela vence 🌻"],
+    "final": ["A literatura pode denunciar injustiças e inspirar a mudança ✊"],
+    "emocao": "indignação",
+    "nivel": "leve"
   },
-  {
-    "autor": "Conceição Evaristo",
-    "obra": "Becos da Memória",
-    "explicacao_candinho": "Conceição conta histórias inspiradas na vida das pessoas das comunidades brasileiras, mostrando força, amizade e esperança.",
-    "tema": "Memória e comunidade",
-    "genero": "Romance"
+  "conceicao_evaristo_becos_da_memoria": {
+    "tema": "autores_brasileiros",
+    "subtema": "conceicao_evaristo",
+    "palavras_chave": ["conceição evaristo", "becos da memória", "comunidade", "esperança"],
+    "inicio": ["Em Becos da Memória, Conceição nos leva a uma vila onde as lembranças moram em cada canto e a união vence as dificuldades 🏘️❤️"],
+    "explicacao_curta": ["Conceição conta histórias inspiradas na vida das pessoas das comunidades brasileiras, mostrando força, amizade e esperança."],
+    "explicacao_aprofundada": ["A obra narra a vida de moradores prestes a serem removidos de uma favela, ressaltando a memória afetiva e a resistência popular."],
+    "curiosidade": ["Conceição usa a expressão 'escrevivência' para dizer que sua escrita é misturada com sua própria vivência como mulher negra e favelada ✍🏿"],
+    "interacao": ["Que lugar você não esqueceria nunca mesmo se tivesse que se mudar?"],
+    "atividade": ["Desenhe um beco com três casas; em cada casa, desenhe uma lembrança boa que você guarda de um lugar especial 🏚️📦"],
+    "final": ["As memórias do lugar onde vivemos nos acompanham para sempre, mesmo depois de partirmos 🌈"],
+    "emocao": "saudade",
+    "nivel": "leve"
   },
-  {
-    "autor": "Conceição Evaristo",
-    "obra": "Olhos D'Água",
-    "explicacao_candinho": "Os contos falam sobre famílias, sonhos e dificuldades vividas por mulheres negras no Brasil.",
-    "tema": "Família e resistência",
-    "genero": "Contos"
+  "conceicao_evaristo_olhos_dagua": {
+    "tema": "autores_brasileiros",
+    "subtema": "conceicao_evaristo",
+    "palavras_chave": ["conceição evaristo", "olhos d'água", "contos", "mulheres negras"],
+    "inicio": ["Cada conto de Olhos D'Água é como uma lágrima ou um sorriso de uma mulher que luta pela vida 💧😊"],
+    "explicacao_curta": ["Os contos falam sobre famílias, sonhos e dificuldades vividas por mulheres negras no Brasil."],
+    "explicacao_aprofundada": ["Conceição aborda maternidade, abandono, violência e alegria em histórias curtas que emocionam e fazem refletir."],
+    "curiosidade": ["O livro ganhou o Prêmio Jabuti em 2015, um dos mais importantes do Brasil 🏆"],
+    "interacao": ["Que emoção (alegria, tristeza, raiva, medo) você sente mais ao ler uma história? Por quê?"],
+    "atividade": ["Escreva um microconto de duas frases sobre uma mulher forte que você conhece ou imagina ✍️👩🏿"],
+    "final": ["As lágrimas podem ser de dor, mas também de esperança e resistência 💪"],
+    "emocao": "empatia",
+    "nivel": "leve"
   },
-  {
-    "autor": "Conceição Evaristo",
-    "obra": "Canção para ninar menino grande",
-    "explicacao_candinho": "A autora usa uma escrita cheia de emoção para falar sobre amor, lembranças e relações humanas.",
-    "tema": "Sentimentos e memória",
-    "genero": "Romance"
+  "conceicao_evaristo_cancao_para_ninar_menino_grande": {
+    "tema": "autores_brasileiros",
+    "subtema": "conceicao_evaristo",
+    "palavras_chave": ["conceição evaristo", "canção para ninar menino grande", "amor", "memória"],
+    "inicio": ["Uma canção de ninar não só para crianças, mas para todos nós que carregamos lembranças na alma 🎵🌙"],
+    "explicacao_curta": ["A autora usa uma escrita cheia de emoção para falar sobre amor, lembranças e relações humanas."],
+    "explicacao_aprofundada": ["O romance narra o encontro entre uma mulher e um homem que voltam a se ver depois de anos, revisitando feridas e afetos do passado."],
+    "curiosidade": ["Conceição disse que escreveu esse livro pensando em todas as pessoas que têm 'meninos grandes' dentro de si – adultos que ainda precisam de colo 🧸"],
+    "interacao": ["Quem é o 'menino grande' que mora dentro de você ou de alguém que você ama?"],
+    "atividade": ["Desenhe um abraço entre duas pessoas, uma delas com um coração aberto e a outra com uma pequena criança desenhada dentro do peito 🤗"],
+    "final": ["O amor pode nos curar como uma canção de ninar que nunca esquecemos 💤"],
+    "emocao": "ternura",
+    "nivel": "leve"
   },
-  {
-    "autor": "Carolina Maria de Jesus",
-    "obra": "Quarto de Despejo: Diário de uma Favelada",
-    "explicacao_candinho": "Carolina escreveu sobre sua própria vida na favela, mostrando coragem e vontade de lutar por dias melhores.",
-    "tema": "Vida na favela",
-    "genero": "Diário"
+  "carolina_maria_de_jesus_quarto_de_despejo": {
+    "tema": "autores_brasileiros",
+    "subtema": "carolina_maria_de_jesus",
+    "palavras_chave": ["carolina maria de jesus", "quarto de despejo", "diário", "favela"],
+    "inicio": ["Carolina catava papel para sobreviver, mas escrevia um diário que virou um livro famoso no mundo todo 📔🗑️"],
+    "explicacao_curta": ["Carolina escreveu sobre sua própria vida na favela, mostrando coragem e vontade de lutar por dias melhores."],
+    "explicacao_aprofundada": ["O diário descreve a fome, o trabalho duro e o amor pelos filhos, mas também a inteligência e a dignidade de uma mulher que nunca desistiu."],
+    "curiosidade": ["Seu livro foi traduzido para mais de 13 idiomas e fez Carolina ser recebida por chefes de estado no exterior 🗺️"],
+    "interacao": ["O que você acha que é mais importante: ter coisas materiais ou ter sonhos? Por quê?"],
+    "atividade": ["Escreva e desenhe uma página de diário imaginário de Carolina: ela encontra um livro jogado no lixo e decide ler para os filhos à noite 📚✨"],
+    "final": ["Uma pessoa pobre pode ter uma mente riquíssima e mudar o mundo com suas palavras 🌟"],
+    "emocao": "dignidade",
+    "nivel": "leve"
   },
-  {
-    "autor": "Itamar Vieira Junior",
-    "obra": "Torto Arado",
-    "explicacao_candinho": "Esse livro fala sobre duas irmãs e a vida no interior do Brasil, mostrando a ligação das pessoas com a terra e suas tradições.",
-    "tema": "Terra e ancestralidade",
-    "genero": "Romance"
+  "itamar_vieira_junior_torto_arado": {
+    "tema": "autores_brasileiros",
+    "subtema": "itamar_vieira_junior",
+    "palavras_chave": ["itamar vieira junior", "torto arado", "ancestralidade", "chapada diamantina"],
+    "inicio": ["Duas irmãs, uma enxada e um arado torto: assim começa uma história de amor e luta pela terra 🌽⚒️"],
+    "explicacao_curta": ["Esse livro fala sobre duas irmãs e a vida no interior do Brasil, mostrando a ligação das pessoas com a terra e suas tradições."],
+    "explicacao_aprofundada": ["Bibiana e Belonísia crescem numa comunidade de descendentes de escravizados e enfrentam conflitos de terra, fé e afeto, com uma narrativa poética e forte."],
+    "curiosidade": ["Torto Arado foi o livro mais vendido no Brasil em 2020 e ganhou o Prêmio Jabuti e o Prêmio Oceanos 🌊"],
+    "interacao": ["Você já visitou uma fazenda ou roça? O que mais gostou?"],
+    "atividade": ["Desenhe uma paisagem do campo com uma casa simples, uma plantação e duas irmãs caminhando juntas sob o sol 🌞👩🏿‍🌾"],
+    "final": ["A terra não é só chão: é memória, família e vida 🌍"],
+    "emocao": "conexão",
+    "nivel": "leve"
   },
-  {
-    "autor": "Daniel Munduruku",
-    "obra": "Histórias de Índio",
-    "explicacao_candinho": "Daniel conta histórias dos povos indígenas para ensinar respeito à natureza e às diferentes culturas.",
-    "tema": "Cultura indígena",
-    "genero": "Contos"
+  "daniel_munduruku_historias_de_indio": {
+    "tema": "autores_brasileiros",
+    "subtema": "daniel_munduruku",
+    "palavras_chave": ["daniel munduruku", "histórias de índio", "contos indígenas", "natureza"],
+    "inicio": ["Daniel Munduruku conta causos da floresta que os avós indígenas ensinam para as crianças, cheios de macacos, onças e curupiras 🐒🌳"],
+    "explicacao_curta": ["Daniel conta histórias dos povos indígenas para ensinar respeito à natureza e às diferentes culturas."],
+    "explicacao_aprofundada": ["Cada conto traz um ensinamento sobre a vida, a amizade e a importância de cuidar do meio ambiente, do ponto de vista dos povos originários."],
+    "curiosidade": ["Daniel é da etnia Munduruku, tem doutorado em Educação e escreveu mais de 50 livros infantis 📚"],
+    "interacao": ["Que animal da floresta você acha que tem a história mais interessante?"],
+    "atividade": ["Desenhe o personagem 'Curupira' (o protetor da mata com os pés virados para trás) assustando um caçador que quer derrubar árvores 🌲👣"],
+    "final": ["As histórias indígenas ensinam que a natureza é nossa mãe e deve ser respeitada 💚"],
+    "emocao": "encantamento",
+    "nivel": "leve"
   },
-  {
-    "autor": "Daniel Munduruku",
-    "obra": "O Karaíba: Uma História do pré-Brasil",
-    "explicacao_candinho": "A obra imagina como era o Brasil antes da chegada dos portugueses, cheia de aventuras e sabedoria indígena.",
-    "tema": "História indígena",
-    "genero": "Romance"
+  "daniel_munduruku_o_karaiba": {
+    "tema": "autores_brasileiros",
+    "subtema": "daniel_munduruku",
+    "palavras_chave": ["daniel munduruku", "o karaíba", "pré-brasil", "aventura"],
+    "inicio": ["Imagine o Brasil antes de cabral: florestas gigantes, rios limpos e povos livres – foi assim que Daniel imaginou em O Karaíba 🏞️⛵"],
+    "explicacao_curta": ["A obra imagina como era o Brasil antes da chegada dos portugueses, cheia de aventuras e sabedoria indígena."],
+    "explicacao_aprofundada": ["O jovem Karaíba parte numa jornada para encontrar o 'Pajé do Fim do Mundo' e descobre os valores de sua gente, além de enfrentar perigos e aprender com a natureza."],
+    "curiosidade": ["O título 'Karaíba' significa 'senhor do fogo' ou 'espírito poderoso' na língua tupi-guarani 🔥"],
+    "interacao": ["Se você pudesse viajar no tempo para o Brasil de 1500, o que levaria para mostrar aos indígenas?"],
+    "atividade": ["Desenhe uma canoa indígena navegando por um rio cheio de vitórias-régias, com um pajé apontando o caminho para o 'fim do mundo' 🛶"],
+    "final": ["Conhecer o passado nos ajuda a valorizar o presente e a imaginar o futuro 🌅"],
+    "emocao": "aventura",
+    "nivel": "leve"
   },
-  {
-    "autor": "Ailton Krenak",
-    "obra": "Ideias para adiar o fim do mundo",
-    "explicacao_candinho": "Ailton faz as pessoas pensarem sobre como cuidar da natureza e viver em harmonia com o planeta.",
-    "tema": "Natureza e humanidade",
-    "genero": "Reflexão"
+  "ailton_krenak_ideias_para_adiar_o_fim_do_mundo": {
+    "tema": "autores_brasileiros",
+    "subtema": "ailton_krenak",
+    "palavras_chave": ["ailton krenak", "ideias para adiar o fim do mundo", "natureza", "reflexão"],
+    "inicio": ["Ailton Krenak nos convida a sonhar com um planeta onde as pessoas cuidam dos rios como cuidam de parentes 🌊🤝"],
+    "explicacao_curta": ["Ailton faz as pessoas pensarem sobre como cuidar da natureza e viver em harmonia com o planeta."],
+    "explicacao_aprofundada": ["Com uma linguagem poética, ele critica a destruição ambiental e propõe que adiemos o 'fim do mundo' agindo com amor pela Terra."],
+    "curiosidade": ["Ailton ficou famoso quando discursou na Assembleia Constituinte de 1988 pintado de preto, protestando contra a invasão das terras indígenas 🖤"],
+    "interacao": ["O que você faria para 'adiar o fim do mundo' na sua casa?"],
+    "atividade": ["Desenhe o planeta Terra sendo abraçado por muitas mãos de cores diferentes – cada mão representa uma pessoa cuidando do meio ambiente 🌍🤲"],
+    "final": ["Cuidar da natureza é um ato de amor pela vida de todos os seres 🐝🌻"],
+    "emocao": "esperança",
+    "nivel": "leve"
   },
-  {
-    "autor": "Ailton Krenak",
-    "obra": "A vida não é útil",
-    "explicacao_candinho": "O autor fala sobre a importância de respeitar a vida, os rios, as florestas e todos os seres vivos.",
-    "tema": "Vida e meio ambiente",
-    "genero": "Reflexão"
+  "ailton_krenak_a_vida_nao_e_util": {
+    "tema": "autores_brasileiros",
+    "subtema": "ailton_krenak",
+    "palavras_chave": ["ailton krenak", "a vida não é útil", "meio ambiente", "reflexão"],
+    "inicio": ["A vida não é um objeto que a gente usa e joga fora – ela é para ser vivida, sentida e respeitada 💖"],
+    "explicacao_curta": ["O autor fala sobre a importância de respeitar a vida, os rios, as florestas e todos os seres vivos."],
+    "explicacao_aprofundada": ["Krenak critica a ideia de que tudo precisa ter 'utilidade' e mostra que a natureza tem valor por si mesma, não só pelo que produz."],
+    "curiosidade": ["O livro é baseado em uma palestra que Ailton deu em Portugal, onde ele falou sobre como as empresas querem transformar tudo em mercadoria 💰"],
+    "interacao": ["O que você acha que não tem utilidade prática, mas é muito importante para você?"],
+    "atividade": ["Desenhe uma flor que não serve para nada além de ser bonita, e escreva embaixo: 'A beleza também é importante' 🌸"],
+    "final": ["Nem tudo precisa ser útil: o amor, a amizade e a arte são preciosos demais para serem medidos 💎"],
+    "emocao": "contemplação",
+    "nivel": "leve"
   },
-  {
-    "autor": "Olívio Jekupé",
-    "obra": "Xerekó Arandu, a Morte de Kretã",
-    "explicacao_candinho": "A história mostra tradições e ensinamentos do povo guarani através de aventuras e memórias.",
-    "tema": "Sabedoria indígena",
-    "genero": "Narrativa indígena"
+  "olivio_jekupe_xereko_arandu": {
+    "tema": "autores_brasileiros",
+    "subtema": "olivio_jekupe",
+    "palavras_chave": ["olívio jekupé", "xerekó arandu", "guarani", "morte de kretã"],
+    "inicio": ["Os guerreiros guaranis enfrentam mistérios e desafios em uma história cheia de coragem e sabedoria ancestral 🛡️🌙"],
+    "explicacao_curta": ["A história mostra tradições e ensinamentos do povo guarani através de aventuras e memórias."],
+    "explicacao_aprofundada": ["O livro narra a saga de Kretã, um líder guarani, e seu povo em meio a conflitos e rituais, preservando a cultura oral em narrativa escrita."],
+    "curiosidade": ["Olívio é professor, escritor e ativista guarani; ele usa a literatura para fortalecer a identidade indígena entre os jovens 📖"],
+    "interacao": ["Que valores (como respeito, união, bravura) você acha que são mais importantes em uma comunidade?"],
+    "atividade": ["Desenhe um círculo de conversa ao redor de uma fogueira, com várias pessoas ouvindo um pajé que conta histórias 🔥👂"],
+    "final": ["As histórias de luta dos povos indígenas nos ensinam a nunca desistir de nossas raízes 🌱"],
+    "emocao": "bravura",
+    "nivel": "leve"
   },
-  {
-    "autor": "Olívio Jekupé",
-    "obra": "As Queixadas e Outros Contos Guaranis",
-    "explicacao_candinho": "O livro reúne histórias inspiradas na tradição oral guarani e nos animais da floresta.",
-    "tema": "Natureza e tradição",
-    "genero": "Contos"
+  "olivio_jekupe_as_queixadas": {
+    "tema": "autores_brasileiros",
+    "subtema": "olivio_jekupe",
+    "palavras_chave": ["olívio jekupé", "as queixadas", "contos guaranis", "animais"],
+    "inicio": ["As queixadas (porcos do mato) têm muito o que ensinar sobre amizade e união, como mostra esse livro de contos 🐗🌿"],
+    "explicacao_curta": ["O livro reúne histórias inspiradas na tradição oral guarani e nos animais da floresta."],
+    "explicacao_aprofundada": ["Cada conto traz lições sobre a vida em comunidade, o respeito aos mais velhos e a harmonia com os bichos da mata."],
+    "curiosidade": ["Olívio recolheu essas histórias com os anciãos de sua aldeia para que não se perdessem com o tempo 🧓🏽"],
+    "interacao": ["Qual bicho você acha que poderia ser o personagem principal de um conto guarani?"],
+    "atividade": ["Desenhe um grupo de queixadas (porcos selvagens) caminhando pela floresta, com uma cobra ou arara observando de longe 🐆"],
+    "final": ["Os animais são nossos parentes mais antigos e merecem respeito e carinho 🦜"],
+    "emocao": "curiosidade",
+    "nivel": "leve"
   },
-  {
-    "autor": "Davi Kopenawa Yanomami",
-    "obra": "A Queda do Céu: Palavras de um Xamã Yanomami",
-    "explicacao_candinho": "Davi conta ensinamentos do povo Yanomami e alerta sobre a importância de proteger a Amazônia.",
-    "tema": "Floresta e preservação",
-    "genero": "Relato"
+  "davi_kopenawa_queda_do_ceu": {
+    "tema": "autores_brasileiros",
+    "subtema": "davi_kopenawa",
+    "palavras_chave": ["davi kopenawa", "a queda do céu", "yanomami", "xamã"],
+    "inicio": ["Davi Kopenawa é um xamã yanomami que sonhou com a queda do céu e nos alerta: a floresta está em perigo 🌳⚡"],
+    "explicacao_curta": ["Davi conta ensinamentos do povo Yanomami e alerta sobre a importância de proteger a Amazônia."],
+    "explicacao_aprofundada": ["O livro é um relato de sua vida, dos rituais xamânicos e da destruição causada pelo garimpo, escrita em parceria com o antropólogo Bruce Albert."],
+    "curiosidade": ["Davi foi uma das lideranças indígenas mais importantes do mundo, recebendo prêmios e discursando na ONU 🕊️"],
+    "interacao": ["O que você faria se visse uma grande máquina destruindo a floresta perto da sua casa?"],
+    "atividade": ["Desenhe um xamã yanomami com cocar de penas e um pó mágico (soprado para curar) em uma mão; na outra, desenhe uma folha em chamas como alerta 🔥"],
+    "final": ["A voz dos xamãs nos lembra que o céu pode cair se não cuidarmos da terra 🌎"],
+    "emocao": "urgência",
+    "nivel": "leve"
   },
-  {
-    "autor": "Kaká Werá Jecupé",
-    "obra": "Todas as vezes que dissemos adeus",
-    "explicacao_candinho": "O autor escreve sobre memórias, encontros e a força das raízes indígenas.",
-    "tema": "Memória e identidade",
-    "genero": "Romance"
+  "kaka_wera_jeicupe_todas_as_vezes_que_dissemos_adeus": {
+    "tema": "autores_brasileiros",
+    "subtema": "kaka_wera_jeicupe",
+    "palavras_chave": ["kaká werá jecupé", "todas as vezes que dissemos adeus", "memória", "identidade"],
+    "inicio": ["Despedidas podem ser tristes, mas também nos ensinam sobre o valor de quem amamos e de onde viemos 👋🏽❤️"],
+    "explicacao_curta": ["O autor escreve sobre memórias, encontros e a força das raízes indígenas."],
+    "explicacao_aprofundada": ["O romance narra a busca de um homem por sua identidade, entre a cidade grande e a aldeia, com lembranças de amores e partidas."],
+    "curiosidade": ["Kaká Werá é da etnia Guarani e também é músico e palestrante, viajando o mundo para falar sobre cultura indígena 🎸"],
+    "interacao": ["De quem você já se despediu e até hoje sente saudade?"],
+    "atividade": ["Desenhe uma mala de viagem com vários corações dentro, simbolizando as pessoas e lugares que você carrega no coração mesmo depois de partir 🧳❤️"],
+    "final": ["Cada despedida nos prepara para novos encontros – e as raízes nunca se perdem 🌱"],
+    "emocao": "melancolia",
+    "nivel": "leve"
   },
-  {
-    "autor": "Kaká Werá Jecupé",
-    "obra": "Tupã Tenondé",
-    "explicacao_candinho": "Essa obra apresenta histórias e ensinamentos da tradição guarani de maneira poética e cheia de espiritualidade.",
-    "tema": "Espiritualidade indígena",
-    "genero": "Narrativa indígena"
+  "kaka_wera_jeicupe_tupa_tenonde": {
+    "tema": "autores_brasileiros",
+    "subtema": "kaka_wera_jeicupe",
+    "palavras_chave": ["kaká werá jecupé", "tupã tenondé", "guarani", "espiritualidade"],
+    "inicio": ["Tupã Tenondé é o deus da criação para os guaranis; nesta obra, Kaká Werá conta seus ensinamentos como quem canta uma reza 🎶🌤️"],
+    "explicacao_curta": ["Essa obra apresenta histórias e ensinamentos da tradição guarani de maneira poética e cheia de espiritualidade."],
+    "explicacao_aprofundada": ["Misturando mito, poesia e reflexão, o livro reconta a criação do mundo segundo os guaranis e o papel dos seres humanos em cuidar da terra."],
+    "curiosidade": ["O nome 'Tupã Tenondé' pode ser traduzido como 'Deus Primeiro' ou 'O Senhor do Amanhecer' 🌅"],
+    "interacao": ["Como você imagina que o mundo foi criado? Que história você inventaria?"],
+    "atividade": ["Desenhe um amanhecer com um deus indígena soprando o sol, as estrelas e as águas – tudo nascendo ao mesmo tempo 🌞💨"],
+    "final": ["A espiritualidade indígena nos ensina que somos parte da grande teia da vida, não seus donos 🕸️"],
+    "emocao": "sagrado",
+    "nivel": "leve"
   }
-]
+}
