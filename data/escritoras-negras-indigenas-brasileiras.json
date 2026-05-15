@@ -1,79 +1,156 @@
-[
-  {
-    "autora": "Conceição Evaristo",
-    "obra": "Olhos d'Água",
-    "explicacao_candinho": "Oi, leitorzinho! Conceição Evaristo escreve histórias inspiradas na vida real de muitas mulheres negras brasileiras. Seus textos falam de coragem, família, sonhos e dificuldades do dia a dia.",
-    "tema": "Memória e resistência",
-    "genero": "Contos"
+{
+  "conceicao_evaristo_olhos_dagua": {
+    "tema": "escritoras_brasileiras",
+    "subtema": "conceicao_evaristo",
+    "palavras_chave": ["conceição evaristo", "olhos d'água", "contos", "mulheres negras"],
+    "inicio": ["Conceição Evaristo escreve histórias que parecem janelas para a vida de mulheres fortes e guerreiras 💪📖"],
+    "explicacao_curta": ["Conceição Evaristo escreve histórias inspiradas na vida real de muitas mulheres negras brasileiras."],
+    "explicacao_aprofundada": ["Seus textos falam de coragem, família, sonhos e dificuldades do dia a dia, mostrando como a esperança nunca se apaga."],
+    "curiosidade": ["Conceição trabalhou como empregada doméstica e só começou a estudar já adulta; hoje é uma das maiores escritoras do Brasil 🌟"],
+    "interacao": ["Que história da sua família ou de alguém que você conhece merecia ser contada?"],
+    "atividade": ["Desenhe uma cena de uma história real que você gostaria de escrever: pode ser um momento feliz ou de superação 🖍️"],
+    "final": ["A literatura pode dar voz a quem sempre teve histórias incríveis para contar 🗣️"],
+    "emocao": "resistência",
+    "nivel": "leve"
   },
-  {
-    "autora": "Conceição Evaristo",
-    "obra": "Becos da Memória",
-    "explicacao_candinho": "Essa obra conta histórias de pessoas que vivem em uma comunidade simples e cheia de lembranças. A autora mostra como a união e a esperança ajudam as pessoas.",
-    "tema": "Comunidade e memória",
-    "genero": "Romance"
+  "conceicao_evaristo_becos_da_memoria": {
+    "tema": "escritoras_brasileiras",
+    "subtema": "conceicao_evaristo",
+    "palavras_chave": ["conceição evaristo", "becos da memória", "comunidade", "romance"],
+    "inicio": ["Em 'Becos da Memória', Conceição nos leva a uma comunidade onde as lembranças moram em cada canto 🏘️"],
+    "explicacao_curta": ["Essa obra conta histórias de pessoas que vivem em uma comunidade simples e cheia de lembranças."],
+    "explicacao_aprofundada": ["A autora mostra como a união e a esperança ajudam as pessoas a enfrentar dificuldades e a manter viva a memória de quem partiu."],
+    "curiosidade": ["O livro é inspirado na infância de Conceição, que cresceu em uma vila de operários em Belo Horizonte 🚂"],
+    "interacao": ["O que você lembra com mais carinho do lugar onde você mora ou morou?"],
+    "atividade": ["Desenhe um 'beco da memória' seu: uma rua, um quintal ou uma casa onde você guarda boas lembranças, e desenhe uma pessoa especial ali 🏠"],
+    "final": ["As lembranças, mesmo tristes, podem nos ensinar a ser mais fortes e unidos 🤝"],
+    "emocao": "nostalgia",
+    "nivel": "leve"
   },
-  {
-    "autora": "Carolina Maria de Jesus",
-    "obra": "Quarto de Despejo: Diário de uma Favelada",
-    "explicacao_candinho": "Carolina escreveu sobre sua própria vida na favela, contando as dificuldades e também sua força para cuidar da família. Seu diário virou um livro muito importante.",
-    "tema": "Vida na favela",
-    "genero": "Diário"
+  "carolina_maria_de_jesus_quarto_de_despejo": {
+    "tema": "escritoras_brasileiras",
+    "subtema": "carolina_maria_de_jesus",
+    "palavras_chave": ["carolina maria de jesus", "quarto de despejo", "diário", "favela"],
+    "inicio": ["Carolina Maria de Jesus escreveu um diário de verdade, contando seu dia a dia na favela com muita coragem 📔"],
+    "explicacao_curta": ["Carolina escreveu sobre sua própria vida na favela, contando as dificuldades e também sua força para cuidar da família."],
+    "explicacao_aprofundada": ["Seu diário virou um livro muito importante que mostra a realidade de quem vive na pobreza, mas também a dignidade, a inteligência e os sonhos de Carolina."],
+    "curiosidade": ["Ela catava papel para sobreviver e foi encontrada por um jornalista que se encantou com seus escritos; o livro vendeu milhares de cópias no mundo todo 🌍"],
+    "interacao": ["Se você escrevesse um diário sobre o seu dia, o que contaria primeiro?"],
+    "atividade": ["Escreva uma pequena página de diário desenhando algo que aconteceu ontem e que te fez sentir orgulho de você mesmo(a) ✍️"],
+    "final": ["A escrita pode transformar a vida de uma pessoa e inspirar o mundo inteiro 🌎"],
+    "emocao": "superação",
+    "nivel": "leve"
   },
-  {
-    "autora": "Maria Firmina dos Reis",
-    "obra": "Úrsula",
-    "explicacao_candinho": "Maria Firmina escreveu uma história que defendia a liberdade das pessoas escravizadas. Foi uma obra muito corajosa para a época.",
-    "tema": "Liberdade e justiça",
-    "genero": "Romance"
+  "maria_firmina_dos_reis_ursula": {
+    "tema": "escritoras_brasileiras",
+    "subtema": "maria_firmina_dos_reis",
+    "palavras_chave": ["maria firmina dos reis", "úrsula", "romance", "liberdade", "abolicionista"],
+    "inicio": ["Maria Firmina dos Reis escreveu um livro corajoso que denunciava a escravidão e pedia justiça ✊🏿"],
+    "explicacao_curta": ["Maria Firmina escreveu uma história que defendia a liberdade das pessoas escravizadas. Foi uma obra muito corajosa para a época."],
+    "explicacao_aprofundada": ["'Úrsula' é considerado o primeiro romance abolicionista do Brasil, mostrando a dor e a resistência de pessoas negras escravizadas."],
+    "curiosidade": ["Maria Firmina também foi professora e musicista, e seu livro ficou esquecido por mais de 100 anos, sendo redescoberto só no século XX 🔍"],
+    "interacao": ["O que significa 'justiça' para você? Como você explicaria?"],
+    "atividade": ["Desenhe uma balança (símbolo da justiça) e, de um lado, desenhe algo que você acha injusto; do outro, desenhe como seria o mundo sem essa injustiça ⚖️"],
+    "final": ["A literatura pode lutar por um mundo mais justo para todos 🌈"],
+    "emocao": "justiça",
+    "nivel": "leve"
   },
-  {
-    "autora": "Jarid Arraes",
-    "obra": "Heroínas Negras Brasileiras em 15 Cordéis",
-    "explicacao_candinho": "Jarid conta histórias de mulheres negras brasileiras muito importantes usando cordel, um jeito divertido e rimado de contar histórias.",
-    "tema": "Heroínas brasileiras",
-    "genero": "Cordel"
+  "jarid_arraes_heroinas_negras": {
+    "tema": "escritoras_brasileiras",
+    "subtema": "jarid_arraes",
+    "palavras_chave": ["jarid arraes", "heroínas negras brasileiras", "cordel", "15 cordéis"],
+    "inicio": ["Jarid Arraes conta histórias de mulheres incríveis usando versos rimados, como os cantadores de feira 🎤📜"],
+    "explicacao_curta": ["Jarid conta histórias de mulheres negras brasileiras muito importantes usando cordel, um jeito divertido e rimado de contar histórias."],
+    "explicacao_aprofundada": ["Cada cordel é como uma música em versos, que homenageia heroínas como Tia Ciata, Carolina de Jesus e muitas outras, mostrando sua força e legado."],
+    "curiosidade": ["Jarid começou a escrever cordel ainda na adolescência e publicou seu primeiro livro aos 24 anos, depois de criar um clube de leitura feminino 📚"],
+    "interacao": ["Que mulher da sua vida você gostaria de homenagear com versos rimados?"],
+    "atividade": ["Escreva uma quadrinha (quatro versos) rimada sobre uma mulher que você admira – pode ser sua mãe, avó, professora ou uma amiga ✏️🎶"],
+    "final": ["A poesia rimada pode transformar qualquer história em uma canção inesquecível 🎵"],
+    "emocao": "homenagem",
+    "nivel": "leve"
   },
-  {
-    "autora": "Djamila Ribeiro",
-    "obra": "Pequeno Manual Antirracista",
-    "explicacao_candinho": "Djamila explica de forma simples como podemos construir um mundo mais justo e respeitoso para todas as pessoas.",
-    "tema": "Respeito e igualdade",
-    "genero": "Ensaio"
+  "djamila_ribeiro_manual_antirracista": {
+    "tema": "escritoras_brasileiras",
+    "subtema": "djamila_ribeiro",
+    "palavras_chave": ["djamila ribeiro", "pequeno manual antirracista", "ensaio", "igualdade"],
+    "inicio": ["Djamila Ribeiro escreveu um livrinho que ensina, de forma simples, como podemos ser mais amigos e respeitar todas as pessoas 🤝"],
+    "explicacao_curta": ["Djamila explica de forma simples como podemos construir um mundo mais justo e respeitoso para todas as pessoas."],
+    "explicacao_aprofundada": ["O livro traz exemplos do dia a dia e atitudes práticas para combater o racismo, valorizando a diversidade e a empatia."],
+    "curiosidade": ["Djamila foi a primeira filósofa negra a dar aula na Universidade Federal de São Paulo e é uma das vozes mais importantes contra o racismo no Brasil 🎓"],
+    "interacao": ["O que você faria se visse alguém sendo tratado de forma injusta por causa da cor da pele?"],
+    "atividade": ["Desenhe um cartaz com a frase 'Todos iguais, todos diferentes' e encha de desenhos de pessoas com várias cores de cabelo, pele e roupas felizes 🎨"],
+    "final": ["Pequenos gestos de respeito podem mudar o mundo, um abraço de cada vez 💖"],
+    "emocao": "empatia",
+    "nivel": "leve"
   },
-  {
-    "autora": "Eliane Potiguara",
-    "obra": "Metade Cara, Metade Máscara",
-    "explicacao_candinho": "Eliane escreve sobre os povos indígenas, suas histórias, culturas e a importância de cuidar das tradições e da natureza.",
-    "tema": "Cultura indígena",
-    "genero": "Poesia e relatos"
+  "eliane_potiguara_metade_cara_metade_mascara": {
+    "tema": "escritoras_brasileiras",
+    "subtema": "eliane_potiguara",
+    "palavras_chave": ["eliane potiguara", "metade cara metade máscara", "indígena", "poesia"],
+    "inicio": ["Eliane Potiguara escreve sobre a beleza e a luta dos povos indígenas, como uma guardiã de histórias antigas 🏹📖"],
+    "explicacao_curta": ["Eliane escreve sobre os povos indígenas, suas histórias, culturas e a importância de cuidar das tradições e da natureza."],
+    "explicacao_aprofundada": ["A obra mistura poesia e relatos para mostrar a força da mulher indígena, a resistência contra o preconceito e o amor pela terra."],
+    "curiosidade": ["Eliane é da etnia Potiguara e fundou o primeiro centro de apoio aos indígenas urbanos no Rio de Janeiro, chamado 'Grumim' 🍃"],
+    "interacao": ["O que você sabe sobre os povos indígenas que vivem no Brasil hoje?"],
+    "atividade": ["Desenhe uma máscara de guerra ou de festa inspirada em algum povo indígena brasileiro (você pode pesquisar imagens de cocares ou pinturas corporais) 🎭"],
+    "final": ["A literatura indígena nos ensina a respeitar a natureza e a valorizar quem veio antes de nós 🌿"],
+    "emocao": "ancestralidade",
+    "nivel": "leve"
   },
-  {
-    "autora": "Graça Graúna",
-    "obra": "Criaturas de Ñanderu",
-    "explicacao_candinho": "Graça usa poemas para falar sobre espiritualidade, natureza e a sabedoria dos povos indígenas brasileiros.",
-    "tema": "Natureza e ancestralidade",
-    "genero": "Poesia"
+  "graca_grauna_criaturas_de_anderu": {
+    "tema": "escritoras_brasileiras",
+    "subtema": "graca_grauna",
+    "palavras_chave": ["graça graúna", "criaturas de ñanderu", "poesia", "ancestralidade"],
+    "inicio": ["Graça Graúna usa poemas para falar de seres mágicos da natureza, como se a floresta inteira pudesse falar 🌳✨"],
+    "explicacao_curta": ["Graça usa poemas para falar sobre espiritualidade, natureza e a sabedoria dos povos indígenas brasileiros."],
+    "explicacao_aprofundada": ["O livro traz criaturas míticas e elementos da cosmologia Guarani, mostrando como tudo na terra está conectado com o sagrado."],
+    "curiosidade": ["Graça também é atriz, professora e roteirista; ela escreve tanto para crianças quanto para adultos, sempre valorizando a cultura indígena 🎭"],
+    "interacao": ["Se a natureza pudesse te contar um segredo através de um poema, o que você acha que ela diria?"],
+    "atividade": ["Invente um poema de três versos para um animal ou planta que você ama (exemplo: 'O beija-flor bebe sol / e veste arco-íris / para dançar no meu quintal') 🐦🌺"],
+    "final": ["A poesia pode dar alma às folhas, aos bichos e aos rios 🌊"],
+    "emocao": "encantamento",
+    "nivel": "leve"
   },
-  {
-    "autora": "Auritha Tabajara",
-    "obra": "Coração na Aldeia, Pés no Mundo",
-    "explicacao_candinho": "Auritha mistura histórias da aldeia com aventuras pelo mundo, mostrando a força e a beleza da cultura indígena.",
-    "tema": "Identidade indígena",
-    "genero": "Cordel"
+  "auritha_tabajara_coracao_na_aldeia": {
+    "tema": "escritoras_brasileiras",
+    "subtema": "auritha_tabajara",
+    "palavras_chave": ["auritha tabajara", "coração na aldeia pés no mundo", "cordel", "identidade indígena"],
+    "inicio": ["Auritha Tabajara escreve versos que viajam da aldeia para a cidade, sempre com o coração cheio de tradição 🌎❤️"],
+    "explicacao_curta": ["Auritha mistura histórias da aldeia com aventuras pelo mundo, mostrando a força e a beleza da cultura indígena."],
+    "explicacao_aprofundada": ["Em cordel, ela conta como é ser indígena no Brasil de hoje, equilibrando ancestralidade e modernidade, além de lutar contra o preconceito."],
+    "curiosidade": ["Auritha é a primeira mulher indígena a publicar um cordel no Brasil, e ela faz parte da etnia Tabajara, do Ceará 🎉"],
+    "interacao": ["O que você gosta de levar com você onde quer que vá (um objeto, uma lembrança, um cheiro)?"],
+    "atividade": ["Crie um pequeno cordel de duas estrofes rimadas sobre um lugar que você ama (sua casa, a praia, a escola, a aldeia dos seus sonhos) 🏡🎶"],
+    "final": ["Podemos viver no mundo todo sem nunca esquecer de onde viemos 🌍"],
+    "emocao": "pertencimento",
+    "nivel": "leve"
   },
-  {
-    "autora": "Márcia Kambeba",
-    "obra": "Ay Kakyri Tama - Eu Moro na Cidade",
-    "explicacao_candinho": "Márcia fala sobre viver na cidade sem esquecer as raízes indígenas e o amor pela natureza e pelos antepassados.",
-    "tema": "Ancestralidade",
-    "genero": "Poesia"
+  "marcia_kambeba_ay_kakyri_tama": {
+    "tema": "escritoras_brasileiras",
+    "subtema": "marcia_kambeba",
+    "palavras_chave": ["márcia kambeba", "ay kakyri tama", "eu moro na cidade", "poesia indígena"],
+    "inicio": ["Márcia Kambeba mostra que é possível morar na cidade grande e ainda guardar a floresta dentro do peito 🌆🌳"],
+    "explicacao_curta": ["Márcia fala sobre viver na cidade sem esquecer as raízes indígenas e o amor pela natureza e pelos antepassados."],
+    "explicacao_aprofundada": ["Seus poemas falam de identidade, memória e resistência, mostrando que ser indígena não é só viver na aldeia, mas também está presente nos centros urbanos."],
+    "curiosidade": ["Márcia é do povo Kambeba, nasceu no Amazonas, e é geógrafa, ativista e poetisa; ela viaja o Brasil levando a palavra indígena para escolas e universidades 🎓"],
+    "interacao": ["O que você carrega da sua família ou da sua cultura mesmo quando está longe?"],
+    "atividade": ["Desenhe uma paisagem que misture prédios e arranha-céus com árvores, rios e animais da floresta – como seria a cidade dos seus sonhos? 🏙️🌿"],
+    "final": ["Podemos ser muitos lugares ao mesmo tempo; o importante é nunca apagar nossas raízes 🌱"],
+    "emocao": "pertencimento duplo",
+    "nivel": "leve"
   },
-  {
-    "autora": "Julie Dorrico",
-    "obra": "Literatura indígena contemporânea",
-    "explicacao_candinho": "Julie Dorrico escreve e pesquisa histórias indígenas para ajudar mais pessoas a conhecerem a riqueza dessas culturas.",
-    "tema": "Cultura e conhecimento indígena",
-    "genero": "Pesquisa e literatura"
+  "julie_dorrico_literatura_indigena_contemporanea": {
+    "tema": "escritoras_brasileiras",
+    "subtema": "julie_dorrico",
+    "palavras_chave": ["julie dorrico", "literatura indígena contemporânea", "pesquisa", "cultura indígena"],
+    "inicio": ["Julie Dorrico estuda e escreve sobre histórias indígenas para que todo mundo conheça a riqueza dessas culturas 📚✨"],
+    "explicacao_curta": ["Julie Dorrico escreve e pesquisa histórias indígenas para ajudar mais pessoas a conhecerem a riqueza dessas culturas."],
+    "explicacao_aprofundada": ["Seu trabalho mostra como a literatura indígena vai muito além do folclore: é arte, política, memória e muita criatividade feita por pessoas indígenas de verdade."],
+    "curiosidade": ["Julie é da etnia Macuxi, doutora em Letras e organizou a primeira antologia de literatura indígena brasileira contemporânea, chamada 'Morosofia' 🏆"],
+    "interacao": ["Que livro ou história indígena você já leu ou ouviu falar?"],
+    "atividade": ["Pesquise (com ajuda de um adulto) um mito indígena curto, leia e depois desenhe a cena que você mais gostou 🐆"],
+    "final": ["Conhecer a literatura indígena é abrir a porta para mundos cheios de sabedoria e encanto 🚪🌈"],
+    "emocao": "conhecimento",
+    "nivel": "leve"
   }
-]
+}
