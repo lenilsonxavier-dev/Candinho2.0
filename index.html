@@ -387,6 +387,9 @@ function detectarTemaPrioritario(texto) {
 
 if (
     txt.includes("abaporu") ||
+    txt.includes("obra abaporu") ||
+    txt.includes("explique abaporu") ||
+    txt.includes("explique o abaporu") ||
     txt.includes("operarios") ||
     txt.includes("antropofagia") ||
     txt.includes("a cuca") ||
@@ -430,20 +433,6 @@ if (
         txt.includes("pintor")
     ) {
         return "artistas";
-    }
-
-    // =========================
-    // OBRAS MODERNISTAS
-    // =========================
-
-    if (
-        txt.includes("abaporu") ||
-        txt.includes("operarios") ||
-        txt.includes("antropofagia") ||
-        txt.includes("a cuca") ||
-        txt.includes("lavrador de cafe")
-    ) {
-        return "obras_modernistas_brasileiras";
     }
 
     // =========================
