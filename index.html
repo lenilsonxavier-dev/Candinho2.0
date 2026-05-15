@@ -635,125 +635,153 @@ if (
 
     return null;
 }
-    function buscarRecursivo(obj, textoNorm) {
-        if (!obj || typeof obj !== "object") return null;
-        
-        if (obj.palavras_chave && Array.isArray(obj.palavras_chave)) {
-            for (let kw of obj.palavras_chave) {
-                let kwNorm = normalizar(kw);
-                if (textoNorm.includes(kwNorm)) {
-                    return obj.explicacao_infantil || obj.resposta || null;
-                }
-            }
-        }
-        
-        for (let key in obj) {
-            if (obj.hasOwnProperty(key) && typeof obj[key] === "object") {
-                let resultado = buscarRecursivo(obj[key], textoNorm);
-                if (resultado) return resultado;
-            }
-        }
-        return null;
-    }
     
+    // ======================= FUNÇÃO buscarEmJSON ATUALIZADA (NOVO MODELO) =======================
     function buscarEmJSON(jsonObj, pergunta) {
 
-    if (!jsonObj || typeof jsonObj !== "object") {
-        return null;
-    }
-
-    const textoNorm = normalizar(pergunta);
-
-    function buscarRecursivo(obj) {
-
-        if (!obj || typeof obj !== "object") {
+        if (!jsonObj || typeof jsonObj !== "object") {
             return null;
         }
-
-        for (const chave in obj) {
-
-            const item = obj[chave];
-
+    
+        const textoNorm = normalizar(pergunta);
+    
+        // =========================================
+        // MONTA RESPOSTA
+        // =========================================
+    
+        function montarResposta(item) {
+    
+            let partes = [];
+    
             // =========================
-            // ITEM COM PALAVRAS-CHAVE
+            // NOVO MODELO JSON
             // =========================
-
+    
+            if (item.inicio?.[0]) {
+                partes.push(item.inicio[0]);
+            }
+    
+            if (item.explicacao_curta?.[0]) {
+                partes.push(item.explicacao_curta[0]);
+            }
+    
+            if (item.explicacao_aprofundada?.[0]) {
+                partes.push(item.explicacao_aprofundada[0]);
+            }
+    
+            if (item.curiosidade?.[0]) {
+                partes.push(item.curiosidade[0]);
+            }
+    
+            if (item.interacao?.[0]) {
+                partes.push(item.interacao[0]);
+            }
+    
+            if (item.atividade?.[0]) {
+                partes.push(item.atividade[0]);
+            }
+    
+            if (item.final?.[0]) {
+                partes.push(item.final[0]);
+            }
+    
+            // =========================
+            // MODELO ANTIGO
+            // =========================
+    
             if (
-                item &&
-                typeof item === "object" &&
-                Array.isArray(item.palavras_chave)
+                partes.length === 0 &&
+                typeof item.explicacao_infantil === "string"
             ) {
-
-                const encontrou = item.palavras_chave.some(p =>
-                    textoNorm.includes(normalizar(p))
+                partes.push(item.explicacao_infantil);
+            }
+    
+            if (
+                partes.length === 0 &&
+                typeof item.resposta === "string"
+            ) {
+                partes.push(item.resposta);
+            }
+    
+            if (
+                partes.length === 0 &&
+                Array.isArray(item.respostas)
+            ) {
+    
+                partes.push(
+                    item.respostas[
+                        Math.floor(Math.random() * item.respostas.length)
+                    ]
                 );
-
-                if (encontrou) {
-
-                    // explicação infantil
-                    if (typeof item.explicacao_infantil === "string") {
-                        return item.explicacao_infantil;
-                    }
-
-                    // resposta simples
-                    if (typeof item.resposta === "string") {
-                        return item.resposta;
-                    }
-
-                    // respostas múltiplas
-                    if (
-                        item.respostas &&
-                        Array.isArray(item.respostas)
-                    ) {
-
-                        return item.respostas[
-                            Math.floor(Math.random() * item.respostas.length)
-                        ];
-                    }
-
-                    // explicação curta
-                    if (
-                        item.explicacao_curta &&
-                        Array.isArray(item.explicacao_curta)
-                    ) {
-
-                        return item.explicacao_curta[
-                            Math.floor(Math.random() * item.explicacao_curta.length)
-                        ];
-                    }
-
-                    // início
-                    if (
-                        item.inicio &&
-                        Array.isArray(item.inicio)
-                    ) {
-
-                        return item.inicio[
-                            Math.floor(Math.random() * item.inicio.length)
-                        ];
-                    }
-                }
             }
-
-            // =========================
-            // RECURSÃO
-            // =========================
-
-            if (typeof item === "object") {
-
-                const resultado = buscarRecursivo(item);
-
-                if (resultado) {
-                    return resultado;
-                }
-            }
+    
+            return partes.join("\n\n").trim();
         }
-
-        return null;
+    
+        // =========================================
+        // BUSCA RECURSIVA
+        // =========================================
+    
+        function buscarRecursivo(obj) {
+    
+            if (!obj || typeof obj !== "object") {
+                return null;
+            }
+    
+            for (const chave in obj) {
+    
+                const item = obj[chave];
+    
+                // =========================
+                // ITEM COM PALAVRAS-CHAVE
+                // =========================
+    
+                if (
+                    item &&
+                    typeof item === "object" &&
+                    Array.isArray(item.palavras_chave)
+                ) {
+    
+                    const encontrou = item.palavras_chave.some(p =>
+                        textoNorm.includes(normalizar(p))
+                    );
+    
+                    if (encontrou) {
+    
+                        const resposta = montarResposta(item);
+    
+                        if (
+                            resposta &&
+                            typeof resposta === "string" &&
+                            resposta.trim().length > 0
+                        ) {
+                            return resposta;
+                        }
+                    }
+                }
+    
+                // =========================
+                // CONTINUA BUSCA
+                // =========================
+    
+                if (
+                    item &&
+                    typeof item === "object"
+                ) {
+    
+                    const resultado = buscarRecursivo(item);
+    
+                    if (resultado) {
+                        return resultado;
+                    }
+                }
+            }
+    
+            return null;
+        }
+    
+        return buscarRecursivo(jsonObj);
     }
-
-    return buscarRecursivo(jsonObj);
-}
     
     function respostaInstantanea(pergunta) {
         const tema = detectarTemaPrioritario(pergunta);
