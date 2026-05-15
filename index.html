@@ -582,19 +582,38 @@ if (
     return null;
    
 }
-    function buscarResposta(pergunta, dados) {
+   function buscarResposta(pergunta, dados) {
 
     const txt = normalizar(pergunta);
 
-    // 1. PRIORIDADE: OBRA
+    // =========================
+    // 1. PALAVRAS-CHAVE
+    // =========================
+
     let resultado = dados.find(item =>
+        item.palavras_chave &&
+        item.palavras_chave.some(p =>
+            txt.includes(normalizar(p))
+        )
+    );
+
+    if (resultado) return resultado;
+
+    // =========================
+    // 2. OBRA
+    // =========================
+
+    resultado = dados.find(item =>
         item.obra &&
         txt.includes(normalizar(item.obra))
     );
 
     if (resultado) return resultado;
 
-    // 2. ARTISTA
+    // =========================
+    // 3. ARTISTA
+    // =========================
+
     resultado = dados.find(item =>
         item.artista &&
         txt.includes(normalizar(item.artista))
@@ -602,7 +621,10 @@ if (
 
     if (resultado) return resultado;
 
-    // 3. AUTOR
+    // =========================
+    // 4. AUTOR
+    // =========================
+
     resultado = dados.find(item =>
         item.autor &&
         txt.includes(normalizar(item.autor))
