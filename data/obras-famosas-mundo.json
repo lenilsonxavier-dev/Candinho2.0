@@ -1,0 +1,156 @@
+[
+  {
+    "obra": "Mona Lisa",
+    "artista": "Leonardo da Vinci",
+    "explicacao_candinho": "Oi, pequeno artista! Essa pintura ficou famosa pelo sorriso misterioso da mulher. Parece que ela está pensando em um segredo! Leonardo usou sombras suaves para deixar o rosto bem realista.",
+    "cores_principais": ["marrom", "verde", "bege"],
+    "tema": "Retrato"
+  },
+  {
+    "obra": "A Noite Estrelada",
+    "artista": "Vincent van Gogh",
+    "explicacao_candinho": "Veja como o céu parece girar cheio de estrelas brilhantes! Van Gogh pintou a noite com muita emoção e pinceladas fortes para mostrar seus sentimentos.",
+    "cores_principais": ["azul", "amarelo", "preto"],
+    "tema": "Paisagem"
+  },
+  {
+    "obra": "A Última Ceia",
+    "artista": "Leonardo da Vinci",
+    "explicacao_candinho": "Essa obra mostra Jesus e seus amigos em um jantar importante. O artista organizou as pessoas de um jeito que parece quase uma fotografia.",
+    "cores_principais": ["marrom", "azul", "bege"],
+    "tema": "Religioso"
+  },
+  {
+    "obra": "Guernica",
+    "artista": "Pablo Picasso",
+    "explicacao_candinho": "Picasso pintou essa obra para mostrar a tristeza e o medo causados pela guerra. As formas parecem quebradas para mostrar o sofrimento das pessoas.",
+    "cores_principais": ["preto", "branco", "cinza"],
+    "tema": "Guerra"
+  },
+  {
+    "obra": "O Grito",
+    "artista": "Edvard Munch",
+    "explicacao_candinho": "A pessoa da pintura parece assustada e preocupada. As cores fortes e o céu estranho ajudam a mostrar emoções intensas.",
+    "cores_principais": ["laranja", "azul", "vermelho"],
+    "tema": "Emoções"
+  },
+  {
+    "obra": "A Criação de Adão",
+    "artista": "Michelangelo",
+    "explicacao_candinho": "Essa pintura famosa mostra Deus e Adão quase tocando os dedos. Parece um momento mágico cheio de energia.",
+    "cores_principais": ["bege", "verde", "rosa"],
+    "tema": "Religioso"
+  },
+  {
+    "obra": "O Nascimento de Vênus",
+    "artista": "Sandro Botticelli",
+    "explicacao_candinho": "Vênus aparece saindo do mar dentro de uma concha gigante. A pintura parece um conto encantado cheio de beleza.",
+    "cores_principais": ["azul", "rosa", "bege"],
+    "tema": "Mitologia"
+  },
+  {
+    "obra": "Moça com Brinco de Pérola",
+    "artista": "Johannes Vermeer",
+    "explicacao_candinho": "A menina olha para nós como se quisesse conversar. O brinco brilhante chama muita atenção e deixa a pintura elegante.",
+    "cores_principais": ["azul", "preto", "bege"],
+    "tema": "Retrato"
+  },
+  {
+    "obra": "As Meninas",
+    "artista": "Diego Velázquez",
+    "explicacao_candinho": "Essa obra mostra uma princesa e várias pessoas ao seu redor. Parece que estamos dentro da sala junto com elas!",
+    "cores_principais": ["marrom", "cinza", "bege"],
+    "tema": "Vida na corte"
+  },
+  {
+    "obra": "O Beijo",
+    "artista": "Gustav Klimt",
+    "explicacao_candinho": "O casal parece envolvido em um abraço dourado cheio de carinho. Klimt usou muito brilho e formas decorativas.",
+    "cores_principais": ["dourado", "amarelo", "marrom"],
+    "tema": "Amor"
+  },
+  {
+    "obra": "A Persistência da Memória",
+    "artista": "Salvador Dalí",
+    "explicacao_candinho": "Os relógios derretendo parecem um sonho estranho! Dalí queria mostrar que o tempo pode parecer diferente na nossa imaginação.",
+    "cores_principais": ["marrom", "azul", "amarelo"],
+    "tema": "Surrealismo"
+  },
+  {
+    "obra": "A Ronda Noturna",
+    "artista": "Rembrandt",
+    "explicacao_candinho": "Esse grupo de guardas parece pronto para sair em missão. A luz faz algumas pessoas brilharem mais do que outras.",
+    "cores_principais": ["preto", "marrom", "amarelo"],
+    "tema": "Cena histórica"
+  },
+  {
+    "obra": "Impressão, Sol Nascente",
+    "artista": "Claude Monet",
+    "explicacao_candinho": "Monet pintou o nascer do sol com pinceladas rápidas e leves. A água parece se mover de verdade!",
+    "cores_principais": ["azul", "laranja", "cinza"],
+    "tema": "Natureza"
+  },
+  {
+    "obra": "A Liberdade Guiando o Povo",
+    "artista": "Eugène Delacroix",
+    "explicacao_candinho": "A mulher com a bandeira representa a liberdade liderando o povo. A pintura fala sobre coragem e luta.",
+    "cores_principais": ["vermelho", "azul", "marrom"],
+    "tema": "Revolução"
+  },
+  {
+    "obra": "O Jardim das Delícias Terrenas",
+    "artista": "Hieronymus Bosch",
+    "explicacao_candinho": "Essa obra é cheia de criaturas estranhas e cenas curiosas. Parece um grande mundo de fantasia para explorar.",
+    "cores_principais": ["verde", "rosa", "azul"],
+    "tema": "Fantasia"
+  },
+  {
+    "obra": "American Gothic",
+    "artista": "Grant Wood",
+    "explicacao_candinho": "O homem e a mulher aparecem sérios em frente à casa. A pintura mostra a vida simples do campo nos Estados Unidos.",
+    "cores_principais": ["marrom", "verde", "cinza"],
+    "tema": "Vida rural"
+  },
+  {
+    "obra": "O Almoço dos Remadores",
+    "artista": "Pierre-Auguste Renoir",
+    "explicacao_candinho": "As pessoas estão conversando, comendo e se divertindo juntas. Renoir gostava de pintar momentos felizes.",
+    "cores_principais": ["azul", "branco", "laranja"],
+    "tema": "Amizade"
+  },
+  {
+    "obra": "O Filho do Homem",
+    "artista": "René Magritte",
+    "explicacao_candinho": "O homem de chapéu tem uma maçã escondendo seu rosto. A obra brinca com mistério e imaginação.",
+    "cores_principais": ["verde", "cinza", "azul"],
+    "tema": "Mistério"
+  },
+  {
+    "obra": "A Grande Onda de Kanagawa",
+    "artista": "Hokusai",
+    "explicacao_candinho": "A enorme onda parece pronta para engolir os barcos! O artista japonês mostrou a força impressionante da natureza.",
+    "cores_principais": ["azul", "branco", "bege"],
+    "tema": "Natureza"
+  },
+  {
+    "obra": "No. 5, 1948",
+    "artista": "Jackson Pollock",
+    "explicacao_candinho": "Pollock jogava tinta na tela de um jeito livre e divertido. A pintura parece cheia de energia e movimento.",
+    "cores_principais": ["amarelo", "marrom", "preto"],
+    "tema": "Arte abstrata"
+  },
+  {
+    "obra": "Castle and Sun",
+    "artista": "Paul Klee",
+    "explicacao_candinho": "Paul Klee usou formas geométricas coloridas para criar um castelo mágico. Parece um desenho feito com blocos de cor.",
+    "cores_principais": ["amarelo", "laranja", "vermelho"],
+    "tema": "Arte abstrata"
+  },
+  {
+    "obra": "Nenúfares",
+    "artista": "Claude Monet",
+    "explicacao_candinho": "Monet pintou flores boiando na água com cores suaves e reflexos brilhantes. Parece um jardim calmo e tranquilo.",
+    "cores_principais": ["verde", "azul", "rosa"],
+    "tema": "Natureza"
+  }
+]
