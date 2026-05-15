@@ -381,6 +381,35 @@ function detectarTemaPrioritario(texto) {
         return "arte_tecnicas";
     }
 
+   // =========================
+// OBRAS MODERNISTAS
+// =========================
+
+if (
+    txt.includes("abaporu") ||
+    txt.includes("operarios") ||
+    txt.includes("antropofagia") ||
+    txt.includes("a cuca") ||
+    txt.includes("lavrador de cafe") ||
+    txt.includes("cafe")
+) {
+    return "obras_modernistas_brasileiras";
+}
+
+// =========================
+// OBRAS FAMOSAS MUNDO
+// =========================
+
+if (
+    txt.includes("mona lisa") ||
+    txt.includes("noite estrelada") ||
+    txt.includes("guernica") ||
+    txt.includes("o beijo") ||
+    txt.includes("grande onda") ||
+    txt.includes("ultima ceia")
+) {
+    return "obras_famosas_mundo";
+}
     // =========================
     // ARTISTAS
     // =========================
