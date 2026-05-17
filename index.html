@@ -329,21 +329,26 @@ function detectarTemaPrioritario(texto) {
         return "curiosidades";
     }
 
-    // =========================
-    // CANTIGAS DE RODA (nova)
-    // =========================
-    const cantigasPalavras = [
-        "ciranda", "capelinha de melão", "escravos de jó", "peixe vivo", "galinha do vizinho",
-        "borboletinha", "meu limão", "barata", "alecrim", "cai balão", "pirulito", "pombinha",
-        "terezinha", "indiozinhos", "essa rua", "cravo e rosa", "sapo não lava", "marcha soldado",
-        "tororó", "canoa virou", "sapocururu", "meu galinho", "marinheiro só", "pezinho",
-        "vai abóbora", "roda pião", "caranguejo", "mestre andré", "meu boi morreu", "tutu marambá",
-        "você gosta de mim", "vamos maninha", "valentim", "na bahia tem", "gatinha parda",
-        "balaio", "barraquinha", "boi barroso", "pobre cego", "são joão da rão"
-    ];
-    if (cantigasPalavras.some(p => txt.includes(p))) {
-        return "cantigas_de_roda";
-    }
+ // =========================
+// CANTIGAS DE RODA (por nome específico)
+// =========================
+const nomesCantigas = [
+    "escravos de jó", "ciranda cirandinha", "capelinha de melão", "peixe vivo",
+    "galinha do vizinho", "borboletinha", "meu limão", "barata diz que tem",
+    "alecrim", "cai cai balão", "pirulito que bate", "pombinha branca",
+    "terezinha de jesus", "indiozinhos", "se essa rua fosse minha", "cravo e a rosa",
+    "sapo não lava o pé", "marcha soldado", "fui no tororó", "ai eu entrei na roda",
+    "canoa virou", "rosa amarela", "quem me ensinou a nadar", "sapo cururu",
+    "meu galinho", "marinheiro só", "pezinho", "vai abóbora", "roda pião",
+    "caranguejo", "na loja do mestre andré", "meu boi morreu", "tutu marambá",
+    "você gosta de mim", "vamos maninha", "que é de valentim", "na bahia tem",
+    "gatinha parda", "balaio", "barraquinha", "boi barroso", "pobre cego",
+    "são joão da rão"
+];
+
+if (nomesCantigas.some(nome => txt.includes(nome))) {
+    return "cantigas_de_roda";
+}
 
     // =========================
     // LITERATURA (novo)
@@ -729,7 +734,23 @@ if (tema === "curiosidade" && dataStore.curiosidades) {
         return aleatoria.explicacao_infantil || aleatoria.resposta;
     }
 }
-        
+       if (tema === "cantigas_de_roda") {
+    const cantigas = dataStore.cantigas_de_roda?.cantigas_de_roda;
+    if (!cantigas) return null;
+    
+    // Encontra a cantiga pelo título (ignorando acentos e caixa)
+    const txtLower = normalizar(pergunta);
+    const cantigaEncontrada = cantigas.find(c =>
+        normalizar(c.titulo).includes(txtLower) ||
+        c.palavras_chave.some(p => txtLower.includes(normalizar(p)))
+    );
+    
+    if (cantigaEncontrada) {
+        // Retorna a letra completa formatada
+        return `🎵 **${cantigaEncontrada.titulo}** 🎵\n\n${cantigaEncontrada.letra}`;
+    }
+    return null;
+}        
         // Apoio emocional
         if (tema === "emocao" && dataStore.emocional) {
             for (let chave in dataStore.emocional) {
