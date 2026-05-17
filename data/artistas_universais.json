@@ -2,2090 +2,715 @@
   "leonardo_da_vinci": {
     "tema": "artistas_universais",
     "subtema": "leonardo_da_vinci",
-
-    "palavras_chave": [
-      "leonardo",
-      "leonardo da vinci",
-      "mona lisa"
-    ],
-
-    "inicio": [
-      "Leonardo da Vinci adorava arte, ciência e invenções 🎨"
-    ],
-
-    "explicacao_curta": [
-      "Ele foi um artista italiano muito curioso e criativo."
-    ],
-
-    "explicacao_aprofundada": [
-      "Leonardo estudava pintura, corpo humano, máquinas e natureza ao mesmo tempo."
-    ],
-
-    "curiosidade": [
-      "A Mona Lisa é uma das pinturas mais famosas do mundo 🖼️"
-    ],
-
-    "interacao": [
-      "Você gostaria de inventar máquinas como Leonardo?"
-    ],
-
-    "atividade": [
-      "Desenhe uma invenção imaginária ✏️"
-    ],
-
-    "final": [
-      "Arte e curiosidade podem caminhar juntas 🌟"
-    ],
-
+    "palavras_chave": ["leonardo", "leonardo da vinci", "mona lisa"],
+    "inicio": ["Leonardo da Vinci adorava arte, ciência e invenções 🎨"],
+    "explicacao_curta": ["Ele foi um artista italiano muito curioso e criativo."],
+    "explicacao_aprofundada": ["Leonardo estudava pintura, corpo humano, máquinas e natureza ao mesmo tempo."],
+    "curiosidade": ["A Mona Lisa é uma das pinturas mais famosas do mundo 🖼️"],
+    "interacao": ["Você gostaria de inventar máquinas como Leonardo?"],
+    "atividade": ["Desenhe uma invenção imaginária ✏️"],
+    "final": ["Arte e curiosidade podem caminhar juntas 🌟"],
     "emocao": "descoberta",
     "nivel": "leve"
   },
-
   "michelangelo": {
     "tema": "artistas_universais",
     "subtema": "michelangelo",
-
-    "palavras_chave": [
-      "michelangelo",
-      "capela sistina"
-    ],
-
-    "inicio": [
-      "Michelangelo criava esculturas e pinturas gigantes ✨"
-    ],
-
-    "explicacao_curta": [
-      "Ele pintou o teto da Capela Sistina."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas obras mostram detalhes do corpo humano e muita expressão."
-    ],
-
-    "curiosidade": [
-      "Michelangelo também trabalhava com esculturas em mármore 🪨"
-    ],
-
-    "interacao": [
-      "Você gostaria de pintar um teto enorme?"
-    ],
-
-    "atividade": [
-      "Desenhe personagens olhando para cima 🎨"
-    ],
-
-    "final": [
-      "Grandes obras podem nascer de muita dedicação 🌍"
-    ],
-
+    "palavras_chave": ["michelangelo", "capela sistina"],
+    "inicio": ["Michelangelo criava esculturas e pinturas gigantes ✨"],
+    "explicacao_curta": ["Ele pintou o teto da Capela Sistina."],
+    "explicacao_aprofundada": ["Suas obras mostram detalhes do corpo humano e muita expressão."],
+    "curiosidade": ["Michelangelo também trabalhava com esculturas em mármore 🪨"],
+    "interacao": ["Você gostaria de pintar um teto enorme?"],
+    "atividade": ["Desenhe personagens olhando para cima 🎨"],
+    "final": ["Grandes obras podem nascer de muita dedicação 🌍"],
     "emocao": "admiracao",
     "nivel": "leve"
   },
-
   "claude_monet": {
     "tema": "artistas_universais",
     "subtema": "claude_monet",
-
-    "palavras_chave": [
-      "monet",
-      "claude monet",
-      "impressionismo"
-    ],
-
-    "inicio": [
-      "Monet adorava pintar luz e natureza 🌿"
-    ],
-
-    "explicacao_curta": [
-      "Ele foi um dos artistas mais importantes do impressionismo."
-    ],
-
-    "explicacao_aprofundada": [
-      "Monet pintava paisagens observando mudanças de luz e cor."
-    ],
-
-    "curiosidade": [
-      "Ele pintou várias vezes o mesmo jardim em horários diferentes 🌤️"
-    ],
-
-    "interacao": [
-      "Você já percebeu como o céu muda durante o dia?"
-    ],
-
-    "atividade": [
-      "Pinte uma paisagem usando pinceladas leves 🎨"
-    ],
-
-    "final": [
-      "A luz pode transformar completamente uma pintura ✨"
-    ],
-
+    "palavras_chave": ["monet", "claude monet", "impressionismo"],
+    "inicio": ["Monet adorava pintar luz e natureza 🌿"],
+    "explicacao_curta": ["Ele foi um dos artistas mais importantes do impressionismo."],
+    "explicacao_aprofundada": ["Monet pintava paisagens observando mudanças de luz e cor."],
+    "curiosidade": ["Ele pintou várias vezes o mesmo jardim em horários diferentes 🌤️"],
+    "interacao": ["Você já percebeu como o céu muda durante o dia?"],
+    "atividade": ["Pinte uma paisagem usando pinceladas leves 🎨"],
+    "final": ["A luz pode transformar completamente uma pintura ✨"],
     "emocao": "leveza",
     "nivel": "leve"
   },
-
   "vincent_van_gogh": {
     "tema": "artistas_universais",
     "subtema": "vincent_van_gogh",
-
-    "palavras_chave": [
-      "van gogh",
-      "noite estrelada"
-    ],
-
-    "inicio": [
-      "Van Gogh pintava usando cores fortes e movimento 🌙"
-    ],
-
-    "explicacao_curta": [
-      "Suas pinturas possuem pinceladas marcantes."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele usava cores intensas para mostrar emoções e energia nas obras."
-    ],
-
-    "curiosidade": [
-      "A Noite Estrelada é uma de suas pinturas mais famosas ⭐"
-    ],
-
-    "interacao": [
-      "Que cores você usaria para pintar a noite?"
-    ],
-
-    "atividade": [
-      "Faça espirais coloridas inspiradas no céu 🎨"
-    ],
-
-    "final": [
-      "As cores podem mostrar sentimentos profundos ✨"
-    ],
-
+    "palavras_chave": ["van gogh", "noite estrelada"],
+    "inicio": ["Van Gogh pintava usando cores fortes e movimento 🌙"],
+    "explicacao_curta": ["Suas pinturas possuem pinceladas marcantes."],
+    "explicacao_aprofundada": ["Ele usava cores intensas para mostrar emoções e energia nas obras."],
+    "curiosidade": ["A Noite Estrelada é uma de suas pinturas mais famosas ⭐"],
+    "interacao": ["Que cores você usaria para pintar a noite?"],
+    "atividade": ["Faça espirais coloridas inspiradas no céu 🎨"],
+    "final": ["As cores podem mostrar sentimentos profundos ✨"],
     "emocao": "emocao",
     "nivel": "leve"
   },
-
   "pablo_picasso": {
     "tema": "artistas_universais",
     "subtema": "pablo_picasso",
-
-    "palavras_chave": [
-      "picasso",
-      "cubismo"
-    ],
-
-    "inicio": [
-      "Picasso gostava de reinventar as formas 🎭"
-    ],
-
-    "explicacao_curta": [
-      "Ele ajudou a criar o cubismo."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas obras mostram objetos e rostos vistos de vários ângulos ao mesmo tempo."
-    ],
-
-    "curiosidade": [
-      "Picasso começou a desenhar ainda criança ✏️"
-    ],
-
-    "interacao": [
-      "Você conseguiria desenhar um rosto geométrico?"
-    ],
-
-    "atividade": [
-      "Monte um desenho usando triângulos e quadrados 🟦"
-    ],
-
-    "final": [
-      "A arte pode mostrar o mundo de formas diferentes 🌈"
-    ],
-
+    "palavras_chave": ["picasso", "cubismo"],
+    "inicio": ["Picasso gostava de reinventar as formas 🎭"],
+    "explicacao_curta": ["Ele ajudou a criar o cubismo."],
+    "explicacao_aprofundada": ["Suas obras mostram objetos e rostos vistos de vários ângulos ao mesmo tempo."],
+    "curiosidade": ["Picasso começou a desenhar ainda criança ✏️"],
+    "interacao": ["Você conseguiria desenhar um rosto geométrico?"],
+    "atividade": ["Monte um desenho usando triângulos e quadrados 🟦"],
+    "final": ["A arte pode mostrar o mundo de formas diferentes 🌈"],
     "emocao": "criatividade",
     "nivel": "leve"
   },
-
   "salvador_dali": {
     "tema": "artistas_universais",
     "subtema": "salvador_dali",
-
-    "palavras_chave": [
-      "dali",
-      "salvador dali",
-      "relogio derretendo"
-    ],
-
-    "inicio": [
-      "Dalí criava pinturas parecidas com sonhos 🌙"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras misturam imaginação e realidade."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele pintava objetos estranhos e cenários inesperados."
-    ],
-
-    "curiosidade": [
-      "Os relógios derretendo ficaram famosos no surrealismo ⏰"
-    ],
-
-    "interacao": [
-      "Que sonho você transformaria em desenho?"
-    ],
-
-    "atividade": [
-      "Misture objetos diferentes em uma mesma cena 🎨"
-    ],
-
-    "final": [
-      "A imaginação pode criar mundos surpreendentes ✨"
-    ],
-
+    "palavras_chave": ["dali", "salvador dali", "relogio derretendo"],
+    "inicio": ["Dalí criava pinturas parecidas com sonhos 🌙"],
+    "explicacao_curta": ["Suas obras misturam imaginação e realidade."],
+    "explicacao_aprofundada": ["Ele pintava objetos estranhos e cenários inesperados."],
+    "curiosidade": ["Os relógios derretendo ficaram famosos no surrealismo ⏰"],
+    "interacao": ["Que sonho você transformaria em desenho?"],
+    "atividade": ["Misture objetos diferentes em uma mesma cena 🎨"],
+    "final": ["A imaginação pode criar mundos surpreendentes ✨"],
     "emocao": "imaginacao",
     "nivel": "leve"
   },
-
   "frida_kahlo": {
     "tema": "artistas_universais",
     "subtema": "frida_kahlo",
-
-    "palavras_chave": [
-      "frida kahlo",
-      "frida"
-    ],
-
-    "inicio": [
-      "Frida Kahlo pintava sentimentos e histórias pessoais 🌺"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras mostram identidade, emoções e cultura."
-    ],
-
-    "explicacao_aprofundada": [
-      "Frida utilizava cores fortes, flores e elementos da cultura mexicana."
-    ],
-
-    "curiosidade": [
-      "Ela fez muitos autorretratos 🎨"
-    ],
-
-    "interacao": [
-      "O que você desenharia sobre sua própria vida?"
-    ],
-
-    "atividade": [
-      "Crie um autorretrato usando cores vibrantes 🌈"
-    ],
-
-    "final": [
-      "A arte também pode contar nossa própria história ✨"
-    ],
-
+    "palavras_chave": ["frida kahlo", "frida"],
+    "inicio": ["Frida Kahlo pintava sentimentos e histórias pessoais 🌺"],
+    "explicacao_curta": ["Suas obras mostram identidade, emoções e cultura."],
+    "explicacao_aprofundada": ["Frida utilizava cores fortes, flores e elementos da cultura mexicana."],
+    "curiosidade": ["Ela fez muitos autorretratos 🎨"],
+    "interacao": ["O que você desenharia sobre sua própria vida?"],
+    "atividade": ["Crie um autorretrato usando cores vibrantes 🌈"],
+    "final": ["A arte também pode contar nossa própria história ✨"],
     "emocao": "expressao",
     "nivel": "leve"
   },
-
   "wassily_kandinsky": {
     "tema": "artistas_universais",
     "subtema": "wassily_kandinsky",
-
-    "palavras_chave": [
-      "kandinsky",
-      "arte abstrata"
-    ],
-
-    "inicio": [
-      "Kandinsky usava formas e cores para criar emoções 🔵"
-    ],
-
-    "explicacao_curta": [
-      "Ele foi um dos pioneiros da arte abstrata."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas pinturas não mostravam objetos reais, mas sentimentos através das cores."
-    ],
-
-    "curiosidade": [
-      "Kandinsky acreditava que cores podiam parecer música 🎶"
-    ],
-
-    "interacao": [
-      "Que emoção combina com a cor azul para você?"
-    ],
-
-    "atividade": [
-      "Crie arte usando apenas círculos e linhas 🎨"
-    ],
-
-    "final": [
-      "As formas também podem transmitir sentimentos ✨"
-    ],
-
+    "palavras_chave": ["kandinsky", "arte abstrata"],
+    "inicio": ["Kandinsky usava formas e cores para criar emoções 🔵"],
+    "explicacao_curta": ["Ele foi um dos pioneiros da arte abstrata."],
+    "explicacao_aprofundada": ["Suas pinturas não mostravam objetos reais, mas sentimentos através das cores."],
+    "curiosidade": ["Kandinsky acreditava que cores podiam parecer música 🎶"],
+    "interacao": ["Que emoção combina com a cor azul para você?"],
+    "atividade": ["Crie arte usando apenas círculos e linhas 🎨"],
+    "final": ["As formas também podem transmitir sentimentos ✨"],
     "emocao": "criatividade",
     "nivel": "leve"
   },
-
   "andy_warhol": {
     "tema": "artistas_universais",
     "subtema": "andy_warhol",
-
-    "palavras_chave": [
-      "warhol",
-      "pop art"
-    ],
-
-    "inicio": [
-      "Andy Warhol transformava imagens populares em arte 🌟"
-    ],
-
-    "explicacao_curta": [
-      "Ele foi um dos principais artistas da pop art."
-    ],
-
-    "explicacao_aprofundada": [
-      "Warhol repetia imagens coloridas inspiradas em objetos e celebridades."
-    ],
-
-    "curiosidade": [
-      "Latas e objetos do cotidiano apareciam em suas obras 🥫"
-    ],
-
-    "interacao": [
-      "Que objeto comum você transformaria em arte?"
-    ],
-
-    "atividade": [
-      "Repita o mesmo desenho usando cores diferentes 🎨"
-    ],
-
-    "final": [
-      "Até objetos simples podem virar arte ✨"
-    ],
-
+    "palavras_chave": ["warhol", "pop art"],
+    "inicio": ["Andy Warhol transformava imagens populares em arte 🌟"],
+    "explicacao_curta": ["Ele foi um dos principais artistas da pop art."],
+    "explicacao_aprofundada": ["Warhol repetia imagens coloridas inspiradas em objetos e celebridades."],
+    "curiosidade": ["Latas e objetos do cotidiano apareciam em suas obras 🥫"],
+    "interacao": ["Que objeto comum você transformaria em arte?"],
+    "atividade": ["Repita o mesmo desenho usando cores diferentes 🎨"],
+    "final": ["Até objetos simples podem virar arte ✨"],
     "emocao": "exploracao",
     "nivel": "leve"
   },
-
   "yayoi_kusama": {
     "tema": "artistas_universais",
     "subtema": "yayoi_kusama",
-
-    "palavras_chave": [
-      "kusama",
-      "bolinhas"
-    ],
-
-    "inicio": [
-      "Yayoi Kusama ficou famosa por suas bolinhas coloridas 🔴"
-    ],
-
-    "explicacao_curta": [
-      "Ela cria instalações cheias de cores e padrões."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas obras misturam espelhos, luzes e formas repetidas."
-    ],
-
-    "curiosidade": [
-      "Algumas salas de Kusama parecem infinitas ✨"
-    ],
-
-    "interacao": [
-      "Você gosta de desenhos com padrões repetidos?"
-    ],
-
-    "atividade": [
-      "Cubra uma folha com bolinhas coloridas 🌈"
-    ],
-
-    "final": [
-      "Padrões simples podem criar mundos incríveis 🌟"
-    ],
-
+    "palavras_chave": ["kusama", "bolinhas"],
+    "inicio": ["Yayoi Kusama ficou famosa por suas bolinhas coloridas 🔴"],
+    "explicacao_curta": ["Ela cria instalações cheias de cores e padrões."],
+    "explicacao_aprofundada": ["Suas obras misturam espelhos, luzes e formas repetidas."],
+    "curiosidade": ["Algumas salas de Kusama parecem infinitas ✨"],
+    "interacao": ["Você gosta de desenhos com padrões repetidos?"],
+    "atividade": ["Cubra uma folha com bolinhas coloridas 🌈"],
+    "final": ["Padrões simples podem criar mundos incríveis 🌟"],
     "emocao": "encantamento",
     "nivel": "leve"
-      },
-  {
+  },
   "raphael": {
     "tema": "artistas_universais",
     "subtema": "raphael",
-
-    "palavras_chave": [
-      "raphael",
-      "rafael"
-    ],
-
-    "inicio": [
-      "Raphael criava pinturas suaves e equilibradas 🎨"
-    ],
-
-    "explicacao_curta": [
-      "Ele foi um importante artista do Renascimento."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas obras mostram harmonia, delicadeza e personagens bem organizados."
-    ],
-
-    "curiosidade": [
-      "Raphael gostava de pintar cenas calmas e detalhadas ✨"
-    ],
-
-    "interacao": [
-      "Você prefere desenhos cheios de detalhes ou mais simples?"
-    ],
-
-    "atividade": [
-      "Desenhe pessoas formando uma cena tranquila ✏️"
-    ],
-
-    "final": [
-      "Equilíbrio e suavidade também fazem parte da arte 🌈"
-    ],
-
+    "palavras_chave": ["raphael", "rafael"],
+    "inicio": ["Raphael criava pinturas suaves e equilibradas 🎨"],
+    "explicacao_curta": ["Ele foi um importante artista do Renascimento."],
+    "explicacao_aprofundada": ["Suas obras mostram harmonia, delicadeza e personagens bem organizados."],
+    "curiosidade": ["Raphael gostava de pintar cenas calmas e detalhadas ✨"],
+    "interacao": ["Você prefere desenhos cheios de detalhes ou mais simples?"],
+    "atividade": ["Desenhe pessoas formando uma cena tranquila ✏️"],
+    "final": ["Equilíbrio e suavidade também fazem parte da arte 🌈"],
     "emocao": "harmonia",
     "nivel": "leve"
   },
-
   "caravaggio": {
     "tema": "artistas_universais",
     "subtema": "caravaggio",
-
-    "palavras_chave": [
-      "caravaggio",
-      "luz e sombra"
-    ],
-
-    "inicio": [
-      "Caravaggio usava luz forte para destacar cenas 🔦"
-    ],
-
-    "explicacao_curta": [
-      "Suas pinturas possuem contrastes marcantes entre luz e sombra."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele criava efeitos dramáticos que davam intensidade às obras."
-    ],
-
-    "curiosidade": [
-      "As pinturas parecem iluminadas por uma única luz ✨"
-    ],
-
-    "interacao": [
-      "Você já observou sombras em um quarto escuro?"
-    ],
-
-    "atividade": [
-      "Faça um desenho usando partes claras e escuras 🎨"
-    ],
-
-    "final": [
-      "Luz e sombra podem mudar completamente uma imagem 🌙"
-    ],
-
+    "palavras_chave": ["caravaggio", "luz e sombra"],
+    "inicio": ["Caravaggio usava luz forte para destacar cenas 🔦"],
+    "explicacao_curta": ["Suas pinturas possuem contrastes marcantes entre luz e sombra."],
+    "explicacao_aprofundada": ["Ele criava efeitos dramáticos que davam intensidade às obras."],
+    "curiosidade": ["As pinturas parecem iluminadas por uma única luz ✨"],
+    "interacao": ["Você já observou sombras em um quarto escuro?"],
+    "atividade": ["Faça um desenho usando partes claras e escuras 🎨"],
+    "final": ["Luz e sombra podem mudar completamente uma imagem 🌙"],
     "emocao": "misterio",
     "nivel": "leve"
   },
-
   "rembrandt": {
     "tema": "artistas_universais",
     "subtema": "rembrandt",
-
-    "palavras_chave": [
-      "rembrandt"
-    ],
-
-    "inicio": [
-      "Rembrandt gostava de pintar emoções humanas 🎭"
-    ],
-
-    "explicacao_curta": [
-      "Ele usava luz e sombra para criar profundidade."
-    ],
-
-    "explicacao_aprofundada": [
-      "Muitos retratos de Rembrandt parecem vivos e expressivos."
-    ],
-
-    "curiosidade": [
-      "Ele fez muitos autorretratos ao longo da vida ✨"
-    ],
-
-    "interacao": [
-      "Que emoção você desenharia em um rosto?"
-    ],
-
-    "atividade": [
-      "Crie expressões diferentes em personagens 😊😮😢"
-    ],
-
-    "final": [
-      "A arte pode mostrar sentimentos sem palavras 🌟"
-    ],
-
+    "palavras_chave": ["rembrandt"],
+    "inicio": ["Rembrandt gostava de pintar emoções humanas 🎭"],
+    "explicacao_curta": ["Ele usava luz e sombra para criar profundidade."],
+    "explicacao_aprofundada": ["Muitos retratos de Rembrandt parecem vivos e expressivos."],
+    "curiosidade": ["Ele fez muitos autorretratos ao longo da vida ✨"],
+    "interacao": ["Que emoção você desenharia em um rosto?"],
+    "atividade": ["Crie expressões diferentes em personagens 😊😮😢"],
+    "final": ["A arte pode mostrar sentimentos sem palavras 🌟"],
     "emocao": "emocao",
     "nivel": "leve"
   },
-
   "vermeer": {
     "tema": "artistas_universais",
     "subtema": "vermeer",
-
-    "palavras_chave": [
-      "vermeer"
-    ],
-
-    "inicio": [
-      "Vermeer pintava cenas tranquilas do cotidiano 🕯️"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras possuem luz suave e muitos detalhes."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele mostrava momentos simples como leitura, música e silêncio."
-    ],
-
-    "curiosidade": [
-      "A luz das janelas aparece bastante em suas pinturas ☀️"
-    ],
-
-    "interacao": [
-      "Que momento tranquilo você gostaria de desenhar?"
-    ],
-
-    "atividade": [
-      "Pinte uma cena calma dentro de casa 🎨"
-    ],
-
-    "final": [
-      "Até momentos simples podem virar arte ✨"
-    ],
-
+    "palavras_chave": ["vermeer"],
+    "inicio": ["Vermeer pintava cenas tranquilas do cotidiano 🕯️"],
+    "explicacao_curta": ["Suas obras possuem luz suave e muitos detalhes."],
+    "explicacao_aprofundada": ["Ele mostrava momentos simples como leitura, música e silêncio."],
+    "curiosidade": ["A luz das janelas aparece bastante em suas pinturas ☀️"],
+    "interacao": ["Que momento tranquilo você gostaria de desenhar?"],
+    "atividade": ["Pinte uma cena calma dentro de casa 🎨"],
+    "final": ["Até momentos simples podem virar arte ✨"],
     "emocao": "calma",
     "nivel": "leve"
   },
-
   "edgar_degas": {
     "tema": "artistas_universais",
     "subtema": "edgar_degas",
-
-    "palavras_chave": [
-      "degas",
-      "bailarina"
-    ],
-
-    "inicio": [
-      "Degas adorava mostrar movimento nas pinturas 🩰"
-    ],
-
-    "explicacao_curta": [
-      "Ele ficou famoso por retratar bailarinas."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas obras mostram cenas do cotidiano e movimentos delicados."
-    ],
-
-    "curiosidade": [
-      "Degas observava ensaios de dança para criar suas pinturas 🎶"
-    ],
-
-    "interacao": [
-      "Você gosta de desenhar pessoas em movimento?"
-    ],
-
-    "atividade": [
-      "Faça linhas rápidas mostrando alguém dançando ✏️"
-    ],
-
-    "final": [
-      "A arte também pode capturar movimento 🌈"
-    ],
-
+    "palavras_chave": ["degas", "bailarina"],
+    "inicio": ["Degas adorava mostrar movimento nas pinturas 🩰"],
+    "explicacao_curta": ["Ele ficou famoso por retratar bailarinas."],
+    "explicacao_aprofundada": ["Suas obras mostram cenas do cotidiano e movimentos delicados."],
+    "curiosidade": ["Degas observava ensaios de dança para criar suas pinturas 🎶"],
+    "interacao": ["Você gosta de desenhar pessoas em movimento?"],
+    "atividade": ["Faça linhas rápidas mostrando alguém dançando ✏️"],
+    "final": ["A arte também pode capturar movimento 🌈"],
     "emocao": "leveza",
     "nivel": "leve"
   },
-
   "paul_cezanne": {
     "tema": "artistas_universais",
     "subtema": "paul_cezanne",
-
-    "palavras_chave": [
-      "cezanne"
-    ],
-
-    "inicio": [
-      "Cézanne gostava de simplificar formas 🍎"
-    ],
-
-    "explicacao_curta": [
-      "Ele ajudou a abrir caminhos para a arte moderna."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas pinturas mostram objetos usando formas geométricas simples."
-    ],
-
-    "curiosidade": [
-      "Cézanne pintava muitas frutas e paisagens 🎨"
-    ],
-
-    "interacao": [
-      "Você consegue transformar objetos em círculos e quadrados?"
-    ],
-
-    "atividade": [
-      "Desenhe frutas usando formas geométricas 🔺"
-    ],
-
-    "final": [
-      "Formas simples podem criar grandes ideias ✨"
-    ],
-
+    "palavras_chave": ["cezanne"],
+    "inicio": ["Cézanne gostava de simplificar formas 🍎"],
+    "explicacao_curta": ["Ele ajudou a abrir caminhos para a arte moderna."],
+    "explicacao_aprofundada": ["Suas pinturas mostram objetos usando formas geométricas simples."],
+    "curiosidade": ["Cézanne pintava muitas frutas e paisagens 🎨"],
+    "interacao": ["Você consegue transformar objetos em círculos e quadrados?"],
+    "atividade": ["Desenhe frutas usando formas geométricas 🔺"],
+    "final": ["Formas simples podem criar grandes ideias ✨"],
     "emocao": "criatividade",
     "nivel": "leve"
   },
-
   "georges_braque": {
     "tema": "artistas_universais",
     "subtema": "georges_braque",
-
-    "palavras_chave": [
-      "braque",
-      "cubismo"
-    ],
-
-    "inicio": [
-      "Braque explorava formas geométricas na pintura 🟦"
-    ],
-
-    "explicacao_curta": [
-      "Ele trabalhou junto com Picasso no cubismo."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas obras mostram objetos divididos em partes e ângulos."
-    ],
-
-    "curiosidade": [
-      "O cubismo mudou a maneira de representar objetos ✨"
-    ],
-
-    "interacao": [
-      "Você gostaria de montar um desenho quebrado em formas?"
-    ],
-
-    "atividade": [
-      "Recorte formas geométricas e monte figuras 🎨"
-    ],
-
-    "final": [
-      "A arte pode reinventar a maneira de enxergar 🌈"
-    ],
-
+    "palavras_chave": ["braque", "cubismo"],
+    "inicio": ["Braque explorava formas geométricas na pintura 🟦"],
+    "explicacao_curta": ["Ele trabalhou junto com Picasso no cubismo."],
+    "explicacao_aprofundada": ["Suas obras mostram objetos divididos em partes e ângulos."],
+    "curiosidade": ["O cubismo mudou a maneira de representar objetos ✨"],
+    "interacao": ["Você gostaria de montar um desenho quebrado em formas?"],
+    "atividade": ["Recorte formas geométricas e monte figuras 🎨"],
+    "final": ["A arte pode reinventar a maneira de enxergar 🌈"],
     "emocao": "exploracao",
     "nivel": "leve"
   },
-
   "rene_magritte": {
     "tema": "artistas_universais",
     "subtema": "rene_magritte",
-
-    "palavras_chave": [
-      "magritte"
-    ],
-
-    "inicio": [
-      "Magritte criava imagens curiosas e misteriosas 🎩"
-    ],
-
-    "explicacao_curta": [
-      "Ele misturava objetos comuns de maneiras inesperadas."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas obras fazem as pessoas observarem e pensarem sobre a realidade."
-    ],
-
-    "curiosidade": [
-      "Muitas pinturas de Magritte parecem enigmas 🧩"
-    ],
-
-    "interacao": [
-      "Que objetos estranhos você juntaria em um desenho?"
-    ],
-
-    "atividade": [
-      "Misture céu, objetos e personagens em uma cena surreal 🎨"
-    ],
-
-    "final": [
-      "A imaginação pode transformar o comum em surpreendente ✨"
-    ],
-
+    "palavras_chave": ["magritte"],
+    "inicio": ["Magritte criava imagens curiosas e misteriosas 🎩"],
+    "explicacao_curta": ["Ele misturava objetos comuns de maneiras inesperadas."],
+    "explicacao_aprofundada": ["Suas obras fazem as pessoas observarem e pensarem sobre a realidade."],
+    "curiosidade": ["Muitas pinturas de Magritte parecem enigmas 🧩"],
+    "interacao": ["Que objetos estranhos você juntaria em um desenho?"],
+    "atividade": ["Misture céu, objetos e personagens em uma cena surreal 🎨"],
+    "final": ["A imaginação pode transformar o comum em surpreendente ✨"],
     "emocao": "misterio",
     "nivel": "leve"
   },
-
   "gustav_klimt": {
     "tema": "artistas_universais",
     "subtema": "gustav_klimt",
-
-    "palavras_chave": [
-      "klimt",
-      "o beijo"
-    ],
-
-    "inicio": [
-      "Klimt usava dourado e muitos detalhes brilhantes ✨"
-    ],
-
-    "explicacao_curta": [
-      "Suas pinturas parecem decoradas como joias."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele misturava figuras humanas com padrões coloridos e ornamentados."
-    ],
-
-    "curiosidade": [
-      "O Beijo é uma de suas obras mais famosas 💛"
-    ],
-
-    "interacao": [
-      "Você gosta de desenhos cheios de detalhes?"
-    ],
-
-    "atividade": [
-      "Crie padrões usando círculos e linhas douradas 🎨"
-    ],
-
-    "final": [
-      "Detalhes podem deixar a arte ainda mais encantadora 🌟"
-    ],
-
+    "palavras_chave": ["klimt", "o beijo"],
+    "inicio": ["Klimt usava dourado e muitos detalhes brilhantes ✨"],
+    "explicacao_curta": ["Suas pinturas parecem decoradas como joias."],
+    "explicacao_aprofundada": ["Ele misturava figuras humanas com padrões coloridos e ornamentados."],
+    "curiosidade": ["O Beijo é uma de suas obras mais famosas 💛"],
+    "interacao": ["Você gosta de desenhos cheios de detalhes?"],
+    "atividade": ["Crie padrões usando círculos e linhas douradas 🎨"],
+    "final": ["Detalhes podem deixar a arte ainda mais encantadora 🌟"],
     "emocao": "encantamento",
     "nivel": "leve"
   },
-
   "edvard_munch": {
     "tema": "artistas_universais",
     "subtema": "edvard_munch",
-
-    "palavras_chave": [
-      "munch",
-      "o grito"
-    ],
-
-    "inicio": [
-      "Munch pintava emoções muito intensas 🌪️"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras mostram sentimentos fortes."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele usava linhas e cores para representar medo, tristeza e emoção."
-    ],
-
-    "curiosidade": [
-      "O Grito é uma das pinturas mais conhecidas do mundo 😮"
-    ],
-
-    "interacao": [
-      "Que emoção você transformaria em pintura?"
-    ],
-
-    "atividade": [
-      "Use cores fortes para desenhar sentimentos 🎨"
-    ],
-
-    "final": [
-      "A arte também pode mostrar emoções profundas 🌈"
-    ],
-
+    "palavras_chave": ["munch", "o grito"],
+    "inicio": ["Munch pintava emoções muito intensas 🌪️"],
+    "explicacao_curta": ["Suas obras mostram sentimentos fortes."],
+    "explicacao_aprofundada": ["Ele usava linhas e cores para representar medo, tristeza e emoção."],
+    "curiosidade": ["O Grito é uma das pinturas mais conhecidas do mundo 😮"],
+    "interacao": ["Que emoção você transformaria em pintura?"],
+    "atividade": ["Use cores fortes para desenhar sentimentos 🎨"],
+    "final": ["A arte também pode mostrar emoções profundas 🌈"],
     "emocao": "expressao",
     "nivel": "leve"
-    },
-  {
+  },
   "joan_miro": {
     "tema": "artistas_universais",
     "subtema": "joan_miro",
-
-    "palavras_chave": [
-      "miro",
-      "joan miro"
-    ],
-
-    "inicio": [
-      "Miró criava formas coloridas e imaginativas 🌈"
-    ],
-
-    "explicacao_curta": [
-      "Suas pinturas parecem sonhos cheios de símbolos."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele usava estrelas, linhas, círculos e cores fortes para criar mundos imaginários."
-    ],
-
-    "curiosidade": [
-      "As obras de Miró lembram desenhos mágicos ✨"
-    ],
-
-    "interacao": [
-      "Que símbolos você criaria em uma pintura?"
-    ],
-
-    "atividade": [
-      "Desenhe estrelas, luas e formas inventadas 🌙"
-    ],
-
-    "final": [
-      "A imaginação pode criar universos coloridos 🌟"
-    ],
-
+    "palavras_chave": ["miro", "joan miro"],
+    "inicio": ["Miró criava formas coloridas e imaginativas 🌈"],
+    "explicacao_curta": ["Suas pinturas parecem sonhos cheios de símbolos."],
+    "explicacao_aprofundada": ["Ele usava estrelas, linhas, círculos e cores fortes para criar mundos imaginários."],
+    "curiosidade": ["As obras de Miró lembram desenhos mágicos ✨"],
+    "interacao": ["Que símbolos você criaria em uma pintura?"],
+    "atividade": ["Desenhe estrelas, luas e formas inventadas 🌙"],
+    "final": ["A imaginação pode criar universos coloridos 🌟"],
     "emocao": "imaginacao",
     "nivel": "leve"
   },
-
   "henri_matisse": {
     "tema": "artistas_universais",
     "subtema": "henri_matisse",
-
-    "palavras_chave": [
-      "matisse",
-      "henri matisse"
-    ],
-
-    "inicio": [
-      "Matisse adorava cores fortes e vibrantes 🎨"
-    ],
-
-    "explicacao_curta": [
-      "Ele criava pinturas alegres e cheias de vida."
-    ],
-
-    "explicacao_aprofundada": [
-      "Matisse também fazia colagens usando papéis coloridos recortados."
-    ],
-
-    "curiosidade": [
-      "As tesouras viraram ferramentas importantes para Matisse ✂️"
-    ],
-
-    "interacao": [
-      "Você gosta de criar usando recortes?"
-    ],
-
-    "atividade": [
-      "Faça colagens usando papéis coloridos 🌈"
-    ],
-
-    "final": [
-      "As cores podem transmitir muita alegria ✨"
-    ],
-
+    "palavras_chave": ["matisse", "henri matisse"],
+    "inicio": ["Matisse adorava cores fortes e vibrantes 🎨"],
+    "explicacao_curta": ["Ele criava pinturas alegres e cheias de vida."],
+    "explicacao_aprofundada": ["Matisse também fazia colagens usando papéis coloridos recortados."],
+    "curiosidade": ["As tesouras viraram ferramentas importantes para Matisse ✂️"],
+    "interacao": ["Você gosta de criar usando recortes?"],
+    "atividade": ["Faça colagens usando papéis coloridos 🌈"],
+    "final": ["As cores podem transmitir muita alegria ✨"],
     "emocao": "alegria",
     "nivel": "leve"
   },
-
   "jackson_pollock": {
     "tema": "artistas_universais",
     "subtema": "jackson_pollock",
-
-    "palavras_chave": [
-      "pollock",
-      "jackson pollock"
-    ],
-
-    "inicio": [
-      "Pollock espalhava tinta de maneiras diferentes 🎨"
-    ],
-
-    "explicacao_curta": [
-      "Ele criava pinturas usando respingos e movimentos livres."
-    ],
-
-    "explicacao_aprofundada": [
-      "O artista caminhava ao redor da tela enquanto jogava tinta para criar formas inesperadas."
-    ],
-
-    "curiosidade": [
-      "As pinturas de Pollock parecem cheias de energia ⚡"
-    ],
-
-    "interacao": [
-      "Você gostaria de pintar usando movimentos livres?"
-    ],
-
-    "atividade": [
-      "Faça respingos de tinta em uma folha 🎨"
-    ],
-
-    "final": [
-      "Movimento e arte podem se misturar 🌪️"
-    ],
-
+    "palavras_chave": ["pollock", "jackson pollock"],
+    "inicio": ["Pollock espalhava tinta de maneiras diferentes 🎨"],
+    "explicacao_curta": ["Ele criava pinturas usando respingos e movimentos livres."],
+    "explicacao_aprofundada": ["O artista caminhava ao redor da tela enquanto jogava tinta para criar formas inesperadas."],
+    "curiosidade": ["As pinturas de Pollock parecem cheias de energia ⚡"],
+    "interacao": ["Você gostaria de pintar usando movimentos livres?"],
+    "atividade": ["Faça respingos de tinta em uma folha 🎨"],
+    "final": ["Movimento e arte podem se misturar 🌪️"],
     "emocao": "energia",
     "nivel": "leve"
   },
-
   "keith_haring": {
     "tema": "artistas_universais",
     "subtema": "keith_haring",
-
-    "palavras_chave": [
-      "keith haring",
-      "haring"
-    ],
-
-    "inicio": [
-      "Keith Haring criava desenhos simples e cheios de movimento ✨"
-    ],
-
-    "explicacao_curta": [
-      "Suas figuras parecem dançar e brincar."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele usava linhas fortes e personagens coloridos para comunicar ideias."
-    ],
-
-    "curiosidade": [
-      "As artes de Haring aparecem em murais e espaços públicos 🌍"
-    ],
-
-    "interacao": [
-      "Você consegue desenhar personagens usando poucas linhas?"
-    ],
-
-    "atividade": [
-      "Crie figuras simples em movimento ✏️"
-    ],
-
-    "final": [
-      "Linhas simples podem transmitir muita energia 🌈"
-    ],
-
+    "palavras_chave": ["keith haring", "haring"],
+    "inicio": ["Keith Haring criava desenhos simples e cheios de movimento ✨"],
+    "explicacao_curta": ["Suas figuras parecem dançar e brincar."],
+    "explicacao_aprofundada": ["Ele usava linhas fortes e personagens coloridos para comunicar ideias."],
+    "curiosidade": ["As artes de Haring aparecem em murais e espaços públicos 🌍"],
+    "interacao": ["Você consegue desenhar personagens usando poucas linhas?"],
+    "atividade": ["Crie figuras simples em movimento ✏️"],
+    "final": ["Linhas simples podem transmitir muita energia 🌈"],
     "emocao": "animacao",
     "nivel": "leve"
   },
-
   "banksy": {
     "tema": "artistas_universais",
     "subtema": "banksy",
-
-    "palavras_chave": [
-      "banksy",
-      "grafite banksy"
-    ],
-
-    "inicio": [
-      "Banksy ficou famoso por suas artes urbanas 🎨"
-    ],
-
-    "explicacao_curta": [
-      "Ele cria imagens em paredes e espaços públicos."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas obras misturam humor, crítica e criatividade."
-    ],
-
-    "curiosidade": [
-      "A verdadeira identidade de Banksy continua misteriosa 🎭"
-    ],
-
-    "interacao": [
-      "Você gosta de desenhos em muros e paredes?"
-    ],
-
-    "atividade": [
-      "Crie um desenho usando moldes e formas simples ✏️"
-    ],
-
-    "final": [
-      "A arte pode aparecer em muitos lugares da cidade 🌆"
-    ],
-
+    "palavras_chave": ["banksy", "grafite banksy"],
+    "inicio": ["Banksy ficou famoso por suas artes urbanas 🎨"],
+    "explicacao_curta": ["Ele cria imagens em paredes e espaços públicos."],
+    "explicacao_aprofundada": ["Suas obras misturam humor, crítica e criatividade."],
+    "curiosidade": ["A verdadeira identidade de Banksy continua misteriosa 🎭"],
+    "interacao": ["Você gosta de desenhos em muros e paredes?"],
+    "atividade": ["Crie um desenho usando moldes e formas simples ✏️"],
+    "final": ["A arte pode aparecer em muitos lugares da cidade 🌆"],
     "emocao": "curiosidade",
     "nivel": "leve"
   },
-
   "amedeo_modigliani": {
     "tema": "artistas_universais",
     "subtema": "amedeo_modigliani",
-
-    "palavras_chave": [
-      "modigliani"
-    ],
-
-    "inicio": [
-      "Modigliani pintava rostos alongados e elegantes 🎭"
-    ],
-
-    "explicacao_curta": [
-      "Suas figuras possuem formas suaves e diferentes."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele criava retratos com pescoços longos e olhos marcantes."
-    ],
-
-    "curiosidade": [
-      "Os retratos de Modigliani parecem silenciosos e tranquilos 🌙"
-    ],
-
-    "interacao": [
-      "Você conseguiria desenhar rostos de forma estilizada?"
-    ],
-
-    "atividade": [
-      "Crie personagens com formas alongadas ✏️"
-    ],
-
-    "final": [
-      "Cada artista possui um jeito único de representar pessoas ✨"
-    ],
-
+    "palavras_chave": ["modigliani"],
+    "inicio": ["Modigliani pintava rostos alongados e elegantes 🎭"],
+    "explicacao_curta": ["Suas figuras possuem formas suaves e diferentes."],
+    "explicacao_aprofundada": ["Ele criava retratos com pescoços longos e olhos marcantes."],
+    "curiosidade": ["Os retratos de Modigliani parecem silenciosos e tranquilos 🌙"],
+    "interacao": ["Você conseguiria desenhar rostos de forma estilizada?"],
+    "atividade": ["Crie personagens com formas alongadas ✏️"],
+    "final": ["Cada artista possui um jeito único de representar pessoas ✨"],
     "emocao": "calma",
     "nivel": "leve"
   },
-
   "georgia_okeeffe": {
     "tema": "artistas_universais",
     "subtema": "georgia_okeeffe",
-
-    "palavras_chave": [
-      "okeeffe",
-      "georgia okeeffe"
-    ],
-
-    "inicio": [
-      "Georgia O’Keeffe gostava de pintar flores gigantes 🌺"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras mostram detalhes da natureza."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ela ampliava flores e paisagens para destacar formas e cores."
-    ],
-
-    "curiosidade": [
-      "As flores parecem enormes em suas pinturas 🌸"
-    ],
-
-    "interacao": [
-      "Qual flor você gostaria de pintar?"
-    ],
-
-    "atividade": [
-      "Desenhe uma flor ocupando toda a folha 🎨"
-    ],
-
-    "final": [
-      "A natureza pode inspirar obras incríveis 🌿"
-    ],
-
+    "palavras_chave": ["okeeffe", "georgia okeeffe"],
+    "inicio": ["Georgia O’Keeffe gostava de pintar flores gigantes 🌺"],
+    "explicacao_curta": ["Suas obras mostram detalhes da natureza."],
+    "explicacao_aprofundada": ["Ela ampliava flores e paisagens para destacar formas e cores."],
+    "curiosidade": ["As flores parecem enormes em suas pinturas 🌸"],
+    "interacao": ["Qual flor você gostaria de pintar?"],
+    "atividade": ["Desenhe uma flor ocupando toda a folha 🎨"],
+    "final": ["A natureza pode inspirar obras incríveis 🌿"],
     "emocao": "harmonia",
     "nivel": "leve"
   },
-
   "tamara_de_lempicka": {
     "tema": "artistas_universais",
     "subtema": "tamara_de_lempicka",
-
-    "palavras_chave": [
-      "tamara de lempicka",
-      "lempicka"
-    ],
-
-    "inicio": [
-      "Tamara de Lempicka criava retratos modernos e elegantes ✨"
-    ],
-
-    "explicacao_curta": [
-      "Suas pinturas possuem formas brilhantes e geométricas."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ela misturava luxo, modernidade e estilo artístico."
-    ],
-
-    "curiosidade": [
-      "Suas obras lembram cenas de filmes antigos 🎬"
-    ],
-
-    "interacao": [
-      "Você gosta de desenhos modernos e estilizados?"
-    ],
-
-    "atividade": [
-      "Desenhe roupas usando linhas geométricas ✏️"
-    ],
-
-    "final": [
-      "A arte também pode transmitir elegância 🌟"
-    ],
-
+    "palavras_chave": ["tamara de lempicka", "lempicka"],
+    "inicio": ["Tamara de Lempicka criava retratos modernos e elegantes ✨"],
+    "explicacao_curta": ["Suas pinturas possuem formas brilhantes e geométricas."],
+    "explicacao_aprofundada": ["Ela misturava luxo, modernidade e estilo artístico."],
+    "curiosidade": ["Suas obras lembram cenas de filmes antigos 🎬"],
+    "interacao": ["Você gosta de desenhos modernos e estilizados?"],
+    "atividade": ["Desenhe roupas usando linhas geométricas ✏️"],
+    "final": ["A arte também pode transmitir elegância 🌟"],
     "emocao": "admiracao",
     "nivel": "leve"
   },
-
   "marc_chagall": {
     "tema": "artistas_universais",
     "subtema": "marc_chagall",
-
-    "palavras_chave": [
-      "chagall",
-      "marc chagall"
-    ],
-
-    "inicio": [
-      "Chagall pintava cenas parecidas com sonhos 🌙"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras possuem cores suaves e personagens flutuando."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele misturava memória, imaginação e fantasia em suas pinturas."
-    ],
-
-    "curiosidade": [
-      "Em muitas obras de Chagall as pessoas parecem voar ☁️"
-    ],
-
-    "interacao": [
-      "O que você desenharia em um sonho?"
-    ],
-
-    "atividade": [
-      "Pinte personagens flutuando no céu 🎨"
-    ],
-
-    "final": [
-      "A imaginação pode deixar a arte leve como nuvens ✨"
-    ],
-
+    "palavras_chave": ["chagall", "marc chagall"],
+    "inicio": ["Chagall pintava cenas parecidas com sonhos 🌙"],
+    "explicacao_curta": ["Suas obras possuem cores suaves e personagens flutuando."],
+    "explicacao_aprofundada": ["Ele misturava memória, imaginação e fantasia em suas pinturas."],
+    "curiosidade": ["Em muitas obras de Chagall as pessoas parecem voar ☁️"],
+    "interacao": ["O que você desenharia em um sonho?"],
+    "atividade": ["Pinte personagens flutuando no céu 🎨"],
+    "final": ["A imaginação pode deixar a arte leve como nuvens ✨"],
     "emocao": "sonho",
     "nivel": "leve"
   },
-
   "paul_klee": {
     "tema": "artistas_universais",
     "subtema": "paul_klee",
-
-    "palavras_chave": [
-      "paul klee",
-      "klee"
-    ],
-
-    "inicio": [
-      "Paul Klee misturava arte, música e imaginação 🎶"
-    ],
-
-    "explicacao_curta": [
-      "Ele criava pinturas com símbolos e formas coloridas."
-    ],
-
-    "explicacao_aprofundada": [
-      "Klee acreditava que linhas e cores podiam funcionar como música visual."
-    ],
-
-    "curiosidade": [
-      "Muitas obras de Klee parecem mapas mágicos 🗺️"
-    ],
-
-    "interacao": [
-      "Que formas combinam com música para você?"
-    ],
-
-    "atividade": [
-      "Crie padrões coloridos inspirados em sons 🎨"
-    ],
-
-    "final": [
-      "Arte e música podem conversar entre si ✨"
-    ],
-
+    "palavras_chave": ["paul klee", "klee"],
+    "inicio": ["Paul Klee misturava arte, música e imaginação 🎶"],
+    "explicacao_curta": ["Ele criava pinturas com símbolos e formas coloridas."],
+    "explicacao_aprofundada": ["Klee acreditava que linhas e cores podiam funcionar como música visual."],
+    "curiosidade": ["Muitas obras de Klee parecem mapas mágicos 🗺️"],
+    "interacao": ["Que formas combinam com música para você?"],
+    "atividade": ["Crie padrões coloridos inspirados em sons 🎨"],
+    "final": ["Arte e música podem conversar entre si ✨"],
     "emocao": "criatividade",
     "nivel": "leve"
-     },
-   {
+  },
   "roy_lichtenstein": {
     "tema": "artistas_universais",
     "subtema": "roy_lichtenstein",
-
-    "palavras_chave": [
-      "lichtenstein",
-      "roy lichtenstein",
-      "pop art quadrinhos"
-    ],
-
-    "inicio": [
-      "Roy Lichtenstein transformava quadrinhos em arte 🎨"
-    ],
-
-    "explicacao_curta": [
-      "Suas pinturas parecem páginas gigantes de HQ."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele usava pontos coloridos, balões de fala e imagens inspiradas em revistas."
-    ],
-
-    "curiosidade": [
-      "Os pontinhos de suas obras imitam impressões de revistas 🟡"
-    ],
-
-    "interacao": [
-      "Você gosta de histórias em quadrinhos?"
-    ],
-
-    "atividade": [
-      "Crie um quadrinho usando balões de fala ✏️"
-    ],
-
-    "final": [
-      "A cultura popular também pode virar arte 🌟"
-    ],
-
+    "palavras_chave": ["lichtenstein", "roy lichtenstein", "pop art quadrinhos"],
+    "inicio": ["Roy Lichtenstein transformava quadrinhos em arte 🎨"],
+    "explicacao_curta": ["Suas pinturas parecem páginas gigantes de HQ."],
+    "explicacao_aprofundada": ["Ele usava pontos coloridos, balões de fala e imagens inspiradas em revistas."],
+    "curiosidade": ["Os pontinhos de suas obras imitam impressões de revistas 🟡"],
+    "interacao": ["Você gosta de histórias em quadrinhos?"],
+    "atividade": ["Crie um quadrinho usando balões de fala ✏️"],
+    "final": ["A cultura popular também pode virar arte 🌟"],
     "emocao": "diversao",
     "nivel": "leve"
   },
-
   "fernando_botero": {
     "tema": "artistas_universais",
     "subtema": "fernando_botero",
-
-    "palavras_chave": [
-      "botero",
-      "fernando botero"
-    ],
-
-    "inicio": [
-      "Botero criava personagens grandes e arredondados 🎈"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras possuem formas exageradas e divertidas."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele pintava pessoas, animais e objetos com volumes ampliados."
-    ],
-
-    "curiosidade": [
-      "As esculturas de Botero aparecem em praças e museus 🌍"
-    ],
-
-    "interacao": [
-      "Você conseguiria desenhar personagens bem redondinhos?"
-    ],
-
-    "atividade": [
-      "Transforme figuras comuns em versões gigantes 🎨"
-    ],
-
-    "final": [
-      "A arte pode brincar com tamanhos e formas ✨"
-    ],
-
+    "palavras_chave": ["botero", "fernando botero"],
+    "inicio": ["Botero criava personagens grandes e arredondados 🎈"],
+    "explicacao_curta": ["Suas obras possuem formas exageradas e divertidas."],
+    "explicacao_aprofundada": ["Ele pintava pessoas, animais e objetos com volumes ampliados."],
+    "curiosidade": ["As esculturas de Botero aparecem em praças e museus 🌍"],
+    "interacao": ["Você conseguiria desenhar personagens bem redondinhos?"],
+    "atividade": ["Transforme figuras comuns em versões gigantes 🎨"],
+    "final": ["A arte pode brincar com tamanhos e formas ✨"],
     "emocao": "humor",
     "nivel": "leve"
   },
-
   "jean_michel_basquiat": {
     "tema": "artistas_universais",
     "subtema": "jean_michel_basquiat",
-
-    "palavras_chave": [
-      "basquiat",
-      "jean michel basquiat"
-    ],
-
-    "inicio": [
-      "Basquiat misturava desenho, escrita e arte urbana 👑"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras possuem energia e muitos símbolos."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele usava palavras, cores fortes e figuras expressivas para criar arte."
-    ],
-
-    "curiosidade": [
-      "As coroas aparecem bastante em suas pinturas 👑"
-    ],
-
-    "interacao": [
-      "Que símbolo você criaria para representar você?"
-    ],
-
-    "atividade": [
-      "Misture palavras e desenhos em uma mesma arte ✏️"
-    ],
-
-    "final": [
-      "A arte pode unir imagem, texto e emoção 🌈"
-    ],
-
+    "palavras_chave": ["basquiat", "jean michel basquiat"],
+    "inicio": ["Basquiat misturava desenho, escrita e arte urbana 👑"],
+    "explicacao_curta": ["Suas obras possuem energia e muitos símbolos."],
+    "explicacao_aprofundada": ["Ele usava palavras, cores fortes e figuras expressivas para criar arte."],
+    "curiosidade": ["As coroas aparecem bastante em suas pinturas 👑"],
+    "interacao": ["Que símbolo você criaria para representar você?"],
+    "atividade": ["Misture palavras e desenhos em uma mesma arte ✏️"],
+    "final": ["A arte pode unir imagem, texto e emoção 🌈"],
     "emocao": "expressao",
     "nivel": "leve"
   },
-
   "bridget_riley": {
     "tema": "artistas_universais",
     "subtema": "bridget_riley",
-
-    "palavras_chave": [
-      "bridget riley",
-      "op art"
-    ],
-
-    "inicio": [
-      "Bridget Riley criava ilusões usando linhas e formas 🔲"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras parecem se mover diante dos olhos."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ela organizava padrões geométricos para criar efeitos visuais."
-    ],
-
-    "curiosidade": [
-      "A op art brinca com a percepção visual 👀"
-    ],
-
-    "interacao": [
-      "Você já viu desenhos que parecem mexer?"
-    ],
-
-    "atividade": [
-      "Faça padrões usando linhas repetidas ✏️"
-    ],
-
-    "final": [
-      "Os olhos também participam da experiência artística ✨"
-    ],
-
+    "palavras_chave": ["bridget riley", "op art"],
+    "inicio": ["Bridget Riley criava ilusões usando linhas e formas 🔲"],
+    "explicacao_curta": ["Suas obras parecem se mover diante dos olhos."],
+    "explicacao_aprofundada": ["Ela organizava padrões geométricos para criar efeitos visuais."],
+    "curiosidade": ["A op art brinca com a percepção visual 👀"],
+    "interacao": ["Você já viu desenhos que parecem mexer?"],
+    "atividade": ["Faça padrões usando linhas repetidas ✏️"],
+    "final": ["Os olhos também participam da experiência artística ✨"],
     "emocao": "curiosidade",
     "nivel": "leve"
   },
-
   "niki_de_saint_phalle": {
     "tema": "artistas_universais",
     "subtema": "niki_de_saint_phalle",
-
-    "palavras_chave": [
-      "niki de saint phalle",
-      "niki"
-    ],
-
-    "inicio": [
-      "Niki criava esculturas gigantes e coloridas 🌈"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras possuem formas alegres e criativas."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ela produzia esculturas inspiradas em movimento, dança e fantasia."
-    ],
-
-    "curiosidade": [
-      "Algumas esculturas de Niki parecem personagens mágicos ✨"
-    ],
-
-    "interacao": [
-      "Que escultura divertida você inventaria?"
-    ],
-
-    "atividade": [
-      "Desenhe criaturas coloridas gigantes 🎨"
-    ],
-
-    "final": [
-      "A arte pode ocupar espaços enormes e surpreendentes 🌟"
-    ],
-
+    "palavras_chave": ["niki de saint phalle", "niki"],
+    "inicio": ["Niki criava esculturas gigantes e coloridas 🌈"],
+    "explicacao_curta": ["Suas obras possuem formas alegres e criativas."],
+    "explicacao_aprofundada": ["Ela produzia esculturas inspiradas em movimento, dança e fantasia."],
+    "curiosidade": ["Algumas esculturas de Niki parecem personagens mágicos ✨"],
+    "interacao": ["Que escultura divertida você inventaria?"],
+    "atividade": ["Desenhe criaturas coloridas gigantes 🎨"],
+    "final": ["A arte pode ocupar espaços enormes e surpreendentes 🌟"],
     "emocao": "encantamento",
     "nivel": "leve"
   },
-
   "ai_weiwei": {
     "tema": "artistas_universais",
     "subtema": "ai_weiwei",
-
-    "palavras_chave": [
-      "ai weiwei"
-    ],
-
-    "inicio": [
-      "Ai Weiwei mistura arte, arquitetura e ideias 🌍"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras usam objetos e instalações gigantes."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele cria trabalhos que fazem as pessoas observar e pensar sobre o mundo."
-    ],
-
-    "curiosidade": [
-      "Algumas obras de Ai Weiwei ocupam salas inteiras 🏛️"
-    ],
-
-    "interacao": [
-      "Você gostaria de criar uma obra enorme?"
-    ],
-
-    "atividade": [
-      "Monte uma instalação usando objetos recicláveis ♻️"
-    ],
-
-    "final": [
-      "A arte também pode provocar reflexão ✨"
-    ],
-
+    "palavras_chave": ["ai weiwei"],
+    "inicio": ["Ai Weiwei mistura arte, arquitetura e ideias 🌍"],
+    "explicacao_curta": ["Suas obras usam objetos e instalações gigantes."],
+    "explicacao_aprofundada": ["Ele cria trabalhos que fazem as pessoas observar e pensar sobre o mundo."],
+    "curiosidade": ["Algumas obras de Ai Weiwei ocupam salas inteiras 🏛️"],
+    "interacao": ["Você gostaria de criar uma obra enorme?"],
+    "atividade": ["Monte uma instalação usando objetos recicláveis ♻️"],
+    "final": ["A arte também pode provocar reflexão ✨"],
     "emocao": "pensamento",
     "nivel": "leve"
   },
-
   "takashi_murakami": {
     "tema": "artistas_universais",
     "subtema": "takashi_murakami",
-
-    "palavras_chave": [
-      "murakami",
-      "takashi murakami"
-    ],
-
-    "inicio": [
-      "Murakami mistura arte japonesa e personagens coloridos 🌸"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras parecem desenhos animados gigantes."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele usa flores sorridentes, cores fortes e elementos da cultura pop."
-    ],
-
-    "curiosidade": [
-      "As flores felizes ficaram famosas em suas obras 🌼"
-    ],
-
-    "interacao": [
-      "Você criaria personagens sorridentes?"
-    ],
-
-    "atividade": [
-      "Desenhe flores com expressões divertidas 🌈"
-    ],
-
-    "final": [
-      "A arte pode ser alegre e cheia de fantasia ✨"
-    ],
-
+    "palavras_chave": ["murakami", "takashi murakami"],
+    "inicio": ["Murakami mistura arte japonesa e personagens coloridos 🌸"],
+    "explicacao_curta": ["Suas obras parecem desenhos animados gigantes."],
+    "explicacao_aprofundada": ["Ele usa flores sorridentes, cores fortes e elementos da cultura pop."],
+    "curiosidade": ["As flores felizes ficaram famosas em suas obras 🌼"],
+    "interacao": ["Você criaria personagens sorridentes?"],
+    "atividade": ["Desenhe flores com expressões divertidas 🌈"],
+    "final": ["A arte pode ser alegre e cheia de fantasia ✨"],
     "emocao": "alegria",
     "nivel": "leve"
   },
-
   "anish_kapoor": {
     "tema": "artistas_universais",
     "subtema": "anish_kapoor",
-
-    "palavras_chave": [
-      "anish kapoor"
-    ],
-
-    "inicio": [
-      "Anish Kapoor cria esculturas gigantes e brilhantes 🪞"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras brincam com reflexos e espaço."
-    ],
-
-    "explicacao_aprofundada": [
-      "Muitas esculturas refletem pessoas e ambientes ao redor."
-    ],
-
-    "curiosidade": [
-      "Algumas obras parecem espelhos gigantes 🌟"
-    ],
-
-    "interacao": [
-      "Você gosta de observar reflexos?"
-    ],
-
-    "atividade": [
-      "Desenhe objetos refletindo luz ✏️"
-    ],
-
-    "final": [
-      "Luz e reflexo também podem virar arte ✨"
-    ],
-
+    "palavras_chave": ["anish kapoor"],
+    "inicio": ["Anish Kapoor cria esculturas gigantes e brilhantes 🪞"],
+    "explicacao_curta": ["Suas obras brincam com reflexos e espaço."],
+    "explicacao_aprofundada": ["Muitas esculturas refletem pessoas e ambientes ao redor."],
+    "curiosidade": ["Algumas obras parecem espelhos gigantes 🌟"],
+    "interacao": ["Você gosta de observar reflexos?"],
+    "atividade": ["Desenhe objetos refletindo luz ✏️"],
+    "final": ["Luz e reflexo também podem virar arte ✨"],
     "emocao": "encantamento",
     "nivel": "leve"
   },
-
   "olafur_eliasson": {
     "tema": "artistas_universais",
     "subtema": "olafur_eliasson",
-
-    "palavras_chave": [
-      "olafur eliasson"
-    ],
-
-    "inicio": [
-      "Olafur Eliasson cria obras usando luz e natureza ☀️"
-    ],
-
-    "explicacao_curta": [
-      "Ele mistura ciência, cor e experiências visuais."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas instalações fazem as pessoas sentir luz, sombra e movimento."
-    ],
-
-    "curiosidade": [
-      "Algumas salas parecem cheias de sol artificial 🌞"
-    ],
-
-    "interacao": [
-      "Que tipo de luz você usaria em uma obra?"
-    ],
-
-    "atividade": [
-      "Brinque com lanternas criando sombras 🎭"
-    ],
-
-    "final": [
-      "A arte pode transformar a maneira de enxergar o espaço ✨"
-    ],
-
+    "palavras_chave": ["olafur eliasson"],
+    "inicio": ["Olafur Eliasson cria obras usando luz e natureza ☀️"],
+    "explicacao_curta": ["Ele mistura ciência, cor e experiências visuais."],
+    "explicacao_aprofundada": ["Suas instalações fazem as pessoas sentir luz, sombra e movimento."],
+    "curiosidade": ["Algumas salas parecem cheias de sol artificial 🌞"],
+    "interacao": ["Que tipo de luz você usaria em uma obra?"],
+    "atividade": ["Brinque com lanternas criando sombras 🎭"],
+    "final": ["A arte pode transformar a maneira de enxergar o espaço ✨"],
     "emocao": "exploracao",
     "nivel": "leve"
   },
-
   "jr": {
     "tema": "artistas_universais",
     "subtema": "jr",
-
-    "palavras_chave": [
-      "jr artista",
-      "fotografia urbana"
-    ],
-
-    "inicio": [
-      "JR usa fotografias gigantes em espaços públicos 📸"
-    ],
-
-    "explicacao_curta": [
-      "Ele cola retratos enormes em paredes e construções."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas obras mostram rostos e histórias de diferentes pessoas."
-    ],
-
-    "curiosidade": [
-      "As imagens de JR podem ocupar prédios inteiros 🏙️"
-    ],
-
-    "interacao": [
-      "Que fotografia você mostraria em um mural gigante?"
-    ],
-
-    "atividade": [
-      "Monte colagens usando fotos e desenhos ✂️"
-    ],
-
-    "final": [
-      "A arte urbana pode transformar cidades 🌆"
-    ],
-
+    "palavras_chave": ["jr artista", "fotografia urbana"],
+    "inicio": ["JR usa fotografias gigantes em espaços públicos 📸"],
+    "explicacao_curta": ["Ele cola retratos enormes em paredes e construções."],
+    "explicacao_aprofundada": ["Suas obras mostram rostos e histórias de diferentes pessoas."],
+    "curiosidade": ["As imagens de JR podem ocupar prédios inteiros 🏙️"],
+    "interacao": ["Que fotografia você mostraria em um mural gigante?"],
+    "atividade": ["Monte colagens usando fotos e desenhos ✂️"],
+    "final": ["A arte urbana pode transformar cidades 🌆"],
     "emocao": "conexao",
     "nivel": "leve"
-    
+  },
   "damien_hirst": {
     "tema": "artistas_universais",
     "subtema": "damien_hirst",
-
-    "palavras_chave": [
-      "damien hirst",
-      "hirst"
-    ],
-
-    "inicio": [
-      "Damien Hirst cria obras curiosas e diferentes 🧪"
-    ],
-
-    "explicacao_curta": [
-      "Ele usa objetos, cores e instalações em suas artes."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas obras exploram formas, padrões e maneiras diferentes de apresentar arte."
-    ],
-
-    "curiosidade": [
-      "Algumas pinturas de Hirst usam muitos pontinhos coloridos 🔵"
-    ],
-
-    "interacao": [
-      "Você gosta de obras diferentes e inesperadas?"
-    ],
-
-    "atividade": [
-      "Faça padrões usando círculos coloridos 🎨"
-    ],
-
-    "final": [
-      "A arte contemporânea pode surpreender de muitos jeitos ✨"
-    ],
-
+    "palavras_chave": ["damien hirst", "hirst"],
+    "inicio": ["Damien Hirst cria obras curiosas e diferentes 🧪"],
+    "explicacao_curta": ["Ele usa objetos, cores e instalações em suas artes."],
+    "explicacao_aprofundada": ["Suas obras exploram formas, padrões e maneiras diferentes de apresentar arte."],
+    "curiosidade": ["Algumas pinturas de Hirst usam muitos pontinhos coloridos 🔵"],
+    "interacao": ["Você gosta de obras diferentes e inesperadas?"],
+    "atividade": ["Faça padrões usando círculos coloridos 🎨"],
+    "final": ["A arte contemporânea pode surpreender de muitos jeitos ✨"],
     "emocao": "curiosidade",
     "nivel": "leve"
   },
-
   "marina_abramovic": {
     "tema": "artistas_universais",
     "subtema": "marina_abramovic",
-
-    "palavras_chave": [
-      "marina abramovic",
-      "performance artistica"
-    ],
-
-    "inicio": [
-      "Marina Abramović usa o corpo como forma de arte 🎭"
-    ],
-
-    "explicacao_curta": [
-      "Ela cria performances cheias de expressão."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas apresentações exploram silêncio, presença e emoções."
-    ],
-
-    "curiosidade": [
-      "A performance artística acontece ao vivo diante do público ✨"
-    ],
-
-    "interacao": [
-      "Você já tentou se expressar usando apenas gestos?"
-    ],
-
-    "atividade": [
-      "Crie movimentos para representar emoções 🎨"
-    ],
-
-    "final": [
-      "O corpo também pode contar histórias 🌟"
-    ],
-
+    "palavras_chave": ["marina abramovic", "performance artistica"],
+    "inicio": ["Marina Abramović usa o corpo como forma de arte 🎭"],
+    "explicacao_curta": ["Ela cria performances cheias de expressão."],
+    "explicacao_aprofundada": ["Suas apresentações exploram silêncio, presença e emoções."],
+    "curiosidade": ["A performance artística acontece ao vivo diante do público ✨"],
+    "interacao": ["Você já tentou se expressar usando apenas gestos?"],
+    "atividade": ["Crie movimentos para representar emoções 🎨"],
+    "final": ["O corpo também pode contar histórias 🌟"],
     "emocao": "expressao",
     "nivel": "leve"
   },
-
   "zaha_hadid": {
     "tema": "artistas_universais",
     "subtema": "zaha_hadid",
-
-    "palavras_chave": [
-      "zaha hadid",
-      "arquitetura moderna"
-    ],
-
-    "inicio": [
-      "Zaha Hadid criava construções futuristas 🏙️"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras possuem curvas e formas modernas."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ela imaginava prédios parecidos com ondas, movimento e natureza."
-    ],
-
-    "curiosidade": [
-      "Muitos prédios de Zaha parecem saídos do futuro 🚀"
-    ],
-
-    "interacao": [
-      "Como seria a construção dos seus sonhos?"
-    ],
-
-    "atividade": [
-      "Desenhe um prédio cheio de curvas ✏️"
-    ],
-
-    "final": [
-      "Arquitetura também pode parecer arte em movimento ✨"
-    ],
-
+    "palavras_chave": ["zaha hadid", "arquitetura moderna"],
+    "inicio": ["Zaha Hadid criava construções futuristas 🏙️"],
+    "explicacao_curta": ["Suas obras possuem curvas e formas modernas."],
+    "explicacao_aprofundada": ["Ela imaginava prédios parecidos com ondas, movimento e natureza."],
+    "curiosidade": ["Muitos prédios de Zaha parecem saídos do futuro 🚀"],
+    "interacao": ["Como seria a construção dos seus sonhos?"],
+    "atividade": ["Desenhe um prédio cheio de curvas ✏️"],
+    "final": ["Arquitetura também pode parecer arte em movimento ✨"],
     "emocao": "imaginacao",
     "nivel": "leve"
   },
-
   "antoni_gaudi": {
     "tema": "artistas_universais",
     "subtema": "antoni_gaudi",
-
-    "palavras_chave": [
-      "gaudi",
-      "antoni gaudi",
-      "sagrada familia"
-    ],
-
-    "inicio": [
-      "Gaudí criava construções inspiradas na natureza 🌿"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras possuem curvas, mosaicos e formas diferentes."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele misturava arquitetura, cores e detalhes criativos em seus projetos."
-    ],
-
-    "curiosidade": [
-      "A Sagrada Família é uma de suas obras mais famosas ⛪"
-    ],
-
-    "interacao": [
-      "Que forma da natureza você usaria em um prédio?"
-    ],
-
-    "atividade": [
-      "Crie mosaicos usando formas coloridas 🎨"
-    ],
-
-    "final": [
-      "A natureza pode inspirar construções incríveis 🌈"
-    ],
-
+    "palavras_chave": ["gaudi", "antoni gaudi", "sagrada familia"],
+    "inicio": ["Gaudí criava construções inspiradas na natureza 🌿"],
+    "explicacao_curta": ["Suas obras possuem curvas, mosaicos e formas diferentes."],
+    "explicacao_aprofundada": ["Ele misturava arquitetura, cores e detalhes criativos em seus projetos."],
+    "curiosidade": ["A Sagrada Família é uma de suas obras mais famosas ⛪"],
+    "interacao": ["Que forma da natureza você usaria em um prédio?"],
+    "atividade": ["Crie mosaicos usando formas coloridas 🎨"],
+    "final": ["A natureza pode inspirar construções incríveis 🌈"],
     "emocao": "encantamento",
     "nivel": "leve"
   },
-
   "auguste_rodin": {
     "tema": "artistas_universais",
     "subtema": "auguste_rodin",
-
-    "palavras_chave": [
-      "rodin",
-      "o pensador"
-    ],
-
-    "inicio": [
-      "Rodin transformava pedra e bronze em emoção 🗿"
-    ],
-
-    "explicacao_curta": [
-      "Ele foi um importante escultor francês."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas esculturas mostram movimento, expressão e detalhes do corpo humano."
-    ],
-
-    "curiosidade": [
-      "O Pensador é uma de suas esculturas mais famosas 🤔"
-    ],
-
-    "interacao": [
-      "Que pose você criaria para uma escultura?"
-    ],
-
-    "atividade": [
-      "Modele personagens usando massinha 🎨"
-    ],
-
-    "final": [
-      "As esculturas podem parecer cheias de vida ✨"
-    ],
-
+    "palavras_chave": ["rodin", "o pensador"],
+    "inicio": ["Rodin transformava pedra e bronze em emoção 🗿"],
+    "explicacao_curta": ["Ele foi um importante escultor francês."],
+    "explicacao_aprofundada": ["Suas esculturas mostram movimento, expressão e detalhes do corpo humano."],
+    "curiosidade": ["O Pensador é uma de suas esculturas mais famosas 🤔"],
+    "interacao": ["Que pose você criaria para uma escultura?"],
+    "atividade": ["Modele personagens usando massinha 🎨"],
+    "final": ["As esculturas podem parecer cheias de vida ✨"],
     "emocao": "reflexao",
     "nivel": "leve"
   },
-
   "henry_moore": {
     "tema": "artistas_universais",
     "subtema": "henry_moore",
-
-    "palavras_chave": [
-      "henry moore"
-    ],
-
-    "inicio": [
-      "Henry Moore criava esculturas com formas suaves 🌙"
-    ],
-
-    "explicacao_curta": [
-      "Suas obras lembram pedras, montanhas e corpos humanos."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele explorava curvas e espaços vazios nas esculturas."
-    ],
-
-    "curiosidade": [
-      "Muitas esculturas de Moore ficam ao ar livre 🌿"
-    ],
-
-    "interacao": [
-      "Você gosta de formas arredondadas?"
-    ],
-
-    "atividade": [
-      "Crie esculturas com argila ou papel ✂️"
-    ],
-
-    "final": [
-      "As formas simples podem transmitir beleza 🌟"
-    ],
-
+    "palavras_chave": ["henry moore"],
+    "inicio": ["Henry Moore criava esculturas com formas suaves 🌙"],
+    "explicacao_curta": ["Suas obras lembram pedras, montanhas e corpos humanos."],
+    "explicacao_aprofundada": ["Ele explorava curvas e espaços vazios nas esculturas."],
+    "curiosidade": ["Muitas esculturas de Moore ficam ao ar livre 🌿"],
+    "interacao": ["Você gosta de formas arredondadas?"],
+    "atividade": ["Crie esculturas com argila ou papel ✂️"],
+    "final": ["As formas simples podem transmitir beleza 🌟"],
     "emocao": "harmonia",
     "nivel": "leve"
   },
-
   "louise_bourgeois": {
     "tema": "artistas_universais",
     "subtema": "louise_bourgeois",
-
-    "palavras_chave": [
-      "louise bourgeois",
-      "aranha gigante"
-    ],
-
-    "inicio": [
-      "Louise Bourgeois criava esculturas gigantes e expressivas 🕷️"
-    ],
-
-    "explicacao_curta": [
-      "Ela explorava emoções através da arte."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas esculturas misturam memória, sentimentos e imaginação."
-    ],
-
-    "curiosidade": [
-      "As aranhas gigantes ficaram famosas em suas obras ✨"
-    ],
-
-    "interacao": [
-      "Que animal você transformaria em escultura?"
-    ],
-
-    "atividade": [
-      "Desenhe criaturas enormes e imaginárias 🎨"
-    ],
-
-    "final": [
-      "A arte pode transformar emoções em formas 🌈"
-    ],
-
+    "palavras_chave": ["louise bourgeois", "aranha gigante"],
+    "inicio": ["Louise Bourgeois criava esculturas gigantes e expressivas 🕷️"],
+    "explicacao_curta": ["Ela explorava emoções através da arte."],
+    "explicacao_aprofundada": ["Suas esculturas misturam memória, sentimentos e imaginação."],
+    "curiosidade": ["As aranhas gigantes ficaram famosas em suas obras ✨"],
+    "interacao": ["Que animal você transformaria em escultura?"],
+    "atividade": ["Desenhe criaturas enormes e imaginárias 🎨"],
+    "final": ["A arte pode transformar emoções em formas 🌈"],
     "emocao": "expressao",
     "nivel": "leve"
   },
-
   "constantin_brancusi": {
     "tema": "artistas_universais",
     "subtema": "constantin_brancusi",
-
-    "palavras_chave": [
-      "brancusi"
-    ],
-
-    "inicio": [
-      "Brancusi gostava de simplificar as formas ✨"
-    ],
-
-    "explicacao_curta": [
-      "Suas esculturas possuem linhas suaves e elegantes."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele acreditava que a simplicidade podia mostrar a essência das coisas."
-    ],
-
-    "curiosidade": [
-      "Algumas esculturas parecem pássaros voando 🕊️"
-    ],
-
-    "interacao": [
-      "Você prefere desenhos simples ou detalhados?"
-    ],
-
-    "atividade": [
-      "Crie figuras usando poucas linhas ✏️"
-    ],
-
-    "final": [
-      "A simplicidade também pode ser poderosa 🌟"
-    ],
-
+    "palavras_chave": ["brancusi"],
+    "inicio": ["Brancusi gostava de simplificar as formas ✨"],
+    "explicacao_curta": ["Suas esculturas possuem linhas suaves e elegantes."],
+    "explicacao_aprofundada": ["Ele acreditava que a simplicidade podia mostrar a essência das coisas."],
+    "curiosidade": ["Algumas esculturas parecem pássaros voando 🕊️"],
+    "interacao": ["Você prefere desenhos simples ou detalhados?"],
+    "atividade": ["Crie figuras usando poucas linhas ✏️"],
+    "final": ["A simplicidade também pode ser poderosa 🌟"],
     "emocao": "calma",
     "nivel": "leve"
   },
-
   "edmonia_lewis": {
     "tema": "artistas_universais",
     "subtema": "edmonia_lewis",
-
-    "palavras_chave": [
-      "edmonia lewis"
-    ],
-
-    "inicio": [
-      "Edmonia Lewis criou esculturas cheias de significado 🗿"
-    ],
-
-    "explicacao_curta": [
-      "Ela foi uma importante escultora do século XIX."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas obras representavam histórias, cultura e liberdade."
-    ],
-
-    "curiosidade": [
-      "Ela trabalhava principalmente com mármore ✨"
-    ],
-
-    "interacao": [
-      "Que história você contaria em uma escultura?"
-    ],
-
-    "atividade": [
-      "Modele personagens usando massinha 🎨"
-    ],
-
-    "final": [
-      "A arte pode guardar histórias importantes 🌍"
-    ],
-
+    "palavras_chave": ["edmonia lewis"],
+    "inicio": ["Edmonia Lewis criou esculturas cheias de significado 🗿"],
+    "explicacao_curta": ["Ela foi uma importante escultora do século XIX."],
+    "explicacao_aprofundada": ["Suas obras representavam histórias, cultura e liberdade."],
+    "curiosidade": ["Ela trabalhava principalmente com mármore ✨"],
+    "interacao": ["Que história você contaria em uma escultura?"],
+    "atividade": ["Modele personagens usando massinha 🎨"],
+    "final": ["A arte pode guardar histórias importantes 🌍"],
     "emocao": "inspiracao",
     "nivel": "leve"
   },
-
   "hokusai": {
     "tema": "artistas_universais",
     "subtema": "hokusai",
-
-    "palavras_chave": [
-      "hokusai",
-      "grande onda"
-    ],
-
-    "inicio": [
-      "Hokusai ficou famoso por suas gravuras japonesas 🌊"
-    ],
-
-    "explicacao_curta": [
-      "Ele retratava natureza, ondas e paisagens."
-    ],
-
-    "explicacao_aprofundada": [
-      "Suas obras possuem linhas marcantes e detalhes inspirados no Japão."
-    ],
-
-    "curiosidade": [
-      "A Grande Onda é uma das imagens mais conhecidas da arte japonesa 🌊"
-    ],
-
-    "interacao": [
-      "Você gostaria de desenhar ondas gigantes?"
-    ],
-
-    "atividade": [
-      "Faça desenhos usando linhas curvas e repetidas ✏️"
-    ],
-
-    "final": [
-      "A natureza pode inspirar imagens inesquecíveis ✨"
-    ],
-
+    "palavras_chave": ["hokusai", "grande onda"],
+    "inicio": ["Hokusai ficou famoso por suas gravuras japonesas 🌊"],
+    "explicacao_curta": ["Ele retratava natureza, ondas e paisagens."],
+    "explicacao_aprofundada": ["Suas obras possuem linhas marcantes e detalhes inspirados no Japão."],
+    "curiosidade": ["A Grande Onda é uma das imagens mais conhecidas da arte japonesa 🌊"],
+    "interacao": ["Você gostaria de desenhar ondas gigantes?"],
+    "atividade": ["Faça desenhos usando linhas curvas e repetidas ✏️"],
+    "final": ["A natureza pode inspirar imagens inesquecíveis ✨"],
     "emocao": "admiracao",
     "nivel": "leve"
-    
-    },
-    
+  },
   "marcel_duchamp": {
     "tema": "artistas_universais",
     "subtema": "marcel_duchamp",
-
-    "palavras_chave": [
-      "duchamp",
-      "marcel duchamp",
-      "arte conceitual",
-      "ready made"
-    ],
-
-    "inicio": [
-      "Marcel Duchamp gostava de transformar ideias em arte 🧠"
-    ],
-
-    "explicacao_curta": [
-      "Ele mostrou que objetos comuns também podem virar obras de arte."
-    ],
-
-    "explicacao_aprofundada": [
-      "Duchamp ficou famoso por apresentar objetos do cotidiano como arte, fazendo as pessoas pensarem sobre criatividade e imaginação."
-    ],
-
-    "curiosidade": [
-      "Ele chamou algumas de suas obras de ready-mades ✨"
-    ],
-
-    "interacao": [
-      "Que objeto comum você transformaria em arte?"
-    ],
-
-    "atividade": [
-      "Escolha um objeto da casa e invente um novo significado para ele 🎨"
-    ],
-
-    "final": [
-      "Às vezes a ideia pode ser tão importante quanto o desenho 🌈"
-    ],
-
+    "palavras_chave": ["duchamp", "marcel duchamp", "arte conceitual", "ready made"],
+    "inicio": ["Marcel Duchamp gostava de transformar ideias em arte 🧠"],
+    "explicacao_curta": ["Ele mostrou que objetos comuns também podem virar obras de arte."],
+    "explicacao_aprofundada": ["Duchamp ficou famoso por apresentar objetos do cotidiano como arte, fazendo as pessoas pensarem sobre criatividade e imaginação."],
+    "curiosidade": ["Ele chamou algumas de suas obras de ready-mades ✨"],
+    "interacao": ["Que objeto comum você transformaria em arte?"],
+    "atividade": ["Escolha um objeto da casa e invente um novo significado para ele 🎨"],
+    "final": ["Às vezes a ideia pode ser tão importante quanto o desenho 🌈"],
     "emocao": "curiosidade",
     "nivel": "leve"
-   
-  }
-}
   }
 }
