@@ -134,16 +134,19 @@
 
 <script type="module">
     // ======================= CONFIGURAÇÕES =======================
-    const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
-    const jsonFiles = {
+   const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
+const jsonFiles = {
     apoio_emocional: "apoio_emocional.json",
     arte_tecnicas: "arte_tecnicas.json",
     artes_visuais: "artes_visuais.json",
     artistas: "artistas.json",
     artistas_indigenas_afrobrasileiros: "artistas-indigenas-afrobrasileiros.json",
     artistas_mulheres_historicas: "artistas-mulheres-historicas.json",
+    artistas_universais: "artistas_universais.json",               // novo: Leonardo, Michelangelo, Monet, etc.
     atividades_artisticas: "atividades_artisticas.json",
+    cantigas_de_roda: "cantigas_de_roda.json",                     // novo: 43 cantigas populares
     cultura_afro_brasileira: "cultura_afro_brasileira.json",
+    cultura_brasileira: "cultura_brasileira.json",                 // novo: cordel, repente, capoeira, etc.
     cultura_indigena: "cultura_indigena.json",
     curiosidades: "curiosidades.json",
     dancas: "dancas.json",
@@ -153,10 +156,13 @@
     folclore: "folclore.json",
     historia_arte: "historia_arte.json",
     imaginacao_infantil: "imaginacao_infantil.json",
+    literatura_conceitos: "literatura_conceitos.json",             // novo: poema, verso, estrofe, etc.
     lugares_arte: "lugares_arte.json",
     musica: "musica.json",
     obras_famosas_mundo: "obras-famosas-mundo.json",
     obras_modernistas_brasileiras: "obras-modernistas-brasileiras.json",
+    perguntas_infantis: "perguntas_infantis.json",                 // novo: arte engraçada, monstros, etc.
+    personagens_fantasticos: "personagens_fantasticos.json",       // novo: 5 animais, duendes, bruxas, dragões, alienígenas, terror, misturas do folclore
     piadas: "piadas.json",
     ritmos_musicais: "ritmos_musicais.json",
     saudacoes: "saudacoes.json",
@@ -277,7 +283,7 @@
     }
     
     // ======================= RESPOSTAS INSTANTÂNEAS (PRIORIDADE TOTAL) =======================
-  function normalizar(texto) {
+ function normalizar(texto) {
     return texto.toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
@@ -291,15 +297,9 @@ function detectarTemaPrioritario(texto) {
     // =========================
     // SAUDAÇÕES
     // =========================
-
     if (
-        txt.includes("oi") ||
-        txt.includes("ola") ||
-        txt.includes("bom dia") ||
-        txt.includes("boa tarde") ||
-        txt.includes("boa noite") ||
-        txt.includes("oie") ||
-        txt === "hey"
+        txt.includes("oi") || txt.includes("ola") || txt.includes("bom dia") ||
+        txt.includes("boa tarde") || txt.includes("boa noite") || txt.includes("oie") || txt === "hey"
     ) {
         return "saudacoes";
     }
@@ -307,17 +307,10 @@ function detectarTemaPrioritario(texto) {
     // =========================
     // APOIO EMOCIONAL
     // =========================
-
     if (
-        txt.includes("triste") ||
-        txt.includes("ansioso") ||
-        txt.includes("medo") ||
-        txt.includes("raiva") ||
-        txt.includes("sozinho") ||
-        txt.includes("vergonha") ||
-        txt.includes("frustrado") ||
-        txt.includes("saudade") ||
-        txt.includes("ciumes")
+        txt.includes("triste") || txt.includes("ansioso") || txt.includes("medo") ||
+        txt.includes("raiva") || txt.includes("sozinho") || txt.includes("vergonha") ||
+        txt.includes("frustrado") || txt.includes("saudade") || txt.includes("ciumes")
     ) {
         return "apoio_emocional";
     }
@@ -325,195 +318,205 @@ function detectarTemaPrioritario(texto) {
     // =========================
     // PIADAS
     // =========================
-
-    if (
-        txt.includes("piada") ||
-        txt.includes("engracado") ||
-        txt.includes("engraçada")
-    ) {
+    if (txt.includes("piada") || txt.includes("engracado") || txt.includes("engraçada")) {
         return "piadas";
     }
 
     // =========================
     // CURIOSIDADES
     // =========================
-
-    if (
-        txt.includes("curiosidade") ||
-        txt.includes("sabia que")
-    ) {
+    if (txt.includes("curiosidade") || txt.includes("sabia que")) {
         return "curiosidades";
     }
 
     // =========================
-    // IMAGINAÇÃO
+    // CANTIGAS DE RODA (nova)
     // =========================
+    const cantigasPalavras = [
+        "ciranda", "capelinha de melão", "escravos de jó", "peixe vivo", "galinha do vizinho",
+        "borboletinha", "meu limão", "barata", "alecrim", "cai balão", "pirulito", "pombinha",
+        "terezinha", "indiozinhos", "essa rua", "cravo e rosa", "sapo não lava", "marcha soldado",
+        "tororó", "canoa virou", "sapocururu", "meu galinho", "marinheiro só", "pezinho",
+        "vai abóbora", "roda pião", "caranguejo", "mestre andré", "meu boi morreu", "tutu marambá",
+        "você gosta de mim", "vamos maninha", "valentim", "na bahia tem", "gatinha parda",
+        "balaio", "barraquinha", "boi barroso", "pobre cego", "são joão da rão"
+    ];
+    if (cantigasPalavras.some(p => txt.includes(p))) {
+        return "cantigas_de_roda";
+    }
 
-    if (
-        txt.includes("animal magico") ||
-        txt.includes("super heroi") ||
-        txt.includes("monstro") ||
-        txt.includes("criatura") ||
-        txt.includes("desenho facil") ||
-        txt.includes("arte maluca") ||
-        txt.includes("arte engraçada") ||
-        txt.includes("imaginacao") ||
-        txt.includes("imaginação")
-    ) {
+    // =========================
+    // LITERATURA (novo)
+    // =========================
+    const literaturaPalavras = [
+        "poema", "poesia", "verso", "estrofe", "métrica", "literatura",
+        "gênero literário", "narrativa", "personagem", "enredo", "narrador"
+    ];
+    if (literaturaPalavras.some(p => txt.includes(p))) {
+        return "literatura_conceitos";
+    }
+
+    // =========================
+    // IMAGINAÇÃO INFANTIL (já existia, mas reforço)
+    // =========================
+    const imaginacaoPalavras = [
+        "animal magico", "super heroi", "monstro", "criatura", "desenho facil",
+        "arte maluca", "arte engraçada", "imaginacao", "imaginação",
+        "coisa assustadora", "desenho engraçado", "cor diferente"
+    ];
+    if (imaginacaoPalavras.some(p => txt.includes(p))) {
         return "imaginacao_infantil";
     }
 
     // =========================
-    // TÉCNICAS
+    // PERSONAGENS FANTÁSTICOS (novo)
     // =========================
+    const fantasticosPalavras = [
+        "duende", "bruxa", "mago", "dragão", "alienígena", "fantasma",
+        "lobisomem", "cuca", "saci", "iara", "curupira", "boitatá", "boto",
+        "personagem fantástico", "criatura mágica", "ser mágico"
+    ];
+    if (fantasticosPalavras.some(p => txt.includes(p))) {
+        return "personagens_fantasticos";
+    }
 
-    if (
-        txt.includes("aquarela") ||
-        txt.includes("origami") ||
-        txt.includes("colagem") ||
-        txt.includes("mosaico") ||
-        txt.includes("gravura") ||
-        txt.includes("xilogravura") ||
-        txt.includes("stencil") ||
-        txt.includes("tecnica") ||
-        txt.includes("maneira de desenhar")
-    ) {
+    // =========================
+    // ARTES TÉCNICAS
+    // =========================
+    const tecnicasPalavras = [
+        "aquarela", "origami", "colagem", "mosaico", "gravura",
+        "xilogravura", "stencil", "tecnica", "maneira de desenhar"
+    ];
+    if (tecnicasPalavras.some(p => txt.includes(p))) {
         return "arte_tecnicas";
     }
 
-   // =========================
-// OBRAS MODERNISTAS
-// =========================
-
-if (
-    txt.includes("abaporu") ||
-    txt.includes("obra abaporu") ||
-    txt.includes("explique abaporu") ||
-    txt.includes("explique o abaporu") ||
-    txt.includes("operarios") ||
-    txt.includes("antropofagia") ||
-    txt.includes("a cuca")
-) {
-    return "obras_modernistas_brasileiras";
-}
-
-// =========================
-// ARTISTAS
-// =========================
-
-if (
-    txt.includes("tarsila") ||
-    txt.includes("portinari") ||
-    txt.includes("van gogh") ||
-    txt.includes("picasso") ||
-    txt.includes("artista") ||
-    txt.includes("pintor")
-) {
-    return "artistas";
-}
-// =========================
-// OBRAS FAMOSAS MUNDO
-// =========================
-
-if (
-    txt.includes("mona lisa") ||
-    txt.includes("noite estrelada") ||
-    txt.includes("guernica") ||
-    txt.includes("o beijo") ||
-    txt.includes("grande onda") ||
-    txt.includes("ultima ceia")
-) {
-    return "obras_famosas_mundo";
-}
     // =========================
-    // ARTISTAS
+    // OBRAS MODERNISTAS BRASILEIRAS
     // =========================
-
     if (
-        txt.includes("van gogh") ||
-        txt.includes("tarsila") ||
-        txt.includes("portinari") ||
-        txt.includes("picasso") ||
-        txt.includes("monet") ||
-        txt.includes("dali") ||
-        txt.includes("frida") ||
-        txt.includes("michelangelo") ||
-        txt.includes("da vinci") ||
-        txt.includes("duchamp") ||
-        txt.includes("gaudi") ||
-        txt.includes("artista") ||
-        txt.includes("pintor")
+        txt.includes("abaporu") || txt.includes("operarios") ||
+        txt.includes("antropofagia") || txt.includes("a cuca")
+    ) {
+        return "obras_modernistas_brasileiras";
+    }
+
+    // =========================
+    // ARTISTAS UNIVERSAIS (estrangeiros)
+    // =========================
+    const artistasUnivPalavras = [
+        "van gogh", "monet", "picasso", "dali", "frida", "michelangelo",
+        "da vinci", "duchamp", "gaudi", "kandinsky", "warhol", "kusama",
+        "rembrandt", "vermeer", "degas", "cezanne", "magritte", "klimt",
+        "munch", "matisse", "pollock", "haring", "banksy", "modigliani",
+        "okeeffe", "chagall", "klee", "lichtenstein", "botero", "basquiat"
+    ];
+    if (artistasUnivPalavras.some(p => txt.includes(p))) {
+        return "artistas_universais";
+    }
+
+    // =========================
+    // ARTISTAS BRASILEIROS E OUTROS (manter "artistas")
+    // =========================
+    if (
+        txt.includes("tarsila") || txt.includes("portinari") ||
+        txt.includes("di cavalcanti") || txt.includes("candido portinari") ||
+        txt.includes("artista") || txt.includes("pintor")
     ) {
         return "artistas";
     }
 
     // =========================
-    // OBRAS FAMOSAS MUNDO
+    // OBRAS FAMOSAS DO MUNDO
     // =========================
-
-    if (
-        txt.includes("mona lisa") ||
-        txt.includes("noite estrelada") ||
-        txt.includes("guernica") ||
-        txt.includes("o beijo") ||
-        txt.includes("grande onda")
-    ) {
+    const obrasPalavras = [
+        "mona lisa", "noite estrelada", "guernica", "o beijo", "grande onda",
+        "ultima ceia", "o grito", "persistência da memória"
+    ];
+    if (obrasPalavras.some(p => txt.includes(p))) {
         return "obras_famosas_mundo";
+    }
+
+    // =========================
+    // LUGARES DE ARTE (novo)
+    // =========================
+    const lugaresPalavras = [
+        "louvre", "moma", "masp", "inhotim", "acrópole", "coliseu",
+        "torre eiffel", "machu picchu", "sagrada família", "bienal"
+    ];
+    if (lugaresPalavras.some(p => txt.includes(p))) {
+        return "lugares_arte";
+    }
+
+    // =========================
+    // HISTÓRIA DA ARTE (novo)
+    // =========================
+    const historiaPalavras = [
+        "arte rupestre", "arte egípcia", "arte grega", "arte romana",
+        "arte medieval", "renascimento", "barroco", "impressionismo",
+        "modernismo", "cubismo", "surrealismo", "arte contemporânea"
+    ];
+    if (historiaPalavras.some(p => txt.includes(p))) {
+        return "historia_arte";
+    }
+
+    // =========================
+    // RITMOS MUSICAIS (novo)
+    // =========================
+    const ritmosPalavras = [
+        "samba", "forró", "frevo", "maracatu", "axé", "funk", "bossa nova",
+        "rock", "rap", "k-pop", "sertanejo", "pagode", "reggae", "pop",
+        "jazz", "blues", "hip hop", "música clássica", "eletrônica"
+    ];
+    if (ritmosPalavras.some(p => txt.includes(p))) {
+        return "ritmos_musicais";
     }
 
     // =========================
     // CULTURA INDÍGENA
     // =========================
-
     if (
-        txt.includes("indigena") ||
-        txt.includes("tupi") ||
-        txt.includes("grafismo") ||
-        txt.includes("cestaria") ||
-        txt.includes("aldeia") ||
-        txt.includes("pintura corporal")
+        txt.includes("indigena") || txt.includes("tupi") || txt.includes("grafismo") ||
+        txt.includes("cestaria") || txt.includes("aldeia") || txt.includes("pintura corporal")
     ) {
         return "cultura_indigena";
     }
 
     // =========================
-    // CULTURA AFRO
+    // CULTURA AFRO-BRASILEIRA
     // =========================
-
     if (
-        txt.includes("quilombo") ||
-        txt.includes("orixa") ||
-        txt.includes("cultura afro") ||
-        txt.includes("afro brasileira")
+        txt.includes("quilombo") || txt.includes("orixa") ||
+        txt.includes("cultura afro") || txt.includes("afro brasileira")
     ) {
         return "cultura_afro_brasileira";
     }
 
     // =========================
+    // CULTURA BRASILEIRA (cordel, repente, etc.) - novo
+    // =========================
+    const culturaBrPalavras = [
+        "cordel", "repente", "capoeira", "reisado", "boi bumbá",
+        "cacuriá", "pastoril", "quadrilha", "lavadeiras", "festa do divino"
+    ];
+    if (culturaBrPalavras.some(p => txt.includes(p))) {
+        return "cultura_brasileira";
+    }
+
+    // =========================
     // DANÇAS
     // =========================
-
-    if (
-        txt.includes("danca") ||
-        txt.includes("dança") ||
-        txt.includes("ballet") ||
-        txt.includes("coreografia") ||
-        txt.includes("frevo") ||
-        txt.includes("ciranda")
-    ) {
+    if (txt.includes("danca") || txt.includes("dança") || txt.includes("ballet") ||
+        txt.includes("coreografia") || txt.includes("frevo") || txt.includes("ciranda")) {
         return "dancas";
     }
 
     // =========================
-    // MÚSICA
+    // MÚSICA (conceitos gerais)
     // =========================
-
     if (
-        txt.includes("musica") ||
-        txt.includes("canção") ||
-        txt.includes("instrumento") ||
-        txt.includes("violao") ||
-        txt.includes("tambor")
+        txt.includes("musica") || txt.includes("canção") || txt.includes("instrumento") ||
+        txt.includes("violao") || txt.includes("tambor")
     ) {
         return "musica";
     }
@@ -521,119 +524,38 @@ if (
     // =========================
     // TEATRO
     // =========================
-
-    if (
-        txt.includes("teatro") ||
-        txt.includes("peca") ||
-        txt.includes("ator") ||
-        txt.includes("fantoche")
-    ) {
+    if (txt.includes("teatro") || txt.includes("peca") || txt.includes("ator") || txt.includes("fantoche")) {
         return "teatro";
     }
 
     // =========================
-    // FESTAS
+    // FESTAS BRASILEIRAS
     // =========================
-
-    if (
-        txt.includes("carnaval") ||
-        txt.includes("festa junina") ||
-        txt.includes("parintins")
-    ) {
+    if (txt.includes("carnaval") || txt.includes("festa junina") || txt.includes("parintins")) {
         return "festas_brasileiras";
     }
 
     // =========================
-    // ATIVIDADES
+    // ATIVIDADES ARTÍSTICAS
     // =========================
-
-    if (
-        txt.includes("atividade") ||
-        txt.includes("oficina") ||
-        txt.includes("brincadeira") ||
-        txt.includes("desafio")
-    ) {
+    if (txt.includes("atividade") || txt.includes("oficina") || txt.includes("brincadeira") || txt.includes("desafio")) {
         return "atividades_artisticas";
     }
 
     // =========================
     // ARTES VISUAIS
     // =========================
-
     const artesVisuaisKeywords = [
-        "cor primaria",
-        "cores primarias",
-        "cor secundaria",
-        "cores secundarias",
-        "linha",
-        "forma",
-        "textura",
-        "perspectiva",
-        "pintura",
-        "desenho",
-        "escultura",
-        "grafite",
-        "fotografia"
+        "cor primaria", "cores primarias", "cor secundaria", "cores secundarias",
+        "linha", "forma", "textura", "perspectiva", "pintura", "desenho",
+        "escultura", "grafite", "fotografia"
     ];
-
     if (artesVisuaisKeywords.some(kw => txt.includes(kw))) {
         return "artes_visuais";
     }
 
     return null;
-   
 }
-   function buscarResposta(pergunta, dados) {
-
-    const txt = normalizar(pergunta);
-
-    // =========================
-    // 1. PALAVRAS-CHAVE
-    // =========================
-
-    let resultado = dados.find(item =>
-        item.palavras_chave &&
-        item.palavras_chave.some(p =>
-            txt.includes(normalizar(p))
-        )
-    );
-
-    if (resultado) return resultado;
-
-    // =========================
-    // 2. OBRA
-    // =========================
-
-    resultado = dados.find(item =>
-        item.obra &&
-        txt.includes(normalizar(item.obra))
-    );
-
-    if (resultado) return resultado;
-
-    // =========================
-    // 3. ARTISTA
-    // =========================
-
-    resultado = dados.find(item =>
-        item.artista &&
-        txt.includes(normalizar(item.artista))
-    );
-
-    if (resultado) return resultado;
-
-    // =========================
-    // 4. AUTOR
-    // =========================
-
-    resultado = dados.find(item =>
-        item.autor &&
-        txt.includes(normalizar(item.autor))
-    );
-
-    if (resultado) return resultado;
-
-    return null;
 }
     
     // ======================= FUNÇÃO buscarEmJSON ATUALIZADA (NOVO MODELO) =======================
@@ -818,7 +740,7 @@ if (tema === "curiosidade" && dataStore.curiosidades) {
             }
         }
         
-        // Mapeamento tema -> chaves do dataStore
+     // Mapeamento tema -> chaves do dataStore
 let chavesBusca = [];
 
 if (tema === "arte") {
@@ -829,7 +751,9 @@ if (tema === "arte") {
         "artistas",
         "artistas_universais",
         "historia_arte",
-        "lugares_arte"
+        "lugares_arte",
+        "obras_famosas_mundo",
+        "obras_modernistas_brasileiras"
     ];
 }
 
@@ -838,6 +762,7 @@ else if (tema === "danca") {
         "dancas",
         "ritmos_musicais",
         "cultura_afro_brasileira",
+        "cultura_brasileira",
         "festas_brasileiras"
     ];
 }
@@ -847,7 +772,9 @@ else if (tema === "musica") {
         "musica",
         "ritmos_musicais",
         "cultura_afro_brasileira",
-        "festas_brasileiras"
+        "cultura_brasileira",
+        "festas_brasileiras",
+        "cantigas_de_roda"
     ];
 }
 
@@ -860,7 +787,10 @@ else if (tema === "teatro") {
 else if (tema === "folclore") {
     chavesBusca = [
         "folclore",
-        "imaginacao_infantil"
+        "imaginacao_infantil",
+        "personagens_fantasticos",
+        "cultura_brasileira",
+        "cantigas_de_roda"
     ];
 }
 
@@ -868,8 +798,10 @@ else if (tema === "festas") {
     chavesBusca = [
         "festas_brasileiras",
         "cultura_afro_brasileira",
+        "cultura_brasileira",
         "dancas",
-        "musica"
+        "musica",
+        "ritmos_musicais"
     ];
 }
 
@@ -877,7 +809,8 @@ else if (tema === "indigena") {
     chavesBusca = [
         "cultura_indigena",
         "artes_visuais",
-        "folclore"
+        "folclore",
+        "personagens_fantasticos"
     ];
 }
 
@@ -886,7 +819,8 @@ else if (tema === "afro") {
         "cultura_afro_brasileira",
         "musica",
         "dancas",
-        "festas_brasileiras"
+        "festas_brasileiras",
+        "ritmos_musicais"
     ];
 }
 
@@ -894,7 +828,8 @@ else if (tema === "atividades") {
     chavesBusca = [
         "atividades_artisticas",
         "arte_tecnicas",
-        "imaginacao_infantil"
+        "imaginacao_infantil",
+        "personagens_fantasticos"
     ];
 }
 
@@ -903,7 +838,9 @@ else if (tema === "artista") {
         "artistas",
         "artistas_universais",
         "arte_artista",
-        "historia_arte"
+        "historia_arte",
+        "obras_famosas_mundo",
+        "obras_modernistas_brasileiras"
     ];
 }
 
@@ -924,8 +861,10 @@ else if (tema === "saudacoes") {
 else if (tema === "imaginacao") {
     chavesBusca = [
         "imaginacao_infantil",
+        "personagens_fantasticos",
         "folclore",
-        "atividades_artisticas"
+        "atividades_artisticas",
+        "cantigas_de_roda"
     ];
 }
 
@@ -947,24 +886,49 @@ else if (tema === "piadas") {
     ];
 }
 
+else if (tema === "literatura") {
+    chavesBusca = [
+        "literatura_conceitos",
+        "cantigas_de_roda",
+        "imaginacao_infantil"
+    ];
+}
+
+else if (tema === "cantigas") {
+    chavesBusca = [
+        "cantigas_de_roda",
+        "musica",
+        "folclore"
+    ];
+}
+
+else if (tema === "personagens") {
+    chavesBusca = [
+        "personagens_fantasticos",
+        "folclore",
+        "imaginacao_infantil"
+    ];
+}
+
 else {
     chavesBusca = Object.keys(dataStore).filter(
         k =>
             k !== "piadas" &&
-            k !== "curiosidades"
+            k !== "curiosidades" &&
+            k !== "saudacoes"
     );
 }
-        
-        for (let chave of chavesBusca) {
-            const obj = dataStore[chave];
-            if (obj) {
-                const resposta = buscarEmJSON(obj, pergunta);
-                if (resposta && typeof resposta === "string" && resposta.trim().length > 0) {
-                    return resposta;
-                }
-            }
+
+for (let chave of chavesBusca) {
+    const obj = dataStore[chave];
+    if (obj) {
+        const resposta = buscarEmJSON(obj, pergunta);
+        if (resposta && typeof resposta === "string" && resposta.trim().length > 0) {
+            return resposta;
         }
-    // =========================
+    }
+}
+   // =========================
 // FALLBACK "O QUE É"
 // =========================
 
@@ -972,82 +936,248 @@ if (txt.includes("o que e") || txt.includes("o que é")) {
 
     // MÚSICA
     if (txt.includes("musica")) {
-
         const item = dataStore.musica?.o_que_e_musica;
-
-        if (item?.explicacao_infantil) {
-            return item.explicacao_infantil;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
         }
     }
 
     // DANÇA
-    if (
-        txt.includes("danca") ||
-        txt.includes("dança")
-    ) {
-
+    if (txt.includes("danca") || txt.includes("dança")) {
+        // Se existir "o_que_e_danca" no JSON dancas
         const item = dataStore.dancas?.o_que_e_danca;
-
-        if (item?.explicacao_infantil) {
-            return item.explicacao_infantil;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
         }
+        // Fallback: primeiro item genérico sobre dança
+        const primeiroItem = dataStore.dancas?.[Object.keys(dataStore.dancas)[0]];
+        if (primeiroItem?.inicio) return primeiroItem.inicio[0];
     }
 
     // TEATRO
     if (txt.includes("teatro")) {
-
         const item = dataStore.teatro?.o_que_e_teatro;
-
-        if (item?.explicacao_infantil) {
-            return item.explicacao_infantil;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
         }
     }
 
     // FOLCLORE
     if (txt.includes("folclore")) {
-
         const item = dataStore.folclore?.o_que_e_folclore;
-
-        if (item?.explicacao_infantil) {
-            return item.explicacao_infantil;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
         }
     }
 
-    // LINHA
+    // LITERATURA (novo)
+    if (txt.includes("literatura")) {
+        const item = dataStore.literatura_conceitos?.o_que_e_literatura;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("poema")) {
+        const item = dataStore.literatura_conceitos?.o_que_e_poema;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("poesia")) {
+        const item = dataStore.literatura_conceitos?.o_que_e_poesia;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("verso")) {
+        const item = dataStore.literatura_conceitos?.verso;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("estrofe")) {
+        const item = dataStore.literatura_conceitos?.estrofe;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+
+    // CANTIGAS DE RODA
+    if (txt.includes("cantiga") || txt.includes("cantiga de roda")) {
+        // Retorna uma explicação genérica ou a primeira cantiga
+        const primeiraCantiga = dataStore.cantigas_de_roda?.cantigas_de_roda?.[0];
+        if (primeiraCantiga?.inicio) {
+            return `Cantiga de roda é uma música tradicional cantada em roda, geralmente com coreografia. Exemplo: "${primeiraCantiga.titulo}" - ${primeiraCantiga.inicio[0]}`;
+        }
+    }
+
+    // PERSONAGENS FANTÁSTICOS
+    if (txt.includes("duende")) {
+        const item = dataStore.personagens_fantasticos?.duende_pimenta;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("bruxa")) {
+        const item = dataStore.personagens_fantasticos?.bruxa_Agatha_das_Ervas;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("mago")) {
+        const item = dataStore.personagens_fantasticos?.mago_Albus_dos_Desenhos;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("dragão") || txt.includes("dragao")) {
+        const item = dataStore.personagens_fantasticos?.drago_Chama_Azul;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("alien") || txt.includes("alienígena")) {
+        const item = dataStore.personagens_fantasticos?.alien_Glub;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+
+    // HISTÓRIA DA ARTE
+    if (txt.includes("renascimento")) {
+        const item = dataStore.historia_arte?.renascimento;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("barroco")) {
+        const item = dataStore.historia_arte?.barroco;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("impressionismo")) {
+        const item = dataStore.historia_arte?.impressionismo;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("cubismo")) {
+        const item = dataStore.historia_arte?.cubismo;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("surrealismo")) {
+        const item = dataStore.historia_arte?.surrealismo;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+
+    // RITMOS MUSICAIS
+    if (txt.includes("samba")) {
+        const item = dataStore.ritmos_musicais?.samba;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("forró") || txt.includes("forro")) {
+        const item = dataStore.ritmos_musicais?.forro;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("frevo")) {
+        const item = dataStore.ritmos_musicais?.frevo;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("bossa nova")) {
+        const item = dataStore.ritmos_musicais?.bossa_nova;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+
+    // LUGARES DE ARTE
+    if (txt.includes("louvre")) {
+        const item = dataStore.lugares_arte?.louvre;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("masp")) {
+        const item = dataStore.lugares_arte?.masp;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("inhotim")) {
+        const item = dataStore.lugares_arte?.inhotim;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+
+    // ELEMENTOS DAS ARTES VISUAIS
     if (txt.includes("linha")) {
-
-        const item =
-            dataStore.artes_visuais?.artes_visuais?.elementos_basicos?.linha;
-
-        if (item?.explicacao_infantil) {
-            return item.explicacao_infantil;
+        const item = dataStore.artes_visuais?.elementos_basicos?.linha;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
         }
     }
-
-    // PONTO
     if (txt.includes("ponto")) {
-
-        const item =
-            dataStore.artes_visuais?.artes_visuais?.elementos_basicos?.ponto;
-
-        if (item?.explicacao_infantil) {
-            return item.explicacao_infantil;
+        const item = dataStore.artes_visuais?.elementos_basicos?.ponto;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("forma")) {
+        const item = dataStore.artes_visuais?.elementos_basicos?.forma;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("textura")) {
+        const item = dataStore.artes_visuais?.elementos_basicos?.textura;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
         }
     }
 
-    // FORMA
-    if (txt.includes("forma")) {
+    // CULTURA AFRO-BRASILEIRA
+    if (txt.includes("cultura afro") || txt.includes("cultura afro-brasileira")) {
+        const item = dataStore.cultura_afro_brasileira?.o_que_e;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
 
-        const item =
-            dataStore.artes_visuais?.artes_visuais?.elementos_basicos?.forma;
+    // CULTURA INDÍGENA
+    if (txt.includes("cultura indígena") || txt.includes("cultura indigena")) {
+        const item = dataStore.cultura_indigena?.o_que_e;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
 
-        if (item?.explicacao_infantil) {
-            return item.explicacao_infantil;
+    // FESTAS BRASILEIRAS
+    if (txt.includes("festa junina")) {
+        const item = dataStore.festas_brasileiras?.festa_junina;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
+        }
+    }
+    if (txt.includes("carnaval")) {
+        const item = dataStore.festas_brasileiras?.carnaval;
+        if (item?.inicio && Array.isArray(item.inicio)) {
+            return item.inicio[0];
         }
     }
 
     return null;
-}
 }
        
     // ======================= FUNÇÃO RESPONDER (PRIORIDADE INSTANTÂNEA + IA FALLBACK) =======================
