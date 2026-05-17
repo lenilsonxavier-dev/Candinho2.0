@@ -1,0 +1,262 @@
+{
+  "cantigas_de_roda": [
+    {
+      "id": 1,
+      "titulo": "Ciranda, Cirandinha",
+      "letra": "Ciranda Cirandinha\nVamos todos cirandar\nVamos dar a meia volta\nVolta e meia vamos dar\n\nO Anel que tu me destes\nEra vidro e se quebrou\nO amor que tu me tinhas\nEra pouco e se acabou\n\nPor isso dona (nome da criança)\nFaz favor de entrar na roda\nDiga um verso bem bonito\nDiga adeus e vá embora",
+      "palavras_chave": ["ciranda", "cirandinha", "anel", "vidro", "roda", "verso"]
+    },
+    {
+      "id": 2,
+      "titulo": "Capelinha de Melão",
+      "letra": "Capelinha de melão\nÉ de São João\nÉ de cravo, é de rosa,\nÉ de manjericão\nSão João está dormindo\nNão acorda, não\nAcordai, acordai,\nAcordai, João!",
+      "palavras_chave": ["capelinha", "melão", "são joão", "cravo", "rosa", "manjericão"]
+    },
+    {
+      "id": 3,
+      "titulo": "Escravos de Jó",
+      "letra": "Escravos de Jó\nJogavam caxangá\nTira, bota, deixa ficar\nGuerreiros com guerreiros fazem zigue-zigue-zá\nGuerreiros com guerreiros fazem zigue-zigue-zá.",
+      "palavras_chave": ["escravos", "jó", "caxangá", "tira", "bota", "zigue-zigue-zá"]
+    },
+    {
+      "id": 4,
+      "titulo": "Peixe Vivo",
+      "letra": "Como pode o peixe vivo\nViver fora da água fria\nComo pode o peixe vivo\nViver fora da água fria\n\nComo poderei viver\nComo poderei viver\nSem a tua, sem a tua\nSem a tua companhia\nSem a tua, sem a tua\nSem a tua companhia\n\nOs pastores desta aldeia\nJá me fazem zombaria\nOs pastores desta aldeia\nJá me fazem zombaria\n\nPor me verem assim chorando\nPor me verem assim chorando\nSem a tua, sem a tua\nSem a tua companhia\nSem a tua, sem a tua\nSem a tua companhia",
+      "palavras_chave": ["peixe", "vivo", "água", "fria", "companhia", "pastores", "zombaria"]
+    },
+    {
+      "id": 5,
+      "titulo": "A Galinha do Vizinho",
+      "letra": "A galinha do vizinho\nBota ovo amarelinho\nBota um, bota dois, bota três,\nBota quatro, bota cinco, bota seis,\nBota sete, bota oito, bota nove,\nBota dez!",
+      "palavras_chave": ["galinha", "vizinho", "ovo", "amarelinho", "bota", "dez"]
+    },
+    {
+      "id": 6,
+      "titulo": "Borboletinha",
+      "letra": "Borboletinha tá na cozinha\nFazendo chocolate\nPara a madrinha\n\nPoti, poti\nPerna de pau\nOlho de vidro\nE nariz de pica-pau pau pau",
+      "palavras_chave": ["borboletinha", "cozinha", "chocolate", "madrinha", "poti", "pica-pau"]
+    },
+    {
+      "id": 7,
+      "titulo": "Meu Limão, Meu Limoeiro",
+      "letra": "Meu limão, meu limoeiro\nMeu pé de jacarandá\nUma vez, tindolelê\nOutra vez, tindolalá",
+      "palavras_chave": ["limão", "limoeiro", "jacarandá", "tindolelê", "tindolalá"]
+    },
+    {
+      "id": 8,
+      "titulo": "A Barata Diz que Tem",
+      "letra": "A Barata diz que tem sete saias de filó\nÉ mentira da barata, ela tem é uma só\nAh ra ra, iá ro ró, ela tem é uma só!\n\nA Barata diz que tem um sapato de veludo\nÉ mentira da barata, o pé dela é peludo\nAh ra ra, Iu ru ru, o pé dela é peludo!\n\nA Barata diz que tem uma cama de marfim\nÉ mentira da barata, ela tem é de capim\nAh ra ra, rim rim rim, ela tem é de capim\n\nA Barata diz que tem um anel de formatura\nÉ mentira da barata, ela tem é casca dura\nAh ra ra , iu ru ru, ela tem é casca dura\n\nA barata diz que vai viajar de avião\nÉ mentira da barata ela vai de caminhão\nAh ra ra , iu ru ru, ela vai de caminhão",
+      "palavras_chave": ["barata", "saias", "filó", "veludo", "marfim", "anel", "avião", "caminhão"]
+    },
+    {
+      "id": 9,
+      "titulo": "Alecrim",
+      "letra": "Alecrim, Alecrim dourado\nQue nasceu no campo\nSem ser semeado\nAlecrim, Alecrim dourado\nQue nasceu no campo\nSem ser semeado\n\nFoi meu amor\nQue me disse assim\nQue a flor do campo é o alecrim\nFoi meu amor\nQue me disse assim\nQue a flor do campo é o alecrim",
+      "palavras_chave": ["alecrim", "dourado", "campo", "semeado", "amor", "flor"]
+    },
+    {
+      "id": 10,
+      "titulo": "Cai, Cai Balão",
+      "letra": "Cai cai balão, cai cai balão\nNa rua do sabão\nNão Cai não, não cai não, não cai não\nCai aqui na minha mão!\n\nCai cai balão, cai cai balão\nAqui na minha mão\nNão vou lá, não vou lá, não vou lá\nTenho medo de apanhar!",
+      "palavras_chave": ["cai", "balão", "sabão", "mão", "medo", "apanhar"]
+    },
+    {
+      "id": 11,
+      "titulo": "Pirulito que Bate Bate",
+      "letra": "Pirulito que bate bate\nPirulito que já bateu\nQuem gosta de mim é ela\nQuem gosta dela sou eu\n\nPirulito que bate bate\nPirulito que já bateu\nA menina que eu gostava\nNão gostava como eu",
+      "palavras_chave": ["pirulito", "bate", "gosta", "menina"]
+    },
+    {
+      "id": 12,
+      "titulo": "Pombinha Branca",
+      "letra": "Pombinha branca o que está fazendo?\nLavando roupa pro casamento\nVou me lavar, vou me secar\nVou pra janela pra namorar\nPassou um moço de terno branco,\nChapéu de lado meu namorado\nMandei entrar, mandei sentar\nCuspiu no chão, limpa aí seu porcalhão",
+      "palavras_chave": ["pombinha", "branca", "roupa", "casamento", "janela", "namorado"]
+    },
+    {
+      "id": 13,
+      "titulo": "Terezinha de Jesus",
+      "letra": "Terezinha de Jesus deu uma queda\nFoi ao chão\nAcudiram três cavalheiros\nTodos de chapéu na mão\n\nO primeiro foi seu pai\nO segundo seu irmão\nO terceiro foi aquele\nQue a Tereza deu a mão\n\nTerezinha levantou-se\nLevantou-se lá do chão\nE sorrindo disse ao noivo\nEu te dou meu coração\n\nDa laranja quero um gomo\nDo limão quero um pedaço\nDa morena mais bonita\nQuero um beijo e um abraço",
+      "palavras_chave": ["terezinha", "jesus", "queda", "cavalheiros", "laranja", "limão", "abraço"]
+    },
+    {
+      "id": 14,
+      "titulo": "Indiozinhos",
+      "letra": "Um, dois, três indiozinhos\nQuatro, cinco, seis indiozinhos\nSete, oito, nove indiozinhos\nDez num pequeno bote\nIam navegando pelo rio abaixo\nQuando um jacaré se aproximou\nE o pequeno bote dos indiozinhos\nQuase, quase virou.",
+      "palavras_chave": ["indiozinhos", "bote", "rio", "jacaré", "virou"]
+    },
+    {
+      "id": 15,
+      "titulo": "Se Essa Rua Fosse Minha",
+      "letra": "Se essa rua\nSe essa rua fosse minha\nEu mandava\nEu mandava ladrilhar\nCom pedrinhas\nCom pedrinhas de brilhante\nPara o meu\nPara o meu amor passar\n\nNessa rua\nNessa rua tem um bosque\nQue se chama\nQue se chama solidão\nDentro dele\nDentro dele mora um anjo\nQue roubou\nQue roubou meu coração\n\nSe eu roubei\nSe eu roubei teu coração\nTu roubaste\nTu roubaste o meu também\nSe eu roubei\nSe eu roubei teu coração\nÉ porque\nÉ porque te quero bem",
+      "palavras_chave": ["rua", "minha", "ladrilhar", "brilhante", "amor", "bosque", "solidão", "anjo", "coração"]
+    },
+    {
+      "id": 16,
+      "titulo": "O Cravo e a Rosa",
+      "letra": "O cravo brigou com a rosa\nDebaixo de uma sacada\nO cravo saiu ferido\nE a rosa despedaçada\n\nO cravo ficou doente\nE a rosa foi visitar\nO cravo teve um desmaio\nE a rosa pôs-se a chorar\n\nA rosa fez serenata\nO cravo foi espiar\nE as flores fizeram festa\nPorque eles vão se casar",
+      "palavras_chave": ["cravo", "rosa", "brigou", "sacada", "doente", "casamento"]
+    },
+    {
+      "id": 17,
+      "titulo": "O Sapo",
+      "letra": "O sapo não lava o pé.\nNão lava porque não quer.\nEle mora lá na lagoa,\nE não lava o pé\nPorque não quer\nMas, que chulé!",
+      "palavras_chave": ["sapo", "lava", "pé", "lagoa", "chulé"]
+    },
+    {
+      "id": 18,
+      "titulo": "Marcha Soldado",
+      "letra": "Marcha Soldado\nCabeça de Papel\nSe não marchar direito\nVai preso pro quartel\n\nO quartel pegou fogo\nA polícia deu sinal\nAcorda acorda acorda\nA bandeira nacional",
+      "palavras_chave": ["marcha", "soldado", "cabeça", "papel", "quartel", "fogo", "bandeira"]
+    },
+    {
+      "id": 19,
+      "titulo": "Fui no Tororó",
+      "letra": "Fui no Tororó beber água não achei\nAchei linda Morena\nQue no Tororó deixei\nAproveita minha gente\nQue uma noite não é nada\nSe não dormir agora\nDormirá de madrugada\n\nOh, Dona Maria\nOh, Mariazinha, entra nesta roda\nOu ficarás sozinha!\n\nSozinha eu não fico\nNem hei de ficar!\nPor que eu tenho o Pedro\nPara ser o meu par!",
+      "palavras_chave": ["tororó", "água", "morena", "dona maria", "roda", "pedro"]
+    },
+    {
+      "id": 20,
+      "titulo": "Ai, Eu Entrei na Roda",
+      "letra": "Ai, eu entrei na roda\nAi, eu não sei como se dança\nAi, eu entrei na 'rodadança'\nAi, eu não sei dançar\n\nSete e sete são quatorze, com mais sete, vinte e um\nTenho sete namorados só posso casar com um\n\nNamorei um garotinho do colégio militar\nO diabo do garoto, só queria me beijar\n\nTodo mundo se admira da macaca fazer renda\nEu já vi uma perua ser caixeira de uma venda\n\nLá vai uma, lá vão duas, lá vão três pela terceira\nLá se vai o meu benzinho, no vapor da cachoeira\n\nEssa noite tive um sonho que chupava picolé\nAcordei de madrugada, chupando dedo do pé",
+      "palavras_chave": ["entrei", "roda", "dançar", "sete", "quatorze", "namorados", "militar", "macaca", "perua", "picolé"]
+    },
+    {
+      "id": 21,
+      "titulo": "A Canoa Virou",
+      "letra": "A canoa virou\nPor deixá-la virar\nFoi por causa da Maria\nQue não soube remar\n\nSe eu fosse um peixinho\nE soubesse nadar\nTirava a Maria\nDo fundo do mar\n\nA canoa virou\nPor deixá-la virar\nPorque se eu mergulho\nEu vou me molhar\n\nSe eu fosse um peixinho\nMas como eu não sou\nNão posso nadar\nE a canoa virou",
+      "palavras_chave": ["canoa", "virou", "maria", "remar", "peixinho", "nadar", "mar"]
+    },
+    {
+      "id": 22,
+      "titulo": "A Rosa Amarela",
+      "letra": "Olha a Rosa amarela, Rosa\nTão Formosa, tão bela, Rosa\nOlha a Rosa amarela, Rosa\nTão Formosa, tão bela, Rosa\n\nIá-iá meu lenço, ô Iá-iá\nPara me enxugar, ô Iá-iá\nEsta despedida, ô Iá-iá\nJá me fez chorar, ô Iá-iá (repete)",
+      "palavras_chave": ["rosa", "amarela", "formosa", "bela", "lenço", "enxugar", "despedida", "chorar"]
+    },
+    {
+      "id": 23,
+      "titulo": "Quem me Ensinou a Nadar",
+      "letra": "Quem me ensinou a nadar\nQuem me ensinou a nadar\n\nFoi, foi, marinheiro,\nFoi os peixinhos do mar\nFoi, foi, marinheiro,\nFoi os peixinhos do mar",
+      "palavras_chave": ["ensinou", "nadar", "marinheiro", "peixinhos", "mar"]
+    },
+    {
+      "id": 24,
+      "titulo": "Sapo-Cururu",
+      "letra": "Sapo-Cururu\nNa beira do rio\nQuando o sapo canta,\nÓ maninha,\nÉ que está com frio\n\nA mulher do sapo\nDeve estar lá dentro\nFazendo rendinha,\nÓ maninha,\nPara o casamento",
+      "palavras_chave": ["sapo-cururu", "beira", "rio", "canta", "frio", "rendinha", "casamento"]
+    },
+    {
+      "id": 25,
+      "titulo": "Meu Galinho",
+      "letra": "Há três noites que eu não durmo, o-lá-lá!\nPois perdi o meu galinho o-lá-lá!\nCoitadinho, o-lá-lá!\nPobrezinho, o-lá-lá!\nEu perdi lá no jardim.\n\nEle é branco e amarelo, o-lá-lá!\nTem a crista vermelhinha, o-lá-lá!\nBate as asas, o-lá-lá!\nAbre o bico, o-lá-lá!\nEle faz qui-ri-qui-qui!\n\nJá rodei em Mato Grosso, o-lá-lá!\nAmazonas e Pará, o-lá-lá!\nEncontrei, o-lá-lá!\nMeu galinho, o-lá-lá!\nNo sertão do Ceará.",
+      "palavras_chave": ["galinho", "durmo", "perdi", "jardim", "crista", "qui-ri-qui-qui", "mato grosso", "amazonas", "pará", "ceará"]
+    },
+    {
+      "id": 26,
+      "titulo": "Marinheiro só",
+      "letra": "Oi, marinheiro, marinheiro,\nMarinheiro só\nQuem te ensinou a navegar?\nMarinheiro só\nFoi o balanço do navio,\nMarinheiro só\nFoi o balanço do mar\nMarinheiro só.",
+      "palavras_chave": ["marinheiro", "só", "ensina", "navegar", "balanço", "navio", "mar"]
+    },
+    {
+      "id": 27,
+      "titulo": "Pezinho",
+      "letra": "Ai bota aqui\nAi bota aqui o seu pezinho\nSeu pezinho bem juntinho com o meu\nE depois não vá dizer\nQue você se arrependeu!",
+      "palavras_chave": ["pezinho", "bota", "juntinho", "arrependeu"]
+    },
+    {
+      "id": 28,
+      "titulo": "Vai abóbora",
+      "letra": "Vai abóbora vai melão de melão vai melancia\nVai jambo sinhá, vai jambo sinhá, vai doce, vai cocadinha\nQuem quiser aprender a dançar, vai na casa do Juquinha\nEle pula, ele dança, ele faz requebradinha.",
+      "palavras_chave": ["abóbora", "melão", "melancia", "jambo", "doce", "cocadinha", "juquinha", "requebradinha"]
+    },
+    {
+      "id": 29,
+      "titulo": "Roda pião",
+      "letra": "O Pião entrou na roda, ó pião!\nRoda pião, bambeia pião!\nSapateia no terreiro, ó pião!\nMostra a tua figura, ó pião!\nFaça uma cortesia, ó pião!\nAtira a tua fieira, ó pião!\nEntrega o chapéu ao outro, ó pião!",
+      "palavras_chave": ["pião", "roda", "bambeia", "sapateia", "terreiro", "cortesia", "fieira", "chapéu"]
+    },
+    {
+      "id": 30,
+      "titulo": "Caranguejo",
+      "letra": "Caranguejo não é peixe\nCaranguejo peixe é\nCaranguejo não é peixe\nNa vazante da maré.\nPalma, palma, palma,\nPé, pé, pé\nCaranguejo só é peixe, na vazante da maré!",
+      "palavras_chave": ["caranguejo", "peixe", "vazante", "maré", "palma", "pé"]
+    },
+    {
+      "id": 31,
+      "titulo": "Na loja do Mestre André",
+      "letra": "Foi na loja do Mestre André\nQue eu comprei um pianinho,\nPlim, plim, plim, um pianinho\nAi olé, ai olé!\nFoi na loja do Mestre André!\n\nFoi na loja do Mestre André\nQue eu comprei um violão,\nDão, dão, dão, um violão\nPlim, plim, plim, um pianinho\nAi olé, ai olé!\nFoi na loja do Mestre André!\n\nFoi na loja do Mestre André\nQue eu comprei uma flautinha,\nFlá, flá, flá, uma flautinha\nDão, dão, dão, um violão\nPlim, plim, plim, um pianinho\nAi olé, ai olé!\nFoi na loja do Mestre André!\n\nFoi na loja do Mestre André\nQue eu comprei um tamborzinho,\nDum, dum, dum, um tamborzinho\nFlá, flá, flá, uma flautinha\nDão, dão, dão, um violão\nPlim, plim, plim, um pianinho\nAi olé, ai olé!\nFoi na loja do Mestre André!",
+      "palavras_chave": ["mestre andré", "pianinho", "violão", "flautinha", "tamborzinho", "plim", "dão", "flá", "dum"]
+    },
+    {
+      "id": 32,
+      "titulo": "Meu boi morreu",
+      "letra": "O meu boi morreu\nO que será de mim\nMande buscar outro, oh Morena\nLá no Piauí\n\nO meu boi morreu\nO que será da vaca\nPinga com limão, oh Morena\nCura urucubaca.",
+      "palavras_chave": ["boi", "morreu", "morena", "piauí", "vaca", "pinga", "limão", "urucubaca"]
+    },
+    {
+      "id": 33,
+      "titulo": "Tutu Marambá",
+      "letra": "Tutu Marambá não venhas mais cá\nQue o pai do menino te manda matar\n\nDurma neném, que a Cuca logo vem\nPapai está na roça e Mamãezinha em Belém\n\nTutu Marambá não venhas mais cá\nQue o pai do menino te manda matar.",
+      "palavras_chave": ["tutu marambá", "pai", "matar", "durma", "neném", "cuca", "papai", "mamãezinha", "belém"]
+    },
+    {
+      "id": 34,
+      "titulo": "Você gosta de mim?",
+      "letra": "Você gosta de mim, ó menina?\nEu também de você, ó menina\nVou pedir a seu pai, ó menina,\nPara casar com você, ó menina\n\nSe ele disser que sim, ó menina,\nTratarei dos papéis, ó menina,\nSe ele disser que não, ó menina,\nMorrerei de paixão.",
+      "palavras_chave": ["gosta", "menina", "pai", "casar", "papéis", "paixão"]
+    },
+    {
+      "id": 35,
+      "titulo": "Vamos Maninha",
+      "letra": "Vamos Maninha vamos,\nLá na praia passear\nVamos ver a barca nova que do céu caiu do mar\n\nNossa Senhora está dentro,\nOs anjinhos a remar\nRema rema remador, que este barco é do Senhor\n\nO barquinho já vai longe\nE os anjinhos a remar\nRema rema remador, que este barco é do Senhor (repete)",
+      "palavras_chave": ["maninha", "praia", "barca", "céu", "mar", "nossa senhora", "anjinhos", "remador"]
+    },
+    {
+      "id": 36,
+      "titulo": "Que é de Valentim",
+      "letra": "Que é de Valentim ? Valentim Trás Trás\nQue é de Valentim ? É um bom rapaz\nQue é de Valentim ? Valentim sou eu!\nDeixa a moreninha, que esse par é meu!",
+      "palavras_chave": ["valentim", "trás", "bom rapaz", "moreninha", "par"]
+    },
+    {
+      "id": 37,
+      "titulo": "Na Bahia tem",
+      "letra": "Na Bahia tem, tem tem tem\nCoco de vintém, ô Ia-iá\nNa Bahia tem!\n\nNa beira da praia\nNa beira da praia\nEu vou, eu quero ver\nNa beira da praia,\nSó me caso com você\n\nNa beira da praia\nVocê diz que não, que não,\nVocê mesmo há de ser\n\nÁgua tanto deu na pedra,\nQue até fez amolecer,\nNa beira da praia.",
+      "palavras_chave": ["bahia", "coco", "vintém", "beira da praia", "caso", "pedra", "amolecer"]
+    },
+    {
+      "id": 38,
+      "titulo": "A gatinha parda",
+      "letra": "A gatinha parda\nA minha gatinha parda, que em Janeiro me fugiu\nOnde está minha gatinha,\nVocê sabe, você sabe, você viu?\n\nEu não vi sua gatinha, mas ouvi o seu miau\nQuem roubou sua gatinha\nFoi a bruxa, foi a bruxa pica-pau.",
+      "palavras_chave": ["gatinha", "parda", "janeiro", "fugiu", "miau", "bruxa", "pica-pau"]
+    },
+    {
+      "id": 39,
+      "titulo": "Balaio",
+      "letra": "Eu queria ser balaio\nBalaio eu queria ser\nPra ficar dependurado\nNa cintura de “ocê”\n\nBalaio meu bem, balaio sinhá\nBalaio do coração\nMoça que não tem balaio, sinhá\nBota a costura no chão\n\nEu mandei fazer balaio,\nPra guardar meu algodão\nBalaio saiu pequeno,\nNão quero balaio não\n\nBalaio meu bem,\nBalaio sinhá\nBalaio do coração\nMoça que não tem balaio, sinhá\nBota a costura no chão.",
+      "palavras_chave": ["balaio", "dependurado", "cintura", "coração", "costura", "algodão"]
+    },
+    {
+      "id": 40,
+      "titulo": "A barraquinha",
+      "letra": "Vem, vem, vem sinhazinha\nVem, vem para provar\nVem, vem, vem Sinhazinha\nNa barraquinha comprar\n\nPé de moleque queimado\nCana, aipim, batatinha\nÓ quanta coisa gostosa\nPara você Sinhazinha.",
+      "palavras_chave": ["barraquinha", "sinhazinha", "provar", "comprar", "pé de moleque", "cana", "aipim", "batatinha"]
+    },
+    {
+      "id": 41,
+      "titulo": "Boi Barroso",
+      "letra": "Eu mandei fazer um laço do couro do jacaré\nPra laçar o boi barroso, num cavalo pangaré\n\nMeu Boi Barroso, meu Boi Pitanga\nO teu lugar, ai, é lá na cana\nAdeus menina, eu vou me embora\nNão sou daqui,ai, sou lá de fora\n\nMeu bonito Boi Barroso, que eu já dava por perdido\nDeixando rastro na areia logo foi reconhecido.",
+      "palavras_chave": ["boi", "barroso", "laço", "jacaré", "cavalo", "pangaré", "pitanga", "cana", "adeus", "rastro"]
+    },
+    {
+      "id": 42,
+      "titulo": "O pobre cego",
+      "letra": "Minha Mãe acorde, de tanto dormir\nVenha ver o cego, Vida Minha, cantar e pedir\nSe ele canta e pede, de-lhe pão e vinho\nMande o pobre cego, Vida Minha, seguir seu caminho\nNão quero teu pão, nem também teu vinho\nQuero só que a minha vida, Vida Minha, me ensine o caminho\nAnda mais Aninha, mais um bocadinho,\nEu sou pobre cego, Vida Minha, não vejo o caminho.",
+      "palavras_chave": ["cego", "acorde", "dormir", "cantar", "pedir", "pão", "vinho", "caminho", "aninha"]
+    },
+    {
+      "id": 43,
+      "titulo": "São João da Rão",
+      "letra": "São João Da Ra Rão\nTem uma gaita-ra-rai-ta\nQue quando toca-ra-roca\nBate nela\n\nTodos os anja-ra-ran-jos\nTocam gaita-ra-rai-ta\nTocam gaita-ra-rai-ta\nAqui na terra\n\nMaria tu vais ao baile, tu “leva” o xale\nQue vai chover\nE depois de madrugada, toda molhada\nTu vais morrer\n\nMaria tu vais “casares”, eu vou te “dares”\nEu vou te “dares” os parabéns\nVou te “dartes” uma prenda\nSaia de renda e dois vinténs.",
+      "palavras_chave": ["são joão", "gaita", "anjo", "terra", "maria", "baile", "xale", "chover", "casares", "parabéns", "prenda", "renda", "vinténs"]
+    }
+  ]
+}
