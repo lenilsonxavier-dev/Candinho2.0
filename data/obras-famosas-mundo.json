@@ -1,156 +1,310 @@
-[
-  {
-    "obra": "Mona Lisa",
-    "artista": "Leonardo da Vinci",
-    "explicacao_candinho": "Oi, pequeno artista! Essa pintura ficou famosa pelo sorriso misterioso da mulher. Parece que ela está pensando em um segredo! Leonardo usou sombras suaves para deixar o rosto bem realista.",
-    "cores_principais": ["marrom", "verde", "bege"],
-    "tema": "Retrato"
+{
+  "mona_lisa": {
+    "tema": "obras_de_arte",
+    "subtema": "mona_lisa",
+    "palavras_chave": ["mona lisa", "leonardo da vinci", "retrato", "sorriso misterioso", "marrom", "verde", "bege"],
+    "inicio": ["Oi, pequeno artista! Essa pintura ficou famosa pelo sorriso misterioso da mulher 🎨"],
+    "explicacao_curta": ["Leonardo da Vinci usou sombras suaves para deixar o rosto bem realista."],
+    "explicacao_aprofundada": ["Parece que ela está pensando em um segredo! O sorriso muda de expressão dependendo do ângulo que você olha."],
+    "curiosidade": ["A Mona Lisa está guardada no museu do Louvre, em Paris 🖼️"],
+    "interacao": ["O que você acha que a Mona Lisa está pensando?"],
+    "atividade": ["Desenhe um rosto com um sorriso misterioso ✏️"],
+    "final": ["Um sorriso pode esconder muitos segredos 🌟"],
+    "emocao": "curiosidade",
+    "nivel": "leve"
   },
-  {
-    "obra": "A Noite Estrelada",
-    "artista": "Vincent van Gogh",
-    "explicacao_candinho": "Veja como o céu parece girar cheio de estrelas brilhantes! Van Gogh pintou a noite com muita emoção e pinceladas fortes para mostrar seus sentimentos.",
-    "cores_principais": ["azul", "amarelo", "preto"],
-    "tema": "Paisagem"
+  "noite_estrelada": {
+    "tema": "obras_de_arte",
+    "subtema": "noite_estrelada",
+    "palavras_chave": ["noite estrelada", "van gogh", "paisagem", "céu estrelado", "azul", "amarelo", "preto"],
+    "inicio": ["Veja como o céu parece girar cheio de estrelas brilhantes 🌌"],
+    "explicacao_curta": ["Van Gogh pintou a noite com muita emoção e pinceladas fortes."],
+    "explicacao_aprofundada": ["As pinceladas curvas mostram seus sentimentos e a energia que ele via no céu."],
+    "curiosidade": ["Van Gogh pintou essa obra enquanto estava em um hospital 🏥"],
+    "interacao": ["Se você pudesse pintar o céu, como ele seria?"],
+    "atividade": ["Faça espirais coloridas imitando as estrelas de Van Gogh 🎨"],
+    "final": ["O céu noturno pode ser cheio de movimento e emoção ✨"],
+    "emocao": "emoção",
+    "nivel": "leve"
   },
-  {
-    "obra": "A Última Ceia",
-    "artista": "Leonardo da Vinci",
-    "explicacao_candinho": "Essa obra mostra Jesus e seus amigos em um jantar importante. O artista organizou as pessoas de um jeito que parece quase uma fotografia.",
-    "cores_principais": ["marrom", "azul", "bege"],
-    "tema": "Religioso"
+  "ultima_ceia": {
+    "tema": "obras_de_arte",
+    "subtema": "ultima_ceia",
+    "palavras_chave": ["ultima ceia", "leonardo da vinci", "religioso", "jesus", "marrom", "azul", "bege"],
+    "inicio": ["Essa obra mostra Jesus e seus amigos em um jantar importante 🍞"],
+    "explicacao_curta": ["O artista organizou as pessoas de um jeito que parece quase uma fotografia."],
+    "explicacao_aprofundada": ["Cada pessoa tem uma reação diferente, mostrando surpresa, tristeza e conversa."],
+    "curiosidade": ["A Última Ceia é um mural gigante pintado em uma parede de igreja na Itália 🇮🇹"],
+    "interacao": ["O que você acha que Jesus está falando na cena?"],
+    "atividade": ["Desenhe uma mesa redonda com seus amigos e comidas 🖍️"],
+    "final": ["Um jantar pode guardar uma história importante 🌟"],
+    "emocao": "respeito",
+    "nivel": "leve"
   },
-  {
-    "obra": "Guernica",
-    "artista": "Pablo Picasso",
-    "explicacao_candinho": "Picasso pintou essa obra para mostrar a tristeza e o medo causados pela guerra. As formas parecem quebradas para mostrar o sofrimento das pessoas.",
-    "cores_principais": ["preto", "branco", "cinza"],
-    "tema": "Guerra"
+  "guernica": {
+    "tema": "obras_de_arte",
+    "subtema": "guernica",
+    "palavras_chave": ["guernica", "picasso", "guerra", "sofrimento", "preto", "branco", "cinza"],
+    "inicio": ["Picasso pintou essa obra para mostrar a tristeza e o medo causados pela guerra 🕊️"],
+    "explicacao_curta": ["As formas parecem quebradas para mostrar o sofrimento das pessoas."],
+    "explicacao_aprofundada": ["Ele usou apenas preto, branco e cinza para dar força e gravidade à cena."],
+    "curiosidade": ["Guernica é o nome de uma cidade espanhola que foi bombardeada 💣"],
+    "interacao": ["Como você mostraria a paz em um desenho?"],
+    "atividade": ["Desenhe um símbolo da paz usando formas simples ✏️"],
+    "final": ["A arte pode denunciar a violência e pedir paz 🌎"],
+    "emocao": "consciência",
+    "nivel": "leve"
   },
-  {
-    "obra": "O Grito",
-    "artista": "Edvard Munch",
-    "explicacao_candinho": "A pessoa da pintura parece assustada e preocupada. As cores fortes e o céu estranho ajudam a mostrar emoções intensas.",
-    "cores_principais": ["laranja", "azul", "vermelho"],
-    "tema": "Emoções"
+  "o_grito": {
+    "tema": "obras_de_arte",
+    "subtema": "o_grito",
+    "palavras_chave": ["o grito", "edvard munch", "medo", "emoção", "laranja", "azul", "vermelho"],
+    "inicio": ["A pessoa da pintura parece assustada e preocupada 😱"],
+    "explicacao_curta": ["As cores fortes e o céu estranho ajudam a mostrar emoções intensas."],
+    "explicacao_aprofundada": ["Munch quis mostrar como é sentir um pânico que vem de dentro."],
+    "curiosidade": ["Existem quatro versões dessa pintura feitas pelo artista 🎨"],
+    "interacao": ["O que te deixa assustado às vezes?"],
+    "atividade": ["Desenhe um rosto expressando medo ou surpresa 🎭"],
+    "final": ["Todos nós sentimos emoções fortes, e a arte ajuda a expressá-las 🌈"],
+    "emocao": "emoção",
+    "nivel": "leve"
   },
-  {
-    "obra": "A Criação de Adão",
-    "artista": "Michelangelo",
-    "explicacao_candinho": "Essa pintura famosa mostra Deus e Adão quase tocando os dedos. Parece um momento mágico cheio de energia.",
-    "cores_principais": ["bege", "verde", "rosa"],
-    "tema": "Religioso"
+  "criacao_de_adao": {
+    "tema": "obras_de_arte",
+    "subtema": "criacao_de_adao",
+    "palavras_chave": ["criação de adão", "michelangelo", "religioso", "deus", "bege", "verde", "rosa"],
+    "inicio": ["Essa pintura famosa mostra Deus e Adão quase tocando os dedos ✨"],
+    "explicacao_curta": ["Parece um momento mágico cheio de energia."],
+    "explicacao_aprofundada": ["O toque que não acontece representa a vida sendo passada para o primeiro homem."],
+    "curiosidade": ["A pintura fica no teto da Capela Sistina, no Vaticano ⛪"],
+    "interacao": ["Se você pudesse dar vida a algo com um toque, o que seria?"],
+    "atividade": ["Desenhe duas mãos quase se tocando ✏️"],
+    "final": ["A vida pode começar em um gesto simples 🌟"],
+    "emocao": "admiração",
+    "nivel": "leve"
   },
-  {
-    "obra": "O Nascimento de Vênus",
-    "artista": "Sandro Botticelli",
-    "explicacao_candinho": "Vênus aparece saindo do mar dentro de uma concha gigante. A pintura parece um conto encantado cheio de beleza.",
-    "cores_principais": ["azul", "rosa", "bege"],
-    "tema": "Mitologia"
+  "nascimento_de_venus": {
+    "tema": "obras_de_arte",
+    "subtema": "nascimento_de_venus",
+    "palavras_chave": ["nascimento de vênus", "botticelli", "mitologia", "concha", "azul", "rosa", "bege"],
+    "inicio": ["Vênus aparece saindo do mar dentro de uma concha gigante 🌊"],
+    "explicacao_curta": ["A pintura parece um conto encantado cheio de beleza."],
+    "explicacao_aprofundada": ["Os ventos empurram a concha e uma deusa espera com um manto para cobri-la."],
+    "curiosidade": ["Vênus é a deusa romana do amor e da beleza 💖"],
+    "interacao": ["Que criatura mágica sairia do mar na sua imaginação?"],
+    "atividade": ["Desenhe uma concha gigante com algo saindo de dentro 🐚"],
+    "final": ["O mar também pode ser o berço da arte ✨"],
+    "emocao": "encantamento",
+    "nivel": "leve"
   },
-  {
-    "obra": "Moça com Brinco de Pérola",
-    "artista": "Johannes Vermeer",
-    "explicacao_candinho": "A menina olha para nós como se quisesse conversar. O brinco brilhante chama muita atenção e deixa a pintura elegante.",
-    "cores_principais": ["azul", "preto", "bege"],
-    "tema": "Retrato"
+  "moca_com_brinco_de_perola": {
+    "tema": "obras_de_arte",
+    "subtema": "moca_com_brinco_de_perola",
+    "palavras_chave": ["moça com brinco de pérola", "vermeer", "retrato", "brinco", "azul", "preto", "bege"],
+    "inicio": ["A menina olha para nós como se quisesse conversar 👀"],
+    "explicacao_curta": ["O brinco brilhante chama muita atenção e deixa a pintura elegante."],
+    "explicacao_aprofundada": ["O fundo escuro faz a menina e seu brinco se destacarem."],
+    "curiosidade": ["Algumas pessoas chamam essa obra de 'Mona Lisa do Norte' 🌍"],
+    "interacao": ["Se você pudesse usar um brinco mágico, que poder ele teria?"],
+    "atividade": ["Desenhe um retrato com um acessório brilhante ✨"],
+    "final": ["Às vezes, um pequeno detalhe faz toda a diferença 🌟"],
+    "emocao": "curiosidade",
+    "nivel": "leve"
   },
-  {
-    "obra": "As Meninas",
-    "artista": "Diego Velázquez",
-    "explicacao_candinho": "Essa obra mostra uma princesa e várias pessoas ao seu redor. Parece que estamos dentro da sala junto com elas!",
-    "cores_principais": ["marrom", "cinza", "bege"],
-    "tema": "Vida na corte"
+  "as_meninas": {
+    "tema": "obras_de_arte",
+    "subtema": "as_meninas",
+    "palavras_chave": ["as meninas", "velázquez", "vida na corte", "princesa", "marrom", "cinza", "bege"],
+    "inicio": ["Essa obra mostra uma princesa e várias pessoas ao seu redor 👸"],
+    "explicacao_curta": ["Parece que estamos dentro da sala junto com elas!"],
+    "explicacao_aprofundada": ["O artista se incluiu na pintura, atrás de um cavalete, brincando com quem olha."],
+    "curiosidade": ["As meninas eram damas de companhia da princesa, daí o nome 👗"],
+    "interacao": ["Se você estivesse nessa cena, o que estaria fazendo?"],
+    "atividade": ["Desenhe uma sala com várias pessoas fazendo coisas diferentes 🖍️"],
+    "final": ["Um quadro pode parecer uma janela para outra época 🌟"],
+    "emocao": "curiosidade",
+    "nivel": "leve"
   },
-  {
-    "obra": "O Beijo",
-    "artista": "Gustav Klimt",
-    "explicacao_candinho": "O casal parece envolvido em um abraço dourado cheio de carinho. Klimt usou muito brilho e formas decorativas.",
-    "cores_principais": ["dourado", "amarelo", "marrom"],
-    "tema": "Amor"
+  "o_beijo": {
+    "tema": "obras_de_arte",
+    "subtema": "o_beijo",
+    "palavras_chave": ["o beijo", "klimt", "amor", "dourado", "dourado", "amarelo", "marrom"],
+    "inicio": ["O casal parece envolvido em um abraço dourado cheio de carinho 💛"],
+    "explicacao_curta": ["Klimt usou muito brilho e formas decorativas."],
+    "explicacao_aprofundada": ["Os padrões geométricos e o dourado representam a riqueza do sentimento amoroso."],
+    "curiosidade": ["Klimt usou folhas de ouro de verdade na pintura ✨"],
+    "interacao": ["Como você mostraria o amor em um desenho?"],
+    "atividade": ["Crie um abraço colorido usando formas douradas 🎨"],
+    "final": ["O amor pode ser brilhante e decorado 🌟"],
+    "emocao": "amor",
+    "nivel": "leve"
   },
-  {
-    "obra": "A Persistência da Memória",
-    "artista": "Salvador Dalí",
-    "explicacao_candinho": "Os relógios derretendo parecem um sonho estranho! Dalí queria mostrar que o tempo pode parecer diferente na nossa imaginação.",
-    "cores_principais": ["marrom", "azul", "amarelo"],
-    "tema": "Surrealismo"
+  "persistencia_da_memoria": {
+    "tema": "obras_de_arte",
+    "subtema": "persistencia_da_memoria",
+    "palavras_chave": ["persistência da memória", "dalí", "surrealismo", "relógios derretendo", "marrom", "azul", "amarelo"],
+    "inicio": ["Os relógios derretendo parecem um sonho estranho 🕰️"],
+    "explicacao_curta": ["Dalí queria mostrar que o tempo pode parecer diferente na nossa imaginação."],
+    "explicacao_aprofundada": ["Os relógios moles representam a forma como sentimos o tempo passar de maneira elástica."],
+    "curiosidade": ["Dalí se inspirou em queijo derretendo para criar essa ideia 🧀"],
+    "interacao": ["Se o tempo pudesse derreter, que horas você gostaria que ele parasse?"],
+    "atividade": ["Desenhe um relógio derretendo em um cenário estranho 🎨"],
+    "final": ["Na imaginação, tudo pode ser diferente 🌟"],
+    "emocao": "imaginação",
+    "nivel": "leve"
   },
-  {
-    "obra": "A Ronda Noturna",
-    "artista": "Rembrandt",
-    "explicacao_candinho": "Esse grupo de guardas parece pronto para sair em missão. A luz faz algumas pessoas brilharem mais do que outras.",
-    "cores_principais": ["preto", "marrom", "amarelo"],
-    "tema": "Cena histórica"
+  "ronda_noturna": {
+    "tema": "obras_de_arte",
+    "subtema": "ronda_noturna",
+    "palavras_chave": ["ronda noturna", "rembrandt", "cena histórica", "guarda", "preto", "marrom", "amarelo"],
+    "inicio": ["Esse grupo de guardas parece pronto para sair em missão 🛡️"],
+    "explicacao_curta": ["A luz faz algumas pessoas brilharem mais do que outras."],
+    "explicacao_aprofundada": ["Rembrandt usou luz e sombra para dar destaque aos líderes da patrulha."],
+    "curiosidade": ["Na verdade, a cena acontece durante o dia, mas a pintura escureceu com o tempo 🌞"],
+    "interacao": ["Que missão você acha que esses guardas vão cumprir?"],
+    "atividade": ["Desenhe um grupo de pessoas com uma luz forte iluminando o centro 🔦"],
+    "final": ["A luz pode contar quem é importante em uma história 🌟"],
+    "emocao": "mistério",
+    "nivel": "leve"
   },
-  {
-    "obra": "Impressão, Sol Nascente",
-    "artista": "Claude Monet",
-    "explicacao_candinho": "Monet pintou o nascer do sol com pinceladas rápidas e leves. A água parece se mover de verdade!",
-    "cores_principais": ["azul", "laranja", "cinza"],
-    "tema": "Natureza"
+  "impressao_sol_nascente": {
+    "tema": "obras_de_arte",
+    "subtema": "impressao_sol_nascente",
+    "palavras_chave": ["impressão sol nascente", "monet", "natureza", "amanhecer", "azul", "laranja", "cinza"],
+    "inicio": ["Monet pintou o nascer do sol com pinceladas rápidas e leves 🌅"],
+    "explicacao_curta": ["A água parece se mover de verdade!"],
+    "explicacao_aprofundada": ["Essa pintura deu nome ao movimento impressionista, que capturava as impressões do momento."],
+    "curiosidade": ["Monet pintou essa cena da janela do quarto onde estava hospedado 🪟"],
+    "interacao": ["Como é o nascer do sol onde você mora?"],
+    "atividade": ["Pinte um amanhecer usando pinceladas leves e rápidas 🎨"],
+    "final": ["A primeira luz do dia pode ser mágica ✨"],
+    "emocao": "calma",
+    "nivel": "leve"
   },
-  {
-    "obra": "A Liberdade Guiando o Povo",
-    "artista": "Eugène Delacroix",
-    "explicacao_candinho": "A mulher com a bandeira representa a liberdade liderando o povo. A pintura fala sobre coragem e luta.",
-    "cores_principais": ["vermelho", "azul", "marrom"],
-    "tema": "Revolução"
+  "liberdade_guiando_o_povo": {
+    "tema": "obras_de_arte",
+    "subtema": "liberdade_guiando_o_povo",
+    "palavras_chave": ["liberdade guiando o povo", "delacroix", "revolução", "bandeira", "vermelho", "azul", "marrom"],
+    "inicio": ["A mulher com a bandeira representa a liberdade liderando o povo 🚩"],
+    "explicacao_curta": ["A pintura fala sobre coragem e luta."],
+    "explicacao_aprofundada": ["Ela mostra pessoas comuns se unindo por um ideal, mesmo enfrentando perigos."],
+    "curiosidade": ["A mulher não é real, é uma ideia ganhando forma de mulher 💪"],
+    "interacao": ["O que você faria para lutar por algo que acredita?"],
+    "atividade": ["Desenhe uma pessoa erguendo um símbolo importante ✏️"],
+    "final": ["Às vezes, um símbolo pode unir muitas pessoas 🌟"],
+    "emocao": "coragem",
+    "nivel": "leve"
   },
-  {
-    "obra": "O Jardim das Delícias Terrenas",
-    "artista": "Hieronymus Bosch",
-    "explicacao_candinho": "Essa obra é cheia de criaturas estranhas e cenas curiosas. Parece um grande mundo de fantasia para explorar.",
-    "cores_principais": ["verde", "rosa", "azul"],
-    "tema": "Fantasia"
+  "jardim_das_delicias_terrenas": {
+    "tema": "obras_de_arte",
+    "subtema": "jardim_das_delicias_terrenas",
+    "palavras_chave": ["jardim das delícias terrenas", "bosch", "fantasia", "criaturas", "verde", "rosa", "azul"],
+    "inicio": ["Essa obra é cheia de criaturas estranhas e cenas curiosas 🐉"],
+    "explicacao_curta": ["Parece um grande mundo de fantasia para explorar."],
+    "explicacao_aprofundada": ["É um tríptico (três pinturas juntas) que mostra o paraíso, o mundo terreno e o inferno de forma imaginativa."],
+    "curiosidade": ["Bosch criou personagens que nunca existiram, misturando plantas, animais e objetos 🧙"],
+    "interacao": ["Que bicho estranho você inventaria?"],
+    "atividade": ["Misture três animais diferentes para criar uma criatura nova 🎨"],
+    "final": ["Na fantasia, tudo pode ser possível 🌈"],
+    "emocao": "imaginação",
+    "nivel": "leve"
   },
-  {
-    "obra": "American Gothic",
-    "artista": "Grant Wood",
-    "explicacao_candinho": "O homem e a mulher aparecem sérios em frente à casa. A pintura mostra a vida simples do campo nos Estados Unidos.",
-    "cores_principais": ["marrom", "verde", "cinza"],
-    "tema": "Vida rural"
+  "american_gothic": {
+    "tema": "obras_de_arte",
+    "subtema": "american_gothic",
+    "palavras_chave": ["american gothic", "grant wood", "vida rural", "sério", "marrom", "verde", "cinza"],
+    "inicio": ["O homem e a mulher aparecem sérios em frente à casa 🏠"],
+    "explicacao_curta": ["A pintura mostra a vida simples do campo nos Estados Unidos."],
+    "explicacao_aprofundada": ["Os rostos sérios e a roupa de trabalho representam a força e a honestidade dos agricultores."],
+    "curiosidade": ["As pessoas da pintura não eram um casal de verdade, eram a irmã do artista e seu dentista 👩‍🌾"],
+    "interacao": ["Qual é a expressão mais séria que você consegue fazer?"],
+    "atividade": ["Desenhe uma casa simples e uma pessoa com um objeto de trabalho ✏️"],
+    "final": ["O trabalho no campo também pode ser arte 🌾"],
+    "emocao": "respeito",
+    "nivel": "leve"
   },
-  {
-    "obra": "O Almoço dos Remadores",
-    "artista": "Pierre-Auguste Renoir",
-    "explicacao_candinho": "As pessoas estão conversando, comendo e se divertindo juntas. Renoir gostava de pintar momentos felizes.",
-    "cores_principais": ["azul", "branco", "laranja"],
-    "tema": "Amizade"
+  "almoco_dos_remadores": {
+    "tema": "obras_de_arte",
+    "subtema": "almoco_dos_remadores",
+    "palavras_chave": ["almoço dos remadores", "renoir", "amizade", "festa", "azul", "branco", "laranja"],
+    "inicio": ["As pessoas estão conversando, comendo e se divertindo juntas 🍽️"],
+    "explicacao_curta": ["Renoir gostava de pintar momentos felizes."],
+    "explicacao_aprofundada": ["A luz do sol atravessa as folhas e ilumina o rosto de cada pessoa de forma diferente."],
+    "curiosidade": ["Um dos homens na pintura é um amigo artista de Renoir 🖌️"],
+    "interacao": ["Quem você convidaria para um almoço divertido?"],
+    "atividade": ["Desenhe uma mesa redonda com amigos e comidas coloridas 🎨"],
+    "final": ["Compartilhar uma refeição é também compartilhar alegria ✨"],
+    "emocao": "alegria",
+    "nivel": "leve"
   },
-  {
-    "obra": "O Filho do Homem",
-    "artista": "René Magritte",
-    "explicacao_candinho": "O homem de chapéu tem uma maçã escondendo seu rosto. A obra brinca com mistério e imaginação.",
-    "cores_principais": ["verde", "cinza", "azul"],
-    "tema": "Mistério"
+  "filho_do_homem": {
+    "tema": "obras_de_arte",
+    "subtema": "filho_do_homem",
+    "palavras_chave": ["filho do homem", "magritte", "mistério", "maçã", "verde", "cinza", "azul"],
+    "inicio": ["O homem de chapéu tem uma maçã escondendo seu rosto 🍎"],
+    "explicacao_curta": ["A obra brinca com mistério e imaginação."],
+    "explicacao_aprofundada": ["A maçã esconde mas também revela, deixando a gente curioso sobre o que está por trás."],
+    "curiosidade": ["Magritte disse que a maçã representa a tentação que sempre está na frente dos nossos olhos 👀"],
+    "interacao": ["Se você pudesse esconder seu rosto com algo, o que seria?"],
+    "atividade": ["Desenhe uma figura com o rosto escondido por um objeto inventado 🖍️"],
+    "final": ["O que está escondido às vezes é mais interessante 🌟"],
+    "emocao": "mistério",
+    "nivel": "leve"
   },
-  {
-    "obra": "A Grande Onda de Kanagawa",
-    "artista": "Hokusai",
-    "explicacao_candinho": "A enorme onda parece pronta para engolir os barcos! O artista japonês mostrou a força impressionante da natureza.",
-    "cores_principais": ["azul", "branco", "bege"],
-    "tema": "Natureza"
+  "grande_onda_de_kanagawa": {
+    "tema": "obras_de_arte",
+    "subtema": "grande_onda_de_kanagawa",
+    "palavras_chave": ["grande onda de kanagawa", "hokusai", "natureza", "onda", "tsunami", "azul", "branco", "bege"],
+    "inicio": ["A enorme onda parece pronta para engolir os barcos 🌊"],
+    "explicacao_curta": ["O artista japonês mostrou a força impressionante da natureza."],
+    "explicacao_aprofundada": ["Os barcos são pequenos diante da onda, mostrando como os humanos são frágeis frente à natureza."],
+    "curiosidade": ["Essa imagem é uma gravura, não uma pintura, e foi reproduzida milhares de vezes 🖨️"],
+    "interacao": ["Você já viu o mar bem agitado?"],
+    "atividade": ["Desenhe uma grande onda usando curvas e espumas 🎨"],
+    "final": ["A natureza pode ser bela e poderosa ao mesmo tempo ✨"],
+    "emocao": "adrenalina",
+    "nivel": "leve"
   },
-  {
-    "obra": "No. 5, 1948",
-    "artista": "Jackson Pollock",
-    "explicacao_candinho": "Pollock jogava tinta na tela de um jeito livre e divertido. A pintura parece cheia de energia e movimento.",
-    "cores_principais": ["amarelo", "marrom", "preto"],
-    "tema": "Arte abstrata"
+  "no_5_1948": {
+    "tema": "obras_de_arte",
+    "subtema": "no_5_1948",
+    "palavras_chave": ["no 5 1948", "jackson pollock", "arte abstrata", "respingos", "amarelo", "marrom", "preto"],
+    "inicio": ["Pollock jogava tinta na tela de um jeito livre e divertido 🎨"],
+    "explicacao_curta": ["A pintura parece cheia de energia e movimento."],
+    "explicacao_aprofundada": ["Pollock colocava a tela no chão e andava ao redor pingando tinta, criando uma dança com as cores."],
+    "curiosidade": ["Essa é uma das pinturas mais caras já vendidas: mais de 140 milhões de dólares 💰"],
+    "interacao": ["Se você pudesse pintar com respingos, onde faria isso?"],
+    "atividade": ["Faça uma pintura com respingos e gotas de tinta (use um pincel para espirrar) 🎨"],
+    "final": ["A arte pode ser pura ação e diversão 🌪️"],
+    "emocao": "energia",
+    "nivel": "leve"
   },
-  {
-    "obra": "Castle and Sun",
-    "artista": "Paul Klee",
-    "explicacao_candinho": "Paul Klee usou formas geométricas coloridas para criar um castelo mágico. Parece um desenho feito com blocos de cor.",
-    "cores_principais": ["amarelo", "laranja", "vermelho"],
-    "tema": "Arte abstrata"
+  "castle_and_sun": {
+    "tema": "obras_de_arte",
+    "subtema": "castle_and_sun",
+    "palavras_chave": ["castle and sun", "paul klee", "arte abstrata", "castelo", "amarelo", "laranja", "vermelho"],
+    "inicio": ["Paul Klee usou formas geométricas coloridas para criar um castelo mágico 🏰"],
+    "explicacao_curta": ["Parece um desenho feito com blocos de cor."],
+    "explicacao_aprofundada": ["As formas retangulares e triângulos se encaixam como peças de um quebra-cabeça para formar o castelo."],
+    "curiosidade": ["Klee também era músico, e ele dizia que pintava como se compusesse música 🎵"],
+    "interacao": ["Como seria seu castelo dos sonhos feito de formas?"],
+    "atividade": ["Construa um castelo usando apenas quadrados, triângulos e círculos ✏️"],
+    "final": ["Formas simples podem criar mundos encantados 🌟"],
+    "emocao": "criatividade",
+    "nivel": "leve"
   },
-  {
-    "obra": "Nenúfares",
-    "artista": "Claude Monet",
-    "explicacao_candinho": "Monet pintou flores boiando na água com cores suaves e reflexos brilhantes. Parece um jardim calmo e tranquilo.",
-    "cores_principais": ["verde", "azul", "rosa"],
-    "tema": "Natureza"
+  "nenufares": {
+    "tema": "obras_de_arte",
+    "subtema": "nenufares",
+    "palavras_chave": ["nenúfares", "monet", "natureza", "flores", "água", "verde", "azul", "rosa"],
+    "inicio": ["Monet pintou flores boiando na água com cores suaves e reflexos brilhantes 💐"],
+    "explicacao_curta": ["Parece um jardim calmo e tranquilo."],
+    "explicacao_aprofundada": ["Monet pintou muitas versões do mesmo jardim de nenúfares para capturar a mudança da luz ao longo do dia."],
+    "curiosidade": ["Essas pinturas são enormes e ocupam salas inteiras em museus 🖼️"],
+    "interacao": ["O que você gosta de olhar quando quer ficar calmo?"],
+    "atividade": ["Desenhe flores na água com espelhos e reflexos 🎨"],
+    "final": ["A água pode refletir a beleza do céu e das flores ✨"],
+    "emocao": "calma",
+    "nivel": "leve"
   }
-]
+}
