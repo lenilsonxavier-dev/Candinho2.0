@@ -2,422 +2,140 @@
   "o_que_e_folclore": {
     "tema": "folclore",
     "subtema": "o_que_e_folclore",
-
-    "palavras_chave": [
-      "o que e folclore",
-      "definicao de folclore",
-      "cultura popular brasileira",
-      "folclore brasileiro"
-    ],
-
-    "inicio": [
-      "O folclore guarda histórias e tradições muito antigas do Brasil 🌿",
-      "As lendas e costumes populares fazem parte do folclore ✨"
-    ],
-
-    "explicacao_curta": [
-      "O folclore reúne histórias, músicas, brincadeiras e costumes de um povo."
-    ],
-
-    "explicacao_aprofundada": [
-      "O folclore é passado de geração em geração e ajuda a preservar a cultura brasileira."
-    ],
-
-    "curiosidade": [
-      "Cada região do Brasil possui personagens e histórias diferentes 🌎"
-    ],
-
-    "interacao": [
-      "Você conhece alguma lenda brasileira?",
-      "Qual personagem do folclore você acha mais curioso?"
-    ],
-
-    "atividade": [
-      "Desenhe seu personagem folclórico favorito 🎨"
-    ],
-
-    "final": [
-      "O folclore mantém vivas muitas histórias do Brasil 🌟"
-    ],
-
+    "palavras_chave": ["o que e folclore", "definicao de folclore", "cultura popular brasileira", "folclore brasileiro"],
+    "inicio": ["O folclore guarda histórias e tradições muito antigas do Brasil 🌿", "As lendas e costumes populares fazem parte do folclore ✨"],
+    "explicacao_curta": ["O folclore reúne histórias, músicas, brincadeiras e costumes de um povo."],
+    "explicacao_aprofundada": ["O folclore é passado de geração em geração e ajuda a preservar a cultura brasileira."],
+    "curiosidade": ["Cada região do Brasil possui personagens e histórias diferentes 🌎"],
+    "interacao": ["Você conhece alguma lenda brasileira?", "Qual personagem do folclore você acha mais curioso?"],
+    "atividade": ["Desenhe seu personagem folclórico favorito 🎨"],
+    "final": ["O folclore mantém vivas muitas histórias do Brasil 🌟"],
     "emocao": "curiosidade",
     "nivel": "leve"
   },
-
   "lendas": {
     "tema": "folclore",
     "subtema": "lendas",
-
-    "palavras_chave": [
-      "o que sao lendas",
-      "lendas brasileiras",
-      "historia de lenda"
-    ],
-
-    "inicio": [
-      "As lendas misturam imaginação e mistério ✨"
-    ],
-
-    "explicacao_curta": [
-      "As lendas são histórias populares passadas entre as pessoas."
-    ],
-
-    "explicacao_aprofundada": [
-      "Muitas lendas explicam fenômenos da natureza e ensinam valores importantes."
-    ],
-
-    "curiosidade": [
-      "Algumas lendas mudam um pouco dependendo da região do Brasil 🌎"
-    ],
-
-    "interacao": [
-      "Você gosta de histórias misteriosas?"
-    ],
-
-    "atividade": [
-      "Crie sua própria lenda brasileira ✏️"
-    ],
-
-    "final": [
-      "As lendas fazem a imaginação viajar 🌙"
-    ],
-
+    "palavras_chave": ["o que sao lendas", "lendas brasileiras", "historia de lenda"],
+    "inicio": ["As lendas misturam imaginação e mistério ✨"],
+    "explicacao_curta": ["As lendas são histórias populares passadas entre as pessoas."],
+    "explicacao_aprofundada": ["Muitas lendas explicam fenômenos da natureza e ensinam valores importantes."],
+    "curiosidade": ["Algumas lendas mudam um pouco dependendo da região do Brasil 🌎"],
+    "interacao": ["Você gosta de histórias misteriosas?"],
+    "atividade": ["Crie sua própria lenda brasileira ✏️"],
+    "final": ["As lendas fazem a imaginação viajar 🌙"],
     "emocao": "misterio",
     "nivel": "leve"
   },
-
   "saci_perere": {
     "tema": "folclore",
     "subtema": "saci_perere",
-
-    "palavras_chave": [
-      "saci",
-      "saci perere",
-      "menino de uma perna",
-      "gorro vermelho"
-    ],
-
-    "inicio": [
-      "O Saci é um dos personagens mais famosos do folclore brasileiro 🌪️"
-    ],
-
-    "explicacao_curta": [
-      "O Saci é um menino travesso de uma perna só que usa um gorro vermelho."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele gosta de fazer brincadeiras, esconder objetos e aparecer em redemoinhos."
-    ],
-
-    "curiosidade": [
-      "Dizem que o gorro vermelho do Saci possui poderes mágicos ✨"
-    ],
-
-    "interacao": [
-      "Que travessura você acha que o Saci faria?"
-    ],
-
-    "atividade": [
-      "Desenhe o Saci em meio a um redemoinho 🎨"
-    ],
-
-    "final": [
-      "O Saci mistura humor, mistério e imaginação 🌿"
-    ],
-
+    "palavras_chave": ["saci", "saci perere", "menino de uma perna", "gorro vermelho"],
+    "inicio": ["O Saci é um dos personagens mais famosos do folclore brasileiro 🌪️"],
+    "explicacao_curta": ["O Saci é um menino travesso de uma perna só que usa um gorro vermelho."],
+    "explicacao_aprofundada": ["Ele gosta de fazer brincadeiras, esconder objetos e aparecer em redemoinhos."],
+    "curiosidade": ["Dizem que o gorro vermelho do Saci possui poderes mágicos ✨"],
+    "interacao": ["Que travessura você acha que o Saci faria?"],
+    "atividade": ["Desenhe o Saci em meio a um redemoinho 🎨"],
+    "final": ["O Saci mistura humor, mistério e imaginação 🌿"],
     "emocao": "diversao",
     "nivel": "leve"
   },
-
   "curupira": {
     "tema": "folclore",
     "subtema": "curupira",
-
-    "palavras_chave": [
-      "curupira",
-      "protetor da floresta",
-      "pes virados",
-      "pés virados"
-    ],
-
-    "inicio": [
-      "O Curupira protege as florestas brasileiras 🌳"
-    ],
-
-    "explicacao_curta": [
-      "Ele possui os pés virados para trás para enganar caçadores."
-    ],
-
-    "explicacao_aprofundada": [
-      "O Curupira aparece nas histórias como defensor da natureza e dos animais."
-    ],
-
-    "curiosidade": [
-      "Os rastros invertidos confundem quem tenta seguir o Curupira 👣"
-    ],
-
-    "interacao": [
-      "Como você ajudaria a proteger uma floresta?"
-    ],
-
-    "atividade": [
-      "Crie um cartaz sobre cuidado com a natureza 🌿"
-    ],
-
-    "final": [
-      "O Curupira lembra a importância de cuidar do meio ambiente 🌎"
-    ],
-
+    "palavras_chave": ["curupira", "protetor da floresta", "pes virados", "pés virados"],
+    "inicio": ["O Curupira protege as florestas brasileiras 🌳"],
+    "explicacao_curta": ["Ele possui os pés virados para trás para enganar caçadores."],
+    "explicacao_aprofundada": ["O Curupira aparece nas histórias como defensor da natureza e dos animais."],
+    "curiosidade": ["Os rastros invertidos confundem quem tenta seguir o Curupira 👣"],
+    "interacao": ["Como você ajudaria a proteger uma floresta?"],
+    "atividade": ["Crie um cartaz sobre cuidado com a natureza 🌿"],
+    "final": ["O Curupira lembra a importância de cuidar do meio ambiente 🌎"],
     "emocao": "protecao",
     "nivel": "leve"
   },
-
   "iara": {
     "tema": "folclore",
     "subtema": "iara",
-
-    "palavras_chave": [
-      "iara",
-      "sereia",
-      "sereia do rio"
-    ],
-
-    "inicio": [
-      "A Iara vive nas águas dos rios brasileiros 🌊"
-    ],
-
-    "explicacao_curta": [
-      "Ela é conhecida como uma sereia encantadora."
-    ],
-
-    "explicacao_aprofundada": [
-      "A Iara aparece em histórias populares cantando perto dos rios e despertando curiosidade."
-    ],
-
-    "curiosidade": [
-      "O nome Iara significa 'senhora das águas' 💧"
-    ],
-
-    "interacao": [
-      "Você já imaginou ouvir um canto mágico vindo do rio?"
-    ],
-
-    "atividade": [
-      "Desenhe um rio encantado com a Iara 🎨"
-    ],
-
-    "final": [
-      "As águas dos rios guardam muitas histórias misteriosas ✨"
-    ],
-
+    "palavras_chave": ["iara", "sereia", "sereia do rio"],
+    "inicio": ["A Iara vive nas águas dos rios brasileiros 🌊"],
+    "explicacao_curta": ["Ela é conhecida como uma sereia encantadora."],
+    "explicacao_aprofundada": ["A Iara aparece em histórias populares cantando perto dos rios e despertando curiosidade."],
+    "curiosidade": ["O nome Iara significa 'senhora das águas' 💧"],
+    "interacao": ["Você já imaginou ouvir um canto mágico vindo do rio?"],
+    "atividade": ["Desenhe um rio encantado com a Iara 🎨"],
+    "final": ["As águas dos rios guardam muitas histórias misteriosas ✨"],
     "emocao": "encantamento",
     "nivel": "leve"
   },
-
   "boitata": {
     "tema": "folclore",
     "subtema": "boitata",
-
-    "palavras_chave": [
-      "boitata",
-      "cobra de fogo",
-      "luz na mata"
-    ],
-
-    "inicio": [
-      "O Boitatá parece uma chama brilhando na floresta 🔥"
-    ],
-
-    "explicacao_curta": [
-      "Ele é uma cobra de fogo ligada à proteção da natureza."
-    ],
-
-    "explicacao_aprofundada": [
-      "As histórias dizem que o Boitatá protege as matas e aparece iluminando a escuridão."
-    ],
-
-    "curiosidade": [
-      "Algumas pessoas relacionavam luzes misteriosas na mata ao Boitatá ✨"
-    ],
-
-    "interacao": [
-      "Você teria coragem de caminhar numa floresta iluminada pelo Boitatá?"
-    ],
-
-    "atividade": [
-      "Crie uma pintura usando cores quentes e brilhantes 🎨"
-    ],
-
-    "final": [
-      "O Boitatá lembra a força da natureza 🌿"
-    ],
-
+    "palavras_chave": ["boitata", "cobra de fogo", "luz na mata"],
+    "inicio": ["O Boitatá parece uma chama brilhando na floresta 🔥"],
+    "explicacao_curta": ["Ele é uma cobra de fogo ligada à proteção da natureza."],
+    "explicacao_aprofundada": ["As histórias dizem que o Boitatá protege as matas e aparece iluminando a escuridão."],
+    "curiosidade": ["Algumas pessoas relacionavam luzes misteriosas na mata ao Boitatá ✨"],
+    "interacao": ["Você teria coragem de caminhar numa floresta iluminada pelo Boitatá?"],
+    "atividade": ["Crie uma pintura usando cores quentes e brilhantes 🎨"],
+    "final": ["O Boitatá lembra a força da natureza 🌿"],
     "emocao": "misterio",
     "nivel": "leve"
   },
-
   "mula_sem_cabeca": {
     "tema": "folclore",
     "subtema": "mula_sem_cabeca",
-
-    "palavras_chave": [
-      "mula sem cabeca",
-      "mula de fogo"
-    ],
-
-    "inicio": [
-      "A Mula sem Cabeça aparece em histórias cheias de mistério 🌙"
-    ],
-
-    "explicacao_curta": [
-      "Ela corre soltando fogo pelo pescoço."
-    ],
-
-    "explicacao_aprofundada": [
-      "Essa personagem faz parte das lendas populares contadas há muitos anos no Brasil."
-    ],
-
-    "curiosidade": [
-      "Muitas histórias da Mula sem Cabeça acontecem durante a noite 🌌"
-    ],
-
-    "interacao": [
-      "Você gosta de histórias misteriosas?"
-    ],
-
-    "atividade": [
-      "Desenhe uma noite cheia de mistério ✏️"
-    ],
-
-    "final": [
-      "As lendas deixam o folclore cheio de imaginação ✨"
-    ],
-
+    "palavras_chave": ["mula sem cabeca", "mula de fogo"],
+    "inicio": ["A Mula sem Cabeça aparece em histórias cheias de mistério 🌙"],
+    "explicacao_curta": ["Ela corre soltando fogo pelo pescoço."],
+    "explicacao_aprofundada": ["Essa personagem faz parte das lendas populares contadas há muitos anos no Brasil."],
+    "curiosidade": ["Muitas histórias da Mula sem Cabeça acontecem durante a noite 🌌"],
+    "interacao": ["Você gosta de histórias misteriosas?"],
+    "atividade": ["Desenhe uma noite cheia de mistério ✏️"],
+    "final": ["As lendas deixam o folclore cheio de imaginação ✨"],
     "emocao": "misterio",
     "nivel": "leve"
   },
-
   "boto_cor_de_rosa": {
     "tema": "folclore",
     "subtema": "boto_cor_de_rosa",
-
-    "palavras_chave": [
-      "boto",
-      "boto cor de rosa",
-      "rapaz elegante do rio"
-    ],
-
-    "inicio": [
-      "O Boto cor-de-rosa vive nas águas da Amazônia 🌊"
-    ],
-
-    "explicacao_curta": [
-      "Nas lendas, ele se transforma em um rapaz elegante."
-    ],
-
-    "explicacao_aprofundada": [
-      "O Boto participa de festas e depois retorna para o rio antes do amanhecer."
-    ],
-
-    "curiosidade": [
-      "O boto cor-de-rosa existe de verdade nos rios amazônicos 🐬"
-    ],
-
-    "interacao": [
-      "Você já viu fotos de um boto amazônico?"
-    ],
-
-    "atividade": [
-      "Desenhe o encontro entre o rio e a floresta 🎨"
-    ],
-
-    "final": [
-      "Os rios amazônicos inspiram histórias incríveis 🌿"
-    ],
-
+    "palavras_chave": ["boto", "boto cor de rosa", "rapaz elegante do rio"],
+    "inicio": ["O Boto cor-de-rosa vive nas águas da Amazônia 🌊"],
+    "explicacao_curta": ["Nas lendas, ele se transforma em um rapaz elegante."],
+    "explicacao_aprofundada": ["O Boto participa de festas e depois retorna para o rio antes do amanhecer."],
+    "curiosidade": ["O boto cor-de-rosa existe de verdade nos rios amazônicos 🐬"],
+    "interacao": ["Você já viu fotos de um boto amazônico?"],
+    "atividade": ["Desenhe o encontro entre o rio e a floresta 🎨"],
+    "final": ["Os rios amazônicos inspiram histórias incríveis 🌿"],
     "emocao": "encantamento",
     "nivel": "leve"
   },
-
   "cuca": {
     "tema": "folclore",
     "subtema": "cuca",
-
-    "palavras_chave": [
-      "cuca",
-      "bruxa cuca"
-    ],
-
-    "inicio": [
-      "A Cuca aparece em muitas histórias populares brasileiras 🐊"
-    ],
-
-    "explicacao_curta": [
-      "Ela é uma personagem misteriosa usada em histórias e cantigas."
-    ],
-
-    "explicacao_aprofundada": [
-      "A Cuca ficou conhecida em livros, músicas e programas infantis."
-    ],
-
-    "curiosidade": [
-      "A música da Cuca é famosa em várias regiões do Brasil 🎵"
-    ],
-
-    "interacao": [
-      "Você já ouviu alguma cantiga sobre a Cuca?"
-    ],
-
-    "atividade": [
-      "Crie sua própria personagem folclórica ✏️"
-    ],
-
-    "final": [
-      "As histórias populares fazem parte da cultura brasileira 🌟"
-    ],
-
+    "palavras_chave": ["cuca", "bruxa cuca"],
+    "inicio": ["A Cuca aparece em muitas histórias populares brasileiras 🐊"],
+    "explicacao_curta": ["Ela é uma personagem misteriosa usada em histórias e cantigas."],
+    "explicacao_aprofundada": ["A Cuca ficou conhecida em livros, músicas e programas infantis."],
+    "curiosidade": ["A música da Cuca é famosa em várias regiões do Brasil 🎵"],
+    "interacao": ["Você já ouviu alguma cantiga sobre a Cuca?"],
+    "atividade": ["Crie sua própria personagem folclórica ✏️"],
+    "final": ["As histórias populares fazem parte da cultura brasileira 🌟"],
     "emocao": "misterio",
     "nivel": "leve"
   },
-
   "lobisomem": {
     "tema": "folclore",
     "subtema": "lobisomem",
-
-    "palavras_chave": [
-      "lobisomem",
-      "homem lobo",
-      "lua cheia"
-    ],
-
-    "inicio": [
-      "O Lobisomem aparece em histórias misteriosas de lua cheia 🌕"
-    ],
-
-    "explicacao_curta": [
-      "Ele é um personagem que se transforma em lobo."
-    ],
-
-    "explicacao_aprofundada": [
-      "As histórias do Lobisomem existem em vários lugares do mundo e ganharam versões brasileiras."
-    ],
-
-    "curiosidade": [
-      "A lua cheia sempre aparece nas histórias de Lobisomem 🌕"
-    ],
-
-    "interacao": [
-      "Você prefere histórias engraçadas ou misteriosas?"
-    ],
-
-    "atividade": [
-      "Desenhe uma floresta iluminada pela lua ✨"
-    ],
-
-    "final": [
-      "As lendas ajudam a imaginação a ganhar vida 🌙"
-    ],
-
+    "palavras_chave": ["lobisomem", "homem lobo", "lua cheia"],
+    "inicio": ["O Lobisomem aparece em histórias misteriosas de lua cheia 🌕"],
+    "explicacao_curta": ["Ele é um personagem que se transforma em lobo."],
+    "explicacao_aprofundada": ["As histórias do Lobisomem existem em vários lugares do mundo e ganharam versões brasileiras."],
+    "curiosidade": ["A lua cheia sempre aparece nas histórias de Lobisomem 🌕"],
+    "interacao": ["Você prefere histórias engraçadas ou misteriosas?"],
+    "atividade": ["Desenhe uma floresta iluminada pela lua ✨"],
+    "final": ["As lendas ajudam a imaginação a ganhar vida 🌙"],
     "emocao": "misterio",
     "nivel": "leve"
   }
