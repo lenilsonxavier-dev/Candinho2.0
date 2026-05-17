@@ -2,802 +2,267 @@
   "samba": {
     "tema": "ritmos_musicais",
     "subtema": "samba",
-
-    "palavras_chave": [
-      "samba",
-      "ritmo de samba",
-      "musica de samba",
-      "genero samba"
-    ],
-
-    "inicio": [
-      "O samba é um dos ritmos mais famosos do Brasil 🥁"
-    ],
-
-    "explicacao_curta": [
-      "O samba possui ritmo alegre e cheio de energia."
-    ],
-
-    "explicacao_aprofundada": [
-      "Ele está presente em festas, rodas de música e no carnaval brasileiro."
-    ],
-
-    "curiosidade": [
-      "O samba nasceu da mistura de influências africanas e brasileiras ✨"
-    ],
-
-    "interacao": [
-      "Você consegue acompanhar um ritmo batendo palmas?"
-    ],
-
-    "atividade": [
-      "Crie um ritmo usando mesa, palmas e pés 🥁"
-    ],
-
-    "final": [
-      "O samba espalha alegria e movimento 🌈"
-    ],
-
+    "palavras_chave": ["samba", "ritmo de samba", "musica de samba", "genero samba"],
+    "inicio": ["O samba é um dos ritmos mais famosos do Brasil 🥁"],
+    "explicacao_curta": ["O samba possui ritmo alegre e cheio de energia."],
+    "explicacao_aprofundada": ["Ele está presente em festas, rodas de música e no carnaval brasileiro."],
+    "curiosidade": ["O samba nasceu da mistura de influências africanas e brasileiras ✨"],
+    "interacao": ["Você consegue acompanhar um ritmo batendo palmas?"],
+    "atividade": ["Crie um ritmo usando mesa, palmas e pés 🥁"],
+    "final": ["O samba espalha alegria e movimento 🌈"],
     "emocao": "animacao",
     "nivel": "leve"
   },
-
   "forro": {
     "tema": "ritmos_musicais",
     "subtema": "forro",
-
-    "palavras_chave": [
-      "forro",
-      "ritmo forro",
-      "musica nordestina forro",
-      "forro musica"
-    ],
-
-    "inicio": [
-      "O forró traz sons animados do Nordeste brasileiro 🌵"
-    ],
-
-    "explicacao_curta": [
-      "O forró é dançado em pares e possui muito ritmo."
-    ],
-
-    "explicacao_aprofundada": [
-      "A sanfona, a zabumba e o triângulo são instrumentos importantes no forró."
-    ],
-
-    "curiosidade": [
-      "As festas juninas costumam ter muito forró 🎉"
-    ],
-
-    "interacao": [
-      "Você gostaria de aprender passos de forró?"
-    ],
-
-    "atividade": [
-      "Desenhe instrumentos usados no forró 🎨"
-    ],
-
-    "final": [
-      "O forró mistura música, dança e tradição 🌟"
-    ],
-
+    "palavras_chave": ["forro", "ritmo forro", "musica nordestina forro", "forro musica"],
+    "inicio": ["O forró traz sons animados do Nordeste brasileiro 🌵"],
+    "explicacao_curta": ["O forró é dançado em pares e possui muito ritmo."],
+    "explicacao_aprofundada": ["A sanfona, a zabumba e o triângulo são instrumentos importantes no forró."],
+    "curiosidade": ["As festas juninas costumam ter muito forró 🎉"],
+    "interacao": ["Você gostaria de aprender passos de forró?"],
+    "atividade": ["Desenhe instrumentos usados no forró 🎨"],
+    "final": ["O forró mistura música, dança e tradição 🌟"],
     "emocao": "alegria",
     "nivel": "leve"
   },
-
   "frevo": {
     "tema": "ritmos_musicais",
     "subtema": "frevo",
-
-    "palavras_chave": [
-      "frevo",
-      "ritmo frevo",
-      "musica frevo pernambuco"
-    ],
-
-    "inicio": [
-      "O frevo é rápido e cheio de energia 🎺"
-    ],
-
-    "explicacao_curta": [
-      "Ele mistura música animada e dança com muitos movimentos."
-    ],
-
-    "explicacao_aprofundada": [
-      "O frevo é muito conhecido no carnaval de Pernambuco."
-    ],
-
-    "curiosidade": [
-      "As sombrinhas coloridas fazem parte do frevo 🌈"
-    ],
-
-    "interacao": [
-      "Você conseguiria dançar bem rápido acompanhando uma música?"
-    ],
-
-    "atividade": [
-      "Crie uma mini sombrinha colorida ✂️"
-    ],
-
-    "final": [
-      "O frevo transforma música em explosão de alegria ✨"
-    ],
-
+    "palavras_chave": ["frevo", "ritmo frevo", "musica frevo pernambuco"],
+    "inicio": ["O frevo é rápido e cheio de energia 🎺"],
+    "explicacao_curta": ["Ele mistura música animada e dança com muitos movimentos."],
+    "explicacao_aprofundada": ["O frevo é muito conhecido no carnaval de Pernambuco."],
+    "curiosidade": ["As sombrinhas coloridas fazem parte do frevo 🌈"],
+    "interacao": ["Você conseguiria dançar bem rápido acompanhando uma música?"],
+    "atividade": ["Crie uma mini sombrinha colorida ✂️"],
+    "final": ["O frevo transforma música em explosão de alegria ✨"],
     "emocao": "energia",
     "nivel": "leve"
   },
-
   "maracatu": {
     "tema": "ritmos_musicais",
     "subtema": "maracatu",
-
-    "palavras_chave": [
-      "maracatu",
-      "ritmo maracatu",
-      "musica afro brasileira maracatu"
-    ],
-
-    "inicio": [
-      "O maracatu possui tambores fortes e marcantes 🥁"
-    ],
-
-    "explicacao_curta": [
-      "Esse ritmo faz parte da cultura afro-brasileira."
-    ],
-
-    "explicacao_aprofundada": [
-      "O maracatu mistura música, dança e cortejos tradicionais."
-    ],
-
-    "curiosidade": [
-      "Os tambores criam batidas poderosas e vibrantes 🔥"
-    ],
-
-    "interacao": [
-      "Você gosta de músicas com batidas fortes?"
-    ],
-
-    "atividade": [
-      "Crie ritmos usando objetos recicláveis ♻️"
-    ],
-
-    "final": [
-      "O maracatu carrega tradição e ritmo 🌍"
-    ],
-
+    "palavras_chave": ["maracatu", "ritmo maracatu", "musica afro brasileira maracatu"],
+    "inicio": ["O maracatu possui tambores fortes e marcantes 🥁"],
+    "explicacao_curta": ["Esse ritmo faz parte da cultura afro-brasileira."],
+    "explicacao_aprofundada": ["O maracatu mistura música, dança e cortejos tradicionais."],
+    "curiosidade": ["Os tambores criam batidas poderosas e vibrantes 🔥"],
+    "interacao": ["Você gosta de músicas com batidas fortes?"],
+    "atividade": ["Crie ritmos usando objetos recicláveis ♻️"],
+    "final": ["O maracatu carrega tradição e ritmo 🌍"],
     "emocao": "forca",
     "nivel": "leve"
   },
-
   "axe": {
     "tema": "ritmos_musicais",
     "subtema": "axe",
-
-    "palavras_chave": [
-      "axe",
-      "ritmo axe",
-      "musica baiana axe"
-    ],
-
-    "inicio": [
-      "O axé é cheio de dança e animação 🌞"
-    ],
-
-    "explicacao_curta": [
-      "Esse ritmo nasceu na Bahia e mistura vários estilos."
-    ],
-
-    "explicacao_aprofundada": [
-      "O axé costuma aparecer em festas, carnavais e apresentações cheias de movimento."
-    ],
-
-    "curiosidade": [
-      "Muitos trios elétricos tocam músicas de axé 🎶"
-    ],
-
-    "interacao": [
-      "Qual música deixa você com vontade de dançar?"
-    ],
-
-    "atividade": [
-      "Crie passos animados acompanhando uma música 🎵"
-    ],
-
-    "final": [
-      "O axé espalha ritmo e alegria 🌈"
-    ],
-
+    "palavras_chave": ["axe", "ritmo axe", "musica baiana axe"],
+    "inicio": ["O axé é cheio de dança e animação 🌞"],
+    "explicacao_curta": ["Esse ritmo nasceu na Bahia e mistura vários estilos."],
+    "explicacao_aprofundada": ["O axé costuma aparecer em festas, carnavais e apresentações cheias de movimento."],
+    "curiosidade": ["Muitos trios elétricos tocam músicas de axé 🎶"],
+    "interacao": ["Qual música deixa você com vontade de dançar?"],
+    "atividade": ["Crie passos animados acompanhando uma música 🎵"],
+    "final": ["O axé espalha ritmo e alegria 🌈"],
     "emocao": "animacao",
     "nivel": "leve"
   },
-
   "funk": {
     "tema": "ritmos_musicais",
     "subtema": "funk",
-
-    "palavras_chave": [
-      "funk",
-      "ritmo funk",
-      "musica funk brasileira"
-    ],
-
-    "inicio": [
-      "O funk possui batidas fortes e marcantes 🔊"
-    ],
-
-    "explicacao_curta": [
-      "É um ritmo brasileiro muito popular."
-    ],
-
-    "explicacao_aprofundada": [
-      "O funk mistura música, dança e criatividade das comunidades urbanas."
-    ],
-
-    "curiosidade": [
-      "Cada região pode criar estilos diferentes de funk 🎧"
-    ],
-
-    "interacao": [
-      "Você conseguiria inventar um passo diferente?"
-    ],
-
-    "atividade": [
-      "Monte uma sequência de movimentos rápidos 🎵"
-    ],
-
-    "final": [
-      "A música pode transformar movimento em expressão ✨"
-    ],
-
+    "palavras_chave": ["funk", "ritmo funk", "musica funk brasileira"],
+    "inicio": ["O funk possui batidas fortes e marcantes 🔊"],
+    "explicacao_curta": ["É um ritmo brasileiro muito popular."],
+    "explicacao_aprofundada": ["O funk mistura música, dança e criatividade das comunidades urbanas."],
+    "curiosidade": ["Cada região pode criar estilos diferentes de funk 🎧"],
+    "interacao": ["Você conseguiria inventar um passo diferente?"],
+    "atividade": ["Monte uma sequência de movimentos rápidos 🎵"],
+    "final": ["A música pode transformar movimento em expressão ✨"],
     "emocao": "energia",
     "nivel": "leve"
   },
-
   "bossa_nova": {
     "tema": "ritmos_musicais",
     "subtema": "bossa_nova",
-
-    "palavras_chave": [
-      "bossa nova",
-      "musica bossa nova",
-      "ritmo suave brasileiro"
-    ],
-
-    "inicio": [
-      "A bossa nova possui sons suaves e tranquilos 🌙"
-    ],
-
-    "explicacao_curta": [
-      "Ela mistura samba com influências do jazz."
-    ],
-
-    "explicacao_aprofundada": [
-      "As músicas costumam ter voz calma, violão suave e melodias delicadas."
-    ],
-
-    "curiosidade": [
-      "A bossa nova ficou famosa em vários países 🌍"
-    ],
-
-    "interacao": [
-      "Você prefere músicas agitadas ou tranquilas?"
-    ],
-
-    "atividade": [
-      "Desenhe uma paisagem ouvindo música calma 🎨"
-    ],
-
-    "final": [
-      "A bossa nova parece música flutuando no ar ✨"
-    ],
-
+    "palavras_chave": ["bossa nova", "musica bossa nova", "ritmo suave brasileiro"],
+    "inicio": ["A bossa nova possui sons suaves e tranquilos 🌙"],
+    "explicacao_curta": ["Ela mistura samba com influências do jazz."],
+    "explicacao_aprofundada": ["As músicas costumam ter voz calma, violão suave e melodias delicadas."],
+    "curiosidade": ["A bossa nova ficou famosa em vários países 🌍"],
+    "interacao": ["Você prefere músicas agitadas ou tranquilas?"],
+    "atividade": ["Desenhe uma paisagem ouvindo música calma 🎨"],
+    "final": ["A bossa nova parece música flutuando no ar ✨"],
     "emocao": "calma",
     "nivel": "leve"
   },
-
   "rock": {
     "tema": "ritmos_musicais",
     "subtema": "rock",
-
-    "palavras_chave": [
-      "rock",
-      "musica rock",
-      "ritmo rock"
-    ],
-
-    "inicio": [
-      "O rock possui guitarras e muita energia 🎸"
-    ],
-
-    "explicacao_curta": [
-      "Ele pode ser rápido, forte ou até mais calmo."
-    ],
-
-    "explicacao_aprofundada": [
-      "O rock usa instrumentos como guitarra, bateria e baixo para criar ritmos marcantes."
-    ],
-
-    "curiosidade": [
-      "Existem muitos tipos diferentes de rock 🤘"
-    ],
-
-    "interacao": [
-      "Você gosta de músicas agitadas?"
-    ],
-
-    "atividade": [
-      "Desenhe uma banda tocando no palco 🎤"
-    ],
-
-    "final": [
-      "O rock mistura ritmo, atitude e criatividade 🌟"
-    ],
-
+    "palavras_chave": ["rock", "musica rock", "ritmo rock"],
+    "inicio": ["O rock possui guitarras e muita energia 🎸"],
+    "explicacao_curta": ["Ele pode ser rápido, forte ou até mais calmo."],
+    "explicacao_aprofundada": ["O rock usa instrumentos como guitarra, bateria e baixo para criar ritmos marcantes."],
+    "curiosidade": ["Existem muitos tipos diferentes de rock 🤘"],
+    "interacao": ["Você gosta de músicas agitadas?"],
+    "atividade": ["Desenhe uma banda tocando no palco 🎤"],
+    "final": ["O rock mistura ritmo, atitude e criatividade 🌟"],
     "emocao": "energia",
     "nivel": "leve"
   },
-
   "rap": {
     "tema": "ritmos_musicais",
     "subtema": "rap",
-
-    "palavras_chave": [
-      "rap",
-      "musica rap",
-      "ritmo rap"
-    ],
-
-    "inicio": [
-      "O rap usa palavras com ritmo e expressão 🎤"
-    ],
-
-    "explicacao_curta": [
-      "As letras são faladas acompanhando a batida da música."
-    ],
-
-    "explicacao_aprofundada": [
-      "O rap é usado para contar histórias, opiniões e sentimentos."
-    ],
-
-    "curiosidade": [
-      "As rimas são muito importantes no rap ✨"
-    ],
-
-    "interacao": [
-      "Você consegue criar uma frase rimando?"
-    ],
-
-    "atividade": [
-      "Invente pequenas rimas divertidas 🎵"
-    ],
-
-    "final": [
-      "As palavras também podem dançar no ritmo 🌈"
-    ],
-
+    "palavras_chave": ["rap", "musica rap", "ritmo rap"],
+    "inicio": ["O rap usa palavras com ritmo e expressão 🎤"],
+    "explicacao_curta": ["As letras são faladas acompanhando a batida da música."],
+    "explicacao_aprofundada": ["O rap é usado para contar histórias, opiniões e sentimentos."],
+    "curiosidade": ["As rimas são muito importantes no rap ✨"],
+    "interacao": ["Você consegue criar uma frase rimando?"],
+    "atividade": ["Invente pequenas rimas divertidas 🎵"],
+    "final": ["As palavras também podem dançar no ritmo 🌈"],
     "emocao": "expressao",
     "nivel": "leve"
   },
-
   "k_pop": {
     "tema": "ritmos_musicais",
     "subtema": "k_pop",
-
-    "palavras_chave": [
-      "k pop",
-      "musica kpop",
-      "pop coreano"
-    ],
-
-    "inicio": [
-      "O K-pop mistura música, dança e apresentações modernas ✨"
-    ],
-
-    "explicacao_curta": [
-      "Esse estilo nasceu na Coreia do Sul."
-    ],
-
-    "explicacao_aprofundada": [
-      "Os grupos usam coreografias sincronizadas, roupas criativas e músicas animadas."
-    ],
-
-    "curiosidade": [
-      "As apresentações de K-pop possuem muitos efeitos visuais 🌈"
-    ],
-
-    "interacao": [
-      "Você gosta de músicas com dança coreografada?"
-    ],
-
-    "atividade": [
-      "Crie uma sequência simples de passos 🎵"
-    ],
-
-    "final": [
-      "Música e dança podem criar grandes espetáculos 🌟"
-    ],
-
+    "palavras_chave": ["k pop", "musica kpop", "pop coreano"],
+    "inicio": ["O K-pop mistura música, dança e apresentações modernas ✨"],
+    "explicacao_curta": ["Esse estilo nasceu na Coreia do Sul."],
+    "explicacao_aprofundada": ["Os grupos usam coreografias sincronizadas, roupas criativas e músicas animadas."],
+    "curiosidade": ["As apresentações de K-pop possuem muitos efeitos visuais 🌈"],
+    "interacao": ["Você gosta de músicas com dança coreografada?"],
+    "atividade": ["Crie uma sequência simples de passos 🎵"],
+    "final": ["Música e dança podem criar grandes espetáculos 🌟"],
     "emocao": "animacao",
     "nivel": "leve"
-    },
-  
+  },
   "sertanejo": {
     "tema": "ritmos_musicais",
     "subtema": "sertanejo",
-
-    "palavras_chave": [
-      "sertanejo",
-      "musica sertaneja",
-      "ritmo sertanejo"
-    ],
-
-    "inicio": [
-      "O sertanejo fala sobre sentimentos e vida no campo 🌾"
-    ],
-
-    "explicacao_curta": [
-      "É um ritmo muito popular no Brasil."
-    ],
-
-    "explicacao_aprofundada": [
-      "As músicas sertanejas costumam usar violão e contar histórias do cotidiano."
-    ],
-
-    "curiosidade": [
-      "Muitas duplas sertanejas cantam juntas 🎵"
-    ],
-
-    "interacao": [
-      "Você gosta de músicas mais calmas ou agitadas?"
-    ],
-
-    "atividade": [
-      "Desenhe uma paisagem do campo 🎨"
-    ],
-
-    "final": [
-      "A música pode contar histórias da vida 🌻"
-    ],
-
+    "palavras_chave": ["sertanejo", "musica sertaneja", "ritmo sertanejo"],
+    "inicio": ["O sertanejo fala sobre sentimentos e vida no campo 🌾"],
+    "explicacao_curta": ["É um ritmo muito popular no Brasil."],
+    "explicacao_aprofundada": ["As músicas sertanejas costumam usar violão e contar histórias do cotidiano."],
+    "curiosidade": ["Muitas duplas sertanejas cantam juntas 🎵"],
+    "interacao": ["Você gosta de músicas mais calmas ou agitadas?"],
+    "atividade": ["Desenhe uma paisagem do campo 🎨"],
+    "final": ["A música pode contar histórias da vida 🌻"],
     "emocao": "tranquilidade",
     "nivel": "leve"
   },
-
   "pagode": {
     "tema": "ritmos_musicais",
     "subtema": "pagode",
-
-    "palavras_chave": [
-      "pagode",
-      "musica pagode",
-      "tipo de samba pagode"
-    ],
-
-    "inicio": [
-      "O pagode mistura ritmo leve e alegria 🪘"
-    ],
-
-    "explicacao_curta": [
-      "Ele é um estilo musical ligado ao samba."
-    ],
-
-    "explicacao_aprofundada": [
-      "O pagode costuma aparecer em rodas de música e encontros animados."
-    ],
-
-    "curiosidade": [
-      "Instrumentos como tantã e cavaquinho aparecem no pagode 🎶"
-    ],
-
-    "interacao": [
-      "Você gosta de músicas para cantar com amigos?"
-    ],
-
-    "atividade": [
-      "Crie um ritmo usando palmas e objetos da casa 👏"
-    ],
-
-    "final": [
-      "O pagode espalha ritmo e amizade 🌈"
-    ],
-
+    "palavras_chave": ["pagode", "musica pagode", "tipo de samba pagode"],
+    "inicio": ["O pagode mistura ritmo leve e alegria 🪘"],
+    "explicacao_curta": ["Ele é um estilo musical ligado ao samba."],
+    "explicacao_aprofundada": ["O pagode costuma aparecer em rodas de música e encontros animados."],
+    "curiosidade": ["Instrumentos como tantã e cavaquinho aparecem no pagode 🎶"],
+    "interacao": ["Você gosta de músicas para cantar com amigos?"],
+    "atividade": ["Crie um ritmo usando palmas e objetos da casa 👏"],
+    "final": ["O pagode espalha ritmo e amizade 🌈"],
     "emocao": "alegria",
     "nivel": "leve"
   },
-
   "reggae": {
     "tema": "ritmos_musicais",
     "subtema": "reggae",
-
-    "palavras_chave": [
-      "reggae",
-      "musica reggae",
-      "ritmo reggae"
-    ],
-
-    "inicio": [
-      "O reggae possui ritmo tranquilo e relaxante 🌴"
-    ],
-
-    "explicacao_curta": [
-      "Esse estilo musical fala muito sobre paz e união."
-    ],
-
-    "explicacao_aprofundada": [
-      "As batidas do reggae costumam ser suaves e marcadas."
-    ],
-
-    "curiosidade": [
-      "O reggae ficou famoso em vários países 🌍"
-    ],
-
-    "interacao": [
-      "Que música faz você relaxar?"
-    ],
-
-    "atividade": [
-      "Pinte usando cores suaves enquanto escuta música 🎨"
-    ],
-
-    "final": [
-      "A música também pode transmitir calma ✨"
-    ],
-
+    "palavras_chave": ["reggae", "musica reggae", "ritmo reggae"],
+    "inicio": ["O reggae possui ritmo tranquilo e relaxante 🌴"],
+    "explicacao_curta": ["Esse estilo musical fala muito sobre paz e união."],
+    "explicacao_aprofundada": ["As batidas do reggae costumam ser suaves e marcadas."],
+    "curiosidade": ["O reggae ficou famoso em vários países 🌍"],
+    "interacao": ["Que música faz você relaxar?"],
+    "atividade": ["Pinte usando cores suaves enquanto escuta música 🎨"],
+    "final": ["A música também pode transmitir calma ✨"],
     "emocao": "calma",
     "nivel": "leve"
   },
-
   "pop": {
     "tema": "ritmos_musicais",
     "subtema": "pop",
-
-    "palavras_chave": [
-      "pop",
-      "musica pop",
-      "ritmo pop"
-    ],
-
-    "inicio": [
-      "O pop mistura ritmos modernos e animados 🌟"
-    ],
-
-    "explicacao_curta": [
-      "É um estilo musical popular em muitos lugares do mundo."
-    ],
-
-    "explicacao_aprofundada": [
-      "A música pop mistura dança, melodias marcantes e diferentes estilos musicais."
-    ],
-
-    "curiosidade": [
-      "Muitas músicas pop possuem refrões fáceis de cantar 🎤"
-    ],
-
-    "interacao": [
-      "Qual música faz você querer cantar junto?"
-    ],
-
-    "atividade": [
-      "Crie a capa imaginária de um álbum pop 🎨"
-    ],
-
-    "final": [
-      "A música pop espalha ritmo e diversão 🌈"
-    ],
-
+    "palavras_chave": ["pop", "musica pop", "ritmo pop"],
+    "inicio": ["O pop mistura ritmos modernos e animados 🌟"],
+    "explicacao_curta": ["É um estilo musical popular em muitos lugares do mundo."],
+    "explicacao_aprofundada": ["A música pop mistura dança, melodias marcantes e diferentes estilos musicais."],
+    "curiosidade": ["Muitas músicas pop possuem refrões fáceis de cantar 🎤"],
+    "interacao": ["Qual música faz você querer cantar junto?"],
+    "atividade": ["Crie a capa imaginária de um álbum pop 🎨"],
+    "final": ["A música pop espalha ritmo e diversão 🌈"],
     "emocao": "animacao",
     "nivel": "leve"
   },
-
   "jazz": {
     "tema": "ritmos_musicais",
     "subtema": "jazz",
-
-    "palavras_chave": [
-      "jazz",
-      "musica jazz",
-      "ritmo jazz"
-    ],
-
-    "inicio": [
-      "O jazz mistura ritmo, improviso e criatividade 🎷"
-    ],
-
-    "explicacao_curta": [
-      "Os músicos podem criar sons diferentes durante a apresentação."
-    ],
-
-    "explicacao_aprofundada": [
-      "O jazz usa instrumentos como saxofone, piano e trompete."
-    ],
-
-    "curiosidade": [
-      "No jazz, cada músico pode tocar de um jeito único ✨"
-    ],
-
-    "interacao": [
-      "Você gostaria de inventar uma melodia?"
-    ],
-
-    "atividade": [
-      "Desenhe instrumentos de uma banda de jazz 🎺"
-    ],
-
-    "final": [
-      "O jazz transforma improviso em música 🌙"
-    ],
-
+    "palavras_chave": ["jazz", "musica jazz", "ritmo jazz"],
+    "inicio": ["O jazz mistura ritmo, improviso e criatividade 🎷"],
+    "explicacao_curta": ["Os músicos podem criar sons diferentes durante a apresentação."],
+    "explicacao_aprofundada": ["O jazz usa instrumentos como saxofone, piano e trompete."],
+    "curiosidade": ["No jazz, cada músico pode tocar de um jeito único ✨"],
+    "interacao": ["Você gostaria de inventar uma melodia?"],
+    "atividade": ["Desenhe instrumentos de uma banda de jazz 🎺"],
+    "final": ["O jazz transforma improviso em música 🌙"],
     "emocao": "criatividade",
     "nivel": "leve"
   },
-
   "blues": {
     "tema": "ritmos_musicais",
     "subtema": "blues",
-
-    "palavras_chave": [
-      "blues",
-      "musica blues",
-      "ritmo blues"
-    ],
-
-    "inicio": [
-      "O blues possui melodias marcantes e emocionantes 🎸"
-    ],
-
-    "explicacao_curta": [
-      "Esse ritmo expressa sentimentos através da música."
-    ],
-
-    "explicacao_aprofundada": [
-      "O blues influenciou muitos outros estilos musicais."
-    ],
-
-    "curiosidade": [
-      "A guitarra é muito usada no blues 🎶"
-    ],
-
-    "interacao": [
-      "Você gosta de músicas mais suaves?"
-    ],
-
-    "atividade": [
-      "Desenhe linhas e cores inspiradas em emoções 🎨"
-    ],
-
-    "final": [
-      "A música pode mostrar sentimentos profundos 🌌"
-    ],
-
+    "palavras_chave": ["blues", "musica blues", "ritmo blues"],
+    "inicio": ["O blues possui melodias marcantes e emocionantes 🎸"],
+    "explicacao_curta": ["Esse ritmo expressa sentimentos através da música."],
+    "explicacao_aprofundada": ["O blues influenciou muitos outros estilos musicais."],
+    "curiosidade": ["A guitarra é muito usada no blues 🎶"],
+    "interacao": ["Você gosta de músicas mais suaves?"],
+    "atividade": ["Desenhe linhas e cores inspiradas em emoções 🎨"],
+    "final": ["A música pode mostrar sentimentos profundos 🌌"],
     "emocao": "emocao",
     "nivel": "leve"
   },
-
   "hip_hop": {
     "tema": "ritmos_musicais",
     "subtema": "hip_hop",
-
-    "palavras_chave": [
-      "hip hop",
-      "musica hip hop",
-      "ritmo hip hop"
-    ],
-
-    "inicio": [
-      "O hip hop mistura música, dança e expressão urbana 🎧"
-    ],
-
-    "explicacao_curta": [
-      "Esse movimento cultural usa ritmo, rimas e dança."
-    ],
-
-    "explicacao_aprofundada": [
-      "O hip hop reúne rap, breakdance, grafite e criatividade."
-    ],
-
-    "curiosidade": [
-      "O grafite também faz parte da cultura hip hop 🎨"
-    ],
-
-    "interacao": [
-      "Você gostaria de criar passos de dança?"
-    ],
-
-    "atividade": [
-      "Monte um desenho inspirado em arte urbana ✏️"
-    ],
-
-    "final": [
-      "O hip hop transforma criatividade em movimento 🌟"
-    ],
-
+    "palavras_chave": ["hip hop", "musica hip hop", "ritmo hip hop"],
+    "inicio": ["O hip hop mistura música, dança e expressão urbana 🎧"],
+    "explicacao_curta": ["Esse movimento cultural usa ritmo, rimas e dança."],
+    "explicacao_aprofundada": ["O hip hop reúne rap, breakdance, grafite e criatividade."],
+    "curiosidade": ["O grafite também faz parte da cultura hip hop 🎨"],
+    "interacao": ["Você gostaria de criar passos de dança?"],
+    "atividade": ["Monte um desenho inspirado em arte urbana ✏️"],
+    "final": ["O hip hop transforma criatividade em movimento 🌟"],
     "emocao": "energia",
     "nivel": "leve"
   },
-
   "classica": {
     "tema": "ritmos_musicais",
     "subtema": "classica",
-
-    "palavras_chave": [
-      "musica classica",
-      "ritmo classico",
-      "genero classico"
-    ],
-
-    "inicio": [
-      "A música clássica mistura instrumentos e emoções 🎻"
-    ],
-
-    "explicacao_curta": [
-      "Ela pode ser suave, intensa ou grandiosa."
-    ],
-
-    "explicacao_aprofundada": [
-      "Orquestras usam instrumentos como violino, piano, flauta e violoncelo."
-    ],
-
-    "curiosidade": [
-      "Uma orquestra pode reunir muitos músicos ao mesmo tempo 🎼"
-    ],
-
-    "interacao": [
-      "Qual instrumento você gostaria de aprender?"
-    ],
-
-    "atividade": [
-      "Desenhe uma grande orquestra 🎨"
-    ],
-
-    "final": [
-      "A música clássica transforma sons em emoção ✨"
-    ],
-
+    "palavras_chave": ["musica classica", "ritmo classico", "genero classico"],
+    "inicio": ["A música clássica mistura instrumentos e emoções 🎻"],
+    "explicacao_curta": ["Ela pode ser suave, intensa ou grandiosa."],
+    "explicacao_aprofundada": ["Orquestras usam instrumentos como violino, piano, flauta e violoncelo."],
+    "curiosidade": ["Uma orquestra pode reunir muitos músicos ao mesmo tempo 🎼"],
+    "interacao": ["Qual instrumento você gostaria de aprender?"],
+    "atividade": ["Desenhe uma grande orquestra 🎨"],
+    "final": ["A música clássica transforma sons em emoção ✨"],
     "emocao": "calma",
     "nivel": "leve"
   },
-
   "eletronica": {
     "tema": "ritmos_musicais",
     "subtema": "eletronica",
-
-    "palavras_chave": [
-      "musica eletronica",
-      "ritmo eletronico",
-      "dj musica"
-    ],
-
-    "inicio": [
-      "A música eletrônica usa tecnologia para criar sons 🔊"
-    ],
-
-    "explicacao_curta": [
-      "Ela mistura batidas digitais e efeitos sonoros."
-    ],
-
-    "explicacao_aprofundada": [
-      "DJs e produtores criam músicas usando computadores e equipamentos especiais."
-    ],
-
-    "curiosidade": [
-      "Algumas músicas eletrônicas possuem sons futuristas 🚀"
-    ],
-
-    "interacao": [
-      "Você gosta de músicas com batidas rápidas?"
-    ],
-
-    "atividade": [
-      "Crie padrões coloridos inspirados em sons eletrônicos 🌈"
-    ],
-
-    "final": [
-      "Tecnologia e música podem criar sons surpreendentes ✨"
-    ],
-
+    "palavras_chave": ["musica eletronica", "ritmo eletronico", "dj musica"],
+    "inicio": ["A música eletrônica usa tecnologia para criar sons 🔊"],
+    "explicacao_curta": ["Ela mistura batidas digitais e efeitos sonoros."],
+    "explicacao_aprofundada": ["DJs e produtores criam músicas usando computadores e equipamentos especiais."],
+    "curiosidade": ["Algumas músicas eletrônicas possuem sons futuristas 🚀"],
+    "interacao": ["Você gosta de músicas com batidas rápidas?"],
+    "atividade": ["Crie padrões coloridos inspirados em sons eletrônicos 🌈"],
+    "final": ["Tecnologia e música podem criar sons surpreendentes ✨"],
     "emocao": "energia",
     "nivel": "leve"
   }
 }
-  
-
