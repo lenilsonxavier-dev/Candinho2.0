@@ -1,18 +1,18 @@
 {
-  "tarsila_do_amaral": {
-    "tema": "artistas_brasileiros",
-    "subtema": "tarsila_do_amaral",
-    "palavras_chave": ["tarsila", "abaporu", "tarsila do amaral"],
-    "inicio": ["Tarsila do Amaral adorava pintar o Brasil com cores fortes 🎨"],
-    "explicacao_curta": ["Ela foi uma artista brasileira muito importante."],
-    "explicacao_aprofundada": ["Tarsila criava pinturas com formas diferentes e cores vibrantes para mostrar a cultura brasileira."],
-    "curiosidade": ["O Abaporu é uma das pinturas mais famosas do Brasil 🖼️"],
-    "interacao": ["Você gostaria de criar uma pintura cheia de cores como Tarsila?"],
-    "atividade": ["Desenhe um personagem usando formas diferentes ✏️"],
-    "final": ["A arte pode mostrar a imaginação e a cultura 🌟"],
+"o_que_e_arte": {
+    "tema": "artes_visuais",
+    "subtema": "conceitos_basicos",
+    "palavras_chave": ["o que é arte", "significado de arte", "definição de arte", "para que serve a arte", "o que significa arte"],
+    "inicio": ["Arte é tudo que a gente cria com imaginação e sentimento 🎨", "Arte é uma forma de expressar ideias, emoções e beleza ✨"],
+    "explicacao_curta": ["A arte pode ser pintura, desenho, música, dança, teatro, escultura, fotografia e muito mais!"],
+    "explicacao_aprofundada": ["Desde as cavernas, os humanos fazem arte para contar histórias, registrar momentos, sentir alegria e compartilhar sentimentos. Não existe jeito certo ou errado de fazer arte – o importante é criar com o coração."],
+    "curiosidade": ["As pinturas rupestres nas cavernas têm mais de 30 mil anos e são consideradas as primeiras formas de arte da humanidade 🏺"],
+    "interacao": ["Que tipo de arte você mais gosta de fazer ou ver? 🖌️", "Se você pudesse criar qualquer obra de arte, o que seria?"],
+    "atividade": ["Desenhe algo que represente sua alegria hoje 🌈", "Crie uma pequena escultura usando massa de modelagem ou argila."],
+    "final": ["A arte está em toda parte – em um desenho, uma música, uma dança ou até na natureza 🌻"],
     "emocao": "criatividade",
     "nivel": "leve"
-  },
+},
   "desenho_basico": {
     "tema": "arte_tecnicas",
     "subtema": "desenho_basico",
