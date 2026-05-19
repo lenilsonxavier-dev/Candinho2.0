@@ -11,7 +11,20 @@
     "atividade": ["Desenhe uma invenção imaginária ✏️"],
     "final": ["Arte e curiosidade podem caminhar juntas 🌟"],
     "emocao": "descoberta",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1452",
+    "ano_falecimento": "1519",
+    "local_nascimento": "Vinci, Itália",
+    "o_que_ele_fez": [
+      "Pintou a Mona Lisa, o retrato mais famoso do mundo.",
+      "Criou a pintura A Última Ceia, que mostra Jesus e seus discípulos.",
+      "Desenhou máquinas voadoras, paraquedas e tanques de guerra – tudo no papel!",
+      "Estudou o corpo humano e fez desenhos incríveis de órgãos e músculos.",
+      "Inventou pontes, canais e mecanismos para a cidade de Florença."
+    ],
+    "onde_nasceu_resposta": "Leonardo da Vinci nasceu em Vinci, uma cidade na Itália, em 1452.",
+    "ano_nascimento_resposta": "Leonardo da Vinci nasceu no ano de 1452.",
+    "ano_falecimento_resposta": "Leonardo da Vinci faleceu no ano de 1519."
   },
   "michelangelo": {
     "tema": "artistas_universais",
@@ -25,7 +38,19 @@
     "atividade": ["Desenhe personagens olhando para cima 🎨"],
     "final": ["Grandes obras podem nascer de muita dedicação 🌍"],
     "emocao": "admiracao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1475",
+    "ano_falecimento": "1564",
+    "local_nascimento": "Caprese, Itália",
+    "o_que_ele_fez": [
+      "Pintou o teto da Capela Sistina, no Vaticano.",
+      "Esculpiu a estátua de Davi, um dos símbolos do Renascimento.",
+      "Projetou a cúpula da Basílica de São Pedro.",
+      "Criou a escultura Pietà, que mostra Maria com Jesus no colo."
+    ],
+    "onde_nasceu_resposta": "Michelangelo nasceu em Caprese, na Itália, em 1475.",
+    "ano_nascimento_resposta": "Michelangelo nasceu no ano de 1475.",
+    "ano_falecimento_resposta": "Michelangelo faleceu no ano de 1564."
   },
   "claude_monet": {
     "tema": "artistas_universais",
@@ -39,7 +64,18 @@
     "atividade": ["Pinte uma paisagem usando pinceladas leves 🎨"],
     "final": ["A luz pode transformar completamente uma pintura ✨"],
     "emocao": "leveza",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1840",
+    "ano_falecimento": "1926",
+    "local_nascimento": "Paris, França",
+    "o_que_ele_fez": [
+      "Criou o movimento impressionista, pintando ao ar livre.",
+      "Pintou a série 'Nenúfares', com mais de 250 obras de seu jardim em Giverny.",
+      "Registrou a Catedral de Rouen em diferentes luzes."
+    ],
+    "onde_nasceu_resposta": "Claude Monet nasceu em Paris, França, em 1840.",
+    "ano_nascimento_resposta": "Claude Monet nasceu no ano de 1840.",
+    "ano_falecimento_resposta": "Claude Monet faleceu no ano de 1926."
   },
   "vincent_van_gogh": {
     "tema": "artistas_universais",
@@ -53,7 +89,18 @@
     "atividade": ["Faça espirais coloridas inspiradas no céu 🎨"],
     "final": ["As cores podem mostrar sentimentos profundos ✨"],
     "emocao": "emocao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1853",
+    "ano_falecimento": "1890",
+    "local_nascimento": "Zundert, Países Baixos",
+    "o_que_ele_fez": [
+      "Pintou 'A Noite Estrelada', uma das obras mais famosas do mundo.",
+      "Criou mais de 2.000 obras, incluindo 'Girassóis' e 'Quarto em Arles'.",
+      "Desenvolveu um estilo único com pinceladas grossas e cores vibrantes."
+    ],
+    "onde_nasceu_resposta": "Van Gogh nasceu em Zundert, nos Países Baixos, em 1853.",
+    "ano_nascimento_resposta": "Van Gogh nasceu no ano de 1853.",
+    "ano_falecimento_resposta": "Van Gogh faleceu no ano de 1890."
   },
   "pablo_picasso": {
     "tema": "artistas_universais",
@@ -67,7 +114,18 @@
     "atividade": ["Monte um desenho usando triângulos e quadrados 🟦"],
     "final": ["A arte pode mostrar o mundo de formas diferentes 🌈"],
     "emocao": "criatividade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1881",
+    "ano_falecimento": "1973",
+    "local_nascimento": "Málaga, Espanha",
+    "o_que_ele_fez": [
+      "Criou o cubismo junto com Georges Braque.",
+      "Pintou 'Guernica', uma obra contra a guerra.",
+      "Produziu mais de 50.000 obras, incluindo pinturas, esculturas e cerâmicas."
+    ],
+    "onde_nasceu_resposta": "Pablo Picasso nasceu em Málaga, na Espanha, em 1881.",
+    "ano_nascimento_resposta": "Picasso nasceu no ano de 1881.",
+    "ano_falecimento_resposta": "Picasso faleceu no ano de 1973."
   },
   "salvador_dali": {
     "tema": "artistas_universais",
@@ -81,7 +139,18 @@
     "atividade": ["Misture objetos diferentes em uma mesma cena 🎨"],
     "final": ["A imaginação pode criar mundos surpreendentes ✨"],
     "emocao": "imaginacao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1904",
+    "ano_falecimento": "1989",
+    "local_nascimento": "Figueres, Espanha",
+    "o_que_ele_fez": [
+      "Pintou 'A Persistência da Memória', com os relógios derretendo.",
+      "Foi um dos principais artistas do surrealismo.",
+      "Criou esculturas, filmes e até joias."
+    ],
+    "onde_nasceu_resposta": "Salvador Dalí nasceu em Figueres, na Espanha, em 1904.",
+    "ano_nascimento_resposta": "Dalí nasceu no ano de 1904.",
+    "ano_falecimento_resposta": "Dalí faleceu no ano de 1989."
   },
   "frida_kahlo": {
     "tema": "artistas_universais",
@@ -95,7 +164,18 @@
     "atividade": ["Crie um autorretrato usando cores vibrantes 🌈"],
     "final": ["A arte também pode contar nossa própria história ✨"],
     "emocao": "expressao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1907",
+    "ano_falecimento": "1954",
+    "local_nascimento": "Coyoacán, México",
+    "o_que_ele_fez": [
+      "Pintou muitos autorretratos que mostravam sua força e sentimentos.",
+      "Usou símbolos da cultura mexicana, como macacos, espinhos e flores.",
+      "Sua obra 'As Duas Fridas' mostra duas versões de si mesma."
+    ],
+    "onde_nasceu_resposta": "Frida Kahlo nasceu em Coyoacán, no México, em 1907.",
+    "ano_nascimento_resposta": "Frida Kahlo nasceu no ano de 1907.",
+    "ano_falecimento_resposta": "Frida Kahlo faleceu no ano de 1954."
   },
   "wassily_kandinsky": {
     "tema": "artistas_universais",
@@ -109,7 +189,18 @@
     "atividade": ["Crie arte usando apenas círculos e linhas 🎨"],
     "final": ["As formas também podem transmitir sentimentos ✨"],
     "emocao": "criatividade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1866",
+    "ano_falecimento": "1944",
+    "local_nascimento": "Moscou, Rússia",
+    "o_que_ele_fez": [
+      "Foi um dos primeiros artistas a pintar arte abstrata.",
+      "Escreveu um livro importante chamado 'Do Espiritual na Arte'.",
+      "Acreditava que cores e formas podiam criar uma 'sinfonia visual'."
+    ],
+    "onde_nasceu_resposta": "Wassily Kandinsky nasceu em Moscou, na Rússia, em 1866.",
+    "ano_nascimento_resposta": "Kandinsky nasceu no ano de 1866.",
+    "ano_falecimento_resposta": "Kandinsky faleceu no ano de 1944."
   },
   "andy_warhol": {
     "tema": "artistas_universais",
@@ -123,7 +214,18 @@
     "atividade": ["Repita o mesmo desenho usando cores diferentes 🎨"],
     "final": ["Até objetos simples podem virar arte ✨"],
     "emocao": "exploracao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1928",
+    "ano_falecimento": "1987",
+    "local_nascimento": "Pittsburgh, EUA",
+    "o_que_ele_fez": [
+      "Criou a famosa série de latas de sopa Campbell.",
+      "Pintou retratos de celebridades como Marilyn Monroe.",
+      "Fundou a The Factory, um estúdio que reunia artistas e músicos."
+    ],
+    "onde_nasceu_resposta": "Andy Warhol nasceu em Pittsburgh, nos Estados Unidos, em 1928.",
+    "ano_nascimento_resposta": "Warhol nasceu no ano de 1928.",
+    "ano_falecimento_resposta": "Warhol faleceu no ano de 1987."
   },
   "yayoi_kusama": {
     "tema": "artistas_universais",
@@ -137,7 +239,17 @@
     "atividade": ["Cubra uma folha com bolinhas coloridas 🌈"],
     "final": ["Padrões simples podem criar mundos incríveis 🌟"],
     "emocao": "encantamento",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1929",
+    "ano_falecimento": "",
+    "local_nascimento": "Matsumoto, Japão",
+    "o_que_ele_fez": [
+      "Criou as famosas 'salas infinitas' com espelhos e luzes.",
+      "Pintou abóboras com bolinhas, que se tornaram sua marca registrada.",
+      "Expôs suas obras nos maiores museus do mundo."
+    ],
+    "onde_nasceu_resposta": "Yayoi Kusama nasceu em Matsumoto, no Japão, em 1929.",
+    "ano_nascimento_resposta": "Yayoi Kusama nasceu no ano de 1929."
   },
   "raphael": {
     "tema": "artistas_universais",
@@ -151,7 +263,18 @@
     "atividade": ["Desenhe pessoas formando uma cena tranquila ✏️"],
     "final": ["Equilíbrio e suavidade também fazem parte da arte 🌈"],
     "emocao": "harmonia",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1483",
+    "ano_falecimento": "1520",
+    "local_nascimento": "Urbino, Itália",
+    "o_que_ele_fez": [
+      "Pintou a Escola de Atenas, com grandes filósofos da Grécia Antiga.",
+      "Ficou conhecido por suas Madonas, pinturas da mãe de Jesus.",
+      "Trabalhou como arquiteto para o Papa no Vaticano."
+    ],
+    "onde_nasceu_resposta": "Raphael nasceu em Urbino, na Itália, em 1483.",
+    "ano_nascimento_resposta": "Raphael nasceu no ano de 1483.",
+    "ano_falecimento_resposta": "Raphael faleceu no ano de 1520."
   },
   "caravaggio": {
     "tema": "artistas_universais",
@@ -165,7 +288,18 @@
     "atividade": ["Faça um desenho usando partes claras e escuras 🎨"],
     "final": ["Luz e sombra podem mudar completamente uma imagem 🌙"],
     "emocao": "misterio",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1571",
+    "ano_falecimento": "1610",
+    "local_nascimento": "Milão, Itália",
+    "o_que_ele_fez": [
+      "Usou a técnica do chiaroscuro (forte contraste de luz e sombra).",
+      "Pintou cenas bíblicas como 'A Vocação de São Mateus'.",
+      "Suas obras têm um realismo intenso e dramático."
+    ],
+    "onde_nasceu_resposta": "Caravaggio nasceu em Milão, na Itália, em 1571.",
+    "ano_nascimento_resposta": "Caravaggio nasceu no ano de 1571.",
+    "ano_falecimento_resposta": "Caravaggio faleceu no ano de 1610."
   },
   "rembrandt": {
     "tema": "artistas_universais",
@@ -179,7 +313,18 @@
     "atividade": ["Crie expressões diferentes em personagens 😊😮😢"],
     "final": ["A arte pode mostrar sentimentos sem palavras 🌟"],
     "emocao": "emocao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1606",
+    "ano_falecimento": "1669",
+    "local_nascimento": "Leiden, Países Baixos",
+    "o_que_ele_fez": [
+      "Pintou 'A Ronda Noturna', uma obra cheia de movimento.",
+      "Fez mais de 90 autorretratos ao longo da vida.",
+      "Dominou o uso de luz e sombra para dar emoção aos rostos."
+    ],
+    "onde_nasceu_resposta": "Rembrandt nasceu em Leiden, nos Países Baixos, em 1606.",
+    "ano_nascimento_resposta": "Rembrandt nasceu no ano de 1606.",
+    "ano_falecimento_resposta": "Rembrandt faleceu no ano de 1669."
   },
   "vermeer": {
     "tema": "artistas_universais",
@@ -193,7 +338,18 @@
     "atividade": ["Pinte uma cena calma dentro de casa 🎨"],
     "final": ["Até momentos simples podem virar arte ✨"],
     "emocao": "calma",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1632",
+    "ano_falecimento": "1675",
+    "local_nascimento": "Delft, Países Baixos",
+    "o_que_ele_fez": [
+      "Pintou 'Moça com Brinco de Pérola', conhecida como a Mona Lisa holandesa.",
+      "Registrou cenas domésticas com luz suave e cores harmoniosas.",
+      "Deixou apenas cerca de 35 pinturas, todas de altíssima qualidade."
+    ],
+    "onde_nasceu_resposta": "Vermeer nasceu em Delft, nos Países Baixos, em 1632.",
+    "ano_nascimento_resposta": "Vermeer nasceu no ano de 1632.",
+    "ano_falecimento_resposta": "Vermeer faleceu no ano de 1675."
   },
   "edgar_degas": {
     "tema": "artistas_universais",
@@ -207,7 +363,18 @@
     "atividade": ["Faça linhas rápidas mostrando alguém dançando ✏️"],
     "final": ["A arte também pode capturar movimento 🌈"],
     "emocao": "leveza",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1834",
+    "ano_falecimento": "1917",
+    "local_nascimento": "Paris, França",
+    "o_que_ele_fez": [
+      "Pintou centenas de cenas de bailarinas, ensaios e apresentações.",
+      "Também fez esculturas, como 'Pequena Dançarina de Quatorze Anos'.",
+      "Experimentou com pastel e técnicas de captura de movimento."
+    ],
+    "onde_nasceu_resposta": "Edgar Degas nasceu em Paris, França, em 1834.",
+    "ano_nascimento_resposta": "Degas nasceu no ano de 1834.",
+    "ano_falecimento_resposta": "Degas faleceu no ano de 1917."
   },
   "paul_cezanne": {
     "tema": "artistas_universais",
@@ -221,7 +388,18 @@
     "atividade": ["Desenhe frutas usando formas geométricas 🔺"],
     "final": ["Formas simples podem criar grandes ideias ✨"],
     "emocao": "criatividade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1839",
+    "ano_falecimento": "1906",
+    "local_nascimento": "Aix-en-Provence, França",
+    "o_que_ele_fez": [
+      "Influenciou o cubismo e a arte moderna com suas formas geométricas.",
+      "Pintou várias versões da Montanha Sainte-Victoire.",
+      "Foi chamado de 'pai da arte moderna' por artistas como Picasso."
+    ],
+    "onde_nasceu_resposta": "Paul Cézanne nasceu em Aix-en-Provence, na França, em 1839.",
+    "ano_nascimento_resposta": "Cézanne nasceu no ano de 1839.",
+    "ano_falecimento_resposta": "Cézanne faleceu no ano de 1906."
   },
   "georges_braque": {
     "tema": "artistas_universais",
@@ -235,7 +413,18 @@
     "atividade": ["Recorte formas geométricas e monte figuras 🎨"],
     "final": ["A arte pode reinventar a maneira de enxergar 🌈"],
     "emocao": "exploracao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1882",
+    "ano_falecimento": "1963",
+    "local_nascimento": "Argenteuil, França",
+    "o_que_ele_fez": [
+      "Desenvolveu o cubismo ao lado de Picasso.",
+      "Usou letras e números em suas pinturas, inovando na arte.",
+      "Criou a técnica de colagem com papéis recortados."
+    ],
+    "onde_nasceu_resposta": "Georges Braque nasceu em Argenteuil, na França, em 1882.",
+    "ano_nascimento_resposta": "Braque nasceu no ano de 1882.",
+    "ano_falecimento_resposta": "Braque faleceu no ano de 1963."
   },
   "rene_magritte": {
     "tema": "artistas_universais",
@@ -249,7 +438,18 @@
     "atividade": ["Misture céu, objetos e personagens em uma cena surreal 🎨"],
     "final": ["A imaginação pode transformar o comum em surpreendente ✨"],
     "emocao": "misterio",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1898",
+    "ano_falecimento": "1967",
+    "local_nascimento": "Lessines, Bélgica",
+    "o_que_ele_fez": [
+      "Pintou 'A Traição das Imagens', com um cachimbo escrito 'Isto não é um cachimbo'.",
+      "Criou cenas com homens de chapéu-coco caindo do céu.",
+      "Desafiou a percepção da realidade com imagens paradoxais."
+    ],
+    "onde_nasceu_resposta": "René Magritte nasceu em Lessines, na Bélgica, em 1898.",
+    "ano_nascimento_resposta": "Magritte nasceu no ano de 1898.",
+    "ano_falecimento_resposta": "Magritte faleceu no ano de 1967."
   },
   "gustav_klimt": {
     "tema": "artistas_universais",
@@ -263,7 +463,18 @@
     "atividade": ["Crie padrões usando círculos e linhas douradas 🎨"],
     "final": ["Detalhes podem deixar a arte ainda mais encantadora 🌟"],
     "emocao": "encantamento",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1862",
+    "ano_falecimento": "1918",
+    "local_nascimento": "Viena, Áustria",
+    "o_que_ele_fez": [
+      "Pintou 'O Beijo', uma obra cheia de folhas de ouro.",
+      "Fundou o movimento da Secessão Vienense.",
+      "Criou o famoso friso da Universidade de Viena."
+    ],
+    "onde_nasceu_resposta": "Gustav Klimt nasceu em Viena, na Áustria, em 1862.",
+    "ano_nascimento_resposta": "Klimt nasceu no ano de 1862.",
+    "ano_falecimento_resposta": "Klimt faleceu no ano de 1918."
   },
   "edvard_munch": {
     "tema": "artistas_universais",
@@ -277,7 +488,18 @@
     "atividade": ["Use cores fortes para desenhar sentimentos 🎨"],
     "final": ["A arte também pode mostrar emoções profundas 🌈"],
     "emocao": "expressao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1863",
+    "ano_falecimento": "1944",
+    "local_nascimento": "Ådalsbruk, Noruega",
+    "o_que_ele_fez": [
+      "Pintou 'O Grito', que se tornou um ícone da angústia humana.",
+      "Fez várias versões da mesma obra em pintura, pastel e litografia.",
+      "Explorou temas como amor, medo e morte em suas séries."
+    ],
+    "onde_nasceu_resposta": "Edvard Munch nasceu em Ådalsbruk, na Noruega, em 1863.",
+    "ano_nascimento_resposta": "Munch nasceu no ano de 1863.",
+    "ano_falecimento_resposta": "Munch faleceu no ano de 1944."
   },
   "joan_miro": {
     "tema": "artistas_universais",
@@ -291,7 +513,18 @@
     "atividade": ["Desenhe estrelas, luas e formas inventadas 🌙"],
     "final": ["A imaginação pode criar universos coloridos 🌟"],
     "emocao": "imaginacao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1893",
+    "ano_falecimento": "1983",
+    "local_nascimento": "Barcelona, Espanha",
+    "o_que_ele_fez": [
+      "Criou um estilo único com formas orgânicas e cores vibrantes.",
+      "Pintou 'O Carnaval de Arlequim', cheio de símbolos fantásticos.",
+      "Também fez esculturas, cerâmicas e murais gigantes."
+    ],
+    "onde_nasceu_resposta": "Joan Miró nasceu em Barcelona, na Espanha, em 1893.",
+    "ano_nascimento_resposta": "Miró nasceu no ano de 1893.",
+    "ano_falecimento_resposta": "Miró faleceu no ano de 1983."
   },
   "henri_matisse": {
     "tema": "artistas_universais",
@@ -305,7 +538,18 @@
     "atividade": ["Faça colagens usando papéis coloridos 🌈"],
     "final": ["As cores podem transmitir muita alegria ✨"],
     "emocao": "alegria",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1869",
+    "ano_falecimento": "1954",
+    "local_nascimento": "Le Cateau-Cambrésis, França",
+    "o_que_ele_fez": [
+      "Liderou o movimento fauvista, com cores intensas e puras.",
+      "No final da vida, criou colagens coloridas chamadas 'gouaches découpées'.",
+      "Projetou a Capela do Rosário em Vence, com vitrais e desenhos."
+    ],
+    "onde_nasceu_resposta": "Henri Matisse nasceu em Le Cateau-Cambrésis, na França, em 1869.",
+    "ano_nascimento_resposta": "Matisse nasceu no ano de 1869.",
+    "ano_falecimento_resposta": "Matisse faleceu no ano de 1954."
   },
   "jackson_pollock": {
     "tema": "artistas_universais",
@@ -319,7 +563,18 @@
     "atividade": ["Faça respingos de tinta em uma folha 🎨"],
     "final": ["Movimento e arte podem se misturar 🌪️"],
     "emocao": "energia",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1912",
+    "ano_falecimento": "1956",
+    "local_nascimento": "Cody, Wyoming, EUA",
+    "o_que_ele_fez": [
+      "Inventou o 'drip painting' (pintura por gotejamento), jogando tinta sobre a tela.",
+      "Suas obras abstratas revolucionaram a arte americana.",
+      "Foi um dos principais nomes do expressionismo abstrato."
+    ],
+    "onde_nasceu_resposta": "Jackson Pollock nasceu em Cody, Wyoming, nos Estados Unidos, em 1912.",
+    "ano_nascimento_resposta": "Pollock nasceu no ano de 1912.",
+    "ano_falecimento_resposta": "Pollock faleceu no ano de 1956."
   },
   "keith_haring": {
     "tema": "artistas_universais",
@@ -333,7 +588,18 @@
     "atividade": ["Crie figuras simples em movimento ✏️"],
     "final": ["Linhas simples podem transmitir muita energia 🌈"],
     "emocao": "animacao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1958",
+    "ano_falecimento": "1990",
+    "local_nascimento": "Reading, Pensilvânia, EUA",
+    "o_que_ele_fez": [
+      "Desenhou bonecos dançantes e radiantes em murais e metrôs de Nova York.",
+      "Usou sua arte para campanhas contra as drogas e a favor da paz.",
+      "Criou a Fundação Keith Haring para apoiar crianças e pessoas com HIV."
+    ],
+    "onde_nasceu_resposta": "Keith Haring nasceu em Reading, nos Estados Unidos, em 1958.",
+    "ano_nascimento_resposta": "Keith Haring nasceu no ano de 1958.",
+    "ano_falecimento_resposta": "Keith Haring faleceu no ano de 1990."
   },
   "banksy": {
     "tema": "artistas_universais",
@@ -347,7 +613,17 @@
     "atividade": ["Crie um desenho usando moldes e formas simples ✏️"],
     "final": ["A arte pode aparecer em muitos lugares da cidade 🌆"],
     "emocao": "curiosidade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1974",
+    "ano_falecimento": "",
+    "local_nascimento": "Bristol, Reino Unido",
+    "o_que_ele_fez": [
+      "Criou o famoso grafite da menina com balão vermelho.",
+      "Destruiu uma de suas obras após leilão com um triturador escondido na moldura.",
+      "Fez murais políticos e satíricos em várias cidades do mundo."
+    ],
+    "onde_nasceu_resposta": "Banksy nasceu em Bristol, no Reino Unido, em 1974 (aproximadamente).",
+    "ano_nascimento_resposta": "Banksy nasceu por volta de 1974."
   },
   "amedeo_modigliani": {
     "tema": "artistas_universais",
@@ -361,7 +637,18 @@
     "atividade": ["Crie personagens com formas alongadas ✏️"],
     "final": ["Cada artista possui um jeito único de representar pessoas ✨"],
     "emocao": "calma",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1884",
+    "ano_falecimento": "1920",
+    "local_nascimento": "Livorno, Itália",
+    "o_que_ele_fez": [
+      "Criou retratos e nus com pescoços e rostos alongados.",
+      "Trabalhou principalmente em Paris, na comunidade de artistas.",
+      "Morreu jovem, mas deixou um estilo inconfundível."
+    ],
+    "onde_nasceu_resposta": "Amedeo Modigliani nasceu em Livorno, na Itália, em 1884.",
+    "ano_nascimento_resposta": "Modigliani nasceu no ano de 1884.",
+    "ano_falecimento_resposta": "Modigliani faleceu no ano de 1920."
   },
   "georgia_okeeffe": {
     "tema": "artistas_universais",
@@ -375,7 +662,18 @@
     "atividade": ["Desenhe uma flor ocupando toda a folha 🎨"],
     "final": ["A natureza pode inspirar obras incríveis 🌿"],
     "emocao": "harmonia",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1887",
+    "ano_falecimento": "1986",
+    "local_nascimento": "Sun Prairie, Wisconsin, EUA",
+    "o_que_ele_fez": [
+      "Pintou flores ampliadas como se vistas por uma lupa.",
+      "Registrou paisagens do Novo México, com ossos e cruzes.",
+      "Foi uma das artistas mais importantes dos Estados Unidos."
+    ],
+    "onde_nasceu_resposta": "Georgia O'Keeffe nasceu em Sun Prairie, Wisconsin, em 1887.",
+    "ano_nascimento_resposta": "Georgia O'Keeffe nasceu no ano de 1887.",
+    "ano_falecimento_resposta": "Georgia O'Keeffe faleceu no ano de 1986."
   },
   "tamara_de_lempicka": {
     "tema": "artistas_universais",
@@ -389,7 +687,18 @@
     "atividade": ["Desenhe roupas usando linhas geométricas ✏️"],
     "final": ["A arte também pode transmitir elegância 🌟"],
     "emocao": "admiracao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1898",
+    "ano_falecimento": "1980",
+    "local_nascimento": "Varsóvia, Polônia",
+    "o_que_ele_fez": [
+      "Pintou retratos da alta sociedade art déco.",
+      "Usou cores metálicas e formas geométricas para retratar elegância.",
+      "Suas obras representam o glamour do século XX."
+    ],
+    "onde_nasceu_resposta": "Tamara de Lempicka nasceu em Varsóvia, na Polônia, em 1898.",
+    "ano_nascimento_resposta": "Tamara de Lempicka nasceu no ano de 1898.",
+    "ano_falecimento_resposta": "Tamara de Lempicka faleceu no ano de 1980."
   },
   "marc_chagall": {
     "tema": "artistas_universais",
@@ -403,7 +712,18 @@
     "atividade": ["Pinte personagens flutuando no céu 🎨"],
     "final": ["A imaginação pode deixar a arte leve como nuvens ✨"],
     "emocao": "sonho",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1887",
+    "ano_falecimento": "1985",
+    "local_nascimento": "Liozna, Bielorrússia",
+    "o_que_ele_fez": [
+      "Pintou casais flutuando sobre cidades, como em 'Sobre a Cidade'.",
+      "Criou vitrais para a Catedral de Metz e a ONU.",
+      "Misturou memórias da infância judaica com imaginação poética."
+    ],
+    "onde_nasceu_resposta": "Marc Chagall nasceu em Liozna, na Bielorrússia, em 1887.",
+    "ano_nascimento_resposta": "Chagall nasceu no ano de 1887.",
+    "ano_falecimento_resposta": "Chagall faleceu no ano de 1985."
   },
   "paul_klee": {
     "tema": "artistas_universais",
@@ -417,7 +737,18 @@
     "atividade": ["Crie padrões coloridos inspirados em sons 🎨"],
     "final": ["Arte e música podem conversar entre si ✨"],
     "emocao": "criatividade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1879",
+    "ano_falecimento": "1940",
+    "local_nascimento": "Münchenbuchsee, Suíça",
+    "o_que_ele_fez": [
+      "Ensinou na escola de arte Bauhaus, influenciando gerações.",
+      "Criou mais de 9.000 obras, cheias de humor e fantasia.",
+      "Escreveu o livro 'Teoria da Arte Moderna', sobre cor e forma."
+    ],
+    "onde_nasceu_resposta": "Paul Klee nasceu em Münchenbuchsee, na Suíça, em 1879.",
+    "ano_nascimento_resposta": "Paul Klee nasceu no ano de 1879.",
+    "ano_falecimento_resposta": "Paul Klee faleceu no ano de 1940."
   },
   "roy_lichtenstein": {
     "tema": "artistas_universais",
@@ -431,7 +762,18 @@
     "atividade": ["Crie um quadrinho usando balões de fala ✏️"],
     "final": ["A cultura popular também pode virar arte 🌟"],
     "emocao": "diversao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1923",
+    "ano_falecimento": "1997",
+    "local_nascimento": "Nova York, EUA",
+    "o_que_ele_fez": [
+      "Ampliou quadrinhos para telas enormes, com balões e textos.",
+      "Usou a técnica de pontilhado (Ben-Day dots) para imitar impressão.",
+      "Parodiou obras famosas como as pinceladas de Pollock."
+    ],
+    "onde_nasceu_resposta": "Roy Lichtenstein nasceu em Nova York, nos Estados Unidos, em 1923.",
+    "ano_nascimento_resposta": "Lichtenstein nasceu no ano de 1923.",
+    "ano_falecimento_resposta": "Lichtenstein faleceu no ano de 1997."
   },
   "fernando_botero": {
     "tema": "artistas_universais",
@@ -445,7 +787,17 @@
     "atividade": ["Transforme figuras comuns em versões gigantes 🎨"],
     "final": ["A arte pode brincar com tamanhos e formas ✨"],
     "emocao": "humor",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1932",
+    "ano_falecimento": "",
+    "local_nascimento": "Medellín, Colômbia",
+    "o_que_ele_fez": [
+      "Pintou Mona Lisa com formas volumosas e divertidas.",
+      "Fez esculturas de animais e pessoas com aparência rechonchuda.",
+      "Doou muitas obras para museus da Colômbia."
+    ],
+    "onde_nasceu_resposta": "Fernando Botero nasceu em Medellín, na Colômbia, em 1932.",
+    "ano_nascimento_resposta": "Botero nasceu no ano de 1932."
   },
   "jean_michel_basquiat": {
     "tema": "artistas_universais",
@@ -459,7 +811,18 @@
     "atividade": ["Misture palavras e desenhos em uma mesma arte ✏️"],
     "final": ["A arte pode unir imagem, texto e emoção 🌈"],
     "emocao": "expressao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1960",
+    "ano_falecimento": "1988",
+    "local_nascimento": "Brooklyn, Nova York, EUA",
+    "o_que_ele_fez": [
+      "Começou como grafiteiro com o pseudônimo SAMO.",
+      "Pintou o famoso crânio com coroa e dentes amarelos.",
+      "Colaborou com Andy Warhol em uma série de obras."
+    ],
+    "onde_nasceu_resposta": "Jean-Michel Basquiat nasceu no Brooklyn, Nova York, em 1960.",
+    "ano_nascimento_resposta": "Basquiat nasceu no ano de 1960.",
+    "ano_falecimento_resposta": "Basquiat faleceu no ano de 1988."
   },
   "bridget_riley": {
     "tema": "artistas_universais",
@@ -473,7 +836,17 @@
     "atividade": ["Faça padrões usando linhas repetidas ✏️"],
     "final": ["Os olhos também participam da experiência artística ✨"],
     "emocao": "curiosidade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1931",
+    "ano_falecimento": "",
+    "local_nascimento": "Londres, Reino Unido",
+    "o_que_ele_fez": [
+      "Criou pinturas abstratas com listras em preto e branco que vibram.",
+      "Foi uma das principais representantes da Op Art.",
+      "Expandiu seu trabalho para cores, mantendo o efeito óptico."
+    ],
+    "onde_nasceu_resposta": "Bridget Riley nasceu em Londres, no Reino Unido, em 1931.",
+    "ano_nascimento_resposta": "Bridget Riley nasceu no ano de 1931."
   },
   "niki_de_saint_phalle": {
     "tema": "artistas_universais",
@@ -487,7 +860,18 @@
     "atividade": ["Desenhe criaturas coloridas gigantes 🎨"],
     "final": ["A arte pode ocupar espaços enormes e surpreendentes 🌟"],
     "emocao": "encantamento",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1930",
+    "ano_falecimento": "2002",
+    "local_nascimento": "Neuilly-sur-Seine, França",
+    "o_que_ele_fez": [
+      "Criou as 'Nanas', esculturas alegres e volumosas de mulheres.",
+      "Fez o Jardim dos Tarô, com figuras gigantes na Toscana.",
+      "Usou tiro de espingarda sobre tinta em suas primeiras obras."
+    ],
+    "onde_nasceu_resposta": "Niki de Saint Phalle nasceu em Neuilly-sur-Seine, na França, em 1930.",
+    "ano_nascimento_resposta": "Niki de Saint Phalle nasceu no ano de 1930.",
+    "ano_falecimento_resposta": "Niki de Saint Phalle faleceu no ano de 2002."
   },
   "ai_weiwei": {
     "tema": "artistas_universais",
@@ -501,7 +885,17 @@
     "atividade": ["Monte uma instalação usando objetos recicláveis ♻️"],
     "final": ["A arte também pode provocar reflexão ✨"],
     "emocao": "pensamento",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1957",
+    "ano_falecimento": "",
+    "local_nascimento": "Pequim, China",
+    "o_que_ele_fez": [
+      "Cobriu o chão do Museu de Arte de Tóquio com 100 milhões de sementes de girassol de porcelana.",
+      "Instalou milhares de mochilas em praças para lembrar crianças.",
+      "Projetou o Estádio Nacional de Pequim (Ninho de Pássaro)."
+    ],
+    "onde_nasceu_resposta": "Ai Weiwei nasceu em Pequim, na China, em 1957.",
+    "ano_nascimento_resposta": "Ai Weiwei nasceu no ano de 1957."
   },
   "takashi_murakami": {
     "tema": "artistas_universais",
@@ -515,7 +909,17 @@
     "atividade": ["Desenhe flores com expressões divertidas 🌈"],
     "final": ["A arte pode ser alegre e cheia de fantasia ✨"],
     "emocao": "alegria",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1962",
+    "ano_falecimento": "",
+    "local_nascimento": "Tóquio, Japão",
+    "o_que_ele_fez": [
+      "Criou o movimento artístico 'Superflat'.",
+      "Desenhou flores sorridentes e personagens de olhos grandes.",
+      "Colaborou com marcas como Louis Vuitton."
+    ],
+    "onde_nasceu_resposta": "Takashi Murakami nasceu em Tóquio, no Japão, em 1962.",
+    "ano_nascimento_resposta": "Takashi Murakami nasceu no ano de 1962."
   },
   "anish_kapoor": {
     "tema": "artistas_universais",
@@ -529,7 +933,17 @@
     "atividade": ["Desenhe objetos refletindo luz ✏️"],
     "final": ["Luz e reflexo também podem virar arte ✨"],
     "emocao": "encantamento",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1954",
+    "ano_falecimento": "",
+    "local_nascimento": "Bombaim, Índia",
+    "o_que_ele_fez": [
+      "Criou 'Cloud Gate' (o feijão polido) em Chicago.",
+      "Usou pigmentos de cores intensas em esculturas que parecem sugar o espaço.",
+      "Produziu a obra 'Descendo' que parece um vórtice vermelho."
+    ],
+    "onde_nasceu_resposta": "Anish Kapoor nasceu em Bombaim, na Índia, em 1954.",
+    "ano_nascimento_resposta": "Anish Kapoor nasceu no ano de 1954."
   },
   "olafur_eliasson": {
     "tema": "artistas_universais",
@@ -543,7 +957,17 @@
     "atividade": ["Brinque com lanternas criando sombras 🎭"],
     "final": ["A arte pode transformar a maneira de enxergar o espaço ✨"],
     "emocao": "exploracao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1967",
+    "ano_falecimento": "",
+    "local_nascimento": "Copenhague, Dinamarca",
+    "o_que_ele_fez": [
+      "Instalou um enorme sol amarelo no Tate Modern, em Londres.",
+      "Criou cachoeiras artificiais no rio Hudson, em Nova York.",
+      "Usa neblina, espelhos e luzes para criar ambientes imersivos."
+    ],
+    "onde_nasceu_resposta": "Olafur Eliasson nasceu em Copenhague, na Dinamarca, em 1967.",
+    "ano_nascimento_resposta": "Olafur Eliasson nasceu no ano de 1967."
   },
   "jr": {
     "tema": "artistas_universais",
@@ -557,7 +981,17 @@
     "atividade": ["Monte colagens usando fotos e desenhos ✂️"],
     "final": ["A arte urbana pode transformar cidades 🌆"],
     "emocao": "conexao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1983",
+    "ano_falecimento": "",
+    "local_nascimento": "Paris, França",
+    "o_que_ele_fez": [
+      "Cobriu a fachada do Louvre com uma ilusão de ótica.",
+      "Colou retratos de refugiados em muros ao redor do mundo.",
+      "Ganhou o prêmio TED em 2011 e criou o projeto 'Inside Out'."
+    ],
+    "onde_nasceu_resposta": "JR nasceu em Paris, na França, em 1983.",
+    "ano_nascimento_resposta": "JR nasceu no ano de 1983."
   },
   "damien_hirst": {
     "tema": "artistas_universais",
@@ -571,7 +1005,17 @@
     "atividade": ["Faça padrões usando círculos coloridos 🎨"],
     "final": ["A arte contemporânea pode surpreender de muitos jeitos ✨"],
     "emocao": "curiosidade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1965",
+    "ano_falecimento": "",
+    "local_nascimento": "Bristol, Reino Unido",
+    "o_que_ele_fez": [
+      "Imobilizou um tubarão em formol para a obra 'A Impossibilidade Física da Morte'.",
+      "Pintou séries de pontos coloridos ('Spot Paintings').",
+      "Criou 'Por Amor a Deus', uma caveira cravejada de diamantes."
+    ],
+    "onde_nasceu_resposta": "Damien Hirst nasceu em Bristol, no Reino Unido, em 1965.",
+    "ano_nascimento_resposta": "Damien Hirst nasceu no ano de 1965."
   },
   "marina_abramovic": {
     "tema": "artistas_universais",
@@ -585,7 +1029,17 @@
     "atividade": ["Crie movimentos para representar emoções 🎨"],
     "final": ["O corpo também pode contar histórias 🌟"],
     "emocao": "expressao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1946",
+    "ano_falecimento": "",
+    "local_nascimento": "Belgrado, Sérvia",
+    "o_que_ele_fez": [
+      "Ficou sentada em silêncio por 736 horas no MoMA, olhando nos olhos dos visitantes.",
+      "Andou pela Grande Muralha da China para encontrar seu ex-parceiro.",
+      "Usou objetos perigosos e dor como parte de suas performances."
+    ],
+    "onde_nasceu_resposta": "Marina Abramović nasceu em Belgrado, na Sérvia, em 1946.",
+    "ano_nascimento_resposta": "Marina Abramović nasceu no ano de 1946."
   },
   "zaha_hadid": {
     "tema": "artistas_universais",
@@ -599,7 +1053,18 @@
     "atividade": ["Desenhe um prédio cheio de curvas ✏️"],
     "final": ["Arquitetura também pode parecer arte em movimento ✨"],
     "emocao": "imaginacao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1950",
+    "ano_falecimento": "2016",
+    "local_nascimento": "Bagdá, Iraque",
+    "o_que_ele_fez": [
+      "Projetou o Aquatics Centre para as Olimpíadas de Londres.",
+      "Criou o edifício da Ópera de Guangzhou, na China.",
+      "Foi a primeira mulher a ganhar o Prêmio Pritzker de arquitetura."
+    ],
+    "onde_nasceu_resposta": "Zaha Hadid nasceu em Bagdá, no Iraque, em 1950.",
+    "ano_nascimento_resposta": "Zaha Hadid nasceu no ano de 1950.",
+    "ano_falecimento_resposta": "Zaha Hadid faleceu no ano de 2016."
   },
   "antoni_gaudi": {
     "tema": "artistas_universais",
@@ -613,7 +1078,18 @@
     "atividade": ["Crie mosaicos usando formas coloridas 🎨"],
     "final": ["A natureza pode inspirar construções incríveis 🌈"],
     "emocao": "encantamento",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1852",
+    "ano_falecimento": "1926",
+    "local_nascimento": "Reus, Espanha",
+    "o_que_ele_fez": [
+      "Projetou a Sagrada Família, que ainda está em construção.",
+      "Criou o Parque Güell, com bancos de mosaico e formas onduladas.",
+      "Usou arcos parabólicos e colunas inclinadas em seus edifícios."
+    ],
+    "onde_nasceu_resposta": "Antoni Gaudí nasceu em Reus, na Espanha, em 1852.",
+    "ano_nascimento_resposta": "Gaudí nasceu no ano de 1852.",
+    "ano_falecimento_resposta": "Gaudí faleceu no ano de 1926."
   },
   "auguste_rodin": {
     "tema": "artistas_universais",
@@ -627,7 +1103,18 @@
     "atividade": ["Modele personagens usando massinha 🎨"],
     "final": ["As esculturas podem parecer cheias de vida ✨"],
     "emocao": "reflexao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1840",
+    "ano_falecimento": "1917",
+    "local_nascimento": "Paris, França",
+    "o_que_ele_fez": [
+      "Criou 'O Pensador', originalmente parte de uma porta gigante chamada 'Portão do Inferno'.",
+      "Esculpiu 'O Beijo', mostrando um casal se abraçando.",
+      "Enfrentou críticas por suas esculturas realistas e emocionais."
+    ],
+    "onde_nasceu_resposta": "Auguste Rodin nasceu em Paris, na França, em 1840.",
+    "ano_nascimento_resposta": "Rodin nasceu no ano de 1840.",
+    "ano_falecimento_resposta": "Rodin faleceu no ano de 1917."
   },
   "henry_moore": {
     "tema": "artistas_universais",
@@ -641,7 +1128,18 @@
     "atividade": ["Crie esculturas com argila ou papel ✂️"],
     "final": ["As formas simples podem transmitir beleza 🌟"],
     "emocao": "harmonia",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1898",
+    "ano_falecimento": "1986",
+    "local_nascimento": "Castleford, Reino Unido",
+    "o_que_ele_fez": [
+      "Criou esculturas abstratas de figuras reclinadas.",
+      "Usou buracos e formas orgânicas inspiradas em ossos e seixos.",
+      "Doou muitas obras para a Fundação Henry Moore."
+    ],
+    "onde_nasceu_resposta": "Henry Moore nasceu em Castleford, no Reino Unido, em 1898.",
+    "ano_nascimento_resposta": "Henry Moore nasceu no ano de 1898.",
+    "ano_falecimento_resposta": "Henry Moore faleceu no ano de 1986."
   },
   "louise_bourgeois": {
     "tema": "artistas_universais",
@@ -655,7 +1153,18 @@
     "atividade": ["Desenhe criaturas enormes e imaginárias 🎨"],
     "final": ["A arte pode transformar emoções em formas 🌈"],
     "emocao": "expressao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1911",
+    "ano_falecimento": "2010",
+    "local_nascimento": "Paris, França",
+    "o_que_ele_fez": [
+      "Criou a escultura 'Maman', uma aranha gigante de bronze.",
+      "Produziu células, ambientes com objetos pessoais e tecidos.",
+      "Trabalhou com tecido, borracha e mármore até os 90 anos."
+    ],
+    "onde_nasceu_resposta": "Louise Bourgeois nasceu em Paris, na França, em 1911.",
+    "ano_nascimento_resposta": "Louise Bourgeois nasceu no ano de 1911.",
+    "ano_falecimento_resposta": "Louise Bourgeois faleceu no ano de 2010."
   },
   "constantin_brancusi": {
     "tema": "artistas_universais",
@@ -669,7 +1178,18 @@
     "atividade": ["Crie figuras usando poucas linhas ✏️"],
     "final": ["A simplicidade também pode ser poderosa 🌟"],
     "emocao": "calma",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1876",
+    "ano_falecimento": "1957",
+    "local_nascimento": "Hobița, Romênia",
+    "o_que_ele_fez": [
+      "Esculpiu 'Pássaro no Espaço', uma forma alongada e elegante.",
+      "Simplificou figuras humanas até formas ovais básicas.",
+      "Trabalhou principalmente com mármore, bronze e madeira."
+    ],
+    "onde_nasceu_resposta": "Constantin Brancusi nasceu em Hobița, na Romênia, em 1876.",
+    "ano_nascimento_resposta": "Brancusi nasceu no ano de 1876.",
+    "ano_falecimento_resposta": "Brancusi faleceu no ano de 1957."
   },
   "edmonia_lewis": {
     "tema": "artistas_universais",
@@ -683,7 +1203,18 @@
     "atividade": ["Modele personagens usando massinha 🎨"],
     "final": ["A arte pode guardar histórias importantes 🌍"],
     "emocao": "inspiracao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1844",
+    "ano_falecimento": "1907",
+    "local_nascimento": "Greenbush, Nova York, EUA",
+    "o_que_ele_fez": [
+      "Esculpiu 'A Morte de Cleópatra', uma obra dramática em mármore.",
+      "Foi a primeira mulher negra e nativa americana a ganhar reconhecimento internacional.",
+      "Retratou figuras abolicionistas e temas da mitologia."
+    ],
+    "onde_nasceu_resposta": "Edmonia Lewis nasceu em Greenbush, Nova York, em 1844.",
+    "ano_nascimento_resposta": "Edmonia Lewis nasceu no ano de 1844.",
+    "ano_falecimento_resposta": "Edmonia Lewis faleceu no ano de 1907."
   },
   "hokusai": {
     "tema": "artistas_universais",
@@ -697,7 +1228,18 @@
     "atividade": ["Faça desenhos usando linhas curvas e repetidas ✏️"],
     "final": ["A natureza pode inspirar imagens inesquecíveis ✨"],
     "emocao": "admiracao",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1760",
+    "ano_falecimento": "1849",
+    "local_nascimento": "Tóquio, Japão",
+    "o_que_ele_fez": [
+      "Criou a xilogravura 'A Grande Onda de Kanagawa'.",
+      "Produziu a série '36 Vistas do Monte Fuji'.",
+      "Mudou de estilo várias vezes ao longo da vida, sempre inovando."
+    ],
+    "onde_nasceu_resposta": "Hokusai nasceu em Tóquio, no Japão, em 1760.",
+    "ano_nascimento_resposta": "Hokusai nasceu no ano de 1760.",
+    "ano_falecimento_resposta": "Hokusai faleceu no ano de 1849."
   },
   "marcel_duchamp": {
     "tema": "artistas_universais",
@@ -711,6 +1253,17 @@
     "atividade": ["Escolha um objeto da casa e invente um novo significado para ele 🎨"],
     "final": ["Às vezes a ideia pode ser tão importante quanto o desenho 🌈"],
     "emocao": "curiosidade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1887",
+    "ano_falecimento": "1968",
+    "local_nascimento": "Blainville-Crevon, França",
+    "o_que_ele_fez": [
+      "Apresentou um urinol assinado como obra de arte ('Fonte').",
+      "Colocou uma roda de bicicleta sobre um banco, criando um ready-made.",
+      "Desafiou as definições tradicionais de arte e influenciou a arte conceitual."
+    ],
+    "onde_nasceu_resposta": "Marcel Duchamp nasceu em Blainville-Crevon, na França, em 1887.",
+    "ano_nascimento_resposta": "Marcel Duchamp nasceu no ano de 1887.",
+    "ano_falecimento_resposta": "Marcel Duchamp faleceu no ano de 1968."
   }
 }
