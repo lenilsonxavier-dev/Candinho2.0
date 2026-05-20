@@ -11,7 +11,19 @@
     "atividade": ["Desenhe um personagem usando formas diferentes ✏️"],
     "final": ["A arte pode mostrar a imaginação e a cultura 🌟"],
     "emocao": "criatividade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1886",
+    "ano_falecimento": "1973",
+    "local_nascimento": "Capivari, São Paulo, Brasil",
+    "o_que_ele_fez": [
+      "Pintou o Abaporu, um dos quadros mais importantes da arte brasileira.",
+      "Fez parte do Grupo dos Cinco, que revolucionou a arte moderna no Brasil.",
+      "Criou o movimento antropofágico, que engolia a cultura estrangeira e transformava em arte brasileira.",
+      "Pintou obras como Operários e Antropofagia."
+    ],
+    "onde_nasceu_resposta": "Tarsila do Amaral nasceu em Capivari, São Paulo, em 1886.",
+    "ano_nascimento_resposta": "Tarsila do Amaral nasceu no ano de 1886.",
+    "ano_falecimento_resposta": "Tarsila do Amaral faleceu no ano de 1973."
   },
   "candido_portinari": {
     "tema": "artistas_brasileiros",
@@ -25,7 +37,18 @@
     "atividade": ["Desenhe pessoas fazendo alguma atividade que você vê todos os dias ✏️"],
     "final": ["A arte pode valorizar as pessoas simples e o nosso cotidiano 🌻"],
     "emocao": "empatia",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1903",
+    "ano_falecimento": "1962",
+    "local_nascimento": "Brodowski, São Paulo, Brasil",
+    "o_que_ele_fez": [
+      "Pintou os murais 'Guerra e Paz' na sede da ONU em Nova York.",
+      "Retratou crianças brincando, trabalhadores no campo e a vida dos retirantes.",
+      "Pintou mais de 5 mil obras, entre quadros, murais e painéis."
+    ],
+    "onde_nasceu_resposta": "Candido Portinari nasceu em Brodowski, São Paulo, em 1903.",
+    "ano_nascimento_resposta": "Candido Portinari nasceu no ano de 1903.",
+    "ano_falecimento_resposta": "Candido Portinari faleceu no ano de 1962."
   },
   "anita_malfatti": {
     "tema": "artistas_brasileiros",
@@ -39,7 +62,18 @@
     "atividade": ["Pinte uma figura humana com cores que não existem na realidade, como roxo no cabelo ou azul na pele 🎨"],
     "final": ["Ser diferente na arte é um jeito de mostrar o seu olhar único 👁️"],
     "emocao": "ousadia",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1889",
+    "ano_falecimento": "1964",
+    "local_nascimento": "São Paulo, São Paulo, Brasil",
+    "o_que_ele_fez": [
+      "Fez a exposição de 1917 que chocou o público com suas cores e formas.",
+      "Foi uma das pioneiras do modernismo no Brasil.",
+      "Participou da Semana de Arte Moderna de 1922."
+    ],
+    "onde_nasceu_resposta": "Anita Malfatti nasceu em São Paulo, em 1889.",
+    "ano_nascimento_resposta": "Anita Malfatti nasceu no ano de 1889.",
+    "ano_falecimento_resposta": "Anita Malfatti faleceu no ano de 1964."
   },
   "di_cavalcanti": {
     "tema": "artistas_brasileiros",
@@ -53,7 +87,18 @@
     "atividade": ["Desenhe uma roda de samba ou uma festa junina com muitas cores e movimentos 💃"],
     "final": ["A arte pode capturar a alegria e a energia do nosso povo 🎉"],
     "emocao": "alegria",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1897",
+    "ano_falecimento": "1976",
+    "local_nascimento": "Rio de Janeiro, Rio de Janeiro, Brasil",
+    "o_que_ele_fez": [
+      "Criou o cartaz da Semana de Arte Moderna de 1922.",
+      "Pintou cenas de samba, mulatas e festas populares.",
+      "Ilustrou livros e foi um dos grandes nomes do modernismo brasileiro."
+    ],
+    "onde_nasceu_resposta": "Di Cavalcanti nasceu no Rio de Janeiro, em 1897.",
+    "ano_nascimento_resposta": "Di Cavalcanti nasceu no ano de 1897.",
+    "ano_falecimento_resposta": "Di Cavalcanti faleceu no ano de 1976."
   },
   "romero_britto": {
     "tema": "artistas_brasileiros",
@@ -67,7 +112,17 @@
     "atividade": ["Desenhe um coração ou um animal e preencha com listras, bolinhas e cores vibrantes ❤️"],
     "final": ["A arte pode espalhar felicidade pelo mundo 🌈"],
     "emocao": "otimismo",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1963",
+    "ano_falecimento": "",
+    "local_nascimento": "Recife, Pernambuco, Brasil",
+    "o_que_ele_fez": [
+      "Criou esculturas e pinturas em praças e museus do mundo todo.",
+      "Fez obras para as Olimpíadas e para a FIFA.",
+      "Espalhou sua arte alegre e colorida por mais de 100 países."
+    ],
+    "onde_nasceu_resposta": "Romero Britto nasceu em Recife, Pernambuco, em 1963.",
+    "ano_nascimento_resposta": "Romero Britto nasceu no ano de 1963."
   },
   "vik_muniz": {
     "tema": "artistas_brasileiros",
@@ -81,7 +136,17 @@
     "atividade": ["Use grãos de feijão, arroz ou massinha para montar um rosto ou animal sobre uma folha 📸"],
     "final": ["A arte pode nascer de qualquer lugar, até do lixo ♻️"],
     "emocao": "curiosidade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1961",
+    "ano_falecimento": "",
+    "local_nascimento": "São Paulo, São Paulo, Brasil",
+    "o_que_ele_fez": [
+      "Recriou obras famosas usando chocolate, poeira, açúcar e lixo.",
+      "Foi indicado ao Oscar pelo filme 'Lixo Extraordinário'.",
+      "Expôs suas fotos nos maiores museus do mundo."
+    ],
+    "onde_nasceu_resposta": "Vik Muniz nasceu em São Paulo, em 1961.",
+    "ano_nascimento_resposta": "Vik Muniz nasceu no ano de 1961."
   },
   "beatriz_milhazes": {
     "tema": "artistas_brasileiros",
@@ -95,7 +160,17 @@
     "atividade": ["Desenhe vários círculos, flores e listras coloridos, um sobre o outro, formando uma composição alegre 🌸"],
     "final": ["A arte pode ser uma explosão de formas e cores 🎆"],
     "emocao": "vitalidade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1960",
+    "ano_falecimento": "",
+    "local_nascimento": "Rio de Janeiro, Rio de Janeiro, Brasil",
+    "o_que_ele_fez": [
+      "Representou o Brasil na Bienal de Veneza.",
+      "Criou murais para o metrô de Nova York.",
+      "Suas obras estão em museus como MoMA e Guggenheim."
+    ],
+    "onde_nasceu_resposta": "Beatriz Milhazes nasceu no Rio de Janeiro, em 1960.",
+    "ano_nascimento_resposta": "Beatriz Milhazes nasceu no ano de 1960."
   },
   "adriana_varejao": {
     "tema": "artistas_brasileiros",
@@ -109,7 +184,17 @@
     "atividade": ["Desenhe um painel de azulejos com um desenho seu favorito repetido várias vezes 🔷"],
     "final": ["A arte pode conversar com a história e com o nosso dia a dia 📜"],
     "emocao": "reflexão",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1964",
+    "ano_falecimento": "",
+    "local_nascimento": "Rio de Janeiro, Rio de Janeiro, Brasil",
+    "o_que_ele_fez": [
+      "Criou a obra 'Celacanto Provoca Maremoto' para o museu Inhotim.",
+      "Representou o Brasil na Bienal de Veneza.",
+      "Suas obras misturam pintura, cerâmica e escultura."
+    ],
+    "onde_nasceu_resposta": "Adriana Varejão nasceu no Rio de Janeiro, em 1964.",
+    "ano_nascimento_resposta": "Adriana Varejão nasceu no ano de 1964."
   },
   "heitor_dos_prazeres": {
     "tema": "artistas_brasileiros",
@@ -123,7 +208,18 @@
     "atividade": ["Desenhe uma roda de samba com instrumentos e pessoas dançando, usando cores quentes e vivas 🥁"],
     "final": ["A arte pode unir música, dança e pintura em uma só festa 🎭"],
     "emocao": "ritmo",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1898",
+    "ano_falecimento": "1966",
+    "local_nascimento": "Rio de Janeiro, Rio de Janeiro, Brasil",
+    "o_que_ele_fez": [
+      "Pintou cenas de samba e desfiles de carnaval.",
+      "Foi compositor de sambas famosos.",
+      "Fez parte da ala de compositores da Portela."
+    ],
+    "onde_nasceu_resposta": "Heitor dos Prazeres nasceu no Rio de Janeiro, em 1898.",
+    "ano_nascimento_resposta": "Heitor dos Prazeres nasceu no ano de 1898.",
+    "ano_falecimento_resposta": "Heitor dos Prazeres faleceu no ano de 1966."
   },
   "lasar_segal": {
     "tema": "artistas_brasileiros",
@@ -137,7 +233,18 @@
     "atividade": ["Desenhe um rosto com expressão forte (tristeza, alegria ou susto) usando apenas linhas curvas e grossas ✏️"],
     "final": ["A arte pode falar de sentimentos profundos sem precisar de palavras 🗣️"],
     "emocao": "empatia",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1891",
+    "ano_falecimento": "1957",
+    "local_nascimento": "Vilnius, Lituânia",
+    "o_que_ele_fez": [
+      "Fez obras sobre a imigração e o sofrimento humano.",
+      "Fundou o Museu Lasar Segall em São Paulo.",
+      "Usou cores fortes e traços dramáticos para mostrar emoções."
+    ],
+    "onde_nasceu_resposta": "Lasar Segall nasceu em Vilnius, na Lituânia, em 1891.",
+    "ano_nascimento_resposta": "Lasar Segall nasceu no ano de 1891.",
+    "ano_falecimento_resposta": "Lasar Segall faleceu no ano de 1957."
   },
   "tomie_ohtake": {
     "tema": "artistas_brasileiros",
@@ -151,7 +258,18 @@
     "atividade": ["Pinte uma grande mancha vermelha ou azul e, em volta, faça curvas que se repetem suavemente 🎨"],
     "final": ["A arte abstrata nos permite sentir as formas e cores livremente 🌀"],
     "emocao": "serenidade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1913",
+    "ano_falecimento": "2015",
+    "local_nascimento": "Quioto, Japão",
+    "o_que_ele_fez": [
+      "Criou o painel 'Cor e Forma' no metrô de São Paulo.",
+      "Suas esculturas abstratas estão em praças e museus.",
+      "Começou a pintar aos 40 anos e se tornou famosa mundialmente."
+    ],
+    "onde_nasceu_resposta": "Tomie Ohtake nasceu em Quioto, no Japão, em 1913.",
+    "ano_nascimento_resposta": "Tomie Ohtake nasceu no ano de 1913.",
+    "ano_falecimento_resposta": "Tomie Ohtake faleceu no ano de 2015."
   },
   "pedro_americo": {
     "tema": "artistas_brasileiros",
@@ -165,7 +283,18 @@
     "atividade": ["Desenhe uma cena heroica com muitos personagens, como uma cavalgada ou uma grande festa 📜"],
     "final": ["A arte pode guardar momentos importantes da nossa história 📖"],
     "emocao": "orgulho",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1843",
+    "ano_falecimento": "1905",
+    "local_nascimento": "Areia, Paraíba, Brasil",
+    "o_que_ele_fez": [
+      "Pintou 'Independência ou Morte', a obra mais famosa sobre a independência do Brasil.",
+      "Foi diretor da Academia Imperial de Belas Artes.",
+      "Pintou telas históricas sobre batalhas e a família real."
+    ],
+    "onde_nasceu_resposta": "Pedro Américo nasceu em Areia, na Paraíba, em 1843.",
+    "ano_nascimento_resposta": "Pedro Américo nasceu no ano de 1843.",
+    "ano_falecimento_resposta": "Pedro Américo faleceu no ano de 1905."
   },
   "almeida_junior": {
     "tema": "artistas_brasileiros",
@@ -179,7 +308,18 @@
     "atividade": ["Desenhe uma cena de roça com uma casinha, uma árvore e uma pessoa trabalhando ou descansando 👨‍🌾"],
     "final": ["A arte pode valorizar a simplicidade e a beleza da vida no campo 🌾"],
     "emocao": "nostalgia",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1850",
+    "ano_falecimento": "1899",
+    "local_nascimento": "Itu, São Paulo, Brasil",
+    "o_que_ele_fez": [
+      "Pintou 'O Caipira Picando Fumo', um ícone da arte brasileira.",
+      "Foi um dos principais pintores realistas do Brasil.",
+      "Retratou a vida no interior com muito realismo e detalhe."
+    ],
+    "onde_nasceu_resposta": "Almeida Júnior nasceu em Itu, São Paulo, em 1850.",
+    "ano_nascimento_resposta": "Almeida Júnior nasceu no ano de 1850.",
+    "ano_falecimento_resposta": "Almeida Júnior faleceu no ano de 1899."
   },
   "djanira": {
     "tema": "artistas_brasileiros",
@@ -193,7 +333,18 @@
     "atividade": ["Desenhe uma procissão ou uma roda de ciranda com muitas pessoas e bandeirinhas 🎏"],
     "final": ["A arte pode celebrar as tradições e a fé do nosso povo ✨"],
     "emocao": "acolhimento",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1914",
+    "ano_falecimento": "1979",
+    "local_nascimento": "Avaré, São Paulo, Brasil",
+    "o_que_ele_fez": [
+      "Pintou cenas de festas populares, procissões e trabalhadores.",
+      "Fez painéis para igrejas e murais públicos.",
+      "Começou a pintar tarde e se tornou uma grande artista autodidata."
+    ],
+    "onde_nasceu_resposta": "Djanira nasceu em Avaré, São Paulo, em 1914.",
+    "ano_nascimento_resposta": "Djanira nasceu no ano de 1914.",
+    "ano_falecimento_resposta": "Djanira faleceu no ano de 1979."
   },
   "lita_cabellut": {
     "tema": "artistas_brasileiros",
@@ -207,7 +358,17 @@
     "atividade": ["Desenhe um rosto bem grande na folha e exagere os olhos, a boca ou as sobrancelhas para mostrar um sentimento 😊😢😡"],
     "final": ["A arte pode transformar dor e história em beleza 🖤"],
     "emocao": "intensidade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1966",
+    "ano_falecimento": "",
+    "local_nascimento": "Araguaína, Tocantins, Brasil",
+    "o_que_ele_fez": [
+      "Criou retratos gigantes que mostram emoções e rugas.",
+      "Expôs seus trabalhos em museus da Europa e Ásia.",
+      "Superou uma infância difícil para se tornar artista famosa."
+    ],
+    "onde_nasceu_resposta": "Lita Cabellut nasceu em Araguaína, Tocantins, em 1966.",
+    "ano_nascimento_resposta": "Lita Cabellut nasceu no ano de 1966."
   },
   "rosana_paulino": {
     "tema": "artistas_brasileiros",
@@ -221,7 +382,17 @@
     "atividade": ["Desenhe um rosto e, ao redor, faça pontos ou linhas como se fosse um bordado, usando lápis de cor 🪡"],
     "final": ["A arte pode resgatar memórias e dar voz a quem nem sempre foi ouvida 🗣️"],
     "emocao": "resistência",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1967",
+    "ano_falecimento": "",
+    "local_nascimento": "São Paulo, São Paulo, Brasil",
+    "o_que_ele_fez": [
+      "Criou a obra 'Parede da Memória', bordando retratos de mulheres negras.",
+      "Representou o Brasil na Bienal de Veneza.",
+      "Usa bordado e fotografia para falar sobre história e identidade."
+    ],
+    "onde_nasceu_resposta": "Rosana Paulino nasceu em São Paulo, em 1967.",
+    "ano_nascimento_resposta": "Rosana Paulino nasceu no ano de 1967."
   },
   "sonia_gomes": {
     "tema": "artistas_brasileiros",
@@ -235,7 +406,17 @@
     "atividade": ["Amasse e amarre retalhos de pano ou tiras de papel formando uma pequena escultura pendurada 🧶"],
     "final": ["A arte pode nascer do afeto e da reutilização de materiais ♻️"],
     "emocao": "aconchego",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1948",
+    "ano_falecimento": "",
+    "local_nascimento": "Caetanópolis, Minas Gerais, Brasil",
+    "o_que_ele_fez": [
+      "Criou esculturas com tecidos, rendas e objetos amarrados.",
+      "Expôs suas obras no Centre Pompidou, em Paris.",
+      "Começou a fazer arte aos 50 anos e conquistou o mundo."
+    ],
+    "onde_nasceu_resposta": "Sonia Gomes nasceu em Caetanópolis, Minas Gerais, em 1948.",
+    "ano_nascimento_resposta": "Sonia Gomes nasceu no ano de 1948."
   },
   "daiara_tukano": {
     "tema": "artistas_brasileiros",
@@ -249,7 +430,17 @@
     "atividade": ["Desenhe um símbolo que represente a floresta ou um animal importante para você, repetindo-o em uma moldura decorativa 🐆"],
     "final": ["A arte indígena nos ensina a respeitar a terra e os mais velhos 🌎"],
     "emocao": "ancestralidade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1978",
+    "ano_falecimento": "",
+    "local_nascimento": "São Gabriel da Cachoeira, Amazonas, Brasil",
+    "o_que_ele_fez": [
+      "Criou murais e pinturas sobre a cultura indígena.",
+      "Ajudou a fundar a primeira galeria de arte indígena no Museu de Arte do Rio.",
+      "Usa sua arte para defender os direitos indígenas."
+    ],
+    "onde_nasceu_resposta": "Daiara Tukano nasceu em São Gabriel da Cachoeira, Amazonas, em 1978.",
+    "ano_nascimento_resposta": "Daiara Tukano nasceu no ano de 1978."
   },
   "awa_mendes": {
     "tema": "artistas_brasileiros",
@@ -263,7 +454,17 @@
     "atividade": ["Desenhe uma árvore grande com raízes e frutas, e ao redor coloque desenhos de animais da mata 🌴"],
     "final": ["A arte pode proteger a natureza e lembrar que somos parte dela 🍃"],
     "emocao": "gratidão",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1985",
+    "ano_falecimento": "",
+    "local_nascimento": "Maranhão, Brasil",
+    "o_que_ele_fez": [
+      "Pinta sobre a relação do povo Guajajara com a floresta.",
+      "Usa a arte para defender a Amazônia e os direitos indígenas.",
+      "Participa de exposições sobre arte indígena contemporânea."
+    ],
+    "onde_nasceu_resposta": "Awa Mendes nasceu no Maranhão, em 1985.",
+    "ano_nascimento_resposta": "Awa Mendes nasceu no ano de 1985."
   },
   "jaider_esbell": {
     "tema": "artistas_brasileiros",
@@ -277,7 +478,18 @@
     "atividade": ["Desenhe um ser fantástico metade homem, metade animal ou planta, usando padrões geométricos como listras e triângulos 🐸"],
     "final": ["A arte pode criar novos mitos e conectar passado e presente ✨"],
     "emocao": "imaginação",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1979",
+    "ano_falecimento": "2021",
+    "local_nascimento": "Roraima, Brasil",
+    "o_que_ele_fez": [
+      "Criou pinturas com símbolos e cores vibrantes sobre a cultura indígena.",
+      "Organizou a exposição 'Véxoa: Nós Sabemos' com artistas indígenas.",
+      "Escreveu livros e foi um grande ativista da arte indígena."
+    ],
+    "onde_nasceu_resposta": "Jaider Esbell nasceu em Roraima, em 1979.",
+    "ano_nascimento_resposta": "Jaider Esbell nasceu no ano de 1979.",
+    "ano_falecimento_resposta": "Jaider Esbell faleceu no ano de 2021."
   },
   "denilson_baniwa": {
     "tema": "artistas_brasileiros",
@@ -291,6 +503,16 @@
     "atividade": ["Invente um herói ou heroína indígena: dê um nome, um animal de poder e desenhe seu uniforme com grafismos 🏹"],
     "final": ["A arte pode transformar a tradição em algo novo e divertido 🤣"],
     "emocao": "humor",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1988",
+    "ano_falecimento": "",
+    "local_nascimento": "Rio Negro, Amazonas, Brasil",
+    "o_que_ele_fez": [
+      "Criou a série 'Vingadores Indígenas', misturando heróis da Marvel com cultura indígena.",
+      "Fez exposições em museus como o MASP e o Museu de Arte do Rio.",
+      "Usa arte para criticar o preconceito e valorizar a cultura indígena."
+    ],
+    "onde_nasceu_resposta": "Denilson Baniwa nasceu na região do Rio Negro, Amazonas, em 1988.",
+    "ano_nascimento_resposta": "Denilson Baniwa nasceu no ano de 1988."
   }
 }
