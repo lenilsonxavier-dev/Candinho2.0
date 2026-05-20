@@ -1,8 +1,8 @@
 {
-  "conceicao_evaristo_olhos_dagua": {
+  "conceicao_evaristo": {
     "tema": "escritoras_brasileiras",
     "subtema": "conceicao_evaristo",
-    "palavras_chave": ["conceição evaristo", "olhos d'água", "contos", "mulheres negras"],
+    "palavras_chave": ["conceição evaristo", "olhos d'água", "becos da memória", "contos", "mulheres negras"],
     "inicio": ["Conceição Evaristo escreve histórias que parecem janelas para a vida de mulheres fortes e guerreiras 💪📖"],
     "explicacao_curta": ["Conceição Evaristo escreve histórias inspiradas na vida real de muitas mulheres negras brasileiras."],
     "explicacao_aprofundada": ["Seus textos falam de coragem, família, sonhos e dificuldades do dia a dia, mostrando como a esperança nunca se apaga."],
@@ -11,23 +11,21 @@
     "atividade": ["Desenhe uma cena de uma história real que você gostaria de escrever: pode ser um momento feliz ou de superação 🖍️"],
     "final": ["A literatura pode dar voz a quem sempre teve histórias incríveis para contar 🗣️"],
     "emocao": "resistência",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1946",
+    "ano_falecimento": "",
+    "local_nascimento": "Belo Horizonte, Minas Gerais, Brasil",
+    "o_que_ele_fez": [
+      "Escreveu 'Olhos d'Água', livro de contos que ganhou prêmios importantes.",
+      "Escreveu 'Becos da Memória', romance inspirado em sua infância.",
+      "É uma das vozes mais importantes da literatura brasileira contemporânea.",
+      "Doutora em Literatura Comparada pela UFMG."
+    ],
+    "onde_nasceu_resposta": "Conceição Evaristo nasceu em Belo Horizonte, Minas Gerais, em 1946.",
+    "ano_nascimento_resposta": "Conceição Evaristo nasceu no ano de 1946.",
+    "ano_falecimento_resposta": "Conceição Evaristo continua viva e escrevendo até hoje."
   },
-  "conceicao_evaristo_becos_da_memoria": {
-    "tema": "escritoras_brasileiras",
-    "subtema": "conceicao_evaristo",
-    "palavras_chave": ["conceição evaristo", "becos da memória", "comunidade", "romance"],
-    "inicio": ["Em 'Becos da Memória', Conceição nos leva a uma comunidade onde as lembranças moram em cada canto 🏘️"],
-    "explicacao_curta": ["Essa obra conta histórias de pessoas que vivem em uma comunidade simples e cheia de lembranças."],
-    "explicacao_aprofundada": ["A autora mostra como a união e a esperança ajudam as pessoas a enfrentar dificuldades e a manter viva a memória de quem partiu."],
-    "curiosidade": ["O livro é inspirado na infância de Conceição, que cresceu em uma vila de operários em Belo Horizonte 🚂"],
-    "interacao": ["O que você lembra com mais carinho do lugar onde você mora ou morou?"],
-    "atividade": ["Desenhe um 'beco da memória' seu: uma rua, um quintal ou uma casa onde você guarda boas lembranças, e desenhe uma pessoa especial ali 🏠"],
-    "final": ["As lembranças, mesmo tristes, podem nos ensinar a ser mais fortes e unidos 🤝"],
-    "emocao": "nostalgia",
-    "nivel": "leve"
-  },
-  "carolina_maria_de_jesus_quarto_de_despejo": {
+  "carolina_maria_de_jesus": {
     "tema": "escritoras_brasileiras",
     "subtema": "carolina_maria_de_jesus",
     "palavras_chave": ["carolina maria de jesus", "quarto de despejo", "diário", "favela"],
@@ -39,9 +37,20 @@
     "atividade": ["Escreva uma pequena página de diário desenhando algo que aconteceu ontem e que te fez sentir orgulho de você mesmo(a) ✍️"],
     "final": ["A escrita pode transformar a vida de uma pessoa e inspirar o mundo inteiro 🌎"],
     "emocao": "superação",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1914",
+    "ano_falecimento": "1977",
+    "local_nascimento": "Sacramento, Minas Gerais, Brasil",
+    "o_que_ele_fez": [
+      "Escreveu 'Quarto de Despejo: Diário de uma Favelada', que vendeu mais de 1 milhão de cópias.",
+      "Foi uma das primeiras escritoras negras a alcançar fama internacional.",
+      "Deixou mais de 20 cadernos com poemas, contos e peças de teatro."
+    ],
+    "onde_nasceu_resposta": "Carolina Maria de Jesus nasceu em Sacramento, Minas Gerais, em 1914.",
+    "ano_nascimento_resposta": "Carolina Maria de Jesus nasceu no ano de 1914.",
+    "ano_falecimento_resposta": "Carolina Maria de Jesus faleceu no ano de 1977."
   },
-  "maria_firmina_dos_reis_ursula": {
+  "maria_firmina_dos_reis": {
     "tema": "escritoras_brasileiras",
     "subtema": "maria_firmina_dos_reis",
     "palavras_chave": ["maria firmina dos reis", "úrsula", "romance", "liberdade", "abolicionista"],
@@ -53,9 +62,20 @@
     "atividade": ["Desenhe uma balança (símbolo da justiça) e, de um lado, desenhe algo que você acha injusto; do outro, desenhe como seria o mundo sem essa injustiça ⚖️"],
     "final": ["A literatura pode lutar por um mundo mais justo para todos 🌈"],
     "emocao": "justiça",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1822",
+    "ano_falecimento": "1917",
+    "local_nascimento": "São Luís, Maranhão, Brasil",
+    "o_que_ele_fez": [
+      "Escreveu 'Úrsula' (1859), primeiro romance abolicionista do Brasil.",
+      "Publicou contos, poemas e uma obra sobre pedagogia.",
+      "Foi professora e fundou a primeira escola mista e gratuita do Maranhão."
+    ],
+    "onde_nasceu_resposta": "Maria Firmina dos Reis nasceu em São Luís, Maranhão, em 1822.",
+    "ano_nascimento_resposta": "Maria Firmina dos Reis nasceu no ano de 1822.",
+    "ano_falecimento_resposta": "Maria Firmina dos Reis faleceu no ano de 1917."
   },
-  "jarid_arraes_heroinas_negras": {
+  "jarid_arraes": {
     "tema": "escritoras_brasileiras",
     "subtema": "jarid_arraes",
     "palavras_chave": ["jarid arraes", "heroínas negras brasileiras", "cordel", "15 cordéis"],
@@ -67,9 +87,20 @@
     "atividade": ["Escreva uma quadrinha (quatro versos) rimada sobre uma mulher que você admira – pode ser sua mãe, avó, professora ou uma amiga ✏️🎶"],
     "final": ["A poesia rimada pode transformar qualquer história em uma canção inesquecível 🎵"],
     "emocao": "homenagem",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1991",
+    "ano_falecimento": "",
+    "local_nascimento": "Juazeiro do Norte, Ceará, Brasil",
+    "o_que_ele_fez": [
+      "Escreveu 'Heroínas Negras Brasileiras em 15 Cordéis'.",
+      "Fundou o Clube de Leitura Feminino.",
+      "É escritora, poeta e cordelista premiada."
+    ],
+    "onde_nasceu_resposta": "Jarid Arraes nasceu em Juazeiro do Norte, Ceará, em 1991.",
+    "ano_nascimento_resposta": "Jarid Arraes nasceu no ano de 1991.",
+    "ano_falecimento_resposta": "Jarid Arraes continua viva e escrevendo até hoje."
   },
-  "djamila_ribeiro_manual_antirracista": {
+  "djamila_ribeiro": {
     "tema": "escritoras_brasileiras",
     "subtema": "djamila_ribeiro",
     "palavras_chave": ["djamila ribeiro", "pequeno manual antirracista", "ensaio", "igualdade"],
@@ -81,9 +112,20 @@
     "atividade": ["Desenhe um cartaz com a frase 'Todos iguais, todos diferentes' e encha de desenhos de pessoas com várias cores de cabelo, pele e roupas felizes 🎨"],
     "final": ["Pequenos gestos de respeito podem mudar o mundo, um abraço de cada vez 💖"],
     "emocao": "empatia",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1980",
+    "ano_falecimento": "",
+    "local_nascimento": "São Paulo, São Paulo, Brasil",
+    "o_que_ele_fez": [
+      "Escreveu 'Pequeno Manual Antirracista', que se tornou um best-seller.",
+      "É filósofa, feminista e ativista pelos direitos humanos.",
+      "Coordenou a coleção 'Feminismos Plurais'."
+    ],
+    "onde_nasceu_resposta": "Djamila Ribeiro nasceu em São Paulo, em 1980.",
+    "ano_nascimento_resposta": "Djamila Ribeiro nasceu no ano de 1980.",
+    "ano_falecimento_resposta": "Djamila Ribeiro continua viva e escrevendo até hoje."
   },
-  "eliane_potiguara_metade_cara_metade_mascara": {
+  "eliane_potiguara": {
     "tema": "escritoras_brasileiras",
     "subtema": "eliane_potiguara",
     "palavras_chave": ["eliane potiguara", "metade cara metade máscara", "indígena", "poesia"],
@@ -95,9 +137,20 @@
     "atividade": ["Desenhe uma máscara de guerra ou de festa inspirada em algum povo indígena brasileiro (você pode pesquisar imagens de cocares ou pinturas corporais) 🎭"],
     "final": ["A literatura indígena nos ensina a respeitar a natureza e a valorizar quem veio antes de nós 🌿"],
     "emocao": "ancestralidade",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1947",
+    "ano_falecimento": "",
+    "local_nascimento": "Rio de Janeiro, Rio de Janeiro, Brasil",
+    "o_que_ele_fez": [
+      "Escreveu 'Metade Cara, Metade Máscara' e outros livros de poesia.",
+      "Fundou o Grumin (Grupo Mulher-Educação Indígena).",
+      "É uma das primeiras escritoras indígenas a publicar no Brasil."
+    ],
+    "onde_nasceu_resposta": "Eliane Potiguara nasceu no Rio de Janeiro, em 1947.",
+    "ano_nascimento_resposta": "Eliane Potiguara nasceu no ano de 1947.",
+    "ano_falecimento_resposta": "Eliane Potiguara continua viva e escrevendo até hoje."
   },
-  "graca_grauna_criaturas_de_anderu": {
+  "graca_grauna": {
     "tema": "escritoras_brasileiras",
     "subtema": "graca_grauna",
     "palavras_chave": ["graça graúna", "criaturas de ñanderu", "poesia", "ancestralidade"],
@@ -109,9 +162,20 @@
     "atividade": ["Invente um poema de três versos para um animal ou planta que você ama (exemplo: 'O beija-flor bebe sol / e veste arco-íris / para dançar no meu quintal') 🐦🌺"],
     "final": ["A poesia pode dar alma às folhas, aos bichos e aos rios 🌊"],
     "emocao": "encantamento",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1968",
+    "ano_falecimento": "",
+    "local_nascimento": "Pesqueira, Pernambuco, Brasil",
+    "o_que_ele_fez": [
+      "Escreveu 'Criaturas de Ñanderu' e outros livros de poesia.",
+      "É atriz, roteirista e professora.",
+      "Escreve para crianças e adultos valorizando a cultura indígena."
+    ],
+    "onde_nasceu_resposta": "Graça Graúna nasceu em Pesqueira, Pernambuco, em 1968.",
+    "ano_nascimento_resposta": "Graça Graúna nasceu no ano de 1968.",
+    "ano_falecimento_resposta": "Graça Graúna continua viva e escrevendo até hoje."
   },
-  "auritha_tabajara_coracao_na_aldeia": {
+  "auritha_tabajara": {
     "tema": "escritoras_brasileiras",
     "subtema": "auritha_tabajara",
     "palavras_chave": ["auritha tabajara", "coração na aldeia pés no mundo", "cordel", "identidade indígena"],
@@ -123,9 +187,20 @@
     "atividade": ["Crie um pequeno cordel de duas estrofes rimadas sobre um lugar que você ama (sua casa, a praia, a escola, a aldeia dos seus sonhos) 🏡🎶"],
     "final": ["Podemos viver no mundo todo sem nunca esquecer de onde viemos 🌍"],
     "emocao": "pertencimento",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1985",
+    "ano_falecimento": "",
+    "local_nascimento": "Fortaleza, Ceará, Brasil",
+    "o_que_ele_fez": [
+      "Escreveu 'Coração na Aldeia, Pés no Mundo' (cordel).",
+      "Foi a primeira mulher indígena a publicar um cordel no Brasil.",
+      "É contadora de histórias, cordelista e ativista indígena."
+    ],
+    "onde_nasceu_resposta": "Auritha Tabajara nasceu em Fortaleza, Ceará, em 1985.",
+    "ano_nascimento_resposta": "Auritha Tabajara nasceu no ano de 1985.",
+    "ano_falecimento_resposta": "Auritha Tabajara continua viva e escrevendo até hoje."
   },
-  "marcia_kambeba_ay_kakyri_tama": {
+  "marcia_kambeba": {
     "tema": "escritoras_brasileiras",
     "subtema": "marcia_kambeba",
     "palavras_chave": ["márcia kambeba", "ay kakyri tama", "eu moro na cidade", "poesia indígena"],
@@ -137,9 +212,20 @@
     "atividade": ["Desenhe uma paisagem que misture prédios e arranha-céus com árvores, rios e animais da floresta – como seria a cidade dos seus sonhos? 🏙️🌿"],
     "final": ["Podemos ser muitos lugares ao mesmo tempo; o importante é nunca apagar nossas raízes 🌱"],
     "emocao": "pertencimento duplo",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1981",
+    "ano_falecimento": "",
+    "local_nascimento": "Amazonas, Brasil",
+    "o_que_ele_fez": [
+      "Escreveu 'Ay Kakyri Tama - Eu Moro na Cidade'.",
+      "É geógrafa, poetisa e ativista indígena.",
+      "Viaja o Brasil levando poesia indígena para escolas e universidades."
+    ],
+    "onde_nasceu_resposta": "Márcia Kambeba nasceu no Amazonas, em 1981.",
+    "ano_nascimento_resposta": "Márcia Kambeba nasceu no ano de 1981.",
+    "ano_falecimento_resposta": "Márcia Kambeba continua viva e escrevendo até hoje."
   },
-  "julie_dorrico_literatura_indigena_contemporanea": {
+  "julie_dorrico": {
     "tema": "escritoras_brasileiras",
     "subtema": "julie_dorrico",
     "palavras_chave": ["julie dorrico", "literatura indígena contemporânea", "pesquisa", "cultura indígena"],
@@ -151,6 +237,17 @@
     "atividade": ["Pesquise (com ajuda de um adulto) um mito indígena curto, leia e depois desenhe a cena que você mais gostou 🐆"],
     "final": ["Conhecer a literatura indígena é abrir a porta para mundos cheios de sabedoria e encanto 🚪🌈"],
     "emocao": "conhecimento",
-    "nivel": "leve"
+    "nivel": "leve",
+    "ano_nascimento": "1985",
+    "ano_falecimento": "",
+    "local_nascimento": "Roraima, Brasil",
+    "o_que_ele_fez": [
+      "Organizou a primeira antologia de literatura indígena brasileira contemporânea, 'Morosofia'.",
+      "É doutora em Letras pela PUCRS.",
+      "Escreve e pesquisa sobre literatura indígena contemporânea."
+    ],
+    "onde_nasceu_resposta": "Julie Dorrico nasceu em Roraima, em 1985.",
+    "ano_nascimento_resposta": "Julie Dorrico nasceu no ano de 1985.",
+    "ano_falecimento_resposta": "Julie Dorrico continua viva e escrevendo até hoje."
   }
 }
