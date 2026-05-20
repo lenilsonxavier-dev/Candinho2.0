@@ -133,41 +133,40 @@
 </div>
 
 <script type="module">
-    // ======================= CONFIGURAÇÕES =======================
-   const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
-const jsonFiles = {
-    apoio_emocional: "apoio_emocional.json",
-    arte_tecnicas: "arte_tecnicas.json",
-    artes_visuais: "artes_visuais.json",
-    artistas: "artistas.json",
-    artistas_indigenas_afrobrasileiros: "artistas-indigenas-afrobrasileiros.json",
-    artistas_mulheres_historicas: "artistas-mulheres-historicas.json",
-    artistas_universais: "artistas_universais.json",
-    atividades_artisticas: "atividades_artisticas.json",
-    cantigas_de_roda: "cantigas_de_roda.json",
-    cultura_afro_brasileira: "cultura_afro_brasileira.json",
-    cultura_brasileira: "cultura_brasileira.json",
-    cultura_indigena: "cultura_indigena.json",
-    curiosidades: "curiosidades.json",
-    dancas: "dancas.json",
-    escritoras_negras_indigenas_brasileiras: "escritoras-negras-indigenas-brasileiras.json",
-    escritores_negros_indigenas_brasileiros: "escritores-negros-indigenas-brasileiros.json",
-    festas_brasileiras: "festas_brasileiras.json",
-    folclore: "folclore.json",
-    historia_arte: "historia_arte.json",
-    imaginacao_infantil: "imaginacao_infantil.json",
-    literatura_conceitos: "literatura_conceitos.json",
-    lugares_arte: "lugares_arte.json",
-    musica: "musica.json",
-    obras_famosas_mundo: "obras-famosas-mundo.json",
-    obras_modernistas_brasileiras: "obras-modernistas-brasileiras.json",
-    perguntas_infantis: "perguntas_infantis.json",
-    personagens_fantasticos: "personagens_fantasticos.json",
-    piadas: "piadas.json",
-    ritmos_musicais: "ritmos_musicais.json",
-    saudacoes: "saudacoes.json",
-    teatro: "teatro.json"
-};
+    const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
+    const jsonFiles = {
+        apoio_emocional: "apoio_emocional.json",
+        arte_tecnicas: "arte_tecnicas.json",
+        artes_visuais: "artes_visuais.json",
+        artistas: "artistas.json",
+        artistas_indigenas_afrobrasileiros: "artistas-indigenas-afrobrasileiros.json",
+        artistas_mulheres_historicas: "artistas-mulheres-historicas.json",
+        artistas_universais: "artistas_universais.json",
+        atividades_artisticas: "atividades_artisticas.json",
+        cantigas_de_roda: "cantigas_de_roda.json",
+        cultura_afro_brasileira: "cultura_afro_brasileira.json",
+        cultura_brasileira: "cultura_brasileira.json",
+        cultura_indigena: "cultura_indigena.json",
+        curiosidades: "curiosidades.json",
+        dancas: "dancas.json",
+        escritoras_negras_indigenas_brasileiras: "escritoras-negras-indigenas-brasileiras.json",
+        escritores_negros_indigenas_brasileiros: "escritores-negros-indigenas-brasileiros.json",
+        festas_brasileiras: "festas_brasileiras.json",
+        folclore: "folclore.json",
+        historia_arte: "historia_arte.json",
+        imaginacao_infantil: "imaginacao_infantil.json",
+        literatura_conceitos: "literatura_conceitos.json",
+        lugares_arte: "lugares_arte.json",
+        musica: "musica.json",
+        obras_famosas_mundo: "obras-famosas-mundo.json",
+        obras_modernistas_brasileiras: "obras-modernistas-brasileiras.json",
+        perguntas_infantis: "perguntas_infantis.json",
+        personagens_fantasticos: "personagens_fantasticos.json",
+        piadas: "piadas.json",
+        ritmos_musicais: "ritmos_musicais.json",
+        saudacoes: "saudacoes.json",
+        teatro: "teatro.json"
+    };
     
     let dataStore = {};
     let ultimoPersonagem = null;
@@ -185,8 +184,6 @@ const jsonFiles = {
         nivel: localStorage.getItem("candinho_nivel") || "iniciante",
         historicoCurto: []
     };
-    
-    let globalPlayerName = memoria.nome;
     
     const chatDiv = document.getElementById("chat");
     const inputField = document.getElementById("pergunta");
@@ -210,17 +207,14 @@ const jsonFiles = {
             novoNome = novoNome.charAt(0).toUpperCase() + novoNome.slice(1).toLowerCase();
             memoria.nome = novoNome;
             localStorage.setItem("candinho_nome", memoria.nome);
-            globalPlayerName = novoNome;
             return `Prazer, ${memoria.nome}! Vou lembrar de você 😊`;
         }
-        
         const idadeMatch = pergunta.match(/(\d{1,2}) anos/);
         if (idadeMatch) {
             memoria.idade = idadeMatch[1];
             localStorage.setItem("candinho_idade", memoria.idade);
             return `Legal! Você tem ${memoria.idade} anos 🎈`;
         }
-        
         const interesses = ["desenhar", "pintar", "dançar", "música", "teatro"];
         for (let interesse of interesses) {
             if (texto.includes(interesse)) {
@@ -261,107 +255,24 @@ const jsonFiles = {
     };
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const CONVERSA_COLLECTION = "conversas_candinho";
     
     async function salvarMensagemFirebase(role, content) { return; }
     async function carregarHistoricoFirebase() {
         historicoMensagens = [];
-        statusDiv.innerText = "✅ Candinho pronto (sem histórico)";
+        statusDiv.innerText = "✅ Candinho pronto";
         return;
     }
     
     function normalizar(texto) {
-        return texto.toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .trim();
+        return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
     }
     
-    function detectarTemaPrioritario(texto) {
-        const txt = normalizar(texto);
-        if (txt.includes("oi") || txt.includes("ola") || txt.includes("bom dia") ||
-            txt.includes("boa tarde") || txt.includes("boa noite") || txt.includes("oie") || txt === "hey") {
-            return "saudacoes";
-        }
-        if (txt.includes("triste") || txt.includes("ansioso") || txt.includes("medo") ||
-            txt.includes("raiva") || txt.includes("sozinho") || txt.includes("vergonha") ||
-            txt.includes("frustrado") || txt.includes("saudade") || txt.includes("ciumes")) {
-            return "apoio_emocional";
-        }
-        if (txt.includes("piada") || txt.includes("engracado") || txt.includes("engraçada")) {
-            return "piadas";
-        }
-        if (txt.includes("curiosidade") || txt.includes("sabia que")) {
-            return "curiosidades";
-        }
-        const nomesCantigas = [
-            "escravos de jó", "ciranda cirandinha", "capelinha de melão", "peixe vivo",
-            "galinha do vizinho", "borboletinha", "meu limão", "barata diz que tem",
-            "alecrim", "cai cai balão", "pirulito que bate", "pombinha branca",
-            "terezinha de jesus", "indiozinhos", "se essa rua fosse minha", "cravo e a rosa",
-            "sapo não lava o pé", "marcha soldado", "fui no tororó", "ai eu entrei na roda",
-            "canoa virou", "rosa amarela", "quem me ensinou a nadar", "sapo cururu",
-            "meu galinho", "marinheiro só", "pezinho", "vai abóbora", "roda pião",
-            "caranguejo", "na loja do mestre andré", "meu boi morreu", "tutu marambá",
-            "você gosta de mim", "vamos maninha", "que é de valentim", "na bahia tem",
-            "gatinha parda", "balaio", "barraquinha", "boi barroso", "pobre cego",
-            "são joão da rão"
-        ];
-        if (nomesCantigas.some(nome => txt.includes(nome))) return "cantigas_de_roda";
-        const literaturaPalavras = ["poema", "poesia", "verso", "estrofe", "métrica", "literatura", "gênero literário", "narrativa", "personagem", "enredo", "narrador"];
-        if (literaturaPalavras.some(p => txt.includes(p))) return "literatura_conceitos";
-        const imaginacaoPalavras = ["animal magico", "super heroi", "monstro", "criatura", "desenho facil", "arte maluca", "arte engraçada", "imaginacao", "imaginação", "coisa assustadora", "desenho engraçado", "cor diferente"];
-        if (imaginacaoPalavras.some(p => txt.includes(p))) return "imaginacao_infantil";
-        const fantasticosPalavras = ["duende", "bruxa", "mago", "dragão", "alienígena", "fantasma", "lobisomem", "cuca", "saci", "iara", "curupira", "boitatá", "boto", "personagem fantástico", "criatura mágica", "ser mágico"];
-        if (fantasticosPalavras.some(p => txt.includes(p))) return "personagens_fantasticos";
-        const tecnicasPalavras = ["aquarela", "origami", "colagem", "mosaico", "gravura", "xilogravura", "stencil", "tecnica", "maneira de desenhar"];
-        if (tecnicasPalavras.some(p => txt.includes(p))) return "arte_tecnicas";
-        if (txt.includes("abaporu") || txt.includes("operarios") || txt.includes("antropofagia") || txt.includes("a cuca")) return "obras_modernistas_brasileiras";
-        const artistasUnivPalavras = ["van gogh", "monet", "picasso", "dali", "frida", "michelangelo", "da vinci", "duchamp", "gaudi", "kandinsky", "warhol", "kusama", "rembrandt", "vermeer", "degas", "cezanne", "magritte", "klimt", "munch", "matisse", "pollock", "haring", "banksy", "modigliani", "okeeffe", "chagall", "klee", "lichtenstein", "botero", "basquiat"];
-        if (artistasUnivPalavras.some(p => txt.includes(p))) return "artistas_universais";
-        if (txt.includes("tarsila") || txt.includes("portinari") || txt.includes("di cavalcanti") || txt.includes("candido portinari") || txt.includes("artista") || txt.includes("pintor")) return "artistas";
-        const obrasPalavras = ["mona lisa", "noite estrelada", "guernica", "o beijo", "grande onda", "ultima ceia", "o grito", "persistência da memória"];
-        if (obrasPalavras.some(p => txt.includes(p))) return "obras_famosas_mundo";
-        const lugaresPalavras = ["louvre", "moma", "masp", "inhotim", "acrópole", "coliseu", "torre eiffel", "machu picchu", "sagrada família", "bienal"];
-        if (lugaresPalavras.some(p => txt.includes(p))) return "lugares_arte";
-        const historiaPalavras = ["arte rupestre", "arte egípcia", "arte grega", "arte romana", "arte medieval", "renascimento", "barroco", "impressionismo", "modernismo", "cubismo", "surrealismo", "arte contemporânea"];
-        if (historiaPalavras.some(p => txt.includes(p))) return "historia_arte";
-        const ritmosPalavras = ["samba", "forró", "frevo", "maracatu", "axé", "funk", "bossa nova", "rock", "rap", "k-pop", "sertanejo", "pagode", "reggae", "pop", "jazz", "blues", "hip hop", "música clássica", "eletrônica"];
-        if (ritmosPalavras.some(p => txt.includes(p))) return "ritmos_musicais";
-        if (txt.includes("indigena") || txt.includes("tupi") || txt.includes("grafismo") || txt.includes("cestaria") || txt.includes("aldeia") || txt.includes("pintura corporal")) return "cultura_indigena";
-        if (txt.includes("quilombo") || txt.includes("orixa") || txt.includes("cultura afro") || txt.includes("afro brasileira")) return "cultura_afro_brasileira";
-        const culturaBrPalavras = ["cordel", "repente", "capoeira", "reisado", "boi bumbá", "cacuriá", "pastoril", "quadrilha", "lavadeiras", "festa do divino"];
-        if (culturaBrPalavras.some(p => txt.includes(p))) return "cultura_brasileira";
-        if (txt.includes("danca") || txt.includes("dança") || txt.includes("ballet") || txt.includes("coreografia") || txt.includes("frevo") || txt.includes("ciranda")) return "dancas";
-        if (txt.includes("musica") || txt.includes("canção") || txt.includes("instrumento") || txt.includes("violao") || txt.includes("tambor")) return "musica";
-        if (txt.includes("teatro") || txt.includes("peca") || txt.includes("ator") || txt.includes("fantoche")) return "teatro";
-        if (txt.includes("carnaval") || txt.includes("festa junina") || txt.includes("parintins")) return "festas_brasileiras";
-        if (txt.includes("atividade") || txt.includes("oficina") || txt.includes("brincadeira") || txt.includes("desafio")) return "atividades_artisticas";
-        const artesVisuaisKeywords = ["cor primaria", "cores primarias", "cor secundaria", "cores secundarias", "linha", "forma", "textura", "perspectiva", "pintura", "desenho", "escultura", "grafite", "fotografia"];
-        if (artesVisuaisKeywords.some(kw => txt.includes(kw))) return "artes_visuais";
-        return null;
-    }
-    
-    let contexto = {
-        personagem: null,
-        tema: null,
-        ultimaPergunta: null
-    };
+    let contexto = { personagem: null, tema: null, ultimaPergunta: null };
     
     function buscarEmJSON(jsonObj, pergunta) {
         if (!jsonObj || typeof jsonObj !== "object") return null;
         const textoNorm = normalizar(pergunta);
-        const perguntasContexto = ["quem foi", "quem e", "quem é", "o que ele fez", "o que ela fez", "onde nasceu", "onde morava", "o que pintou", "o que criou"];
-        const ehPerguntaContexto = perguntasContexto.some(p => textoNorm.includes(p));
-        if (ehPerguntaContexto && contexto.personagem) {
-            for (const chave in jsonObj) {
-                const item = jsonObj[chave];
-                if (chave === contexto.personagem && item && typeof item === "object") {
-                    const respostaContexto = montarResposta(item);
-                    if (respostaContexto) return respostaContexto;
-                }
-            }
-        }
+        
         function montarResposta(item) {
             let partes = [];
             if (item.inicio?.[0]) partes.push(item.inicio[0]);
@@ -373,9 +284,9 @@ const jsonFiles = {
             if (item.final?.[0]) partes.push(item.final[0]);
             if (partes.length === 0 && typeof item.explicacao_infantil === "string") partes.push(item.explicacao_infantil);
             if (partes.length === 0 && typeof item.resposta === "string") partes.push(item.resposta);
-            if (partes.length === 0 && Array.isArray(item.respostas)) partes.push(item.respostas[Math.floor(Math.random() * item.respostas.length)]);
             return partes.join("\n\n").trim();
         }
+        
         function buscarRecursivo(obj) {
             if (!obj || typeof obj !== "object") return null;
             for (const chave in obj) {
@@ -387,7 +298,7 @@ const jsonFiles = {
                         contexto.ultimaPergunta = pergunta;
                         ultimoPersonagem = chave;
                         const resposta = montarResposta(item);
-                        if (resposta && typeof resposta === "string" && resposta.trim().length > 0) return resposta;
+                        if (resposta && resposta.trim().length > 0) return resposta;
                     }
                 }
                 if (item && typeof item === "object") {
@@ -400,252 +311,103 @@ const jsonFiles = {
         return buscarRecursivo(jsonObj);
     }
     
-    function respostaInstantanea(pergunta) {
-        const tema = detectarTemaPrioritario(pergunta);
-        const txt = normalizar(pergunta);
-        if (tema === "piada" && dataStore.piadas) {
-            const piadasArray = Object.values(dataStore.piadas);
-            if (piadasArray.length) {
-                const aleatoria = piadasArray[Math.floor(Math.random() * piadasArray.length)];
-                if (typeof aleatoria === "string") return aleatoria;
-                return aleatoria.explicacao_infantil || aleatoria.resposta || "😂 Não sei nenhuma piada agora!";
+    // Mapeamento de nomes comuns para as chaves do JSON
+    const mapaNomes = {
+        "leonardo da vinci": "leonardo_da_vinci",
+        "leonardo": "leonardo_da_vinci",
+        "michelangelo": "michelangelo",
+        "van gogh": "vincent_van_gogh",
+        "vincent van gogh": "vincent_van_gogh",
+        "picasso": "pablo_picasso",
+        "pablo picasso": "pablo_picasso",
+        "dali": "salvador_dali",
+        "salvador dali": "salvador_dali",
+        "frida": "frida_kahlo",
+        "frida kahlo": "frida_kahlo",
+        "monet": "claude_monet",
+        "claude monet": "claude_monet",
+        "matisse": "henri_matisse",
+        "henri matisse": "henri_matisse",
+        "portinari": "candido_portinari",
+        "tarsila": "tarsila_do_amaral",
+        "tarsila do amaral": "tarsila_do_amaral"
+    };
+    
+    function buscarArtistaPorNome(nomeBuscado) {
+        const nomeNorm = normalizar(nomeBuscado);
+        const fontesArtistas = [
+            dataStore.artistas,
+            dataStore.artistas_universais,
+            dataStore.artistas_indigenas_afrobrasileiros,
+            dataStore.artistas_mulheres_historicas
+        ];
+        
+        // Tenta pelo mapeamento direto
+        let chaveDireta = mapaNomes[nomeNorm];
+        if (chaveDireta) {
+            for (const fonte of fontesArtistas) {
+                if (fonte && fonte[chaveDireta]) return { fonte, chave: chaveDireta, dados: fonte[chaveDireta] };
             }
         }
-        if (tema === "curiosidade" && dataStore.curiosidades) {
-            const curiosArray = Object.values(dataStore.curiosidades);
-            if (curiosArray.length) {
-                const aleatoria = curiosArray[Math.floor(Math.random() * curiosArray.length)];
-                if (typeof aleatoria === "string") return aleatoria;
-                return aleatoria.explicacao_infantil || aleatoria.resposta;
+        
+        // Busca por similaridade na chave
+        for (const fonte of fontesArtistas) {
+            if (!fonte) continue;
+            for (const [chave, dados] of Object.entries(fonte)) {
+                const chaveNorm = chave.toLowerCase().replace(/_/g, ' ');
+                if (chaveNorm.includes(nomeNorm) || nomeNorm.includes(chaveNorm)) {
+                    return { fonte, chave, dados };
+                }
+                if (dados.palavras_chave && dados.palavras_chave.some(p => normalizar(p).includes(nomeNorm))) {
+                    return { fonte, chave, dados };
+                }
             }
-        }
-        if (tema === "cantigas_de_roda") {
-            const cantigas = dataStore.cantigas_de_roda?.cantigas_de_roda;
-            if (!cantigas) return null;
-            const txtLower = normalizar(pergunta);
-            const cantigaEncontrada = cantigas.find(c => normalizar(c.titulo).includes(txtLower) || c.palavras_chave.some(p => txtLower.includes(normalizar(p))));
-            if (cantigaEncontrada) return `🎵 **${cantigaEncontrada.titulo}** 🎵\n\n${cantigaEncontrada.letra}`;
-            return null;
-        }
-        let chavesBusca = [];
-        if (tema === "arte") chavesBusca = ["artes_visuais", "arte_tecnicas", "arte_artista", "artistas", "artistas_universais", "historia_arte", "lugares_arte", "obras_famosas_mundo", "obras_modernistas_brasileiras"];
-        else if (tema === "danca") chavesBusca = ["dancas", "ritmos_musicais", "cultura_afro_brasileira", "cultura_brasileira", "festas_brasileiras"];
-        else if (tema === "musica") chavesBusca = ["musica", "ritmos_musicais", "cultura_afro_brasileira", "cultura_brasileira", "festas_brasileiras", "cantigas_de_roda"];
-        else if (tema === "teatro") chavesBusca = ["teatro"];
-        else if (tema === "folclore") chavesBusca = ["folclore", "imaginacao_infantil", "personagens_fantasticos", "cultura_brasileira", "cantigas_de_roda"];
-        else if (tema === "festas") chavesBusca = ["festas_brasileiras", "cultura_afro_brasileira", "cultura_brasileira", "dancas", "musica", "ritmos_musicais"];
-        else if (tema === "indigena") chavesBusca = ["cultura_indigena", "artes_visuais", "folclore", "personagens_fantasticos"];
-        else if (tema === "afro") chavesBusca = ["cultura_afro_brasileira", "musica", "dancas", "festas_brasileiras", "ritmos_musicais"];
-        else if (tema === "atividades") chavesBusca = ["atividades_artisticas", "arte_tecnicas", "imaginacao_infantil", "personagens_fantasticos"];
-        else if (tema === "artista") chavesBusca = ["artistas", "artistas_universais", "arte_artista", "historia_arte", "obras_famosas_mundo", "obras_modernistas_brasileiras"];
-        else if (tema === "tecnicas") chavesBusca = ["arte_tecnicas", "artes_visuais", "atividades_artisticas"];
-        else if (tema === "saudacoes") chavesBusca = ["saudacoes"];
-        else if (tema === "imaginacao") chavesBusca = ["imaginacao_infantil", "personagens_fantasticos", "folclore", "atividades_artisticas", "cantigas_de_roda"];
-        else if (tema === "emocional") chavesBusca = ["apoio_emocional"];
-        else if (tema === "curiosidades") chavesBusca = ["curiosidades"];
-        else if (tema === "piadas") chavesBusca = ["piadas"];
-        else if (tema === "literatura") chavesBusca = ["literatura_conceitos", "cantigas_de_roda", "imaginacao_infantil"];
-        else if (tema === "cantigas") chavesBusca = ["cantigas_de_roda", "musica", "folclore"];
-        else if (tema === "personagens") chavesBusca = ["personagens_fantasticos", "folclore", "imaginacao_infantil"];
-        else chavesBusca = Object.keys(dataStore).filter(k => k !== "piadas" && k !== "curiosidades" && k !== "saudacoes");
-        for (let chave of chavesBusca) {
-            const obj = dataStore[chave];
-            if (obj) {
-                const resposta = buscarEmJSON(obj, pergunta);
-                if (resposta && typeof resposta === "string" && resposta.trim().length > 0) return resposta;
-            }
-        }
-        if (txt.includes("o que e") || txt.includes("o que é")) {
-            if (txt.includes("musica")) {
-                const item = dataStore.musica?.o_que_e_musica;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("danca") || txt.includes("dança")) {
-                const item = dataStore.dancas?.o_que_e_danca;
-                if (item?.inicio?.[0]) return item.inicio[0];
-                const primeiroItem = dataStore.dancas?.[Object.keys(dataStore.dancas)[0]];
-                if (primeiroItem?.inicio) return primeiroItem.inicio[0];
-            }
-            if (txt.includes("teatro")) {
-                const item = dataStore.teatro?.o_que_e_teatro;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("folclore")) {
-                const item = dataStore.folclore?.o_que_e_folclore;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("literatura")) {
-                const item = dataStore.literatura_conceitos?.o_que_e_literatura;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("poema")) {
-                const item = dataStore.literatura_conceitos?.o_que_e_poema;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("poesia")) {
-                const item = dataStore.literatura_conceitos?.o_que_e_poesia;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("verso")) {
-                const item = dataStore.literatura_conceitos?.verso;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("estrofe")) {
-                const item = dataStore.literatura_conceitos?.estrofe;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("cantiga") || txt.includes("cantiga de roda")) {
-                const primeiraCantiga = dataStore.cantigas_de_roda?.cantigas_de_roda?.[0];
-                if (primeiraCantiga?.inicio) return `Cantiga de roda é uma música tradicional cantada em roda, geralmente com coreografia. Exemplo: "${primeiraCantiga.titulo}" - ${primeiraCantiga.inicio[0]}`;
-            }
-            if (txt.includes("duende")) {
-                const item = dataStore.personagens_fantasticos?.duende_pimenta;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("bruxa")) {
-                const item = dataStore.personagens_fantasticos?.bruxa_Agatha_das_Ervas;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("mago")) {
-                const item = dataStore.personagens_fantasticos?.mago_Albus_dos_Desenhos;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("dragão") || txt.includes("dragao")) {
-                const item = dataStore.personagens_fantasticos?.drago_Chama_Azul;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("alien") || txt.includes("alienígena")) {
-                const item = dataStore.personagens_fantasticos?.alien_Glub;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("renascimento")) {
-                const item = dataStore.historia_arte?.renascimento;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("barroco")) {
-                const item = dataStore.historia_arte?.barroco;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("impressionismo")) {
-                const item = dataStore.historia_arte?.impressionismo;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("cubismo")) {
-                const item = dataStore.historia_arte?.cubismo;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("surrealismo")) {
-                const item = dataStore.historia_arte?.surrealismo;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("samba")) {
-                const item = dataStore.ritmos_musicais?.samba;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("forró") || txt.includes("forro")) {
-                const item = dataStore.ritmos_musicais?.forro;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("frevo")) {
-                const item = dataStore.ritmos_musicais?.frevo;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("bossa nova")) {
-                const item = dataStore.ritmos_musicais?.bossa_nova;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("louvre")) {
-                const item = dataStore.lugares_arte?.louvre;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("masp")) {
-                const item = dataStore.lugares_arte?.masp;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("inhotim")) {
-                const item = dataStore.lugares_arte?.inhotim;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("linha")) {
-                const item = dataStore.artes_visuais?.elementos_basicos?.linha;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("ponto")) {
-                const item = dataStore.artes_visuais?.elementos_basicos?.ponto;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("forma")) {
-                const item = dataStore.artes_visuais?.elementos_basicos?.forma;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("textura")) {
-                const item = dataStore.artes_visuais?.elementos_basicos?.textura;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("cultura afro") || txt.includes("cultura afro-brasileira")) {
-                const item = dataStore.cultura_afro_brasileira?.o_que_e;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("cultura indígena") || txt.includes("cultura indigena")) {
-                const item = dataStore.cultura_indigena?.o_que_e;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("festa junina")) {
-                const item = dataStore.festas_brasileiras?.festa_junina;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            if (txt.includes("carnaval")) {
-                const item = dataStore.festas_brasileiras?.carnaval;
-                if (item?.inicio?.[0]) return item.inicio[0];
-            }
-            return null;
         }
         return null;
     }
     
-    // ======================= FUNÇÃO RESPONDER ATUALIZADA =======================
-    async function responder(pergunta) {
-        // 1. TRATAMENTO ESPECIAL PARA "QUEM FOI X?" ou "QUEM É X?"
-        const quemMatch = pergunta.match(/quem (foi|é)\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i);
-        if (quemMatch) {
-            let nomeBuscado = quemMatch[2].trim().toLowerCase();
-            nomeBuscado = nomeBuscado.replace(/[?!.,]+$/, '');
-            
-            const fontesArtistas = [
-                dataStore.artistas,
-                dataStore.artistas_universais,
-                dataStore.artistas_indigenas_afrobrasileiros,
-                dataStore.artistas_mulheres_historicas
-            ];
-            
-            for (const fonte of fontesArtistas) {
-                if (!fonte) continue;
-                for (const [chave, conteudo] of Object.entries(fonte)) {
-                    const chaveNorm = chave.toLowerCase().replace(/_/g, ' ');
-                    if (chaveNorm.includes(nomeBuscado) || nomeBuscado.includes(chaveNorm)) {
-                        let resposta = '';
-                        if (conteudo.inicio?.[0]) resposta += conteudo.inicio[0] + '\n\n';
-                        if (conteudo.explicacao_curta?.[0]) resposta += conteudo.explicacao_curta[0] + '\n\n';
-                        if (conteudo.curiosidade?.[0]) resposta += conteudo.curiosidade[0];
-                        if (!resposta && conteudo.explicacao_infantil) resposta = conteudo.explicacao_infantil;
-                        if (!resposta && conteudo.resposta) resposta = conteudo.resposta;
-                        if (resposta) {
-                            ultimoPersonagem = chave;
-                            historicoMensagens.push({ role: "user", content: pergunta });
-                            historicoMensagens.push({ role: "assistant", content: resposta });
-                            return resposta;
-                        }
-                    }
-                }
+    // Extrai nome de perguntas como "Quando nasceu Leonardo da Vinci?" ou "Onde morreu Michelangelo?"
+    function extrairNomeDaPergunta(pergunta) {
+        // Padrões: "Quando nasceu X?", "Onde nasceu X?", "Em que ano nasceu X?", "Quando morreu X?", etc.
+        const padroes = [
+            /quando nasceu\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i,
+            /onde nasceu\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i,
+            /em que ano nasceu\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i,
+            /ano de nascimento de\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i,
+            /quando morreu\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i,
+            /em que ano morreu\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i,
+            /onde morreu\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i,
+            /o que (ele|ela) fez\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i,
+            /o que (ele|ela) criou\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i
+        ];
+        for (const padrao of padroes) {
+            const match = pergunta.match(padrao);
+            if (match) {
+                let nome = match[1] || match[2];
+                if (nome) return nome.trim().replace(/[?!.,]+$/, '');
             }
-            const naoAchei = `Ainda não aprendi sobre ${quemMatch[2]} 😅. Pode me ensinar? Ou pergunte sobre outro artista!`;
-            historicoMensagens.push({ role: "user", content: pergunta });
-            historicoMensagens.push({ role: "assistant", content: naoAchei });
-            return naoAchei;
         }
-
-        // 2. PERGUNTAS CONTEXTUAIS SOBRE O ÚLTIMO PERSONAGEM
+        return null;
+    }
+    
+    async function responder(pergunta) {
         const txt = normalizar(pergunta);
+        
+        // ============================================================
+        // 0. TENTA EXTRAIR NOME DE PERGUNTAS CONTEXTUAIS DIRETAS
+        //    Ex: "Quando nasceu Leonardo da Vinci?" -> atualiza ultimoPersonagem
+        // ============================================================
+        const nomeExtraido = extrairNomeDaPergunta(pergunta);
+        if (nomeExtraido) {
+            const artista = buscarArtistaPorNome(nomeExtraido);
+            if (artista) {
+                ultimoPersonagem = artista.chave;
+            }
+        }
+        
+        // ============================================================
+        // 1. PERGUNTAS CONTEXTUAIS SOBRE O ÚLTIMO PERSONAGEM
+        // ============================================================
         if (ultimoPersonagem) {
             let personagemData = null;
             const fontesArtistas = [
@@ -660,12 +422,14 @@ const jsonFiles = {
                     break;
                 }
             }
-
+            
             if (personagemData) {
+                const nomeArtista = ultimoPersonagem.replace(/_/g, ' ').split(' ').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+                
                 // O que ele fez?
                 if (txt.includes("o que ele fez") || txt.includes("o que ela fez") || 
                     txt.includes("o que criou") || txt.includes("o que pintou") ||
-                    txt.includes("o que fez")) {
+                    txt.includes("o que fez") || (txt.includes("fez") && !txt.includes("nasceu") && !txt.includes("morreu"))) {
                     if (personagemData.o_que_ele_fez && Array.isArray(personagemData.o_que_ele_fez)) {
                         const resposta = personagemData.o_que_ele_fez.join(' ');
                         historicoMensagens.push({ role: "user", content: pergunta });
@@ -674,9 +438,9 @@ const jsonFiles = {
                     }
                 }
                 // Em que ano nasceu?
-                if (txt.includes("ano nasceu") || txt.includes("ano de nascimento") || txt.includes("quando nasceu")) {
-                    if (personagemData.ano_nascimento_resposta) {
-                        const resposta = personagemData.ano_nascimento_resposta;
+                if (txt.includes("ano nasceu") || txt.includes("ano de nascimento") || txt.includes("quando nasceu") || txt.includes("nasceu em que ano") || (txt.includes("nasceu") && !txt.includes("onde"))) {
+                    if (personagemData.ano_nascimento) {
+                        const resposta = `${nomeArtista} nasceu no ano de ${personagemData.ano_nascimento}.`;
                         historicoMensagens.push({ role: "user", content: pergunta });
                         historicoMensagens.push({ role: "assistant", content: resposta });
                         return resposta;
@@ -684,17 +448,26 @@ const jsonFiles = {
                 }
                 // Onde nasceu?
                 if (txt.includes("onde nasceu") || txt.includes("local de nascimento")) {
-                    if (personagemData.onde_nasceu_resposta) {
-                        const resposta = personagemData.onde_nasceu_resposta;
+                    if (personagemData.local_nascimento) {
+                        const resposta = `${nomeArtista} nasceu em ${personagemData.local_nascimento}.`;
                         historicoMensagens.push({ role: "user", content: pergunta });
                         historicoMensagens.push({ role: "assistant", content: resposta });
                         return resposta;
                     }
                 }
-                // Em que ano morreu?
-                if (txt.includes("ano morreu") || txt.includes("faleceu") || txt.includes("morreu em que ano")) {
-                    if (personagemData.ano_falecimento_resposta) {
-                        const resposta = personagemData.ano_falecimento_resposta;
+                // Em que ano morreu? / faleceu
+                if (txt.includes("ano morreu") || txt.includes("morreu em que ano") || txt.includes("quando morreu") || txt.includes("faleceu")) {
+                    if (personagemData.ano_falecimento) {
+                        const resposta = `${nomeArtista} faleceu no ano de ${personagemData.ano_falecimento}.`;
+                        historicoMensagens.push({ role: "user", content: pergunta });
+                        historicoMensagens.push({ role: "assistant", content: resposta });
+                        return resposta;
+                    }
+                }
+                // Onde morreu?
+                if (txt.includes("onde morreu")) {
+                    if (personagemData.local_falecimento) {
+                        const resposta = `${nomeArtista} faleceu em ${personagemData.local_falecimento}.`;
                         historicoMensagens.push({ role: "user", content: pergunta });
                         historicoMensagens.push({ role: "assistant", content: resposta });
                         return resposta;
@@ -702,8 +475,39 @@ const jsonFiles = {
                 }
             }
         }
-
+        
+        // ============================================================
+        // 2. TRATAMENTO ESPECIAL PARA "QUEM FOI X?" ou "QUEM É X?"
+        // ============================================================
+        const quemMatch = pergunta.match(/quem (foi|é)\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i);
+        if (quemMatch) {
+            let nomeBuscado = quemMatch[2].trim();
+            nomeBuscado = nomeBuscado.replace(/[?!.,]+$/, '');
+            
+            const resultado = buscarArtistaPorNome(nomeBuscado);
+            if (resultado && resultado.dados) {
+                let resposta = '';
+                if (resultado.dados.inicio?.[0]) resposta += resultado.dados.inicio[0] + '\n\n';
+                if (resultado.dados.explicacao_curta?.[0]) resposta += resultado.dados.explicacao_curta[0] + '\n\n';
+                if (resultado.dados.curiosidade?.[0]) resposta += resultado.dados.curiosidade[0];
+                if (!resposta && resultado.dados.explicacao_infantil) resposta = resultado.dados.explicacao_infantil;
+                if (!resposta && resultado.dados.resposta) resposta = resultado.dados.resposta;
+                if (resposta) {
+                    ultimoPersonagem = resultado.chave;
+                    historicoMensagens.push({ role: "user", content: pergunta });
+                    historicoMensagens.push({ role: "assistant", content: resposta });
+                    return resposta;
+                }
+            }
+            const naoAchei = `Ainda não aprendi sobre ${nomeBuscado} 😅. Pode me ensinar? Ou pergunte sobre outro artista!`;
+            historicoMensagens.push({ role: "user", content: pergunta });
+            historicoMensagens.push({ role: "assistant", content: naoAchei });
+            return naoAchei;
+        }
+        
+        // ============================================================
         // 3. PERGUNTA "QUEM FOI?" (sem nome) - usa último personagem
+        // ============================================================
         if ((txt === "quem foi" || txt === "quem foi?") && ultimoPersonagem) {
             for (const chave in dataStore) {
                 const obj = dataStore[chave];
@@ -715,8 +519,10 @@ const jsonFiles = {
                 }
             }
         }
-
-        // 4. MEMÓRIA (nome, idade, interesses)
+        
+        // ============================================================
+        // 4. MEMÓRIA
+        // ============================================================
         const memoriaDetectada = extrairMemoria(pergunta);
         if (memoriaDetectada) {
             historicoMensagens.push({ role: "user", content: pergunta });
@@ -731,43 +537,25 @@ const jsonFiles = {
             return memoria.idade ? `Você tem ${memoria.idade} anos! 🎈` : "Você ainda não me contou sua idade!";
         }
         
-        // 5. RESPOSTA INSTANTÂNEA (JSONs existentes)
-        const instant = respostaInstantanea(pergunta);
-        if (instant) {
-            historicoMensagens.push({ role: "user", content: pergunta });
-            historicoMensagens.push({ role: "assistant", content: instant });
-            return instant;
-        }
-        
-        // 6. FALLBACK - IA (proxy Groq)
-        memoria.historicoCurto.push({ role: "user", content: pergunta });
-        if (memoria.historicoCurto.length > 6) memoria.historicoCurto.shift();
-        
-        try {
-            const response = await fetch('/api/groq', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ mensagem: pergunta, memoria: memoria })
-            });
-            const textResponse = await response.text();
-            let data;
-            try {
-                data = JSON.parse(textResponse);
-            } catch (jsonError) {
-                console.error("Proxy retornou texto não-JSON:", textResponse.slice(0, 200));
-                throw new Error("Resposta inválida do servidor");
+        // ============================================================
+        // 5. RESPOSTA DOS JSONS (busca geral)
+        // ============================================================
+        for (const chave of Object.keys(dataStore)) {
+            const obj = dataStore[chave];
+            if (obj) {
+                const resposta = buscarEmJSON(obj, pergunta);
+                if (resposta && typeof resposta === "string" && resposta.trim().length > 0) {
+                    historicoMensagens.push({ role: "user", content: pergunta });
+                    historicoMensagens.push({ role: "assistant", content: resposta });
+                    return resposta;
+                }
             }
-            if (!response.ok) throw new Error(data.error || `Erro HTTP ${response.status}`);
-            const respostaIA = data.reply || "Não consegui responder. Tente de novo!";
-            
-            memoria.historicoCurto.push({ role: "assistant", content: respostaIA });
-            historicoMensagens.push({ role: "user", content: pergunta });
-            historicoMensagens.push({ role: "assistant", content: respostaIA });
-            return respostaIA;
-        } catch (erro) {
-            console.error("Erro no proxy:", erro);
-            return "Desculpe, não consegui me conectar à minha central de conhecimentos agora. Tente novamente mais tarde. 🎨";
         }
+        
+        // ============================================================
+        // 6. FALLBACK
+        // ============================================================
+        return "Ainda não aprendi sobre isso. Tente perguntar de outra forma ou pergunte sobre um artista! 🎨";
     }
     
     async function carregarTodosJSONs() {
@@ -808,7 +596,7 @@ const jsonFiles = {
             addMessageToUI(resposta, false);
         } catch (err) {
             removeLoading();
-            addMessageToUI("Ops! Ocorreu um erro inesperado. Recarregue a página e tente novamente.", false, true);
+            addMessageToUI("Ops! Ocorreu um erro inesperado.", false, true);
             console.error(err);
         } finally {
             isProcessing = false;
