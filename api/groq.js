@@ -2,55 +2,75 @@ const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candin
 
 // ======================= ARQUIVOS =======================
 const JSON_FILES = {
-    // Apoio e socioemocional
-    apoio_emocional: "apoio_emocional.json",
+  // Apoio e socioemocional
+  apoio_emocional: "apoio_emocional.json",
 
-    // Artes plásticas e técnicas
-    arte_artista: "arte_artista.json",
-    arte_tecnicas: "arte_tecnicas.json",
-    artes_visuais: "artes_visuais.json",
-    artistas: "artistas.json",
-    artistas_universais: "artistas_universais.json",
-    artistas_indigenas_afrobrasileiros: "artistas-indigenas-afrobrasileiros.json",
-    artistas_mulheres_historicas: "artistas-mulheres-historicas.json",
-    atividades_artisticas: "atividades_artisticas.json",
-    
-    // Cultura brasileira (folclore, festas, música, etc.)
-    cultura_afro_brasileira: "cultura_afro_brasileira.json",
-    cultura_indigena: "cultura_indigena.json",
-    cultura_brasileira: "cultura_brasileira.json",        // cordel, repente, capoeira, reisado, etc.
-    festas_brasileiras: "festas_brasileiras.json",
-    folclore: "folclore.json",
-    
-    // Música e dança
-    musica: "musica.json",
-    ritmos_musicais: "ritmos_musicais.json",
-    dancas: "dancas.json",
-    
-    // Teatro e lugares de arte
-    teatro: "teatro.json",
-    lugares_arte: "lugares_arte.json",
-    
-    // História da arte
-    historia_arte: "historia_arte.json",
-    
-    // Obras famosas
-    obras_famosas_mundo: "obras-famosas-mundo.json",
-    obras_modernistas_brasileiras: "obras-modernistas-brasileiras.json",
-    
-    // Literatura
-    literatura_conceitos: "literatura_conceitos.json",
-    cantigas_de_roda: "cantigas_de_roda.json",
-    
-    // Criação infantil e imaginário
-    imaginacao_infantil: "imaginacao_infantil.json",
-    perguntas_infantis: "perguntas_infantis.json",       // arte_engracada, coisa_assustadora, etc.
-    personagens_fantasticos: "personagens_fantasticos.json", // animais, duendes, bruxas, magos, dragões, aliens, terror, misturas do folclore
-    
-    // Outros
-    curiosidades: "curiosidades.json",
-    piadas: "piadas.json",
-    saudacoes: "saudacoes.json"
+  // Artes plásticas e técnicas
+  arte_artista: "arte_artista.json",
+  arte_tecnicas: "arte_tecnicas.json",
+  artes_visuais: "artes_visuais.json",
+  artistas: "artistas.json",
+  artistas_universais: "artistas_universais.json",
+  artistas_indigenas_afrobrasileiros:
+    "artistas-indigenas-afrobrasileiros.json",
+  artistas_mulheres_historicas:
+    "artistas-mulheres-historicas.json",
+  atividades_artisticas: "atividades_artisticas.json",
+
+  // Cultura brasileira
+  cultura_afro_brasileira:
+    "cultura_afro_brasileira.json",
+  cultura_indigena: "cultura_indigena.json",
+
+  festas_brasileiras: "festas_brasileiras.json",
+  folclore: "folclore.json",
+
+  // Música e dança
+  musica: "musica.json",
+  ritmos_musicais: "ritmos_musicais.json",
+  dancas: "dancas.json",
+
+  // Teatro e lugares de arte
+  teatro: "teatro.json",
+  lugares_arte: "lugares_arte.json",
+
+  // História da arte
+  historia_arte: "historia_arte.json",
+
+  // Obras famosas
+  obras_famosas_mundo:
+    "obras-famosas-mundo.json",
+  obras_modernistas_brasileiras:
+    "obras-modernistas-brasileiras.json",
+
+  // Literatura
+  literatura_conceitos:
+    "literatura_conceitos.json",
+  cantigas_de_roda: "cantigas_de_roda.json",
+
+  // ADICIONE ESTAS DUAS 👇
+  escritoras_negras_indigenas_brasileiras:
+    "escritoras-negras-indigenas-brasileiras.json",
+
+  escritores_negros_indigenas_brasileiros:
+    "escritores-negros-indigenas-brasileiros.json",
+
+  // Criação infantil e imaginário
+  imaginacao_infantil:
+    "imaginacao_infantil.json",
+
+  // Se esse arquivo existir, mantenha.
+  // Se não existir, remova também.
+  perguntas_infantis:
+    "perguntas_infantis.json",
+
+  personagens_fantasticos:
+    "personagens_fantasticos.json",
+
+  // Outros
+  curiosidades: "curiosidades.json",
+  piadas: "piadas.json",
+  saudacoes: "saudacoes.json"
 };
 
 let cacheData = null;
