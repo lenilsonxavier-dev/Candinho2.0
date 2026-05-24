@@ -122,17 +122,58 @@ function pegarAleatorio(obj) {
     return item?.explicacao_infantil || String(item);
 }
 
+function normalizar(texto) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\w\s]/g, "")
+    .trim();
+}
+
 function respostaInstantanea(pergunta, data) {
-    const texto = pergunta.toLowerCase();
+  const texto = normalizar(pergunta);
 
-    if (texto.includes("piada")) return pegarAleatorio(data.piadas);
-    if (texto.includes("curiosidade")) return pegarAleatorio(data.curiosidades);
-    if (texto.includes("atividade")) return pegarAleatorio(data.atividades);
-    if (texto.includes("artista")) return pegarAleatorio(data.artistas);
-    if (texto.includes("dança") || texto.includes("danca")) return pegarAleatorio(data.dancas);
-    if (texto.includes("história") || texto.includes("historia")) return pegarAleatorio(data.historia);
+  // respostas rápidas por tema
+  if (texto.includes("piada"))
+    return pegarAleatorio(data.piadas);
 
-    return null;
+  if (texto.includes("curiosidade"))
+    return pegarAleatorio(data.curiosidades);
+
+  if (texto.includes("atividade"))
+    return pegarAleatorio(data.atividades_artisticas);
+
+  if (texto.includes("danca"))
+    return pegarAleatorio(data.dancas);
+
+  if (texto.includes("historia"))
+    return pegarAleatorio(data.historia_arte);
+
+  // procura personagem/artista/escritor em TODOS os JSONs
+  for (const categoria of Object.values(data)) {
+    if (!categoria || typeof categoria !== "object")
+      continue;
+
+    for (const item of Object.values(categoria)) {
+      if (!item?.palavras_chave) continue;
+
+      const encontrou = item.palavras_chave.some(palavra =>
+        texto.includes(normalizar(palavra))
+      );
+
+      if (encontrou) {
+        return [
+          item.inicio?.[0],
+          item.explicacao_curta?.[0]
+        ]
+          .filter(Boolean)
+          .join(" ");
+      }
+    }
+  }
+
+  return null;
 }
 
 function buscarContexto(pergunta, data) {
