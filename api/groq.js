@@ -202,6 +202,79 @@ function mesmoTema(novaPergunta, historico) {
 
     return palavrasNova.some(p => palavrasAntiga.includes(p));
 }
+// ========== NOVAS FUNÇÕES ==========
+
+/**
+ * Extrai o nome da última entidade mencionada pelo Candinho no histórico.
+ * Retorna a chave exata como está nos JSONs (ex.: "carolina_maria_de_jesus")
+ */
+function extrairNomeEntidadeDoHistorico(historico, data) {
+  if (!Array.isArray(historico) || !historico.length) return null;
+
+  // Percorre as mensagens do assistente (role === "bot" ou "assistant")
+  // na ordem inversa (mais recente primeiro)
+  for (let i = historico.length - 1; i >= 0; i--) {
+    const msg = historico[i];
+    if (msg.role !== "assistant" && msg.role !== "bot") continue;
+
+    const texto = msg.content.toLowerCase();
+
+    // Varre todas as categorias e todas as entidades
+    for (const categoria of Object.values(data)) {
+      if (!categoria || typeof categoria !== "object") continue;
+
+      for (const chave of Object.keys(categoria)) {
+        const nomeDisplay = chave.replace(/_/g, " "); // ex.: "carolina maria de jesus"
+        if (texto.includes(nomeDisplay)) {
+          return chave; // retorna a chave original
+        }
+      }
+    }
+  }
+  return null;
+}
+
+/**
+ * Verifica se a pergunta é de acompanhamento e tenta extrair uma resposta direta.
+ */
+function responderAcompanhamento(pergunta, historico, data) {
+  const texto = pergunta.toLowerCase().trim();
+
+  // Detecta se é pergunta de acompanhamento + nascimento
+  const regexFollowUp = /^(ela|ele|esse\s+artista|essa\s+artista|essa\s+escritora|esse\s+escritor|quando\s+(ela|ele)\s+nasceu|qual\s+a\s+data\s+de\s+nascimento|onde\s+(ela|ele)\s+nasceu|quando\s+nasceu)/i;
+
+  if (!regexFollowUp.test(texto)) return null;
+
+  // Extrai o nome da entidade do histórico
+  const chaveEntidade = extrairNomeEntidadeDoHistorico(historico, data);
+  if (!chaveEntidade) return null;
+
+  // Busca a entidade correspondente no JSON
+  let entidade = null;
+  for (const categoria of Object.values(data)) {
+    if (categoria && categoria[chaveEntidade]) {
+      entidade = categoria[chaveEntidade];
+      break;
+    }
+  }
+  if (!entidade) return null;
+
+  // Se a pergunta fala em nascimento
+  if (texto.includes("nasceu") || texto.includes("nascimento")) {
+    // Tenta campos comuns de data de nascimento
+    const nascimento = entidade.data_nascimento ||
+                       entidade.nascimento ||
+                       entidade.data_de_nascimento;
+
+    if (nascimento) {
+      const nome = chaveEntidade.replace(/_/g, " ");
+      return `${nome} nasceu em ${nascimento}.`;
+    }
+  }
+
+  // Aqui poderíamos expandir para outros tipos de follow-up (ex.: obras, onde viveu, etc.)
+  return null;
+}
 
 // ======================= HANDLER =======================
 export default async function handler(req, res) {
@@ -228,6 +301,27 @@ export default async function handler(req, res) {
         if (instant) {
             return res.status(200).json({ reply: instant });
         }
+// ... dentro do handler, depois de:
+const instant = respostaInstantanea(mensagem, data);
+if (instant) {
+    return res.status(200).json({ reply: instant });
+}
+
+// ======== NOVO: Pergunta de acompanhamento ========
+const respostaAcompanhamento = responderAcompanhamento(
+    mensagem,
+    memoria.historicoCurto || [],
+    data
+);
+if (respostaAcompanhamento) {
+    return res.status(200).json({ reply: respostaAcompanhamento });
+}
+// =================================================
+
+// 3. Contexto (antigo)
+const contexto = buscarContexto(mensagem, data);
+// ...
+      
 
         // 3. Contexto
         const contexto = buscarContexto(mensagem, data);
