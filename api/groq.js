@@ -48,7 +48,6 @@ const JSON_FILES = {
     "literatura_conceitos.json",
   cantigas_de_roda: "cantigas_de_roda.json",
 
-  // ADICIONE ESTAS DUAS 👇
   escritoras_negras_indigenas_brasileiras:
     "escritoras-negras-indigenas-brasileiras.json",
 
@@ -59,8 +58,6 @@ const JSON_FILES = {
   imaginacao_infantil:
     "imaginacao_infantil.json",
 
-  // Se esse arquivo existir, mantenha.
-  // Se não existir, remova também.
   perguntas_infantis:
     "perguntas_infantis.json",
 
@@ -131,6 +128,48 @@ function normalizar(texto) {
     .trim();
 }
 
+// ======================= FUNÇÃO UNIVERSAL DE BUSCA (NOVA) =======================
+function buscarEntidade(pergunta, data) {
+  const texto = normalizar(pergunta);
+
+  for (const categoria of Object.values(data)) {
+    if (!categoria || typeof categoria !== "object")
+      continue;
+
+    for (const [chave, item] of Object.entries(categoria)) {
+
+      // nome vindo da chave do JSON
+      const nomeChave = normalizar(
+        chave.replace(/_/g, " ")
+      );
+
+      // palavras-chave do item
+      const palavras = Array.isArray(item?.palavras_chave)
+        ? item.palavras_chave.map(normalizar)
+        : [];
+
+      // nome do artista (caso exista no JSON)
+      const nome =
+        normalizar(item?.nome || "");
+
+      const encontrou =
+        texto.includes(nomeChave) ||
+        texto.includes(nome) ||
+        palavras.some(p => texto.includes(p));
+
+      if (encontrou) {
+        return {
+          chave,
+          item
+        };
+      }
+    }
+  }
+
+  return null;
+}
+
+// ======================= RESPOSTA INSTANTÂNEA (REESCRITA) =======================
 function respostaInstantanea(pergunta, data) {
   const texto = normalizar(pergunta);
 
@@ -150,48 +189,39 @@ function respostaInstantanea(pergunta, data) {
   if (texto.includes("historia"))
     return pegarAleatorio(data.historia_arte);
 
-  // procura personagem/artista/escritor em TODOS os JSONs
-  for (const categoria of Object.values(data)) {
-    if (!categoria || typeof categoria !== "object")
-      continue;
-
-    for (const item of Object.values(categoria)) {
-      if (!item?.palavras_chave) continue;
-
-      const encontrou = item.palavras_chave.some(palavra =>
-        texto.includes(normalizar(palavra))
-      );
-
-      if (encontrou) {
-        return [
-          item.inicio?.[0],
-          item.explicacao_curta?.[0]
-        ]
-          .filter(Boolean)
-          .join(" ");
-      }
-    }
+  // procura entidade
+  const entidade = buscarEntidade(pergunta, data);
+  if (entidade) {
+    const { item } = entidade;
+    return (
+      item.explicacao_infantil ||
+      item.quem_foi ||
+      item.explicacao_curta?.[0] ||
+      item.inicio?.[0] ||
+      item.descricao ||
+      item.texto ||
+      null
+    );
   }
 
   return null;
 }
 
+// ======================= BUSCAR CONTEXTO (REESCRITA) =======================
 function buscarContexto(pergunta, data) {
-    const texto = pergunta.toLowerCase();
+  const entidade = buscarEntidade(pergunta, data);
+  if (!entidade) return "";
 
-    for (const base of Object.values(data)) {
-        if (!base) continue;
-
-        for (const chave in base) {
-            const chaveLimpa = chave.replace(/_/g, " ");
-            if (texto.includes(chaveLimpa)) {
-                return base[chave]?.explicacao_infantil || "";
-            }
-        }
-    }
-
-    return "";
+  const { item } = entidade;
+  return (
+    item.explicacao_infantil ||
+    item.quem_foi ||
+    item.explicacao_curta?.[0] ||
+    item.descricao ||
+    ""
+  );
 }
+
 function mesmoTema(novaPergunta, historico) {
     if (!historico.length) return true;
 
@@ -202,6 +232,7 @@ function mesmoTema(novaPergunta, historico) {
 
     return palavrasNova.some(p => palavrasAntiga.includes(p));
 }
+
 // ========== NOVAS FUNÇÕES ==========
 
 /**
@@ -301,34 +332,22 @@ export default async function handler(req, res) {
         if (instant) {
             return res.status(200).json({ reply: instant });
         }
-// ... dentro do handler, depois de:
-const instant = respostaInstantanea(mensagem, data);
-if (instant) {
-    return res.status(200).json({ reply: instant });
-}
 
-// ======== NOVO: Pergunta de acompanhamento ========
-const respostaAcompanhamento = responderAcompanhamento(
-    mensagem,
-    memoria.historicoCurto || [],
-    data
-);
-if (respostaAcompanhamento) {
-    return res.status(200).json({ reply: respostaAcompanhamento });
-}
-// =================================================
+        // ======== Pergunta de acompanhamento ========
+        const respostaAcompanhamento = responderAcompanhamento(
+            mensagem,
+            memoria.historicoCurto || [],
+            data
+        );
+        if (respostaAcompanhamento) {
+            return res.status(200).json({ reply: respostaAcompanhamento });
+        }
 
-// 3. Contexto (antigo)
-const contexto = buscarContexto(mensagem, data);
-// ...
-      
-
-        // 3. Contexto
+        // 3. Contexto (agora usa a nova função reescrita)
         const contexto = buscarContexto(mensagem, data);
-        // 🔥 resposta direta do conteúdo (PRIORIDADE MÁXIMA)
-if (contexto) {
-    return res.status(200).json({ reply: contexto });
-}
+        if (contexto) {
+            return res.status(200).json({ reply: contexto });
+        }
 
         // 4. Sistema
         const contextoSistema = `
@@ -354,13 +373,14 @@ Regras:
         // 🧠 Proteção da memória
         let historicoSeguro = [];
 
-if (Array.isArray(memoria.historicoCurto)) {
-    if (mesmoTema(mensagem, memoria.historicoCurto)) {
-        historicoSeguro = memoria.historicoCurto.slice(-4);
-    } else {
-        historicoSeguro = []; // limpa se mudou assunto
-    }
-}
+        if (Array.isArray(memoria.historicoCurto)) {
+            if (mesmoTema(mensagem, memoria.historicoCurto)) {
+                historicoSeguro = memoria.historicoCurto.slice(-4);
+            } else {
+                historicoSeguro = []; // limpa se mudou assunto
+            }
+        }
+
         // 5. Groq
         const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
