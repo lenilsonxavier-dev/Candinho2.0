@@ -1,5 +1,5 @@
 // ========================================
-// CONFIGURAÇÃO
+// CONFIGURAÇÃO 
 // ========================================
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
 
