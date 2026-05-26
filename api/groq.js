@@ -3,8 +3,7 @@
 // ========================================
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
 
-// ⚠️ IMPORTANTE: Coloque sua chave da Europeana AQUI
-const EUROPEANA_API_KEY = "SUA_CHAVE_AQUI"; // ← SUBSTITUA PELA SUA CHAVE
+// ⚠️ IMPORTANTE: Coloque sua chave da Europeana no arquivo .env
 const EUROPEANA_API_KEY = process.env.EUROPEANA_API_KEY;
 
 const JSON_FILES = {
