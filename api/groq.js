@@ -18,7 +18,6 @@ const jsonFiles = {
     cantigas_de_roda: "cantigas_de_roda.json",
     cultura_afro_brasileira: "cultura_afro_brasileira.json",
     cultura_indigena: "cultura_indigena.json",
-    // cultura_brasileira: "cultura_brasileira.json", // REMOVIDO - não existe
     curiosidades: "curiosidades.json",
     dancas: "dancas.json",
     escritoras_negras_indigenas_brasileiras: "escritoras-negras-indigenas-brasileiras.json",
@@ -32,7 +31,6 @@ const jsonFiles = {
     musica: "musica.json",
     obras_famosas_mundo: "obras-famosas-mundo.json",
     obras_modernistas_brasileiras: "obras-modernistas-brasileiras.json",
-    // perguntas_infantis: "perguntas_infantis.json", // REMOVIDO - não existe
     personagens_fantasticos: "personagens_fantasticos.json",
     piadas: "piadas.json",
     ritmos_musicais: "ritmos_musicais.json",
@@ -52,12 +50,12 @@ async function buscarImagemEuropeana(termo) {
     }
     
     try {
-        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${encodeURIComponent(termo)}&qf=type:IMAGE&rows=3`;
+        // Correção do parâmetro qf para "TYPE:IMAGE"
+        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${encodeURIComponent(termo)}&qf=TYPE:IMAGE&rows=3`;
         const response = await fetch(url);
         const data = await response.json();
         
         if (data.items && data.items.length > 0) {
-            // Retorna a primeira imagem encontrada
             const primeiroItem = data.items[0];
             return {
                 imagemUrl: primeiroItem.edmPreview?.[0] || null,
@@ -82,7 +80,8 @@ async function buscarDetalhesEuropeana(artista) {
     }
     
     try {
-        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=who:"${encodeURIComponent(artista)}"&qf=type:IMAGE&rows=5`;
+        // Correção do parâmetro qf para "TYPE:IMAGE"
+        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=who:"${encodeURIComponent(artista)}"&qf=TYPE:IMAGE&rows=5`;
         const response = await fetch(url);
         const data = await response.json();
         
@@ -120,7 +119,8 @@ async function carregarTodosJSONs() {
     if (cacheData) return cacheData;
     const results = {};
     
-    const promises = Object.entries(JSON_FILES).map(async ([key, filename]) => {
+    // Correção: Alterado de "JSON_FILES" para "jsonFiles"
+    const promises = Object.entries(jsonFiles).map(async ([key, filename]) => {
         try {
             const res = await fetch(GITHUB_BASE + filename);
             if (res.ok) {
