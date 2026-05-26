@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Candinho na Vercel</title>
+<title>Candinho com Europeana</title>
 <style>
-    /* seu CSS permanece o mesmo */
     * { box-sizing: border-box; }
     body {
         font-family: 'Segoe UI', Arial, sans-serif;
@@ -109,23 +108,24 @@
 <div class="container">
     <div class="header">
         <img src="https://i.imgur.com/fnMYS0Z.png" alt="Candinho" class="avatar">
-        <h2>Candinho na Vercel 🎨</h2>
-        <div id="status">🔄 Carregando...</div>
+        <h2>Candinho com Europeana 🎨</h2>
+        <div id="status">🔄 Pronto para buscar arte!</div>
     </div>
     <div id="chat"></div>
     <div class="input-area">
-        <input type="text" id="pergunta" placeholder="Pergunte sobre arte, artistas, história..." autocomplete="off">
+        <input type="text" id="pergunta" placeholder="Ex: Quem foi Tarsila do Amaral?" autocomplete="off">
         <button id="sendBtn">Enviar</button>
     </div>
 </div>
 
 <script>
+    // ======================= ELEMENTOS DOM =======================
     const chatDiv = document.getElementById("chat");
     const inputField = document.getElementById("pergunta");
     const sendBtn = document.getElementById("sendBtn");
     const statusDiv = document.getElementById("status");
-    
-    // Acervo local de artistas
+
+    // ======================= ACERVO LOCAL DE ARTISTAS (fallback) =======================
     const artistasLocal = {
         "tarsila do amaral": {
             nome: "Tarsila do Amaral",
@@ -156,8 +156,9 @@
             resposta: "🎭 Leonardo da Vinci foi um gênio do Renascimento! Além de pintar a Mona Lisa, ele também foi inventor, cientista e engenheiro. ✏️"
         }
     };
-    
-    function buscarArtista(nome) {
+
+    // ======================= FUNÇÃO: buscar artista localmente =======================
+    function buscarArtistaLocal(nome) {
         const nomeNorm = nome.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         for (const [chave, dados] of Object.entries(artistasLocal)) {
             if (nomeNorm.includes(chave) || chave.includes(nomeNorm)) {
@@ -166,7 +167,17 @@
         }
         return null;
     }
-    
+
+    // ======================= FUNÇÃO: extrair nome da pergunta (quem foi/é ...) =======================
+    function extrairNomeArtista(pergunta) {
+        const match = pergunta.match(/quem (foi|é)\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i);
+        if (match && match[2]) {
+            return match[2].trim().replace(/[?!.,]+$/, '');
+        }
+        return null;
+    }
+
+    // ======================= FUNÇÕES DE UI =======================
     function addMessageToUI(text, isUser, isError = false) {
         const div = document.createElement("div");
         div.className = `msg ${isUser ? "user" : "bot"} ${isError ? "error" : ""}`;
@@ -175,7 +186,7 @@
         chatDiv.scrollTop = chatDiv.scrollHeight;
         return div;
     }
-    
+
     function addLoading() {
         const div = document.createElement("div");
         div.className = "msg bot loading";
@@ -184,52 +195,118 @@
         chatDiv.appendChild(div);
         chatDiv.scrollTop = chatDiv.scrollHeight;
     }
-    
+
     function removeLoading() {
         const el = document.getElementById("loadingMsg");
         if (el) el.remove();
     }
-    
+
+    // ======================= FUNÇÃO: ADICIONAR IMAGEM AO CHAT (Passo 4) =======================
+    function adicionarImagemAoChat(imagemUrl, titulo, credito) {
+        const div = document.createElement('div');
+        div.className = 'msg bot';
+        div.innerHTML = `
+            <div>🖼️ <strong>${titulo}</strong></div>
+            <img src="${imagemUrl}" alt="${titulo}" style="max-width: 200px; border-radius: 10px; margin: 5px 0;">
+            <div style="font-size: 0.7rem; color: #666;">📷 Fonte: ${credito}</div>
+        `;
+        chatDiv.appendChild(div);
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+    }
+
+    // ======================= FUNÇÃO: CHAMAR API EUROPEANA (Passo 4) =======================
+    async function buscarNaEuropeana(termo) {
+        try {
+            console.log('🔍 Buscando na Europeana:', termo);
+            const resposta = await fetch('/api/europeana', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    termo: termo,
+                    tipo: 'artista'
+                })
+            });
+            const dados = await resposta.json();
+            console.log('📦 Resposta da Europeana:', dados);
+            
+            if (dados.encontrado && dados.obra) {
+                return {
+                    sucesso: true,
+                    mensagem: dados.reply,
+                    imagem: dados.obra.imagem,
+                    titulo: dados.obra.titulo,
+                    credito: dados.obra.credito
+                };
+            }
+            return {
+                sucesso: false,
+                mensagem: dados.reply || 'Não encontrei obras desse artista na Europeana.'
+            };
+        } catch (erro) {
+            console.error('❌ Erro ao chamar Europeana:', erro);
+            return {
+                sucesso: false,
+                mensagem: 'Estou com dificuldades técnicas. Tente novamente! 🎨'
+            };
+        }
+    }
+
+    // ======================= FUNÇÃO RESPONDER (com fallback local e Europeana) =======================
     async function responder(pergunta) {
-        // Verifica se é uma pergunta sobre artista
-        const quemMatch = pergunta.match(/quem (foi|é)\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i);
-        let nomeBuscado = "";
+        // 1. Verificar se é uma pergunta sobre artista ("quem foi...")
+        let nomeArtista = extrairNomeArtista(pergunta);
         
-        if (quemMatch) {
-            nomeBuscado = quemMatch[2].trim();
-        } else if (pergunta.toLowerCase().includes("artista")) {
+        // Se não for, tenta extrair palavras soltas (ex: "Tarsila")
+        if (!nomeArtista) {
             const palavras = pergunta.split(/\s+/);
-            for (let i = 0; i < palavras.length; i++) {
-                if (artistasLocal[palavras[i].toLowerCase()]) {
-                    nomeBuscado = palavras[i];
+            for (let p of palavras) {
+                if (p.length > 3 && artistasLocal[p.toLowerCase()]) {
+                    nomeArtista = p;
                     break;
                 }
             }
         }
         
-        if (nomeBuscado) {
-            const resposta = buscarArtista(nomeBuscado);
-            if (resposta) return resposta;
+        // 2. Buscar no acervo local (fallback rápido)
+        const respostaLocal = nomeArtista ? buscarArtistaLocal(nomeArtista) : null;
+        if (respostaLocal) {
+            return respostaLocal + " 🦆✨";
         }
         
-        // Respostas para perguntas comuns
+        // 3. Se não encontrou localmente e tem um nome, tentar na Europeana
+        if (nomeArtista) {
+            const resultado = await buscarNaEuropeana(nomeArtista);
+            if (resultado.sucesso) {
+                // Mostrar a mensagem textual
+                addMessageToUI(resultado.mensagem, false);
+                // Pequeno atraso para não misturar com a imagem (opcional)
+                setTimeout(() => {
+                    if (resultado.imagem) {
+                        adicionarImagemAoChat(resultado.imagem, resultado.titulo, resultado.credito);
+                    }
+                }, 300);
+                return; // já adicionamos a mensagem, não precisa retornar mais nada
+            } else {
+                return resultado.mensagem + " Que tal perguntar sobre Tarsila, Portinari ou Van Gogh? 🎨";
+            }
+        }
+        
+        // 4. Se a pergunta não for sobre artista, responder de forma genérica
         const perguntaLower = pergunta.toLowerCase();
-        if (perguntaLower.includes("oi") || perguntaLower.includes("olá") || perguntaLower.includes("hello")) {
-            return "Olá! Sou o Candinho, seu amigo artista! Pergunte sobre artistas como Tarsila, Portinari, Van Gogh ou Frida Kahlo! 🎨✨";
+        if (perguntaLower.includes("oi") || perguntaLower.includes("olá")) {
+            return "Olá! Sou o Candinho, seu amigo artista! Pergunte 'Quem foi Tarsila do Amaral?' ou sobre outros artistas! 🎨✨";
         }
-        
-        if (perguntaLower.includes("obrigado") || perguntaLower.includes("valeu")) {
+        if (perguntaLower.includes("obrigado")) {
             return "Por nada! Fico feliz em ajudar você a descobrir o mundo da arte! 🦆💛";
         }
-        
-        if (perguntaLower.includes("ajuda") || perguntaLower.includes("o que você faz")) {
+        if (perguntaLower.includes("ajuda")) {
             return "Posso te contar sobre artistas famosos! Tente perguntar: 'Quem foi Tarsila do Amaral?' ou 'Quem foi Van Gogh?' 🎭";
         }
         
-        // Fallback
-        return `🎨 Ainda não aprendi muito sobre "${pergunta.substring(0, 30)}"...\n\nQue tal perguntar sobre artistas como Tarsila do Amaral, Portinari, Van Gogh, Monet, Picasso ou Frida Kahlo? 🦆✨`;
+        return "Ainda não aprendi sobre isso. Pergunte sobre artistas como Tarsila, Portinari, Van Gogh, Monet, Picasso ou Frida Kahlo! 🦆✨";
     }
-    
+
+    // ======================= CONTROLE DE ENVIO =======================
     let isProcessing = false;
     async function enviar() {
         if (isProcessing) return;
@@ -244,10 +321,14 @@
         try {
             const resposta = await responder(texto);
             removeLoading();
-            addMessageToUI(resposta, false);
+            // Se a responder já tiver adicionado mensagem (caso Europeana com imagem), não adicionar novamente
+            if (resposta) {
+                addMessageToUI(resposta, false);
+            }
         } catch (err) {
             removeLoading();
-            addMessageToUI("Ops! Ocorreu um erro.", false, true);
+            addMessageToUI("Ops! Ocorreu um erro inesperado.", false, true);
+            console.error(err);
         } finally {
             isProcessing = false;
             sendBtn.disabled = false;
@@ -255,12 +336,13 @@
             inputField.focus();
         }
     }
-    
+
     sendBtn.addEventListener("click", enviar);
     inputField.addEventListener("keypress", (e) => { if (e.key === "Enter" && !isProcessing) enviar(); });
-    
-    statusDiv.innerText = "🎨 Candinho pronto!";
-    addMessageToUI("Olá! Sou o Candinho, seu amigo artista! Pergunte sobre artistas como Tarsila, Portinari, Van Gogh ou Frida Kahlo! 🎨", false);
+
+    // Mensagem inicial
+    statusDiv.innerText = "🎨 Candinho conectado à Europeana!";
+    addMessageToUI("Olá! Sou o Candinho. Pergunte 'Quem foi Tarsila do Amaral?' e, se o artista não estiver no meu acervo local, vou buscar imagens na Europeana para você! 🖼️", false);
 </script>
 </body>
 </html>
