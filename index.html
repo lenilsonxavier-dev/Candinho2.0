@@ -116,6 +116,22 @@
         opacity: 0.5;
         cursor: not-allowed;
     }
+    .image-msg {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .image-msg img {
+        max-width: 250px;
+        border-radius: 15px;
+        margin-top: 5px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .image-caption {
+        font-size: 0.8rem;
+        color: #2d3436;
+        margin-top: 5px;
+    }
 </style>
 </head>
 <body>
@@ -134,40 +150,40 @@
 
 <script type="module">
     // ======================= CONFIGURAÇÕES =======================
-   const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
-const jsonFiles = {
-    apoio_emocional: "apoio_emocional.json",
-    arte_tecnicas: "arte_tecnicas.json",
-    artes_visuais: "artes_visuais.json",
-    artistas: "artistas.json",
-    artistas_indigenas_afrobrasileiros: "artistas-indigenas-afrobrasileiros.json",
-    artistas_mulheres_historicas: "artistas-mulheres-historicas.json",
-    artistas_universais: "artistas_universais.json",
-    atividades_artisticas: "atividades_artisticas.json",
-    cantigas_de_roda: "cantigas_de_roda.json",
-    cultura_afro_brasileira: "cultura_afro_brasileira.json",
-    cultura_brasileira: "cultura_brasileira.json",
-    cultura_indigena: "cultura_indigena.json",
-    curiosidades: "curiosidades.json",
-    dancas: "dancas.json",
-    escritoras_negras_indigenas_brasileiras: "escritoras-negras-indigenas-brasileiras.json",
-    escritores_negros_indigenas_brasileiros: "escritores-negros-indigenas-brasileiros.json",
-    festas_brasileiras: "festas_brasileiras.json",
-    folclore: "folclore.json",
-    historia_arte: "historia_arte.json",
-    imaginacao_infantil: "imaginacao_infantil.json",
-    literatura_conceitos: "literatura_conceitos.json",
-    lugares_arte: "lugares_arte.json",
-    musica: "musica.json",
-    obras_famosas_mundo: "obras-famosas-mundo.json",
-    obras_modernistas_brasileiras: "obras-modernistas-brasileiras.json",
-    perguntas_infantis: "perguntas_infantis.json",
-    personagens_fantasticos: "personagens_fantasticos.json",
-    piadas: "piadas.json",
-    ritmos_musicais: "ritmos_musicais.json",
-    saudacoes: "saudacoes.json",
-    teatro: "teatro.json"
-};
+    const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
+    const jsonFiles = {
+        apoio_emocional: "apoio_emocional.json",
+        arte_tecnicas: "arte_tecnicas.json",
+        artes_visuais: "artes_visuais.json",
+        artistas: "artistas.json",
+        artistas_indigenas_afrobrasileiros: "artistas-indigenas-afrobrasileiros.json",
+        artistas_mulheres_historicas: "artistas-mulheres-historicas.json",
+        artistas_universais: "artistas_universais.json",
+        atividades_artisticas: "atividades_artisticas.json",
+        cantigas_de_roda: "cantigas_de_roda.json",
+        cultura_afro_brasileira: "cultura_afro_brasileira.json",
+        cultura_brasileira: "cultura_brasileira.json",
+        cultura_indigena: "cultura_indigena.json",
+        curiosidades: "curiosidades.json",
+        dancas: "dancas.json",
+        escritoras_negras_indigenas_brasileiras: "escritoras-negras-indigenas-brasileiras.json",
+        escritores_negros_indigenas_brasileiros: "escritores-negros-indigenas-brasileiros.json",
+        festas_brasileiras: "festas_brasileiras.json",
+        folclore: "folclore.json",
+        historia_arte: "historia_arte.json",
+        imaginacao_infantil: "imaginacao_infantil.json",
+        literatura_conceitos: "literatura_conceitos.json",
+        lugares_arte: "lugares_arte.json",
+        musica: "musica.json",
+        obras_famosas_mundo: "obras-famosas-mundo.json",
+        obras_modernistas_brasileiras: "obras-modernistas-brasileiras.json",
+        perguntas_infantis: "perguntas_infantis.json",
+        personagens_fantasticos: "personagens_fantasticos.json",
+        piadas: "piadas.json",
+        ritmos_musicais: "ritmos_musicais.json",
+        saudacoes: "saudacoes.json",
+        teatro: "teatro.json"
+    };
     
     let dataStore = {};
     let ultimoPersonagem = null;
@@ -200,6 +216,18 @@ const jsonFiles = {
         chatDiv.appendChild(div);
         chatDiv.scrollTop = chatDiv.scrollHeight;
         return div;
+    }
+    
+    function addImageToUI(imageUrl, titulo, credito) {
+        const div = document.createElement("div");
+        div.className = "msg bot image-msg";
+        div.innerHTML = `
+            <div>🎨 <strong>${titulo}</strong></div>
+            <img src="${imageUrl}" alt="${titulo}" onerror="this.style.display='none'">
+            <div class="image-caption">📷 Fonte: ${credito}</div>
+        `;
+        chatDiv.appendChild(div);
+        chatDiv.scrollTop = chatDiv.scrollHeight;
     }
     
     function extrairMemoria(pergunta) {
@@ -248,33 +276,46 @@ const jsonFiles = {
         if (el) el.remove();
     }
     
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-    
-    const firebaseConfig = {
-        apiKey: "AIzaSyCQq1DYHivZBIX2_0_NY7eKIoBWG5sKs48",
-        authDomain: "candinho-8bee5.firebaseapp.com",
-        projectId: "candinho-8bee5",
-        storageBucket: "candinho-8bee5.firebasestorage.app",
-        messagingSenderId: "342319000222",
-        appId: "1:342319000222:web:ab04b940b0175b8722a98f"
-    };
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const CONVERSA_COLLECTION = "conversas_candinho";
-    
-    async function salvarMensagemFirebase(role, content) { return; }
-    async function carregarHistoricoFirebase() {
-        historicoMensagens = [];
-        statusDiv.innerText = "✅ Candinho pronto";
-        return;
-    }
-    
     function normalizar(texto) {
         return texto.toLowerCase()
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
             .trim();
+    }
+    
+    // ======================= FUNÇÃO PARA CHAMAR O BACK-END =======================
+    async function chamarBackend(pergunta) {
+        try {
+            const resposta = await fetch('/api/groq', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    mensagem: pergunta,
+                    memoria: memoria 
+                })
+            });
+            
+            const dados = await resposta.json();
+            
+            // Se o back-end retornou uma imagem da Europeana
+            if (dados.image && dados.image.imagemUrl) {
+                addImageToUI(dados.image.titulo, dados.image.imagemUrl, dados.image.credito);
+            }
+            
+            // Se retornou várias obras
+            if (dados.artworks && dados.artworks.length > 0) {
+                dados.artworks.slice(0, 2).forEach(obra => {
+                    if (obra.imagem) {
+                        addImageToUI(obra.titulo, obra.imagem, "Europeana");
+                    }
+                });
+            }
+            
+            return dados.reply;
+        } catch (erro) {
+            console.error("Erro no back-end:", erro);
+            return "Estou com dificuldades técnicas. Tente novamente! 🎨";
+        }
     }
     
     function detectarTemaPrioritario(texto) {
@@ -419,9 +460,7 @@ const jsonFiles = {
         const tema = detectarTemaPrioritario(pergunta);
         const txt = normalizar(pergunta);
         
-        // ============================================================
         // TRATAMENTO ESPECIAL PARA SAUDAÇÕES, DESPEDIDAS, AGRADECIMENTOS E ELOGIOS
-        // ============================================================
         if (tema === "saudacoes" && dataStore.saudacoes && dataStore.saudacoes.saudacoes) {
             const saudacoesData = dataStore.saudacoes.saudacoes;
             let resposta = '';
@@ -494,9 +533,7 @@ const jsonFiles = {
             if (resposta) return resposta;
         }
         
-        // ============================================================
         // PIADAS
-        // ============================================================
         if (tema === "piadas" && dataStore.piadas) {
             const piadasArray = Object.values(dataStore.piadas);
             if (piadasArray.length) {
@@ -506,9 +543,7 @@ const jsonFiles = {
             }
         }
         
-        // ============================================================
         // CURIOSIDADES
-        // ============================================================
         if (tema === "curiosidades" && dataStore.curiosidades) {
             const curiosArray = Object.values(dataStore.curiosidades);
             if (curiosArray.length) {
@@ -518,9 +553,7 @@ const jsonFiles = {
             }
         }
         
-        // ============================================================
         // CANTIGAS DE RODA
-        // ============================================================
         if (tema === "cantigas_de_roda") {
             const cantigas = dataStore.cantigas_de_roda?.cantigas_de_roda;
             if (!cantigas) return null;
@@ -530,9 +563,7 @@ const jsonFiles = {
             return null;
         }
         
-        // ============================================================
         // MAPEAMENTO DE TEMAS PARA BUSCA
-        // ============================================================
         let chavesBusca = [];
         if (tema === "arte") chavesBusca = ["artes_visuais", "arte_tecnicas", "arte_artista", "artistas", "artistas_universais", "historia_arte", "lugares_arte", "obras_famosas_mundo", "obras_modernistas_brasileiras"];
         else if (tema === "danca") chavesBusca = ["dancas", "ritmos_musicais", "cultura_afro_brasileira", "cultura_brasileira", "festas_brasileiras"];
@@ -560,9 +591,7 @@ const jsonFiles = {
             }
         }
         
-        // ============================================================
         // FALLBACK "O QUE É"
-        // ============================================================
         if (txt.includes("o que e") || txt.includes("o que é")) {
             if (txt.includes("musica")) {
                 const item = dataStore.musica?.o_que_e_musica;
@@ -608,7 +637,6 @@ const jsonFiles = {
         return null;
     }
     
-    // Função para buscar artista pelo nome
     function buscarArtistaPorNome(nomeBuscado) {
         const nomeNorm = normalizar(nomeBuscado);
         const fontesArtistas = [
@@ -674,10 +702,9 @@ const jsonFiles = {
         return null;
     }
     
+    // ======================= FUNÇÃO RESPONDER PRINCIPAL =======================
     async function responder(pergunta) {
-        // ============================================================
         // 1. PERGUNTAS CONTEXTUAIS COM NOME EXTRAÍDO
-        // ============================================================
         const nomeExtraido = extrairNomeDaPergunta(pergunta);
         if (nomeExtraido) {
             const artista = buscarArtistaPorNome(nomeExtraido);
@@ -686,9 +713,7 @@ const jsonFiles = {
             }
         }
         
-        // ============================================================
         // 2. PERGUNTAS CONTEXTUAIS SOBRE O ÚLTIMO PERSONAGEM
-        // ============================================================
         const txt = normalizar(pergunta);
         if (ultimoPersonagem) {
             let personagemData = null;
@@ -748,9 +773,7 @@ const jsonFiles = {
             }
         }
         
-        // ============================================================
         // 3. TRATAMENTO PARA "QUEM FOI X?" ou "QUEM É X?"
-        // ============================================================
         const quemMatch = pergunta.match(/quem (foi|é)\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i);
         if (quemMatch) {
             let nomeBuscado = quemMatch[2].trim();
@@ -771,30 +794,9 @@ const jsonFiles = {
                     return resposta;
                 }
             }
-            const naoAchei = `Ainda não aprendi sobre ${nomeBuscado} 😅. Pode me ensinar? Ou pergunte sobre outro artista!`;
-            historicoMensagens.push({ role: "user", content: pergunta });
-            historicoMensagens.push({ role: "assistant", content: naoAchei });
-            return naoAchei;
         }
         
-        // ============================================================
-        // 4. PERGUNTA "QUEM FOI?" (sem nome)
-        // ============================================================
-        if ((txt === "quem foi" || txt === "quem foi?") && ultimoPersonagem) {
-            for (const chave in dataStore) {
-                const obj = dataStore[chave];
-                const resposta = buscarEmJSON(obj, ultimoPersonagem);
-                if (resposta) {
-                    historicoMensagens.push({ role: "user", content: pergunta });
-                    historicoMensagens.push({ role: "assistant", content: resposta });
-                    return resposta;
-                }
-            }
-        }
-        
-        // ============================================================
-        // 5. MEMÓRIA
-        // ============================================================
+        // 4. MEMÓRIA
         const memoriaDetectada = extrairMemoria(pergunta);
         if (memoriaDetectada) {
             historicoMensagens.push({ role: "user", content: pergunta });
@@ -809,9 +811,7 @@ const jsonFiles = {
             return memoria.idade ? `Você tem ${memoria.idade} anos! 🎈` : "Você ainda não me contou sua idade!";
         }
         
-        // ============================================================
-        // 6. RESPOSTA INSTANTÂNEA (JSONs)
-        // ============================================================
+        // 5. RESPOSTA INSTANTÂNEA (JSONs locais)
         const instant = respostaInstantanea(pergunta);
         if (instant) {
             historicoMensagens.push({ role: "user", content: pergunta });
@@ -819,10 +819,11 @@ const jsonFiles = {
             return instant;
         }
         
-        // ============================================================
-        // 7. FALLBACK
-        // ============================================================
-        return "Ainda não aprendi sobre isso. Tente perguntar de outra forma ou pergunte sobre um artista! 🎨";
+        // 6. SE NÃO ACHOU, CHAMA O BACK-END (GROQ + EUROPEANA)
+        const respostaBackend = await chamarBackend(pergunta);
+        historicoMensagens.push({ role: "user", content: pergunta });
+        historicoMensagens.push({ role: "assistant", content: respostaBackend });
+        return respostaBackend;
     }
     
     async function carregarTodosJSONs() {
