@@ -1,4 +1,10 @@
+// ========================================
+// CONFIGURAÇÃO
+// ========================================
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
+
+// ⚠️ IMPORTANTE: Coloque sua chave da Europeana AQUI
+const EUROPEANA_API_KEY = "SUA_CHAVE_AQUI"; // ← SUBSTITUA PELA SUA CHAVE
 
 const JSON_FILES = {
   apoio_emocional: "apoio_emocional.json",
@@ -24,8 +30,8 @@ const JSON_FILES = {
   obras_modernistas_brasileiras: "obras-modernistas-brasileiras.json",
   literatura_conceitos: "literatura_conceitos.json",
   cantigas_de_roda: "cantigas_de_roda.json",
-  escritoras_negras_indigenas_brasileiras: "escritoras-negras-indigenas-brasileiras.json", // Verificado
-  escritores_negros_indigenas_brasileiros: "escritores-negros-indigenas-brasileiros.json", // Verificado
+  escritoras_negras_indigenas_brasileiras: "escritoras-negras-indigenas-brasileiras.json",
+  escritores_negros_indigenas_brasileiros: "escritores-negros-indigenas-brasileiros.json",
   imaginacao_infantil: "imaginacao_infantil.json",
   perguntas_infantis: "perguntas_infantis.json",
   personagens_fantasticos: "personagens_fantasticos.json",
@@ -36,11 +42,84 @@ const JSON_FILES = {
 
 let cacheData = null;
 
+// ========================================
+// FUNÇÃO PARA BUSCAR IMAGENS NA EUROPEANA
+// ========================================
+async function buscarImagemEuropeana(termo) {
+    if (!EUROPEANA_API_KEY || EUROPEANA_API_KEY === "SUA_CHAVE_AQUI") {
+        console.warn("⚠️ Chave da Europeana não configurada");
+        return null;
+    }
+    
+    try {
+        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${encodeURIComponent(termo)}&qf=type:IMAGE&rows=3`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.items && data.items.length > 0) {
+            // Retorna a primeira imagem encontrada
+            const primeiroItem = data.items[0];
+            return {
+                imagemUrl: primeiroItem.edmPreview?.[0] || null,
+                titulo: primeiroItem.title?.[0] || termo,
+                credito: primeiroItem.dataProvider?.[0] || "Europeana",
+                link: primeiroItem.guid || null
+            };
+        }
+        return null;
+    } catch (error) {
+        console.error("Erro ao buscar imagem na Europeana:", error);
+        return null;
+    }
+}
+
+// ========================================
+// FUNÇÃO PARA BUSCAR MAIS DETALHES NA EUROPEANA
+// ========================================
+async function buscarDetalhesEuropeana(artista) {
+    if (!EUROPEANA_API_KEY || EUROPEANA_API_KEY === "SUA_CHAVE_AQUI") {
+        return null;
+    }
+    
+    try {
+        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=who:"${encodeURIComponent(artista)}"&qf=type:IMAGE&rows=5`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.items && data.items.length > 0) {
+            return data.items.map(item => ({
+                titulo: item.title?.[0] || "Sem título",
+                imagem: item.edmPreview?.[0] || null,
+                data: item.year?.[0] || "Data desconhecida",
+                link: item.guid || null
+            }));
+        }
+        return null;
+    } catch (error) {
+        console.error("Erro ao buscar detalhes na Europeana:", error);
+        return null;
+    }
+}
+
+// ========================================
+// FUNÇÕES AUXILIARES
+// ========================================
+function normalizar(texto) {
+    if (!texto) return "";
+    return texto.toString().toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^\w\s]/g, "").trim();
+}
+
+function extrairTexto(campo) {
+    if (!campo) return "";
+    return Array.isArray(campo) ? campo.join(" ") : campo;
+}
+
 async function carregarTodosJSONs() {
     if (cacheData) return cacheData;
     const results = {};
     
-    // Carregamento em paralelo para ser rápido
     const promises = Object.entries(JSON_FILES).map(async ([key, filename]) => {
         try {
             const res = await fetch(GITHUB_BASE + filename);
@@ -59,26 +138,11 @@ async function carregarTodosJSONs() {
     return results;
 }
 
-function normalizar(texto) {
-    if (!texto) return "";
-    return texto.toString().toLowerCase()
-        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^\w\s]/g, "").trim();
-}
-
-function extrairTexto(campo) {
-    if (!campo) return "";
-    return Array.isArray(campo) ? campo.join(" ") : campo;
-}
-
-// ======================= NOVO MOTOR DE BUSCA PROFUNDA =======================
 function buscarNoAcervo(pergunta, data) {
     const textoBusca = normalizar(pergunta);
     if (!textoBusca) return null;
 
-    // Varre cada arquivo carregado no data
     for (const [keyFile, conteudo] of Object.entries(data)) {
-        // Se o conteúdo for um objeto (como escritoras.json)
         const entries = Object.entries(conteudo);
         
         for (const [chaveID, dados] of entries) {
@@ -88,7 +152,6 @@ function buscarNoAcervo(pergunta, data) {
                 ? dados.palavras_chave.map(normalizar) 
                 : [];
 
-            // Verifica se o termo pesquisado bate com o ID, o Nome ou as Tags
             const match = textoBusca.includes(nomeChave) || 
                           (nomeItem && textoBusca.includes(nomeItem)) ||
                           palavrasChave.some(p => textoBusca.includes(p));
@@ -103,7 +166,8 @@ function buscarNoAcervo(pergunta, data) {
                                extrairTexto(dados.quem_foi) || 
                                extrairTexto(dados.explicacao_aprofundada),
                     curiosidade: extrairTexto(dados.curiosidade),
-                    feito: extrairTexto(dados.o_que_ele_fez) || extrairTexto(dados.o_que_fez)
+                    feito: extrairTexto(dados.o_que_ele_fez) || extrairTexto(dados.o_que_fez),
+                    palavras_chave: palavrasChave
                 };
             }
         }
@@ -111,6 +175,9 @@ function buscarNoAcervo(pergunta, data) {
     return null;
 }
 
+// ========================================
+// HANDLER PRINCIPAL
+// ========================================
 export default async function handler(req, res) {
     if (req.method !== "POST") return res.status(405).send();
 
@@ -118,10 +185,13 @@ export default async function handler(req, res) {
         const { mensagem, memoria = {} } = req.body;
         const data = await carregarTodosJSONs();
 
-        // 1. Tenta buscar no banco de dados primeiro
+        // 1. Busca no acervo local
         const achado = buscarNoAcervo(mensagem, data);
-
+        
         let contextoAdicional = "";
+        let imagemEuropeana = null;
+        let obrasEuropeana = null;
+
         if (achado) {
             contextoAdicional = `
                 INFORMAÇÃO REAL DO ACERVO:
@@ -131,22 +201,46 @@ export default async function handler(req, res) {
                 Feitos: ${achado.feito}
                 Use estritamente os fatos acima para responder.
             `;
+            
+            // 2. Busca IMAGEM na Europeana (se disponível)
+            imagemEuropeana = await buscarImagemEuropeana(achado.nome);
+            
+            // 3. Busca OBRAS do artista na Europeana
+            obrasEuropeana = await buscarDetalhesEuropeana(achado.nome);
         }
 
-        // 2. Monta o Prompt para a IA
+        // 4. Monta o Prompt com informações da Europeana
+        let promptImagem = "";
+        if (imagemEuropeana) {
+            promptImagem = `\n\nIMAGEM DISPONÍVEL: ${imagemEuropeana.imagemUrl}
+            Título da obra: ${imagemEuropeana.titulo}
+            Fonte: ${imagemEuropeana.credito}`;
+        }
+        
+        let promptObras = "";
+        if (obrasEuropeana && obrasEuropeana.length > 0) {
+            promptObras = "\n\nOBRAS RELACIONADAS:";
+            obrasEuropeana.slice(0, 3).forEach((obra, idx) => {
+                promptObras += `\n${idx+1}. ${obra.titulo} (${obra.data}) - ${obra.imagem}`;
+            });
+        }
+
         const promptSistema = `
             Você é o Candinho, mentor de arte e literatura infantil.
             Homenageia Cândido Portinari.
             Público: Crianças de 10 anos.
             
             ${contextoAdicional}
+            ${promptImagem}
+            ${promptObras}
 
             REGRAS:
             - Se houver INFORMAÇÃO REAL acima, você DEVE usá-la.
-            - Se não houver informação no acervo sobre o artista, incentive a criança a pesquisar ou pergunte se ela quer saber de outro que você conhece.
+            - Se houver IMAGEM DISPONÍVEL, mencione que tem uma imagem para mostrar.
+            - Se não houver informação no acervo, incentive a criança a pesquisar.
             - NUNCA use linguagem neutra.
-            - Máximo 3 linhas.
-            - Seja muito carinhoso.
+            - Máximo 4 linhas.
+            - Seja muito carinhoso e use emojis.
         `;
 
         const GROQ_API_KEY = process.env.GROQ_API_KEY;
@@ -167,9 +261,19 @@ export default async function handler(req, res) {
         });
 
         const dataIA = await response.json();
-        return res.status(200).json({ reply: dataIA.choices[0].message.content });
+        const respostaTexto = dataIA.choices[0].message.content;
+        
+        // 5. Retorna a resposta JUNTO com a imagem (se existir)
+        return res.status(200).json({ 
+            reply: respostaTexto,
+            image: imagemEuropeana,      // Para exibir no front-end
+            artworks: obrasEuropeana     // Lista de obras encontradas
+        });
 
     } catch (err) {
-        return res.status(200).json({ reply: "Puxa, tive um probleminha aqui! 🎨 Pode perguntar de novo?" });
+        console.error(err);
+        return res.status(200).json({ 
+            reply: "Puxa, tive um probleminha aqui! 🎨 Pode perguntar de novo?" 
+        });
     }
 }
