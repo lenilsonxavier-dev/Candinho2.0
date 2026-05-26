@@ -5,6 +5,7 @@ const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candin
 
 // ⚠️ IMPORTANTE: Coloque sua chave da Europeana AQUI
 const EUROPEANA_API_KEY = "SUA_CHAVE_AQUI"; // ← SUBSTITUA PELA SUA CHAVE
+const EUROPEANA_API_KEY = process.env.EUROPEANA_API_KEY;
 
 const JSON_FILES = {
   apoio_emocional: "apoio_emocional.json",
