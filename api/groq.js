@@ -1,10 +1,15 @@
 // ========================================
+// IMPORTAÇÃO DA BIBLIOTECA CULTURAL
+// ========================================
+import { bibliotecaCultural } from "../src/data/bibliotecaCultural.js";
+
+// ========================================
 // CONFIGURAÇÃO
 // ========================================
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
 const EUROPEANA_API_KEY = process.env.EUROPEANA_API_KEY;
 
-// Lista de arquivos JSON que existem no seu repositório (pelo que vi nos logs)
+// Lista de arquivos JSON que existem no seu repositório (fallback)
 const JSON_FILES = {
     artistas: "artistas.json",
     artistas_universais: "artistas_universais.json",
@@ -55,8 +60,37 @@ function extrairTexto(campo) {
     return Array.isArray(campo) ? campo.join(" ") : campo;
 }
 
-// Busca artista nos JSONs de artistas
-function buscarArtista(nome, data) {
+// NOVA FUNÇÃO: Busca artista na bibliotecaCultural (prioridade)
+function buscarArtistaNaBiblioteca(nome) {
+    const nomeNorm = normalizar(nome);
+    
+    for (const [chave, info] of Object.entries(bibliotecaCultural)) {
+        // Pula a seção de conceitos (não é artista)
+        if (chave === "conceitos") continue;
+        
+        const chaveNorm = normalizar(chave.replace(/_/g, " "));
+        const palavras = (info.palavras_chave || []).map(normalizar);
+        const nomeInfo = normalizar(info.nome || "");
+        
+        if (nomeNorm === chaveNorm || nomeNorm === nomeInfo || palavras.includes(nomeNorm)) {
+            return {
+                nome: info.nome || chave.replace(/_/g, " "),
+                biografia: extrairTexto(info.explicacao_infantil) ||
+                           extrairTexto(info.explicacao_curta) ||
+                           extrairTexto(info.inicio) ||
+                           extrairTexto(info.quem_foi),
+                curiosidade: extrairTexto(info.curiosidade),
+                obra_famosa: info.obra_mais_famosa || (info.obras?.[0]),
+                nascimento: info.nascimento || info.ano_nascimento,
+                nacionalidade: info.nacionalidade || "Brasileira"
+            };
+        }
+    }
+    return null;
+}
+
+// FUNÇÃO ORIGINAL ADAPTADA: Busca artista nos JSONs (fallback)
+function buscarArtistaNosJSONs(nome, data) {
     const nomeNorm = normalizar(nome);
     const fontes = ["artistas", "artistas_universais", "artistas_indigenas_afrobrasileiros", "artistas_mulheres_historicas"];
     for (const fonte of fontes) {
@@ -84,10 +118,43 @@ function buscarArtista(nome, data) {
     return null;
 }
 
-// Busca conceito (dança, arte, piada) nos JSONs
+// FUNÇÃO PRINCIPAL DE BUSCA (prioriza biblioteca, fallback para JSONs)
+function buscarArtista(nome, data) {
+    // Primeiro tenta na bibliotecaCultural
+    const artistaDaBiblioteca = buscarArtistaNaBiblioteca(nome);
+    if (artistaDaBiblioteca) return artistaDaBiblioteca;
+    
+    // Se não encontrar, tenta nos JSONs (fallback)
+    return buscarArtistaNosJSONs(nome, data);
+}
+
+// Busca conceito (dança, arte, piada) - prioriza bibliotecaCultural
 function buscarConceito(pergunta, data) {
     const texto = normalizar(pergunta);
-    // Mapeamento simples
+    
+    // PRIORIDADE: busca na bibliotecaCultural
+    const conceitos = bibliotecaCultural.conceitos;
+    if (conceitos) {
+        if (texto.includes("danca") || texto.includes("dança")) {
+            if (conceitos.danca?.inicio) return conceitos.danca.inicio[0];
+        }
+        if (texto.includes("arte")) {
+            if (conceitos.arte?.inicio) return conceitos.arte.inicio[0];
+        }
+        if (texto.includes("desenho")) {
+            if (conceitos.desenho?.inicio) return conceitos.desenho.inicio[0];
+        }
+        if (texto.includes("pintura")) {
+            if (conceitos.pintura?.inicio) return conceitos.pintura.inicio[0];
+        }
+        if (texto.includes("piada")) {
+            if (conceitos.piadas && conceitos.piadas.length) {
+                return conceitos.piadas[Math.floor(Math.random() * conceitos.piadas.length)];
+            }
+        }
+    }
+    
+    // FALLBACK: busca nos JSONs
     if (texto.includes("danca") || texto.includes("dança")) {
         const dancas = data.dancas;
         if (dancas && dancas.o_que_e_danca?.inicio) return dancas.o_que_e_danca.inicio[0];
@@ -164,7 +231,7 @@ export default async function handler(req, res) {
 
     try {
         const { mensagem, memoria = {} } = req.body;
-        const data = await carregarJSONs();
+        const data = await carregarJSONs(); // ainda carrega para fallback
         let ultimoArtista = memoria.ultimoArtista || null;
         let resposta = null;
         let imagem = null;
