@@ -52,8 +52,8 @@
         max-width: 80%;
         padding: 10px 15px;
         border-radius: 20px;
-        line-height: 1.4;
         word-wrap: break-word;
+        animation: fadeIn 0.2s ease;
     }
     .user {
         background: #74b9ff;
@@ -66,11 +66,22 @@
         align-self: flex-start;
         border-bottom-left-radius: 5px;
     }
+    .bot-image {
+        margin-top: 8px;
+        max-width: 200px;
+        border-radius: 10px;
+    }
+    .image-credit {
+        font-size: 0.7rem;
+        color: #555;
+        margin-top: 4px;
+    }
     .loading {
         background: #dfe6e9;
         font-style: italic;
         animation: pulse 1s infinite;
     }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes pulse { 0% { opacity: 0.6; } 100% { opacity: 1; } }
     .input-area {
         display: flex;
@@ -97,20 +108,6 @@
         cursor: pointer;
     }
     button:disabled { opacity: 0.5; cursor: not-allowed; }
-    .image-msg {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
-    .image-msg img {
-        max-width: 200px;
-        border-radius: 10px;
-        margin-top: 5px;
-    }
-    .image-caption {
-        font-size: 0.7rem;
-        color: #666;
-    }
 </style>
 </head>
 <body>
@@ -121,18 +118,16 @@
     </div>
     <div id="chat"></div>
     <div class="input-area">
-        <input type="text" id="pergunta" placeholder="Ex: Quem foi Tarsila do Amaral?" autocomplete="off">
+        <input type="text" id="pergunta" placeholder="Ex: O que é dança?" autocomplete="off">
         <button id="sendBtn">Enviar</button>
     </div>
 </div>
 
 <script>
-    // ======================= DOM =======================
     const chatDiv = document.getElementById("chat");
     const inputField = document.getElementById("pergunta");
     const sendBtn = document.getElementById("sendBtn");
-
-    // ======================= MEMÓRIA (contexto) =======================
+    
     let ultimoArtista = null;
     let memoria = {
         nome: localStorage.getItem("candinho_nome") || "",
@@ -140,26 +135,33 @@
         ultimoArtista: null
     };
 
-    // ======================= FUNÇÕES UI =======================
-    function addMessageToUI(text, isUser) {
+    function addMessageToUI(text, isUser, imageData = null) {
         const div = document.createElement("div");
         div.className = `msg ${isUser ? "user" : "bot"}`;
-        div.innerText = text;
+        
+        // Texto principal
+        const textSpan = document.createElement("span");
+        textSpan.innerText = text;
+        div.appendChild(textSpan);
+        
+        // Se tiver imagem, adiciona abaixo do texto
+        if (imageData && imageData.imagemUrl) {
+            const img = document.createElement("img");
+            img.src = imageData.imagemUrl;
+            img.alt = imageData.titulo || "Imagem da obra";
+            img.className = "bot-image";
+            img.loading = "lazy";
+            div.appendChild(img);
+            
+            const creditSpan = document.createElement("div");
+            creditSpan.className = "image-credit";
+            creditSpan.innerText = `📷 ${imageData.credito || "Europeana"}`;
+            div.appendChild(creditSpan);
+        }
+        
         chatDiv.appendChild(div);
         chatDiv.scrollTop = chatDiv.scrollHeight;
         return div;
-    }
-
-    function addImageToUI(imageUrl, titulo, credito) {
-        const div = document.createElement("div");
-        div.className = "msg bot image-msg";
-        div.innerHTML = `
-            <div>🖼️ <strong>${titulo}</strong></div>
-            <img src="${imageUrl}" alt="${titulo}">
-            <div class="image-caption">📷 Fonte: ${credito}</div>
-        `;
-        chatDiv.appendChild(div);
-        chatDiv.scrollTop = chatDiv.scrollHeight;
     }
 
     function addLoading() {
@@ -176,10 +178,9 @@
         if (el) el.remove();
     }
 
-    // ======================= CHAMADA AO BACK-END =======================
     async function enviarParaBackend(mensagem) {
         try {
-            const resposta = await fetch('/api/groq', {
+            const response = await fetch('/api/groq', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -190,82 +191,57 @@
                     }
                 })
             });
-            const dados = await resposta.json();
+            const data = await response.json();
             
-            // Atualiza o último artista com o que o back-end retornou
-            if (dados.artista) ultimoArtista = dados.artista;
+            // Atualiza o último artista
+            if (data.artista) ultimoArtista = data.artista;
             
-            // Se veio imagem, exibe
-            if (dados.image && dados.image.imagemUrl) {
-                addImageToUI(dados.image.imagemUrl, dados.image.titulo, dados.image.credito);
-            }
-            
-            // Se veio lista de obras, exibe as primeiras (opcional)
-            if (dados.artworks && dados.artworks.length > 0) {
-                dados.artworks.slice(0, 2).forEach(obra => {
-                    if (obra.imagem) {
-                        addImageToUI(obra.imagem, obra.titulo, "Europeana");
-                    }
-                });
-            }
-            
-            return dados.reply;
-        } catch (erro) {
-            console.error("Erro no back-end:", erro);
-            return "Puxa, tive um probleminha técnico. Tente de novo? 🎨";
+            return {
+                texto: data.reply || "Não consegui responder agora.",
+                imagem: data.image || null
+            };
+        } catch (error) {
+            console.error("Erro no back-end:", error);
+            return {
+                texto: "Puxa, derramei a tinta. Tente de novo? 🎨",
+                imagem: null
+            };
         }
     }
 
-    // ======================= FUNÇÃO RESPONDER =======================
-    async function responder(pergunta) {
-        // Se for saudação simples, responde direto sem chamar back-end
-        const perguntaLow = pergunta.toLowerCase();
-        if (perguntaLow === "oi" || perguntaLow === "olá" || perguntaLow === "hello") {
-            return "Olá! Sou o Candinho, seu amigo artista. Pergunte sobre Tarsila, Portinari, Van Gogh... 🎨";
-        }
-        if (perguntaLow.includes("obrigado")) {
-            return "Por nada! Fico feliz em ajudar. 🦆💛";
-        }
-        
-        // Para qualquer outra pergunta, chama o back-end
-        return await enviarParaBackend(pergunta);
-    }
-
-    // ======================= ENVIO DE MENSAGEM =======================
     let isProcessing = false;
     async function enviar() {
         if (isProcessing) return;
-        const texto = inputField.value.trim();
-        if (!texto) return;
+        const pergunta = inputField.value.trim();
+        if (!pergunta) return;
+        
         isProcessing = true;
         sendBtn.disabled = true;
         inputField.disabled = true;
         
-        addMessageToUI(texto, true);
+        // Mostra pergunta do usuário
+        addMessageToUI(pergunta, true);
         inputField.value = "";
+        
         addLoading();
         
-        try {
-            const resposta = await responder(texto);
-            removeLoading();
-            addMessageToUI(resposta, false);
-        } catch (err) {
-            removeLoading();
-            addMessageToUI("Ops! Ocorreu um erro inesperado.", false);
-            console.error(err);
-        } finally {
-            isProcessing = false;
-            sendBtn.disabled = false;
-            inputField.disabled = false;
-            inputField.focus();
-        }
+        const resposta = await enviarParaBackend(pergunta);
+        removeLoading();
+        
+        // Exibe a resposta do bot com a imagem (se houver) em um único bloco
+        addMessageToUI(resposta.texto, false, resposta.imagem);
+        
+        isProcessing = false;
+        sendBtn.disabled = false;
+        inputField.disabled = false;
+        inputField.focus();
     }
 
     sendBtn.addEventListener("click", enviar);
     inputField.addEventListener("keypress", (e) => { if (e.key === "Enter" && !isProcessing) enviar(); });
-
-    // Mensagem inicial
-    addMessageToUI("Olá! Sou o Candinho, seu amigo artista. 🎨", false);
+    
+    // Mensagem de boas-vindas (sem imagem)
+    addMessageToUI("Olá! Sou o Candinho, seu amigo artista. Pergunte sobre arte... 🎨", false);
 </script>
 </body>
 </html>
