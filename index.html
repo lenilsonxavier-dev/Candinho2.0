@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Candinho com Europeana</title>
+<title>Candinho</title>
 <style>
     * { box-sizing: border-box; }
     body {
@@ -39,7 +39,7 @@
         margin-bottom: 10px;
     }
     .header h2 { margin: 0; font-size: 1.6rem; }
-    #status { font-size: 0.8rem; margin-top: 5px; opacity: 0.9; }
+    #status { display: none; } /* esconde completamente o status técnico */
     #chat {
         height: 400px;
         overflow-y: auto;
@@ -108,8 +108,8 @@
 <div class="container">
     <div class="header">
         <img src="https://i.imgur.com/fnMYS0Z.png" alt="Candinho" class="avatar">
-        <h2>Candinho com Europeana 🎨</h2>
-        <div id="status">🔄 Pronto para buscar arte!</div>
+        <h2>Candinho</h2>
+        <div id="status"></div> <!-- vazio e escondido pelo CSS -->
     </div>
     <div id="chat"></div>
     <div class="input-area">
@@ -123,7 +123,6 @@
     const chatDiv = document.getElementById("chat");
     const inputField = document.getElementById("pergunta");
     const sendBtn = document.getElementById("sendBtn");
-    const statusDiv = document.getElementById("status");
 
     // ======================= ACERVO LOCAL DE ARTISTAS (fallback) =======================
     const artistasLocal = {
@@ -201,7 +200,7 @@
         if (el) el.remove();
     }
 
-    // ======================= FUNÇÃO: ADICIONAR IMAGEM AO CHAT (Passo 4) =======================
+    // ======================= FUNÇÃO: ADICIONAR IMAGEM AO CHAT =======================
     function adicionarImagemAoChat(imagemUrl, titulo, credito) {
         const div = document.createElement('div');
         div.className = 'msg bot';
@@ -214,7 +213,7 @@
         chatDiv.scrollTop = chatDiv.scrollHeight;
     }
 
-    // ======================= FUNÇÃO: CHAMAR API EUROPEANA (Passo 4) =======================
+    // ======================= FUNÇÃO: CHAMAR API EUROPEANA (back-end) =======================
     async function buscarNaEuropeana(termo) {
         try {
             console.log('🔍 Buscando na Europeana:', termo);
@@ -227,8 +226,6 @@
                 })
             });
             const dados = await resposta.json();
-            console.log('📦 Resposta da Europeana:', dados);
-            
             if (dados.encontrado && dados.obra) {
                 return {
                     sucesso: true,
@@ -279,13 +276,12 @@
             if (resultado.sucesso) {
                 // Mostrar a mensagem textual
                 addMessageToUI(resultado.mensagem, false);
-                // Pequeno atraso para não misturar com a imagem (opcional)
                 setTimeout(() => {
                     if (resultado.imagem) {
                         adicionarImagemAoChat(resultado.imagem, resultado.titulo, resultado.credito);
                     }
                 }, 300);
-                return; // já adicionamos a mensagem, não precisa retornar mais nada
+                return; // já adicionamos a mensagem
             } else {
                 return resultado.mensagem + " Que tal perguntar sobre Tarsila, Portinari ou Van Gogh? 🎨";
             }
@@ -321,7 +317,6 @@
         try {
             const resposta = await responder(texto);
             removeLoading();
-            // Se a responder já tiver adicionado mensagem (caso Europeana com imagem), não adicionar novamente
             if (resposta) {
                 addMessageToUI(resposta, false);
             }
@@ -340,9 +335,8 @@
     sendBtn.addEventListener("click", enviar);
     inputField.addEventListener("keypress", (e) => { if (e.key === "Enter" && !isProcessing) enviar(); });
 
-    // Mensagem inicial
-    statusDiv.innerText = "🎨 Candinho conectado à Europeana!";
-    addMessageToUI("Olá! Sou o Candinho. Pergunte 'Quem foi Tarsila do Amaral?' e, se o artista não estiver no meu acervo local, vou buscar imagens na Europeana para você! 🖼️", false);
+    // Mensagem inicial simplificada
+    addMessageToUI("Olá! Sou o Candinho, seu amigo artista. 🎨", false);
 </script>
 </body>
 </html>
