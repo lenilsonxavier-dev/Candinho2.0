@@ -12,10 +12,7 @@ const EUROPEANA_API_KEY = process.env.EUROPEANA_API_KEY;
 
 // ======================= ARQUIVOS =======================
 const JSON_FILES = {
-  // Apoio e socioemocional
   apoio_emocional: "apoio_emocional.json",
-
-  // Artes plásticas e técnicas
   arte_artista: "arte_artista.json",
   arte_tecnicas: "arte_tecnicas.json",
   artes_visuais: "artes_visuais.json",
@@ -24,42 +21,25 @@ const JSON_FILES = {
   artistas_indigenas_afrobrasileiros: "artistas-indigenas-afrobrasileiros.json",
   artistas_mulheres_historicas: "artistas-mulheres-historicas.json",
   atividades_artisticas: "atividades_artisticas.json",
-
-  // Cultura brasileira
   cultura_afro_brasileira: "cultura_afro_brasileira.json",
   cultura_indigena: "cultura_indigena.json",
   festas_brasileiras: "festas_brasileiras.json",
   folclore: "folclore.json",
-
-  // Música e dança
   musica: "musica.json",
   ritmos_musicais: "ritmos_musicais.json",
   dancas: "dancas.json",
-
-  // Teatro e lugares de arte
   teatro: "teatro.json",
   lugares_arte: "lugares_arte.json",
-
-  // História da arte
   historia_arte: "historia_arte.json",
-
-  // Obras famosas
   obras_famosas_mundo: "obras-famosas-mundo.json",
   obras_modernistas_brasileiras: "obras-modernistas-brasileiras.json",
-
-  // Literatura
   literatura_conceitos: "literatura_conceitos.json",
   cantigas_de_roda: "cantigas_de_roda.json",
-
   escritoras_negras_indigenas_brasileiras: "escritoras-negras-indigenas-brasileiras.json",
   escritores_negros_indigenas_brasileiros: "escritores-negros-indigenas-brasileiros.json",
-
-  // Criação infantil e imaginário
   imaginacao_infantil: "imaginacao_infantil.json",
   perguntas_infantis: "perguntas_infantis.json",
   personagens_fantasticos: "personagens_fantasticos.json",
-
-  // Outros
   curiosidades: "curiosidades.json",
   piadas: "piadas.json",
   saudacoes: "saudacoes.json"
@@ -72,29 +52,34 @@ async function carregarTodosJSONs() {
     if (cacheData) return cacheData;
 
     const results = {};
+    const fetchPromises = [];
 
     for (const [key, filename] of Object.entries(JSON_FILES)) {
-        try {
-            const url = GITHUB_BASE + filename;
-            const res = await fetch(url);
+        const promise = fetch(GITHUB_BASE + filename)
+            .then(async res => {
+                if (!res.ok) {
+                    console.warn(`Arquivo não encontrado: ${filename}`);
+                    return [key, {}];
+                }
+                const text = await res.text();
+                try {
+                    return [key, JSON.parse(text)];
+                } catch {
+                    console.error(`JSON inválido em ${filename}`);
+                    return [key, {}];
+                }
+            })
+            .catch(err => {
+                console.error(`Erro em ${filename}:`, err.message);
+                return [key, {}];
+            });
+        
+        fetchPromises.push(promise);
+    }
 
-            if (!res.ok) {
-                console.warn(`Arquivo não encontrado: ${filename}`);
-                results[key] = {};
-                continue;
-            }
-
-            const text = await res.text();
-            try {
-                results[key] = JSON.parse(text);
-            } catch {
-                console.error(`JSON inválido em ${filename}`);
-                results[key] = {};
-            }
-        } catch (err) {
-            console.error(`Erro em ${filename}:`, err.message);
-            results[key] = {};
-        }
+    const fetchedResults = await Promise.all(fetchPromises);
+    for (const [key, value] of fetchedResults) {
+        results[key] = value;
     }
 
     cacheData = results;
@@ -104,17 +89,92 @@ async function carregarTodosJSONs() {
 // ======================= BUSCA NA BIBLIOTECA CULTURAL =======================
 function buscarNaBibliotecaCultural(pergunta) {
     const texto = pergunta.toLowerCase();
+    const palavrasChave = texto.split(/\s+/).filter(palavra => palavra.length > 3);
+    
+    let melhorMatch = null;
+    let maiorPontuacao = 0;
     
     for (const [categoria, itens] of Object.entries(bibliotecaCultural)) {
+        if (!Array.isArray(itens)) continue;
+        
         for (const item of itens) {
-            // Busca por título ou descrição
-            if (item.titulo && texto.includes(item.titulo.toLowerCase())) {
-                return item.descricao || `${item.titulo}: ${item.detalhes || ""}`;
+            let pontuacao = 0;
+            
+            // Busca por título
+            if (item.titulo) {
+                const tituloLower = item.titulo.toLowerCase();
+                if (texto.includes(tituloLower)) {
+                    pontuacao += 10;
+                } else {
+                    // Busca por palavras individuais do título
+                    for (const palavra of palavrasChave) {
+                        if (tituloLower.includes(palavra)) {
+                            pontuacao += 2;
+                        }
+                    }
+                }
             }
-            if (item.descricao && texto.includes(item.descricao.toLowerCase().slice(0, 50))) {
-                return item.descricao;
+            
+            // Busca por descrição
+            if (item.descricao) {
+                const descricaoLower = item.descricao.toLowerCase();
+                for (const palavra of palavrasChave) {
+                    if (descricaoLower.includes(palavra)) {
+                        pontuacao += 1;
+                    }
+                }
+            }
+            
+            // Busca por tags/palavras-chave se existirem
+            if (item.tags && Array.isArray(item.tags)) {
+                for (const tag of item.tags) {
+                    if (texto.includes(tag.toLowerCase())) {
+                        pontuacao += 3;
+                    }
+                }
+            }
+            
+            if (pontuacao > maiorPontuacao) {
+                maiorPontuacao = pontuacao;
+                melhorMatch = item;
             }
         }
+    }
+    
+    if (melhorMatch && maiorPontuacao > 0) {
+        // Formata a resposta de forma amigável para crianças
+        if (melhorMatch.descricao) {
+            return melhorMatch.descricao;
+        }
+        if (melhorMatch.titulo && melhorMatch.detalhes) {
+            return `${melhorMatch.titulo}: ${melhorMatch.detalhes}`;
+        }
+        if (melhorMatch.titulo) {
+            return melhorMatch.titulo;
+        }
+    }
+    
+    return null;
+}
+
+// ======================= BUSCA NA EUROPEANA (se tiver chave) =======================
+async function buscarNaEuropeana(pergunta) {
+    if (!EUROPEANA_API_KEY) return null;
+    
+    const texto = pergunta.toLowerCase();
+    const palavrasChave = texto.split(/\s+/).slice(0, 5).join('+');
+    
+    try {
+        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${palavrasChave}&rows=1&profile=minimal`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.items && data.items.length > 0) {
+            const item = data.items[0];
+            return item.title ? item.title[0] : null;
+        }
+    } catch (err) {
+        console.error("Erro ao buscar na Europeana:", err.message);
     }
     
     return null;
@@ -123,11 +183,19 @@ function buscarNaBibliotecaCultural(pergunta) {
 // ======================= UTIL =======================
 function pegarAleatorio(obj) {
     if (!obj || typeof obj !== "object") return null;
-    const valores = Object.values(obj);
+    const valores = Array.isArray(obj) ? obj : Object.values(obj);
     if (!valores.length) return null;
 
     const item = valores[Math.floor(Math.random() * valores.length)];
-    return item?.explicacao_infantil || String(item);
+    
+    // Se for objeto com explicação infantil
+    if (item?.explicacao_infantil) return item.explicacao_infantil;
+    // Se for string direta
+    if (typeof item === "string") return item;
+    // Se tiver descrição
+    if (item?.descricao) return item.descricao;
+    
+    return String(item);
 }
 
 function respostaInstantanea(pergunta, data) {
@@ -139,6 +207,9 @@ function respostaInstantanea(pergunta, data) {
     if (texto.includes("artista")) return pegarAleatorio(data.artistas);
     if (texto.includes("dança") || texto.includes("danca")) return pegarAleatorio(data.dancas);
     if (texto.includes("história") || texto.includes("historia")) return pegarAleatorio(data.historia_arte);
+    if (texto.includes("música") || texto.includes("musica")) return pegarAleatorio(data.musica);
+    if (texto.includes("teatro")) return pegarAleatorio(data.teatro);
+    if (texto.includes("folclore")) return pegarAleatorio(data.folclore);
 
     return null;
 }
@@ -146,13 +217,18 @@ function respostaInstantanea(pergunta, data) {
 function buscarContexto(pergunta, data) {
     const texto = pergunta.toLowerCase();
 
-    for (const base of Object.values(data)) {
-        if (!base) continue;
+    for (const [nomeBase, base] of Object.entries(data)) {
+        if (!base || typeof base !== "object") continue;
 
         for (const chave in base) {
             const chaveLimpa = chave.replace(/_/g, " ");
             if (texto.includes(chaveLimpa)) {
-                return base[chave]?.explicacao_infantil || "";
+                const resposta = base[chave]?.explicacao_infantil || 
+                               base[chave]?.descricao || 
+                               String(base[chave]);
+                if (resposta && resposta !== "[object Object]") {
+                    return resposta;
+                }
             }
         }
     }
@@ -164,15 +240,21 @@ function mesmoTema(novaPergunta, historico) {
     if (!historico.length) return true;
 
     const ultima = historico[historico.length - 1]?.content || "";
-    const palavrasNova = novaPergunta.toLowerCase().split(" ");
-    const palavrasAntiga = ultima.toLowerCase().split(" ");
-
-    return palavrasNova.some(p => palavrasAntiga.includes(p));
+    const palavrasNova = new Set(novaPergunta.toLowerCase().split(/\s+/));
+    const palavrasAntiga = ultima.toLowerCase().split(/\s+/);
+    
+    let matches = 0;
+    for (const palavra of palavrasAntiga) {
+        if (palavrasNova.has(palavra) && palavra.length > 3) {
+            matches++;
+        }
+    }
+    
+    return matches > 0;
 }
 
 // ======================= HANDLER =======================
 export default async function handler(req, res) {
-    // 🔒 Anti-cache
     res.setHeader("Cache-Control", "no-store");
 
     if (req.method !== "POST") {
@@ -203,47 +285,50 @@ export default async function handler(req, res) {
             contexto = buscarNaBibliotecaCultural(mensagem);
         }
         
-        // 5. Resposta direta do conteúdo encontrado
+        // 5. Se ainda não achou, tentar Europeana (opcional)
+        if (!contexto && EUROPEANA_API_KEY) {
+            contexto = await buscarNaEuropeana(mensagem);
+        }
+        
+        // 6. Resposta direta do conteúdo encontrado
         if (contexto) {
-            return res.status(200).json({ reply: contexto });
+            return res.status(200).json({ 
+                reply: contexto,
+                source: "biblioteca" 
+            });
         }
 
-        // 6. Sistema de prompt
-        const contextoSistema = `
-Você é o Candinho, um assistente artístico infantil.
+        // 7. Sistema de prompt melhorado
+        const interessesStr = (memoria.interesses || []).join(", ");
+        const contextoSistema = `Você é o Candinho, um assistente artístico infantil.
 
-Aluno:
-Nome: ${memoria.nome || "não informado"}
-Idade: ${memoria.idade || "não informada"}
-Interesses: ${(memoria.interesses || []).join(", ") || "não informados"}
+Aluno: ${memoria.nome || "amiguinho"} (${memoria.idade || "idade não informada"} anos)
+Interesses: ${interessesStr || "arte em geral"}
 
-Regras:
-- Use o nome do aluno naturalmente
-- Responda como professor de arte
-- Linguagem simples (criança)
-- Máx 3 linhas
-- Não use linguagem neutra
-- Não use diminutivos e nem aumentativos
-- Perguntas ofensivas e violência, você responde com retomada ao tema Arte
-- O seu nome é uma homenagem ao grande pintor Cândido Portinari
-- Nunca invente fatos errados
-- Use a biblioteca cultural sempre que possível para informações precisas
-`;
+REGRAS OBRIGATÓRIAS:
+- Sempre chame o aluno pelo nome
+- Use linguagem simples e alegre, como um professor de arte
+- Respostas curtas (máximo 3 linhas)
+- NUNCA use diminutivos (ex: "desenhozinho")
+- NUNCA use aumentativos (ex: "desenhão")
+- Se perguntar algo ofensivo ou violento, volte ao tema arte
+- Você é uma homenagem ao pintor Cândido Portinari
+- Jamais invente informações - se não souber, diga que não sabe
+- Use emojis de arte ocasionalmente 🎨🖌️✨`;
 
-        // 7. Proteção da memória
+        // 8. Proteção da memória
         let historicoSeguro = [];
-        if (Array.isArray(memoria.historicoCurto)) {
-            if (mesmoTema(mensagem, memoria.historicoCurto)) {
-                historicoSeguro = memoria.historicoCurto.slice(-4);
-            } else {
-                historicoSeguro = [];
-            }
+        if (Array.isArray(memoria.historicoCurto) && mesmoTema(mensagem, memoria.historicoCurto)) {
+            historicoSeguro = memoria.historicoCurto.slice(-4);
         }
 
-        // 8. Chamada Groq
+        // 9. Chamada Groq com fallback
         const GROQ_API_KEY = process.env.GROQ_API_KEY;
         if (!GROQ_API_KEY) {
-            throw new Error("API KEY não configurada");
+            console.warn("API KEY não configurada, usando fallback");
+            return res.status(200).json({ 
+                reply: contexto || "Conte mais sobre o que você gosta na arte! 🎨" 
+            });
         }
 
         const payload = {
@@ -253,8 +338,8 @@ Regras:
                 ...historicoSeguro,
                 { role: "user", content: mensagem }
             ],
-            temperature: 0.4,
-            max_tokens: 120
+            temperature: 0.5,
+            max_tokens: 150
         };
 
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -283,7 +368,7 @@ Regras:
 
         let reply = dataIA?.choices?.[0]?.message?.content?.trim();
         if (!reply) {
-            reply = contexto || "Não consegui responder agora. Tente novamente!";
+            reply = contexto || "Conte mais sobre arte! O que você gosta de aprender? 🎨";
         }
 
         return res.status(200).json({ reply });
@@ -291,7 +376,7 @@ Regras:
     } catch (err) {
         console.error("Erro geral:", err);
         return res.status(200).json({
-            reply: "Hmm... minha paleta travou um pouco 🎨. Pode tentar perguntar de outro jeito?"
+            reply: "Ops! Minha paleta de cores ficou bagunçada 🎨 Pode repetir a pergunta?"
         });
     }
 }
