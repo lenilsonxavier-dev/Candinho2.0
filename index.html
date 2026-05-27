@@ -407,10 +407,11 @@
     });
     
     // Saudação inicial com dica de uso
-    const saudacaoInicial = memoria.nome 
-        ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista. 🦆🎨
+const saudacaoInicial = memoria.nome 
+    ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista. 🦆🎨`
+    : "Olá! Sou o Candinho, seu amigo artista. 🦆🎨";
 
-    addMessageToUI(saudacaoInicial, false);
+addMessageToUI(saudacaoInicial, false);
 </script>
 </body>
 </html>
