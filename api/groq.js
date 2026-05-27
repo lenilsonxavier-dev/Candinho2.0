@@ -3,10 +3,8 @@ from "../src/data/bibliotecaCultural.js";
 
 console.log("API iniciou");
 console.log("biblioteca:", bibliotecaCultural);
-console.log(
-  "registros:",
-  Object.keys(bibliotecaCultural).length
-);
+console.log("registros:", Object.keys(bibliotecaCultural).length);
+console.log("Conceitos:", bibliotecaCultural?.conceitos ? Object.keys(bibliotecaCultural.conceitos) : "Nenhum");
 
 // ========================================
 // CONFIGURAÇÃO
@@ -14,7 +12,6 @@ console.log(
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
 const EUROPEANA_API_KEY = process.env.EUROPEANA_API_KEY;
 
-// Lista de arquivos JSON que existem no seu repositório (fallback)
 const JSON_FILES = {
     artistas: "artistas.json",
     artistas_universais: "artistas_universais.json",
@@ -44,13 +41,18 @@ async function carregarJSONs() {
     await Promise.all(Object.entries(JSON_FILES).map(async ([key, file]) => {
         try {
             const res = await fetch(GITHUB_BASE + file);
-            if (res.ok) results[key] = await res.json();
-            else console.warn(`⚠️ ${file} não encontrado`);
+            if (res.ok) {
+                results[key] = await res.json();
+                console.log(`✅ Carregado: ${file}`);
+            } else {
+                console.warn(`⚠️ ${file} não encontrado (status: ${res.status})`);
+            }
         } catch (err) {
             console.warn(`❌ Erro ao carregar ${file}:`, err.message);
         }
     }));
     cacheData = results;
+    console.log("📦 JSONs carregados:", Object.keys(results).filter(k => results[k]));
     return results;
 }
 
@@ -63,11 +65,13 @@ function normalizar(str) {
 
 function extrairTexto(campo) {
     if (!campo) return "";
-    return Array.isArray(campo) ? campo.join(" ") : campo;
+    if (Array.isArray(campo)) return campo.join(" ");
+    if (typeof campo === "string") return campo;
+    return "";
 }
 
 // ========================================
-// BUSCA NA BIBLIOTECA CULTURAL (MELHORADA)
+// BUSCA NA BIBLIOTECA CULTURAL
 // ========================================
 function buscarArtistaNaBiblioteca(nome) {
     if (!bibliotecaCultural) {
@@ -76,37 +80,36 @@ function buscarArtistaNaBiblioteca(nome) {
     }
     
     const nomeNorm = normalizar(nome);
-    console.log(`🔍 Buscando por: "${nomeNorm}"`);
+    console.log(`🔍 Buscando na biblioteca: "${nomeNorm}"`);
+    
+    // Lista de nomes conhecidos para debug
+    const chavesConhecidas = Object.keys(bibliotecaCultural).filter(k => k !== "conceitos");
+    console.log(`📚 Biblioteca tem ${chavesConhecidas.length} artistas:`, chavesConhecidas.slice(0, 5));
     
     for (const [chave, info] of Object.entries(bibliotecaCultural)) {
         if (chave === "conceitos") continue;
         
-        const isArtistaEntry = info && (
-            info.palavras_chave || 
-            info.inicio || 
-            info.explicacao_curta ||
-            info.categoria
-        );
-        
-        if (!isArtistaEntry) continue;
-        
         const chaveNorm = normalizar(chave.replace(/_/g, " "));
-        const palavras = (info.palavras_chave || []).map(normalizar);
         const nomeInfo = normalizar(info.nome || "");
+        const palavras = (info.palavras_chave || []).map(normalizar);
         
-        // BUSCA MAIS FLEXÍVEL
-        if (
-            chaveNorm.includes(nomeNorm) ||
-            nomeInfo.includes(nomeNorm) ||
-            palavras.some(p => p.includes(nomeNorm) || nomeNorm.includes(p))
-        ) {
+        // Busca flexível
+        const matchChave = chaveNorm.includes(nomeNorm) || nomeNorm.includes(chaveNorm);
+        const matchNome = nomeInfo.includes(nomeNorm) || nomeNorm.includes(nomeInfo);
+        const matchPalavra = palavras.some(p => p.includes(nomeNorm) || nomeNorm.includes(p));
+        
+        if (matchChave || matchNome || matchPalavra) {
             console.log(`✅ Encontrado na biblioteca: ${chave}`);
+            
+            let biografia = "";
+            if (info.explicacao_infantil) biografia = extrairTexto(info.explicacao_infantil);
+            else if (info.explicacao_curta) biografia = extrairTexto(info.explicacao_curta);
+            else if (info.inicio) biografia = extrairTexto(info.inicio);
+            else if (info.quem_foi) biografia = extrairTexto(info.quem_foi);
+            
             return {
                 nome: info.nome || chave.replace(/_/g, " "),
-                biografia: extrairTexto(info.explicacao_infantil) ||
-                           extrairTexto(info.explicacao_curta) ||
-                           extrairTexto(info.inicio) ||
-                           extrairTexto(info.quem_foi),
+                biografia: biografia,
                 curiosidade: extrairTexto(info.curiosidade),
                 obra_famosa: info.obra_mais_famosa || (info.obras?.[0]),
                 nascimento: info.nascimento || info.ano_nascimento,
@@ -120,7 +123,7 @@ function buscarArtistaNaBiblioteca(nome) {
 }
 
 // ========================================
-// BUSCA NOS JSONs (REFORÇADA E MAIS FLEXÍVEL)
+// BUSCA NOS JSONs
 // ========================================
 function buscarArtistaNosJSONs(nome, data) {
     const nomeNorm = normalizar(nome);
@@ -131,41 +134,40 @@ function buscarArtistaNosJSONs(nome, data) {
     for (const fonte of fontes) {
         const conteudo = data[fonte];
         if (!conteudo) {
-            console.log(`📁 Fonte ${fonte} não carregada`);
+            console.log(`📁 Fonte ${fonte} não disponível`);
             continue;
         }
         
-        console.log(`📁 Buscando em ${fonte}...`);
+        console.log(`📁 Verificando ${fonte}...`);
         
         for (const [chave, info] of Object.entries(conteudo)) {
             const chaveNorm = normalizar(chave.replace(/_/g, " "));
             const nomeInfo = normalizar(info.nome || "");
             const palavras = (info.palavras_chave || []).map(normalizar);
             
-            // BUSCA MAIS FLEXÍVEL - aceita match parcial
-            if (
-                chaveNorm.includes(nomeNorm) ||
-                nomeInfo.includes(nomeNorm) ||
-                palavras.some(p => p.includes(nomeNorm) || nomeNorm.includes(p))
-            ) {
+            // Busca flexível
+            const matchChave = chaveNorm.includes(nomeNorm) || nomeNorm.includes(chaveNorm);
+            const matchNome = nomeInfo.includes(nomeNorm) || nomeNorm.includes(nomeInfo);
+            const matchPalavra = palavras.some(p => p.includes(nomeNorm) || nomeNorm.includes(p));
+            
+            if (matchChave || matchNome || matchPalavra) {
                 console.log(`✅ Encontrado no JSON ${fonte}: ${chave}`);
                 
-                // Constrói biografia mais completa combinando múltiplos campos
-                let biografiaCompleta = "";
-                const bioParts = [];
+                // Monta biografia completa
+                let biografia = "";
+                if (info.explicacao_infantil) biografia = extrairTexto(info.explicacao_infantil);
+                else if (info.explicacao_curta) biografia = extrairTexto(info.explicacao_curta);
+                else if (info.inicio) biografia = extrairTexto(info.inicio);
+                else if (info.quem_foi) biografia = extrairTexto(info.quem_foi);
+                else if (info.descricao) biografia = extrairTexto(info.descricao);
                 
-                if (info.explicacao_infantil) bioParts.push(extrairTexto(info.explicacao_infantil));
-                if (info.explicacao_curta) bioParts.push(extrairTexto(info.explicacao_curta));
-                if (info.inicio) bioParts.push(extrairTexto(info.inicio));
-                if (info.quem_foi) bioParts.push(extrairTexto(info.quem_foi));
-                if (info.descricao) bioParts.push(extrairTexto(info.descricao));
-                if (info.biografia) bioParts.push(extrairTexto(info.biografia));
-                
-                biografiaCompleta = bioParts.join(". ") || `Informações sobre ${info.nome || chave}`;
+                if (!biografia || biografia.length < 20) {
+                    biografia = `${info.nome || chave} é um(a) artista importante na história da arte.`;
+                }
                 
                 return {
                     nome: info.nome || chave.replace(/_/g, " "),
-                    biografia: biografiaCompleta,
+                    biografia: biografia,
                     curiosidade: extrairTexto(info.curiosidade),
                     obra_famosa: info.obra_mais_famosa || (info.obras?.[0]),
                     nascimento: info.nascimento || info.ano_nascimento,
@@ -183,78 +185,72 @@ function buscarArtistaNosJSONs(nome, data) {
 // FUNÇÃO PRINCIPAL DE BUSCA
 // ========================================
 function buscarArtista(nome, data) {
-    // Primeiro tenta na bibliotecaCultural
     const artistaDaBiblioteca = buscarArtistaNaBiblioteca(nome);
     if (artistaDaBiblioteca) return artistaDaBiblioteca;
-    
-    // Depois busca nos JSONs
     return buscarArtistaNosJSONs(nome, data);
 }
 
 // ========================================
-// FUNÇÃO PARA MONTAR RESPOSTA COMPLETA DO ARTISTA (3-4 LINHAS)
+// MONTAR RESPOSTA (3-4 LINHAS)
 // ========================================
 function montarRespostaArtista(artista) {
     const partes = [];
     
-    // Bloco principal - biografia expandida
-    if (artista.biografia && artista.biografia !== `Informações sobre ${artista.nome}`) {
+    // Biografia principal
+    if (artista.biografia && artista.biografia.length > 10) {
         let bio = artista.biografia;
-        
-        // Garante que a biografia tenha conteúdo substancial
-        if (bio.length < 100 && !bio.includes(". ") && !bio.includes("\n")) {
-            if (artista.curiosidade && !artista.curiosidade.includes(bio)) {
-                bio = `${bio} ${artista.curiosidade}`;
-            }
-            if (artista.obra_famosa) {
-                bio = `${bio} Sua obra mais conhecida é "${artista.obra_famosa}".`;
-            }
-        }
+        if (!bio.endsWith(".") && !bio.endsWith("!")) bio += ".";
         partes.push(bio);
     } else {
-        // Fallback para biografia genérica mas informativa
-        let bio = `${artista.nome} é um(a) artista importante.`;
-        if (artista.curiosidade) bio = `${bio} ${artista.curiosidade}`;
-        if (artista.obra_famosa) bio = `${bio} Sua obra mais famosa é "${artista.obra_famosa}".`;
-        partes.push(bio);
+        partes.push(`${artista.nome} é um(a) artista que marcou a história com sua arte.`);
     }
     
-    // Adiciona curiosidade se ainda não foi incluída
-    if (artista.curiosidade && !partes[0]?.includes(artista.curiosidade.substring(0, 50))) {
+    // Curiosidade
+    if (artista.curiosidade && artista.curiosidade.length > 5) {
         partes.push(`✨ ${artista.curiosidade}`);
     }
     
-    // Adiciona obra famosa se ainda não foi incluída
-    if (artista.obra_famosa && !partes[0]?.includes(artista.obra_famosa) && !partes[1]?.includes(artista.obra_famosa)) {
-        partes.push(`🖼️ "${artista.obra_famosa}" é uma de suas grandes obras.`);
+    // Obra famosa
+    if (artista.obra_famosa) {
+        partes.push(`🖼️ Obra conhecida: "${artista.obra_famosa}"`);
     }
     
-    // Adiciona nascimento/nacionalidade como última linha
+    // Nascimento ou nacionalidade
     if (artista.nascimento) {
-        partes.push(`📅 Nasceu em ${artista.nascimento}.`);
+        partes.push(`📅 ${artista.nascimento}`);
     } else if (artista.nacionalidade) {
-        partes.push(`🌎 Nacionalidade: ${artista.nacionalidade}.`);
+        partes.push(`🌎 ${artista.nacionalidade}`);
     }
     
-    // Garante que tenha pelo menos 3 linhas de conteúdo
-    let resposta = partes.join("\n\n");
+    return partes.join("\n\n");
+}
+
+// ========================================
+// EXTRAIR NOME DO ARTISTA (CORRIGIDO)
+// ========================================
+function extrairNomeArtista(pergunta) {
+    // Remove saudações comuns
+    const limpa = pergunta.trim()
+        .replace(/^(oi|olá|opa|e aí|bom dia|boa tarde|boa noite)[\s,]+/i, "")
+        .replace(/[\?\!\.]+$/, "");
     
-    // Se ainda for muito curta (menos de 2 partes ou menos de 150 caracteres)
-    if (partes.length < 2 || resposta.length < 150) {
-        const complementos = [
-            `${artista.nome.split(" ")[0]} é um nome importante na história da arte.`,
-            `Vale a pena conhecer mais sobre este(a) artista!`,
-            `Que tal pesquisar mais sobre sua trajetória?`
-        ];
-        
-        if (partes.length === 1) {
-            resposta = partes[0] + " " + complementos[0] + " " + complementos[1];
-        } else if (partes.length === 0) {
-            resposta = `${artista.nome} é um(a) grande artista! ${complementos[0]} ${complementos[1]}`;
+    // Padrão: quem foi X / quem é X
+    const match = limpa.match(/(?:quem|que)\s+(?:foi|é|e)\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i);
+    if (match) {
+        return match[1].trim();
+    }
+    
+    // Se for apenas um nome ou nome composto (2-3 palavras) sem "quem foi"
+    const palavras = limpa.split(/\s+/);
+    if (palavras.length >= 2 && palavras.length <= 4) {
+        // Verifica se não é uma frase comum
+        const naoArtistas = ["como você", "o que é", "qual é", "me fale", "conte uma"];
+        if (!naoArtistas.some(nao => limpa.toLowerCase().includes(nao))) {
+            return limpa;
         }
     }
     
-    return resposta;
+    return null;
 }
 
 // ========================================
@@ -263,74 +259,47 @@ function montarRespostaArtista(artista) {
 function buscarConceito(pergunta, data) {
     const texto = normalizar(pergunta);
     
+    // Primeiro tenta na bibliotecaCultural
     const conceitos = bibliotecaCultural?.conceitos;
     if (conceitos) {
         if (texto.includes("danca") || texto.includes("dança")) {
-            if (conceitos.danca?.inicio) return conceitos.danca.inicio[0];
-            return "Dança é a arte de movimentar o corpo no ritmo da música! 💃";
+            const danca = conceitos.danca;
+            if (danca && danca.inicio) return Array.isArray(danca.inicio) ? danca.inicio[0] : danca.inicio;
+            return "Dança é a arte de movimentar o corpo no ritmo da música! 💃\n\nExistem muitos tipos: balé, dança de rua, danças folclóricas e muito mais!";
         }
         if (texto.includes("arte") && !texto.includes("pintura") && !texto.includes("desenho")) {
-            if (conceitos.arte?.inicio) return conceitos.arte.inicio[0];
-            return "Arte é tudo que criamos com imaginação e sentimento! 🎨";
-        }
-        if (texto.includes("desenho")) {
-            if (conceitos.desenho?.inicio) return conceitos.desenho.inicio[0];
-            return "Desenho é uma forma de arte usando linhas e formas no papel. ✏️";
-        }
-        if (texto.includes("pintura")) {
-            if (conceitos.pintura?.inicio) return conceitos.pintura.inicio[0];
-            return "Pintura é aplicar tintas numa superfície para criar imagens. 🖌️";
-        }
-        if (texto.includes("piada")) {
-            if (conceitos.piadas && conceitos.piadas.length) {
-                return conceitos.piadas[Math.floor(Math.random() * conceitos.piadas.length)];
-            }
+            const arte = conceitos.arte;
+            if (arte && arte.inicio) return Array.isArray(arte.inicio) ? arte.inicio[0] : arte.inicio;
+            return "Arte é tudo que criamos com imaginação e sentimento! 🎨\n\nPode ser pintura, música, dança, teatro, escultura e muitas outras formas!";
         }
     }
     
-    // FALLBACK: busca nos JSONs
+    // Respostas específicas para tipos de dança
+    if ((texto.includes("tipo") || texto.includes("quais")) && (texto.includes("danca") || texto.includes("dança"))) {
+        return "🎭 Existem muitos tipos de dança!\n\n• Ballet clássico\n• Dança de rua (Hip Hop)\n• Samba\n• Danças folclóricas\n• Dança contemporânea\n• Forró\n• Danças indígenas\n\nQual você quer conhecer melhor?";
+    }
+    
+    // Fallback para outros conceitos
     if (texto.includes("danca") || texto.includes("dança")) {
-        const dancas = data.dancas;
-        if (dancas && dancas.o_que_e_danca?.inicio) return dancas.o_que_e_danca.inicio[0];
-        return "Dança é a arte de movimentar o corpo no ritmo da música! 💃";
+        return "Dança é a arte de movimentar o corpo no ritmo da música! 💃\n\nExistem muitos tipos: balé, dança de rua, danças folclóricas e muito mais!";
     }
     if (texto.includes("arte")) {
-        const arte = data.artes_visuais;
-        if (arte && arte.o_que_e_arte?.inicio) return arte.o_que_e_arte.inicio[0];
-        return "Arte é tudo que criamos com imaginação e sentimento! 🎨";
-    }
-    if (texto.includes("desenho")) {
-        const arte = data.artes_visuais;
-        if (arte && arte.o_que_e_desenho?.inicio) return arte.o_que_e_desenho.inicio[0];
-        return "Desenho é uma forma de arte usando linhas e formas no papel. ✏️";
-    }
-    if (texto.includes("pintura")) {
-        const arte = data.artes_visuais;
-        if (arte && arte.o_que_e_pintura?.inicio) return arte.o_que_e_pintura.inicio[0];
-        return "Pintura é aplicar tintas numa superfície para criar imagens. 🖌️";
+        return "Arte é tudo que criamos com imaginação e sentimento! 🎨\n\nPode ser pintura, música, dança, teatro, escultura e outras formas de expressão!";
     }
     if (texto.includes("piada")) {
-        const piadas = data.piadas;
-        if (piadas) {
-            const lista = Object.values(piadas);
-            if (lista.length) {
-                const p = lista[Math.floor(Math.random() * lista.length)];
-                if (typeof p === "string") return p;
-                return p.explicacao_infantil || p.resposta;
-            }
-        }
-        const fallbackPiadas = [
+        const piadas = [
             "Por que o quadro foi ao médico? Porque estava com uma moldura estranha! 😄",
             "O que o pincel disse para a tela? Vamos pintar o sete! 🎨",
             "Qual é o artista mais barato? O que só desenha com carvão! ✏️"
         ];
-        return fallbackPiadas[Math.floor(Math.random() * fallbackPiadas.length)];
+        return piadas[Math.floor(Math.random() * piadas.length)];
     }
+    
     return null;
 }
 
 // ========================================
-// BUSCA IMAGEM NA EUROPEANA
+// BUSCA IMAGEM
 // ========================================
 async function buscarImagem(artistaNome) {
     if (!EUROPEANA_API_KEY || EUROPEANA_API_KEY === "SUA_CHAVE_AQUI") return null;
@@ -340,12 +309,11 @@ async function buscarImagem(artistaNome) {
         const response = await fetch(url);
         const data = await response.json();
         if (data.items && data.items.length) {
-            const item = data.items.find(i => i.title?.[0]?.toLowerCase().includes(artistaNome.toLowerCase())) || data.items[0];
+            const item = data.items[0];
             return {
                 imagemUrl: item.edmPreview?.[0],
                 titulo: item.title?.[0] || `Obra de ${artistaNome}`,
-                credito: item.dataProvider?.[0] || "Europeana",
-                imagemGrande: item.edmIsShownBy?.[0] || item.edmPreview?.[0]
+                credito: item.dataProvider?.[0] || "Europeana"
             };
         }
         return null;
@@ -355,36 +323,11 @@ async function buscarImagem(artistaNome) {
     }
 }
 
-function extrairNomeArtista(pergunta) {
-    const texto = pergunta
-        .trim()
-        .replace(/[?!.,]+$/, "");
-
-    const match = texto.match(
-        /(?:quem|que)\s+(?:foi|é|e)\s+(.+)/i
-    );
-
-    if (match) {
-        return match[1].trim();
-    }
-
-    if (texto.split(" ").length >= 2) {
-        return texto;
-    }
-
-    return null;
-}
-
 // ========================================
 // HANDLER PRINCIPAL
 // ========================================
 export default async function handler(req, res) {
-    console.log("📚 bibliotecaCultural carregada?",
-        bibliotecaCultural ? `✅ Sim (${Object.keys(bibliotecaCultural).length} itens)` : "❌ Não");
-    
-    if (bibliotecaCultural?.conceitos) {
-        console.log("📖 Conceitos disponíveis:", Object.keys(bibliotecaCultural.conceitos));
-    }
+    console.log("📚 bibliotecaCultural:", bibliotecaCultural ? `✅ ${Object.keys(bibliotecaCultural).length} itens` : "❌");
     
     if (req.method !== "POST") return res.status(405).send();
 
@@ -396,69 +339,61 @@ export default async function handler(req, res) {
         let imagem = null;
         let novoArtista = null;
 
-        const curta = mensagem.toLowerCase().trim();
+        const msgOriginal = mensagem.trim();
+        const msgLower = msgOriginal.toLowerCase();
         
-        // 1. Perguntas contextuais curtas (se há último artista)
-        if (ultimoArtista && (curta === "país" || curta === "nacionalidade" || curta.includes("nasceu") || curta.includes("ano") || curta.includes("obra"))) {
-            const artista = buscarArtista(ultimoArtista, data);
-            if (artista) {
-                if (curta.includes("país") || curta.includes("nacionalidade")) {
-                    resposta = artista.nacionalidade ? `${artista.nome} era de ${artista.nacionalidade}.` : `Não sei a nacionalidade de ${artista.nome}.`;
-                } else if (curta.includes("nasceu") || curta.includes("ano")) {
-                    resposta = artista.nascimento ? `${artista.nome} nasceu em ${artista.nascimento}.` : `Não tenho a data de nascimento de ${artista.nome}.`;
-                } else if (curta.includes("obra")) {
-                    resposta = artista.obra_famosa ? `A obra mais famosa de ${artista.nome} é "${artista.obra_famosa}".` : `${artista.nome} criou muitas obras lindas!`;
-                }
+        console.log(`📨 Mensagem: "${msgOriginal}"`);
+        console.log(`📝 Último artista: ${ultimoArtista || "nenhum"}`);
+
+        // 1. Saudações e conversa casual (prioridade máxima)
+        const saudacoes = ["oi", "olá", "opa", "e aí", "bom dia", "boa tarde", "boa noite"];
+        const ehSaudacao = saudacoes.some(s => msgLower.startsWith(s));
+        
+        if (ehSaudacao && !msgLower.includes("quem") && !msgLower.includes("oque")) {
+            const nome = msgOriginal.replace(/^(oi|olá|opa|e aí|bom dia|boa tarde|boa noite)[\s,]+/i, "").trim();
+            if (nome && nome.length > 2 && !nome.includes("candinho")) {
+                resposta = `Olá, ${nome}! 🦆🎨\n\nSou o Candinho, seu amigo artista. Pergunte sobre artistas, dança ou arte!`;
+            } else {
+                resposta = "Olá! Sou o Candinho, seu amigo artista. 🦆🎨\n\nPergunte sobre artistas, dança, arte ou peça uma piada!";
             }
         }
-
-        // 2. Pergunta "Quem foi?" (sem nome) - Expande sobre o último artista
-        if (!resposta && ultimoArtista && (
-            curta === "quem foi" ||
-            curta === "quem foi?" ||
-            curta === "quem é" ||
-            curta === "quem é?" ||
-            curta === "conte mais" ||
-            curta === "fale mais" ||
-            curta === "me fale mais"
-        )) {
+        
+        // 2. "Quem foi?" sem nome - usa último artista
+        if (!resposta && ultimoArtista && (msgLower === "quem foi" || msgLower === "quem é" || msgLower === "conte mais" || msgLower === "fale mais")) {
             const artista = buscarArtista(ultimoArtista, data);
             if (artista) {
                 resposta = montarRespostaArtista(artista);
             }
         }
-
+        
         // 3. Conceitos (dança, arte, piada)
         if (!resposta) {
-            const conceito = buscarConceito(mensagem, data);
+            const conceito = buscarConceito(msgOriginal, data);
             if (conceito) resposta = conceito;
         }
-
-        // 4. Artista (quem foi X)
+        
+        // 4. Busca de artista
         if (!resposta) {
-            const nome = extrairNomeArtista(mensagem);
-            if (nome) {
-                const artista = buscarArtista(nome, data);
+            const nomeArtista = extrairNomeArtista(msgOriginal);
+            if (nomeArtista) {
+                console.log(`🎨 Buscando artista: "${nomeArtista}"`);
+                const artista = buscarArtista(nomeArtista, data);
                 if (artista) {
                     novoArtista = artista.nome;
                     ultimoArtista = novoArtista;
                     resposta = montarRespostaArtista(artista);
                     imagem = await buscarImagem(artista.nome);
+                    console.log(`✅ Resposta gerada para ${artista.nome}`);
                 } else {
-                    resposta = `Ainda não tenho informações sobre ${nome} no meu acervo. 🦆✨\n\nTente perguntar de outra forma ou sobre outro artista!`;
+                    resposta = `Ainda não tenho informações sobre "${nomeArtista}" no meu acervo. 🦆✨\n\nTente perguntar sobre:\n• Tarsila do Amaral\n• Conceição Evaristo\n• Daiara Tukano\n• Carolina Maria de Jesus\n• Ou peça uma piada!`;
                 }
             }
         }
-
-        // 5. Saudações e ajuda
+        
+        // 5. Ajuda
         if (!resposta) {
-            const msg = mensagem.toLowerCase();
-            if (msg.includes("oi") || msg.includes("olá")) {
-                resposta = "Olá! Sou o Candinho, seu amigo artista. 🎨🦆\n\nPergunte sobre artistas, dança, arte ou peça uma piada! Exemplo: 'Quem foi Tarsila do Amaral?'";
-            } else if (msg.includes("obrigado")) {
-                resposta = "Por nada! Fico feliz em ajudar. 🦆💛\n\nContinue explorando a arte comigo!";
-            } else if (msg.includes("ajuda")) {
-                resposta = "🎨 **Como posso ajudar:**\n\n• 'Quem foi Tarsila do Amaral?'\n• 'O que é dança?'\n• 'Conte uma piada'\n• 'Qual a obra mais famosa de Portinari?'\n\nDepois de perguntar sobre um artista, pode dizer 'quem foi?' para eu repetir com mais detalhes!";
+            if (msgLower.includes("ajuda")) {
+                resposta = "🎨 **Como posso ajudar:**\n\n• 'Quem foi Tarsila do Amaral?'\n• 'Quem é Conceição Evaristo?'\n• 'O que é dança?'\n• 'Quais são os tipos de dança?'\n• 'Conte uma piada'\n\nDepois de perguntar sobre um artista, pode dizer 'quem foi?' para eu repetir!";
             } else {
                 resposta = "Não entendi. 🦆\n\nPergunte sobre um artista (ex: 'Quem foi Conceição Evaristo?'), conceito artístico ou peça uma piada!\n\nDigite 'ajuda' para ver exemplos.";
             }
