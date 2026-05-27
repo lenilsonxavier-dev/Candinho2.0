@@ -1,7 +1,12 @@
-// ========================================
-// IMPORTAÇÃO DA BIBLIOTECA CULTURAL
-// ========================================
-import { bibliotecaCultural } from "../../src/data/bibliotecaCultural.js";
+import { bibliotecaCultural }
+from "../../src/data/bibliotecaCultural.js";
+
+console.log("API iniciou");
+console.log("biblioteca:", bibliotecaCultural);
+console.log(
+  "registros:",
+  Object.keys(bibliotecaCultural).length
+);
 
 // ========================================
 // CONFIGURAÇÃO
