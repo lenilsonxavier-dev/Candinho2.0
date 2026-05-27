@@ -3,8 +3,8 @@
 // ========================================
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
 
-// ⚠️ IMPORTANTE: Coloque sua chave da Europeana no arquivo .env
 const EUROPEANA_API_KEY = process.env.EUROPEANA_API_KEY;
+const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
 const jsonFiles = {
     apoio_emocional: "apoio_emocional.json",
@@ -41,52 +41,6 @@ const jsonFiles = {
 let cacheData = null;
 
 // ========================================
-// FUNÇÃO PARA BUSCAR IMAGENS NA EUROPEANA
-// ========================================
-async function buscarImagemEuropeana(termo) {
-    if (!EUROPEANA_API_KEY || EUROPEANA_API_KEY === "SUA_CHAVE_AQUI") return null;
-    try {
-        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${encodeURIComponent(termo)}&qf=TYPE:IMAGE&rows=3`;
-        const response = await fetch(url);
-        const data = await response.json();
-        if (data.items && data.items.length > 0) {
-            const primeiroItem = data.items[0];
-            return {
-                imagemUrl: primeiroItem.edmPreview?.[0] || null,
-                titulo: primeiroItem.title?.[0] || termo,
-                credito: primeiroItem.dataProvider?.[0] || "Europeana",
-                link: primeiroItem.guid || null
-            };
-        }
-        return null;
-    } catch (error) {
-        console.error("Erro ao buscar imagem na Europeana:", error);
-        return null;
-    }
-}
-
-async function buscarDetalhesEuropeana(artista) {
-    if (!EUROPEANA_API_KEY || EUROPEANA_API_KEY === "SUA_CHAVE_AQUI") return null;
-    try {
-        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=who:"${encodeURIComponent(artista)}"&qf=TYPE:IMAGE&rows=5`;
-        const response = await fetch(url);
-        const data = await response.json();
-        if (data.items && data.items.length > 0) {
-            return data.items.map(item => ({
-                titulo: item.title?.[0] || "Sem título",
-                imagem: item.edmPreview?.[0] || null,
-                data: item.year?.[0] || "Data desconhecida",
-                link: item.guid || null
-            }));
-        }
-        return null;
-    } catch (error) {
-        console.error("Erro ao buscar detalhes na Europeana:", error);
-        return null;
-    }
-}
-
-// ========================================
 // FUNÇÕES AUXILIARES
 // ========================================
 function normalizar(texto) {
@@ -108,9 +62,9 @@ async function carregarTodosJSONs() {
         try {
             const res = await fetch(GITHUB_BASE + filename);
             if (res.ok) results[key] = await res.json();
-            else console.error(`Erro 404: ${filename}`);
+            else console.warn(`Arquivo não encontrado: ${filename}`);
         } catch (err) {
-            console.error(`Erro ${filename}:`, err);
+            console.error(`Erro ao carregar ${filename}:`, err);
         }
     });
     await Promise.all(promises);
@@ -118,8 +72,8 @@ async function carregarTodosJSONs() {
     return results;
 }
 
-// Busca um artista pelo nome (retorna o objeto completo e a chave)
-function buscarArtistaPorNome(nome, data) {
+// Busca artista nos JSONs carregados
+function buscarArtistaNoAcervo(nome, data) {
     const nomeNorm = normalizar(nome);
     for (const [keyFile, conteudo] of Object.entries(data)) {
         for (const [chaveID, dados] of Object.entries(conteudo)) {
@@ -127,101 +81,6 @@ function buscarArtistaPorNome(nome, data) {
             const nomeItem = normalizar(dados?.nome || "");
             const palavrasChave = Array.isArray(dados?.palavras_chave) ? dados.palavras_chave.map(normalizar) : [];
             if (nomeNorm === nomeChave || nomeNorm === nomeItem || palavrasChave.some(p => p === nomeNorm)) {
-                return { chave: chaveID, dados };
-            }
-        }
-    }
-    return null;
-}
-
-// Extrai informações complementares (obras, nascimento, etc.) dos dados do artista
-function extrairInfoArtista(dados) {
-    let obras = [];
-    let obraMaisFamosa = null;
-    let nascimento = null;
-    let falecimento = null;
-    
-    // Tenta extrair de campos comuns nos seus JSONs
-    if (dados.obras && Array.isArray(dados.obras)) obras = dados.obras;
-    else if (dados.obras_famosas && Array.isArray(dados.obras_famosas)) obras = dados.obras_famosas;
-    else if (dados.principais_obras && Array.isArray(dados.principais_obras)) obras = dados.principais_obras;
-    
-    if (dados.obra_mais_famosa) obraMaisFamosa = dados.obra_mais_famosa;
-    else if (obras.length > 0) obraMaisFamosa = obras[0];
-    
-    if (dados.nascimento) nascimento = dados.nascimento;
-    else if (dados.ano_nascimento) nascimento = dados.ano_nascimento;
-    
-    if (dados.falecimento) falecimento = dados.falecimento;
-    else if (dados.ano_falecimento) falecimento = dados.ano_falecimento;
-    
-    return { obras, obraMaisFamosa, nascimento, falecimento };
-}
-
-function responderContextual(pergunta, ultimoArtistaNome, data) {
-    if (!ultimoArtistaNome) return null;
-    const artistaObj = buscarArtistaPorNome(ultimoArtistaNome, data);
-    if (!artistaObj) return null;
-    
-    const info = extrairInfoArtista(artistaObj.dados);
-    const nomeArtista = artistaObj.dados.nome || ultimoArtistaNome;
-    const perguntaLow = pergunta.toLowerCase();
-    
-    if (perguntaLow.includes("obra") && (perguntaLow.includes("famosa") || perguntaLow.includes("conhecida"))) {
-        if (info.obraMaisFamosa) {
-            return `🎨 A obra mais famosa de ${nomeArtista} é "${info.obraMaisFamosa}".`;
-        } else if (info.obras.length) {
-            return `🎨 ${nomeArtista} pintou obras como: ${info.obras.slice(0,3).join(", ")}. A mais conhecida é "${info.obras[0]}"!`;
-        }
-        return `🖼️ ${nomeArtista} criou várias obras, mas ainda não tenho uma lista completa aqui.`;
-    }
-    
-    if (perguntaLow.includes("obras") || perguntaLow.includes("pintou") || perguntaLow.includes("quadros")) {
-        if (info.obras.length) {
-            return `🖼️ ${nomeArtista} pintou obras famosas como: ${info.obras.join(", ")}.`;
-        }
-        return `🖌️ ${nomeArtista} produziu muitas obras importantes! Posso buscar mais detalhes para você.`;
-    }
-    
-    if (perguntaLow.includes("nasceu")) {
-        if (info.nascimento) return `📅 ${nomeArtista} nasceu em ${info.nascimento}.`;
-        return `📅 Não tenho a data de nascimento de ${nomeArtista} agora, mas você pode pesquisar!`;
-    }
-    
-    if (perguntaLow.includes("morreu") || perguntaLow.includes("faleceu")) {
-        if (info.falecimento) return `🕯️ ${nomeArtista} faleceu em ${info.falecimento}.`;
-        return `🕯️ Não tenho a data de falecimento de ${nomeArtista} agora.`;
-    }
-    
-    return null;
-}
-
-function extrairNomeDaPergunta(texto) {
-    const match = texto.match(/quem (foi|é)\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i);
-    if (match && match[2]) return match[2].trim().replace(/[?!.,]+$/, '');
-    return null;
-}
-
-function isPerguntaContextual(texto) {
-    const ctx = texto.toLowerCase();
-    return ctx.includes("dele") || ctx.includes("dela") || 
-           (ctx.includes("obra") && (ctx.includes("famosa") || ctx.includes("pintou") || ctx.includes("quadro"))) ||
-           ctx.includes("nasceu") || ctx.includes("morreu") || ctx.includes("faleceu") ||
-           ctx.includes("obras") || ctx.includes("pintou");
-}
-
-function buscarNoAcervo(pergunta, data) {
-    const textoBusca = normalizar(pergunta);
-    if (!textoBusca) return null;
-    for (const [keyFile, conteudo] of Object.entries(data)) {
-        for (const [chaveID, dados] of Object.entries(conteudo)) {
-            const nomeChave = normalizar(chaveID.replace(/_/g, " "));
-            const nomeItem = normalizar(dados?.nome || "");
-            const palavrasChave = Array.isArray(dados?.palavras_chave) ? dados.palavras_chave.map(normalizar) : [];
-            const match = textoBusca.includes(nomeChave) || 
-                          (nomeItem && textoBusca.includes(nomeItem)) ||
-                          palavrasChave.some(p => textoBusca.includes(p));
-            if (match) {
                 return {
                     nome: dados.nome || nomeChave,
                     biografia: extrairTexto(dados.explicacao_infantil) || 
@@ -230,13 +89,43 @@ function buscarNoAcervo(pergunta, data) {
                                extrairTexto(dados.quem_foi) || 
                                extrairTexto(dados.explicacao_aprofundada),
                     curiosidade: extrairTexto(dados.curiosidade),
-                    feito: extrairTexto(dados.o_que_ele_fez) || extrairTexto(dados.o_que_fez),
-                    palavras_chave: palavrasChave,
                     dadosBrutos: dados
                 };
             }
         }
     }
+    return null;
+}
+
+// Busca imagem na Europeana específica para o artista + "painting"
+async function buscarImagemEuropeana(artistaNome) {
+    if (!EUROPEANA_API_KEY || EUROPEANA_API_KEY === "SUA_CHAVE_AQUI") return null;
+    try {
+        const query = `"${encodeURIComponent(artistaNome)}" AND painting`;
+        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${query}&qf=TYPE:IMAGE&rows=3`;
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.items && data.items.length > 0) {
+            // Procura um item cujo título contenha o nome do artista (para maior confiabilidade)
+            const item = data.items.find(i => i.title?.[0]?.toLowerCase().includes(artistaNome.toLowerCase())) || data.items[0];
+            return {
+                imagemUrl: item.edmPreview?.[0] || null,
+                titulo: item.title?.[0] || `Obra de ${artistaNome}`,
+                credito: item.dataProvider?.[0] || "Europeana",
+                link: item.guid || null
+            };
+        }
+        return null;
+    } catch (error) {
+        console.error("Erro na Europeana:", error);
+        return null;
+    }
+}
+
+// Extrai nome da pergunta "quem foi X"
+function extrairNomeDaPergunta(texto) {
+    const match = texto.match(/quem (foi|é)\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i);
+    if (match && match[2]) return match[2].trim().replace(/[?!.,]+$/, '');
     return null;
 }
 
@@ -249,123 +138,80 @@ export default async function handler(req, res) {
     try {
         const { mensagem, memoria = {} } = req.body;
         const data = await carregarTodosJSONs();
-
-        // Recupera último artista do front-end
         let ultimoArtista = memoria.ultimoArtista || null;
-
-        // 1. Tenta responder pergunta contextual (dele/dela/obra famosa) localmente
-        if (isPerguntaContextual(mensagem) && ultimoArtista) {
-            const respostaLocal = responderContextual(mensagem, ultimoArtista, data);
-            if (respostaLocal) {
-                return res.status(200).json({
-                    reply: respostaLocal,
-                    artista: ultimoArtista, // mantém o mesmo
-                    image: null,
-                    artworks: null
-                });
-            }
-        }
-
-        // 2. Busca no acervo local para responder pergunta normal
-        const achado = buscarNoAcervo(mensagem, data);
-        let contextoAdicional = "";
-        let imagemEuropeana = null;
-        let obrasEuropeana = null;
-        let artistaNome = null;
-
-        if (achado) {
-            artistaNome = achado.nome;
-            ultimoArtista = artistaNome; // atualiza o último artista
-            contextoAdicional = `
-                INFORMAÇÃO REAL DO ACERVO:
-                Nome: ${achado.nome}
-                O que fez/Biografia: ${achado.biografia}
-                Curiosidade: ${achado.curiosidade}
-                Feitos: ${achado.feito}
-                Use estritamente os fatos acima para responder.
-            `;
-            imagemEuropeana = await buscarImagemEuropeana(achado.nome);
-            obrasEuropeana = await buscarDetalhesEuropeana(achado.nome);
-        } else {
-            // Tenta extrair nome da pergunta (ex: "quem foi Tarsila")
-            const nomeExtraido = extrairNomeDaPergunta(mensagem);
-            if (nomeExtraido) {
-                const artista = buscarArtistaPorNome(nomeExtraido, data);
-                if (artista) {
-                    artistaNome = artista.dados.nome || nomeExtraido;
-                    ultimoArtista = artistaNome;
-                    contextoAdicional = `
-                        INFORMAÇÃO REAL DO ACERVO:
-                        Nome: ${artista.dados.nome || nomeExtraido}
-                        Use as informações do acervo para responder.
-                    `;
-                    imagemEuropeana = await buscarImagemEuropeana(artistaNome);
-                    obrasEuropeana = await buscarDetalhesEuropeana(artistaNome);
+        
+        // 1. Verifica se é pergunta contextual (obra famosa, nasceu, etc.)
+        const isContextual = (msg) => {
+            const m = msg.toLowerCase();
+            return m.includes("obra") || m.includes("pintou") || m.includes("nasceu") || m.includes("morreu");
+        };
+        
+        let respostaTexto = null;
+        let imagem = null;
+        let novoArtista = null;
+        
+        // 2. Se for contextual e temos último artista, tenta responder com dados locais
+        if (isContextual(mensagem) && ultimoArtista) {
+            const artista = buscarArtistaNoAcervo(ultimoArtista, data);
+            if (artista && artista.dadosBrutos) {
+                const dadosArt = artista.dadosBrutos;
+                const perguntaLow = mensagem.toLowerCase();
+                if (perguntaLow.includes("obra") && perguntaLow.includes("famosa")) {
+                    const obra = dadosArt.obra_mais_famosa || (dadosArt.obras?.[0]) || "várias obras lindas";
+                    respostaTexto = `🎨 A obra mais famosa de ${artista.nome} é "${obra}".`;
+                } else if (perguntaLow.includes("obras") || perguntaLow.includes("pintou")) {
+                    const obras = dadosArt.obras || [];
+                    if (obras.length) respostaTexto = `🖼️ ${artista.nome} pintou obras como: ${obras.slice(0,3).join(", ")}.`;
+                    else respostaTexto = `${artista.nome} criou muitas obras importantes!`;
+                } else if (perguntaLow.includes("nasceu")) {
+                    const nasc = dadosArt.nascimento || dadosArt.ano_nascimento;
+                    if (nasc) respostaTexto = `📅 ${artista.nome} nasceu em ${nasc}.`;
+                } else if (perguntaLow.includes("morreu")) {
+                    const morte = dadosArt.falecimento || dadosArt.ano_falecimento;
+                    if (morte) respostaTexto = `🕯️ ${artista.nome} faleceu em ${morte}.`;
                 }
             }
         }
-
-        // 3. Monta o prompt para a IA (Groq)
-        let promptImagem = "";
-        if (imagemEuropeana) {
-            promptImagem = `\n\nIMAGEM DISPONÍVEL: ${imagemEuropeana.imagemUrl}
-            Título da obra: ${imagemEuropeana.titulo}
-            Fonte: ${imagemEuropeana.credito}`;
-        }
-        let promptObras = "";
-        if (obrasEuropeana && obrasEuropeana.length > 0) {
-            promptObras = "\n\nOBRAS RELACIONADAS:";
-            obrasEuropeana.slice(0, 3).forEach((obra, idx) => {
-                promptObras += `\n${idx+1}. ${obra.titulo} (${obra.data}) - ${obra.imagem}`;
-            });
-        }
-
-        const promptSistema = `
-            Você é o Candinho, mentor de arte e literatura infantil.
-            Homenageia Cândido Portinari.
-            Público: Crianças de 10 anos.
-            
-            ${contextoAdicional}
-            ${promptImagem}
-            ${promptObras}
-
-            REGRAS:
-            - Se houver INFORMAÇÃO REAL acima, você DEVE usá-la.
-            - Se houver IMAGEM DISPONÍVEL, mencione que tem uma imagem para mostrar.
-            - Se não houver informação no acervo, incentive a criança a pesquisar.
-            - NUNCA use linguagem neutra.
-            - Máximo 4 linhas.
-            - Seja muito carinhoso e use emojis.
-        `;
-
-        const GROQ_API_KEY = process.env.GROQ_API_KEY;
-        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${GROQ_API_KEY}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                model: "llama-3.1-8b-instant",
-                messages: [
-                    { role: "system", content: promptSistema },
-                    { role: "user", content: mensagem }
-                ],
-                temperature: 0.4
-            })
-        });
-
-        const dataIA = await response.json();
-        const respostaTexto = dataIA.choices[0].message.content;
         
-        // 4. Retorna a resposta + atualização do último artista
+        // 3. Se não respondeu contextualmente, procura o artista na pergunta
+        if (!respostaTexto) {
+            const nomeArtista = extrairNomeDaPergunta(mensagem);
+            if (nomeArtista) {
+                const artista = buscarArtistaNoAcervo(nomeArtista, data);
+                if (artista) {
+                    novoArtista = artista.nome;
+                    ultimoArtista = novoArtista;
+                    respostaTexto = artista.biografia || artista.curiosidade || `Que tal saber mais sobre ${artista.nome}?`;
+                    if (respostaTexto && respostaTexto.length > 300) respostaTexto = respostaTexto.substring(0, 300) + "...";
+                    // Busca imagem na Europeana para este artista
+                    imagem = await buscarImagemEuropeana(artista.nome);
+                } else {
+                    // Artista não encontrado no acervo – resposta amigável
+                    respostaTexto = `Ainda não tenho informações sobre ${nomeArtista} no meu acervo, mas você pode pesquisar! 🦆✨`;
+                    imagem = null;
+                }
+            } else {
+                // Pergunta comum (saudação, ajuda, etc.)
+                const perguntaLow = mensagem.toLowerCase();
+                if (perguntaLow.includes("oi") || perguntaLow.includes("olá")) {
+                    respostaTexto = "Olá! Sou o Candinho, seu amigo artista. Pergunte sobre Tarsila, Portinari, Van Gogh... 🎨";
+                } else if (perguntaLow.includes("obrigado")) {
+                    respostaTexto = "Por nada! Fico feliz em ajudar. 🦆💛";
+                } else if (perguntaLow.includes("ajuda")) {
+                    respostaTexto = "Tente perguntar: 'Quem foi Tarsila do Amaral?' ou 'Qual a obra mais famosa de Portinari?' 🎭";
+                } else {
+                    respostaTexto = "Não entendi. Pergunte sobre um artista, como 'Quem foi Tarsila do Amaral?' 🎨";
+                }
+            }
+        }
+        
+        // 4. Retorna a resposta e a imagem (se encontrada)
         return res.status(200).json({
             reply: respostaTexto,
-            image: imagemEuropeana,
-            artworks: obrasEuropeana,
-            artista: artistaNome || ultimoArtista   // importante para o front-end guardar
+            image: imagem,
+            artista: novoArtista || ultimoArtista
         });
-
+        
     } catch (err) {
         console.error(err);
         return res.status(200).json({
