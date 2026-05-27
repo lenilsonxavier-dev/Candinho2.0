@@ -40,7 +40,7 @@
     }
     .header h2 { margin: 0; font-size: 1.6rem; }
     #chat {
-        height: 400px;
+        height: 450px;
         overflow-y: auto;
         background: #f8f9fa;
         padding: 15px;
@@ -66,23 +66,91 @@
         align-self: flex-start;
         border-bottom-left-radius: 5px;
     }
+    
+    /* ========================================
+       ESTILOS DA IMAGEM DA EUROPEANA
+       ======================================== */
     .bot-image {
-        margin-top: 8px;
-        max-width: 200px;
-        border-radius: 10px;
+        margin-top: 12px;
+        max-width: 100%;
+        width: auto;
+        border-radius: 16px;
+        cursor: zoom-in;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        display: block;
     }
+    
+    .bot-image:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    
+    /* Modal de zoom para imagem */
+    .image-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+        cursor: zoom-out;
+    }
+    
+    .image-modal img {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        animation: zoomFadeIn 0.2s ease;
+    }
+    
+    .image-modal .modal-caption {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: white;
+        background: rgba(0,0,0,0.6);
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+    
+    @keyframes zoomFadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    
     .image-credit {
-        font-size: 0.7rem;
-        color: #555;
-        margin-top: 4px;
+        font-size: 0.65rem;
+        color: #666;
+        margin-top: 5px;
+        text-align: center;
     }
+    
+    /* Loading */
     .loading {
         background: #dfe6e9;
         font-style: italic;
         animation: pulse 1s infinite;
     }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes pulse { 0% { opacity: 0.6; } 100% { opacity: 1; } }
+    
+    @keyframes fadeIn { 
+        from { opacity: 0; transform: translateY(5px); } 
+        to { opacity: 1; transform: translateY(0); } 
+    }
+    
+    @keyframes pulse { 
+        0% { opacity: 0.6; } 
+        100% { opacity: 1; } 
+    }
+    
     .input-area {
         display: flex;
         padding: 15px;
@@ -101,13 +169,47 @@
     button {
         background: #fd79a8;
         border: none;
-        padding: 0 20px;
+        padding: 0 25px;
         border-radius: 50px;
         color: white;
         font-weight: bold;
         cursor: pointer;
+        transition: transform 0.1s ease;
     }
-    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button:active { transform: scale(0.97); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    
+    /* Rolagem personalizada */
+    #chat::-webkit-scrollbar {
+        width: 6px;
+    }
+    #chat::-webkit-scrollbar-track {
+        background: #e0e0e0;
+        border-radius: 10px;
+    }
+    #chat::-webkit-scrollbar-thumb {
+        background: #6c5ce7;
+        border-radius: 10px;
+    }
+    
+    /* Responsividade para telas pequenas */
+    @media (max-width: 600px) {
+        .container {
+            border-radius: 20px;
+        }
+        .msg {
+            max-width: 90%;
+        }
+        .bot-image {
+            max-width: 100%;
+        }
+        .header h2 {
+            font-size: 1.3rem;
+        }
+        .avatar {
+            width: 60px;
+        }
+    }
 </style>
 </head>
 <body>
@@ -118,9 +220,15 @@
     </div>
     <div id="chat"></div>
     <div class="input-area">
-        <input type="text" id="pergunta" placeholder="Ex: O que é dança?" autocomplete="off" autofocus>
+        <input type="text" id="pergunta" placeholder="Ex: Quem foi Tarsila do Amaral?" autocomplete="off" autofocus>
         <button id="sendBtn">Enviar</button>
     </div>
+</div>
+
+<!-- Modal para zoom da imagem -->
+<div id="imageModal" class="image-modal" onclick="closeImageModal()">
+    <img id="modalImage" src="" alt="">
+    <div class="modal-caption" id="modalCaption"></div>
 </div>
 
 <script>
@@ -135,28 +243,72 @@
         ultimoArtista: null
     };
 
+    // ========================================
+    // FUNÇÕES DO MODAL DE ZOOM
+    // ========================================
+    function openImageModal(imgSrc, caption) {
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        const modalCaption = document.getElementById("modalCaption");
+        
+        modalImg.src = imgSrc;
+        modalCaption.innerText = caption || "Obra de arte";
+        modal.style.display = "flex";
+        
+        // Previne scroll do body quando modal está aberto
+        document.body.style.overflow = "hidden";
+    }
+    
+    function closeImageModal() {
+        const modal = document.getElementById("imageModal");
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+    }
+    
+    // Fechar modal com tecla ESC
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            closeImageModal();
+        }
+    });
+
     function addMessageToUI(text, isUser, imageData = null) {
         const div = document.createElement("div");
         div.className = `msg ${isUser ? "user" : "bot"}`;
         
-        // Texto principal
+        // Texto principal (suporta quebras de linha)
         const textSpan = document.createElement("span");
+        textSpan.style.whiteSpace = "pre-wrap";
         textSpan.innerText = text;
         div.appendChild(textSpan);
         
         // Adiciona imagem se houver dados disponíveis
         if (imageData && imageData.imagemUrl) {
+            const imgContainer = document.createElement("div");
+            imgContainer.style.marginTop = "10px";
+            
             const img = document.createElement("img");
             img.src = imageData.imagemUrl;
             img.alt = imageData.titulo || "Imagem da obra";
             img.className = "bot-image";
             img.loading = "lazy";
-            div.appendChild(img);
+            img.title = "Clique para ampliar";
+            
+            // Adiciona evento de clique para abrir modal com zoom
+            img.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const highResUrl = imageData.imagemGrande || imageData.imagemUrl;
+                openImageModal(highResUrl, imageData.titulo || `Obra de ${imageData.credito || "artista"}`);
+            });
+            
+            imgContainer.appendChild(img);
             
             const creditSpan = document.createElement("div");
             creditSpan.className = "image-credit";
-            creditSpan.innerText = `📷 ${imageData.credito || "Europeana"}`;
-            div.appendChild(creditSpan);
+            creditSpan.innerText = `📷 ${imageData.credito || "Europeana"} • Clique na imagem para ampliar`;
+            imgContainer.appendChild(creditSpan);
+            
+            div.appendChild(imgContainer);
         }
         
         chatDiv.appendChild(div);
@@ -168,7 +320,7 @@
         const div = document.createElement("div");
         div.className = "msg bot loading";
         div.id = "loadingMsg";
-        div.innerText = "Candinho está pensando... 🖌️";
+        div.innerText = "Candinho está pensando... 🎨";
         chatDiv.appendChild(div);
         chatDiv.scrollTop = chatDiv.scrollHeight;
     }
@@ -180,7 +332,6 @@
 
     async function enviarParaBackend(mensagem) {
         try {
-            // Se o arquivo do backend for chamado 'groq.js', a rota correta é '/api/groq'
             const response = await fetch('/api/groq', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -201,10 +352,15 @@
             
             if (data.artista) {
                 ultimoArtista = data.artista;
+                // Salva na memória local para persistência
+                memoria.ultimoArtista = ultimoArtista;
             }
             
+            // Processa a resposta para adicionar quebras de linha
+            let textoFormatado = data.reply || "Acho que me distraí com uma pintura! Pode repetir? 🎨";
+            
             return {
-                texto: data.reply || "Acho que me distraí com uma pintura! Pode repetir? 🎨",
+                texto: textoFormatado,
                 imagem: data.image || null
             };
         } catch (error) {
@@ -239,7 +395,7 @@
         isProcessing = false;
         sendBtn.disabled = false;
         inputField.disabled = false;
-        inputField.focus(); // Devolve o foco ao input para facilitar o uso pela criança
+        inputField.focus();
     }
 
     sendBtn.addEventListener("click", enviar);
@@ -250,10 +406,24 @@
         }
     });
     
-    // Saudação inicial inteligente
+    // Saudação inicial com dica de uso
     const saudacaoInicial = memoria.nome 
-        ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista. Pergunte sobre arte, dança ou peça uma piada! 🎨`
-        : "Olá! Sou o Candinho, seu amigo artista. Pergunte sobre arte, dança ou peça uma piada! 🎨";
+        ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista. 🦆🎨
+
+💡 **Dicas:**
+• Pergunte "Quem foi Tarsila do Amaral?"
+• Peça "Conte uma piada"
+• Descubra "O que é dança?"
+
+Depois de perguntar sobre um artista, pode dizer "Quem foi?" que eu conto mais!`
+        : `Olá! Sou o Candinho, seu amigo artista. 🦆🎨
+
+💡 **Dicas:**
+• Pergunte "Quem foi Tarsila do Amaral?"
+• Peça "Conte uma piada"
+• Descubra "O que é dança?"
+
+Depois de perguntar sobre um artista, pode dizer "Quem foi?" que eu conto mais!`;
 
     addMessageToUI(saudacaoInicial, false);
 </script>
