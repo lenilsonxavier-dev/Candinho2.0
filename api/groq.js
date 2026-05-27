@@ -1,7 +1,7 @@
 // ========================================
 // IMPORTAÇÃO DA BIBLIOTECA CULTURAL
 // ========================================
-import { bibliotecaCultural } from "../src/data/bibliotecaCultural.js";
+import { bibliotecaCultural } from "../../src/data/bibliotecaCultural.js";
 
 // ========================================
 // CONFIGURAÇÃO
@@ -50,6 +50,7 @@ async function carregarJSONs() {
 }
 
 function normalizar(str) {
+    if (!str) return "";
     return str.toLowerCase()
         .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
         .replace(/[^\w\s]/g, "").trim();
@@ -60,19 +61,39 @@ function extrairTexto(campo) {
     return Array.isArray(campo) ? campo.join(" ") : campo;
 }
 
-// NOVA FUNÇÃO: Busca artista na bibliotecaCultural (prioridade)
+// ========================================
+// BUSCA NA BIBLIOTECA CULTURAL (ACHATADA)
+// ========================================
 function buscarArtistaNaBiblioteca(nome) {
+    if (!bibliotecaCultural) {
+        console.error("❌ bibliotecaCultural não carregada!");
+        return null;
+    }
+    
     const nomeNorm = normalizar(nome);
+    console.log(`🔍 Buscando por: "${nomeNorm}"`);
     
     for (const [chave, info] of Object.entries(bibliotecaCultural)) {
-        // Pula a seção de conceitos (não é artista)
+        // Pula a seção de conceitos
         if (chave === "conceitos") continue;
+        
+        // Verifica se é uma entrada válida de artista/escritor
+        // (tem palavras_chave ou tem os campos esperados)
+        const isArtistaEntry = info && (
+            info.palavras_chave || 
+            info.inicio || 
+            info.explicacao_curta ||
+            info.categoria
+        );
+        
+        if (!isArtistaEntry) continue;
         
         const chaveNorm = normalizar(chave.replace(/_/g, " "));
         const palavras = (info.palavras_chave || []).map(normalizar);
         const nomeInfo = normalizar(info.nome || "");
         
         if (nomeNorm === chaveNorm || nomeNorm === nomeInfo || palavras.includes(nomeNorm)) {
+            console.log(`✅ Encontrado: ${chave}`);
             return {
                 nome: info.nome || chave.replace(/_/g, " "),
                 biografia: extrairTexto(info.explicacao_infantil) ||
@@ -86,20 +107,27 @@ function buscarArtistaNaBiblioteca(nome) {
             };
         }
     }
+    
+    console.log(`❌ Não encontrado: ${nome}`);
     return null;
 }
 
-// FUNÇÃO ORIGINAL ADAPTADA: Busca artista nos JSONs (fallback)
+// ========================================
+// BUSCA NOS JSONs (FALLBACK)
+// ========================================
 function buscarArtistaNosJSONs(nome, data) {
     const nomeNorm = normalizar(nome);
     const fontes = ["artistas", "artistas_universais", "artistas_indigenas_afrobrasileiros", "artistas_mulheres_historicas"];
+    
     for (const fonte of fontes) {
         const conteudo = data[fonte];
         if (!conteudo) continue;
+        
         for (const [chave, info] of Object.entries(conteudo)) {
             const chaveNorm = normalizar(chave.replace(/_/g, " "));
             const nomeInfo = normalizar(info.nome || "");
             const palavras = (info.palavras_chave || []).map(normalizar);
+            
             if (nomeNorm === chaveNorm || nomeNorm === nomeInfo || palavras.includes(nomeNorm)) {
                 return {
                     nome: info.nome || chave.replace(/_/g, " "),
@@ -118,7 +146,9 @@ function buscarArtistaNosJSONs(nome, data) {
     return null;
 }
 
-// FUNÇÃO PRINCIPAL DE BUSCA (prioriza biblioteca, fallback para JSONs)
+// ========================================
+// FUNÇÃO PRINCIPAL DE BUSCA
+// ========================================
 function buscarArtista(nome, data) {
     // Primeiro tenta na bibliotecaCultural
     const artistaDaBiblioteca = buscarArtistaNaBiblioteca(nome);
@@ -128,24 +158,30 @@ function buscarArtista(nome, data) {
     return buscarArtistaNosJSONs(nome, data);
 }
 
-// Busca conceito (dança, arte, piada) - prioriza bibliotecaCultural
+// ========================================
+// BUSCA DE CONCEITOS
+// ========================================
 function buscarConceito(pergunta, data) {
     const texto = normalizar(pergunta);
     
     // PRIORIDADE: busca na bibliotecaCultural
-    const conceitos = bibliotecaCultural.conceitos;
+    const conceitos = bibliotecaCultural?.conceitos;
     if (conceitos) {
         if (texto.includes("danca") || texto.includes("dança")) {
             if (conceitos.danca?.inicio) return conceitos.danca.inicio[0];
+            return "Dança é a arte de movimentar o corpo no ritmo da música! 💃";
         }
-        if (texto.includes("arte")) {
+        if (texto.includes("arte") && !texto.includes("pintura") && !texto.includes("desenho")) {
             if (conceitos.arte?.inicio) return conceitos.arte.inicio[0];
+            return "Arte é tudo que criamos com imaginação e sentimento! 🎨";
         }
         if (texto.includes("desenho")) {
             if (conceitos.desenho?.inicio) return conceitos.desenho.inicio[0];
+            return "Desenho é uma forma de arte usando linhas e formas no papel. ✏️";
         }
         if (texto.includes("pintura")) {
             if (conceitos.pintura?.inicio) return conceitos.pintura.inicio[0];
+            return "Pintura é aplicar tintas numa superfície para criar imagens. 🖌️";
         }
         if (texto.includes("piada")) {
             if (conceitos.piadas && conceitos.piadas.length) {
@@ -195,7 +231,9 @@ function buscarConceito(pergunta, data) {
     return null;
 }
 
-// Busca imagem na Europeana
+// ========================================
+// BUSCA IMAGEM NA EUROPEANA
+// ========================================
 async function buscarImagem(artistaNome) {
     if (!EUROPEANA_API_KEY || EUROPEANA_API_KEY === "SUA_CHAVE_AQUI") return null;
     try {
@@ -227,6 +265,14 @@ function extrairNomeArtista(pergunta) {
 // HANDLER PRINCIPAL
 // ========================================
 export default async function handler(req, res) {
+    // Log para debug
+    console.log("📚 bibliotecaCultural carregada?",
+        bibliotecaCultural ? `✅ Sim (${Object.keys(bibliotecaCultural).length} itens)` : "❌ Não");
+    
+    if (bibliotecaCultural?.conceitos) {
+        console.log("📖 Conceitos disponíveis:", Object.keys(bibliotecaCultural.conceitos));
+    }
+    
     if (req.method !== "POST") return res.status(405).send();
 
     try {
