@@ -8,6 +8,8 @@ console.log("registros:", Object.keys(bibliotecaCultural).length);
 // CONFIGURAÇÃO
 // ========================================
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
+
+// ✅ NOVA CHAVE EUROPEANA (formato 2025)
 const EUROPEANA_API_KEY = process.env.EUROPEANA_API_KEY;
 
 // ======================= ARQUIVOS =======================
@@ -89,7 +91,7 @@ async function carregarTodosJSONs() {
 // ======================= BUSCA NA BIBLIOTECA CULTURAL =======================
 function buscarNaBibliotecaCultural(pergunta) {
     const texto = pergunta.toLowerCase();
-    const palavrasChave = texto.split(/\s+/).filter(palavra => palavra.length > 3);
+    const palavrasChave = texto.split(/\s+/).filter(palavra => palavra.length > 2);
     
     let melhorMatch = null;
     let maiorPontuacao = 0;
@@ -100,36 +102,23 @@ function buscarNaBibliotecaCultural(pergunta) {
         for (const item of itens) {
             let pontuacao = 0;
             
-            // Busca por título
             if (item.titulo) {
                 const tituloLower = item.titulo.toLowerCase();
                 if (texto.includes(tituloLower)) {
                     pontuacao += 10;
-                } else {
-                    // Busca por palavras individuais do título
-                    for (const palavra of palavrasChave) {
-                        if (tituloLower.includes(palavra)) {
-                            pontuacao += 2;
-                        }
+                }
+                for (const palavra of palavrasChave) {
+                    if (tituloLower.includes(palavra)) {
+                        pontuacao += 2;
                     }
                 }
             }
             
-            // Busca por descrição
             if (item.descricao) {
                 const descricaoLower = item.descricao.toLowerCase();
                 for (const palavra of palavrasChave) {
                     if (descricaoLower.includes(palavra)) {
                         pontuacao += 1;
-                    }
-                }
-            }
-            
-            // Busca por tags/palavras-chave se existirem
-            if (item.tags && Array.isArray(item.tags)) {
-                for (const tag of item.tags) {
-                    if (texto.includes(tag.toLowerCase())) {
-                        pontuacao += 3;
                     }
                 }
             }
@@ -142,7 +131,6 @@ function buscarNaBibliotecaCultural(pergunta) {
     }
     
     if (melhorMatch && maiorPontuacao > 0) {
-        // Formata a resposta de forma amigável para crianças
         if (melhorMatch.descricao) {
             return melhorMatch.descricao;
         }
@@ -157,24 +145,91 @@ function buscarNaBibliotecaCultural(pergunta) {
     return null;
 }
 
-// ======================= BUSCA NA EUROPEANA (se tiver chave) =======================
+// ======================= BUSCA NA EUROPEANA (NOVO MÉTODO 2025) =======================
 async function buscarNaEuropeana(pergunta) {
-    if (!EUROPEANA_API_KEY) return null;
+    if (!EUROPEANA_API_KEY) {
+        console.log("Europeana: chave não configurada");
+        return null;
+    }
     
+    // Extrair palavras-chave relevantes da pergunta
     const texto = pergunta.toLowerCase();
-    const palavrasChave = texto.split(/\s+/).slice(0, 5).join('+');
+    const palavrasIgnorar = ["o que é", "quem foi", "me fale sobre", "sobre", "para", "como", "qual", "onde", "quando"];
+    let palavrasChave = texto.split(/\s+/).filter(p => p.length > 3 && !palavrasIgnorar.includes(p));
+    
+    if (palavrasChave.length === 0) {
+        palavrasChave = texto.split(/\s+/).filter(p => p.length > 2);
+    }
+    
+    const query = palavrasChave.slice(0, 4).join('+');
+    if (!query) return null;
     
     try {
-        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${palavrasChave}&rows=1&profile=minimal`;
-        const response = await fetch(url);
+        // 🔥 NOVO MÉTODO: Header X-Api-Key em vez de parâmetro wskey
+        const url = `https://api.europeana.eu/record/v2/search.json?query=${query}&rows=1&profile=minimal&qf=type:IMAGE`;
+        
+        console.log(`Buscando Europeana: ${query}`);
+        
+        const response = await fetch(url, {
+            headers: {
+                'X-Api-Key': EUROPEANA_API_KEY
+            }
+        });
+        
+        if (!response.ok) {
+            console.error(`Europeana erro ${response.status}: ${response.statusText}`);
+            return null;
+        }
+        
         const data = await response.json();
         
         if (data.items && data.items.length > 0) {
             const item = data.items[0];
-            return item.title ? item.title[0] : null;
+            
+            // Tentar extrair título ou descrição relevante
+            if (item.title && item.title[0]) {
+                const titulo = item.title[0];
+                // Evitar respostas muito longas ou confusas
+                if (titulo.length < 200 && !titulo.includes("http")) {
+                    return `Sabia que existe uma obra interessante sobre isso? 🎨 ${titulo.substring(0, 150)}`;
+                }
+            }
+            
+            if (item.description && item.description[0]) {
+                return `Encontrei algo legal! 🎨 ${item.description[0].substring(0, 150)}`;
+            }
         }
+        
+        return null;
+        
     } catch (err) {
-        console.error("Erro ao buscar na Europeana:", err.message);
+        console.error("Erro na Europeana:", err.message);
+        return null;
+    }
+}
+
+// ======================= CONCEITOS BÁSICOS DE ARTE =======================
+function responderConceitoBasico(pergunta) {
+    const texto = pergunta.toLowerCase();
+    
+    const conceitos = {
+        "linha": "Linha é um ponto que andou! 🎨 Na arte, a linha pode ser reta, curva, grossa, fina, ondulada. Ela ajuda a desenhar contornos e formas. Experimente fazer linhas diferentes no seu caderno!",
+        
+        "ponto": "O ponto é a coisa mais pequena que podemos desenhar! 🎨 É como uma semente que pode virar uma linha, uma forma ou uma obra de arte. Os pontilhistas, como Seurat, criavam quadros só com pontinhos!",
+        
+        "forma": "Forma é a figura que vemos no desenho, como um círculo, quadrado ou triângulo. 🎨 Na arte, usamos formas para construir tudo: uma casa, uma árvore, um rosto. Quer tentar desenhar formas diferentes?",
+        
+        "cor": "Cor é a luz que vemos nos objetos! 🎨 Temos as cores primárias (azul, vermelho, amarelo) que misturadas criam todas as outras. O arco-íris mostra muitas cores lindas!",
+        
+        "textura": "Textura é como a superfície parece ou se sente: lisa, áspera, macia, rugosa. 🎨 Na arte, podemos mostrar textura no desenho com traços especiais!",
+        
+        "volume": "Volume é quando uma coisa parece ter altura, largura e profundidade, como uma bola ou uma caixa. 🎨 Os artistas usam luz e sombra para dar volume aos desenhos!"
+    };
+    
+    for (const [conceito, resposta] of Object.entries(conceitos)) {
+        if (texto.includes(conceito)) {
+            return resposta;
+        }
     }
     
     return null;
@@ -188,12 +243,10 @@ function pegarAleatorio(obj) {
 
     const item = valores[Math.floor(Math.random() * valores.length)];
     
-    // Se for objeto com explicação infantil
     if (item?.explicacao_infantil) return item.explicacao_infantil;
-    // Se for string direta
     if (typeof item === "string") return item;
-    // Se tiver descrição
     if (item?.descricao) return item.descricao;
+    if (item?.letra) return `🎵 ${item.letra}`;
     
     return String(item);
 }
@@ -208,8 +261,8 @@ function respostaInstantanea(pergunta, data) {
     if (texto.includes("dança") || texto.includes("danca")) return pegarAleatorio(data.dancas);
     if (texto.includes("história") || texto.includes("historia")) return pegarAleatorio(data.historia_arte);
     if (texto.includes("música") || texto.includes("musica")) return pegarAleatorio(data.musica);
+    if (texto.includes("cantiga")) return pegarAleatorio(data.cantigas_de_roda);
     if (texto.includes("teatro")) return pegarAleatorio(data.teatro);
-    if (texto.includes("folclore")) return pegarAleatorio(data.folclore);
 
     return null;
 }
@@ -217,14 +270,25 @@ function respostaInstantanea(pergunta, data) {
 function buscarContexto(pergunta, data) {
     const texto = pergunta.toLowerCase();
 
+    // Busca em cantigas_de_roda
+    if (data.cantigas_de_roda && texto.includes("cantiga")) {
+        for (const [nome, cantiga] of Object.entries(data.cantigas_de_roda)) {
+            if (texto.includes(nome.toLowerCase()) || texto.includes("canoa") || texto.includes("peixe vivo")) {
+                return cantiga?.letra || cantiga?.explicacao_infantil || `🎵 ${cantiga}`;
+            }
+        }
+    }
+    
+    // Busca geral
     for (const [nomeBase, base] of Object.entries(data)) {
         if (!base || typeof base !== "object") continue;
 
         for (const chave in base) {
             const chaveLimpa = chave.replace(/_/g, " ");
-            if (texto.includes(chaveLimpa)) {
+            if (texto.includes(chaveLimpa) || (texto.includes(chave) && chave.length > 3)) {
                 const resposta = base[chave]?.explicacao_infantil || 
                                base[chave]?.descricao || 
+                               base[chave]?.letra ||
                                String(base[chave]);
                 if (resposta && resposta !== "[object Object]") {
                     return resposta;
@@ -280,52 +344,59 @@ export default async function handler(req, res) {
         // 3. Buscar contexto nos JSONs
         let contexto = buscarContexto(mensagem, data);
         
-        // 4. Se não achou nos JSONs, buscar na bibliotecaCultural
+        // 4. Se não achou, buscar conceitos básicos de arte
+        if (!contexto) {
+            contexto = responderConceitoBasico(mensagem);
+        }
+        
+        // 5. Se ainda não achou, buscar na bibliotecaCultural
         if (!contexto) {
             contexto = buscarNaBibliotecaCultural(mensagem);
         }
         
-        // 5. Se ainda não achou, tentar Europeana (opcional)
+        // 6. 🆕 Buscar na Europeana (nova API)
         if (!contexto && EUROPEANA_API_KEY) {
             contexto = await buscarNaEuropeana(mensagem);
         }
         
-        // 6. Resposta direta do conteúdo encontrado
+        // 7. Resposta direta
         if (contexto) {
             return res.status(200).json({ 
-                reply: contexto,
-                source: "biblioteca" 
+                reply: contexto
             });
         }
 
-        // 7. Sistema de prompt melhorado
+        // 8. Sistema de prompt
         const interessesStr = (memoria.interesses || []).join(", ");
         const contextoSistema = `Você é o Candinho, um assistente artístico infantil.
 
-Aluno: ${memoria.nome || "amiguinho"} (${memoria.idade || "idade não informada"} anos)
-Interesses: ${interessesStr || "arte em geral"}
+Aluno: ${memoria.nome || "amiguinho"} (${memoria.idade || "?"} anos)
 
-REGRAS OBRIGATÓRIAS:
-- Sempre chame o aluno pelo nome
-- Use linguagem simples e alegre, como um professor de arte
-- Respostas curtas (máximo 3 linhas)
-- NUNCA use diminutivos (ex: "desenhozinho")
-- NUNCA use aumentativos (ex: "desenhão")
-- Se perguntar algo ofensivo ou violento, volte ao tema arte
-- Você é uma homenagem ao pintor Cândido Portinari
-- Jamais invente informações - se não souber, diga que não sabe
-- Use emojis de arte ocasionalmente 🎨🖌️✨`;
+REGRAS:
+- Fale como um professor de arte animado
+- Máximo 2 frases por resposta
+- NUNCA use diminutivos (desenhozinho, pinturinha)
+- NUNCA use aumentativos
+- Se perguntar sobre cantiga de roda, responda com a letra
+- Se não souber algo, diga "Não sei essa ainda! Quer me ensinar ou falar sobre arte?"
+- Use um emoji de arte por resposta 🎨
 
-        // 8. Proteção da memória
+EXEMPLOS:
+Aluno: "O que é linha?"
+Você: "Linha é um ponto que andou! 🎨 Pode ser reta, curva ou ondulada."
+
+Aluno: "Quem foi Tarsila?"
+Você: "Tarsila do Amaral foi uma pintora brasileira que amava cores! 🎨 Ela pintou o Abaporu."`;
+
+        // 9. Memória
         let historicoSeguro = [];
         if (Array.isArray(memoria.historicoCurto) && mesmoTema(mensagem, memoria.historicoCurto)) {
             historicoSeguro = memoria.historicoCurto.slice(-4);
         }
 
-        // 9. Chamada Groq com fallback
+        // 10. Groq
         const GROQ_API_KEY = process.env.GROQ_API_KEY;
         if (!GROQ_API_KEY) {
-            console.warn("API KEY não configurada, usando fallback");
             return res.status(200).json({ 
                 reply: contexto || "Conte mais sobre o que você gosta na arte! 🎨" 
             });
@@ -376,7 +447,7 @@ REGRAS OBRIGATÓRIAS:
     } catch (err) {
         console.error("Erro geral:", err);
         return res.status(200).json({
-            reply: "Ops! Minha paleta de cores ficou bagunçada 🎨 Pode repetir a pergunta?"
+            reply: "Ops! Minha paleta bagunçou 🎨 Pode repetir?"
         });
     }
 }
