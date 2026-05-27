@@ -78,7 +78,6 @@ function buscarArtistaNaBiblioteca(nome) {
         if (chave === "conceitos") continue;
         
         // Verifica se é uma entrada válida de artista/escritor
-        // (tem palavras_chave ou tem os campos esperados)
         const isArtistaEntry = info && (
             info.palavras_chave || 
             info.inicio || 
@@ -150,12 +149,38 @@ function buscarArtistaNosJSONs(nome, data) {
 // FUNÇÃO PRINCIPAL DE BUSCA
 // ========================================
 function buscarArtista(nome, data) {
-    // Primeiro tenta na bibliotecaCultural
     const artistaDaBiblioteca = buscarArtistaNaBiblioteca(nome);
     if (artistaDaBiblioteca) return artistaDaBiblioteca;
-    
-    // Se não encontrar, tenta nos JSONs (fallback)
     return buscarArtistaNosJSONs(nome, data);
+}
+
+// ========================================
+// FUNÇÃO PARA MONTAR RESPOSTA COMPLETA DO ARTISTA
+// ========================================
+function montarRespostaArtista(artista) {
+    const partes = [];
+    
+    if (artista.biografia) {
+        partes.push(artista.biografia);
+    }
+    
+    if (artista.curiosidade) {
+        partes.push(`✨ Curiosidade: ${artista.curiosidade}`);
+    }
+    
+    if (artista.obra_famosa) {
+        partes.push(`🖼️ Obra conhecida: ${artista.obra_famosa}`);
+    }
+    
+    if (artista.nascimento) {
+        partes.push(`📅 Nascimento: ${artista.nascimento}`);
+    }
+    
+    if (artista.nacionalidade && !artista.nascimento) {
+        partes.push(`🌎 Nacionalidade: ${artista.nacionalidade}`);
+    }
+    
+    return partes.join("\n\n") || `Conheça ${artista.nome}! 🎨`;
 }
 
 // ========================================
@@ -164,7 +189,6 @@ function buscarArtista(nome, data) {
 function buscarConceito(pergunta, data) {
     const texto = normalizar(pergunta);
     
-    // PRIORIDADE: busca na bibliotecaCultural
     const conceitos = bibliotecaCultural?.conceitos;
     if (conceitos) {
         if (texto.includes("danca") || texto.includes("dança")) {
@@ -246,7 +270,9 @@ async function buscarImagem(artistaNome) {
             return {
                 imagemUrl: item.edmPreview?.[0],
                 titulo: item.title?.[0] || `Obra de ${artistaNome}`,
-                credito: item.dataProvider?.[0] || "Europeana"
+                credito: item.dataProvider?.[0] || "Europeana",
+                // Adiciona URL de alta resolução (se disponível)
+                imagemGrande: item.edmIsShownBy?.[0] || item.edmPreview?.[0]
             };
         }
         return null;
@@ -265,7 +291,6 @@ function extrairNomeArtista(pergunta) {
 // HANDLER PRINCIPAL
 // ========================================
 export default async function handler(req, res) {
-    // Log para debug
     console.log("📚 bibliotecaCultural carregada?",
         bibliotecaCultural ? `✅ Sim (${Object.keys(bibliotecaCultural).length} itens)` : "❌ Não");
     
@@ -277,7 +302,7 @@ export default async function handler(req, res) {
 
     try {
         const { mensagem, memoria = {} } = req.body;
-        const data = await carregarJSONs(); // ainda carrega para fallback
+        const data = await carregarJSONs();
         let ultimoArtista = memoria.ultimoArtista || null;
         let resposta = null;
         let imagem = null;
@@ -285,6 +310,7 @@ export default async function handler(req, res) {
 
         // 1. Perguntas contextuais curtas (se há último artista)
         const curta = mensagem.toLowerCase().trim();
+        
         if (ultimoArtista && (curta === "país" || curta === "nacionalidade" || curta.includes("nasceu") || curta.includes("ano") || curta.includes("obra"))) {
             const artista = buscarArtista(ultimoArtista, data);
             if (artista) {
@@ -298,13 +324,29 @@ export default async function handler(req, res) {
             }
         }
 
-        // 2. Conceitos (dança, arte, piada)
+        // 2. CORREÇÃO: Pergunta "Quem foi?" (sem nome) - Expande sobre o último artista
+        if (!resposta && ultimoArtista && (
+            curta === "quem foi" ||
+            curta === "quem foi?" ||
+            curta === "quem é" ||
+            curta === "quem é?" ||
+            curta === "conte mais" ||
+            curta === "fale mais" ||
+            curta === "me fale mais"
+        )) {
+            const artista = buscarArtista(ultimoArtista, data);
+            if (artista) {
+                resposta = montarRespostaArtista(artista);
+            }
+        }
+
+        // 3. Conceitos (dança, arte, piada)
         if (!resposta) {
             const conceito = buscarConceito(mensagem, data);
             if (conceito) resposta = conceito;
         }
 
-        // 3. Artista (quem foi X)
+        // 4. Artista (quem foi X)
         if (!resposta) {
             const nome = extrairNomeArtista(mensagem);
             if (nome) {
@@ -312,8 +354,8 @@ export default async function handler(req, res) {
                 if (artista) {
                     novoArtista = artista.nome;
                     ultimoArtista = novoArtista;
-                    resposta = artista.biografia || artista.curiosidade || `Conheça ${artista.nome}!`;
-                    if (resposta.length > 350) resposta = resposta.substring(0, 350) + "...";
+                    // RESPOSTA COMPLETA - SEM CORTE
+                    resposta = montarRespostaArtista(artista);
                     imagem = await buscarImagem(artista.nome);
                 } else {
                     resposta = `Ainda não tenho informações sobre ${nome} no meu acervo. 🦆✨`;
@@ -321,7 +363,7 @@ export default async function handler(req, res) {
             }
         }
 
-        // 4. Saudações e ajuda
+        // 5. Saudações e ajuda
         if (!resposta) {
             const msg = mensagem.toLowerCase();
             if (msg.includes("oi") || msg.includes("olá")) {
@@ -329,7 +371,7 @@ export default async function handler(req, res) {
             } else if (msg.includes("obrigado")) {
                 resposta = "Por nada! Fico feliz em ajudar. 🦆💛";
             } else if (msg.includes("ajuda")) {
-                resposta = "Tente: 'Quem foi Tarsila?', 'O que é dança?', 'Conte uma piada' ou 'Qual a obra mais famosa de Portinari?'";
+                resposta = "Tente:\n• 'Quem foi Tarsila do Amaral?'\n• 'O que é dança?'\n• 'Conte uma piada'\n• 'Qual a obra mais famosa de Portinari?'\n\nDepois de perguntar sobre um artista, pode dizer 'quem foi?' para eu repetir! 🎨";
             } else {
                 resposta = "Não entendi. Pergunte sobre um artista, conceito artístico ou peça uma piada! 🎨";
             }
