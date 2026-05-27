@@ -118,7 +118,7 @@
     </div>
     <div id="chat"></div>
     <div class="input-area">
-        <input type="text" id="pergunta" placeholder="Ex: O que é dança?" autocomplete="off">
+        <input type="text" id="pergunta" placeholder="Ex: O que é dança?" autocomplete="off" autofocus>
         <button id="sendBtn">Enviar</button>
     </div>
 </div>
@@ -144,7 +144,7 @@
         textSpan.innerText = text;
         div.appendChild(textSpan);
         
-        // Se tiver imagem, adiciona abaixo do texto
+        // Adiciona imagem se houver dados disponíveis
         if (imageData && imageData.imagemUrl) {
             const img = document.createElement("img");
             img.src = imageData.imagemUrl;
@@ -180,6 +180,7 @@
 
     async function enviarParaBackend(mensagem) {
         try {
+            // Se o arquivo do backend for chamado 'groq.js', a rota correta é '/api/groq'
             const response = await fetch('/api/groq', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -191,19 +192,25 @@
                     }
                 })
             });
+
+            if (!response.ok) {
+                throw new Error(`Erro na resposta do servidor: ${response.status}`);
+            }
+
             const data = await response.json();
             
-            // Atualiza o último artista
-            if (data.artista) ultimoArtista = data.artista;
+            if (data.artista) {
+                ultimoArtista = data.artista;
+            }
             
             return {
-                texto: data.reply || "Não consegui responder agora.",
+                texto: data.reply || "Acho que me distraí com uma pintura! Pode repetir? 🎨",
                 imagem: data.image || null
             };
         } catch (error) {
-            console.error("Erro no back-end:", error);
+            console.error("Erro na comunicação com o back-end:", error);
             return {
-                texto: "Puxa, derramei a tinta. Tente de novo? 🎨",
+                texto: "Puxa, derramei minhas tintas! Tente me perguntar de novo? 🎨",
                 imagem: null
             };
         }
@@ -211,15 +218,14 @@
 
     let isProcessing = false;
     async function enviar() {
-        if (isProcessing) return;
         const pergunta = inputField.value.trim();
-        if (!pergunta) return;
+        if (!pergunta || isProcessing) return;
         
         isProcessing = true;
         sendBtn.disabled = true;
         inputField.disabled = true;
         
-        // Mostra pergunta do usuário
+        // Adiciona mensagem digitada
         addMessageToUI(pergunta, true);
         inputField.value = "";
         
@@ -228,20 +234,28 @@
         const resposta = await enviarParaBackend(pergunta);
         removeLoading();
         
-        // Exibe a resposta do bot com a imagem (se houver) em um único bloco
         addMessageToUI(resposta.texto, false, resposta.imagem);
         
         isProcessing = false;
         sendBtn.disabled = false;
         inputField.disabled = false;
-        inputField.focus();
+        inputField.focus(); // Devolve o foco ao input para facilitar o uso pela criança
     }
 
     sendBtn.addEventListener("click", enviar);
-    inputField.addEventListener("keypress", (e) => { if (e.key === "Enter" && !isProcessing) enviar(); });
+    inputField.addEventListener("keypress", (e) => { 
+        if (e.key === "Enter") {
+            e.preventDefault();
+            enviar(); 
+        }
+    });
     
-    // Mensagem de boas-vindas (sem imagem)
-    addMessageToUI("Olá! Sou o Candinho, seu amigo artista. Pergunte sobre arte... 🎨", false);
+    // Saudação inicial inteligente
+    const saudacaoInicial = memoria.nome 
+        ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista. Pergunte sobre arte, dança ou peça uma piada! 🎨`
+        : "Olá! Sou o Candinho, seu amigo artista. Pergunte sobre arte, dança ou peça uma piada! 🎨";
+
+    addMessageToUI(saudacaoInicial, false);
 </script>
 </body>
 </html>
