@@ -1,3 +1,15 @@
+import express from "express";
+import path from "path";
+import { createServer as createViteServer } from "vite";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
+
 // ========================================
 // CONFIGURAÇÃO
 // ========================================
@@ -45,16 +57,16 @@ const JSON_FILES = {
     ritmos_musicais: "ritmos_musicais.json"
 };
 
-let cacheData = null;
+let cacheData: any = null;
 
 // ========================================
 // FUNÇÕES AUXILIARES DE CARREGAMENTO
 // ========================================
 
-async function fetchComFallback(file) {
-    const fetchUrl = async (fileName) => {
+async function fetchComFallback(file: string) {
+    const fetchUrl = async (fileName: string) => {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
         try {
             const res = await fetch(GITHUB_BASE + fileName, { 
                 headers: { 'Accept': 'application/json' },
@@ -94,8 +106,9 @@ async function fetchComFallback(file) {
 
 async function carregarJSONs() {
     if (cacheData) return cacheData;
-    const results = {};
+    const results: any = {};
     
+    console.log("📥 Carregando JSONs do GitHub...");
     const promessas = Object.entries(JSON_FILES).map(async ([key, file]) => {
         const data = await fetchComFallback(file);
         if (data) results[key] = data;
@@ -103,6 +116,7 @@ async function carregarJSONs() {
 
     await Promise.all(promessas);
     cacheData = results;
+    console.log(`✅ ${Object.keys(results).length} arquivos carregados.`);
     return results;
 }
 
@@ -110,39 +124,37 @@ async function carregarJSONs() {
 // NORMALIZAÇÃO E BUSCA FLEXÍVEL
 // ========================================
 
-function normalizar(str) {
+function normalizar(str: string) {
     if (!str) return "";
     return str.toLowerCase()
         .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
         .replace(/[^\w\s]/g, "").trim();
 }
 
-// Faz a busca flexível (permite encontrar "Pierre-Auguste Renoir" digitando apenas "Renoir")
-function compararNomes(pesquisa, alvo) {
+function compararNomes(pesquisa: string, alvo: string) {
     if (!pesquisa || !alvo) return false;
     const p = normalizar(pesquisa);
     const a = normalizar(alvo);
     if (p === a) return true;
     
-    // Evita falsos-positivos com termos muito curtos (exige ao menos 4 letras)
     if (p.length >= 4 && (a.includes(p) || p.includes(a))) {
         return true;
     }
     return false;
 }
 
-function extrairTexto(campo) {
+function extrairTexto(campo: any): string {
     if (!campo) return "";
     if (Array.isArray(campo)) {
         return campo
             .map(item => typeof item === "string" ? item.trim() : "")
             .filter(Boolean)
-            .join(" "); // Une as linhas em parágrafos para uma leitura contínua e rica
+            .join(" ");
     }
     return typeof campo === "string" ? campo.trim() : String(campo);
 }
 
-function limitarTextoAmigavel(texto, maxCaracteres = 380) {
+function limitarTextoAmigavel(texto: string, maxCaracteres = 380) {
     if (!texto || texto.length <= maxCaracteres) return texto;
     const sub = texto.substring(0, maxCaracteres);
     const ultimoPonto = Math.max(sub.lastIndexOf("."), sub.lastIndexOf("!"), sub.lastIndexOf("?"));
@@ -152,9 +164,7 @@ function limitarTextoAmigavel(texto, maxCaracteres = 380) {
     return sub + "...";
 }
 
-// Busca personalidades (artistas e escritores) nos respectivos JSONs carregados
-function buscarArtista(nome, data) {
-    // Adicionamos os arquivos de escritores no escopo de buscas de personalidades
+function buscarArtista(nome: string, data: any) {
     const fontes = [
         "artistas", 
         "artistas_universais", 
@@ -168,7 +178,6 @@ function buscarArtista(nome, data) {
         const conteudo = data[fonte];
         if (!conteudo) continue;
         
-        // Garante suporte tanto a objetos de chaves quanto a listas (Arrays)
         const entradas = Array.isArray(conteudo)
             ? conteudo.map((item, index) => [String(index), item])
             : Object.entries(conteudo);
@@ -182,7 +191,7 @@ function buscarArtista(nome, data) {
             
             const encontrou = compararNomes(nome, chaveLimpa) || 
                               compararNomes(nome, nomeInfo) || 
-                              palavras.some(p => compararNomes(nome, p));
+                              palavras.some((p: string) => compararNomes(nome, p));
                               
             if (encontrou) {
                 return {
@@ -203,15 +212,13 @@ function buscarArtista(nome, data) {
     return null;
 }
 
-function buscarConceito(pergunta, data) {
+function buscarConceito(pergunta: string, data: any) {
     const texto = normalizar(pergunta);
     
     if (texto.includes("danca") || texto.includes("dança")) {
         const dancas = data.dancas;
         if (dancas && dancas.o_que_e_danca) {
-            const explicacao = extrairTexto(dancas.o_que_e_danca.explicacao_infantil) || 
-                              extrairTexto(dancas.o_que_e_danca.inicio);
-            if (explicacao) return explicacao;
+            return extrairTexto(dancas.o_que_e_danca.explicacao_infantil) || extrairTexto(dancas.o_que_e_danca.inicio);
         }
         return "Dança é a arte de movimentar o corpo seguindo o ritmo da música! É uma forma maravilhosa de se expressar! 💃✨";
     }
@@ -219,9 +226,7 @@ function buscarConceito(pergunta, data) {
     if (texto.includes("arte")) {
         const arte = data.artes_visuais;
         if (arte && arte.o_que_e_arte) {
-            const explicacao = extrairTexto(arte.o_que_e_arte.explicacao_infantil) || 
-                              extrairTexto(arte.o_que_e_arte.inicio);
-            if (explicacao) return explicacao;
+            return extrairTexto(arte.o_que_e_arte.explicacao_infantil) || extrairTexto(arte.o_que_e_arte.inicio);
         }
         return "Arte é tudo aquilo que criamos usando a nossa imaginação, sentimentos e criatividade! 🎨🌟";
     }
@@ -229,47 +234,55 @@ function buscarConceito(pergunta, data) {
     if (texto.includes("desenho")) {
         const arte = data.artes_visuais;
         if (arte && arte.o_que_e_desenho) {
-            const explicacao = extrairTexto(arte.o_que_e_desenho.explicacao_infantil) || 
-                              extrairTexto(arte.o_que_e_desenho.inicio);
-            if (explicacao) return explicacao;
+            return extrairTexto(arte.o_que_e_desenho.explicacao_infantil) || extrairTexto(arte.o_que_e_desenho.inicio);
         }
-        return "Desenho é criar formas, linhas e caminhos em um papel para mostrar o que nossa imaginação está pensando! ✏️✨";
+        return "Desenho é criar formas, lines e caminhos em um papel para mostrar o que nossa imaginação está pensando! ✏️✨";
     }
-    
-    if (texto.includes("pintura")) {
-        const arte = data.artes_visuais;
-        if (arte && arte.o_que_e_pintura) {
-            const explicacao = extrairTexto(arte.o_que_e_pintura.explicacao_infantil) || 
-                              extrairTexto(arte.o_que_e_pintura.inicio);
-            if (explicacao) return explicacao;
-        }
-        return "Pintura é a arte de aplicar cores em uma superfície usando tintas, pincéis ou até mesmo os dedos! 🖌️🌈";
-    }
-    
-    if (texto.includes("piada")) {
-        const piadas = data.piadas;
-        if (piadas) {
-            const lista = Object.values(piadas);
-            if (lista.length) {
-                const p = lista[Math.floor(Math.random() * lista.length)];
-                if (typeof p === "string") return p;
-                return extrairTexto(p.explicacao_infantil) || extrairTexto(p.resposta) || extrairTexto(p.pergunta);
+
+    // Busca mais ampla em literaturas e outros
+    const buscasEspeciais = [
+        { termos: ["cantiga", "roda", "ciranda"], fonte: "cantigas_de_roda" },
+        { termos: ["literatura", "escritor"], fonte: "literatura_conceitos" },
+        { termos: ["folclore", "lenda"], fonte: "folclore" },
+        { termos: ["musica", "ritmo"], fonte: "musica" },
+        { termos: ["teatro", "palco"], fonte: "teatro" },
+        { termos: ["piada"], fonte: "piadas" }
+    ];
+
+    for (const busca of buscasEspeciais) {
+        if (busca.termos.some(t => texto.includes(t))) {
+            const conteudo = data[busca.fonte];
+            if (conteudo) {
+                // Se for piada, pega uma aleatória
+                if (busca.fonte === "piadas") {
+                    const lista = Object.values(conteudo);
+                    if (lista.length) {
+                        const p: any = lista[Math.floor(Math.random() * lista.length)];
+                        return typeof p === "string" ? p : (extrairTexto(p.explicacao_infantil) || extrairTexto(p.resposta) || extrairTexto(p.pergunta));
+                    }
+                }
+                // Busca por chave dentro do JSON
+                for (const [chave, info] of Object.entries(conteudo)) {
+                    if (compararNomes(pergunta, chave)) {
+                        return extrairTexto((info as any).explicacao_infantil) || extrairTexto((info as any).inicio) || extrairTexto(info as any);
+                    }
+                }
             }
         }
-        return "Por que o pincel foi ao médico? Porque estava com uma dor na moldura! 😄🎨";
     }
+    
     return null;
 }
 
-async function buscarImagem(artistaNome) {
-    if (!EUROPEANA_API_KEY || EUROPEANA_API_KEY === "SUA_CHAVE_AQUI") return null;
+async function buscarImagem(artistaNome: string) {
+    if (!EUROPEANA_API_KEY || EUROPEANA_API_KEY === "SUA_CHAVE_AQUI" || EUROPEANA_API_KEY === "") return null;
     try {
         const query = `"${encodeURIComponent(artistaNome)}" AND painting`;
         const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${query}&qf=TYPE:IMAGE&rows=3`;
         const response = await fetch(url);
-        const data = await response.json();
+        const data = await response.json() as any;
         if (data.items && data.items.length) {
-            const item = data.items.find(i => i.title?.[0]?.toLowerCase().includes(artistaNome.toLowerCase())) || data.items[0];
+            const item = data.items.find((i: any) => i.title?.[0]?.toLowerCase().includes(artistaNome.toLowerCase())) || data.items[0];
             return {
                 imagemUrl: item.edmPreview?.[0],
                 titulo: item.title?.[0] || `Obra de ${artistaNome}`,
@@ -283,17 +296,13 @@ async function buscarImagem(artistaNome) {
     }
 }
 
-function extrairNomeArtista(pergunta) {
-    const match = pergunta.match(/quem (foi|é)\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i);
+function extrairNomeArtista(pergunta: string) {
+    const match = pergunta.match(/quem (foi|é|era)\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)/i);
     return match ? match[2].trim().replace(/[?!.,]+$/, '') : null;
 }
 
-// ========================================
-// HANDLER PRINCIPAL
-// ========================================
-export default async function handler(req, res) {
-    if (req.method !== "POST") return res.status(405).send();
-
+// API Routes
+app.post("/api/chat", async (req, res) => {
     try {
         const { mensagem, memoria = {} } = req.body;
         const data = await carregarJSONs();
@@ -337,6 +346,16 @@ export default async function handler(req, res) {
                 } else {
                     resposta = `Ainda não tenho informações sobre ${nome} no meu acervo de arte. 🦆✨`;
                 }
+            } else {
+                // Tentativa de busca direta por nome se o usuário apenas digitou o nome
+                const artista = buscarArtista(mensagem, data);
+                if (artista) {
+                    novoArtista = artista.nome;
+                    ultimoArtista = novoArtista;
+                    resposta = artista.biografia || artista.curiosidade;
+                    resposta = limitarTextoAmigavel(resposta!, 380);
+                    imagem = await buscarImagem(artista.nome);
+                }
             }
         }
 
@@ -362,9 +381,32 @@ export default async function handler(req, res) {
 
     } catch (err) {
         console.error("Erro no handler:", err);
-        return res.status(200).json({
+        return res.status(500).json({
             reply: "Tive um pequeno contratempo técnico! 🎨 Pode perguntar de novo?",
             artista: null
         });
     }
+});
+
+async function startServer() {
+  // Serve frontend
+  if (process.env.NODE_ENV !== "production") {
+    const vite = await createViteServer({
+      server: { middlewareMode: true },
+      appType: "spa",
+    });
+    app.use(vite.middlewares);
+  } else {
+    const distPath = path.join(process.cwd(), "dist");
+    app.use(express.static(distPath));
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(distPath, "index.html"));
+    });
+  }
+
+  app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on http://0.0.0.0:${PORT}`);
+  });
 }
+
+startServer();
