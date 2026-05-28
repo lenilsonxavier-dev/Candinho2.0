@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Candinho - Tela Inteira</title>
+<title>Candinho</title>
 <style>
     * { box-sizing: border-box; }
     body {
@@ -18,40 +18,21 @@
     }
     .container {
         width: 100%;
-        height: 100vh;          /* ocupa toda a altura da viewport */
-        max-width: 100%;        /* remove limite de largura (opcional) */
+        height: 100vh;
         background: white;
-        border-radius: 0;       /* sem bordas arredondadas para tela inteira (opcional) */
-        box-shadow: none;       /* remove sombra (opcional) */
-        overflow: hidden;
         display: flex;
         flex-direction: column;
+        overflow: hidden;
     }
-    .header {
-        background: #6c5ce7;
-        color: white;
-        padding: 25px 20px;
-        text-align: center;
-        flex-shrink: 0;         /* não encolhe */
-    }
-    .avatar {
-        width: 120px;
-        border-radius: 50%;
-        border: 3px solid #f9b713;
-        margin-bottom: 15px;
-    }
-    .header h2 {
-        margin: 0;
-        font-size: 1.6rem;
-    }
+    /* sem header fixo */
     #chat {
-        flex: 1;                /* ocupa todo o espaço restante */
+        flex: 1;
         overflow-y: auto;
         background: #f8f9fa;
-        padding: 15px;
+        padding: 20px 15px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
     }
     .msg {
         max-width: 80%;
@@ -71,6 +52,20 @@
         align-self: flex-start;
         border-bottom-left-radius: 5px;
     }
+    /* avatar na mensagem do bot (saudação) */
+    .bot-avatar-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .bot-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+    /* imagem da obra */
     .bot-image {
         margin-top: 12px;
         max-width: 100%;
@@ -180,27 +175,14 @@
         border-radius: 10px;
     }
     @media (max-width: 600px) {
-        .avatar {
-            width: 80px;
-        }
-        .header h2 {
-            font-size: 1.3rem;
-        }
-        .msg {
-            max-width: 90%;
-        }
-        .bot-image {
-            max-width: 100%;
-        }
+        .msg { max-width: 90%; }
+        .bot-image { max-width: 100%; }
+        .bot-avatar { width: 36px; height: 36px; }
     }
 </style>
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <img src="https://i.imgur.com/fnMYS0Z.png" alt="Candinho" class="avatar">
-        <h2>Candinho</h2>
-    </div>
     <div id="chat"></div>
     <div class="input-area">
         <input type="text" id="pergunta" placeholder="Ex: Quem foi Tarsila do Amaral?" autocomplete="off" autofocus>
@@ -208,6 +190,7 @@
     </div>
 </div>
 
+<!-- Modal para zoom -->
 <div id="imageModal" class="image-modal" onclick="closeImageModal()">
     <img id="modalImage" src="" alt="">
     <div class="modal-caption" id="modalCaption"></div>
@@ -245,29 +228,27 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeImageModal();
 });
 
+// Função de mensagem (agora sem header, só o chat)
 function addMessageToUI(text, isUser, imageData = null) {
     const div = document.createElement("div");
     div.className = `msg ${isUser ? "user" : "bot"}`;
 
+    // Verifica se é a saudação do bot (para incluir o avatar inline)
     const isSaudacao = !isUser && typeof text === "string" && text.includes("Sou o Candinho");
 
     if (isSaudacao) {
         const wrapper = document.createElement("div");
-        wrapper.style.display = "flex";
-        wrapper.style.alignItems = "center";
-        wrapper.style.gap = "10px";
+        wrapper.className = "bot-avatar-wrapper";
 
         const avatar = document.createElement("img");
-        avatar.src = "https://i.imgur.com/UDl1c5j.png";
+        avatar.src = "https://i.imgur.com/UDl1c5j.png"; // avatar do Candinho (mesmo do Quinti)
         avatar.alt = "Candinho";
-        avatar.style.width = "42px";
-        avatar.style.height = "42px";
-        avatar.style.borderRadius = "50%";
-        avatar.style.flexShrink = "0";
-        avatar.style.objectFit = "cover";
+        avatar.className = "bot-avatar";
 
         const texto = document.createElement("span");
         texto.innerText = text;
+        texto.style.whiteSpace = "pre-wrap";
+
         wrapper.appendChild(avatar);
         wrapper.appendChild(texto);
         div.appendChild(wrapper);
@@ -278,24 +259,30 @@ function addMessageToUI(text, isUser, imageData = null) {
         div.appendChild(textSpan);
     }
 
+    // Adiciona imagem da Europeana se existir
     if (imageData && imageData.imagemUrl) {
         const imgContainer = document.createElement("div");
         imgContainer.style.marginTop = "10px";
+
         const img = document.createElement("img");
         img.src = imageData.imagemUrl;
         img.alt = imageData.titulo || "Imagem da obra";
         img.className = "bot-image";
         img.loading = "lazy";
         img.title = "Clique para ampliar";
+
         img.addEventListener("click", (e) => {
             e.stopPropagation();
             const highResUrl = imageData.imagemGrande || imageData.imagemUrl;
             openImageModal(highResUrl, imageData.titulo || `Obra de ${imageData.credito || "artista"}`);
         });
+
         imgContainer.appendChild(img);
+
         const creditSpan = document.createElement("div");
         creditSpan.className = "image-credit";
         creditSpan.innerText = `📷 ${imageData.credito || "Europeana"} • Clique na imagem para ampliar`;
+
         imgContainer.appendChild(creditSpan);
         div.appendChild(imgContainer);
     }
@@ -335,10 +322,16 @@ async function enviarParaBackend(mensagem) {
             ultimoArtista = data.artista;
             memoria.ultimoArtista = ultimoArtista;
         }
-        return { texto: data.reply || "Acho que me distraí com uma pintura! Pode repetir? 🎨", imagem: data.image || null };
+        return {
+            texto: data.reply || "Acho que me distraí com uma pintura! Pode repetir? 🎨",
+            imagem: data.image || null
+        };
     } catch (error) {
         console.error(error);
-        return { texto: "Puxa, derramei minhas tintas! Tente me perguntar de novo? 🎨", imagem: null };
+        return {
+            texto: "Puxa, derramei minhas tintas! Tente me perguntar de novo? 🎨",
+            imagem: null
+        };
     }
 }
 
@@ -365,9 +358,18 @@ async function enviar() {
 }
 
 sendBtn.addEventListener("click", enviar);
-inputField.addEventListener("keypress", (e) => { if (e.key === "Enter") { e.preventDefault(); enviar(); } });
+inputField.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        enviar();
+    }
+});
 
-const saudacaoInicial = memoria.nome ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista.` : `Olá! Sou o Candinho, seu amigo artista.`;
+// Saudação inicial (agora sem header, só a mensagem com avatar inline)
+const saudacaoInicial = memoria.nome
+    ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista.`
+    : `Olá! Sou o Candinho, seu amigo artista.`;
+
 addMessageToUI(saudacaoInicial, false);
 </script>
 </body>
