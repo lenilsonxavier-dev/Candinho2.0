@@ -3,48 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Candinho</title>
+<title>Candinho - Tela Inteira</title>
 <style>
     * { box-sizing: border-box; }
     body {
         font-family: 'Segoe UI', Arial, sans-serif;
         background: linear-gradient(135deg, #ffeaa7, #81ecec);
+        margin: 0;
+        padding: 0;
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 100vh;
-        margin: 0;
-        padding: 20px;
     }
     .container {
-        max-width: 800px;
         width: 100%;
+        height: 100vh;          /* ocupa toda a altura da viewport */
+        max-width: 100%;        /* remove limite de largura (opcional) */
         background: white;
-        border-radius: 35px;
-        box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+        border-radius: 0;       /* sem bordas arredondadas para tela inteira (opcional) */
+        box-shadow: none;       /* remove sombra (opcional) */
         overflow: hidden;
         display: flex;
         flex-direction: column;
     }
-   
-.header {
-    background: #6c5ce7;
-    color: white;
-    padding: 25px 20px;  /* um pouco mais de espaço vertical */
-    text-align: center;
-}
-
-.avatar {
-    width: 120px;        /* antes era 80px */
-    border-radius: 50%;
-    border: 3px solid #f9b713;
-    margin-bottom: 15px; /* pequeno ajuste para acompanhar o novo tamanho */
-}
-
-.header h2 {
-    margin: 0;
-    font-size: 1.6rem;
-}
+    .header {
+        background: #6c5ce7;
+        color: white;
+        padding: 25px 20px;
+        text-align: center;
+        flex-shrink: 0;         /* não encolhe */
+    }
+    .avatar {
+        width: 120px;
+        border-radius: 50%;
+        border: 3px solid #f9b713;
+        margin-bottom: 15px;
+    }
+    .header h2 {
+        margin: 0;
+        font-size: 1.6rem;
+    }
+    #chat {
+        flex: 1;                /* ocupa todo o espaço restante */
+        overflow-y: auto;
+        background: #f8f9fa;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
     .msg {
         max-width: 80%;
         padding: 10px 15px;
@@ -63,10 +71,6 @@
         align-self: flex-start;
         border-bottom-left-radius: 5px;
     }
-    
-    /* ========================================
-       ESTILOS DA IMAGEM DA EUROPEANA
-       ======================================== */
     .bot-image {
         margin-top: 12px;
         max-width: 100%;
@@ -77,13 +81,10 @@
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         display: block;
     }
-    
     .bot-image:hover {
         transform: scale(1.02);
         box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
-    
-    /* Modal de zoom para imagem */
     .image-modal {
         display: none;
         position: fixed;
@@ -97,7 +98,6 @@
         align-items: center;
         cursor: zoom-out;
     }
-    
     .image-modal img {
         max-width: 90%;
         max-height: 90%;
@@ -106,7 +106,6 @@
         box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         animation: zoomFadeIn 0.2s ease;
     }
-    
     .image-modal .modal-caption {
         position: absolute;
         bottom: 20px;
@@ -118,42 +117,36 @@
         padding: 8px;
         font-size: 0.8rem;
     }
-    
     @keyframes zoomFadeIn {
         from { opacity: 0; transform: scale(0.95); }
         to { opacity: 1; transform: scale(1); }
     }
-    
     .image-credit {
         font-size: 0.65rem;
         color: #666;
         margin-top: 5px;
         text-align: center;
     }
-    
-    /* Loading */
     .loading {
         background: #dfe6e9;
         font-style: italic;
         animation: pulse 1s infinite;
     }
-    
     @keyframes fadeIn { 
         from { opacity: 0; transform: translateY(5px); } 
         to { opacity: 1; transform: translateY(0); } 
     }
-    
     @keyframes pulse { 
         0% { opacity: 0.6; } 
         100% { opacity: 1; } 
     }
-    
     .input-area {
         display: flex;
         padding: 15px;
         background: white;
         border-top: 1px solid #ddd;
         gap: 10px;
+        flex-shrink: 0;
     }
     input {
         flex: 1;
@@ -175,8 +168,6 @@
     }
     button:active { transform: scale(0.97); }
     button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    
-    /* Rolagem personalizada */
     #chat::-webkit-scrollbar {
         width: 6px;
     }
@@ -188,23 +179,18 @@
         background: #6c5ce7;
         border-radius: 10px;
     }
-    
-    /* Responsividade para telas pequenas */
     @media (max-width: 600px) {
-        .container {
-            border-radius: 20px;
+        .avatar {
+            width: 80px;
+        }
+        .header h2 {
+            font-size: 1.3rem;
         }
         .msg {
             max-width: 90%;
         }
         .bot-image {
             max-width: 100%;
-        }
-        .header h2 {
-            font-size: 1.3rem;
-        }
-        .avatar {
-            width: 60px;
         }
     }
 </style>
@@ -222,7 +208,6 @@
     </div>
 </div>
 
-<!-- Modal para zoom da imagem -->
 <div id="imageModal" class="image-modal" onclick="closeImageModal()">
     <img id="modalImage" src="" alt="">
     <div class="modal-caption" id="modalCaption"></div>
@@ -234,25 +219,19 @@ const inputField = document.getElementById("pergunta");
 const sendBtn = document.getElementById("sendBtn");
 
 let ultimoArtista = null;
-
 let memoria = {
     nome: localStorage.getItem("candinho_nome") || "",
     idade: localStorage.getItem("candinho_idade") || "",
     ultimoArtista: null
 };
 
-// ========================================
-// MODAL DE ZOOM
-// ========================================
 function openImageModal(imgSrc, caption) {
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImage");
     const modalCaption = document.getElementById("modalCaption");
-
     modalImg.src = imgSrc;
     modalCaption.innerText = caption || "Obra de arte";
     modal.style.display = "flex";
-
     document.body.style.overflow = "hidden";
 }
 
@@ -263,53 +242,35 @@ function closeImageModal() {
 }
 
 document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-        closeImageModal();
-    }
+    if (e.key === "Escape") closeImageModal();
 });
 
-// ========================================
-// MENSAGENS (SUBSTITUÍDA)
-// ========================================
 function addMessageToUI(text, isUser, imageData = null) {
     const div = document.createElement("div");
     div.className = `msg ${isUser ? "user" : "bot"}`;
 
-    // ========================================
-    // SAUDAÇÃO COM ÍCONE NO COMEÇO
-    // ========================================
-    const isSaudacao =
-        !isUser &&
-        typeof text === "string" &&
-        text.includes("Sou o Candinho");
+    const isSaudacao = !isUser && typeof text === "string" && text.includes("Sou o Candinho");
 
     if (isSaudacao) {
         const wrapper = document.createElement("div");
-
         wrapper.style.display = "flex";
         wrapper.style.alignItems = "center";
         wrapper.style.gap = "10px";
 
-        // rosto do Candinho
         const avatar = document.createElement("img");
         avatar.src = "https://i.imgur.com/UDl1c5j.png";
         avatar.alt = "Candinho";
-
         avatar.style.width = "42px";
         avatar.style.height = "42px";
         avatar.style.borderRadius = "50%";
         avatar.style.flexShrink = "0";
         avatar.style.objectFit = "cover";
 
-        // texto
         const texto = document.createElement("span");
         texto.innerText = text;
-
         wrapper.appendChild(avatar);
         wrapper.appendChild(texto);
-
         div.appendChild(wrapper);
-
     } else {
         const textSpan = document.createElement("span");
         textSpan.style.whiteSpace = "pre-wrap";
@@ -317,60 +278,38 @@ function addMessageToUI(text, isUser, imageData = null) {
         div.appendChild(textSpan);
     }
 
-    // ========================================
-    // IMAGEM EUROPEANA
-    // ========================================
     if (imageData && imageData.imagemUrl) {
         const imgContainer = document.createElement("div");
         imgContainer.style.marginTop = "10px";
-
         const img = document.createElement("img");
         img.src = imageData.imagemUrl;
         img.alt = imageData.titulo || "Imagem da obra";
         img.className = "bot-image";
         img.loading = "lazy";
         img.title = "Clique para ampliar";
-
         img.addEventListener("click", (e) => {
             e.stopPropagation();
-
-            const highResUrl =
-                imageData.imagemGrande ||
-                imageData.imagemUrl;
-
-            openImageModal(
-                highResUrl,
-                imageData.titulo ||
-                `Obra de ${imageData.credito || "artista"}`
-            );
+            const highResUrl = imageData.imagemGrande || imageData.imagemUrl;
+            openImageModal(highResUrl, imageData.titulo || `Obra de ${imageData.credito || "artista"}`);
         });
-
         imgContainer.appendChild(img);
-
         const creditSpan = document.createElement("div");
         creditSpan.className = "image-credit";
-        creditSpan.innerText =
-            `📷 ${imageData.credito || "Europeana"} • Clique na imagem para ampliar`;
-
+        creditSpan.innerText = `📷 ${imageData.credito || "Europeana"} • Clique na imagem para ampliar`;
         imgContainer.appendChild(creditSpan);
         div.appendChild(imgContainer);
     }
 
     chatDiv.appendChild(div);
     chatDiv.scrollTop = chatDiv.scrollHeight;
-
     return div;
 }
 
-// ========================================
-// LOADING
-// ========================================
 function addLoading() {
     const div = document.createElement("div");
     div.className = "msg bot loading";
     div.id = "loadingMsg";
     div.innerText = "Candinho está pensando... 🎨";
-
     chatDiv.appendChild(div);
     chatDiv.scrollTop = chatDiv.scrollHeight;
 }
@@ -380,88 +319,44 @@ function removeLoading() {
     if (el) el.remove();
 }
 
-// ========================================
-// BACKEND
-// ========================================
 async function enviarParaBackend(mensagem) {
     try {
         const response = await fetch("/api/groq", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 mensagem: mensagem,
-                memoria: {
-                    ...memoria,
-                    ultimoArtista: ultimoArtista
-                }
+                memoria: { ...memoria, ultimoArtista: ultimoArtista }
             })
         });
-
-        if (!response.ok) {
-            throw new Error(
-                `Erro na resposta do servidor: ${response.status}`
-            );
-        }
-
+        if (!response.ok) throw new Error(`Erro: ${response.status}`);
         const data = await response.json();
-
         if (data.artista) {
             ultimoArtista = data.artista;
             memoria.ultimoArtista = ultimoArtista;
         }
-
-        return {
-            texto:
-                data.reply ||
-                "Acho que me distraí com uma pintura! Pode repetir? 🎨",
-            imagem: data.image || null
-        };
-
+        return { texto: data.reply || "Acho que me distraí com uma pintura! Pode repetir? 🎨", imagem: data.image || null };
     } catch (error) {
-        console.error(
-            "Erro na comunicação com o back-end:",
-            error
-        );
-
-        return {
-            texto:
-                "Puxa, derramei minhas tintas! Tente me perguntar de novo? 🎨",
-            imagem: null
-        };
+        console.error(error);
+        return { texto: "Puxa, derramei minhas tintas! Tente me perguntar de novo? 🎨", imagem: null };
     }
 }
 
-// ========================================
-// ENVIO
-// ========================================
 let isProcessing = false;
-
 async function enviar() {
     const pergunta = inputField.value.trim();
-
     if (!pergunta || isProcessing) return;
-
     isProcessing = true;
     sendBtn.disabled = true;
     inputField.disabled = true;
 
     addMessageToUI(pergunta, true);
     inputField.value = "";
-
     addLoading();
 
-    const resposta =
-        await enviarParaBackend(pergunta);
-
+    const resposta = await enviarParaBackend(pergunta);
     removeLoading();
-
-    addMessageToUI(
-        resposta.texto,
-        false,
-        resposta.imagem
-    );
+    addMessageToUI(resposta.texto, false, resposta.imagem);
 
     isProcessing = false;
     sendBtn.disabled = false;
@@ -470,21 +365,9 @@ async function enviar() {
 }
 
 sendBtn.addEventListener("click", enviar);
+inputField.addEventListener("keypress", (e) => { if (e.key === "Enter") { e.preventDefault(); enviar(); } });
 
-inputField.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-        e.preventDefault();
-        enviar();
-    }
-});
-
-// ========================================
-// SAUDAÇÃO INICIAL (SUBSTITUÍDA)
-// ========================================
-const saudacaoInicial = memoria.nome
-    ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista.`
-    : `Olá! Sou o Candinho, seu amigo artista.`;
-
+const saudacaoInicial = memoria.nome ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista.` : `Olá! Sou o Candinho, seu amigo artista.`;
 addMessageToUI(saudacaoInicial, false);
 </script>
 </body>
