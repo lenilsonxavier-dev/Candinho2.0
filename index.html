@@ -77,7 +77,6 @@
         gap: 12px;
     }
     
-    /* Mensagens */
     .msg {
         max-width: 80%;
         padding: 10px 16px;
@@ -93,13 +92,12 @@
         border-bottom-right-radius: 6px;
     }
     .bot {
-        background: #6c5ce7;      /* roxo */
+        background: #6c5ce7;
         align-self: flex-start;
         border-bottom-left-radius: 6px;
-        color: white;              /* texto branco para contraste */
+        color: white;
     }
     
-    /* Wrapper do bot com ícone */
     .bot-message-wrapper {
         display: flex;
         align-items: center;
@@ -111,14 +109,12 @@
         border-radius: 50%;
         object-fit: cover;
         flex-shrink: 0;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     .bot-text {
         white-space: pre-wrap;
         flex: 1;
     }
     
-    /* Imagem da obra */
     .bot-image {
         margin-top: 12px;
         max-width: 100%;
@@ -134,7 +130,6 @@
         box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
     
-    /* Modal de zoom */
     .image-modal {
         display: none;
         position: fixed;
@@ -178,7 +173,6 @@
         text-align: center;
     }
     
-    /* Loading */
     .loading {
         background: #dfe6e9;
         font-style: italic;
@@ -193,7 +187,6 @@
         100% { opacity: 1; } 
     }
     
-    /* Input */
     .input-area {
         display: flex;
         gap: 12px;
@@ -234,7 +227,6 @@
     button:active { transform: scale(0.97); }
     button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     
-    /* Scrollbar */
     #chat::-webkit-scrollbar {
         width: 6px;
     }
@@ -247,7 +239,6 @@
         border-radius: 10px;
     }
     
-    /* Responsivo */
     @media (max-width: 650px) {
         .container { padding: 18px; max-width: 95%; }
         .avatar { width: 65px; height: 65px; }
@@ -274,7 +265,6 @@
     </div>
 </div>
 
-<!-- Modal de zoom -->
 <div id="imageModal" class="image-modal" onclick="closeImageModal()">
     <img id="modalImage" src="" alt="">
     <div class="modal-caption" id="modalCaption"></div>
@@ -292,7 +282,6 @@ let memoria = {
     ultimoArtista: null
 };
 
-// Modal
 function openImageModal(imgSrc, caption) {
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImage");
@@ -313,7 +302,6 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeImageModal();
 });
 
-// Mensagem: bot sempre com ícone, user sem ícone
 function addMessageToUI(text, isUser, imageData = null) {
     const div = document.createElement("div");
     div.className = `msg ${isUser ? "user" : "bot"}`;
@@ -341,7 +329,6 @@ function addMessageToUI(text, isUser, imageData = null) {
         div.appendChild(wrapper);
     }
 
-    // Imagem da obra (se houver)
     if (imageData && imageData.imagemUrl) {
         const imgContainer = document.createElement("div");
         imgContainer.style.marginTop = "10px";
@@ -374,7 +361,6 @@ function addMessageToUI(text, isUser, imageData = null) {
     return div;
 }
 
-// Loading
 function addLoading() {
     const div = document.createElement("div");
     div.className = "msg bot loading";
@@ -389,7 +375,6 @@ function removeLoading() {
     if (el) el.remove();
 }
 
-// Backend
 async function enviarParaBackend(mensagem) {
     try {
         const response = await fetch("/api/groq", {
@@ -419,7 +404,6 @@ async function enviarParaBackend(mensagem) {
     }
 }
 
-// Envio
 let isProcessing = false;
 async function enviar() {
     const pergunta = inputField.value.trim();
@@ -443,7 +427,6 @@ async function enviar() {
     inputField.focus();
 }
 
-// Eventos
 sendBtn.addEventListener("click", enviar);
 inputField.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
@@ -452,7 +435,6 @@ inputField.addEventListener("keypress", (e) => {
     }
 });
 
-// Saudação inicial (sem emojis)
 const saudacaoInicial = memoria.nome
     ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista.`
     : `Olá! Sou o Candinho, seu amigo artista.`;
