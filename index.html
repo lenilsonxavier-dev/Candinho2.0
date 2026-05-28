@@ -3,83 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Candinho</title>
+<title>Candinho - Artista Amigo</title>
 <style>
-    * { box-sizing: border-box; }
-    body {
-        font-family: 'Segoe UI', Arial, sans-serif;
-        background: linear-gradient(135deg, #ffeaa7, #81ecec);
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        display: flex;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body { 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: white; 
+        padding: 20px; 
+        display: flex; 
         justify-content: center;
         align-items: center;
+        min-height: 100vh;
     }
-    .container {
-        width: 100%;
-        height: 100vh;
-        background: white;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
+    
+    .container { 
+        width: 100%; 
+        max-width: 850px;
+        background: rgba(22, 33, 62, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 28px;
+        padding: 28px; 
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        border: 1px solid rgba(255, 215, 0, 0.3);
     }
-    /* sem header fixo */
-    #chat {
-        flex: 1;
-        overflow-y: auto;
-        background: #f8f9fa;
-        padding: 20px 15px;
+    
+    .header { 
+        display: flex; 
+        align-items: center; 
+        gap: 20px; 
+        margin-bottom: 25px; 
+        padding-bottom: 15px; 
+        border-bottom: 2px solid #e94560; 
+    }
+    
+    .avatar { 
+        width: 85px;
+        height: 85px; 
+        border-radius: 50%; 
+        object-fit: cover; 
+        border: 3px solid #ffd700;
+        animation: float 3s ease-in-out infinite;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-6px); }
+    }
+    
+    .title h1 { 
+        font-size: 2rem;
+        margin-bottom: 6px; 
+        letter-spacing: 1px;
+    }
+    .title small { 
+        font-size: 0.9rem; 
+        color: #ffd700; 
+        font-style: italic;
+    }
+    
+    #chat { 
+        height: 460px;
+        overflow-y: auto; 
+        background: rgba(15, 52, 96, 0.6);
+        padding: 18px; 
+        border-radius: 18px; 
+        margin-bottom: 18px; 
+        border: 1px solid #1b262c;
         display: flex;
         flex-direction: column;
         gap: 12px;
     }
+    
+    /* Mensagens */
     .msg {
         max-width: 80%;
-        padding: 10px 15px;
-        border-radius: 20px;
+        padding: 10px 16px;
+        border-radius: 22px;
         word-wrap: break-word;
         animation: fadeIn 0.2s ease;
+        font-size: 0.95rem;
     }
     .user {
         background: #74b9ff;
         align-self: flex-end;
-        color: #000;
-        border-bottom-right-radius: 5px;
+        color: #1e272e;
+        border-bottom-right-radius: 6px;
     }
     .bot {
-        background: #55efc4;
+        background: #6c5ce7;      /* roxo */
         align-self: flex-start;
-        border-bottom-left-radius: 5px;
+        border-bottom-left-radius: 6px;
+        color: white;              /* texto branco para contraste */
     }
-    /* avatar na mensagem do bot (saudação) */
-    .bot-avatar-wrapper {
+    
+    /* Wrapper do bot com ícone */
+    .bot-message-wrapper {
         display: flex;
         align-items: center;
         gap: 10px;
     }
-    .bot-avatar {
-        width: 42px;
-        height: 42px;
+    .bot-icon {
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
         object-fit: cover;
         flex-shrink: 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-    /* imagem da obra */
+    .bot-text {
+        white-space: pre-wrap;
+        flex: 1;
+    }
+    
+    /* Imagem da obra */
     .bot-image {
         margin-top: 12px;
         max-width: 100%;
         width: auto;
         border-radius: 16px;
         cursor: zoom-in;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         display: block;
     }
     .bot-image:hover {
         transform: scale(1.02);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
+    
+    /* Modal de zoom */
     .image-modal {
         display: none;
         position: fixed;
@@ -118,10 +173,12 @@
     }
     .image-credit {
         font-size: 0.65rem;
-        color: #666;
+        color: #ccc;
         margin-top: 5px;
         text-align: center;
     }
+    
+    /* Loading */
     .loading {
         background: #dfe6e9;
         font-style: italic;
@@ -135,54 +192,81 @@
         0% { opacity: 0.6; } 
         100% { opacity: 1; } 
     }
+    
+    /* Input */
     .input-area {
         display: flex;
-        padding: 15px;
-        background: white;
-        border-top: 1px solid #ddd;
-        gap: 10px;
-        flex-shrink: 0;
+        gap: 12px;
+        margin-top: 5px;
     }
     input {
         flex: 1;
         padding: 12px 18px;
-        border: 2px solid #6c5ce7;
+        border: 2px solid #e94560;
         border-radius: 50px;
         font-size: 1rem;
         outline: none;
+        background: rgba(255,255,255,0.1);
+        color: white;
+        transition: all 0.2s;
+    }
+    input::placeholder {
+        color: #aaa;
+    }
+    input:focus {
+        border-color: #ffd700;
+        background: rgba(255,255,255,0.2);
     }
     button {
-        background: #fd79a8;
+        background: #e94560;
         border: none;
-        padding: 0 25px;
+        padding: 0 28px;
         border-radius: 50px;
         color: white;
         font-weight: bold;
         cursor: pointer;
-        transition: transform 0.1s ease;
+        transition: transform 0.1s ease, background 0.2s;
+        font-size: 1rem;
+    }
+    button:hover {
+        background: #ff6b81;
     }
     button:active { transform: scale(0.97); }
     button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    
+    /* Scrollbar */
     #chat::-webkit-scrollbar {
         width: 6px;
     }
     #chat::-webkit-scrollbar-track {
-        background: #e0e0e0;
+        background: #1b262c;
         border-radius: 10px;
     }
     #chat::-webkit-scrollbar-thumb {
-        background: #6c5ce7;
+        background: #e94560;
         border-radius: 10px;
     }
-    @media (max-width: 600px) {
+    
+    /* Responsivo */
+    @media (max-width: 650px) {
+        .container { padding: 18px; max-width: 95%; }
+        .avatar { width: 65px; height: 65px; }
+        .title h1 { font-size: 1.5rem; }
+        #chat { height: 380px; }
         .msg { max-width: 90%; }
-        .bot-image { max-width: 100%; }
-        .bot-avatar { width: 36px; height: 36px; }
+        .bot-icon { width: 30px; height: 30px; }
     }
 </style>
 </head>
 <body>
 <div class="container">
+    <div class="header">
+        <img src="https://i.imgur.com/fnMYS0Z.png" alt="Candinho" class="avatar">
+        <div class="title">
+            <h1>Candinho</h1>
+            <small>Seu amigo artista</small>
+        </div>
+    </div>
     <div id="chat"></div>
     <div class="input-area">
         <input type="text" id="pergunta" placeholder="Ex: Quem foi Tarsila do Amaral?" autocomplete="off" autofocus>
@@ -190,7 +274,7 @@
     </div>
 </div>
 
-<!-- Modal para zoom -->
+<!-- Modal de zoom -->
 <div id="imageModal" class="image-modal" onclick="closeImageModal()">
     <img id="modalImage" src="" alt="">
     <div class="modal-caption" id="modalCaption"></div>
@@ -208,6 +292,7 @@ let memoria = {
     ultimoArtista: null
 };
 
+// Modal
 function openImageModal(imgSrc, caption) {
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImage");
@@ -228,38 +313,35 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeImageModal();
 });
 
-// Função de mensagem (agora sem header, só o chat)
+// Mensagem: bot sempre com ícone, user sem ícone
 function addMessageToUI(text, isUser, imageData = null) {
     const div = document.createElement("div");
     div.className = `msg ${isUser ? "user" : "bot"}`;
 
-    // Verifica se é a saudação do bot (para incluir o avatar inline)
-    const isSaudacao = !isUser && typeof text === "string" && text.includes("Sou o Candinho");
-
-    if (isSaudacao) {
-        const wrapper = document.createElement("div");
-        wrapper.className = "bot-avatar-wrapper";
-
-        const avatar = document.createElement("img");
-        avatar.src = "https://i.imgur.com/UDl1c5j.png"; // avatar do Candinho (mesmo do Quinti)
-        avatar.alt = "Candinho";
-        avatar.className = "bot-avatar";
-
-        const texto = document.createElement("span");
-        texto.innerText = text;
-        texto.style.whiteSpace = "pre-wrap";
-
-        wrapper.appendChild(avatar);
-        wrapper.appendChild(texto);
-        div.appendChild(wrapper);
-    } else {
+    if (isUser) {
         const textSpan = document.createElement("span");
         textSpan.style.whiteSpace = "pre-wrap";
         textSpan.innerText = text;
         div.appendChild(textSpan);
+    } else {
+        const wrapper = document.createElement("div");
+        wrapper.className = "bot-message-wrapper";
+
+        const icon = document.createElement("img");
+        icon.src = "https://i.imgur.com/UDl1c5j.png";
+        icon.alt = "Candinho";
+        icon.className = "bot-icon";
+
+        const textSpan = document.createElement("span");
+        textSpan.className = "bot-text";
+        textSpan.innerText = text;
+
+        wrapper.appendChild(icon);
+        wrapper.appendChild(textSpan);
+        div.appendChild(wrapper);
     }
 
-    // Adiciona imagem da Europeana se existir
+    // Imagem da obra (se houver)
     if (imageData && imageData.imagemUrl) {
         const imgContainer = document.createElement("div");
         imgContainer.style.marginTop = "10px";
@@ -281,7 +363,7 @@ function addMessageToUI(text, isUser, imageData = null) {
 
         const creditSpan = document.createElement("div");
         creditSpan.className = "image-credit";
-        creditSpan.innerText = `📷 ${imageData.credito || "Europeana"} • Clique na imagem para ampliar`;
+        creditSpan.innerText = `📷 ${imageData.credito || "Europeana"} • Clique para ampliar`;
 
         imgContainer.appendChild(creditSpan);
         div.appendChild(imgContainer);
@@ -292,11 +374,12 @@ function addMessageToUI(text, isUser, imageData = null) {
     return div;
 }
 
+// Loading
 function addLoading() {
     const div = document.createElement("div");
     div.className = "msg bot loading";
     div.id = "loadingMsg";
-    div.innerText = "Candinho está pensando... 🎨";
+    div.innerText = "Candinho está pensando...";
     chatDiv.appendChild(div);
     chatDiv.scrollTop = chatDiv.scrollHeight;
 }
@@ -306,6 +389,7 @@ function removeLoading() {
     if (el) el.remove();
 }
 
+// Backend
 async function enviarParaBackend(mensagem) {
     try {
         const response = await fetch("/api/groq", {
@@ -323,22 +407,24 @@ async function enviarParaBackend(mensagem) {
             memoria.ultimoArtista = ultimoArtista;
         }
         return {
-            texto: data.reply || "Acho que me distraí com uma pintura! Pode repetir? 🎨",
+            texto: data.reply || "Acho que me distraí com uma pintura! Pode repetir?",
             imagem: data.image || null
         };
     } catch (error) {
-        console.error(error);
+        console.error("Erro no backend:", error);
         return {
-            texto: "Puxa, derramei minhas tintas! Tente me perguntar de novo? 🎨",
+            texto: "Puxa, derramei minhas tintas! Tente me perguntar de novo?",
             imagem: null
         };
     }
 }
 
+// Envio
 let isProcessing = false;
 async function enviar() {
     const pergunta = inputField.value.trim();
     if (!pergunta || isProcessing) return;
+
     isProcessing = true;
     sendBtn.disabled = true;
     inputField.disabled = true;
@@ -357,6 +443,7 @@ async function enviar() {
     inputField.focus();
 }
 
+// Eventos
 sendBtn.addEventListener("click", enviar);
 inputField.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
@@ -365,7 +452,7 @@ inputField.addEventListener("keypress", (e) => {
     }
 });
 
-// Saudação inicial (agora sem header, só a mensagem com avatar inline)
+// Saudação inicial (sem emojis)
 const saudacaoInicial = memoria.nome
     ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista.`
     : `Olá! Sou o Candinho, seu amigo artista.`;
