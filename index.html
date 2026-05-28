@@ -26,17 +26,26 @@
         display: flex;
         flex-direction: column;
     }
-    .header {
-        background: #6c5ce7;
-        color: white;
-        padding: 20px;
-        text-align: center;
-    }
-    .avatar {
-        width: 80px;
-        border-radius: 50%;
-        border: 3px solid #f9b713;
-        margin-bottom: 10px;
+
+.avatar {
+    width: 120px;          /* aumenta o avatar */
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #f9b713;
+    margin-bottom: 8px;
+    object-fit: contain;
+
+    /* faz sair da elipse */
+    transform: scale(1.4);
+}
+
+.header h2 {
+    margin: 0;
+
+    /* nome menor */
+    font-size: 1.2rem;
+    font-weight: 700;
+}
     }
     .header h2 { margin: 0; font-size: 1.6rem; }
     #chat {
