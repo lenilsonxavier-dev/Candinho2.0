@@ -1,236 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Candinho</title>
-<style>
-    * { box-sizing: border-box; }
-    body {
-        font-family: 'Segoe UI', Arial, sans-serif;
-        background: linear-gradient(135deg, #ffeaa7, #81ecec);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-        padding: 20px;
-    }
-    .container {
-        max-width: 800px;
-        width: 100%;
-        background: white;
-        border-radius: 35px;
-        box-shadow: 0 20px 35px rgba(0,0,0,0.2);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-    }
-    .header {
-        background: #6c5ce7;
-        color: white;
-        padding: 20px;
-        text-align: center;
-    }
-    .avatar {
-        width: 80px;
-        border-radius: 50%;
-        border: 3px solid #f9b713;
-        margin-bottom: 10px;
-    }
-    .header h2 { margin: 0; font-size: 1.6rem; }
-    #chat {
-        height: 450px;
-        overflow-y: auto;
-        background: #f8f9fa;
-        padding: 15px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    .msg {
-        max-width: 80%;
-        padding: 10px 15px;
-        border-radius: 20px;
-        word-wrap: break-word;
-        animation: fadeIn 0.2s ease;
-    }
-    .user {
-        background: #74b9ff;
-        align-self: flex-end;
-        color: #000;
-        border-bottom-right-radius: 5px;
-    }
-    .bot {
-        background: #55efc4;
-        align-self: flex-start;
-        border-bottom-left-radius: 5px;
-    }
-    
-    /* ========================================
-       ESTILOS DA IMAGEM DA EUROPEANA
-       ======================================== */
-    .bot-image {
-        margin-top: 12px;
-        max-width: 100%;
-        width: auto;
-        border-radius: 16px;
-        cursor: zoom-in;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        display: block;
-    }
-    
-    .bot-image:hover {
-        transform: scale(1.02);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-    
-    /* Modal de zoom para imagem */
-    .image-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.9);
-        z-index: 10000;
-        justify-content: center;
-        align-items: center;
-        cursor: zoom-out;
-    }
-    
-    .image-modal img {
-        max-width: 90%;
-        max-height: 90%;
-        object-fit: contain;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        animation: zoomFadeIn 0.2s ease;
-    }
-    
-    .image-modal .modal-caption {
-        position: absolute;
-        bottom: 20px;
-        left: 0;
-        right: 0;
-        text-align: center;
-        color: white;
-        background: rgba(0,0,0,0.6);
-        padding: 8px;
-        font-size: 0.8rem;
-    }
-    
-    @keyframes zoomFadeIn {
-        from { opacity: 0; transform: scale(0.95); }
-        to { opacity: 1; transform: scale(1); }
-    }
-    
-    .image-credit {
-        font-size: 0.65rem;
-        color: #666;
-        margin-top: 5px;
-        text-align: center;
-    }
-    
-    /* Loading */
-    .loading {
-        background: #dfe6e9;
-        font-style: italic;
-        animation: pulse 1s infinite;
-    }
-    
-    @keyframes fadeIn { 
-        from { opacity: 0; transform: translateY(5px); } 
-        to { opacity: 1; transform: translateY(0); } 
-    }
-    
-    @keyframes pulse { 
-        0% { opacity: 0.6; } 
-        100% { opacity: 1; } 
-    }
-    
-    .input-area {
-        display: flex;
-        padding: 15px;
-        background: white;
-        border-top: 1px solid #ddd;
-        gap: 10px;
-    }
-    input {
-        flex: 1;
-        padding: 12px 18px;
-        border: 2px solid #6c5ce7;
-        border-radius: 50px;
-        font-size: 1rem;
-        outline: none;
-    }
-    button {
-        background: #fd79a8;
-        border: none;
-        padding: 0 25px;
-        border-radius: 50px;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        transition: transform 0.1s ease;
-    }
-    button:active { transform: scale(0.97); }
-    button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    
-    /* Rolagem personalizada */
-    #chat::-webkit-scrollbar {
-        width: 6px;
-    }
-    #chat::-webkit-scrollbar-track {
-        background: #e0e0e0;
-        border-radius: 10px;
-    }
-    #chat::-webkit-scrollbar-thumb {
-        background: #6c5ce7;
-        border-radius: 10px;
-    }
-    
-    /* Responsividade para telas pequenas */
-    @media (max-width: 600px) {
-        .container {
-            border-radius: 20px;
-        }
-        .msg {
-            max-width: 90%;
-        }
-        .bot-image {
-            max-width: 100%;
-        }
-        .header h2 {
-            font-size: 1.3rem;
-        }
-        .avatar {
-            width: 60px;
-        }
-    }
-</style>
-</head>
-<body>
-<div class="container">
-    <div class="header">
-        <img src="https://i.imgur.com/fnMYS0Z.png" alt="Candinho" class="avatar">
-        <h2>Candinho</h2>
-    </div>
-    <div id="chat"></div>
-    <div class="input-area">
-        <input type="text" id="pergunta" placeholder="Ex: Quem foi Tarsila do Amaral?" autocomplete="off" autofocus>
-        <button id="sendBtn">Enviar</button>
-    </div>
-</div>
-
-<!-- Modal para zoom da imagem -->
-<div id="imageModal" class="image-modal" onclick="closeImageModal()">
-    <img id="modalImage" src="" alt="">
-    <div class="modal-caption" id="modalCaption"></div>
-</div>
-
+```html
 <script>
     const chatDiv = document.getElementById("chat");
     const inputField = document.getElementById("pergunta");
@@ -272,14 +40,25 @@
         }
     });
 
+    // ========================================
+    // FUNÇÃO DE MENSAGENS (ATUALIZADA)
+    // ========================================
     function addMessageToUI(text, isUser, imageData = null) {
         const div = document.createElement("div");
         div.className = `msg ${isUser ? "user" : "bot"}`;
         
-        // Texto principal (suporta quebras de linha)
+        // Texto principal
         const textSpan = document.createElement("span");
         textSpan.style.whiteSpace = "pre-wrap";
-        textSpan.innerText = text;
+
+        // Usuário = texto puro
+        // Bot = permite HTML (para imagem do Candinho na saudação)
+        if (isUser) {
+            textSpan.innerText = text;
+        } else {
+            textSpan.innerHTML = text;
+        }
+
         div.appendChild(textSpan);
         
         // Adiciona imagem se houver dados disponíveis
@@ -294,20 +73,25 @@
             img.loading = "lazy";
             img.title = "Clique para ampliar";
             
-            // Adiciona evento de clique para abrir modal com zoom
             img.addEventListener("click", (e) => {
                 e.stopPropagation();
                 const highResUrl = imageData.imagemGrande || imageData.imagemUrl;
-                openImageModal(highResUrl, imageData.titulo || `Obra de ${imageData.credito || "artista"}`);
+
+                openImageModal(
+                    highResUrl,
+                    imageData.titulo ||
+                    `Obra de ${imageData.credito || "artista"}`
+                );
             });
             
             imgContainer.appendChild(img);
             
             const creditSpan = document.createElement("div");
             creditSpan.className = "image-credit";
-            creditSpan.innerText = `📷 ${imageData.credito || "Europeana"} • Clique na imagem para ampliar`;
+            creditSpan.innerText =
+                `📷 ${imageData.credito || "Europeana"} • Clique na imagem para ampliar`;
+
             imgContainer.appendChild(creditSpan);
-            
             div.appendChild(imgContainer);
         }
         
@@ -345,52 +129,66 @@
             });
 
             if (!response.ok) {
-                throw new Error(`Erro na resposta do servidor: ${response.status}`);
+                throw new Error(
+                    `Erro na resposta do servidor: ${response.status}`
+                );
             }
 
             const data = await response.json();
             
             if (data.artista) {
                 ultimoArtista = data.artista;
-                // Salva na memória local para persistência
                 memoria.ultimoArtista = ultimoArtista;
             }
             
-            // Processa a resposta para adicionar quebras de linha
-            let textoFormatado = data.reply || "Acho que me distraí com uma pintura! Pode repetir? 🎨";
+            let textoFormatado =
+                data.reply ||
+                "Acho que me distraí com uma pintura! Pode repetir? 🎨";
             
             return {
                 texto: textoFormatado,
                 imagem: data.image || null
             };
+
         } catch (error) {
-            console.error("Erro na comunicação com o back-end:", error);
+            console.error(
+                "Erro na comunicação com o back-end:",
+                error
+            );
+
             return {
-                texto: "Puxa, derramei minhas tintas! Tente me perguntar de novo? 🎨",
+                texto:
+                    "Puxa, derramei minhas tintas! Tente me perguntar de novo? 🎨",
                 imagem: null
             };
         }
     }
 
     let isProcessing = false;
+
     async function enviar() {
         const pergunta = inputField.value.trim();
+
         if (!pergunta || isProcessing) return;
         
         isProcessing = true;
         sendBtn.disabled = true;
         inputField.disabled = true;
         
-        // Adiciona mensagem digitada
         addMessageToUI(pergunta, true);
         inputField.value = "";
         
         addLoading();
         
         const resposta = await enviarParaBackend(pergunta);
+
         removeLoading();
         
-        addMessageToUI(resposta.texto, false, resposta.imagem);
+        addMessageToUI(
+            resposta.texto,
+            false,
+            resposta.imagem
+        );
         
         isProcessing = false;
         sendBtn.disabled = false;
@@ -399,19 +197,36 @@
     }
 
     sendBtn.addEventListener("click", enviar);
+
     inputField.addEventListener("keypress", (e) => { 
         if (e.key === "Enter") {
             e.preventDefault();
             enviar(); 
         }
     });
-    
-    // Saudação inicial com dica de uso
-const saudacaoInicial = memoria.nome 
-    ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista. 🦆🎨`
-    : "Olá! Sou o Candinho, seu amigo artista. 🦆🎨";
 
-addMessageToUI(saudacaoInicial, false);
+    // ========================================
+    // SAUDAÇÃO COM ÍCONE NO TEXTO
+    // (SEM ALTERAR O AVATAR DO TOPO)
+    // ========================================
+    const iconeCandinho = `
+        <img 
+            src="https://i.imgur.com/UDl1c5j.png"
+            alt="Candinho"
+            style="
+                width:32px;
+                height:32px;
+                vertical-align:middle;
+                margin-left:6px;
+                border-radius:50%;
+            "
+        >
+    `;
+
+    const saudacaoInicial = memoria.nome
+        ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista. ${iconeCandinho}`
+        : `Olá! Sou o Candinho, seu amigo artista. ${iconeCandinho}`;
+
+    addMessageToUI(saudacaoInicial, false);
 </script>
-</body>
-</html>
+```
