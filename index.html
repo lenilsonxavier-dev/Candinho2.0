@@ -272,23 +272,57 @@ document.addEventListener("keydown", (e) => {
 });
 
 // ========================================
-// MENSAGENS
+// MENSAGENS (SUBSTITUÍDA)
 // ========================================
 function addMessageToUI(text, isUser, imageData = null) {
     const div = document.createElement("div");
     div.className = `msg ${isUser ? "user" : "bot"}`;
 
-    const textSpan = document.createElement("span");
-    textSpan.style.whiteSpace = "pre-wrap";
+    // ========================================
+    // SAUDAÇÃO COM ÍCONE NO COMEÇO
+    // ========================================
+    const isSaudacao =
+        !isUser &&
+        typeof text === "string" &&
+        text.includes("Sou o Candinho");
 
-    if (isUser) {
-        textSpan.innerText = text;
+    if (isSaudacao) {
+        const wrapper = document.createElement("div");
+
+        wrapper.style.display = "flex";
+        wrapper.style.alignItems = "center";
+        wrapper.style.gap = "10px";
+
+        // rosto do Candinho
+        const avatar = document.createElement("img");
+        avatar.src = "https://i.imgur.com/UDl1c5j.png";
+        avatar.alt = "Candinho";
+
+        avatar.style.width = "42px";
+        avatar.style.height = "42px";
+        avatar.style.borderRadius = "50%";
+        avatar.style.flexShrink = "0";
+        avatar.style.objectFit = "cover";
+
+        // texto
+        const texto = document.createElement("span");
+        texto.innerText = text;
+
+        wrapper.appendChild(avatar);
+        wrapper.appendChild(texto);
+
+        div.appendChild(wrapper);
+
     } else {
-        textSpan.innerHTML = text;
+        const textSpan = document.createElement("span");
+        textSpan.style.whiteSpace = "pre-wrap";
+        textSpan.innerText = text;
+        div.appendChild(textSpan);
     }
 
-    div.appendChild(textSpan);
-
+    // ========================================
+    // IMAGEM EUROPEANA
+    // ========================================
     if (imageData && imageData.imagemUrl) {
         const imgContainer = document.createElement("div");
         imgContainer.style.marginTop = "10px";
@@ -448,25 +482,11 @@ inputField.addEventListener("keypress", (e) => {
 });
 
 // ========================================
-// SAUDAÇÃO COM ÍCONE
+// SAUDAÇÃO INICIAL (SUBSTITUÍDA)
 // ========================================
-const iconeCandinho = `
-<img
-    src="https://i.imgur.com/UDl1c5j.png"
-    alt="Candinho"
-    style="
-        width:32px;
-        height:32px;
-        vertical-align:middle;
-        margin-left:6px;
-        border-radius:50%;
-    "
->
-`;
-
 const saudacaoInicial = memoria.nome
-    ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista. ${iconeCandinho}`
-    : `Olá! Sou o Candinho, seu amigo artista. ${iconeCandinho}`;
+    ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista.`
+    : `Olá! Sou o Candinho, seu amigo artista.`;
 
 addMessageToUI(saudacaoInicial, false);
 </script>
