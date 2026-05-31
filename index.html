@@ -129,6 +129,27 @@
         transform: scale(1.02);
         box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
+
+    /* Estilo do Botão do Google Arts */
+    .google-arts-btn {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 8px 15px;
+        background: rgba(255, 215, 0, 0.15);
+        border: 1px solid #ffd700;
+        color: #ffd700;
+        text-decoration: none;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        transition: all 0.2s;
+        text-align: center;
+    }
+    .google-arts-btn:hover {
+        background: #ffd700;
+        color: #1a1a2e;
+        transform: translateY(-2px);
+    }
     
     .image-modal {
         display: none;
@@ -265,181 +286,4 @@
     </div>
 </div>
 
-<div id="imageModal" class="image-modal" onclick="closeImageModal()">
-    <img id="modalImage" src="" alt="">
-    <div class="modal-caption" id="modalCaption"></div>
-</div>
-
-<script>
-const chatDiv = document.getElementById("chat");
-const inputField = document.getElementById("pergunta");
-const sendBtn = document.getElementById("sendBtn");
-
-let ultimoArtista = null;
-let memoria = {
-    nome: localStorage.getItem("candinho_nome") || "",
-    idade: localStorage.getItem("candinho_idade") || "",
-    ultimoArtista: null
-};
-
-function openImageModal(imgSrc, caption) {
-    const modal = document.getElementById("imageModal");
-    const modalImg = document.getElementById("modalImage");
-    const modalCaption = document.getElementById("modalCaption");
-    modalImg.src = imgSrc;
-    modalCaption.innerText = caption || "Obra de arte";
-    modal.style.display = "flex";
-    document.body.style.overflow = "hidden";
-}
-
-function closeImageModal() {
-    const modal = document.getElementById("imageModal");
-    modal.style.display = "none";
-    document.body.style.overflow = "";
-}
-
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeImageModal();
-});
-
-function addMessageToUI(text, isUser, imageData = null) {
-    const div = document.createElement("div");
-    div.className = `msg ${isUser ? "user" : "bot"}`;
-
-    if (isUser) {
-        const textSpan = document.createElement("span");
-        textSpan.style.whiteSpace = "pre-wrap";
-        textSpan.innerText = text;
-        div.appendChild(textSpan);
-    } else {
-        const wrapper = document.createElement("div");
-        wrapper.className = "bot-message-wrapper";
-
-        const icon = document.createElement("img");
-        icon.src = "https://i.imgur.com/UDl1c5j.png";
-        icon.alt = "Candinho";
-        icon.className = "bot-icon";
-
-        const textSpan = document.createElement("span");
-        textSpan.className = "bot-text";
-        textSpan.innerText = text;
-
-        wrapper.appendChild(icon);
-        wrapper.appendChild(textSpan);
-        div.appendChild(wrapper);
-    }
-
-    if (imageData && imageData.imagemUrl) {
-        const imgContainer = document.createElement("div");
-        imgContainer.style.marginTop = "10px";
-
-        const img = document.createElement("img");
-        img.src = imageData.imagemUrl;
-        img.alt = imageData.titulo || "Imagem da obra";
-        img.className = "bot-image";
-        img.loading = "lazy";
-        img.title = "Clique para ampliar";
-
-        img.addEventListener("click", (e) => {
-            e.stopPropagation();
-            const highResUrl = imageData.imagemGrande || imageData.imagemUrl;
-            openImageModal(highResUrl, imageData.titulo || `Obra de ${imageData.credito || "artista"}`);
-        });
-
-        imgContainer.appendChild(img);
-
-        const creditSpan = document.createElement("div");
-        creditSpan.className = "image-credit";
-        creditSpan.innerText = `📷 ${imageData.credito || "Europeana"} • Clique para ampliar`;
-
-        imgContainer.appendChild(creditSpan);
-        div.appendChild(imgContainer);
-    }
-
-    chatDiv.appendChild(div);
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-    return div;
-}
-
-function addLoading() {
-    const div = document.createElement("div");
-    div.className = "msg bot loading";
-    div.id = "loadingMsg";
-    div.innerText = "Candinho está pensando...";
-    chatDiv.appendChild(div);
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-}
-
-function removeLoading() {
-    const el = document.getElementById("loadingMsg");
-    if (el) el.remove();
-}
-
-async function enviarParaBackend(mensagem) {
-    try {
-        const response = await fetch("/api/groq", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                mensagem: mensagem,
-                memoria: { ...memoria, ultimoArtista: ultimoArtista }
-            })
-        });
-        if (!response.ok) throw new Error(`Erro: ${response.status}`);
-        const data = await response.json();
-        if (data.artista) {
-            ultimoArtista = data.artista;
-            memoria.ultimoArtista = ultimoArtista;
-        }
-        return {
-            texto: data.reply || "Acho que me distraí com uma pintura! Pode repetir?",
-            imagem: data.image || null
-        };
-    } catch (error) {
-        console.error("Erro no backend:", error);
-        return {
-            texto: "Puxa, derramei minhas tintas! Tente me perguntar de novo?",
-            imagem: null
-        };
-    }
-}
-
-let isProcessing = false;
-async function enviar() {
-    const pergunta = inputField.value.trim();
-    if (!pergunta || isProcessing) return;
-
-    isProcessing = true;
-    sendBtn.disabled = true;
-    inputField.disabled = true;
-
-    addMessageToUI(pergunta, true);
-    inputField.value = "";
-    addLoading();
-
-    const resposta = await enviarParaBackend(pergunta);
-    removeLoading();
-    addMessageToUI(resposta.texto, false, resposta.imagem);
-
-    isProcessing = false;
-    sendBtn.disabled = false;
-    inputField.disabled = false;
-    inputField.focus();
-}
-
-sendBtn.addEventListener("click", enviar);
-inputField.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-        e.preventDefault();
-        enviar();
-    }
-});
-
-const saudacaoInicial = memoria.nome
-    ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista.`
-    : `Olá! Sou o Candinho, seu amigo artista.`;
-
-addMessageToUI(saudacaoInicial, false);
-</script>
-</body>
-</html>
+<div id="imageModal" class="image-modal" onclick="closeImageMod
