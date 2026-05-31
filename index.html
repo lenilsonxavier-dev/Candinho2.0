@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Candinho - Artista Amigo</title>
     <style>
+        /* Estilo Geral */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body { 
@@ -114,6 +115,14 @@
         }
         .bot-image:hover { transform: scale(1.02); }
 
+        .image-credit {
+            font-size: 0.65rem;
+            color: #ffd700;
+            margin-top: 5px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
         /* --- ESTILOS DA FICHA DE MUSEU --- */
         .museum-card {
             background: rgba(255, 255, 255, 0.1);
@@ -212,6 +221,7 @@
     const btn = document.getElementById("sendBtn");
     let isProcessing = false;
 
+    // Função para mostrar mensagens na tela
     function appendMessage(text, side, extra = null) {
         const msgDiv = document.createElement("div");
         msgDiv.className = `msg ${side}`;
@@ -225,12 +235,12 @@
             `;
             msgDiv.appendChild(wrapper);
 
-            // 1. Mostrar Imagem (Wikimedia)
-            if (extra && extra.image) {
+            // 1. Mostrar Imagem (Wikimedia) se ela existir
+            if (extra && extra.image && extra.image.imagemUrl) {
                 const img = document.createElement("img");
                 img.src = extra.image.imagemUrl;
                 img.className = "bot-image";
-                img.title = extra.image.titulo;
+                img.title = extra.image.titulo || "Clique para ampliar";
                 img.onclick = () => {
                     document.getElementById("modalImg").src = img.src;
                     document.getElementById("imgModal").style.display = "flex";
@@ -238,13 +248,13 @@
                 msgDiv.appendChild(img);
                 
                 const credit = document.createElement("div");
-                credit.style.fontSize = "0.6rem"; credit.style.marginTop = "5px";
-                credit.innerText = `📷 ${extra.image.credito || 'Wikimedia'}`;
+                credit.className = "image-credit";
+                credit.innerText = `📷 Fonte: ${extra.image.credito || 'Wikimedia'}`;
                 msgDiv.appendChild(credit);
             }
 
-            // 2. Mostrar Ficha de Museu (Info)
-            if (extra && extra.info && (extra.info.nascimento || extra.info.estilo)) {
+            // 2. Mostrar Ficha de Museu (Info) se houver dados
+            if (extra && extra.info) {
                 const card = document.createElement("div");
                 card.className = "museum-card";
                 card.innerHTML = `
@@ -253,8 +263,8 @@
                     <div class="museum-row"><span class="museum-label">Estilo:</span> <span>${extra.info.estilo || 'Arte'}</span></div>
                 `;
                 
-                // Adicionar o botão do Google Arts dentro da ficha
-                if (extra.googleArts) {
+                // 3. Adicionar o botão do Google Arts se o link existir
+                if (extra.googleArts && extra.googleArts.url) {
                     const artsLink = document.createElement("a");
                     artsLink.href = extra.googleArts.url;
                     artsLink.target = "_blank";
@@ -273,6 +283,7 @@
         chat.scrollTop = chat.scrollHeight;
     }
 
+    // Função de envio
     async function handleSend() {
         const val = input.value.trim();
         if (!val || isProcessing) return;
@@ -285,6 +296,7 @@
             appendMessage(val, 'user');
             input.value = "";
 
+            // Criar balão de carregamento
             const loading = document.createElement("div");
             loading.className = "msg bot loading";
             loading.id = "loader";
@@ -298,12 +310,15 @@
                 body: JSON.stringify({ mensagem: val })
             });
 
-            if (!res.ok) throw new Error();
+            if (!res.ok) throw new Error("Erro na API");
 
             const data = await res.json();
-            document.getElementById("loader").remove();
+            
+            // Remover balão de carregamento
+            const loader = document.getElementById("loader");
+            if (loader) loader.remove();
 
-            // Passa a resposta, a imagem, a ficha de museu e o link do Google Arts
+            // Adicionar resposta final do Candinho
             appendMessage(data.reply, 'bot', { 
                 image: data.image, 
                 info: data.info,
@@ -311,8 +326,10 @@
             });
 
         } catch (e) {
-            if(document.getElementById("loader")) document.getElementById("loader").remove();
+            const loader = document.getElementById("loader");
+            if (loader) loader.remove();
             appendMessage("Ops! Minha paleta bagunçou. Pode repetir? 🎨", "bot");
+            console.error(e);
         } finally {
             isProcessing = false;
             btn.disabled = false;
@@ -321,11 +338,13 @@
         }
     }
 
+    // Eventos de clique e teclado
     btn.addEventListener("click", handleSend);
     input.addEventListener("keydown", (e) => {
         if (e.key === "Enter") handleSend();
     });
 
+    // Boas-vindas
     window.onload = () => {
         appendMessage("Olá! Sou o Candinho, seu amigo artista. O que vamos descobrir hoje? 🎨", "bot");
         input.focus();
