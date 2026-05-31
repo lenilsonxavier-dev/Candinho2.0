@@ -5,269 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Candinho - Artista Amigo</title>
 <style>
+    /* MANTENHA O SEU CSS IGUAL (O estilo está perfeito) */
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body { 
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        color: white; 
-        padding: 20px; 
-        display: flex; 
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
-    
-    .container { 
-        width: 100%; 
-        max-width: 850px;
-        background: rgba(22, 33, 62, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 28px;
-        padding: 28px; 
-        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        border: 1px solid rgba(255, 215, 0, 0.3);
-    }
-    
-    .header { 
-        display: flex; 
-        align-items: center; 
-        gap: 20px; 
-        margin-bottom: 25px; 
-        padding-bottom: 15px; 
-        border-bottom: 2px solid #e94560; 
-    }
-    
-    .avatar { 
-        width: 85px;
-        height: 85px; 
-        border-radius: 50%; 
-        object-fit: cover; 
-        border: 3px solid #ffd700;
-        animation: float 3s ease-in-out infinite;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-    
-    @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-6px); }
-    }
-    
-    .title h1 { 
-        font-size: 2rem;
-        margin-bottom: 6px; 
-        letter-spacing: 1px;
-    }
-    .title small { 
-        font-size: 0.9rem; 
-        color: #ffd700; 
-        font-style: italic;
-    }
-    
-    #chat { 
-        height: 460px;
-        overflow-y: auto; 
-        background: rgba(15, 52, 96, 0.6);
-        padding: 18px; 
-        border-radius: 18px; 
-        margin-bottom: 18px; 
-        border: 1px solid #1b262c;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-    
-    .msg {
-        max-width: 80%;
-        padding: 10px 16px;
-        border-radius: 22px;
-        word-wrap: break-word;
-        animation: fadeIn 0.2s ease;
-        font-size: 0.95rem;
-    }
-    .user {
-        background: #74b9ff;
-        align-self: flex-end;
-        color: #1e272e;
-        border-bottom-right-radius: 6px;
-    }
-    .bot {
-        background: #6c5ce7;
-        align-self: flex-start;
-        border-bottom-left-radius: 6px;
-        color: white;
-    }
-    
-    .bot-message-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .bot-icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        object-fit: cover;
-        flex-shrink: 0;
-    }
-    .bot-text {
-        white-space: pre-wrap;
-        flex: 1;
-    }
-    
-    .bot-image {
-        margin-top: 12px;
-        max-width: 100%;
-        width: auto;
-        border-radius: 16px;
-        cursor: zoom-in;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        display: block;
-    }
-    .bot-image:hover {
-        transform: scale(1.02);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    }
-
-    /* Estilo do Botão do Google Arts */
-    .google-arts-btn {
-        display: inline-block;
-        margin-top: 12px;
-        padding: 8px 15px;
-        background: rgba(255, 215, 0, 0.15);
-        border: 1px solid #ffd700;
-        color: #ffd700;
-        text-decoration: none;
-        border-radius: 12px;
-        font-size: 0.85rem;
-        font-weight: bold;
-        transition: all 0.2s;
-        text-align: center;
-    }
-    .google-arts-btn:hover {
-        background: #ffd700;
-        color: #1a1a2e;
-        transform: translateY(-2px);
-    }
-    
-    .image-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.9);
-        z-index: 10000;
-        justify-content: center;
-        align-items: center;
-        cursor: zoom-out;
-    }
-    .image-modal img {
-        max-width: 90%;
-        max-height: 90%;
-        object-fit: contain;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        animation: zoomFadeIn 0.2s ease;
-    }
-    .image-modal .modal-caption {
-        position: absolute;
-        bottom: 20px;
-        left: 0;
-        right: 0;
-        text-align: center;
-        color: white;
-        background: rgba(0,0,0,0.6);
-        padding: 8px;
-        font-size: 0.8rem;
-    }
-    @keyframes zoomFadeIn {
-        from { opacity: 0; transform: scale(0.95); }
-        to { opacity: 1; transform: scale(1); }
-    }
-    .image-credit {
-        font-size: 0.65rem;
-        color: #ccc;
-        margin-top: 5px;
-        text-align: center;
-    }
-    
-    .loading {
-        background: #dfe6e9;
-        font-style: italic;
-        animation: pulse 1s infinite;
-    }
-    @keyframes fadeIn { 
-        from { opacity: 0; transform: translateY(5px); } 
-        to { opacity: 1; transform: translateY(0); } 
-    }
-    @keyframes pulse { 
-        0% { opacity: 0.6; } 
-        100% { opacity: 1; } 
-    }
-    
-    .input-area {
-        display: flex;
-        gap: 12px;
-        margin-top: 5px;
-    }
-    input {
-        flex: 1;
-        padding: 12px 18px;
-        border: 2px solid #e94560;
-        border-radius: 50px;
-        font-size: 1rem;
-        outline: none;
-        background: rgba(255,255,255,0.1);
-        color: white;
-        transition: all 0.2s;
-    }
-    input::placeholder {
-        color: #aaa;
-    }
-    input:focus {
-        border-color: #ffd700;
-        background: rgba(255,255,255,0.2);
-    }
-    button {
-        background: #e94560;
-        border: none;
-        padding: 0 28px;
-        border-radius: 50px;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        transition: transform 0.1s ease, background 0.2s;
-        font-size: 1rem;
-    }
-    button:hover {
-        background: #ff6b81;
-    }
-    button:active { transform: scale(0.97); }
-    button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    
-    #chat::-webkit-scrollbar {
-        width: 6px;
-    }
-    #chat::-webkit-scrollbar-track {
-        background: #1b262c;
-        border-radius: 10px;
-    }
-    #chat::-webkit-scrollbar-thumb {
-        background: #e94560;
-        border-radius: 10px;
-    }
-    
-    @media (max-width: 650px) {
-        .container { padding: 18px; max-width: 95%; }
-        .avatar { width: 65px; height: 65px; }
-        .title h1 { font-size: 1.5rem; }
-        #chat { height: 380px; }
-        .msg { max-width: 90%; }
-        .bot-icon { width: 30px; height: 30px; }
-    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .container { width: 100%; max-width: 850px; background: rgba(22, 33, 62, 0.95); backdrop-filter: blur(10px); border-radius: 28px; padding: 28px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); border: 1px solid rgba(255, 215, 0, 0.3); }
+    .header { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid #e94560; }
+    .avatar { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; border: 3px solid #ffd700; animation: float 3s ease-in-out infinite; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+    @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-6px); } }
+    .title h1 { font-size: 2rem; margin-bottom: 6px; letter-spacing: 1px; }
+    .title small { font-size: 0.9rem; color: #ffd700; font-style: italic; }
+    #chat { height: 460px; overflow-y: auto; background: rgba(15, 52, 96, 0.6); padding: 18px; border-radius: 18px; margin-bottom: 18px; border: 1px solid #1b262c; display: flex; flex-direction: column; gap: 12px; }
+    .msg { max-width: 80%; padding: 10px 16px; border-radius: 22px; word-wrap: break-word; animation: fadeIn 0.2s ease; font-size: 0.95rem; }
+    .user { background: #74b9ff; align-self: flex-end; color: #1e272e; border-bottom-right-radius: 6px; }
+    .bot { background: #6c5ce7; align-self: flex-start; border-bottom-left-radius: 6px; color: white; }
+    .bot-message-wrapper { display: flex; align-items: center; gap: 10px; }
+    .bot-icon { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .bot-text { white-space: pre-wrap; flex: 1; }
+    .bot-image { margin-top: 12px; max-width: 100%; width: auto; border-radius: 16px; cursor: zoom-in; transition: transform 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: block; }
+    .google-arts-btn { display: inline-block; margin-top: 12px; padding: 8px 15px; background: rgba(255, 215, 0, 0.15); border: 1px solid #ffd700; color: #ffd700; text-decoration: none; border-radius: 12px; font-size: 0.85rem; font-weight: bold; transition: all 0.2s; text-align: center; }
+    .google-arts-btn:hover { background: #ffd700; color: #1a1a2e; transform: translateY(-2px); }
+    .image-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center; }
+    .image-modal img { max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 12px; }
+    .loading { background: #dfe6e9; font-style: italic; animation: pulse 1s infinite; color: #1e272e; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0% { opacity: 0.6; } 100% { opacity: 1; } }
+    .input-area { display: flex; gap: 12px; margin-top: 5px; }
+    input { flex: 1; padding: 12px 18px; border: 2px solid #e94560; border-radius: 50px; font-size: 1rem; outline: none; background: rgba(255,255,255,0.1); color: white; }
+    button { background: #e94560; border: none; padding: 0 28px; border-radius: 50px; color: white; font-weight: bold; cursor: pointer; }
+    button:disabled { opacity: 0.5; }
+    #chat::-webkit-scrollbar { width: 6px; }
+    #chat::-webkit-scrollbar-thumb { background: #e94560; border-radius: 10px; }
 </style>
 </head>
 <body>
@@ -281,14 +48,14 @@
     </div>
     <div id="chat"></div>
     <div class="input-area">
-        <input type="text" id="pergunta" placeholder="Ex: Quem foi Tarsila do Amaral?" autocomplete="off" autofocus>
+        <input type="text" id="pergunta" placeholder="Ex: Quem foi Tarsila?" autocomplete="off" autofocus>
         <button id="sendBtn">Enviar</button>
     </div>
 </div>
 
 <div id="imageModal" class="image-modal" onclick="closeImageModal()">
     <img id="modalImage" src="" alt="">
-    <div class="modal-caption" id="modalCaption"></div>
+    <div class="modal-caption" id="modalCaption" style="position:absolute; bottom:20px; color:white; text-align:center; width:100%;"></div>
 </div>
 
 <script>
@@ -296,184 +63,114 @@ const chatDiv = document.getElementById("chat");
 const inputField = document.getElementById("pergunta");
 const sendBtn = document.getElementById("sendBtn");
 
-let ultimoArtista = null;
-let memoria = {
-    nome: localStorage.getItem("candinho_nome") || "",
-    idade: localStorage.getItem("candinho_idade") || "",
-    ultimoArtista: null
-};
-
 function openImageModal(imgSrc, caption) {
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImage");
-    const modalCaption = document.getElementById("modalCaption");
+    document.getElementById("modalCaption").innerText = caption;
     modalImg.src = imgSrc;
-    modalCaption.innerText = caption || "Obra de arte";
     modal.style.display = "flex";
-    document.body.style.overflow = "hidden";
 }
 
 function closeImageModal() {
-    const modal = document.getElementById("imageModal");
-    modal.style.display = "none";
-    document.body.style.overflow = "";
+    document.getElementById("imageModal").style.display = "none";
 }
-
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeImageModal();
-});
 
 function addMessageToUI(text, isUser, imageData = null, googleArtsData = null) {
     const div = document.createElement("div");
     div.className = `msg ${isUser ? "user" : "bot"}`;
 
     if (isUser) {
-        const textSpan = document.createElement("span");
-        textSpan.style.whiteSpace = "pre-wrap";
-        textSpan.innerText = text;
-        div.appendChild(textSpan);
+        div.innerText = text;
     } else {
         const wrapper = document.createElement("div");
         wrapper.className = "bot-message-wrapper";
-
         const icon = document.createElement("img");
         icon.src = "https://i.imgur.com/UDl1c5j.png";
-        icon.alt = "Candinho";
         icon.className = "bot-icon";
-
         const textSpan = document.createElement("span");
         textSpan.className = "bot-text";
         textSpan.innerText = text;
-
         wrapper.appendChild(icon);
         wrapper.appendChild(textSpan);
         div.appendChild(wrapper);
     }
 
-    // Parte da Imagem (Wikimedia)
     if (imageData && imageData.imagemUrl) {
-        const imgContainer = document.createElement("div");
-        imgContainer.style.marginTop = "10px";
-
         const img = document.createElement("img");
         img.src = imageData.imagemUrl;
-        img.alt = imageData.titulo || "Imagem da obra";
         img.className = "bot-image";
-        img.loading = "lazy";
-        img.title = "Clique para ampliar";
-
-        img.addEventListener("click", (e) => {
-            e.stopPropagation();
-            const highResUrl = imageData.imagemGrande || imageData.imagemUrl;
-            openImageModal(highResUrl, imageData.titulo || `Obra: ${imageData.titulo}`);
-        });
-
-        imgContainer.appendChild(img);
-
-        const creditSpan = document.createElement("div");
-        creditSpan.className = "image-credit";
-        // Crédito dinâmico vindo do backend
-        creditSpan.innerText = `📷 Fonte: ${imageData.credito || "Wikimedia"} • Clique para ampliar`;
-
-        imgContainer.appendChild(creditSpan);
-        div.appendChild(imgContainer);
-    }
-
-    // Parte do Link Google Arts (Portal Mágico)
-    if (googleArtsData && googleArtsData.url) {
-        const artsLink = document.createElement("a");
-        artsLink.href = googleArtsData.url;
-        artsLink.target = "_blank";
-        artsLink.className = "google-arts-btn";
-        artsLink.innerText = "✨ Ver galeria no Google Arts & Culture";
-        div.appendChild(artsLink);
-    }
-
-    chatDiv.appendChild(div);
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-    return div;
-}
-
-function addLoading() {
-    const div = document.createElement("div");
-    div.className = "msg bot loading";
-    div.id = "loadingMsg";
-    div.innerText = "Candinho está pensando...";
-    chatDiv.appendChild(div);
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-}
-
-function removeLoading() {
-    const el = document.getElementById("loadingMsg");
-    if (el) el.remove();
-}
-
-async function enviarParaBackend(mensagem) {
-    try {
-        const response = await fetch("/api/groq", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                mensagem: mensagem,
-                memoria: { ...memoria, ultimoArtista: ultimoArtista }
-            })
-        });
-        if (!response.ok) throw new Error(`Erro: ${response.status}`);
-        const data = await response.json();
+        img.onclick = () => openImageModal(imageData.imagemUrl, imageData.titulo);
+        div.appendChild(img);
         
-        return {
-            texto: data.reply || "Acho que me distraí com uma pintura! Pode repetir?",
-            imagem: data.image || null,
-            googleArts: data.googleArts || null
-        };
-    } catch (error) {
-        console.error("Erro no backend:", error);
-        return {
-            texto: "Puxa, derramei minhas tintas! Tente me perguntar de novo?",
-            imagem: null,
-            googleArts: null
-        };
+        const credit = document.createElement("div");
+        credit.style.fontSize = "0.6rem";
+        credit.style.marginTop = "5px";
+        credit.innerText = `📷 ${imageData.credito || "Fonte Aberta"}`;
+        div.appendChild(credit);
     }
+
+    if (googleArtsData && googleArtsData.url) {
+        const btn = document.createElement("a");
+        btn.href = googleArtsData.url;
+        btn.target = "_blank";
+        btn.className = "google-arts-btn";
+        btn.innerText = "✨ Ver no Google Arts & Culture";
+        div.appendChild(btn);
+    }
+
+    chatDiv.appendChild(div);
+    chatDiv.scrollTop = chatDiv.scrollHeight;
 }
 
 let isProcessing = false;
+
 async function enviar() {
-    const pergunta = inputField.value.trim();
-    if (!pergunta || isProcessing) return;
+    const texto = inputField.value.trim();
+    if (!texto || isProcessing) return;
 
-    isProcessing = true;
-    sendBtn.disabled = true;
-    inputField.disabled = true;
+    try {
+        isProcessing = true;
+        sendBtn.disabled = true;
+        inputField.disabled = true;
 
-    addMessageToUI(pergunta, true);
-    inputField.value = "";
-    addLoading();
+        addMessageToUI(texto, true);
+        inputField.value = "";
 
-    const resposta = await enviarParaBackend(pergunta);
-    removeLoading();
-    
-    // Passamos o texto, se é bot, os dados da imagem e os dados do Google Arts
-    addMessageToUI(resposta.texto, false, resposta.imagem, resposta.googleArts);
+        // Efeito de loading
+        const loading = document.createElement("div");
+        loading.className = "msg bot loading";
+        loading.id = "tmp-loading";
+        loading.innerText = "Candinho está pintando a resposta...";
+        chatDiv.appendChild(loading);
+        chatDiv.scrollTop = chatDiv.scrollHeight;
 
-    isProcessing = false;
-    sendBtn.disabled = false;
-    inputField.disabled = false;
-    inputField.focus();
+        const response = await fetch("/api/groq", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ mensagem: texto })
+        });
+
+        const data = await response.json();
+        
+        document.getElementById("tmp-loading").remove();
+        addMessageToUI(data.reply, false, data.image, data.googleArts);
+
+    } catch (err) {
+        console.error(err);
+        if(document.getElementById("tmp-loading")) document.getElementById("tmp-loading").remove();
+        addMessageToUI("Ops! Minhas tintas secaram. Pode repetir? 🎨", false);
+    } finally {
+        isProcessing = false;
+        sendBtn.disabled = false;
+        inputField.disabled = false;
+        inputField.focus();
+    }
 }
 
-sendBtn.addEventListener("click", enviar);
-inputField.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-        e.preventDefault();
-        enviar();
-    }
-});
+sendBtn.onclick = enviar;
+inputField.onkeydown = (e) => { if (e.key === "Enter") enviar(); };
 
-const saudacaoInicial = memoria.nome
-    ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista.`
-    : `Olá! Sou o Candinho, seu amigo artista.`;
-
-addMessageToUI(saudacaoInicial, false);
+addMessageToUI("Olá! Sou o Candinho, seu amigo artista. O que vamos descobrir hoje? 🎨", false);
 </script>
 </body>
 </html>
