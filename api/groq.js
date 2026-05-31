@@ -55,7 +55,6 @@ async function buscarNosJSONs(pergunta) {
 async function buscarNaEuropeana(pergunta) {
     if (!EUROPEANA_API_KEY) return null;
     
-    // Limpeza para pegar o nome do artista
     const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "mostre", "quando", "nasceu"];
     let palavras = pergunta.toLowerCase().replace(/[?!.,]/g, "").split(/\s+/).filter(p => p.length > 2 && !stopWords.includes(p));
     let termo = palavras.slice(0, 3).join(' ');
@@ -63,15 +62,26 @@ async function buscarNaEuropeana(pergunta) {
     if (!termo) return null;
 
     try {
-        // Usando a lógica de busca por "who" (quem) que você enviou
-        const query = `who:"${encodeURIComponent(termo)}"`;
-        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${query}&qf=TYPE:IMAGE&rows=1&profile=portal`;
+        // AJUSTE NA QUERY: 
+        // 1. Buscamos pelo termo + "painting"
+        // 2. Filtramos para evitar o provedor "Istituto Luce" (que traz fotos jornalísticas)
+        // 3. Exigimos que o que venha seja do tipo IMAGE e tenha alta qualidade
+        const query = `"${encodeURIComponent(termo)}" AND (WHAT:painting OR WHAT:artwork)`;
+        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${query}&qf=TYPE:IMAGE&qf=REUSABILITY:open&rows=1&profile=portal`;
         
         const response = await fetch(url);
         const data = await response.json();
 
         if (data.items && data.items.length > 0) {
             const item = data.items[0];
+            
+            // Verificamos se o provedor não é um arquivo de notícias
+            const provedor = item.dataProvider ? item.dataProvider[0] : "";
+            if (provedor.includes("Luce") || provedor.includes("News")) {
+                // Se for notícia, tentamos pegar o segundo resultado ou ignoramos
+                return null; 
+            }
+
             return {
                 imagemUrl: item.edmPreview ? item.edmPreview[0] : null,
                 titulo: item.title ? item.title[0] : "Obra de arte",
@@ -81,7 +91,6 @@ async function buscarNaEuropeana(pergunta) {
     } catch (e) { return null; }
     return null;
 }
-
 // ======================= HANDLER PRINCIPAL =======================
 export default async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).json({ error: 'Método não permitido' });
