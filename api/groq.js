@@ -62,38 +62,30 @@ async function carregarTodosJSONs() {
 
 // ======================= BUSCA NA EUROPEANA =======================
 async function buscarNaEuropeana(pergunta) {
-    if (!EUROPEANA_API_KEY || EUROPEANA_API_KEY === "SUA_CHAVE_AQUI") return null;
-    
-    // Limpamos a pergunta para pegar só o nome do artista
-    const stopWords = ["quem", "foi", "fale", "sobre", "quando", "nasceu", "morreu", "quem foi", "o que e"];
-    let palavras = pergunta.toLowerCase().split(/\s+/).filter(p => p.length > 2 && !stopWords.includes(p));
-    let busca = palavras.slice(0, 3).join(' ');
-
+    if (!EUROPEANA_API_KEY) return null;
+    const stopWords = ["quem", "foi", "fale", "sobre", "quando", "nasceu", "morreu", "ver", "obra", "quadro"];
+    let busca = pergunta.toLowerCase().split(/\s+/).filter(p => p.length > 2 && !stopWords.includes(p)).join(' ');
     if (!busca) return null;
 
     try {
-        // Buscamos especificamente por "pintura" do artista para ser mais certeiro
         const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${encodeURIComponent(busca + " painting")}&rows=1&profile=portal&qf=TYPE:IMAGE&reusability=open`;
-        
         const response = await fetch(url);
         const data = await response.json();
 
         if (data.items && data.items.length > 0) {
             const item = data.items[0];
-            let img = (item.edmPreview && item.edmPreview[0]) ? item.edmPreview[0] : 
-                      (item.edmIsShownBy && item.edmIsShownBy[0]) ? item.edmIsShownBy[0] : null;
-
+            const img = (item.edmPreview && item.edmPreview[0]) ? item.edmPreview[0] : null;
             if (!img) return null;
-
+            
             return {
                 imagemUrl: img,
-                titulo: item.title ? item.title[0] : "Obra de arte",
-                credito: item.dcCreator ? item.dcCreator[0] : "Europeana"
+                titulo: item.title ? item.title[0] : "Obra de arte"
             };
         }
     } catch (e) { return null; }
     return null;
 }
+
 // ======================= AUXILIARES DE BUSCA =======================
 function responderConceitoBasico(pergunta) {
     const texto = pergunta.toLowerCase();
@@ -167,13 +159,13 @@ export default async function handler(req, res) {
         if (!textoResposta) {
             textoResposta = "Que interessante! Não encontrei detalhes agora, mas essa busca me deixou curioso! 🎨";
         }
-
-        // 5. RESPOSTA FINAL (Envia TEXTO e IMAGEM juntos)
+        
+        // RESPOSTA FINAL UNIFICADA
         return res.status(200).json({
-            reply: textoResposta,
-            image: europeanaResult ? europeanaResult.imagem : null
+            reply: textoResposta || "Olha que legal! 🎨",
+            image: europeanaResult // Envia o objeto direto {imagemUrl, titulo}
         });
-
+      
     } catch (err) {
         console.error("Erro Geral no Handler:", err);
         return res.status(200).json({ 
