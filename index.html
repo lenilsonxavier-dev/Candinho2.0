@@ -71,7 +71,6 @@
             scroll-behavior: smooth;
         }
         
-        /* Estilo das Mensagens */
         .msg {
             max-width: 85%;
             padding: 12px 18px;
@@ -115,20 +114,37 @@
         }
         .bot-image:hover { transform: scale(1.02); }
 
-        .google-arts-btn {
-            display: inline-block;
+        /* --- ESTILOS DA FICHA DE MUSEU --- */
+        .museum-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
             margin-top: 12px;
-            padding: 10px 18px;
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid #ffd700;
-            color: #ffd700;
+            padding: 12px;
+            font-size: 0.85rem;
+        }
+        .museum-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 5px 0;
+        }
+        .museum-label { color: #ffd700; font-weight: bold; }
+
+        .google-arts-btn {
+            display: block;
+            margin-top: 12px;
+            padding: 10px;
+            background: #ffd700;
+            color: #1a1a2e !important;
             text-decoration: none;
             border-radius: 10px;
             font-size: 0.85rem;
             font-weight: bold;
             transition: 0.3s;
+            text-align: center;
         }
-        .google-arts-btn:hover { background: #ffd700; color: #1a1a2e; }
+        .google-arts-btn:hover { background: #ffffff; transform: translateY(-2px); }
 
         .input-area { display: flex; gap: 10px; }
         
@@ -141,7 +157,6 @@
             color: white;
             font-size: 1rem;
             outline: none;
-            transition: 0.3s;
         }
         input:focus { border-color: #ffd700; background: rgba(255,255,255,0.1); }
 
@@ -153,14 +168,11 @@
             border-radius: 30px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
         }
-        button:hover { background: #ff4d6d; transform: scale(1.05); }
-        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        button:disabled { opacity: 0.5; }
 
         .loading { font-style: italic; opacity: 0.8; font-size: 0.9rem; }
 
-        /* Modal */
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center;
@@ -213,11 +225,12 @@
             `;
             msgDiv.appendChild(wrapper);
 
-            // Se houver imagem (Wikimedia)
+            // 1. Mostrar Imagem (Wikimedia)
             if (extra && extra.image) {
                 const img = document.createElement("img");
                 img.src = extra.image.imagemUrl;
                 img.className = "bot-image";
+                img.title = extra.image.titulo;
                 img.onclick = () => {
                     document.getElementById("modalImg").src = img.src;
                     document.getElementById("imgModal").style.display = "flex";
@@ -226,18 +239,31 @@
                 
                 const credit = document.createElement("div");
                 credit.style.fontSize = "0.6rem"; credit.style.marginTop = "5px";
-                credit.innerText = `📷 ${extra.image.credito || 'Fonte Aberta'}`;
+                credit.innerText = `📷 ${extra.image.credito || 'Wikimedia'}`;
                 msgDiv.appendChild(credit);
             }
 
-            // Se houver Link Google Arts
-            if (extra && extra.googleArts) {
-                const link = document.createElement("a");
-                link.href = extra.googleArts.url;
-                link.target = "_blank";
-                link.className = "google-arts-btn";
-                link.innerText = "✨ Galeria no Google Arts & Culture";
-                msgDiv.appendChild(link);
+            // 2. Mostrar Ficha de Museu (Info)
+            if (extra && extra.info && (extra.info.nascimento || extra.info.estilo)) {
+                const card = document.createElement("div");
+                card.className = "museum-card";
+                card.innerHTML = `
+                    <div class="museum-row"><span class="museum-label">Nascimento:</span> <span>${extra.info.nascimento || '---'}</span></div>
+                    <div class="museum-row"><span class="museum-label">Falecimento:</span> <span>${extra.info.morte || '---'}</span></div>
+                    <div class="museum-row"><span class="museum-label">Estilo:</span> <span>${extra.info.estilo || 'Arte'}</span></div>
+                `;
+                
+                // Adicionar o botão do Google Arts dentro da ficha
+                if (extra.googleArts) {
+                    const artsLink = document.createElement("a");
+                    artsLink.href = extra.googleArts.url;
+                    artsLink.target = "_blank";
+                    artsLink.className = "google-arts-btn";
+                    artsLink.innerText = "🚀 Explorar no Google Arts";
+                    card.appendChild(artsLink);
+                }
+                
+                msgDiv.appendChild(card);
             }
         } else {
             msgDiv.innerText = text;
@@ -259,11 +285,10 @@
             appendMessage(val, 'user');
             input.value = "";
 
-            // Loading
             const loading = document.createElement("div");
             loading.className = "msg bot loading";
             loading.id = "loader";
-            loading.innerText = "Candinho está pensando...";
+            loading.innerText = "Candinho está preparando a tela...";
             chat.appendChild(loading);
             chat.scrollTop = chat.scrollHeight;
 
@@ -278,7 +303,12 @@
             const data = await res.json();
             document.getElementById("loader").remove();
 
-            appendMessage(data.reply, 'bot', { image: data.image, googleArts: data.googleArts });
+            // Passa a resposta, a imagem, a ficha de museu e o link do Google Arts
+            appendMessage(data.reply, 'bot', { 
+                image: data.image, 
+                info: data.info,
+                googleArts: data.googleArts 
+            });
 
         } catch (e) {
             if(document.getElementById("loader")) document.getElementById("loader").remove();
@@ -296,7 +326,6 @@
         if (e.key === "Enter") handleSend();
     });
 
-    // Saudação inicial
     window.onload = () => {
         appendMessage("Olá! Sou o Candinho, seu amigo artista. O que vamos descobrir hoje? 🎨", "bot");
         input.focus();
