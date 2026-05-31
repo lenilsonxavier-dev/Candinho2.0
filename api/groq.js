@@ -1,27 +1,26 @@
 // api/groq.js
-import { bibliotecaCultural } from "../src/data/bibliotecaCultural.js";
+import { bibliotecaCultural as libLocal } from "../src/data/bibliotecaCultural.js";
 
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
-// --- FUNÇÃO AUXILIAR: BUSCA NA BIBLIOTECA JS ---
-function buscarNaBiblioteca(pergunta) {
+let bibliotecaCache = null;
+
+async function carregarBiblioteca() {
+    if (bibliotecaCache) return bibliotecaCache;
     try {
-        const texto = pergunta.toLowerCase();
-        for (const chave in bibliotecaCultural) {
-            const item = bibliotecaCultural[chave];
-            if (item.palavras_chave && item.palavras_chave.some(p => texto.includes(p.toLowerCase()))) {
-                return `${item.inicio[0]} ${item.explicacao_curta[0]}`;
-            }
-        }
-    } catch (e) { console.error("Erro na Biblioteca JS:", e); }
-    return null;
+        const res = await fetch(`${GITHUB_BASE}bibliotecaCultural.json`);
+        if (res.ok) {
+            const libGitHub = await res.json();
+            bibliotecaCache = { ...libLocal, ...libGitHub };
+        } else { bibliotecaCache = libLocal; }
+    } catch (e) { bibliotecaCache = libLocal; }
+    return bibliotecaCache;
 }
 
-// --- FUNÇÃO AUXILIAR: BUSCA NA WIKIMEDIA ---
 async function buscarNaWikimedia(pergunta) {
     try {
-        const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra"];
+        const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quadro", "pintura", "tarsila", "pablo"];
         let palavras = pergunta.toLowerCase().replace(/[?!.,]/g, "").split(/\s+/).filter(p => p.length > 2 && !stopWords.includes(p));
         let termo = palavras.slice(0, 3).join(' ');
         if (!termo) return null;
@@ -29,67 +28,71 @@ async function buscarNaWikimedia(pergunta) {
         const url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrsearch=filetype:bitmap|${encodeURIComponent(termo)}&gsrlimit=1&prop=imageinfo&iiprop=url|extmetadata`;
         const res = await fetch(url);
         const data = await res.json();
-        
         if (data.query && data.query.pages) {
             const page = Object.values(data.query.pages)[0];
             const info = page.imageinfo[0];
             return {
                 imagemUrl: info.url,
-                titulo: info.extmetadata?.ObjectName?.value || "Obra de arte",
+                titulo: info.extmetadata?.ObjectName?.value.replace(/<\/?[^>]+(>|$)/g, "") || "Obra de arte",
                 credito: "Wikimedia Commons"
             };
         }
-    } catch (e) { console.error("Erro Wikimedia:", e); }
+    } catch (e) { return null; }
     return null;
 }
 
-// --- HANDLER PRINCIPAL ---
 export default async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).json({ error: 'Método não permitido' });
 
     try {
         const { mensagem } = req.body;
-        if (!mensagem) return res.status(400).json({ reply: "Diga algo para mim! 🎨" });
+        const [imagemResult, lib] = await Promise.all([buscarNaWikimedia(mensagem), carregarBiblioteca()]);
 
-        // 1. Busca imagem e link do Google Arts
-        const [imagemResult, linkGoogleArts] = await Promise.all([
-            buscarNaWikimedia(mensagem),
-            Promise.resolve(`https://artsandculture.google.com/search?q=${encodeURIComponent(mensagem)}`)
-        ]);
+        let infoExtra = { nascimento: "", morte: "", estilo: "" };
+        let textoFinal = "";
 
-        // 2. Busca Texto (Biblioteca JS primeiro)
-        let textoFinal = buscarNaBiblioteca(mensagem);
-
-        // 3. Se não achou, pede ao Groq
-        if (!textoFinal && GROQ_API_KEY) {
-            try {
-                const responseGroq = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                    method: "POST",
-                    headers: { "Authorization": `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        model: "llama-3.1-8b-instant",
-                        messages: [
-                            { role: "system", content: "Você é o Candinho, professor de arte infantil. Diga quem foi o artista, nascimento e morte em até 3 frases. Seja fofo e use emojis 🎨." },
-                            { role: "user", content: mensagem }
-                        ]
-                    })
-                });
-                const dataIA = await responseGroq.json();
-                textoFinal = dataIA.choices?.[0]?.message?.content;
-            } catch (e) { console.error("Erro Groq:", e); }
+        // Busca na biblioteca
+        const textoBusca = mensagem.toLowerCase();
+        for (const chave in lib) {
+            const item = lib[chave];
+            if (item.palavras_chave && item.palavras_chave.some(p => textoBusca.includes(p.toLowerCase()))) {
+                textoFinal = `${item.inicio[0]} ${item.explicacao_curta[0]}`;
+                infoExtra = { nascimento: item.ano_nascimento, morte: item.ano_falecimento, estilo: item.categoria };
+                break;
+            }
         }
 
-        // 4. Resposta de segurança
-        if (!textoFinal) textoFinal = "Que pergunta legal! Não encontrei nos meus livros agora, mas vamos pesquisar juntos? 🎨";
+        // Se não achou na lib, chama o Groq pedindo os dados estruturados
+        if (!textoFinal && GROQ_API_KEY) {
+            const responseGroq = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                method: "POST",
+                headers: { "Authorization": `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    model: "llama-3.1-8b-instant",
+                    messages: [
+                        { role: "system", content: "Você é o Candinho, assistente de arte infantil. Responda quem foi o artista em 2 frases. IMPORTANTE: No final da resposta, adicione sempre os dados neste formato exato: [NASCIMENTO: ano] [MORTE: ano] [ESTILO: estilo]." },
+                        { role: "user", content: mensagem }
+                    ]
+                })
+            });
+            const dataIA = await responseGroq.json();
+            const rawTexto = dataIA.choices?.[0]?.message?.content || "";
+            
+            // Extrai os dados das etiquetas [ ]
+            infoExtra.nascimento = rawTexto.match(/\[NASCIMENTO: (.*?)\]/)?.[1] || "Desconhecido";
+            infoExtra.morte = rawTexto.match(/\[MORTE: (.*?)\]/)?.[1] || "---";
+            infoExtra.estilo = rawTexto.match(/\[ESTILO: (.*?)\]/)?.[1] || "Arte";
+            textoFinal = rawTexto.replace(/\[.*?\]/g, "").trim();
+        }
 
         return res.status(200).json({
-            reply: textoFinal,
+            reply: textoFinal || "Que pergunta legal! Vamos descobrir juntos? 🎨",
             image: imagemResult,
-            googleArts: { url: linkGoogleArts }
+            info: infoExtra,
+            googleArtsUrl: `https://artsandculture.google.com/search?q=${encodeURIComponent(mensagem)}`
         });
 
     } catch (error) {
-        console.error("Erro Geral:", error);
-        return res.status(200).json({ reply: "Tive um pequeno borrão nas minhas tintas, pode repetir? 🎨" });
+        return res.status(200).json({ reply: "Minhas tintas derramaram! 🎨" });
     }
 }
