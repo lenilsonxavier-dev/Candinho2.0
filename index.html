@@ -286,4 +286,194 @@
     </div>
 </div>
 
-<div id="imageModal" class="image-modal" onclick="closeImageMod
+<div id="imageModal" class="image-modal" onclick="closeImageModal()">
+    <img id="modalImage" src="" alt="">
+    <div class="modal-caption" id="modalCaption"></div>
+</div>
+
+<script>
+const chatDiv = document.getElementById("chat");
+const inputField = document.getElementById("pergunta");
+const sendBtn = document.getElementById("sendBtn");
+
+let ultimoArtista = null;
+let memoria = {
+    nome: localStorage.getItem("candinho_nome") || "",
+    idade: localStorage.getItem("candinho_idade") || "",
+    ultimoArtista: null
+};
+
+function openImageModal(imgSrc, caption) {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const modalCaption = document.getElementById("modalCaption");
+    modalImg.src = imgSrc;
+    modalCaption.innerText = caption || "Obra de arte";
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+}
+
+function closeImageModal() {
+    const modal = document.getElementById("imageModal");
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+}
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeImageModal();
+});
+
+function addMessageToUI(text, isUser, imageData = null, googleArtsData = null) {
+    const div = document.createElement("div");
+    div.className = `msg ${isUser ? "user" : "bot"}`;
+
+    if (isUser) {
+        const textSpan = document.createElement("span");
+        textSpan.style.whiteSpace = "pre-wrap";
+        textSpan.innerText = text;
+        div.appendChild(textSpan);
+    } else {
+        const wrapper = document.createElement("div");
+        wrapper.className = "bot-message-wrapper";
+
+        const icon = document.createElement("img");
+        icon.src = "https://i.imgur.com/UDl1c5j.png";
+        icon.alt = "Candinho";
+        icon.className = "bot-icon";
+
+        const textSpan = document.createElement("span");
+        textSpan.className = "bot-text";
+        textSpan.innerText = text;
+
+        wrapper.appendChild(icon);
+        wrapper.appendChild(textSpan);
+        div.appendChild(wrapper);
+    }
+
+    // Parte da Imagem (Wikimedia)
+    if (imageData && imageData.imagemUrl) {
+        const imgContainer = document.createElement("div");
+        imgContainer.style.marginTop = "10px";
+
+        const img = document.createElement("img");
+        img.src = imageData.imagemUrl;
+        img.alt = imageData.titulo || "Imagem da obra";
+        img.className = "bot-image";
+        img.loading = "lazy";
+        img.title = "Clique para ampliar";
+
+        img.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const highResUrl = imageData.imagemGrande || imageData.imagemUrl;
+            openImageModal(highResUrl, imageData.titulo || `Obra: ${imageData.titulo}`);
+        });
+
+        imgContainer.appendChild(img);
+
+        const creditSpan = document.createElement("div");
+        creditSpan.className = "image-credit";
+        // Crédito dinâmico vindo do backend
+        creditSpan.innerText = `📷 Fonte: ${imageData.credito || "Wikimedia"} • Clique para ampliar`;
+
+        imgContainer.appendChild(creditSpan);
+        div.appendChild(imgContainer);
+    }
+
+    // Parte do Link Google Arts (Portal Mágico)
+    if (googleArtsData && googleArtsData.url) {
+        const artsLink = document.createElement("a");
+        artsLink.href = googleArtsData.url;
+        artsLink.target = "_blank";
+        artsLink.className = "google-arts-btn";
+        artsLink.innerText = "✨ Ver galeria no Google Arts & Culture";
+        div.appendChild(artsLink);
+    }
+
+    chatDiv.appendChild(div);
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+    return div;
+}
+
+function addLoading() {
+    const div = document.createElement("div");
+    div.className = "msg bot loading";
+    div.id = "loadingMsg";
+    div.innerText = "Candinho está pensando...";
+    chatDiv.appendChild(div);
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+}
+
+function removeLoading() {
+    const el = document.getElementById("loadingMsg");
+    if (el) el.remove();
+}
+
+async function enviarParaBackend(mensagem) {
+    try {
+        const response = await fetch("/api/groq", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                mensagem: mensagem,
+                memoria: { ...memoria, ultimoArtista: ultimoArtista }
+            })
+        });
+        if (!response.ok) throw new Error(`Erro: ${response.status}`);
+        const data = await response.json();
+        
+        return {
+            texto: data.reply || "Acho que me distraí com uma pintura! Pode repetir?",
+            imagem: data.image || null,
+            googleArts: data.googleArts || null
+        };
+    } catch (error) {
+        console.error("Erro no backend:", error);
+        return {
+            texto: "Puxa, derramei minhas tintas! Tente me perguntar de novo?",
+            imagem: null,
+            googleArts: null
+        };
+    }
+}
+
+let isProcessing = false;
+async function enviar() {
+    const pergunta = inputField.value.trim();
+    if (!pergunta || isProcessing) return;
+
+    isProcessing = true;
+    sendBtn.disabled = true;
+    inputField.disabled = true;
+
+    addMessageToUI(pergunta, true);
+    inputField.value = "";
+    addLoading();
+
+    const resposta = await enviarParaBackend(pergunta);
+    removeLoading();
+    
+    // Passamos o texto, se é bot, os dados da imagem e os dados do Google Arts
+    addMessageToUI(resposta.texto, false, resposta.imagem, resposta.googleArts);
+
+    isProcessing = false;
+    sendBtn.disabled = false;
+    inputField.disabled = false;
+    inputField.focus();
+}
+
+sendBtn.addEventListener("click", enviar);
+inputField.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        enviar();
+    }
+});
+
+const saudacaoInicial = memoria.nome
+    ? `Olá, ${memoria.nome}! Sou o Candinho, seu amigo artista.`
+    : `Olá! Sou o Candinho, seu amigo artista.`;
+
+addMessageToUI(saudacaoInicial, false);
+</script>
+</body>
+</html>
