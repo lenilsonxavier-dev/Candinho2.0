@@ -21,10 +21,6 @@ export const bibliotecaCultural = {
     local_nascimento: "Roraima, Brasil",
     nacionalidade: "Brasileira"
   },
-  // ... todos os outros artistas do bloco (incluindo Tarsila, Portinari, Frida, etc.)
-  // Para economizar espaço, mantenha o objeto exatamente como você montou,
-  // apenas adicionando a linha "categoria: 'artista_visual'" ou "categoria: 'escritora'"
-  // conforme o tema.
 
   // ============================================
   // ESCRITORAS E AUTORES
