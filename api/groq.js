@@ -20,24 +20,33 @@ async function carregarBiblioteca() {
 
 async function buscarNaWikimedia(pergunta) {
     try {
-        const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quadro", "pintura", "tarsila", "pablo"];
+        // Limpa a pergunta para sobrar apenas o nome do artista/obra
+        const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu", "mostre", "uma", "pintura"];
         let palavras = pergunta.toLowerCase().replace(/[?!.,]/g, "").split(/\s+/).filter(p => p.length > 2 && !stopWords.includes(p));
-        let termo = palavras.slice(0, 3).join(' ');
+        let termo = palavras.join(' ');
         if (!termo) return null;
 
-        const url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrsearch=filetype:bitmap|${encodeURIComponent(termo)}&gsrlimit=1&prop=imageinfo&iiprop=url|extmetadata`;
+        // Busca na Wikimedia Commons com parâmetros mais flexíveis
+        const url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrsearch=${encodeURIComponent(termo)}&gsrlimit=5&prop=imageinfo&iiprop=url|extmetadata`;
+        
         const res = await fetch(url);
         const data = await res.json();
+        
         if (data.query && data.query.pages) {
-            const page = Object.values(data.query.pages)[0];
-            const info = page.imageinfo[0];
-            return {
-                imagemUrl: info.url,
-                titulo: info.extmetadata?.ObjectName?.value.replace(/<\/?[^>]+(>|$)/g, "") || "Obra de arte",
-                credito: "Wikimedia Commons"
-            };
+            // Pegamos o primeiro resultado que seja uma imagem válida (jpg ou png)
+            const pages = Object.values(data.query.pages);
+            const pageComImagem = pages.find(p => p.imageinfo && (p.title.toLowerCase().endsWith('.jpg') || p.title.toLowerCase().endsWith('.png')));
+            
+            if (pageComImagem) {
+                const info = pageComImagem.imageinfo[0];
+                return {
+                    imagemUrl: info.url,
+                    titulo: pageComImagem.title.replace("File:", "").split('.')[0],
+                    credito: "Wikimedia Commons / Domínio Público"
+                };
+            }
         }
-    } catch (e) { return null; }
+    } catch (e) { console.error("Erro Wikimedia:", e); }
     return null;
 }
 
@@ -85,14 +94,18 @@ export default async function handler(req, res) {
             textoFinal = rawTexto.replace(/\[.*?\]/g, "").trim();
         }
 
+
+        // RETORNO FINAL PARA O FRONTEND
         return res.status(200).json({
-            reply: textoFinal || "Que pergunta legal! Vamos descobrir juntos? 🎨",
-            image: imagemResult,
+            reply: textoFinal,
+            image: imagemResult, // Se for null, o site sabe lidar
             info: infoExtra,
-            googleArtsUrl: `https://artsandculture.google.com/search?q=${encodeURIComponent(mensagem)}`
+            googleArts: { 
+                url: `https://artsandculture.google.com/search?q=${encodeURIComponent(mensagem)}` 
+            }
         });
 
     } catch (error) {
-        return res.status(200).json({ reply: "Minhas tintas derramaram! 🎨" });
+        return res.status(200).json({ reply: "Ops! Minha paleta de cores caiu. Pode repetir? 🎨" });
     }
 }
