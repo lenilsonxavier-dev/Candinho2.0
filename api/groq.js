@@ -2,95 +2,59 @@
 import { bibliotecaCultural } from "../src/data/bibliotecaCultural.js";
 
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
-const EUROPEANA_API_KEY = process.env.EUROPEANA_API_KEY;
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
-// Nomes EXATOS dos arquivos no seu GitHub
 const JSON_FILES = {
-    apoio_emocional: "apoio_emocional.json",
-    arte_artista: "arte_artista.json",
-    artistas_indigenas: "artistas-indigenas-afrobrasileiros.json",
-    artistas_mulheres: "artistas-mulheres-historicas.json",
     artistas: "artistas.json",
-    obras_famosas: "obras-famosas-mundo.json",
-    obras_modernistas: "obras-modernistas-brasileiras.json",
-    historia_arte: "historia_arte.json",
-    folclore: "folclore.json",
-    saudacoes: "saudacoes.json"
+    // ... seus outros arquivos aqui
 };
 
-// ======================= BUSCA NA BIBLIOTECA CULTURAL (JS) =======================
-function buscarNaBiblioteca(pergunta) {
-    const texto = pergunta.toLowerCase();
-    // Como a bibliotecaCultural é um objeto de objetos, iteramos pelas chaves
-    for (const chave in bibliotecaCultural) {
-        const item = bibliotecaCultural[chave];
-        if (item.palavras_chave && item.palavras_chave.some(p => texto.includes(p.toLowerCase()))) {
-            return {
-                texto: `${item.inicio[0]} ${item.explicacao_curta[0]}`,
-                nascimento: item.ano_nascimento,
-                morte: item.ano_falecimento
-            };
-        }
-    }
-    return null;
-}
-
-// ======================= BUSCA NOS JSONs (GITHUB) =======================
-async function buscarNosJSONs(pergunta) {
-    const texto = pergunta.toLowerCase();
-    try {
-        const response = await fetch(GITHUB_BASE + "artistas.json");
-        const artistas = await response.json();
-        for (const nome in artistas) {
-            if (texto.includes(nome.toLowerCase())) {
-                return artistas[nome].explicacao_infantil || artistas[nome].descricao;
-            }
-        }
-    } catch (e) { return null; }
-    return null;
-}
-
-// ======================= BUSCA NA EUROPEANA =======================
-async function buscarNaEuropeana(pergunta) {
-    if (!EUROPEANA_API_KEY) return null;
+// ======================= FUNÇÃO GOOGLE ARTS (PORTAL MÁGICO) =======================
+function gerarLinkGoogleArts(pergunta) {
+    const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "mostre", "quando", "nasceu", "morreu"];
+    let palavras = pergunta.toLowerCase().replace(/[?!.,]/g, "").split(/\s+/).filter(p => p.length > 2 && !stopWords.includes(p));
+    let termo = palavras.slice(0, 3).join(' ');
     
-    const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "mostre", "quando", "nasceu"];
+    if (!termo) return null;
+    
+    return {
+        nome: "Google Arts & Culture",
+        url: `https://artsandculture.google.com/search?q=${encodeURIComponent(termo)}`
+    };
+}
+
+// ======================= BUSCA NA WIKIMEDIA (IMAGEM NO CHAT) =======================
+async function buscarNaWikimedia(pergunta) {
+    const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "mostre"];
     let palavras = pergunta.toLowerCase().replace(/[?!.,]/g, "").split(/\s+/).filter(p => p.length > 2 && !stopWords.includes(p));
     let termo = palavras.slice(0, 3).join(' ');
 
     if (!termo) return null;
 
     try {
-        // AJUSTE NA QUERY: 
-        // 1. Buscamos pelo termo + "painting"
-        // 2. Filtramos para evitar o provedor "Istituto Luce" (que traz fotos jornalísticas)
-        // 3. Exigimos que o que venha seja do tipo IMAGE e tenha alta qualidade
-        const query = `"${encodeURIComponent(termo)}" AND (WHAT:painting OR WHAT:artwork)`;
-        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${query}&qf=TYPE:IMAGE&qf=REUSABILITY:open&rows=1&profile=portal`;
-        
-        const response = await fetch(url);
+        const searchUrl = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrsearch=filetype:bitmap|drawing|${encodeURIComponent(termo)}&gsrlimit=1&prop=imageinfo&iiprop=url|extmetadata&iilimit=1`;
+        const response = await fetch(searchUrl);
         const data = await response.json();
 
-        if (data.items && data.items.length > 0) {
-            const item = data.items[0];
-            
-            // Verificamos se o provedor não é um arquivo de notícias
-            const provedor = item.dataProvider ? item.dataProvider[0] : "";
-            if (provedor.includes("Luce") || provedor.includes("News")) {
-                // Se for notícia, tentamos pegar o segundo resultado ou ignoramos
-                return null; 
+        if (data.query && data.query.pages) {
+            const pageId = Object.keys(data.query.pages)[0];
+            const page = data.query.pages[pageId];
+            if (page.imageinfo && page.imageinfo[0]) {
+                const info = page.imageinfo[0];
+                const meta = info.extmetadata;
+                return {
+                    imagemUrl: info.url,
+                    titulo: meta && meta.ObjectName ? meta.ObjectName.value : "Obra de arte",
+                    credito: "Wikimedia Commons"
+                };
             }
-
-            return {
-                imagemUrl: item.edmPreview ? item.edmPreview[0] : null,
-                titulo: item.title ? item.title[0] : "Obra de arte",
-                credito: item.dataProvider ? item.dataProvider[0] : "Europeana"
-            };
         }
     } catch (e) { return null; }
     return null;
 }
+
+// ... (mantenha suas funções buscarNaBiblioteca e buscarNosJSONs aqui) ...
+
 // ======================= HANDLER PRINCIPAL =======================
 export default async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).json({ error: 'Método não permitido' });
@@ -98,16 +62,14 @@ export default async function handler(req, res) {
     try {
         const { mensagem } = req.body;
 
-        // 1. Busca imagem na Europeana (sempre tenta)
-        const europeana = await buscarNaEuropeana(mensagem);
+        // 1. Busca imagem da Wikimedia (para o chat) e o link do Google Arts (para explorar)
+        const imagemResult = await buscarNaWikimedia(mensagem);
+        const linkGoogleArts = gerarLinkGoogleArts(mensagem);
 
-        // 2. Busca Texto na Biblioteca JS
-        const biblioteca = buscarNaBiblioteca(mensagem);
-        
-        // 3. Busca Texto nos JSONs (se não achou no JS)
-        let textoFinal = biblioteca ? biblioteca.texto : await buscarNosJSONs(mensagem);
+        // 2. Busca Texto (Biblioteca ou JSONs)
+        let textoFinal = buscarNaBiblioteca(mensagem)?.texto || await buscarNosJSONs(mensagem);
 
-        // 4. Se não achou em lugar nenhum, usa o Groq (IA)
+        // 3. Fallback IA Groq
         if (!textoFinal && GROQ_API_KEY) {
             const responseGroq = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
@@ -126,14 +88,11 @@ export default async function handler(req, res) {
 
         // 5. Retorna para o Front-end
         return res.status(200).json({
-            reply: textoFinal || "Que legal! Vamos aprender mais? 🎨",
-            image: europeana ? {
-                imagemUrl: europeana.imagemUrl,
-                titulo: europeana.titulo,
-                credito: europeana.credito
-            } : null
+            reply: textoFinal,
+            image: imagemResult,
+            googleArts: linkGoogleArts // Enviando o link aqui!
         });
-
+        
     } catch (error) {
         return res.status(200).json({ reply: "Tive um probleminha, mas já estou bem! 🎨" });
     }
