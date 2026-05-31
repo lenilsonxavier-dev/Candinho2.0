@@ -64,45 +64,36 @@ async function carregarTodosJSONs() {
 async function buscarNaEuropeana(pergunta) {
     if (!EUROPEANA_API_KEY || EUROPEANA_API_KEY === "SUA_CHAVE_AQUI") return null;
     
-    // Limpeza de busca: foca no que importa
-    const palavrasIgnorar = ["o que é", "quem foi", "fale sobre", "como", "qual", "onde", "quando", "me", "uma", "foto", "imagem"];
-    let palavras = pergunta.toLowerCase().split(/\s+/).filter(p => p.length > 3 && !palavrasIgnorar.includes(p));
-    
-    const query = encodeURIComponent(palavras.slice(0, 3).join(' '));
-    if (!query) return null;
+    // Limpamos a pergunta para pegar só o nome do artista
+    const stopWords = ["quem", "foi", "fale", "sobre", "quando", "nasceu", "morreu", "quem foi", "o que e"];
+    let palavras = pergunta.toLowerCase().split(/\s+/).filter(p => p.length > 2 && !stopWords.includes(p));
+    let busca = palavras.slice(0, 3).join(' ');
+
+    if (!busca) return null;
 
     try {
-        // Mudança crucial: wskey na URL e profile portal para imagens seguras
-        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${query}&rows=1&profile=portal&qf=TYPE:IMAGE`;
+        // Buscamos especificamente por "pintura" do artista para ser mais certeiro
+        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${encodeURIComponent(busca + " painting")}&rows=1&profile=portal&qf=TYPE:IMAGE&reusability=open`;
         
         const response = await fetch(url);
         const data = await response.json();
 
         if (data.items && data.items.length > 0) {
             const item = data.items[0];
-            
-            // Prioridade: Preview (hospedado pela Europeana, mais seguro) > Original
             let img = (item.edmPreview && item.edmPreview[0]) ? item.edmPreview[0] : 
                       (item.edmIsShownBy && item.edmIsShownBy[0]) ? item.edmIsShownBy[0] : null;
 
             if (!img) return null;
 
             return {
-                texto: `Olha que legal essa obra que eu encontrei: "${item.title ? item.title[0] : 'Sem título'}"! 🎨`,
-                imagem: {
-                    imagemUrl: img,
-                    imagemGrande: img,
-                    titulo: item.title ? item.title[0] : "Obra de arte",
-                    credito: item.dcCreator ? item.dcCreator[0] : "Europeana"
-                }
+                imagemUrl: img,
+                titulo: item.title ? item.title[0] : "Obra de arte",
+                credito: item.dcCreator ? item.dcCreator[0] : "Europeana"
             };
         }
-    } catch (e) {
-        console.error("Erro Europeana:", e);
-    }
+    } catch (e) { return null; }
     return null;
 }
-
 // ======================= AUXILIARES DE BUSCA =======================
 function responderConceitoBasico(pergunta) {
     const texto = pergunta.toLowerCase();
@@ -129,7 +120,7 @@ function buscarContextoLocal(pergunta, data) {
     return null;
 }
 
-// ======================= HANDLER PRINCIPAL =======================
+// ======================= HANDLER PRINCIPAL (VERSÃO COMPLETA) =======================
 export default async function handler(req, res) {
     res.setHeader("Cache-Control", "no-store");
     if (req.method !== "POST") return res.status(405).json({ error: "Método não permitido" });
@@ -138,44 +129,55 @@ export default async function handler(req, res) {
         const { mensagem, memoria = {} } = req.body || {};
         const data = await carregarTodosJSONs();
 
-        // 1. Prioridade: Texto (Local ou Conceitos)
+        // 1. Tenta buscar a IMAGEM na Europeana (guardamos o resultado numa variável)
+        let europeanaResult = await buscarNaEuropeana(mensagem);
+
+        // 2. Tenta buscar o TEXTO nos seus JSONs locais
         let textoResposta = buscarContextoLocal(mensagem, data) || responderConceitoBasico(mensagem);
 
-        // 2. Busca Imagem (Independente de ter achado o texto local)
-        let europeana = await buscarNaEuropeana(mensagem);
-
-        // 3. Monta a Resposta Final
-        if (europeana) {
-            return res.status(200).json({
-                reply: textoResposta || europeana.texto,
-                image: europeana.imagem
-            });
+        // 3. Se não achou o texto nos JSONs, pede para a IA (Groq) gerar a biografia
+        if (!textoResposta && GROQ_API_KEY) {
+            try {
+                const responseGroq = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                    method: "POST",
+                    headers: { 
+                        "Authorization": `Bearer ${GROQ_API_KEY}`, 
+                        "Content-Type": "application/json" 
+                    },
+                    body: JSON.stringify({
+                        model: "llama-3.1-8b-instant",
+                        messages: [
+                            { 
+                                role: "system", 
+                                content: "Você é o Candinho, um professor de arte para crianças. Se perguntarem de um artista, diga quem foi, quando nasceu e quando morreu. Seja muito breve (máximo 3 frases) e use emojis 🎨." 
+                            },
+                            { role: "user", content: mensagem }
+                        ],
+                        temperature: 0.5
+                    })
+                });
+                const dataIA = await responseGroq.json();
+                textoResposta = dataIA?.choices?.[0]?.message?.content;
+            } catch (errIA) {
+                console.error("Erro no Groq:", errIA);
+            }
         }
 
-        if (textoResposta) {
-            return res.status(200).json({ reply: textoResposta });
+        // 4. Se nada funcionou, resposta padrão
+        if (!textoResposta) {
+            textoResposta = "Que interessante! Não encontrei detalhes agora, mas essa busca me deixou curioso! 🎨";
         }
 
-        // 4. Fallback IA Groq
-        if (GROQ_API_KEY) {
-            const responseGroq = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                method: "POST",
-                headers: { "Authorization": `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    model: "llama-3.1-8b-instant",
-                    messages: [
-                        { role: "system", content: "Você é o Candinho, assistente de arte infantil. Responda em até 2 frases e use um emoji 🎨" },
-                        { role: "user", content: mensagem }
-                    ]
-                })
-            });
-            const dataIA = await responseGroq.json();
-            return res.status(200).json({ reply: dataIA?.choices?.[0]?.message?.content || "Conte-me mais sobre arte! 🎨" });
-        }
-
-        return res.status(200).json({ reply: "Não entendi, mas vamos desenhar? 🎨" });
+        // 5. RESPOSTA FINAL (Envia TEXTO e IMAGEM juntos)
+        return res.status(200).json({
+            reply: textoResposta,
+            image: europeanaResult ? europeanaResult.imagem : null
+        });
 
     } catch (err) {
-        return res.status(200).json({ reply: "Minha paleta de cores caiu! 🎨 Pode repetir?" });
+        console.error("Erro Geral no Handler:", err);
+        return res.status(200).json({ 
+            reply: "Ops! Meus pincéis caíram. Pode repetir a pergunta? 🎨" 
+        });
     }
 }
