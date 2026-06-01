@@ -1,9 +1,8 @@
-// api/groq.js (com thumbnails e filtro de formatos)
+// api/groq.js – APENAS Wikimedia Commons, com thumbnails compatíveis e filtro de formato
 const { bibliotecaCultural: libLocal } = require("../src/data/bibliotecaCultural.js");
 
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
-const PEXELS_API_KEY = process.env.PEXELS_API_KEY;
 
 let bibliotecaCache = null;
 
@@ -43,10 +42,10 @@ function extrairNomeArtista(mensagem) {
     return nome || mensagem.slice(0, 40);
 }
 
-// Função melhorada: usa thumbnails JPEG e filtra formatos inválidos
+// Busca exclusiva no Wikimedia Commons com thumbnail otimizado e filtro de formato
 async function buscarWikimedia(artistaNome) {
     try {
-        // 1. Busca por "artista painting" – prioriza pinturas
+        // 1. Busca específica por "artista painting" (prioriza pinturas)
         let termoBusca = `${artistaNome} painting`;
         let url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(termoBusca)}&gsrlimit=8&prop=imageinfo&iiprop=url|mime|mediatype&iiurlwidth=800`;
 
@@ -55,24 +54,20 @@ async function buscarWikimedia(artistaNome) {
 
         if (data.query && data.query.pages) {
             let pages = Object.values(data.query.pages);
-            
-            // Filtra apenas páginas que são imagens (mediatype = BITMAP ou DRAWING) e com mime tipo de imagem comum
+            // Filtra apenas imagens compatíveis (BITMAP ou DRAWING + mime jpeg/png/gif/webp)
             let imagems = pages.filter(p => {
                 if (!p.imageinfo || !p.imageinfo[0]) return false;
                 const info = p.imageinfo[0];
                 const mime = (info.mime || "").toLowerCase();
                 const media = (info.mediatype || "").toUpperCase();
-                // Aceita: JPEG, PNG, GIF, WEBP, SVG (mas SVG pode não ser compatível, vamos preferir BITMAP)
-                return (media === "BITMAP" || media === "DRAWING") && 
+                return (media === "BITMAP" || media === "DRAWING") &&
                        (mime.includes("jpeg") || mime.includes("jpg") || mime.includes("png") || mime.includes("gif") || mime.includes("webp"));
             });
 
             if (imagems.length > 0) {
-                // Pega a primeira imagem válida
                 const imgPage = imagems[0];
                 const info = imgPage.imageinfo[0];
-                // O thumbnail gerado pelo iiurlwidth está em info.thumburl (se disponível)
-                let imgUrl = info.thumburl || info.url;
+                const imgUrl = info.thumburl || info.url; // usa thumburl sempre que possível
                 return {
                     imagemUrl: imgUrl,
                     titulo: imgPage.title.replace("File:", "").split('.')[0],
@@ -80,19 +75,19 @@ async function buscarWikimedia(artistaNome) {
                 };
             }
 
-            // Se não achou imagem com filtro, tenta sem filtro de media mas ainda usando thumburl
+            // Fallback: qualquer thumbnail disponível (evita quebrar)
             let anyPage = pages.find(p => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].thumburl);
             if (anyPage) {
                 const info = anyPage.imageinfo[0];
                 return {
                     imagemUrl: info.thumburl,
                     titulo: anyPage.title.replace("File:", "").split('.')[0],
-                    credito: "Wikimedia Commons (obra de arte)"
+                    credito: "Wikimedia Commons"
                 };
             }
         }
 
-        // 2. Fallback: busca só pelo nome do artista, com mesma técnica
+        // 2. Segunda tentativa: busca mais genérica
         url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(artistaNome)}&gsrlimit=5&prop=imageinfo&iiprop=url|mime|mediatype&iiurlwidth=800`;
         res = await fetch(url);
         data = await res.json();
@@ -103,8 +98,8 @@ async function buscarWikimedia(artistaNome) {
                 const info = p.imageinfo[0];
                 const mime = (info.mime || "").toLowerCase();
                 const media = (info.mediatype || "").toUpperCase();
-                return (media === "BITMAP" || media === "DRAWING") && 
-                       (mime.includes("jpeg") || mime.includes("jpg") || mime.includes("png") || mime.includes("gif") || mime.includes("webp"));
+                return (media === "BITMAP" || media === "DRAWING") &&
+                       (mime.includes("jpeg") || mime.includes("jpg") || mime.includes("png"));
             });
             if (!imgPage) imgPage = pages.find(p => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].thumburl);
             if (imgPage) {
@@ -122,30 +117,8 @@ async function buscarWikimedia(artistaNome) {
     return null;
 }
 
-// Fallback Pexels (caso Wikimedia não encontre)
-async function buscarPexels(artistaNome) {
-    if (!PEXELS_API_KEY) return null;
-    try {
-        const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(artistaNome + " painting art")}&per_page=1&orientation=square`;
-        const res = await fetch(url, { headers: { Authorization: PEXELS_API_KEY } });
-        const data = await res.json();
-        if (data.photos && data.photos.length > 0) {
-            const foto = data.photos[0];
-            return {
-                imagemUrl: foto.src.medium,
-                titulo: `Imagem de ${artistaNome}`,
-                credito: `${foto.photographer} / Pexels`
-            };
-        }
-    } catch(e) {}
-    return null;
-}
-
-async function buscarImagem(artistaNome) {
-    let img = await buscarWikimedia(artistaNome);
-    if (!img && PEXELS_API_KEY) img = await buscarPexels(artistaNome);
-    return img;
-}
+// Nada de Pexels – apenas Wikimedia
+const buscarImagem = buscarWikimedia;
 
 module.exports = async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).json({ error: 'Método não permitido' });
@@ -156,6 +129,7 @@ module.exports = async function handler(req, res) {
         const textoBusca = mensagem.toLowerCase();
         let textoFinal = "";
 
+        // 1. Biblioteca cultural
         for (const chave in lib) {
             const item = lib[chave];
             if (item.palavras_chave && item.palavras_chave.some(p => textoBusca.includes(p.toLowerCase()))) {
@@ -164,6 +138,7 @@ module.exports = async function handler(req, res) {
             }
         }
 
+        // 2. Groq (IA) se necessário
         if (!textoFinal && GROQ_API_KEY) {
             const responseGroq = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
@@ -185,6 +160,7 @@ module.exports = async function handler(req, res) {
             textoFinal = dataIA.choices?.[0]?.message?.content?.trim() || "";
         }
 
+        // 3. Busca imagem sob demanda (só Wikimedia)
         let imagemResult = null;
         if (pediuImagem(mensagem)) {
             const nomeArtista = extrairNomeArtista(mensagem);
