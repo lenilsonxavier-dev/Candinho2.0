@@ -1,4 +1,4 @@
-// api/groq.js (CommonJS – com URLs diretas de imagem)
+// api/groq.js (com thumbnails e filtro de formatos)
 const { bibliotecaCultural: libLocal } = require("../src/data/bibliotecaCultural.js");
 
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
@@ -43,68 +43,75 @@ function extrairNomeArtista(mensagem) {
     return nome || mensagem.slice(0, 40);
 }
 
-// Busca APENAS no Wikimedia Commons (obras de arte)
+// Função melhorada: usa thumbnails JPEG e filtra formatos inválidos
 async function buscarWikimedia(artistaNome) {
     try {
         // 1. Busca por "artista painting" – prioriza pinturas
         let termoBusca = `${artistaNome} painting`;
-        let url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(termoBusca)}&gsrlimit=8&prop=imageinfo&iiprop=url&iiurlwidth=800`;
+        let url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(termoBusca)}&gsrlimit=8&prop=imageinfo&iiprop=url|mime|mediatype&iiurlwidth=800`;
 
         let res = await fetch(url);
         let data = await res.json();
 
         if (data.query && data.query.pages) {
             let pages = Object.values(data.query.pages);
-            // Procura uma página que tenha URL de imagem direta (termina com .jpg, .png, etc.)
-            let melhor = null;
-            for (let p of pages) {
-                if (p.imageinfo && p.imageinfo[0]) {
-                    let imgUrl = p.imageinfo[0].url;
-                    // Garante que é um link direto para a imagem (não uma página)
-                    if (imgUrl && (imgUrl.endsWith('.jpg') || imgUrl.endsWith('.png') || imgUrl.endsWith('.jpeg') || imgUrl.includes('/thumb/'))) {
-                        // Se for thumbnail, pega a versão original ou maior
-                        if (imgUrl.includes('/thumb/')) {
-                            imgUrl = imgUrl.replace(/\/thumb\/(.*?)\/\d+px-(.*)$/, '/$1');
-                        }
-                        melhor = p;
-                        break;
-                    }
-                }
-            }
-            if (!melhor) {
-                melhor = pages.find(p => p.imageinfo && p.imageinfo[0]);
-            }
-            if (melhor) {
-                let info = melhor.imageinfo[0];
-                let imgUrl = info.url;
-                // Se ainda for thumbnail, extrai a original (tira /thumb/...)
-                if (imgUrl.includes('/thumb/')) {
-                    imgUrl = imgUrl.replace(/\/thumb\/(.*?)\/\d+px-(.*)$/, '/$1');
-                }
+            
+            // Filtra apenas páginas que são imagens (mediatype = BITMAP ou DRAWING) e com mime tipo de imagem comum
+            let imagems = pages.filter(p => {
+                if (!p.imageinfo || !p.imageinfo[0]) return false;
+                const info = p.imageinfo[0];
+                const mime = (info.mime || "").toLowerCase();
+                const media = (info.mediatype || "").toUpperCase();
+                // Aceita: JPEG, PNG, GIF, WEBP, SVG (mas SVG pode não ser compatível, vamos preferir BITMAP)
+                return (media === "BITMAP" || media === "DRAWING") && 
+                       (mime.includes("jpeg") || mime.includes("jpg") || mime.includes("png") || mime.includes("gif") || mime.includes("webp"));
+            });
+
+            if (imagems.length > 0) {
+                // Pega a primeira imagem válida
+                const imgPage = imagems[0];
+                const info = imgPage.imageinfo[0];
+                // O thumbnail gerado pelo iiurlwidth está em info.thumburl (se disponível)
+                let imgUrl = info.thumburl || info.url;
                 return {
                     imagemUrl: imgUrl,
-                    titulo: melhor.title.replace("File:", "").split('.')[0],
+                    titulo: imgPage.title.replace("File:", "").split('.')[0],
+                    credito: "Wikimedia Commons (obra de arte)"
+                };
+            }
+
+            // Se não achou imagem com filtro, tenta sem filtro de media mas ainda usando thumburl
+            let anyPage = pages.find(p => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].thumburl);
+            if (anyPage) {
+                const info = anyPage.imageinfo[0];
+                return {
+                    imagemUrl: info.thumburl,
+                    titulo: anyPage.title.replace("File:", "").split('.')[0],
                     credito: "Wikimedia Commons (obra de arte)"
                 };
             }
         }
 
-        // 2. Fallback: busca só pelo nome do artista
-        url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(artistaNome)}&gsrlimit=5&prop=imageinfo&iiprop=url&iiurlwidth=800`;
+        // 2. Fallback: busca só pelo nome do artista, com mesma técnica
+        url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(artistaNome)}&gsrlimit=5&prop=imageinfo&iiprop=url|mime|mediatype&iiurlwidth=800`;
         res = await fetch(url);
         data = await res.json();
         if (data.query && data.query.pages) {
             let pages = Object.values(data.query.pages);
-            let page = pages.find(p => p.imageinfo && p.imageinfo[0]);
-            if (page) {
-                let info = page.imageinfo[0];
-                let imgUrl = info.url;
-                if (imgUrl.includes('/thumb/')) {
-                    imgUrl = imgUrl.replace(/\/thumb\/(.*?)\/\d+px-(.*)$/, '/$1');
-                }
+            let imgPage = pages.find(p => {
+                if (!p.imageinfo || !p.imageinfo[0]) return false;
+                const info = p.imageinfo[0];
+                const mime = (info.mime || "").toLowerCase();
+                const media = (info.mediatype || "").toUpperCase();
+                return (media === "BITMAP" || media === "DRAWING") && 
+                       (mime.includes("jpeg") || mime.includes("jpg") || mime.includes("png") || mime.includes("gif") || mime.includes("webp"));
+            });
+            if (!imgPage) imgPage = pages.find(p => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].thumburl);
+            if (imgPage) {
+                const info = imgPage.imageinfo[0];
                 return {
-                    imagemUrl: imgUrl,
-                    titulo: page.title.replace("File:", "").split('.')[0],
+                    imagemUrl: info.thumburl || info.url,
+                    titulo: imgPage.title.replace("File:", "").split('.')[0],
                     credito: "Wikimedia Commons"
                 };
             }
@@ -115,7 +122,7 @@ async function buscarWikimedia(artistaNome) {
     return null;
 }
 
-// Fallback Pexels (se não achar no Wikimedia)
+// Fallback Pexels (caso Wikimedia não encontre)
 async function buscarPexels(artistaNome) {
     if (!PEXELS_API_KEY) return null;
     try {
