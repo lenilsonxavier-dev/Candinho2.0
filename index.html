@@ -9,7 +9,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body { 
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
+            font-family: 'Segoe UI', system-ui, sans-serif; 
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: white; 
             padding: 15px; 
@@ -123,42 +123,6 @@
             opacity: 0.8;
         }
 
-        /* --- ESTILOS DA FICHA DE MUSEU --- */
-        .museum-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 15px;
-            margin-top: 12px;
-            padding: 12px;
-            font-size: 0.85rem;
-        }
-        .museum-row {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 5px 0;
-        }
-        .museum-label { color: #ffd700; font-weight: bold; }
-
-   .google-arts-btn {
-    display: block;
-    margin-top: 15px;
-    padding: 12px;
-    background: #FFD700; /* Amarelo Ouro */
-    color: #000000 !important; /* Texto Preto para ler bem */
-    text-decoration: none;
-    border-radius: 15px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    transition: 0.3s;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-.google-arts-btn:hover {
-    background: #FFFFFF;
-    transform: scale(1.02);
-}
-
         .input-area { display: flex; gap: 10px; }
         
         input {
@@ -225,7 +189,7 @@
     const btn = document.getElementById("sendBtn");
     let isProcessing = false;
 
-    // Função para mostrar mensagens na tela
+    // Função para mostrar mensagens na tela (sem cards)
     function appendMessage(text, side, extra = null) {
         const msgDiv = document.createElement("div");
         msgDiv.className = `msg ${side}`;
@@ -239,7 +203,7 @@
             `;
             msgDiv.appendChild(wrapper);
 
-            // 1. Mostrar Imagem (Wikimedia) se ela existir
+            // Apenas exibe a imagem (se existir) - sem cards de museu ou botões
             if (extra && extra.image && extra.image.imagemUrl) {
                 const img = document.createElement("img");
                 img.src = extra.image.imagemUrl;
@@ -256,29 +220,6 @@
                 credit.innerText = `📷 Fonte: ${extra.image.credito || 'Wikimedia'}`;
                 msgDiv.appendChild(credit);
             }
-
-            // 2. Mostrar Ficha de Museu (Info) se houver dados
-            if (extra && extra.info) {
-                const card = document.createElement("div");
-                card.className = "museum-card";
-                card.innerHTML = `
-                    <div class="museum-row"><span class="museum-label">Nascimento:</span> <span>${extra.info.nascimento || '---'}</span></div>
-                    <div class="museum-row"><span class="museum-label">Falecimento:</span> <span>${extra.info.morte || '---'}</span></div>
-                    <div class="museum-row"><span class="museum-label">Estilo:</span> <span>${extra.info.estilo || 'Arte'}</span></div>
-                `;
-                
-                // 3. Adicionar o botão do Google Arts se o link existir
-                if (extra.googleArts && extra.googleArts.url) {
-                    const artsLink = document.createElement("a");
-                    artsLink.href = extra.googleArts.url;
-                    artsLink.target = "_blank";
-                    artsLink.className = "google-arts-btn";
-                    artsLink.innerText = "🚀 Explorar no Google Arts";
-                    card.appendChild(artsLink);
-                }
-                
-                msgDiv.appendChild(card);
-            }
         } else {
             msgDiv.innerText = text;
         }
@@ -287,7 +228,6 @@
         chat.scrollTop = chat.scrollHeight;
     }
 
-    // Função de envio
     async function handleSend() {
         const val = input.value.trim();
         if (!val || isProcessing) return;
@@ -300,7 +240,6 @@
             appendMessage(val, 'user');
             input.value = "";
 
-            // Criar balão de carregamento
             const loading = document.createElement("div");
             loading.className = "msg bot loading";
             loading.id = "loader";
@@ -318,15 +257,12 @@
 
             const data = await res.json();
             
-            // Remover balão de carregamento
             const loader = document.getElementById("loader");
             if (loader) loader.remove();
 
-            // Adicionar resposta final do Candinho
+            // Exibe apenas a mensagem e a imagem (se existir) – cards removidos
             appendMessage(data.reply, 'bot', { 
-                image: data.image, 
-                info: data.info,
-                googleArts: data.googleArts 
+                image: data.image   // info e googleArts são ignorados
             });
 
         } catch (e) {
@@ -342,13 +278,11 @@
         }
     }
 
-    // Eventos de clique e teclado
     btn.addEventListener("click", handleSend);
     input.addEventListener("keydown", (e) => {
         if (e.key === "Enter") handleSend();
     });
 
-    // Boas-vindas
     window.onload = () => {
         appendMessage("Olá! Sou o Candinho, seu amigo artista. O que vamos descobrir hoje? 🎨", "bot");
         input.focus();
