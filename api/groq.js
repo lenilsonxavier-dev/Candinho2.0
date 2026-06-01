@@ -6,47 +6,41 @@ const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
 let bibliotecaCache = null;
 
+// Carrega os dados do GitHub para somar com a biblioteca local
 async function carregarBiblioteca() {
     if (bibliotecaCache) return bibliotecaCache;
     try {
         const res = await fetch(`${GITHUB_BASE}bibliotecaCultural.json`);
-        if (res.ok) {
-            const libGitHub = await res.json();
-            bibliotecaCache = { ...libLocal, ...libGitHub };
-        } else { bibliotecaCache = libLocal; }
+        const libGitHub = res.ok ? await res.json() : {};
+        bibliotecaCache = { ...libLocal, ...libGitHub };
     } catch (e) { bibliotecaCache = libLocal; }
     return bibliotecaCache;
 }
 
+// Busca na Wikimedia Commons (Imagens)
 async function buscarNaWikimedia(pergunta) {
     try {
-        // Limpa a pergunta para sobrar apenas o nome do artista/obra
-        const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu", "mostre", "uma", "pintura"];
+        const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu"];
         let palavras = pergunta.toLowerCase().replace(/[?!.,]/g, "").split(/\s+/).filter(p => p.length > 2 && !stopWords.includes(p));
         let termo = palavras.join(' ');
         if (!termo) return null;
 
-        // Busca na Wikimedia Commons com parâmetros mais flexíveis
-        const url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrsearch=${encodeURIComponent(termo)}&gsrlimit=5&prop=imageinfo&iiprop=url|extmetadata`;
-        
+        const url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrsearch=${encodeURIComponent(termo)}&gsrlimit=3&prop=imageinfo&iiprop=url|extmetadata`;
         const res = await fetch(url);
         const data = await res.json();
         
         if (data.query && data.query.pages) {
-            // Pegamos o primeiro resultado que seja uma imagem válida (jpg ou png)
             const pages = Object.values(data.query.pages);
-            const pageComImagem = pages.find(p => p.imageinfo && (p.title.toLowerCase().endsWith('.jpg') || p.title.toLowerCase().endsWith('.png')));
-            
-            if (pageComImagem) {
-                const info = pageComImagem.imageinfo[0];
+            const imagePage = pages.find(p => p.imageinfo && (p.title.match(/\.(jpg|jpeg|png)$/i)));
+            if (imagePage) {
                 return {
-                    imagemUrl: info.url,
-                    titulo: pageComImagem.title.replace("File:", "").split('.')[0],
-                    credito: "Wikimedia Commons / Domínio Público"
+                    imagemUrl: imagePage.imageinfo[0].url,
+                    titulo: imagePage.title.replace("File:", "").split('.')[0],
+                    credito: "Wikimedia Commons"
                 };
             }
         }
-    } catch (e) { console.error("Erro Wikimedia:", e); }
+    } catch (e) { return null; }
     return null;
 }
 
@@ -55,13 +49,13 @@ export default async function handler(req, res) {
 
     try {
         const { mensagem } = req.body;
-        const [imagemResult, lib] = await Promise.all([buscarNaWikimedia(mensagem), carregarBiblioteca()]);
-
-        let infoExtra = { nascimento: "", morte: "", estilo: "" };
-        let textoFinal = "";
-
-        // Busca na biblioteca
+        const lib = await carregarBiblioteca();
         const textoBusca = mensagem.toLowerCase();
+        
+        let textoFinal = "";
+        let infoExtra = { nascimento: "", morte: "", estilo: "" };
+
+        // 1. PRIORIDADE TOTAL: Busca na sua Biblioteca Cultural
         for (const chave in lib) {
             const item = lib[chave];
             if (item.palavras_chave && item.palavras_chave.some(p => textoBusca.includes(p.toLowerCase()))) {
@@ -71,7 +65,7 @@ export default async function handler(req, res) {
             }
         }
 
-        // Se não achou na lib, chama o Groq pedindo os dados estruturados
+        // 2. Se não achou na biblioteca, chama a IA com REGRAS RÍGIDAS
         if (!textoFinal && GROQ_API_KEY) {
             const responseGroq = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
@@ -79,33 +73,35 @@ export default async function handler(req, res) {
                 body: JSON.stringify({
                     model: "llama-3.1-8b-instant",
                     messages: [
-                        { role: "system", content: "Você é o Candinho, assistente de arte infantil. Responda quem foi o artista em 2 frases. IMPORTANTE: No final da resposta, adicione sempre os dados neste formato exato: [NASCIMENTO: ano] [MORTE: ano] [ESTILO: estilo]." },
+                        { 
+                            role: "system", 
+                            content: "Você é o Candinho, um professor de arte para crianças de 10 anos. Seja gentil, claro e breve (máximo 3 frases). NUNCA repita a mesma frase. Se não souber, diga que não sabe. No final, use SEMPRE este formato: [NASCIMENTO: ano] [MORTE: ano] [ESTILO: estilo]." 
+                        },
                         { role: "user", content: mensagem }
-                    ]
+                    ],
+                    temperature: 0.4, // Menor temperatura = IA menos "doida"
+                    max_tokens: 200
                 })
             });
             const dataIA = await responseGroq.json();
             const rawTexto = dataIA.choices?.[0]?.message?.content || "";
             
-            // Extrai os dados das etiquetas [ ]
-            infoExtra.nascimento = rawTexto.match(/\[NASCIMENTO: (.*?)\]/)?.[1] || "Desconhecido";
+            infoExtra.nascimento = rawTexto.match(/\[NASCIMENTO: (.*?)\]/)?.[1] || "---";
             infoExtra.morte = rawTexto.match(/\[MORTE: (.*?)\]/)?.[1] || "---";
             infoExtra.estilo = rawTexto.match(/\[ESTILO: (.*?)\]/)?.[1] || "Arte";
             textoFinal = rawTexto.replace(/\[.*?\]/g, "").trim();
         }
 
+        const imagemResult = await buscarNaWikimedia(mensagem);
 
-        // RETORNO FINAL PARA O FRONTEND
         return res.status(200).json({
-            reply: textoFinal,
-            image: imagemResult, // Se for null, o site sabe lidar
+            reply: textoFinal || "Que pergunta curiosa! Vamos descobrir juntos? 🎨",
+            image: imagemResult,
             info: infoExtra,
-            googleArts: { 
-                url: `https://artsandculture.google.com/search?q=${encodeURIComponent(mensagem)}` 
-            }
+            googleArts: { url: `https://artsandculture.google.com/search?q=${encodeURIComponent(mensagem)}` }
         });
 
     } catch (error) {
-        return res.status(200).json({ reply: "Ops! Minha paleta de cores caiu. Pode repetir? 🎨" });
+        return res.status(200).json({ reply: "Ops! Minhas tintas secaram. Pode repetir? 🎨" });
     }
 }
