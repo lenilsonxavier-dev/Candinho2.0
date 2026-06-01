@@ -1,10 +1,18 @@
 // api/groq.js
 import { bibliotecaCultural as libLocal } from "../src/data/bibliotecaCultural.js";
+import { createClient } from 'pexels';   // 👈 Importa a biblioteca Pexels
 
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
+const PEXELS_API_KEY = process.env.PEXELS_API_KEY;  // 👈 Chave da Pexels (mantenha secreta)
 
 let bibliotecaCache = null;
+
+// Cliente Pexels (inicializado apenas se a chave existir)
+let pexelsClient = null;
+if (PEXELS_API_KEY) {
+    pexelsClient = createClient(PEXELS_API_KEY);
+}
 
 // Carrega os dados do GitHub para somar com a biblioteca local
 async function carregarBiblioteca() {
@@ -24,34 +32,43 @@ function pediuImagem(mensagem) {
     return palavrasImagem.some(palavra => texto.includes(palavra));
 }
 
-// --- BUSCA NA WIKIMEDIA (VERSÃO TURBINADA) ---
-async function buscarNaWikimedia(pergunta) {
+// Extrai o nome do artista da mensagem (melhora a busca)
+function extrairNomeArtista(mensagem) {
+    // Remove palavras comuns e foca em possíveis nomes próprios
+    const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu", "mostre", "imagem", "foto", "pintura", "desenho", "quadro"];
+    let palavras = mensagem.toLowerCase().replace(/[?!.,]/g, "").split(/\s+/);
+    // Procura palavras que começam com letra maiúscula (indica nome próprio)
+    let possiveisNomes = palavras.filter(p => p[0] === p[0].toUpperCase() && p.length > 2 && !stopWords.includes(p));
+    let nome = possiveisNomes.join(" ");
+    // Se não achou, usa a mensagem original (limitado a 40 chars)
+    return nome || mensagem.slice(0, 40);
+}
+
+// --- BUSCA NA PEXELS (substitui a Wikimedia) ---
+async function buscarNaPexels(artistaNome) {
+    if (!pexelsClient || !artistaNome || artistaNome.length < 3) return null;
+
     try {
-        const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu", "mostre"];
-        let palavras = pergunta.toLowerCase().replace(/[?!.,]/g, "").split(/\s+/).filter(p => p.length > 2 && !stopWords.includes(p));
-        let termo = palavras.join(" ");
-        if (!termo) return null;
+        // Busca a primeira foto relevante baseada no nome do artista
+        const resultado = await pexelsClient.photos.search({
+            query: artistaNome,
+            per_page: 1,
+            orientation: 'square',  // Quadrada, boa para exibição
+            size: 'medium'
+        });
 
-        const url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(termo)}&gsrlimit=5&prop=imageinfo&iiprop=url|extmetadata`;
-
-        const res = await fetch(url);
-        const data = await res.json();
-
-        if (data.query && data.query.pages) {
-            const pages = Object.values(data.query.pages);
-            const imagePage = pages.find(p => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].url);
-
-            if (imagePage) {
-                const info = imagePage.imageinfo[0];
-                return {
-                    imagemUrl: info.url,
-                    titulo: imagePage.title.replace("File:", "").split('.')[0],
-                    credito: "Wikimedia Commons"
-                };
-            }
+        if (resultado.photos && resultado.photos.length > 0) {
+            const foto = resultado.photos[0];
+            return {
+                imagemUrl: foto.src.medium,   // URL da imagem (tamanho médio)
+                titulo: `Imagem de ${artistaNome} por ${foto.photographer}`,
+                credito: `${foto.photographer} / Pexels`,  // Atribuição obrigatória
+                autor: foto.photographer,
+                urlReferencia: foto.url
+            };
         }
-    } catch (e) {
-        console.error("Erro Wikimedia:", e);
+    } catch (erro) {
+        console.error("Erro na busca da Pexels:", erro);
     }
     return null;
 }
@@ -99,10 +116,11 @@ export default async function handler(req, res) {
             textoFinal = dataIA.choices?.[0]?.message?.content?.trim() || "";
         }
 
-        // 3. Busca Imagem na Wikimedia APENAS se o usuário pediu explicitamente
+        // 3. Busca Imagem na Pexels APENAS se o usuário pediu explicitamente
         let imagemResult = null;
         if (pediuImagem(mensagem)) {
-            imagemResult = await buscarNaWikimedia(mensagem);
+            const nomeArtista = extrairNomeArtista(mensagem);
+            imagemResult = await buscarNaPexels(nomeArtista);
         }
 
         // 4. Retorno simplificado (sem info e sem googleArts)
