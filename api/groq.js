@@ -1,72 +1,11 @@
-// api/groq.js
-import { bibliotecaCultural as libLocal } from "../src/data/bibliotecaCultural.js";
+// api/groq.js (CommonJS – funciona sem "type": "module")
+const { bibliotecaCultural: libLocal } = require("../src/data/bibliotecaCultural.js");
 
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const PEXELS_API_KEY = process.env.PEXELS_API_KEY;
 
 let bibliotecaCache = null;
-
-// Tenta importar a Pexels, mas se falhar (ex: módulo não instalado), usamos Wikimedia
-let buscarImagem = null;
-try {
-    const { createClient } = await import('pexels');
-    if (PEXELS_API_KEY) {
-        const pexelsClient = createClient(PEXELS_API_KEY);
-        buscarImagem = async (termo) => {
-            try {
-                const resultado = await pexelsClient.photos.search({
-                    query: `${termo} painting artwork`,
-                    per_page: 1,
-                    orientation: 'square',
-                    size: 'medium'
-                });
-                if (resultado.photos && resultado.photos.length > 0) {
-                    const foto = resultado.photos[0];
-                    return {
-                        imagemUrl: foto.src.medium,
-                        titulo: `Imagem de ${termo} por ${foto.photographer}`,
-                        credito: `${foto.photographer} / Pexels`
-                    };
-                }
-            } catch (e) { console.error("Pexels erro:", e); }
-            return null;
-        };
-    }
-} catch (e) {
-    console.log("Pexels não disponível, usando Wikimedia");
-}
-
-// Fallback: Wikimedia Commons (funciona sem chave)
-async function buscarWikimedia(termo) {
-    try {
-        const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu", "mostre"];
-        let palavras = termo.toLowerCase().replace(/[?!.,]/g, "").split(/\s+/).filter(p => p.length > 2 && !stopWords.includes(p));
-        let busca = palavras.join(" ");
-        if (!busca) return null;
-        const url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(busca)}&gsrlimit=5&prop=imageinfo&iiprop=url|extmetadata`;
-        const res = await fetch(url);
-        const data = await res.json();
-        if (data.query && data.query.pages) {
-            const pages = Object.values(data.query.pages);
-            const imagePage = pages.find(p => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].url);
-            if (imagePage) {
-                const info = imagePage.imageinfo[0];
-                return {
-                    imagemUrl: info.url,
-                    titulo: imagePage.title.replace("File:", "").split('.')[0],
-                    credito: "Wikimedia Commons"
-                };
-            }
-        }
-    } catch (e) { console.error("Wikimedia erro:", e); }
-    return null;
-}
-
-// Se não definiu buscarImagem (Pexels), usa Wikimedia
-if (!buscarImagem) {
-    buscarImagem = buscarWikimedia;
-}
 
 async function carregarBiblioteca() {
     if (bibliotecaCache) return bibliotecaCache;
@@ -90,7 +29,61 @@ function extrairNomeArtista(mensagem) {
     return possiveisNomes.join(" ") || mensagem.slice(0, 40);
 }
 
-export default async function handler(req, res) {
+// Busca na Pexels usando fetch direto (sem biblioteca)
+async function buscarNaPexels(artistaNome) {
+    if (!PEXELS_API_KEY || !artistaNome || artistaNome.length < 3) return null;
+    try {
+        const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(artistaNome + " painting artwork")}&per_page=1&orientation=square&size=medium`;
+        const res = await fetch(url, {
+            headers: { Authorization: PEXELS_API_KEY }
+        });
+        const data = await res.json();
+        if (data.photos && data.photos.length > 0) {
+            const foto = data.photos[0];
+            return {
+                imagemUrl: foto.src.medium,
+                titulo: `Imagem de ${artistaNome} por ${foto.photographer}`,
+                credito: `${foto.photographer} / Pexels`
+            };
+        }
+    } catch (e) {
+        console.error("Erro na Pexels:", e);
+    }
+    return null;
+}
+
+// Fallback: Wikimedia Commons
+async function buscarWikimedia(termo) {
+    try {
+        const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu", "mostre"];
+        let palavras = termo.toLowerCase().replace(/[?!.,]/g, "").split(/\s+/).filter(p => p.length > 2 && !stopWords.includes(p));
+        let busca = palavras.join(" ");
+        if (!busca) return null;
+        const url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(busca)}&gsrlimit=5&prop=imageinfo&iiprop=url|extmetadata`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.query && data.query.pages) {
+            const pages = Object.values(data.query.pages);
+            const imagePage = pages.find(p => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].url);
+            if (imagePage) {
+                const info = imagePage.imageinfo[0];
+                return {
+                    imagemUrl: info.url,
+                    titulo: imagePage.title.replace("File:", "").split('.')[0],
+                    credito: "Wikimedia Commons"
+                };
+            }
+        }
+    } catch (e) {
+        console.error("Erro no Wikimedia:", e);
+    }
+    return null;
+}
+
+// Escolhe o mecanismo de busca (Pexels se tiver chave, senão Wikimedia)
+const buscarImagem = PEXELS_API_KEY ? buscarNaPexels : buscarWikimedia;
+
+module.exports = async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).json({ error: 'Método não permitido' });
 
     try {
@@ -114,7 +107,10 @@ export default async function handler(req, res) {
                 body: JSON.stringify({
                     model: "llama-3.1-8b-instant",
                     messages: [
-                        { role: "system", content: "Você é o Candinho, um professor de arte para crianças de 10 anos. Responda de forma simples, gentil e muito breve (máximo 3 frases). NUNCA repita o nome do artista várias vezes. Se não souber, diga 'Não conheço esse artista ainda!'." },
+                        { 
+                            role: "system", 
+                            content: "Você é o Candinho, um professor de arte para crianças de 10 anos. Responda de forma simples, gentil e muito breve (máximo 3 frases). NUNCA repita o nome do artista várias vezes. Se não souber, diga 'Não conheço esse artista ainda!'." 
+                        },
                         { role: "user", content: mensagem }
                     ],
                     temperature: 0.4,
@@ -131,12 +127,12 @@ export default async function handler(req, res) {
             imagemResult = await buscarImagem(nomeArtista);
         }
 
-        res.status(200).json({
+        return res.status(200).json({
             reply: textoFinal || "Que pergunta curiosa! Vamos descobrir juntos? 🎨",
             image: imagemResult
         });
     } catch (error) {
         console.error("Erro Geral:", error);
-        res.status(200).json({ reply: "Ops! Minhas tintas secaram. Pode repetir? 🎨" });
+        return res.status(200).json({ reply: "Ops! Minhas tintas secaram. Pode repetir? 🎨" });
     }
-}
+};
