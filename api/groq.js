@@ -1,4 +1,4 @@
-// api/groq.js (CommonJS – usa Wikimedia para arte, Pexels só como fallback)
+// api/groq.js (CommonJS – com URLs diretas de imagem)
 const { bibliotecaCultural: libLocal } = require("../src/data/bibliotecaCultural.js");
 
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
@@ -23,71 +23,87 @@ function pediuImagem(mensagem) {
 }
 
 function extrairNomeArtista(mensagem) {
-    // Remove palavras comuns e captura nomes próprios (ex: "Van Gogh", "Leonardo da Vinci")
     const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu", "mostre", "imagem", "foto", "pintura", "desenho", "quadro", "retrato", "ilustração"];
     let texto = mensagem.replace(/[?!.,]/g, "").toLowerCase();
     let palavras = texto.split(/\s+/);
-    // Tenta capturar sequências de palavras com iniciais maiúsculas (nominal)
     let partes = [];
     for (let i = 0; i < palavras.length; i++) {
         let p = palavras[i];
         if (p.length > 1 && !stopWords.includes(p)) {
-            // Se a palavra original tem primeira letra maiúscula, considera
             if (mensagem.split(/\s+/)[i] && mensagem.split(/\s+/)[i][0] === mensagem.split(/\s+/)[i][0].toUpperCase()) {
                 partes.push(p);
             } else if (p === "van" || p === "da" || p === "de" || p === "do" || p === "dos") {
-                // Captura partículas de nomes compostos
                 partes.push(p);
             } else if (partes.length === 0 && i === palavras.length - 1) {
-                // Se nada achou, usa a última palavra como fallback
                 partes = [p];
             }
         }
     }
-    let nome = partes.join(" ").replace(/\b\w/g, l => l.toUpperCase()); // Capitaliza
+    let nome = partes.join(" ").replace(/\b\w/g, l => l.toUpperCase());
     return nome || mensagem.slice(0, 40);
 }
 
-// Busca APENAS no Wikimedia Commons (ideal para obras de arte)
+// Busca APENAS no Wikimedia Commons (obras de arte)
 async function buscarWikimedia(artistaNome) {
     try {
-        // Primeira tentativa: busca por "artista painting" para pegar pinturas
+        // 1. Busca por "artista painting" – prioriza pinturas
         let termoBusca = `${artistaNome} painting`;
-        let url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(termoBusca)}&gsrlimit=8&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=800`;
-        
+        let url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(termoBusca)}&gsrlimit=8&prop=imageinfo&iiprop=url&iiurlwidth=800`;
+
         let res = await fetch(url);
         let data = await res.json();
 
         if (data.query && data.query.pages) {
             let pages = Object.values(data.query.pages);
-            // Filtra apenas imagens que tenham "painting" ou o nome do artista no título
-            let melhor = pages.find(p => {
-                let titulo = p.title.toLowerCase();
-                return p.imageinfo && p.imageinfo[0] && p.imageinfo[0].url &&
-                       (titulo.includes("painting") || titulo.includes(artistaNome.toLowerCase()));
-            });
-            if (!melhor) melhor = pages.find(p => p.imageinfo && p.imageinfo[0]);
+            // Procura uma página que tenha URL de imagem direta (termina com .jpg, .png, etc.)
+            let melhor = null;
+            for (let p of pages) {
+                if (p.imageinfo && p.imageinfo[0]) {
+                    let imgUrl = p.imageinfo[0].url;
+                    // Garante que é um link direto para a imagem (não uma página)
+                    if (imgUrl && (imgUrl.endsWith('.jpg') || imgUrl.endsWith('.png') || imgUrl.endsWith('.jpeg') || imgUrl.includes('/thumb/'))) {
+                        // Se for thumbnail, pega a versão original ou maior
+                        if (imgUrl.includes('/thumb/')) {
+                            imgUrl = imgUrl.replace(/\/thumb\/(.*?)\/\d+px-(.*)$/, '/$1');
+                        }
+                        melhor = p;
+                        break;
+                    }
+                }
+            }
+            if (!melhor) {
+                melhor = pages.find(p => p.imageinfo && p.imageinfo[0]);
+            }
             if (melhor) {
-                const info = melhor.imageinfo[0];
+                let info = melhor.imageinfo[0];
+                let imgUrl = info.url;
+                // Se ainda for thumbnail, extrai a original (tira /thumb/...)
+                if (imgUrl.includes('/thumb/')) {
+                    imgUrl = imgUrl.replace(/\/thumb\/(.*?)\/\d+px-(.*)$/, '/$1');
+                }
                 return {
-                    imagemUrl: info.url,
+                    imagemUrl: imgUrl,
                     titulo: melhor.title.replace("File:", "").split('.')[0],
                     credito: "Wikimedia Commons (obra de arte)"
                 };
             }
         }
 
-        // Segunda tentativa: busca só pelo nome do artista (mais genérico)
-        url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(artistaNome)}&gsrlimit=5&prop=imageinfo&iiprop=url`;
+        // 2. Fallback: busca só pelo nome do artista
+        url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(artistaNome)}&gsrlimit=5&prop=imageinfo&iiprop=url&iiurlwidth=800`;
         res = await fetch(url);
         data = await res.json();
         if (data.query && data.query.pages) {
             let pages = Object.values(data.query.pages);
             let page = pages.find(p => p.imageinfo && p.imageinfo[0]);
             if (page) {
-                const info = page.imageinfo[0];
+                let info = page.imageinfo[0];
+                let imgUrl = info.url;
+                if (imgUrl.includes('/thumb/')) {
+                    imgUrl = imgUrl.replace(/\/thumb\/(.*?)\/\d+px-(.*)$/, '/$1');
+                }
                 return {
-                    imagemUrl: info.url,
+                    imagemUrl: imgUrl,
                     titulo: page.title.replace("File:", "").split('.')[0],
                     credito: "Wikimedia Commons"
                 };
@@ -99,7 +115,7 @@ async function buscarWikimedia(artistaNome) {
     return null;
 }
 
-// Fallback para Pexels (caso Wikimedia não encontre)
+// Fallback Pexels (se não achar no Wikimedia)
 async function buscarPexels(artistaNome) {
     if (!PEXELS_API_KEY) return null;
     try {
@@ -118,7 +134,6 @@ async function buscarPexels(artistaNome) {
     return null;
 }
 
-// Função principal de busca: primeiro Wikimedia, se falhar tenta Pexels
 async function buscarImagem(artistaNome) {
     let img = await buscarWikimedia(artistaNome);
     if (!img && PEXELS_API_KEY) img = await buscarPexels(artistaNome);
@@ -134,7 +149,6 @@ module.exports = async function handler(req, res) {
         const textoBusca = mensagem.toLowerCase();
         let textoFinal = "";
 
-        // Busca na biblioteca cultural
         for (const chave in lib) {
             const item = lib[chave];
             if (item.palavras_chave && item.palavras_chave.some(p => textoBusca.includes(p.toLowerCase()))) {
@@ -143,7 +157,6 @@ module.exports = async function handler(req, res) {
             }
         }
 
-        // Se não achou, usa Groq
         if (!textoFinal && GROQ_API_KEY) {
             const responseGroq = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
