@@ -17,6 +17,13 @@ async function carregarBiblioteca() {
     return bibliotecaCache;
 }
 
+// Verifica se o usuário pediu uma imagem (demanda explícita)
+function pediuImagem(mensagem) {
+    const palavrasImagem = ["imagem", "foto", "mostre", "obra", "ver", "desenho", "quadro", "pintura", "ilustração", "retrato"];
+    const texto = mensagem.toLowerCase();
+    return palavrasImagem.some(palavra => texto.includes(palavra));
+}
+
 // --- BUSCA NA WIKIMEDIA (VERSÃO TURBINADA) ---
 async function buscarNaWikimedia(pergunta) {
     try {
@@ -25,7 +32,6 @@ async function buscarNaWikimedia(pergunta) {
         let termo = palavras.join(" ");
         if (!termo) return null;
 
-        // Buscamos especificamente no namespace de Arquivos (6) para não vir texto
         const url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(termo)}&gsrlimit=5&prop=imageinfo&iiprop=url|extmetadata`;
 
         const res = await fetch(url);
@@ -33,7 +39,6 @@ async function buscarNaWikimedia(pergunta) {
 
         if (data.query && data.query.pages) {
             const pages = Object.values(data.query.pages);
-            // Procura a primeira página que tenha uma URL válida
             const imagePage = pages.find(p => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].url);
 
             if (imagePage) {
@@ -61,19 +66,17 @@ export default async function handler(req, res) {
         const textoBusca = mensagem.toLowerCase();
         
         let textoFinal = "";
-        let infoExtra = { nascimento: "", morte: "", estilo: "" };
 
         // 1. PRIORIDADE TOTAL: Busca na Biblioteca Cultural (Dados de Curadoria)
         for (const chave in lib) {
             const item = lib[chave];
             if (item.palavras_chave && item.palavras_chave.some(p => textoBusca.includes(p.toLowerCase()))) {
                 textoFinal = `${item.inicio[0]} ${item.explicacao_curta[0]}`;
-                infoExtra = { nascimento: item.ano_nascimento || "---", morte: item.ano_falecimento || "---", estilo: item.categoria || "Arte" };
                 break;
             }
         }
 
-        // 2. Se não achou na biblioteca, chama a IA (Groq) com trava de segurança
+        // 2. Se não achou na biblioteca, chama a IA (Groq) - sem exigir formato de card
         if (!textoFinal && GROQ_API_KEY) {
             const responseGroq = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
@@ -83,34 +86,29 @@ export default async function handler(req, res) {
                     messages: [
                         { 
                             role: "system", 
-                            content: "Você é o Candinho, um professor de arte para crianças de 10 anos. Responda de forma simples, gentil e muito breve (máximo 3 frases). NUNCA repita o nome do artista várias vezes. Se não souber, diga 'Não conheço esse artista ainda!'. No final, use SEMPRE este formato: [NASCIMENTO: ano] [MORTE: ano] [ESTILO: estilo]." 
+                            content: "Você é o Candinho, um professor de arte para crianças de 10 anos. Responda de forma simples, gentil e muito breve (máximo 3 frases). NUNCA repita o nome do artista várias vezes. Se não souber, diga 'Não conheço esse artista ainda!'." 
                         },
                         { role: "user", content: mensagem }
                     ],
-                    temperature: 0.4, // Temperatura baixa para evitar invenções e repetições
+                    temperature: 0.4,
                     max_tokens: 150
                 })
             });
             
             const dataIA = await responseGroq.json();
-            const rawTexto = dataIA.choices?.[0]?.message?.content || "";
-            
-            // Extração das informações da ficha técnica
-            infoExtra.nascimento = rawTexto.match(/\[NASCIMENTO: (.*?)\]/)?.[1] || "---";
-            infoExtra.morte = rawTexto.match(/\[MORTE: (.*?)\]/)?.[1] || "---";
-            infoExtra.estilo = rawTexto.match(/\[ESTILO: (.*?)\]/)?.[1] || "Arte";
-            textoFinal = rawTexto.replace(/\[.*?\]/g, "").trim();
+            textoFinal = dataIA.choices?.[0]?.message?.content?.trim() || "";
         }
 
-        // 3. Busca Imagem na Wikimedia
-        const imagemResult = await buscarNaWikimedia(mensagem);
+        // 3. Busca Imagem na Wikimedia APENAS se o usuário pediu explicitamente
+        let imagemResult = null;
+        if (pediuImagem(mensagem)) {
+            imagemResult = await buscarNaWikimedia(mensagem);
+        }
 
-        // 4. Retorno Unificado
+        // 4. Retorno simplificado (sem info e sem googleArts)
         return res.status(200).json({
             reply: textoFinal || "Que pergunta curiosa! Vamos descobrir juntos? 🎨",
-            image: imagemResult,
-            info: infoExtra,
-            googleArts: { url: `https://artsandculture.google.com/search?q=${encodeURIComponent(mensagem)}` }
+            image: imagemResult
         });
 
     } catch (error) {
