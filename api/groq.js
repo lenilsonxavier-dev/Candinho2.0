@@ -1,4 +1,4 @@
-// api/groq.js (CommonJS – funciona sem "type": "module")
+// api/groq.js (CommonJS – usa Wikimedia para arte, Pexels só como fallback)
 const { bibliotecaCultural: libLocal } = require("../src/data/bibliotecaCultural.js");
 
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
@@ -23,53 +23,72 @@ function pediuImagem(mensagem) {
 }
 
 function extrairNomeArtista(mensagem) {
-    const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu", "mostre", "imagem", "foto", "pintura", "desenho", "quadro"];
-    let palavras = mensagem.toLowerCase().replace(/[?!.,]/g, "").split(/\s+/);
-    let possiveisNomes = palavras.filter(p => p[0] === p[0].toUpperCase() && p.length > 2 && !stopWords.includes(p));
-    return possiveisNomes.join(" ") || mensagem.slice(0, 40);
-}
-
-// Busca na Pexels usando fetch direto (sem biblioteca)
-async function buscarNaPexels(artistaNome) {
-    if (!PEXELS_API_KEY || !artistaNome || artistaNome.length < 3) return null;
-    try {
-        const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(artistaNome + " painting artwork")}&per_page=1&orientation=square&size=medium`;
-        const res = await fetch(url, {
-            headers: { Authorization: PEXELS_API_KEY }
-        });
-        const data = await res.json();
-        if (data.photos && data.photos.length > 0) {
-            const foto = data.photos[0];
-            return {
-                imagemUrl: foto.src.medium,
-                titulo: `Imagem de ${artistaNome} por ${foto.photographer}`,
-                credito: `${foto.photographer} / Pexels`
-            };
+    // Remove palavras comuns e captura nomes próprios (ex: "Van Gogh", "Leonardo da Vinci")
+    const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu", "mostre", "imagem", "foto", "pintura", "desenho", "quadro", "retrato", "ilustração"];
+    let texto = mensagem.replace(/[?!.,]/g, "").toLowerCase();
+    let palavras = texto.split(/\s+/);
+    // Tenta capturar sequências de palavras com iniciais maiúsculas (nominal)
+    let partes = [];
+    for (let i = 0; i < palavras.length; i++) {
+        let p = palavras[i];
+        if (p.length > 1 && !stopWords.includes(p)) {
+            // Se a palavra original tem primeira letra maiúscula, considera
+            if (mensagem.split(/\s+/)[i] && mensagem.split(/\s+/)[i][0] === mensagem.split(/\s+/)[i][0].toUpperCase()) {
+                partes.push(p);
+            } else if (p === "van" || p === "da" || p === "de" || p === "do" || p === "dos") {
+                // Captura partículas de nomes compostos
+                partes.push(p);
+            } else if (partes.length === 0 && i === palavras.length - 1) {
+                // Se nada achou, usa a última palavra como fallback
+                partes = [p];
+            }
         }
-    } catch (e) {
-        console.error("Erro na Pexels:", e);
     }
-    return null;
+    let nome = partes.join(" ").replace(/\b\w/g, l => l.toUpperCase()); // Capitaliza
+    return nome || mensagem.slice(0, 40);
 }
 
-// Fallback: Wikimedia Commons
-async function buscarWikimedia(termo) {
+// Busca APENAS no Wikimedia Commons (ideal para obras de arte)
+async function buscarWikimedia(artistaNome) {
     try {
-        const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu", "mostre"];
-        let palavras = termo.toLowerCase().replace(/[?!.,]/g, "").split(/\s+/).filter(p => p.length > 2 && !stopWords.includes(p));
-        let busca = palavras.join(" ");
-        if (!busca) return null;
-        const url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(busca)}&gsrlimit=5&prop=imageinfo&iiprop=url|extmetadata`;
-        const res = await fetch(url);
-        const data = await res.json();
+        // Primeira tentativa: busca por "artista painting" para pegar pinturas
+        let termoBusca = `${artistaNome} painting`;
+        let url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(termoBusca)}&gsrlimit=8&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=800`;
+        
+        let res = await fetch(url);
+        let data = await res.json();
+
         if (data.query && data.query.pages) {
-            const pages = Object.values(data.query.pages);
-            const imagePage = pages.find(p => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].url);
-            if (imagePage) {
-                const info = imagePage.imageinfo[0];
+            let pages = Object.values(data.query.pages);
+            // Filtra apenas imagens que tenham "painting" ou o nome do artista no título
+            let melhor = pages.find(p => {
+                let titulo = p.title.toLowerCase();
+                return p.imageinfo && p.imageinfo[0] && p.imageinfo[0].url &&
+                       (titulo.includes("painting") || titulo.includes(artistaNome.toLowerCase()));
+            });
+            if (!melhor) melhor = pages.find(p => p.imageinfo && p.imageinfo[0]);
+            if (melhor) {
+                const info = melhor.imageinfo[0];
                 return {
                     imagemUrl: info.url,
-                    titulo: imagePage.title.replace("File:", "").split('.')[0],
+                    titulo: melhor.title.replace("File:", "").split('.')[0],
+                    credito: "Wikimedia Commons (obra de arte)"
+                };
+            }
+        }
+
+        // Segunda tentativa: busca só pelo nome do artista (mais genérico)
+        url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(artistaNome)}&gsrlimit=5&prop=imageinfo&iiprop=url`;
+        res = await fetch(url);
+        data = await res.json();
+        if (data.query && data.query.pages) {
+            let pages = Object.values(data.query.pages);
+            let page = pages.find(p => p.imageinfo && p.imageinfo[0]);
+            if (page) {
+                const info = page.imageinfo[0];
+                return {
+                    imagemUrl: info.url,
+                    titulo: page.title.replace("File:", "").split('.')[0],
                     credito: "Wikimedia Commons"
                 };
             }
@@ -80,8 +99,31 @@ async function buscarWikimedia(termo) {
     return null;
 }
 
-// Escolhe o mecanismo de busca (Pexels se tiver chave, senão Wikimedia)
-const buscarImagem = PEXELS_API_KEY ? buscarNaPexels : buscarWikimedia;
+// Fallback para Pexels (caso Wikimedia não encontre)
+async function buscarPexels(artistaNome) {
+    if (!PEXELS_API_KEY) return null;
+    try {
+        const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(artistaNome + " painting art")}&per_page=1&orientation=square`;
+        const res = await fetch(url, { headers: { Authorization: PEXELS_API_KEY } });
+        const data = await res.json();
+        if (data.photos && data.photos.length > 0) {
+            const foto = data.photos[0];
+            return {
+                imagemUrl: foto.src.medium,
+                titulo: `Imagem de ${artistaNome}`,
+                credito: `${foto.photographer} / Pexels`
+            };
+        }
+    } catch(e) {}
+    return null;
+}
+
+// Função principal de busca: primeiro Wikimedia, se falhar tenta Pexels
+async function buscarImagem(artistaNome) {
+    let img = await buscarWikimedia(artistaNome);
+    if (!img && PEXELS_API_KEY) img = await buscarPexels(artistaNome);
+    return img;
+}
 
 module.exports = async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).json({ error: 'Método não permitido' });
@@ -92,6 +134,7 @@ module.exports = async function handler(req, res) {
         const textoBusca = mensagem.toLowerCase();
         let textoFinal = "";
 
+        // Busca na biblioteca cultural
         for (const chave in lib) {
             const item = lib[chave];
             if (item.palavras_chave && item.palavras_chave.some(p => textoBusca.includes(p.toLowerCase()))) {
@@ -100,6 +143,7 @@ module.exports = async function handler(req, res) {
             }
         }
 
+        // Se não achou, usa Groq
         if (!textoFinal && GROQ_API_KEY) {
             const responseGroq = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
