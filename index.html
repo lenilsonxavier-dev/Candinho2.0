@@ -1,301 +1,397 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Candinho - Artista Amigo</title>
-    <style>
-        /* Estilo Geral */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body { 
-            font-family: 'Segoe UI', system-ui, sans-serif; 
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white; 
-            padding: 15px; 
-            display: flex; 
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        .container { 
-            width: 100%; 
-            max-width: 800px;
-            background: rgba(22, 33, 62, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 30px;
-            padding: 25px; 
-            box-shadow: 0 15px 50px rgba(0,0,0,0.6);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .header { 
-            display: flex; 
-            align-items: center; 
-            gap: 20px; 
-            margin-bottom: 20px; 
-            padding-bottom: 15px; 
-            border-bottom: 2px solid #e94560; 
-        }
-        
-        .avatar { 
-    width: 110px;
-    height: 110px; 
-    border-radius: 50%; 
-    object-fit: cover; 
-    border: 3px solid #ffd700;
-    animation: float 4s ease-in-out infinite;
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, { useState, useEffect, useRef } from "react";
+import { 
+  Send, 
+  Sparkles, 
+  Trash2, 
+  Image as ImageIcon, 
+  ExternalLink, 
+  Maximize2, 
+  X,
+  Palette
+} from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+
+interface ImagePayload {
+  imagemUrl: string;
+  titulo: string;
+  credito: string;
 }
 
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-        
-        .title h1 { font-size: 1.8rem; letter-spacing: 1px; }
-        .title small { color: #ffd700; font-style: italic; opacity: 0.9; }
-        
-        #chat { 
-            height: 450px;
-            overflow-y: auto; 
-            background: rgba(15, 52, 96, 0.4);
-            padding: 20px; 
-            border-radius: 20px; 
-            margin-bottom: 20px; 
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            scroll-behavior: smooth;
-        }
-        
-        .msg {
-            max-width: 85%;
-            padding: 12px 18px;
-            border-radius: 20px;
-            font-size: 1rem;
-            line-height: 1.5;
-            position: relative;
-            animation: slideIn 0.3s ease-out forwards;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .user {
-            background: #4834d4;
-            align-self: flex-end;
-            color: white;
-            border-bottom-right-radius: 4px;
-        }
-
-        .bot {
-            background: #686de0;
-            align-self: flex-start;
-            color: white;
-            border-bottom-left-radius: 4px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .bot-message-wrapper { display: flex; align-items: flex-start; gap: 15px; }
-       
-        .bot-icon { 
-    width: 55px;
-    height: 55px; 
-    border-radius: 50%; 
-    object-fit: cover;
-    margin-top: 4px; 
+interface Message {
+  id: string;
+  text: string;
+  sender: "user" | "bot";
+  image?: ImagePayload | null;
+  googleArtsUrl?: string;
+  timestamp: Date;
+  isImageRequested?: boolean; // Controla se a imagem foi revelada pelo aluno
 }
-        
-        .bot-image {
-            margin-top: 15px;
-            max-width: 100%;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: transform 0.3s;
-            display: block;
-        }
-        .bot-image:hover { transform: scale(1.02); }
 
-        .image-credit {
-            font-size: 0.65rem;
-            color: #ffd700;
-            margin-top: 5px;
-            text-align: center;
-            opacity: 0.8;
-        }
+const SUGGESTIONS = [
+  "Quem foi Cândido Portinari? 🎨",
+  "Pinte sobre Girassóis de Van Gogh 🌻",
+  "Quem pintou o Abaporu? 🗺️",
+  "O que é o Cubismo de Picasso? 🟩",
+  "Quem foi Tarsila do Amaral? 🌸",
+  "Gênios do Renascimento com Da Vinci 🚀"
+];
 
-        .input-area { display: flex; gap: 10px; }
-        
-        input {
-            flex: 1;
-            padding: 15px 25px;
-            border: 2px solid #e94560;
-            border-radius: 30px;
-            background: rgba(255,255,255,0.05);
-            color: white;
-            font-size: 1rem;
-            outline: none;
-        }
-        input:focus { border-color: #ffd700; background: rgba(255,255,255,0.1); }
+export default function App() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [modalImage, setModalImage] = useState<ImagePayload | null>(null);
+  
+  const chatEndRef = useRef<HTMLDivElement>(null);
 
-        button {
-            background: #e94560;
-            color: white;
-            border: none;
-            padding: 0 30px;
-            border-radius: 30px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        button:disabled { opacity: 0.5; }
+  // Mensagem inicial de boas-vindas do Candinho
+  useEffect(() => {
+    setMessages([
+      {
+        id: "welcome",
+        text: "Olá! Sou o Candinho, seu amigo artista. Estou aqui para conversar com você sobre as coisas mais lindas do mundo: as pinturas, os artistas e as cores! Qual mistério da arte vamos desvendar hoje? 🎨✨",
+        sender: "bot",
+        timestamp: new Date()
+      }
+    ]);
+  }, []);
 
-        .loading { font-style: italic; opacity: 0.8; font-size: 0.9rem; }
+  const scrollToBottom = () => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
-        .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center;
-        }
-        .modal img { max-width: 90%; max-height: 85%; border-radius: 10px; }
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isProcessing]);
 
-        #chat::-webkit-scrollbar { width: 6px; }
-        #chat::-webkit-scrollbar-thumb { background: #e94560; border-radius: 10px; }
-    </style>
-</head>
-<body>
+  const handleSend = async (text: string) => {
+    const queryText = text.trim();
+    if (!queryText || isProcessing) return;
 
-<div class="container">
-    <div class="header">
-        <img src="https://i.imgur.com/fnMYS0Z.png" alt="Candinho" class="avatar">
-        <div class="title">
-            <h1>Candinho</h1>
-            <small>Seu amigo artista 🎨</small>
-        </div>
-    </div>
-
-    <div id="chat"></div>
-
-    <div class="input-area">
-        <input type="text" id="pergunta" placeholder="Pergunte sobre um artista..." autocomplete="off">
-        <button id="sendBtn">Enviar</button>
-    </div>
-</div>
-
-<div id="imgModal" class="modal" onclick="this.style.display='none'">
-    <img id="modalImg" src="">
-</div>
-
-<script>
-    const chat = document.getElementById("chat");
-    const input = document.getElementById("pergunta");
-    const btn = document.getElementById("sendBtn");
-    let isProcessing = false;
-
-    // Função para mostrar mensagens na tela (sem cards)
-    function appendMessage(text, side, extra = null) {
-        const msgDiv = document.createElement("div");
-        msgDiv.className = `msg ${side}`;
-
-        if (side === 'bot') {
-            const wrapper = document.createElement("div");
-            wrapper.className = "bot-message-wrapper";
-            wrapper.innerHTML = `
-                <img src="https://i.imgur.com/UDl1c5j.png" class="bot-icon">
-                <span class="bot-text">${text}</span>
-            `;
-            msgDiv.appendChild(wrapper);
-
-            // Apenas exibe a imagem (se existir) - sem cards de museu ou botões
-            if (extra && extra.image && extra.image.imagemUrl) {
-                const img = document.createElement("img");
-                img.src = extra.image.imagemUrl;
-                img.className = "bot-image";
-                img.title = extra.image.titulo || "Clique para ampliar";
-                img.onclick = () => {
-                    document.getElementById("modalImg").src = img.src;
-                    document.getElementById("imgModal").style.display = "flex";
-                };
-                msgDiv.appendChild(img);
-                
-                const credit = document.createElement("div");
-                credit.className = "image-credit";
-                credit.innerText = `📷 Fonte: ${extra.image.credito || 'Wikimedia'}`;
-                msgDiv.appendChild(credit);
-            }
-        } else {
-            msgDiv.innerText = text;
-        }
-
-        chat.appendChild(msgDiv);
-        chat.scrollTop = chat.scrollHeight;
-    }
-
-    async function handleSend() {
-        const val = input.value.trim();
-        if (!val || isProcessing) return;
-
-        try {
-            isProcessing = true;
-            btn.disabled = true;
-            input.disabled = true;
-
-            appendMessage(val, 'user');
-            input.value = "";
-
-            const loading = document.createElement("div");
-            loading.className = "msg bot loading";
-            loading.id = "loader";
-            loading.innerText = "Candinho está preparando a tela...";
-            chat.appendChild(loading);
-            chat.scrollTop = chat.scrollHeight;
-
-            const res = await fetch("/api/groq", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ mensagem: val })
-            });
-
-            if (!res.ok) throw new Error("Erro na API");
-
-            const data = await res.json();
-            
-            const loader = document.getElementById("loader");
-            if (loader) loader.remove();
-
-            // Exibe apenas a mensagem e a imagem (se existir) – cards removidos
-            appendMessage(data.reply, 'bot', { 
-                image: data.image   // info e googleArts são ignorados
-            });
-
-        } catch (e) {
-            const loader = document.getElementById("loader");
-            if (loader) loader.remove();
-            appendMessage("Ops! Minha paleta bagunçou. Pode repetir? 🎨", "bot");
-            console.error(e);
-        } finally {
-            isProcessing = false;
-            btn.disabled = false;
-            input.disabled = false;
-            input.focus();
-        }
-    }
-
-    btn.addEventListener("click", handleSend);
-    input.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") handleSend();
-    });
-
-    window.onload = () => {
-        appendMessage("Olá! Sou o Candinho, seu amigo artista. O que vamos descobrir hoje? 🎨", "bot");
-        input.focus();
+    const userMessage: Message = {
+      id: `user-${Date.now()}`,
+      text: queryText,
+      sender: "user",
+      timestamp: new Date()
     };
-</script>
 
-</body>
-</html>
+    setMessages((prev) => [...prev, userMessage]);
+    setInputValue("");
+    setIsProcessing(true);
+
+    try {
+      const response = await fetch("/api/groq", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mensagem: queryText })
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro na comunicação");
+      }
+
+      const data = await response.json();
+
+      const botMessage: Message = {
+        id: `bot-${Date.now()}`,
+        text: data.reply || "Minhas tintas derramaram! Pode repetir sua pergunta preciosa? 🎨",
+        sender: "bot",
+        image: data.image ? {
+          imagemUrl: data.image.imagemUrl,
+          titulo: data.image.titulo || "Obra de arte",
+          credito: data.image.credito || "Wikimedia Commons"
+        } : null,
+        googleArtsUrl: data.googleArts?.url || `https://artsandculture.google.com/search?q=${encodeURIComponent(queryText)}`,
+        timestamp: new Date(),
+        isImageRequested: false // Começa sempre bloqueada até o aluno decidir abrir!
+      };
+
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      console.error(error);
+      const errorMessage: Message = {
+        id: `error-${Date.now()}`,
+        text: "Ops! Minha paleta se bagunçou um pouquinho por causa do vento. Pode me perguntar novamente, por favor? 🎨🍃",
+        sender: "bot",
+        timestamp: new Date()
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleSend(inputValue);
+    }
+  };
+
+  const handleRequestImage = (messageId: string) => {
+    setMessages((prev) =>
+      prev.map((msg) =>
+        msg.id === messageId ? { ...msg, isImageRequested: true } : msg
+      )
+    );
+  };
+
+  const clearChat = () => {
+    if (window.confirm("Quer mesmo recomeçar nossa conversa de arte? 🎨🧹")) {
+      setMessages([
+        {
+          id: "welcome-reset",
+          text: "Tela limpa e pronta para novos desenhos! Sou o Candinho. O que vamos descobrir hoje, amiguinho? 🎨🖌️",
+          sender: "bot",
+          timestamp: new Date()
+        }
+      ]);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#0c0c1e] via-[#12122c] to-[#161a36] text-white flex flex-col justify-between p-3 sm:p-5 font-sans relative overflow-hidden">
+      
+      {/* Detalhes Artísticos ao Fundo */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-indigo-900/15 blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-rose-900/10 blur-[130px] pointer-events-none" />
+
+      {/* Caixa do Chat */}
+      <div className="w-full max-w-4xl mx-auto bg-slate-900/60 backdrop-blur-xl rounded-3xl border border-yellow-500/20 shadow-2xl flex flex-col overflow-hidden max-h-[92vh] md:max-h-[88vh]">
+        
+        {/* Cabeçalho */}
+        <header className="px-5 py-4 border-b border-rose-500/30 flex items-center justify-between bg-slate-950/40">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <img 
+                src="https://i.imgur.com/fnMYS0Z.png" 
+                alt="Candinho avatar" 
+                className="w-12 h-12 rounded-full object-cover border-2 border-yellow-400 shadow-md animate-bounce"
+                style={{ animationDuration: '4s' }}
+              />
+              <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-slate-900 rounded-full" />
+            </div>
+            <div>
+              <h1 className="font-display text-xl font-bold tracking-wide flex items-center gap-1.5 text-yellow-300">
+                Candinho
+              </h1>
+              <p className="text-xs text-rose-300 italic font-medium">Seu amigo artista 🎨</p>
+            </div>
+          </div>
+
+          <button 
+            onClick={clearChat}
+            className="p-2.5 rounded-xl bg-slate-800/80 hover:bg-rose-500 hover:text-white transition-all text-slate-400 flex items-center gap-1 text-xs border border-slate-700 hover:border-rose-400 group cursor-pointer animate-none"
+            title="Limpar tela"
+          >
+            <Trash2 size={15} className="group-hover:rotate-12 transition-transform" />
+            <span className="hidden sm:inline">Recomeçar</span>
+          </button>
+        </header>
+
+        {/* Quadro das Mensagens */}
+        <main className="flex-1 overflow-y-auto px-4 py-5 space-y-4 min-h-[380px] max-h-[60vh] scrollbar-thin scrollbar-thumb-rose-500" id="chat">
+          <AnimatePresence initial={false}>
+            {messages.map((msg) => (
+              <motion.div
+                key={msg.id}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+                className={`flex gap-3 max-w-[85%] ${
+                  msg.sender === "user" ? "ml-auto flex-row-reverse" : "mr-auto"
+                }`}
+              >
+                {/* Ícone Redondo do Candinho */}
+                {msg.sender === "bot" && (
+                  <div className="w-8 h-8 rounded-full bg-indigo-600/80 border border-yellow-400/30 flex items-center justify-center flex-shrink-0 shadow shadow-indigo-400">
+                    <img 
+                      src="https://i.imgur.com/UDl1c5j.png" 
+                      alt="Candinho minicon" 
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <div 
+                    className={`px-4 py-3 rounded-2xl text-[0.95rem] leading-relaxed shadow-md ${
+                      msg.sender === "user" 
+                        ? "bg-indigo-600 text-white rounded-br-none shadow-indigo-900/30 font-medium" 
+                        : "bg-indigo-950/80 border border-indigo-500/30 text-slate-100 rounded-bl-none shadow-black/40"
+                    }`}
+                  >
+                    <p className="whitespace-pre-line">{msg.text}</p>
+
+                    {/* Botões de Ação sob Demanda */}
+                    {msg.sender === "bot" && msg.image && !msg.isImageRequested && (
+                      <div className="mt-3.5 pt-3 border-t border-slate-800/60 flex flex-wrap gap-2 items-center">
+                        <button
+                          onClick={() => handleRequestImage(msg.id)}
+                          className="bg-yellow-400 hover:bg-yellow-300 text-slate-950 px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow hover:scale-103 duration-200 flex items-center gap-1.5 cursor-pointer"
+                        >
+                          <Palette size={13} />
+                          Ver Ilustração/Obra 🖼️
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Renderização da Obra de Arte somente se solicitada */}
+                  {msg.sender === "bot" && msg.image && msg.isImageRequested && (
+                    <motion.div
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className="bg-slate-950/80 rounded-2xl p-2.5 border border-yellow-500/30 max-w-sm"
+                    >
+                      <div className="relative group overflow-hidden rounded-xl">
+                        <img 
+                          src={msg.image.imagemUrl} 
+                          alt={msg.image.titulo}
+                          className="w-full h-auto max-h-60 object-cover cursor-pointer hover:scale-102 transition-transform duration-300 rounded-lg"
+                          onClick={() => setModalImage(msg.image || null)}
+                          referrerPolicy="no-referrer"
+                        />
+                        <button 
+                          onClick={() => setModalImage(msg.image || null)}
+                          className="absolute bottom-2 right-2 bg-slate-900/80 p-1.5 rounded-lg text-white opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center hover:bg-indigo-600"
+                        >
+                          <Maximize2 size={14} />
+                        </button>
+                      </div>
+                      <div className="mt-2 text-center">
+                        <span className="text-[0.78rem] font-bold text-yellow-300 block leading-tight">
+                          🎨 {msg.image.titulo}
+                        </span>
+                        <span className="text-[0.62rem] text-slate-400 block mt-0.5">
+                          📷 Fonte: {msg.image.credito || "Wikimedia Commons"}
+                        </span>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+
+            {/* Balão de Escolha de Cores do Candinho */}
+            {isProcessing && (
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex gap-3 max-w-[80%]"
+              >
+                <div className="w-8 h-8 rounded-full bg-rose-900/40 border border-rose-500/20 flex items-center justify-center">
+                  <Palette size={14} className="text-rose-400 animate-spin" />
+                </div>
+                <div className="bg-slate-950/40 px-4 py-2.5 rounded-2xl rounded-bl-none text-slate-300 text-xs italic flex items-center gap-1.5 border border-slate-800">
+                  <span>Candinho está escolhendo as cores da tela...</span>
+                  <div className="flex gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <div ref={chatEndRef} />
+        </main>
+
+        {/* Sugestões de Perguntas Rápidas */}
+        {messages.length <= 2 && (
+          <div className="px-4 py-2 bg-slate-950/20 border-t border-indigo-950/50">
+            <p className="text-[0.72rem] text-rose-300 font-bold mb-1.5 flex items-center gap-1 uppercase tracking-wider">
+              <Sparkles size={11} /> Ideias para conversar com o Candinho:
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {SUGGESTIONS.map((item) => (
+                <button
+                  key={item}
+                  onClick={() => handleSend(item.replace(/[\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD00-\uDFFF]/g, ""))}
+                  className="bg-slate-800/40 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-[0.8rem] px-2.5 py-1.5 rounded-lg transition-all hover:border-yellow-400/40 cursor-pointer"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Caixa de Entrada de Texto */}
+        <section className="p-4 bg-slate-950/55 border-t border-rose-500/20 flex gap-2 items-center">
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={handleKeyPress}
+            placeholder="Pergunte sobre um artista famoso ou uma pintura bonita..."
+            disabled={isProcessing}
+            className="flex-1 bg-slate-900/80 border border-slate-700 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/20 text-white rounded-full px-5 py-3 text-sm outline-none transition-all placeholder-slate-500 disabled:opacity-50"
+          />
+          <button
+            onClick={() => handleSend(inputValue)}
+            disabled={!inputValue.trim() || isProcessing}
+            className="bg-rose-600 hover:bg-rose-500 disabled:bg-slate-800 disabled:text-slate-600 text-white px-5 py-3 rounded-full font-bold text-sm flex items-center gap-1.5 transition-all outline-none hover:scale-102 focus:ring-2 focus:ring-rose-500/20 select-none cursor-pointer"
+            title="Enviar mensagem"
+          >
+            <span className="hidden sm:inline">Enviar</span>
+            <Send size={15} />
+          </button>
+        </section>
+      </div>
+
+      {/* Linha de Rodapé */}
+      <footer className="text-center text-[0.72rem] text-slate-500 mt-3 flex items-center justify-center gap-1">
+        <Palette size={11} className="text-rose-500 animate-pulse" />
+        <span>Candinho 2.0 — Criado com carinho para inspirar jovens alunos de artes!</span>
+      </footer>
+
+      {/* Janela de Zoom (Modal para Ampliar a Pintura Selecionada) */}
+      <AnimatePresence>
+        {modalImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/95 z-55 flex flex-col justify-center items-center p-4"
+          >
+            <button
+              onClick={() => setModalImage(null)}
+              className="absolute top-4 right-4 bg-slate-800/80 hover:bg-rose-600 p-2.5 rounded-full text-white transition-all cursor-pointer border border-slate-700"
+            >
+              <X size={20} />
+            </button>
+
+            <motion.div 
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              className="max-w-3xl w-full flex flex-col items-center"
+            >
+              <img 
+                src={modalImage.imagemUrl} 
+                alt={modalImage.titulo}
+                className="max-h-[75vh] max-w-full rounded-xl object-contain shadow-2xl border border-yellow-500/20"
+                referrerPolicy="no-referrer"
+              />
+              <div className="mt-4 text-center bg-slate-900/90 py-3 px-6 rounded-2xl border border-yellow-400/20 max-w-xl">
+                <h3 className="text-yellow-300 font-display font-bold text-lg leading-snug">
+                  {modalImage.titulo}
+                </h3>
+                <p className="text-slate-400 text-xs mt-1">
+                  📷 Fonte: {modalImage.credito}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
