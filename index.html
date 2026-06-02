@@ -43,13 +43,13 @@
         }
         
         .avatar { 
-    width: 110px;
-    height: 110px; 
-    border-radius: 50%; 
-    object-fit: cover; 
-    border: 3px solid #ffd700;
-    animation: float 4s ease-in-out infinite;
-}
+            width: 110px;
+            height: 110px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 3px solid #ffd700;
+            animation: float 4s ease-in-out infinite;
+        }
         
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
@@ -102,24 +102,34 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .bot-message-wrapper { display: flex; align-items: flex-start; gap: 15px; }
+        .bot-message-wrapper { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 15px; 
+        }
 
-   .bot-icon {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-top: 4px;
-}  /* ← esta chave estava faltando */
+        .bot-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-top: 4px;
+        }
 
-.bot-image {
-    margin-top: 15px;
-    max-width: 100%;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: transform 0.3s;
-    display: block;
-}
+        .bot-text {
+            flex: 1;
+            line-height: 1.5;
+        }
+
+        .bot-image {
+            margin-top: 15px;
+            max-width: 100%;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: block;
+        }
+        
         .bot-image:hover { transform: scale(1.02); }
 
         .image-credit {
@@ -128,6 +138,14 @@
             margin-top: 5px;
             text-align: center;
             opacity: 0.8;
+        }
+
+        .image-museum {
+            font-size: 0.7rem;
+            color: #ffd700;
+            margin-top: 3px;
+            text-align: center;
+            font-weight: bold;
         }
 
         .input-area { display: flex; gap: 10px; }
@@ -142,6 +160,7 @@
             font-size: 1rem;
             outline: none;
         }
+        
         input:focus { border-color: #ffd700; background: rgba(255,255,255,0.1); }
 
         button {
@@ -152,19 +171,56 @@
             border-radius: 30px;
             font-weight: bold;
             cursor: pointer;
+            transition: all 0.3s;
         }
-        button:disabled { opacity: 0.5; }
+        
+        button:hover:not(:disabled) {
+            background: #ff6b6b;
+            transform: scale(1.02);
+        }
+        
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        .loading { font-style: italic; opacity: 0.8; font-size: 0.9rem; }
+        .loading { 
+            font-style: italic; 
+            opacity: 0.8; 
+            font-size: 0.9rem;
+            background: #686de0;
+        }
 
         .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center;
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(0,0,0,0.9); 
+            z-index: 9999; 
+            justify-content: center; 
+            align-items: center;
+            cursor: pointer;
         }
-        .modal img { max-width: 90%; max-height: 85%; border-radius: 10px; }
+        
+        .modal img { 
+            max-width: 90%; 
+            max-height: 85%; 
+            border-radius: 10px; 
+        }
 
         #chat::-webkit-scrollbar { width: 6px; }
+        #chat::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 10px; }
         #chat::-webkit-scrollbar-thumb { background: #e94560; border-radius: 10px; }
+        #chat::-webkit-scrollbar-thumb:hover { background: #ff6b6b; }
+
+        @media (max-width: 600px) {
+            .container { padding: 15px; }
+            .avatar { width: 70px; height: 70px; }
+            .title h1 { font-size: 1.3rem; }
+            .msg { max-width: 95%; }
+            .bot-message-wrapper { gap: 8px; }
+            .bot-icon { width: 40px; height: 40px; }
+        }
     </style>
 </head>
 <body>
@@ -181,7 +237,7 @@
     <div id="chat"></div>
 
     <div class="input-area">
-        <input type="text" id="pergunta" placeholder="Pergunte sobre um artista..." autocomplete="off">
+        <input type="text" id="pergunta" placeholder="Pergunte sobre um artista ou peça para mostrar uma obra..." autocomplete="off">
         <button id="sendBtn">Enviar</button>
     </div>
 </div>
@@ -196,7 +252,7 @@
     const btn = document.getElementById("sendBtn");
     let isProcessing = false;
 
-    // Função para mostrar mensagens na tela (sem cards)
+    // Função para mostrar mensagens na tela
     function appendMessage(text, side, extra = null) {
         const msgDiv = document.createElement("div");
         msgDiv.className = `msg ${side}`;
@@ -204,28 +260,62 @@
         if (side === 'bot') {
             const wrapper = document.createElement("div");
             wrapper.className = "bot-message-wrapper";
-            wrapper.innerHTML = `
-                <img src="https://i.imgur.com/UDl1c5j.png" class="bot-icon">
-                <span class="bot-text">${text}</span>
-            `;
+            
+            const botText = document.createElement("span");
+            botText.className = "bot-text";
+            botText.innerHTML = text;
+            
+            wrapper.innerHTML = `<img src="https://i.imgur.com/UDl1c5j.png" class="bot-icon" alt="Candinho">`;
+            wrapper.appendChild(botText);
             msgDiv.appendChild(wrapper);
 
-            // Apenas exibe a imagem (se existir) - sem cards de museu ou botões
+            // Exibe a imagem se existir
             if (extra && extra.image && extra.image.imagemUrl) {
                 const img = document.createElement("img");
                 img.src = extra.image.imagemUrl;
                 img.className = "bot-image";
                 img.title = extra.image.titulo || "Clique para ampliar";
+                img.alt = extra.image.titulo || "Obra de arte";
                 img.onclick = () => {
                     document.getElementById("modalImg").src = img.src;
                     document.getElementById("imgModal").style.display = "flex";
                 };
                 msgDiv.appendChild(img);
                 
-                const credit = document.createElement("div");
-                credit.className = "image-credit";
-                credit.innerText = `📷 Fonte: ${extra.image.credito || 'Wikimedia'}`;
-                msgDiv.appendChild(credit);
+                // Créditos da imagem
+                if (extra.image.credito) {
+                    const credit = document.createElement("div");
+                    credit.className = "image-credit";
+                    credit.innerHTML = `📷 Fonte: ${extra.image.credito}`;
+                    msgDiv.appendChild(credit);
+                }
+                
+                // Nome do museu se disponível
+                if (extra.image.museu && extra.image.museu !== extra.image.credito) {
+                    const museum = document.createElement("div");
+                    museum.className = "image-museum";
+                    museum.innerHTML = `🏛️ Acervo: ${extra.image.museu}`;
+                    msgDiv.appendChild(museum);
+                }
+                
+                // Título da obra se disponível
+                if (extra.image.titulo && extra.image.titulo !== "Sem título") {
+                    const title = document.createElement("div");
+                    title.className = "image-credit";
+                    title.style.marginTop = "3px";
+                    title.style.fontSize = "0.7rem";
+                    title.innerHTML = `🖼️ ${extra.image.titulo.substring(0, 100)}`;
+                    msgDiv.appendChild(title);
+                }
+                
+                // Artista e ano se disponíveis
+                if (extra.image.autor && extra.image.autor !== "Autor desconhecido") {
+                    const author = document.createElement("div");
+                    author.className = "image-credit";
+                    author.style.fontSize = "0.65rem";
+                    author.innerHTML = `👨‍🎨 ${extra.image.autor}${extra.image.ano && extra.image.ano !== "Data desconhecida" ? ` • ${extra.image.ano}` : ''}`;
+                    msgDiv.appendChild(author);
+                }
             }
         } else {
             msgDiv.innerText = text;
@@ -247,36 +337,46 @@
             appendMessage(val, 'user');
             input.value = "";
 
-            const loading = document.createElement("div");
-            loading.className = "msg bot loading";
-            loading.id = "loader";
-            loading.innerText = "Candinho está preparando a tela...";
-            chat.appendChild(loading);
+            const loadingDiv = document.createElement("div");
+            loadingDiv.className = "msg bot loading";
+            loadingDiv.id = "loader";
+            loadingDiv.innerHTML = `
+                <div class="bot-message-wrapper">
+                    <img src="https://i.imgur.com/UDl1c5j.png" class="bot-icon" alt="Candinho">
+                    <span>Candinho está preparando a tela... 🎨</span>
+                </div>
+            `;
+            chat.appendChild(loadingDiv);
             chat.scrollTop = chat.scrollHeight;
 
+            // Chamada correta para a API
             const res = await fetch("/api/groq", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ mensagem: val })
             });
 
-            if (!res.ok) throw new Error("Erro na API");
+            if (!res.ok) {
+                const errorText = await res.text();
+                console.error("Erro da API:", res.status, errorText);
+                throw new Error(`Erro ${res.status}: ${res.statusText}`);
+            }
 
             const data = await res.json();
             
             const loader = document.getElementById("loader");
             if (loader) loader.remove();
 
-            // Exibe apenas a mensagem e a imagem (se existir) – cards removidos
-            appendMessage(data.reply, 'bot', { 
-                image: data.image   // info e googleArts são ignorados
+            // Exibe a mensagem e a imagem (se existir)
+            appendMessage(data.reply || "Desculpe, não consegui processar sua pergunta.", 'bot', { 
+                image: data.image || null
             });
 
         } catch (e) {
             const loader = document.getElementById("loader");
             if (loader) loader.remove();
+            console.error("Erro detalhado:", e);
             appendMessage("Ops! Minha paleta bagunçou. Pode repetir? 🎨", "bot");
-            console.error(e);
         } finally {
             isProcessing = false;
             btn.disabled = false;
@@ -286,12 +386,15 @@
     }
 
     btn.addEventListener("click", handleSend);
-    input.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") handleSend();
+    input.addEventListener("keypress", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+        }
     });
 
     window.onload = () => {
-        appendMessage("Olá! Sou o Candinho, seu amigo artista. O que vamos descobrir hoje? 🎨", "bot");
+        appendMessage("Olá! Sou o Candinho, seu amigo artista. Vamos descobrir arte brasileira e mundial juntos? 🎨🇧🇷", "bot");
         input.focus();
     };
 </script>
