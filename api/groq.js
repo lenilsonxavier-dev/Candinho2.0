@@ -1,290 +1,204 @@
-// api/groq.js – Fluxo: Wikimedia → Met → Chicago → Europeana
-const { bibliotecaCultural: libLocal } = require("../src/data/bibliotecaCultural.js");
+// ==================== BUSCA EM ACERVOS BRASILEIROS ====================
+// Via Meta-Acervos/Wikimedia GLAM
 
-const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
-const GROQ_API_KEY = process.env.GROQ_API_KEY;
-
-let bibliotecaCache = null;
-
-async function carregarBiblioteca() {
-    if (bibliotecaCache) return bibliotecaCache;
-    try {
-        const res = await fetch(`${GITHUB_BASE}bibliotecaCultural.json`);
-        const libGitHub = res.ok ? await res.json() : {};
-        bibliotecaCache = { ...libLocal, ...libGitHub };
-    } catch (e) { bibliotecaCache = libLocal; }
-    return bibliotecaCache;
-}
-
-function pediuImagem(mensagem) {
-    const palavrasImagem = ["imagem", "foto", "mostre", "obra", "ver", "desenho", "quadro", "pintura", "ilustração", "retrato"];
-    return palavrasImagem.some(p => mensagem.toLowerCase().includes(p));
-}
-
-function extrairNomeArtista(mensagem) {
-    const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu", "mostre", "imagem", "foto", "pintura", "desenho", "quadro", "retrato", "ilustração"];
-    let texto = mensagem.replace(/[?!.,]/g, "").toLowerCase();
-    let palavras = texto.split(/\s+/);
-    let partes = [];
-    for (let i = 0; i < palavras.length; i++) {
-        let p = palavras[i];
-        if (p.length > 1 && !stopWords.includes(p)) {
-            if (mensagem.split(/\s+/)[i] && mensagem.split(/\s+/)[i][0] === mensagem.split(/\s+/)[i][0].toUpperCase()) {
-                partes.push(p);
-            } else if (p === "van" || p === "da" || p === "de" || p === "do" || p === "dos") {
-                partes.push(p);
-            } else if (partes.length === 0 && i === palavras.length - 1) {
-                partes = [p];
-            }
-        }
-    }
-    let nome = partes.join(" ").replace(/\b\w/g, l => l.toUpperCase());
-    return nome || mensagem.slice(0, 40);
-}
-
-// ==================== APIs DOS MUSEUS ====================
-
-// 1. Art Institute of Chicago
-async function buscarChicago(termo) {
-    try {
-        const res = await fetch(
-            `https://api.artic.edu/api/v1/artworks/search?q=${encodeURIComponent(termo)}`
-        );
-        const data = await res.json();
-        if (!data.data?.length) return null;
-        const obra = data.data[0];
-        const detalhe = await fetch(`https://api.artic.edu/api/v1/artworks/${obra.id}`);
-        const detalheJson = await detalhe.json();
-        const art = detalheJson.data;
-        const imagem = art.image_id
-            ? `https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg`
-            : null;
-        return {
-            imagemUrl: imagem,
-            titulo: art.title,
-            autor: art.artist_title,
-            ano: art.date_display,
-            museu: "Art Institute of Chicago",
-            credito: "Art Institute of Chicago"
-        };
-    } catch (e) {
-        console.error("Erro no Chicago:", e);
-        return null;
-    }
-}
-
-// 2. Metropolitan Museum of Art
-async function buscarMetropolitan(termo) {
-    try {
-        const searchResponse = await fetch(
-            `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${encodeURIComponent(termo)}`
-        );
-        const searchData = await searchResponse.json();
-        if (!searchData.objectIDs?.length) return null;
-        const objectId = searchData.objectIDs[0];
-        const detailResponse = await fetch(
-            `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId}`
-        );
-        const obra = await detailResponse.json();
-        return {
-            imagemUrl: obra.primaryImageSmall || obra.primaryImage || null,
-            titulo: obra.title || "Sem título",
-            autor: obra.artistDisplayName || "Autor desconhecido",
-            ano: obra.objectDate || "Data desconhecida",
-            museu: "Metropolitan Museum of Art",
-            credito: "Metropolitan Museum of Art"
-        };
-    } catch (erro) {
-        console.error("Erro no Met:", erro);
-        return null;
-    }
-}
-
-// 3. Wikimedia Commons (prioridade 1)
-async function buscarWikimedia(artistaNome) {
-    try {
-        let termoBusca = `${artistaNome} painting`;
-        let url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(termoBusca)}&gsrlimit=8&prop=imageinfo&iiprop=url|mime|mediatype&iiurlwidth=800`;
-        let res = await fetch(url);
-        let data = await res.json();
-        if (data.query && data.query.pages) {
-            let pages = Object.values(data.query.pages);
-            let imagems = pages.filter(p => {
-                if (!p.imageinfo || !p.imageinfo[0]) return false;
-                const info = p.imageinfo[0];
-                const mime = (info.mime || "").toLowerCase();
-                const media = (info.mediatype || "").toUpperCase();
-                return (media === "BITMAP" || media === "DRAWING") &&
-                       (mime.includes("jpeg") || mime.includes("jpg") || mime.includes("png") || mime.includes("gif") || mime.includes("webp"));
-            });
-            if (imagems.length > 0) {
-                const imgPage = imagems[0];
-                const info = imgPage.imageinfo[0];
-                return {
-                    imagemUrl: info.thumburl || info.url,
-                    titulo: imgPage.title.replace("File:", "").split('.')[0],
-                    credito: "Wikimedia Commons",
-                    museu: "Wikimedia Commons"
-                };
-            }
-            let anyPage = pages.find(p => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].thumburl);
-            if (anyPage) {
-                const info = anyPage.imageinfo[0];
-                return {
-                    imagemUrl: info.thumburl,
-                    titulo: anyPage.title.replace("File:", "").split('.')[0],
-                    credito: "Wikimedia Commons",
-                    museu: "Wikimedia Commons"
-                };
-            }
-        }
-        url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(artistaNome)}&gsrlimit=5&prop=imageinfo&iiprop=url|mime|mediatype&iiurlwidth=800`;
-        res = await fetch(url);
-        data = await res.json();
-        if (data.query && data.query.pages) {
-            let pages = Object.values(data.query.pages);
-            let imgPage = pages.find(p => {
-                if (!p.imageinfo || !p.imageinfo[0]) return false;
-                const info = p.imageinfo[0];
-                const mime = (info.mime || "").toLowerCase();
-                const media = (info.mediatype || "").toUpperCase();
-                return (media === "BITMAP" || media === "DRAWING") &&
-                       (mime.includes("jpeg") || mime.includes("jpg") || mime.includes("png"));
-            });
-            if (!imgPage) imgPage = pages.find(p => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].thumburl);
-            if (imgPage) {
-                const info = imgPage.imageinfo[0];
-                return {
-                    imagemUrl: info.thumburl || info.url,
-                    titulo: imgPage.title.replace("File:", "").split('.')[0],
-                    credito: "Wikimedia Commons",
-                    museu: "Wikimedia Commons"
-                };
-            }
-        }
-    } catch (e) {
-        console.error("Erro no Wikimedia:", e);
-    }
-    return null;
-}
-
-// 4. Europeana (fallback)
-async function buscarEuropeana(artistaNome) {
-    try {
-        // Europeana requer API key - você precisa registrar em https://pro.europeana.eu/
-        const EUROPEANA_API_KEY = process.env.EUROPEANA_API_KEY;
-        if (!EUROPEANA_API_KEY) return null;
-        
-        const url = `https://api.europeana.eu/record/v2/search.json?wskey=${EUROPEANA_API_KEY}&query=${encodeURIComponent(artistaNome)}&reusability=open&media=true&rows=1&profile=rich`;
-        const res = await fetch(url);
-        const data = await res.json();
-        
-        if (data.items && data.items.length > 0) {
-            const item = data.items[0];
-            const imagemUrl = item.edmPreview?.[0] || null;
-            return {
-                imagemUrl: imagemUrl,
-                titulo: item.title?.[0] || "Sem título",
-                autor: item.dcCreator?.[0] || artistaNome,
-                ano: item.year?.[0] || "Data desconhecida",
-                museu: "Europeana",
-                credito: "Europeana"
-            };
-        }
-    } catch (e) {
-        console.error("Erro no Europeana:", e);
-    }
-    return null;
-}
-
-// ==================== FLUXO PRINCIPAL ====================
-// Fluxo: Wikimedia → Met → Chicago → Europeana
-async function buscarImagemFluxo(artistaNome) {
-    // 1. Tentar Wikimedia primeiro
-    let resultado = await buscarWikimedia(artistaNome);
-    if (resultado && resultado.imagemUrl) {
-        console.log(`✅ Imagem encontrada no Wikimedia para: ${artistaNome}`);
-        return resultado;
-    }
-    
-    // 2. Tentar Metropolitan Museum
-    resultado = await buscarMetropolitan(artistaNome);
-    if (resultado && resultado.imagemUrl) {
-        console.log(`✅ Imagem encontrada no Met Museum para: ${artistaNome}`);
-        return resultado;
-    }
-    
-    // 3. Tentar Art Institute of Chicago
-    resultado = await buscarChicago(artistaNome);
-    if (resultado && resultado.imagemUrl) {
-        console.log(`✅ Imagem encontrada no Art Institute of Chicago para: ${artistaNome}`);
-        return resultado;
-    }
-    
-    // 4. Tentar Europeana (fallback final)
-    resultado = await buscarEuropeana(artistaNome);
-    if (resultado && resultado.imagemUrl) {
-        console.log(`✅ Imagem encontrada no Europeana para: ${artistaNome}`);
-        return resultado;
-    }
-    
-    console.log(`❌ Nenhuma imagem encontrada para: ${artistaNome}`);
-    return null;
-}
-
-module.exports = async function handler(req, res) {
-    if (req.method !== 'POST') return res.status(405).json({ error: 'Método não permitido' });
-
-    try {
-        const { mensagem } = req.body;
-        const lib = await carregarBiblioteca();
-        const textoBusca = mensagem.toLowerCase();
-        let textoFinal = "";
-
-        // 1. Biblioteca cultural
-        for (const chave in lib) {
-            const item = lib[chave];
-            if (item.palavras_chave && item.palavras_chave.some(p => textoBusca.includes(p.toLowerCase()))) {
-                textoFinal = `${item.inicio[0]} ${item.explicacao_curta[0]}`;
-                break;
-            }
-        }
-
-        // 2. Groq (IA) se necessário
-        if (!textoFinal && GROQ_API_KEY) {
-            const responseGroq = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                method: "POST",
-                headers: { "Authorization": `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    model: "llama-3.1-8b-instant",
-                    messages: [
-                        { 
-                            role: "system", 
-                            content: "Você é o Candinho, um professor de arte para crianças de 10 anos. Responda de forma simples, gentil e muito breve (máximo 3 frases). NUNCA repita o nome do artista várias vezes. Se não souber, diga 'Não conheço esse artista ainda!'." 
-                        },
-                        { role: "user", content: mensagem }
-                    ],
-                    temperature: 0.4,
-                    max_tokens: 150
-                })
-            });
-            const dataIA = await responseGroq.json();
-            textoFinal = dataIA.choices?.[0]?.message?.content?.trim() || "";
-        }
-
-        // 3. Busca imagem seguindo o fluxo: Wikimedia → Met → Chicago → Europeana
-        let imagemResult = null;
-        if (pediuImagem(mensagem)) {
-            const nomeArtista = extrairNomeArtista(mensagem);
-            imagemResult = await buscarImagemFluxo(nomeArtista);
-        }
-
-        return res.status(200).json({
-            reply: textoFinal || "Que pergunta curiosa! Vamos descobrir juntos? 🎨",
-            image: imagemResult
-        });
-    } catch (error) {
-        console.error("Erro Geral:", error);
-        return res.status(200).json({ reply: "Ops! Minhas tintas secaram. Pode repetir? 🎨" });
-    }
+const MUSEUS_BRASILEIROS = {
+    masp: "MASP",
+    pinacoteca: "Pinacoteca de São Paulo",
+    belas_artes: "Museu Nacional de Belas Artes",
+    museu_paulista: "Museu Paulista da USP",
+    mac_usp: "MAC-USP"
 };
+
+// Mapeamento de instituições no Wikidata
+const INSTITUICOES_WIKIDATA = {
+    "MASP": "Q1299767",
+    "Pinacoteca de São Paulo": "Q10350353",
+    "Museu Nacional de Belas Artes": "Q2094726",
+    "Museu Paulista da USP": "Q3693239",
+    "MAC-USP": "Q10321431"
+};
+
+async function buscarAcervoBrasileiro(termo, museuEspecifico = null) {
+    try {
+        // Constrói a query SPARQL para buscar obras de museus brasileiros
+        let instituicoesQuery = "";
+        
+        if (museuEspecifico && INSTITUICOES_WIKIDATA[museuEspecifico]) {
+            // Busca em um museu específico
+            const wikidataId = INSTITUICOES_WIKIDATA[museuEspecifico];
+            instituicoesQuery = `?item wdt:P195 wd:${wikidataId} .`;
+        } else {
+            // Busca em todos os museus brasileiros mapeados
+            const ids = Object.values(INSTITUICOES_WIKIDATA);
+            const options = ids.map(id => `wd:${id}`).join(" ");
+            instituicoesQuery = `?item wdt:P195 (${options}) .`;
+        }
+        
+        // Query SPARQL para buscar obras com imagem
+        const sparqlQuery = `
+            SELECT ?item ?itemLabel ?image ?creatorLabel ?inception ?collectionLabel WHERE {
+                ?item wdt:P31 wd:Q3305213 .  # é uma pintura
+                ${instituicoesQuery}
+                ?item wdt:P18 ?image .        # tem imagem
+                
+                OPTIONAL { ?item wdt:P170 ?creator . }
+                OPTIONAL { ?item wdt:P571 ?inception . }
+                OPTIONAL { ?item wdt:P195 ?collection . }
+                
+                SERVICE wikibase:label { 
+                    bd:serviceParam wikibase:language "pt,en" .
+                    ?item rdfs:label ?itemLabel .
+                    ?creator rdfs:label ?creatorLabel .
+                    ?collection rdfs:label ?collectionLabel .
+                }
+            }
+            LIMIT 20
+        `;
+        
+        // Se tem termo de busca, adiciona filtro de texto
+        let finalQuery = sparqlQuery;
+        if (termo) {
+            finalQuery = `
+                SELECT ?item ?itemLabel ?image ?creatorLabel ?inception ?collectionLabel WHERE {
+                    ?item wdt:P31 wd:Q3305213 .
+                    ${instituicoesQuery}
+                    ?item wdt:P18 ?image .
+                    OPTIONAL { ?item wdt:P170 ?creator . }
+                    OPTIONAL { ?item wdt:P571 ?inception . }
+                    OPTIONAL { ?item wdt:P195 ?collection . }
+                    
+                    SERVICE wikibase:label { 
+                        bd:serviceParam wikibase:language "pt,en" .
+                        ?item rdfs:label ?itemLabel .
+                        ?creator rdfs:label ?creatorLabel .
+                        ?collection rdfs:label ?collectionLabel .
+                    }
+                    
+                    # Filtro por termo de busca
+                    FILTER(CONTAINS(LCASE(?itemLabel), LCASE("${termo}")))
+                }
+                LIMIT 15
+            `;
+        }
+        
+        const url = `https://query.wikidata.org/sparql?format=json&query=${encodeURIComponent(finalQuery)}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (!data.results?.bindings?.length) return null;
+        
+        // Processa e retorna as obras encontradas
+        const obras = data.results.bindings.map(binding => {
+            // Constrói URL da imagem do Wikimedia Commons
+            const imageFilename = binding.image?.value.split('/').pop();
+            const imageUrl = imageFilename 
+                ? `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(imageFilename)}?width=800`
+                : null;
+            
+            return {
+                titulo: binding.itemLabel?.value || "Sem título",
+                autor: binding.creatorLabel?.value || "Autor desconhecido",
+                ano: binding.inception?.value?.split('-')[0] || "Data desconhecida",
+                museu: binding.collectionLabel?.value || "Museu brasileiro",
+                imagemUrl: imageUrl,
+                credito: `Acervo de ${binding.collectionLabel?.value || "museu brasileiro"} - via Meta-Acervos/Wikidata`,
+                wikidataId: binding.item?.value?.split('/').pop()
+            };
+        });
+        
+        return obras;
+        
+    } catch (error) {
+        console.error("Erro ao buscar acervo brasileiro:", error);
+        return null;
+    }
+}
+
+// Função para buscar uma obra aleatória de museu brasileiro
+async function buscarObraBrasileiraAleatoria() {
+    try {
+        // Query para pegar uma obra aleatória
+        const museusIds = Object.values(INSTITUICOES_WIKIDATA);
+        const options = museusIds.map(id => `wd:${id}`).join(" ");
+        
+        const sparqlQuery = `
+            SELECT ?item ?itemLabel ?image ?creatorLabel ?inception ?collectionLabel WHERE {
+                ?item wdt:P31 wd:Q3305213 .
+                ?item wdt:P195 (${options}) .
+                ?item wdt:P18 ?image .
+                OPTIONAL { ?item wdt:P170 ?creator . }
+                OPTIONAL { ?item wdt:P571 ?inception . }
+                OPTIONAL { ?item wdt:P195 ?collection . }
+                SERVICE wikibase:label { 
+                    bd:serviceParam wikibase:language "pt,en" .
+                    ?item rdfs:label ?itemLabel .
+                    ?creator rdfs:label ?creatorLabel .
+                    ?collection rdfs:label ?collectionLabel .
+                }
+            }
+            ORDER BY RAND()
+            LIMIT 5
+        `;
+        
+        const url = `https://query.wikidata.org/sparql?format=json&query=${encodeURIComponent(sparqlQuery)}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (!data.results?.bindings?.length) return null;
+        
+        const randomIndex = Math.floor(Math.random() * data.results.bindings.length);
+        const obra = data.results.bindings[randomIndex];
+        
+        const imageFilename = obra.image?.value.split('/').pop();
+        
+        return {
+            titulo: obra.itemLabel?.value || "Sem título",
+            autor: obra.creatorLabel?.value || "Autor desconhecido",
+            ano: obra.inception?.value?.split('-')[0] || "Data desconhecida",
+            museu: obra.collectionLabel?.value || "Museu brasileiro",
+            imagemUrl: imageFilename ? `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(imageFilename)}?width=800` : null,
+            wikidataId: obra.item?.value?.split('/').pop()
+        };
+        
+    } catch (error) {
+        console.error("Erro ao buscar obra aleatória brasileira:", error);
+        return null;
+    }
+}
+
+// Integra a busca brasileira no fluxo existente
+async function buscarImagemFluxoComBrasil(artistaNome) {
+    // Primeiro: tenta acervos brasileiros (MASP, Pinacoteca, etc)
+    console.log(`🔍 Buscando no acervo brasileiro para: ${artistaNome}`);
+    let resultadoBrasileiro = await buscarAcervoBrasileiro(artistaNome);
+    
+    if (resultadoBrasileiro && resultadoBrasileiro.length > 0) {
+        console.log(`✅ Encontrado ${resultadoBrasileiro.length} obra(s) brasileira(s) para: ${artistaNome}`);
+        // Retorna a primeira obra encontrada
+        return resultadoBrasileiro[0];
+    }
+    
+    // Fallback: fluxo internacional original
+    console.log(`⚠️ Nada encontrado no acervo brasileiro, tentando Wikimedia geral...`);
+    let resultadoWikimedia = await buscarWikimedia(artistaNome);
+    if (resultadoWikimedia && resultadoWikimedia.imagemUrl) {
+        return resultadoWikimedia;
+    }
+    
+    let resultadoMet = await buscarMetropolitan(artistaNome);
+    if (resultadoMet && resultadoMet.imagemUrl) {
+        return resultadoMet;
+    }
+    
+    let resultadoChicago = await buscarChicago(artistaNome);
+    if (resultadoChicago && resultadoChicago.imagemUrl) {
+        return resultadoChicago;
+    }
+    
+    let resultadoEuropeana = await buscarEuropeana(artistaNome);
+    if (resultadoEuropeana && resultadoEuropeana.imagemUrl) {
+        return resultadoEuropeana;
+    }
+    
+    return null;
+}
