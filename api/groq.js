@@ -1,178 +1,286 @@
-// api/groq.js – APENAS Wikimedia Commons, com thumbnails compatíveis e filtro de formato
-const { bibliotecaCultural: libLocal } = require("../src/data/bibliotecaCultural.js");
+import express, { Request, Response } from "express";
+import path from "path";
+import { createServer as createViteServer } from "vite";
+import { GoogleGenAI } from "@google/genai";
+import { bibliotecaCultural } from "./src/data/bibliotecaCultural.js";
+
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
+
+// Inicializa a IA Gemini se houver chave configurada
+const apiKey = process.env.GEMINI_API_KEY || "";
+const ai = apiKey
+  ? new GoogleGenAI({
+      apiKey: apiKey,
+      httpOptions: {
+        headers: {
+          "User-Agent": "aistudio-build",
+        },
+      },
+    })
+  : null;
 
 const GITHUB_BASE = "https://raw.githubusercontent.com/lenilsonxavier-dev/Candinho2.0/main/data/";
-const GROQ_API_KEY = process.env.GROQ_API_KEY;
-
-let bibliotecaCache = null;
+let bibliotecaCache: any = null;
 
 async function carregarBiblioteca() {
-    if (bibliotecaCache) return bibliotecaCache;
-    try {
-        const res = await fetch(`${GITHUB_BASE}bibliotecaCultural.json`);
-        const libGitHub = res.ok ? await res.json() : {};
-        bibliotecaCache = { ...libLocal, ...libGitHub };
-    } catch (e) { bibliotecaCache = libLocal; }
-    return bibliotecaCache;
+  if (bibliotecaCache) return bibliotecaCache;
+  try {
+    const res = await fetch(`${GITHUB_BASE}bibliotecaCultural.json`);
+    const libGitHub = res.ok ? await res.json() : {};
+    bibliotecaCache = { ...bibliotecaCultural, ...libGitHub };
+  } catch (e) {
+    console.warn("Utilizando biblioteca cultural local de fallback:", e);
+    bibliotecaCache = bibliotecaCultural;
+  }
+  return bibliotecaCache;
 }
 
-function pediuImagem(mensagem) {
-    const palavrasImagem = ["imagem", "foto", "mostre", "obra", "ver", "desenho", "quadro", "pintura", "ilustração", "retrato"];
-    return palavrasImagem.some(p => mensagem.toLowerCase().includes(p));
-}
-
-function extrairNomeArtista(mensagem) {
-    const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu", "mostre", "imagem", "foto", "pintura", "desenho", "quadro", "retrato", "ilustração"];
-    let texto = mensagem.replace(/[?!.,]/g, "").toLowerCase();
-    let palavras = texto.split(/\s+/);
-    let partes = [];
-    for (let i = 0; i < palavras.length; i++) {
-        let p = palavras[i];
-        if (p.length > 1 && !stopWords.includes(p)) {
-            if (mensagem.split(/\s+/)[i] && mensagem.split(/\s+/)[i][0] === mensagem.split(/\s+/)[i][0].toUpperCase()) {
-                partes.push(p);
-            } else if (p === "van" || p === "da" || p === "de" || p === "do" || p === "dos") {
-                partes.push(p);
-            } else if (partes.length === 0 && i === palavras.length - 1) {
-                partes = [p];
-            }
-        }
+// --- BUSCA NO PEXELS (FALLBACK SECUNDÁRIO) ---
+async function buscarNoPexels(termo: string) {
+  const pexelsKey = process.env.PEXELS_API_KEY;
+  if (!pexelsKey) return null;
+  try {
+    const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(termo + " painting art")}&per_page=1&orientation=square`;
+    const res = await fetch(url, {
+      headers: { Authorization: pexelsKey }
+    });
+    if (res.ok) {
+      const data: any = await res.json();
+      if (data.photos && data.photos.length > 0) {
+        const photo = data.photos[0];
+        return {
+          imagemUrl: photo.src.medium,
+          titulo: `Arte de ${termo}`,
+          credito: `${photo.photographer} / Pexels`
+        };
+      }
     }
-    let nome = partes.join(" ").replace(/\b\w/g, l => l.toUpperCase());
-    return nome || mensagem.slice(0, 40);
+  } catch (e) {
+    console.error("Erro Pexels:", e);
+  }
+  return null;
 }
 
-// Busca exclusiva no Wikimedia Commons com thumbnail otimizado e filtro de formato
-async function buscarWikimedia(artistaNome) {
-    try {
-        // 1. Busca específica por "artista painting" (prioriza pinturas)
-        let termoBusca = `${artistaNome} painting`;
-        let url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(termoBusca)}&gsrlimit=8&prop=imageinfo&iiprop=url|mime|mediatype&iiurlwidth=800`;
+// --- BUSCA NA WIKIMEDIA (EXCLUSIVA E FILTRADA) ---
+async function buscarNaWikimedia(artistaNome: string) {
+  try {
+    if (!artistaNome) return null;
 
-        let res = await fetch(url);
-        let data = await res.json();
+    // 1. Busca específica por obra/pintura do artista (prioriza pinturas)
+    let termoBusca = `${artistaNome} painting`;
+    let url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(termoBusca)}&gsrlimit=8&prop=imageinfo&iiprop=url|mime|mediatype|extmetadata&iiurlwidth=800`;
 
-        if (data.query && data.query.pages) {
-            let pages = Object.values(data.query.pages);
-            // Filtra apenas imagens compatíveis (BITMAP ou DRAWING + mime jpeg/png/gif/webp)
-            let imagems = pages.filter(p => {
-                if (!p.imageinfo || !p.imageinfo[0]) return false;
-                const info = p.imageinfo[0];
-                const mime = (info.mime || "").toLowerCase();
-                const media = (info.mediatype || "").toUpperCase();
-                return (media === "BITMAP" || media === "DRAWING") &&
-                       (mime.includes("jpeg") || mime.includes("jpg") || mime.includes("png") || mime.includes("gif") || mime.includes("webp"));
-            });
+    let res = await fetch(url);
+    let data: any = await res.json();
 
-            if (imagems.length > 0) {
-                const imgPage = imagems[0];
-                const info = imgPage.imageinfo[0];
-                const imgUrl = info.thumburl || info.url; // usa thumburl sempre que possível
-                return {
-                    imagemUrl: imgUrl,
-                    titulo: imgPage.title.replace("File:", "").split('.')[0],
-                    credito: "Wikimedia Commons (obra de arte)"
-                };
-            }
+    if (data.query && data.query.pages) {
+      let pages = Object.values(data.query.pages);
+      
+      // Filtra apenas imagens compatíveis (BITMAP ou DRAWING + mime legítimo)
+      let imagens = pages.filter((p: any) => {
+        if (!p.imageinfo || !p.imageinfo[0]) return false;
+        const info = p.imageinfo[0];
+        const mime = (info.mime || "").toLowerCase();
+        const media = (info.mediatype || "").toUpperCase();
+        return (media === "BITMAP" || media === "DRAWING") &&
+               (mime.includes("jpeg") || mime.includes("jpg") || mime.includes("png") || mime.includes("gif") || mime.includes("webp"));
+      });
 
-            // Fallback: qualquer thumbnail disponível (evita quebrar)
-            let anyPage = pages.find(p => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].thumburl);
-            if (anyPage) {
-                const info = anyPage.imageinfo[0];
-                return {
-                    imagemUrl: info.thumburl,
-                    titulo: anyPage.title.replace("File:", "").split('.')[0],
-                    credito: "Wikimedia Commons"
-                };
-            }
+      if (imagens.length > 0) {
+        const imgPage: any = imagens[0];
+        const info = imgPage.imageinfo[0];
+        const imgUrl = info.thumburl || info.url;
+
+        let credito = "Wikimedia Commons";
+        if (info.extmetadata) {
+          if (info.extmetadata.Artist?.value) {
+            credito = info.extmetadata.Artist.value.replace(/<[^>]*>/g, "").trim();
+          } else if (info.extmetadata.Credit?.value) {
+            credito = info.extmetadata.Credit.value.replace(/<[^>]*>/g, "").trim();
+          }
+        }
+        if (credito.length > 50) {
+          credito = credito.substring(0, 47) + "...";
         }
 
-        // 2. Segunda tentativa: busca mais genérica
-        url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(artistaNome)}&gsrlimit=5&prop=imageinfo&iiprop=url|mime|mediatype&iiurlwidth=800`;
-        res = await fetch(url);
-        data = await res.json();
-        if (data.query && data.query.pages) {
-            let pages = Object.values(data.query.pages);
-            let imgPage = pages.find(p => {
-                if (!p.imageinfo || !p.imageinfo[0]) return false;
-                const info = p.imageinfo[0];
-                const mime = (info.mime || "").toLowerCase();
-                const media = (info.mediatype || "").toUpperCase();
-                return (media === "BITMAP" || media === "DRAWING") &&
-                       (mime.includes("jpeg") || mime.includes("jpg") || mime.includes("png"));
-            });
-            if (!imgPage) imgPage = pages.find(p => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].thumburl);
-            if (imgPage) {
-                const info = imgPage.imageinfo[0];
-                return {
-                    imagemUrl: info.thumburl || info.url,
-                    titulo: imgPage.title.replace("File:", "").split('.')[0],
-                    credito: "Wikimedia Commons"
-                };
-            }
-        }
-    } catch (e) {
-        console.error("Erro no Wikimedia:", e);
+        let tituloOriginal = imgPage.title.replace("File:", "").split(".")[0];
+        let titulo = decodeURIComponent(tituloOriginal).replace(/_/g, " ");
+
+        return {
+          imagemUrl: imgUrl,
+          titulo: titulo || "Obra de Arte",
+          credito: credito || "Wikimedia Commons (obra de arte)"
+        };
+      }
     }
-    return null;
+
+    // 2. Segunda tentativa: busca mais genérica se a primeira não retornar compatíveis
+    url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(artistaNome)}&gsrlimit=5&prop=imageinfo&iiprop=url|mime|mediatype|extmetadata&iiurlwidth=800`;
+    res = await fetch(url);
+    data = await res.json();
+
+    if (data.query && data.query.pages) {
+      let pages = Object.values(data.query.pages);
+      let imgPage: any = pages.find((p: any) => {
+        if (!p.imageinfo || !p.imageinfo[0]) return false;
+        const info = p.imageinfo[0];
+        const mime = (info.mime || "").toLowerCase();
+        const media = (info.mediatype || "").toUpperCase();
+        return (media === "BITMAP" || media === "DRAWING") &&
+               (mime.includes("jpeg") || mime.includes("jpg") || mime.includes("png"));
+      });
+
+      if (!imgPage) {
+        imgPage = pages.find((p: any) => p.imageinfo && p.imageinfo[0] && p.imageinfo[0].thumburl);
+      }
+
+      if (imgPage) {
+        const info = imgPage.imageinfo[0];
+        const imgUrl = info.thumburl || info.url;
+
+        let credito = "Wikimedia Commons";
+        if (info.extmetadata) {
+          if (info.extmetadata.Artist?.value) {
+            credito = info.extmetadata.Artist.value.replace(/<[^>]*>/g, "").trim();
+          } else if (info.extmetadata.Credit?.value) {
+            credito = info.extmetadata.Credit.value.replace(/<[^>]*>/g, "").trim();
+          }
+        }
+        if (credito.length > 50) {
+          credito = credito.substring(0, 47) + "...";
+        }
+
+        let tituloOriginal = imgPage.title.replace("File:", "").split(".")[0];
+        let titulo = decodeURIComponent(tituloOriginal).replace(/_/g, " ");
+
+        return {
+          imagemUrl: imgUrl,
+          titulo: titulo || "Obra de Arte",
+          credito: credito || "Wikimedia Commons"
+        };
+      }
+    }
+  } catch (e) {
+    console.error("Erro no Wikimedia:", e);
+  }
+  return null;
 }
 
-// Nada de Pexels – apenas Wikimedia
-const buscarImagem = buscarWikimedia;
+// --- BUSCANTE UNIFICADO ---
+async function buscarImagem(pergunta: string) {
+  try {
+    const stopWords = ["quem", "foi", "fale", "sobre", "ver", "obra", "quando", "nasceu", "morreu", "mostre", "imagem", "foto", "quadro", "pintura", "desenho", "ilustração", "retrato"];
+    let palavras = pergunta.toLowerCase()
+      .replace(/[?!.,]/g, "")
+      .split(/\s+/)
+      .filter(p => p.length > 2 && !stopWords.includes(p));
+    
+    let termo = palavras.join(" ");
+    if (!termo) return null;
 
-module.exports = async function handler(req, res) {
-    if (req.method !== 'POST') return res.status(405).json({ error: 'Método não permitido' });
+    let img = await buscarNaWikimedia(termo);
+    if (!img) {
+      img = await buscarNoPexels(termo);
+    }
+    return img;
+  } catch (e) {
+    console.error("Erro na busca unificada de imagem:", e);
+  }
+  return null;
+}
 
-    try {
-        const { mensagem } = req.body;
-        const lib = await carregarBiblioteca();
-        const textoBusca = mensagem.toLowerCase();
-        let textoFinal = "";
+// --- API ROTAS ---
+app.post("/api/groq", async (req: Request, res: Response) => {
+  try {
+    const { mensagem } = req.body;
+    if (!mensagem || typeof mensagem !== "string") {
+      return res.status(400).json({ error: "Mensagem é obrigatória" });
+    }
 
-        // 1. Biblioteca cultural
-        for (const chave in lib) {
-            const item = lib[chave];
-            if (item.palavras_chave && item.palavras_chave.some(p => textoBusca.includes(p.toLowerCase()))) {
-                textoFinal = `${item.inicio[0]} ${item.explicacao_curta[0]}`;
-                break;
-            }
+    const lib = await carregarBiblioteca();
+    const textoBusca = mensagem.toLowerCase();
+
+    let textoFinal = "";
+    let infoExtra = { nascimento: "", morte: "", estilo: "" };
+
+    // 1. PRIORIDADE TOTAL: Busca na Biblioteca Cultural (Curadoria Local)
+    for (const chave in lib) {
+      const item = lib[chave];
+      if (item.palavras_chave && item.palavras_chave.some((p: string) => textoBusca.includes(p.toLowerCase()))) {
+        if (item.inicio && item.inicio.length > 0 && item.explicacao_curta && item.explicacao_curta.length > 0) {
+          textoFinal = `${item.inicio[0]} ${item.explicacao_curta[0]}`;
         }
+        infoExtra = {
+          nascimento: item.ano_nascimento || "---",
+          morte: item.ano_falecimento || "---",
+          estilo: item.categoria || "Arte"
+        };
+        break;
+      }
+    }
 
-        // 2. Groq (IA) se necessário
-        if (!textoFinal && GROQ_API_KEY) {
-            const responseGroq = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                method: "POST",
-                headers: { "Authorization": `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    model: "llama-3.1-8b-instant",
-                    messages: [
-                        { 
-                            role: "system", 
-                            content: "Você é o Candinho, um professor de arte para crianças de 10 anos. Responda de forma simples, gentil e muito breve (máximo 3 frases). NUNCA repita o nome do artista várias vezes. Se não souber, diga 'Não conheço esse artista ainda!'." 
-                        },
-                        { role: "user", content: mensagem }
-                    ],
-                    temperature: 0.4,
-                    max_tokens: 150
-                })
-            });
-            const dataIA = await responseGroq.json();
-            textoFinal = dataIA.choices?.[0]?.message?.content?.trim() || "";
-        }
-
-        // 3. Busca imagem sob demanda (só Wikimedia)
-        let imagemResult = null;
-        if (pediuImagem(mensagem)) {
-            const nomeArtista = extrairNomeArtista(mensagem);
-            imagemResult = await buscarImagem(nomeArtista);
-        }
-
-        return res.status(200).json({
-            reply: textoFinal || "Que pergunta curiosa! Vamos descobrir juntos? 🎨",
-            image: imagemResult
+    // 2. Se não achou localmente, chama a IA (Gemini como o robô do Candinho)
+    if (!textoFinal) {
+      if (ai) {
+        const responseGemini = await ai.models.generateContent({
+          model: "gemini-3.5-flash",
+          contents: mensagem,
+          config: {
+            systemInstruction: 
+              "Você é o Candinho, um professor de arte e pintor muito simpático e acolhedor para crianças de 10 anos. " +
+              "Responda sempre em português de forma simples, alegre e muito breve (máximo 3 frases). " +
+              "Sempre use uma linguagem positiva e entusiasmada, usando analogias de pintura e pinceladas. " +
+              "NUNCA repita o nome do artista mais de duas vezes. " +
+              "Se não descobrir sobre quem é o artista, responda gentilmente: 'Não conheço esse artista ainda, mas vou pesquisar na minha paleta! 🎨'. " +
+              "Diga se o artista nasceu ou faleceu em tal época de forma amigável no corpo do texto, sem criar listas ou cabeçalhos.",
+            temperature: 0.5,
+          },
         });
-    } catch (error) {
-        console.error("Erro Geral:", error);
-        return res.status(200).json({ reply: "Ops! Minhas tintas secaram. Pode repetir? 🎨" });
+        textoFinal = responseGemini.text || "";
+      } else {
+        textoFinal = "Olá! Adoraria conversar, mas minha paleta de cores eletrônica precisa de uma chave de ativação nas configurações! 🎨";
+      }
     }
-};
+
+    // 3. Busca imagem com tratamento estrito de formato
+    const imagemResult = await buscarImagem(mensagem);
+
+    // 4. Retorno unificado
+    return res.status(200).json({
+      reply: textoFinal || "Que pergunta curiosa! Vamos descobrir juntos sobre arte? 🎨",
+      image: imagemResult,
+      info: infoExtra.nascimento || infoExtra.morte || infoExtra.estilo ? infoExtra : null,
+      googleArts: { url: `https://artsandculture.google.com/search?q=${encodeURIComponent(mensagem)}` }
+    });
+
+  } catch (error) {
+    console.error("Erro Geral no Servidor:", error);
+    return res.status(200).json({ reply: "Ops! Minhas tintas secaram um pouquinho. Pode repetir o que disse? 🎨" });
+  }
+});
+
+// Inicialização das rotas do servidor e do canal Vite
+async function startServer() {
+  if (process.env.NODE_ENV !== "production") {
+    const vite = await createViteServer({
+      server: { middlewareMode: true },
+      appType: "spa",
+    });
+    app.use(vite.middlewares);
+  } else {
+    const distPath = path.join(process.cwd(), "dist");
+    app.use(express.static(distPath));
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(distPath, "index.html"));
+    });
+  }
+
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}
+
+startServer();
