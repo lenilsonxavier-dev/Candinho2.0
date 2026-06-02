@@ -103,16 +103,23 @@
         }
 
         .bot-message-wrapper { display: flex; align-items: flex-start; gap: 15px; }
-        .bot-icon { width: 55px; height: 55px; border-radius: 50%;  object-fit: cover; margin-top: 4px; 
-                   
-        .bot-image {
-            margin-top: 15px;
-            max-width: 100%;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: transform 0.3s;
-            display: block;
-        }
+
+   .bot-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 4px;
+}  /* ← esta chave estava faltando */
+
+.bot-image {
+    margin-top: 15px;
+    max-width: 100%;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    display: block;
+}
         .bot-image:hover { transform: scale(1.02); }
 
         .image-credit {
