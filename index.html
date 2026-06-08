@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Candinho - Artista Amigo</title>
     <style>
-        /* Estilo Geral */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body { 
@@ -17,7 +16,6 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
         }
         
         .container { 
@@ -29,8 +27,6 @@
             padding: 25px; 
             box-shadow: 0 15px 50px rgba(0,0,0,0.6);
             border: 1px solid rgba(255, 215, 0, 0.2);
-            display: flex;
-            flex-direction: column;
         }
         
         .header { 
@@ -56,8 +52,8 @@
             50% { transform: translateY(-8px); }
         }
         
-        .title h1 { font-size: 1.8rem; letter-spacing: 1px; }
-        .title small { color: #ffd700; font-style: italic; opacity: 0.9; }
+        .title h1 { font-size: 1.8rem; }
+        .title small { color: #ffd700; }
         
         #chat { 
             height: 450px;
@@ -69,7 +65,6 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-            scroll-behavior: smooth;
         }
         
         .msg {
@@ -78,8 +73,7 @@
             border-radius: 20px;
             font-size: 1rem;
             line-height: 1.5;
-            position: relative;
-            animation: slideIn 0.3s ease-out forwards;
+            animation: slideIn 0.3s ease-out;
         }
 
         @keyframes slideIn {
@@ -90,16 +84,13 @@
         .user {
             background: #4834d4;
             align-self: flex-end;
-            color: white;
             border-bottom-right-radius: 4px;
         }
 
         .bot {
             background: #686de0;
             align-self: flex-start;
-            color: white;
             border-bottom-left-radius: 4px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .bot-message-wrapper { 
@@ -113,13 +104,9 @@
             height: 55px;
             border-radius: 50%;
             object-fit: cover;
-            margin-top: 4px;
         }
 
-        .bot-text {
-            flex: 1;
-            line-height: 1.5;
-        }
+        .bot-text { flex: 1; }
 
         .bot-image {
             margin-top: 15px;
@@ -127,7 +114,7 @@
             border-radius: 15px;
             cursor: pointer;
             transition: transform 0.3s;
-            display: block;
+            border: 2px solid #ffd700;
         }
         
         .bot-image:hover { transform: scale(1.02); }
@@ -137,18 +124,9 @@
             color: #ffd700;
             margin-top: 5px;
             text-align: center;
-            opacity: 0.8;
         }
 
-        .image-museum {
-            font-size: 0.7rem;
-            color: #ffd700;
-            margin-top: 3px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .input-area { display: flex; gap: 10px; }
+        .input-area { display: flex; gap: 10px; margin-top: 10px; }
         
         input {
             flex: 1;
@@ -161,7 +139,7 @@
             outline: none;
         }
         
-        input:focus { border-color: #ffd700; background: rgba(255,255,255,0.1); }
+        input:focus { border-color: #ffd700; }
 
         button {
             background: #e94560;
@@ -171,22 +149,11 @@
             border-radius: 30px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
         }
         
-        button:hover:not(:disabled) {
-            background: #ff6b6b;
-            transform: scale(1.02);
-        }
-        
-        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        button:disabled { opacity: 0.5; }
 
-        .loading { 
-            font-style: italic; 
-            opacity: 0.8; 
-            font-size: 0.9rem;
-            background: #686de0;
-        }
+        .loading { opacity: 0.8; }
 
         .modal {
             display: none; 
@@ -195,7 +162,7 @@
             left: 0; 
             width: 100%; 
             height: 100%;
-            background: rgba(0,0,0,0.9); 
+            background: rgba(0,0,0,0.95); 
             z-index: 9999; 
             justify-content: center; 
             align-items: center;
@@ -204,22 +171,17 @@
         
         .modal img { 
             max-width: 90%; 
-            max-height: 85%; 
+            max-height: 90%; 
             border-radius: 10px; 
         }
 
-        #chat::-webkit-scrollbar { width: 6px; }
-        #chat::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        #chat::-webkit-scrollbar-thumb { background: #e94560; border-radius: 10px; }
-        #chat::-webkit-scrollbar-thumb:hover { background: #ff6b6b; }
-
-        @media (max-width: 600px) {
-            .container { padding: 15px; }
-            .avatar { width: 70px; height: 70px; }
-            .title h1 { font-size: 1.3rem; }
-            .msg { max-width: 95%; }
-            .bot-message-wrapper { gap: 8px; }
-            .bot-icon { width: 40px; height: 40px; }
+        .error-box {
+            background: rgba(233, 69, 96, 0.3);
+            border-left: 4px solid #e94560;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
         }
     </style>
 </head>
@@ -230,14 +192,14 @@
         <img src="https://i.imgur.com/fnMYS0Z.png" alt="Candinho" class="avatar">
         <div class="title">
             <h1>Candinho</h1>
-            <small>Seu amigo artista 🎨</small>
+            <small>Seu amigo artista 🎨🇧🇷</small>
         </div>
     </div>
 
     <div id="chat"></div>
 
     <div class="input-area">
-        <input type="text" id="pergunta" placeholder="Pergunte sobre um artista ou peça para mostrar uma obra..." autocomplete="off">
+        <input type="text" id="pergunta" placeholder="Ex: Mostra obra da Tarsila" autocomplete="off">
         <button id="sendBtn">Enviar</button>
     </div>
 </div>
@@ -252,7 +214,6 @@
     const btn = document.getElementById("sendBtn");
     let isProcessing = false;
 
-    // Função para mostrar mensagens na tela
     function appendMessage(text, side, extra = null) {
         const msgDiv = document.createElement("div");
         msgDiv.className = `msg ${side}`;
@@ -260,62 +221,36 @@
         if (side === 'bot') {
             const wrapper = document.createElement("div");
             wrapper.className = "bot-message-wrapper";
-            
-            const botText = document.createElement("span");
-            botText.className = "bot-text";
-            botText.innerHTML = text;
-            
             wrapper.innerHTML = `<img src="https://i.imgur.com/UDl1c5j.png" class="bot-icon" alt="Candinho">`;
-            wrapper.appendChild(botText);
+            
+            const textSpan = document.createElement("span");
+            textSpan.className = "bot-text";
+            textSpan.innerHTML = text;
+            wrapper.appendChild(textSpan);
             msgDiv.appendChild(wrapper);
 
-            // Exibe a imagem se existir
-            if (extra && extra.image && extra.image.imagemUrl) {
+            if (extra?.image?.imagemUrl) {
                 const img = document.createElement("img");
                 img.src = extra.image.imagemUrl;
                 img.className = "bot-image";
-                img.title = extra.image.titulo || "Clique para ampliar";
                 img.alt = extra.image.titulo || "Obra de arte";
                 img.onclick = () => {
-                    document.getElementById("modalImg").src = img.src;
+                    document.getElementById("modalImg").src = extra.image.imagemUrl;
                     document.getElementById("imgModal").style.display = "flex";
                 };
                 msgDiv.appendChild(img);
                 
-                // Créditos da imagem
                 if (extra.image.credito) {
                     const credit = document.createElement("div");
                     credit.className = "image-credit";
-                    credit.innerHTML = `📷 Fonte: ${extra.image.credito}`;
+                    credit.innerHTML = `📷 ${extra.image.credito}`;
                     msgDiv.appendChild(credit);
                 }
-                
-                // Nome do museu se disponível
-                if (extra.image.museu && extra.image.museu !== extra.image.credito) {
-                    const museum = document.createElement("div");
-                    museum.className = "image-museum";
-                    museum.innerHTML = `🏛️ Acervo: ${extra.image.museu}`;
-                    msgDiv.appendChild(museum);
-                }
-                
-                // Título da obra se disponível
-                if (extra.image.titulo && extra.image.titulo !== "Sem título") {
-                    const title = document.createElement("div");
-                    title.className = "image-credit";
-                    title.style.marginTop = "3px";
-                    title.style.fontSize = "0.7rem";
-                    title.innerHTML = `🖼️ ${extra.image.titulo.substring(0, 100)}`;
-                    msgDiv.appendChild(title);
-                }
-                
-                // Artista e ano se disponíveis
-                if (extra.image.autor && extra.image.autor !== "Autor desconhecido") {
-                    const author = document.createElement("div");
-                    author.className = "image-credit";
-                    author.style.fontSize = "0.65rem";
-                    author.innerHTML = `👨‍🎨 ${extra.image.autor}${extra.image.ano && extra.image.ano !== "Data desconhecida" ? ` • ${extra.image.ano}` : ''}`;
-                    msgDiv.appendChild(author);
-                }
+            } else if (extra?.image === null) {
+                const errorDiv = document.createElement("div");
+                errorDiv.className = "error-box";
+                errorDiv.innerHTML = "⚠️ Não consegui encontrar uma imagem para essa obra. Tente outro artista!";
+                msgDiv.appendChild(errorDiv);
             }
         } else {
             msgDiv.innerText = text;
@@ -329,54 +264,60 @@
         const val = input.value.trim();
         if (!val || isProcessing) return;
 
+        isProcessing = true;
+        btn.disabled = true;
+        input.disabled = true;
+
+        appendMessage(val, 'user');
+        input.value = "";
+
+        const loadingDiv = document.createElement("div");
+        loadingDiv.className = "msg bot loading";
+        loadingDiv.id = "loader";
+        loadingDiv.innerHTML = `
+            <div class="bot-message-wrapper">
+                <img src="https://i.imgur.com/UDl1c5j.png" class="bot-icon">
+                <span>🎨 Pesquisando obra... aguarde um momento</span>
+            </div>
+        `;
+        chat.appendChild(loadingDiv);
+        chat.scrollTop = chat.scrollHeight;
+
         try {
-            isProcessing = true;
-            btn.disabled = true;
-            input.disabled = true;
-
-            appendMessage(val, 'user');
-            input.value = "";
-
-            const loadingDiv = document.createElement("div");
-            loadingDiv.className = "msg bot loading";
-            loadingDiv.id = "loader";
-            loadingDiv.innerHTML = `
-                <div class="bot-message-wrapper">
-                    <img src="https://i.imgur.com/UDl1c5j.png" class="bot-icon" alt="Candinho">
-                    <span>Candinho está preparando a tela... 🎨</span>
-                </div>
-            `;
-            chat.appendChild(loadingDiv);
-            chat.scrollTop = chat.scrollHeight;
-
-            // Chamada correta para a API
+            console.log("📤 Enviando requisição para:", "/api/groq");
+            
             const res = await fetch("/api/groq", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ mensagem: val })
             });
 
+            console.log("📥 Resposta recebida:", res.status);
+
             if (!res.ok) {
-                const errorText = await res.text();
-                console.error("Erro da API:", res.status, errorText);
-                throw new Error(`Erro ${res.status}: ${res.statusText}`);
+                throw new Error(`HTTP ${res.status}: ${res.statusText}`);
             }
 
             const data = await res.json();
-            
-            const loader = document.getElementById("loader");
-            if (loader) loader.remove();
+            console.log("📦 Dados recebidos:", data);
 
-            // Exibe a mensagem e a imagem (se existir)
-            appendMessage(data.reply || "Desculpe, não consegui processar sua pergunta.", 'bot', { 
-                image: data.image || null
-            });
+            document.getElementById("loader")?.remove();
 
-        } catch (e) {
-            const loader = document.getElementById("loader");
-            if (loader) loader.remove();
-            console.error("Erro detalhado:", e);
-            appendMessage("Ops! Minha paleta bagunçou. Pode repetir? 🎨", "bot");
+            if (data.image && data.image.imagemUrl) {
+                console.log("🖼️ Imagem encontrada:", data.image.imagemUrl);
+                appendMessage(data.reply, 'bot', { image: data.image });
+            } else if (data.image === null || !data.image?.imagemUrl) {
+                console.log("⚠️ Nenhuma imagem encontrada");
+                appendMessage(data.reply + "\n\n🔍 Tente ser mais específico, como: 'Mostra Abaporu da Tarsila'", 'bot', { image: null });
+            } else {
+                appendMessage(data.reply, 'bot');
+            }
+
+        } catch (error) {
+            console.error("❌ Erro:", error);
+            document.getElementById("loader")?.remove();
+            appendMessage("Ops! Estou com problemas para acessar as imagens. Pode tentar novamente? 🎨", "bot");
+            appendMessage(`🔧 Detalhe técnico: ${error.message}`, "bot");
         } finally {
             isProcessing = false;
             btn.disabled = false;
@@ -387,14 +328,11 @@
 
     btn.addEventListener("click", handleSend);
     input.addEventListener("keypress", (e) => {
-        if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            handleSend();
-        }
+        if (e.key === "Enter") handleSend();
     });
 
     window.onload = () => {
-        appendMessage("Olá! Sou o Candinho, seu amigo artista. Vamos descobrir arte brasileira e mundial juntos? 🎨🇧🇷", "bot");
+        appendMessage("Olá! Sou o Candinho. Peça para eu mostrar obras de arte como: 'Mostra obra da Tarsila' ou 'Quem foi Portinari?' 🎨🇧🇷", "bot");
         input.focus();
     };
 </script>
